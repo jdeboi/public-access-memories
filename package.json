@@ -1,11 +1,24 @@
 {
   "name": "white-cube",
   "version": "1.0.0",
-  "description": "",
+  "description": "net art gallery",
+  "engines": {
+    "node": "16.13.1"
+  },
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "concurrently \"nodemon index.js\" \"npm run react\"",
+    "react": "npm start --prefix client"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Jenna deBoisblanc",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^6.4.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.15",
+    "socket.io": "^4.4.0"
+  }
 }
