@@ -1,17 +1,13 @@
-const express = require('express'),
-      path    = require('path'),
-      route   = require('./route.js'),
-      app     = express(),
-      port    = process.env.PORT || 8080;
+const express = require("express");
 
-// var io = module.exports.io = require('socket.io')(server);
-// const ClientManager = require('./websockets/ClientManager');
-// io.on('connection', ClientManager);
+const PORT = process.env.PORT || 3001;
 
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+const app = express();
 
-route(app);
+app.get("/api", (req, res) => {
+    res.json({ message: "Hello from server!" });
+});
 
-app.listen(port);
-
-console.log(`API server is listening on port:${port}`);
+app.listen(PORT, () => {
+    console.log(`Server listening on ${PORT}`);
+});

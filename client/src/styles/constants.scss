@@ -1,0 +1,129 @@
+
+$borderH: 2px;
+$borderRad: 8px;
+$headerGradientStartC: #fc03ad;
+$headerGradientEndC: #335ef6;
+$headerGradient: -webkit-gradient(
+  linear,
+  left top,
+  left bottom,
+  color-stop(0%, $headerGradientStartC),
+  color-stop(100%, $headerGradientEndC)
+);
+
+$headerSelectedGradientEnd: #111111;
+$headerSelectedGradient: -webkit-gradient(
+  linear,
+  left top,
+  left bottom,
+  color-stop(0%, #333333),
+  color-stop(100%, $headerSelectedGradientEnd)
+);
+
+$headerH: 34px;
+$headerMobileH: 60px;
+$fontSize-desktop-1: 16px;
+$fontSize-desktop-2: 14px;
+$fontSize-desktop-3: 12px;
+
+$fontSize-tablet-1: 14px;
+$fontSize-tablet-2: 12px;
+$fontSize-tablet-3: 10px;
+
+$fontSize-mobile-1: 16px;
+$fontSize-mobile-2: 14px;
+$fontSize-mobile-3: 12px;
+$fontSize-mobile-4: 8px;
+$fontSize-mobile-5: 10px;
+
+$appBlue: #335ef6;
+$appAlertColor: #03cefc;
+
+$pearlyGradientStartC: #f1eeff;
+$pearlyGradientEndC: #1e03fc42;
+$pearlyGradient: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $pearlyGradientStartC), color-stop(100%, $pearlyGradientEndC));
+$buttonCol: $pearlyGradientEndC;
+
+$tweetColPrimary: #6666cc;
+$tweetColSecondary: #aaaadd; //#000011;
+$tweetColTertiary: #111199;
+$tweetColHover: #aaaaff;
+$tweetColHr: #aaaadd88;
+
+$limeColor : #b4fa00; 
+
+button.standardButton {
+  font-size: $fontSize-desktop-3;
+  padding: 10px;
+
+  min-width: 140px;
+
+  text-align: center;
+  // border: 1px solid black;
+  color: black;
+  border-radius: 6px;
+
+  border: 2px solid black;
+  // box-shadow: -3px 5px rgb(65, 65, 65);
+  color: white;
+
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    // transform: translateY(-0.25em);
+    transform: scale(1.05);
+  }
+
+  &.primary {
+    background: black;
+    // background: linear-gradient(#000, #1);
+    color: white;
+  }
+
+  &.secondary {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+  }
+}
+
+input.standardInput {
+  font-size: $fontSize-desktop-3;
+  padding: 15px 10px;
+  text-align: left;
+  border: 2px solid black;
+  color: black;
+  border-radius: 6px;
+}
+
+input.standardInputWhite {
+  font-size: $fontSize-desktop-3;
+  padding: 15px 10px;
+  text-align: left;
+  border: 2px solid white;
+  color: white;
+  border-radius: 6px;
+}
+
+// scrollbars
+/* Works on Firefox */
+$scrollbarBackgroundCol: white;
+$scrollbarCol: black;
+* {
+  scrollbar-width: thin;
+  scrollbar-color: $scrollbarCol $scrollbarBackgroundCol;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: $scrollbarBackgroundCol;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: $scrollbarCol;
+  border-radius: 20px;
+  border: 3px solid $scrollbarBackgroundCol;
+}

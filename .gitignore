@@ -11,6 +11,8 @@ NOTES.md
 
 # Ignore the build directory
 /build
+build
+client/build
 
 # Ignore Sass' cache
 /.sass-cache
