@@ -1,0 +1,265 @@
+@import "../../styles/constants.scss";
+
+.App.overflow-all {
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  line-height: 1.6em;
+
+  .App-Content {
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+  }
+}
+
+.App {
+  background-color: black;
+  height: 100%;
+  width: 100%;
+  font-family: consoleFont;
+  overflow: hidden;
+  padding: 0;
+  perspective-origin: 0 0;
+  font-size: 10px;
+
+  // I want this to be container; header fixed, content div takes up rest of height
+  display: flex;
+  flex-flow: column;
+  // cursor: url("./assets/cursors/new/0.png"), auto !important;
+
+  // a, a:link, a:visited, a:focus, a:hover, a:active, .MuiSlider-root, .MuiButtonBase-root {
+  //   cursor: url("./assets/cursors/new/0.png"), auto;
+  // }
+
+  .App-Header {
+    flex: 0 0 auto;
+    height: $headerH;
+
+    /* The above is shorthand for:
+    flex-grow: 0,
+    flex-shrink: 1,
+    flex-basis: auto
+    */
+
+    display: flex;
+    flex-flow: column;
+    align-items: stretch;
+
+    &.mobile {
+      height: $headerMobileH;
+    }
+  }
+
+  .App-Content {
+    flex: 1 1 auto;
+
+    // so that safari would work and
+    display: flex;
+    flex-flow: column;
+    align-items: stretch;
+
+    overflow: hidden;
+  }
+
+  // .Frame-box {
+  //   /* padding-top: 36px; */
+  //   // height: 100%;
+  //
+  //   // dunno why shit on safari is broke
+  //   height: 100%;
+  //   width: 100%;
+  //   overflow: hidden;
+  //   border-top: 0px;
+  //
+  //   position: relative;
+  //   /* making position relative [b/c macbook air clouds need to be absolute to prevent frames from stacking below, but when absolute they over extend beyond app. ? relative makes clouds div 100% wide relative to frame-box rather than entire page] */
+  // }
+
+  .inner-outline {
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    /* border-bottom: 3px solid black; */
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box; /* Firefox, other Gecko */
+    box-sizing: border-box; /* Opera/IE 8+ */
+  }
+
+  // a way to classify all sketch divs to take up full space
+  .Sketch {
+    // need this for safari to get babylon canvas to take up full height
+    flex: 1 1 100%;
+    display: flex;
+
+    width: 100%;
+    overflow: hidden;
+
+    // this is necessary so that overflow: hidden actually hides elements
+    position: relative;
+  }
+
+  #babylon-canvas {
+    flex: 1;
+    display: block;
+
+    /* needs absolute so that frames don't appear below page. dunno why */
+    // well, then I went to flexbox and align-items: stretch and this effed stuff
+    // position: absolute;
+    // top:0;
+    /* making 0 for hard drives */
+    z-index: 0;
+  }
+
+  .noSelect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  #fps {
+    position: absolute;
+    background-color: black;
+    border: 2px solid red;
+    text-align: center;
+    font-size: 16px;
+    color: white;
+    top: 45px;
+    right: 10px;
+    width: 60px;
+    height: 20px;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+
+  header.menuTheme,
+  .menuTheme {
+    color: white;
+    background: black;
+  }
+
+  .dottedBG1 {
+    background-image: radial-gradient(
+        ellipse farthest-corner,
+        transparent 0%,
+        transparent 35%,
+        #fff 30%,
+        #fff 40%,
+        transparent 90%
+      ),
+      radial-gradient(
+        ellipse farthest-corner at 0px 0px,
+        transparent 0%,
+        transparent 20%,
+        #fff 15%,
+        #fff 20%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse farthest-corner at 8px 8px,
+        transparent 0%,
+        transparent 20%,
+        #fff 15%,
+        #fff 20%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse farthest-corner at 0px 8px,
+        transparent 0%,
+        transparent 20%,
+        #fff 15%,
+        #fff 20%,
+        transparent 40%
+      ),
+      radial-gradient(
+        ellipse farthest-corner at 8px 0px,
+        transparent 0%,
+        transparent 20%,
+        #fff 15%,
+        #fff 20%,
+        transparent 50%
+      ),
+      linear-gradient(120deg, #11ffff 0, #ff11ff 100%);
+
+    background-size: 8px 8px, 8px 8px, 8px 8px, 8px 8px, 8px 8px, 100% 100%;
+  }
+
+  .backgroundCover {
+    /*  made 0, was -200, because clouds were behind app-frame-box thing */
+    z-index: 0;
+    // fixed so that it doesn't push other divs down
+    z-index: 0;
+    position: fixed;
+    min-width: 100%;
+    min-height: 100%;
+    
+    // position: absolute;
+    // top: 0px;
+    // left: 0px;
+    // height: 100vh;
+    // width: 100vw;
+
+  }
+
+  .flippedX {
+    transform: scaleX(-1);
+  }
+
+  .flippedY {
+    transform: scaleY(-1);
+  }
+
+  .bold {
+    font-family: consoleFontBold;
+  }
+
+
+
+  .rot90 {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+  }
+
+  .rotNeg90 {
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+  }
+
+}
+
+.App.clickMe {
+  .inner-outline {
+    border-left: 2px solid $limeColor;
+    border-right: 2px solid $limeColor;
+    border-bottom: 2px solid $limeColor;
+  }
+}
+
+@font-face {
+  font-family: consoleFont;
+  src: url(./assets/fonts/dogica.ttf);
+}
+
+@font-face {
+  font-family: consoleFontBold;
+  src: url(./assets/fonts/dogicabold.ttf);
+}

@@ -1,0 +1,222 @@
+$borderRad: 10px;
+$borderLineW: .14em;
+
+
+.Frame {
+
+  color: #000;
+  font-family: consoleFont, HelveticaNeue, 'Helvetica Neue', 'Lucida Grande', Arial, sans-serif;
+
+  position: absolute;
+  margin-bottom: -33px;
+  font-size: 16px;
+  pointer-events: none;
+
+  input, button, select, textarea {
+    pointer-events: all;
+  }
+
+  span {
+    line-height: 8px;
+    vertical-align: 50%;
+  }
+
+  .window {
+    background: black;
+
+    /* margin: auto; */
+    /* margin-top: 12.5vh; */
+    border: $borderLineW solid black;  /* #acacac; */
+    border-radius: $borderRad;
+    box-shadow: 0px 0px 20px #000000; /* #6c6c6c; */
+
+    padding-bottom: 2px;
+
+    // height: 100%;
+
+    overflow: hidden;
+
+  }
+
+  .stair-window {
+    overflow: visible;
+  }
+
+  .titlebar {
+    position: relative;
+    height: 26px;
+    pointer-events: all;
+
+    /* background: white; */
+    font-family: consoleFont, sans-serif;
+
+    font-size: .8em;
+    line-height: 20px;
+    text-align: center;
+    width: 100%;
+
+
+    border-bottom: .15em solid black;
+
+    /* border-top-left-radius: 4px;
+    border-top-right-radius: 4px; */
+
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    // cursor: default;
+
+    // z-index:200;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .titleTxtContainer {
+    position: relative;
+    height: 26px;
+    // width: 100%;
+    white-space: nowrap;
+    flex-grow: 1;
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;  /* <--- I added this */
+    align-items: center;   /* <--- Change here */
+    width: 100%;
+  }
+
+
+  .buttons {
+    // removing absolute b/c i want title to be an inline div floating on same line
+    padding-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    float: left;
+    white-space: nowrap;
+    line-height: 0px;
+    // z-index:200;
+    /* made them match titlebar to show up on Stair */
+    font-family: HelveticaNeue, 'Helvetica Neue', 'Lucida Grande', Arial, sans-serif;
+
+    height: 26px;
+    width: 70px;
+    flex-shrink: 0;
+
+  }
+
+  .circleButton {
+    /* border: .15em solid black; */
+    border-radius: 50%;
+
+    background: white;
+    color: white;
+
+    font-size: 8pt;
+    line-height: 10px;
+    margin-right: 8px;
+    width: 12px;
+    height: 12px;
+
+    display: inline-block;
+
+    /* doing this to position inner circle absolute relative to inner */
+    position: relative;
+
+    &:hover {
+      background: white;
+    }
+
+    .innerC {
+      position: absolute;
+      background: black;
+      border-radius: 50%;
+      height: 8px;
+      width: 8px;
+      /*
+      Put top edge and left edge in the center
+      */
+      top: 50%;
+      left: 50%;
+      margin: -4px 0px 0px -4px;
+      /*
+      Offset the position correctly with
+      minus half of the width and minus half of the height
+      */
+
+      &:hover {
+        background: white;
+      }
+    }
+
+    // .closebutton .innerC:hover {
+    //   background: red;
+    // }
+    //
+    // .minimizebutton .innerC:hover {
+    //   background: #aaaa00;
+    //   height: 30px;
+    // }
+    //
+    // .zoombutton .innerC:hover {
+    //   background: #0000ff;
+    // }
+  }
+
+
+
+  .content {
+    position: relative;
+
+    // on stairs, need content to go under toolbar but above window
+    padding: 0px;
+    margin-bottom: -3px;
+    /* margin-left: -1px; */
+    // height: 100%;
+
+    /* making relative b/c video content from react-player was set to absolute and was bubbling right on top of title bar */
+    // border-radius: $borderRad;
+
+    video {
+      border-bottom-left-radius: calc(#{$borderRad}-2);
+      border-bottom-right-radius: calc(#{$borderRad}-2);
+    }
+  }
+
+}
+
+// haven't looked into why this can't be in .Frame
+/* window BEGIN */
+.hidden {
+  display: none;
+}
+
+.minimized {
+
+  .content {
+    display: none;
+  }
+
+  .window {
+    height: 22px !important;
+  }
+}
+
+
+.FrameSimple {
+  position: absolute;
+  // overflow: hidden;
+}
+
+.FrameSimple.static {
+  position: static;
+}
+
+.Frame.static {
+  position: static;
+}

@@ -95,7 +95,6 @@ input.standardInputWhite {
 .Header {
   display: block;
   font-family: consoleFont;
-  border: 2px solid black;
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;
   -webkit-box-flex: 0;
@@ -316,7 +315,6 @@ input.standardInputWhite {
   float: none;
   margin-right: 75px;
   font-weight: 400;
-  padding: 3px 3px 3px 15px;
   width: 100%;
   color: white;
   line-height: 1.8em;
@@ -354,6 +352,7 @@ input.standardInputWhite {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  padding: 3px 3px 3px 15px;
 }
 
 .Header .flexRow div {

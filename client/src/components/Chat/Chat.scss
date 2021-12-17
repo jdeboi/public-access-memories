@@ -1,0 +1,213 @@
+@import "../../styles/constants.scss";
+
+$lightGray: rgba(0, 0, 0, 0.2);
+// $appBlue: #335ef6;
+$appBlueDisabled: #335ef699;
+$appPink: #fc03ad;
+$appLightBlue: #03cefc;
+
+.Chat {
+    // display: flex;
+    // flex-direction: column;
+    // flex: 1;
+    width: 300px;
+    height: 400px;
+    color: white;
+    // background-color: red;
+    font-size: 12px;
+
+    .Chat-title {
+        // flex: 0 0 auto;
+        // height: auto;
+        padding-bottom: 5px;
+    }
+
+    .Chat-messages {
+        height: 400px;
+        overflow: hidden;
+
+        .Chat-messages-box {
+            // border: 1px solid rgba(255, 255, 255, .23);
+            // border: 2px solid $appBlue;
+            // border-radius: $borderRad;
+
+            font-size: 10px;
+            padding: 10px;
+
+            min-height: 200px;
+            flex: 1;
+            // background-color: blue;
+            overflow: auto;
+
+            .Chat-messages-inner-box {
+                // height:200px;
+
+                .message-from {
+                    // color: white;
+                    color: #ddd;
+                }
+
+                .message-to {
+                    color: #ddd;
+                    // color: white;
+                    // color: #dddddd;
+                }
+
+                .message-to-red {
+                    // color: $appAlertColor;
+                    color: #ddd;
+                }
+
+                .message-deets {
+                    // opacity: .6;
+                    padding-bottom: 7px;
+                    font-size: 10px;
+                }
+
+                .message-txt {
+                    font-size: 12px;
+                    line-height: 1.8em;
+                }
+
+                .bubbleContainer {
+                    display: flex;
+                    flex-direction: row;
+                    padding-top: 10px;
+
+                    .avatar {
+                        // border-radius: 50%;
+                        // background-color: white;
+                        width: 20px;
+                        height: 20px;
+                        // border: 2px solid blue;
+                        font-size: 20px;
+                        padding-top: 8px;
+                        padding-right: 8px;
+                    }
+
+                    .hidden {
+                        visibility: hidden;
+                    }
+                }
+
+                .bubble {
+                    // border-radius: 12px;
+                    padding: 10px;
+                    border-radius: $borderRad;
+                    border: 1px solid $appBlue;
+                    // background: linear-gradient(#000, #333);
+                    background: #111111;
+                }
+
+                .bubbleContainer.chat-from-me {
+                    justify-content: flex-end;
+
+                    .avatar {
+                    }
+                    .bubble {
+                        // background-color: red;
+                        // box-shadow: -3px 5px #aaaaaa88;
+                        // color: $appLightBlue;
+                        // background: linear-gradient(#000, $appBlue);
+                        background: $appBlue;
+                    }
+                }
+
+                .bubbleContainer.chat-from-other {
+                    // text-align: right;
+                    justify-content: flex-start;
+
+                    .bubble {
+                        // border: 1px solid white;
+                        // background: $headerSelectedGradient;
+                        // box-shadow: -3px 5px #ffffff88;
+                    }
+                }
+            }
+        }
+
+        .Chat-form {
+            // flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            height: 90px;
+            // background-color: pink;
+
+            .to-form {
+                display: flex;
+                flex-direction: row;
+                padding-bottom: 5px;
+
+                .to-div {
+                    // height: 48px;
+                    width: 30px;
+                    margin-top: 15px;
+                    // line-height: 48px;
+                    // vertical-align: middle;
+                    padding-right: 10px;
+                }
+
+                .AutoComplete {
+                    // flex: 1;
+                    // display: flex;
+                    height: 30px;
+                    color: white;
+                    // overflow: hidden;
+                    background-color: transparent;
+
+                    div {
+                        input {
+                            // flex: 1;
+                            background-color: transparent;
+                            // border-bottom: 2px solid $appBlue;
+                            // border-radius: $borderRad;
+                            padding: 5px;
+                            color: white;
+                            height: 30px;
+
+                            &:focused {
+                                color: black;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .Chat-send {
+                display: flex;
+                flex-direction: row;
+                padding: 5px 0 5px 0;
+
+                .form-item {
+                    // height: 30px;
+                }
+
+                .Chat-send-item {
+                    flex: 1;
+                    display: flex;
+                    // padding-right: 5px;
+
+                    input {
+                        flex: 1;
+                        // border: 2px solid $appBlue;
+                        // background-color: transparent;
+                    }
+                }
+
+                button {
+                    // border-radius: $borderRad;
+                    width: 60px;
+                    // border: 1px;
+
+                    // background-color: transparent;
+                    // border: 2px solid $appPink;
+
+                    // &:disabled {
+                    //   border: 1px solid gray;
+                    // }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,46 @@
+.RoomDecal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  line-height: 1.3em;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.RoomDecal .decal-content {
+  padding: 15px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: auto;
+}
+
+.RoomDecal .decal-content .identify {
+  margin: auto;
+}
+
+.RoomDecal .decal-content .usersEye {
+  padding: 8px;
+  border: 1px solid black;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.RoomDecal .decal-content .participants-box {
+  width: 100%;
+}
+/*# sourceMappingURL=RoomDecal.css.map */

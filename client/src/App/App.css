@@ -1,0 +1,276 @@
+button.standardButton {
+  font-size: 12px;
+  padding: 10px;
+  min-width: 140px;
+  text-align: center;
+  color: black;
+  border-radius: 6px;
+  border: 2px solid black;
+  color: white;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+button.standardButton:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+button.standardButton.primary {
+  background: black;
+  color: white;
+}
+
+button.standardButton.secondary {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+
+input.standardInput {
+  font-size: 12px;
+  padding: 15px 10px;
+  text-align: left;
+  border: 2px solid black;
+  color: black;
+  border-radius: 6px;
+}
+
+input.standardInputWhite {
+  font-size: 12px;
+  padding: 15px 10px;
+  text-align: left;
+  border: 2px solid white;
+  color: white;
+  border-radius: 6px;
+}
+
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: black white;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: white;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: black;
+  border-radius: 20px;
+  border: 3px solid white;
+}
+
+.App.overflow-all {
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  line-height: 1.6em;
+}
+
+.App.overflow-all .App-Content {
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+}
+
+.App {
+  background-color: black;
+  height: 100%;
+  width: 100%;
+  font-family: consoleFont;
+  overflow: hidden;
+  padding: 0;
+  -webkit-perspective-origin: 0 0;
+          perspective-origin: 0 0;
+  font-size: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+}
+
+.App .App-Header {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+  height: 34px;
+  /* The above is shorthand for:
+    flex-grow: 0,
+    flex-shrink: 1,
+    flex-basis: auto
+    */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+
+.App .App-Header.mobile {
+  height: 60px;
+}
+
+.App .App-Content {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  overflow: hidden;
+}
+
+.App .inner-outline {
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  /* border-bottom: 3px solid black; */
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+  /* Opera/IE 8+ */
+}
+
+.App .Sketch {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 100%;
+          flex: 1 1 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.App #babylon-canvas {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: block;
+  /* needs absolute so that frames don't appear below page. dunno why */
+  /* making 0 for hard drives */
+  z-index: 0;
+}
+
+.App .noSelect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+.App #fps {
+  position: absolute;
+  background-color: black;
+  border: 2px solid red;
+  text-align: center;
+  font-size: 16px;
+  color: white;
+  top: 45px;
+  right: 10px;
+  width: 60px;
+  height: 20px;
+}
+
+.App .bold {
+  font-weight: bold;
+}
+
+.App header.menuTheme,
+.App .menuTheme {
+  color: white;
+  background: black;
+}
+
+.App .dottedBG1 {
+  background-image: radial-gradient(ellipse farthest-corner, transparent 0%, transparent 35%, #fff 30%, #fff 40%, transparent 90%), radial-gradient(ellipse farthest-corner at 0px 0px, transparent 0%, transparent 20%, #fff 15%, #fff 20%, transparent 50%), radial-gradient(ellipse farthest-corner at 8px 8px, transparent 0%, transparent 20%, #fff 15%, #fff 20%, transparent 50%), radial-gradient(ellipse farthest-corner at 0px 8px, transparent 0%, transparent 20%, #fff 15%, #fff 20%, transparent 40%), radial-gradient(ellipse farthest-corner at 8px 0px, transparent 0%, transparent 20%, #fff 15%, #fff 20%, transparent 50%), linear-gradient(120deg, #11ffff 0, #ff11ff 100%);
+  background-size: 8px 8px, 8px 8px, 8px 8px, 8px 8px, 8px 8px, 100% 100%;
+}
+
+.App .backgroundCover {
+  /*  made 0, was -200, because clouds were behind app-frame-box thing */
+  z-index: 0;
+  z-index: 0;
+  position: fixed;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.App .flippedX {
+  -webkit-transform: scaleX(-1);
+          transform: scaleX(-1);
+}
+
+.App .flippedY {
+  -webkit-transform: scaleY(-1);
+          transform: scaleY(-1);
+}
+
+.App .bold {
+  font-family: consoleFontBold;
+}
+
+.App .rot90 {
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+}
+
+.App .rotNeg90 {
+  transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+}
+
+.App.clickMe .inner-outline {
+  border-left: 2px solid #b4fa00;
+  border-right: 2px solid #b4fa00;
+  border-bottom: 2px solid #b4fa00;
+}
+
+@font-face {
+  font-family: consoleFont;
+  src: url(./assets/fonts/dogica.ttf);
+}
+
+@font-face {
+  font-family: consoleFontBold;
+  src: url(./assets/fonts/dogicabold.ttf);
+}
+/*# sourceMappingURL=App.css.map */

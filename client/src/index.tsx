@@ -1,16 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './views/App/App';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import App from './App/App';
+import { BrowserRouter as Router } from "react-router-dom";
+import { CookiesProvider } from 'react-cookie';
+
+// store
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 // import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <Provider store={store} >
+      <CookiesProvider>
+        <Router>
+
+          <App />
+        </Router>
+      </CookiesProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

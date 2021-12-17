@@ -1,19 +1,25 @@
 import React from 'react';
+import { RoomConfig } from '../RoomConfig';
+import { useParams } from "react-router-dom";
 
-interface Props {
-    name: string;
-    author: string;
-    year: string;
-    medium: string;
-    content: JSX.Element | string;
-}
+const Room = () => {
 
-const Room = ({name, author, year, medium, content}: Props) => {
+    const getRoom = (id: string | undefined) => {
+        let roomID = 0;
+        if (id) roomID = parseInt(id);
+        if (isNaN(roomID)) roomID = 0;
+        if (roomID >= RoomConfig.length || roomID < 0) roomID = 0;
+        console.log(id, roomID)
+        const room = RoomConfig[roomID];
+        return room;
+    }
+
+    const { id } = useParams();
+    const room = getRoom(id);
 
     return (
         <div className="Room">
-            <h1>{name}</h1>
-            <div>{content}</div>
+            <h1>{room.roomName}</h1>
         </div>
     )
 };

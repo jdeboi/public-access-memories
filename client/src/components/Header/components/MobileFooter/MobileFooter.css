@@ -1,0 +1,164 @@
+button.standardButton {
+  font-size: 12px;
+  padding: 10px;
+  min-width: 140px;
+  text-align: center;
+  color: black;
+  border-radius: 6px;
+  border: 2px solid black;
+  color: white;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+button.standardButton:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+button.standardButton.primary {
+  background: black;
+  color: white;
+}
+
+button.standardButton.secondary {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+
+input.standardInput {
+  font-size: 12px;
+  padding: 15px 10px;
+  text-align: left;
+  border: 2px solid black;
+  color: black;
+  border-radius: 6px;
+}
+
+input.standardInputWhite {
+  font-size: 12px;
+  padding: 15px 10px;
+  text-align: left;
+  border: 2px solid white;
+  color: white;
+  border-radius: 6px;
+}
+
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: black white;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: white;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: black;
+  border-radius: 20px;
+  border: 3px solid white;
+}
+
+.clickMe .Header {
+  border: 2px solid #b4fa00;
+}
+
+.clickMe .MobileFooter {
+  border: 2px solid #b4fa00;
+}
+
+.MobileFooter {
+  position: fixed;
+  background-color: black;
+  color: white;
+  z-index: 2000;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  bottom: 0px;
+  height: 60px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+
+.MobileFooter.landscape {
+  position: fixed;
+  height: 100%;
+  right: 0px;
+  left: auto;
+  width: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+
+.MobileFooter.landscape .top {
+  margin-top: 60px;
+}
+
+.MobileFooter.landscape .notification .badge {
+  left: 28px;
+}
+
+.MobileFooter .notification {
+  position: relative;
+}
+
+.MobileFooter .notification .badge {
+  position: absolute;
+  font-size: 10px;
+  top: -40px;
+  left: 42px;
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  line-height: 20px;
+  border-radius: 50%;
+  background: red;
+  color: white;
+}
+
+.MobileFooter button {
+  color: white;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  font-size: 30px;
+}
+
+.MobileFooter .disabled {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.MobileFooter .opened {
+  color: white;
+}
+
+.MobileFooter .closed {
+  color: rgba(255, 255, 255, 0.4);
+}
+/*# sourceMappingURL=MobileFooter.css.map */

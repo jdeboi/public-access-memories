@@ -1,0 +1,61 @@
+.GrayedOut {
+    background-color: rgba(0, 0, 0, 0.8);
+    // opacity: 0;
+    // background: red;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    width: 100vw;
+    pointer-events: all;
+}
+
+.CenterModal {
+    .CenterModal-Container {
+        display: flex;
+        flex-direction: column;
+        pointer-events: all;
+    }
+
+    .flex1 {
+        flex: 1;
+        overflow: auto;
+    }
+
+    .flexRow {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .flexPad {
+        margin-bottom: 15px;
+    }
+
+    .center-buttons {
+        display: flex;
+        flex-direction: row;
+        vertical-align: middle;
+        justify-content: center;
+
+        button {
+            margin: 5px;
+        }
+        // flex: 0;
+        // height: 50px;
+    }
+
+    // SE buttons
+    @media only screen and (max-width: 350px) {
+        button.standardButton {
+            min-width: 120px;
+        }
+    }
+  
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}

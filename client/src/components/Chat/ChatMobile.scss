@@ -1,0 +1,199 @@
+@import "../../styles/constants.scss";
+
+$lightGray: rgba(0, 0, 0, 0.2);
+$appBlueDisabled: #335ef699;
+$appPink: #c9a7ff;
+$appLightBlue: #43909e;
+
+.MuiAutocomplete-popper {
+    z-index: 2600;
+}
+
+.ChatMobile {
+    color: black;
+    font-size: 12px;
+
+    .chat-buttons {
+        padding-top: 10px;
+    }
+
+    .sendButton {
+        // margin-bottom: 10px;
+        background: black;
+        color: white;
+        border-radius: $borderRad;
+        height: 50px;
+        width: 50px;
+    }
+
+    .Chat-messages {
+        overflow: hidden;
+        
+
+        .Chat-messages-box {
+            font-size: 10px;
+            padding: 10px;
+            border: 2px solid black;
+            border-radius: $borderRad;
+            flex: 1;
+            overflow: auto;
+
+            .Chat-messages-inner-box {
+                .message-from {
+                    color: black;
+                }
+
+                .message-to {
+                    color: gray;
+                    // color: #ddd;
+                }
+
+                .message-to-red {
+                    // color: $appAlertColor;
+                }
+
+                .message-deets {
+                    padding-bottom: 7px;
+                    font-size: 10px;
+                }
+
+                .message-txt {
+                    font-size: 12px;
+                    line-height: 1.8em;
+                }
+
+                .bubbleContainer {
+                    display: flex;
+                    flex-direction: row;
+                    padding-top: 10px;
+
+                    .avatar {
+                        width: 20px;
+                        height: 20px;
+                        font-size: 20px;
+                        padding-top: 8px;
+                        padding-right: 8px;
+                    }
+
+                    .hidden {
+                        visibility: hidden;
+                    }
+                }
+
+                .bubble {
+                    // border-radius: 12px;
+                    padding: 10px;
+                    color: black;
+                    border-radius: $borderRad;
+                    //   border: 2px solid $appBlue;
+                    // background: linear-gradient(#000, #333);
+                   background: rgb(241, 241, 241);
+
+                }
+
+                .bubbleContainer.chat-from-me {
+                    justify-content: flex-end;
+
+                    .bubble {
+                        color: white;
+                        background: rgb(74, 71, 255);
+
+                        .message-deets {
+                            text-align: right;
+
+                            .message-from {
+                                color: #ddd;
+                            }
+            
+                            .message-to {
+                                color: #ddd;
+                            }
+            
+                            .message-to-red {
+                                // color: $appAlertColor;
+                                color: #ddd;
+                            }
+            
+                        }
+                    }
+
+
+                }
+
+                .bubbleContainer.chat-from-other {
+                    // text-align: right;
+                    justify-content: flex-start;
+
+                    .message-deets {
+                        text-align: left;
+                        
+                    }
+                }
+            }
+        }
+
+        .margR {
+            margin-right: 5px;
+        }
+
+        .Chat-form {
+            // flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 10px;
+            height: 90px;
+            // background-color: pink;
+
+            .to-form {
+                width: 220px;
+                display: flex;
+                flex-direction: row;
+                padding-bottom: 5px;
+
+                .to-div {
+                    // height: 48px;
+                    width: 30px;
+                    margin-top: 15px;
+                    // line-height: 48px;
+                    // vertical-align: middle;
+                    padding-right: 10px;
+                }
+
+                .AutoComplete {
+                    height: 30px;
+                    color: black;
+                    // overflow: hidden;
+                    background-color: transparent;
+
+                    div {
+
+                        input {
+                            background-color: transparent;
+                            // border-bottom: 2px solid $appBlue;
+                            // border-radius: $borderRad;
+                            padding: 5px;
+                            color: black;
+                            height: 30px;
+                            font-size:16px;
+                            &:focused {
+                                color: black;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .Chat-send {
+                display: flex;
+                flex-direction: row;
+                padding: 5px 0 5px 0;
+
+                input {
+                    width: 100%;
+                    font-size:16px;
+                }
+
+            }
+        }
+    }
+}

@@ -30,7 +30,7 @@
 .Header {
     display: block;
     font-family: consoleFont;
-    border: $borderH solid black;
+    // border: $borderH solid black;
     border-top-right-radius: $borderRad;
     border-top-left-radius: $borderRad;
     flex: 0 1 auto;
@@ -260,7 +260,7 @@
                 float: none;
                 margin-right: 75px;
                 font-weight: 400;
-                padding: 3px 3px 3px 15px;
+                // padding: 3px 3px 3px 15px;
                 width: 100%;
                 color: white;
                 line-height: 1.8em;
@@ -304,7 +304,8 @@
     .flexRow {
         display: flex;
         flex-direction: row;
-
+        padding: 3px 3px 3px 15px;
+        
         div {
             padding-right: 5px;
         }

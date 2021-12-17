@@ -1,0 +1,86 @@
+@import '../../../../styles/constants.scss';
+
+.clickMe {
+    .Header {
+        border: 2px solid $limeColor;
+    }
+    .MobileFooter {
+        border: 2px solid $limeColor;
+    }
+}
+
+.MobileFooter {
+    position: fixed;
+    background-color: black;
+    color: white;
+    z-index: 2000;
+    box-sizing: border-box;
+    
+    bottom: 0px;
+    height: 60px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+
+    &.landscape {
+        position: fixed;
+        // top: 20px;
+        height: 100%;
+        right: 0px;
+        left: auto;
+        width: 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        .top {
+            margin-top: 60px;
+        }
+
+        .notification {
+            .badge {
+                left: 28px;
+            }
+        }
+    }
+
+    .notification {
+        position: relative;
+    
+        .badge {
+          position: absolute;
+          font-size: 10px;
+          top: -40px;
+          left: 42px;
+          height: 20px;
+          width: 20px;
+          text-align: center;
+          line-height: 20px;
+          // padding: 2px 2px;
+          border-radius: 50%;
+          background: red;
+          color: white;
+        }
+
+      }
+
+    button {
+        color: white;
+        flex: 1;
+        font-size: 30px;
+    }
+
+    .disabled {
+        color: rgba(255, 255, 255, 0.4);
+    }
+    .opened {
+        color: white;
+    }
+    .closed {
+        color: rgba(255, 255, 255, 0.4);
+    }
+}
