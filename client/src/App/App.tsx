@@ -3,9 +3,8 @@ import "./App.css";
 
 import { Route, Routes, useLocation } from "react-router-dom";
 
-import { getPageName } from '../helpers/helpers';
-
 // interfaces
+import { ShowConfig } from '../data/ShowConfig';
 import { IUser, IUsers } from '../interfaces';
 
 // views
@@ -18,6 +17,7 @@ import NotFound from "../views/pages/NotFound/NotFound";
 // components
 import Header from '../components/Header/Header';
 import Chat from '../components/Chat/Chat';
+import Welcome from '../components/Welcome/Welcome';
 import SignIn from '../components/SignIn/SignIn';
 import MobileFooter from '../components/Header/components/MobileFooter/MobileFooter';
 import RoomDecal from '../components/RoomDecal/RoomDecal';
@@ -31,7 +31,7 @@ import { IMessage } from '../interfaces';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, selectUser, selectWindow, selectMessages } from '../store/store';
 import { setOneMenu, showSignIn, hideMenus } from '../store/menu';
-import { setUser, setUserRoom } from '../store/user';
+import { setUser, setUserRoomUrl } from '../store/user';
 import { startComposition, resizeApp, loadingApp } from '../store/window';
 import { addMessage, incremendNotifications } from '../store/messages';
 
@@ -43,14 +43,12 @@ interface AppInterface {
 function App({ cookies }: AppInterface) {
     const user = useSelector(selectUser);
     const windowUI = useSelector(selectWindow);
-    const windowW = useSelector((state: RootState) => state.window.width)
-    const ava = useSelector((state: RootState) => state.user.avatar)
 
     const dispatch = useDispatch();
 
 
-    const isClosed = false;
-    const isMenuOn = true;
+    const { isClosed, isMenuOn } = ShowConfig;
+
     const { pathname } = useLocation();
 
     const [users, setUsers] = useState<IUsers>([])
@@ -75,7 +73,6 @@ function App({ cookies }: AppInterface) {
     const socketSetup = useSockets({ users, setUsersData });
 
     useEffect(() => {
-        dispatch(setOneMenu("signIn"));
         socketSetup();
         checkSavedUser();
 
@@ -109,7 +106,7 @@ function App({ cookies }: AppInterface) {
 
     const handleKeyPress = (e: KeyboardEvent) => {
         if (e.key === 'Enter') {
-            if (!hasLoadedRoom && getPageName(pathname) !== "gallery") {
+            if (!hasLoadedRoom && pathname !== "/") {
                 setHasLoadedRoom(true);
                 dispatch(startComposition());
             }
@@ -145,22 +142,27 @@ function App({ cookies }: AppInterface) {
     const pageChange = () => {
 
         dispatch(hideMenus());
-        const nextRoom = getPageName(pathname);
-        if (nextRoom !== user.room) {
+        const nextRoomUrl = pathname;
+        if (nextRoomUrl !== user.roomUrl) {
             dispatch(loadingApp());
             setHasLoadedRoom(false);
         }
-        dispatch(setUserRoom({ room: nextRoom }));
+        dispatch(setUserRoomUrl({ roomUrl: nextRoomUrl }));
     }
 
     const startMedia = () => {
         // TODO
-        if (!hasLoadedRoom && getPageName(pathname) !== "gallery") {
+        if (!hasLoadedRoom && pathname !== "/") {
             setHasLoadedRoom(true);
             dispatch(startComposition());
         }
     }
 
+    const closeWelcome = () => {
+        setShowWelcome(false);
+        setHasAvatar(true);
+        setHasLoadedRoom(true);
+    }
 
     return (
         <div className="App">
@@ -173,7 +175,7 @@ function App({ cookies }: AppInterface) {
             </div>
             <div className="App-Content inner-outline">
                 <Routes>
-                    <Route path="/" element={<Gallery users={users} />} />
+                    <Route path="/" element={<Gallery users={users} isClosed={isClosed} />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/statement" element={<Statement />} />
                     <Route path="room/:id" element={<Room />} />
@@ -182,12 +184,6 @@ function App({ cookies }: AppInterface) {
             </div>
             <h1>{windowUI.compositionStarted}</h1>
 
-            {/* <Welcome
-                isClosed={isClosed}
-                hasAvatar={hasAvatar}
-                showWelcome={showWelcome}
-                closeWelcome={closeWelcome}
-            /> */}
 
             <SignIn
                 isFrame={true}
@@ -204,6 +200,14 @@ function App({ cookies }: AppInterface) {
                 hasLoadedRoom={hasLoadedRoom}
                 users={users}
             />
+            <Welcome
+                isClosed={isClosed}
+                hasAvatar={hasAvatar}
+                hasLoadedCookies={hasLoadedCookies}
+                showWelcome={showWelcome}
+                closeWelcome={closeWelcome}
+            />
+
 
             <MobileFooter avatarClicked={avatarClicked} />
 

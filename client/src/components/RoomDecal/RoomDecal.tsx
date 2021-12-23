@@ -43,7 +43,7 @@ const RoomDecal = (props: IRoomDecal) => {
                 <br />
                 <div className="usersEye">
                     <FontAwesomeIcon icon={faEye} />
-                    {getRoomCount(user.room, props.users)}
+                    {getRoomCount(user.roomUrl, props.users)}
                 </div>
                 <br />
                 <br />
@@ -90,7 +90,7 @@ const RoomDecal = (props: IRoomDecal) => {
 
     const getUsers = () => {
         return props.users.map((usr, i) => {
-            if (usr.room !== user.room)
+            if (usr.roomUrl !== user.roomUrl)
                 return null;
             return (
                 <span

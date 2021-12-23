@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from 'react';
+import React, { useRef, useEffect } from 'react';
 // store
 import { useSelector } from 'react-redux';
 import { selectMessages } from '../../../store/store';
@@ -6,18 +6,18 @@ import { selectMessages } from '../../../store/store';
 const MessagesDesktop = () => {
 
     const messages = useSelector(selectMessages);
-    const messagesEnd = useRef() as React.MutableRefObject<HTMLDivElement>;
+    const messagesEnd = useRef<HTMLDivElement>(null);// as React.MutableRefObject<HTMLDivElement>;
 
     const scrollToBottom = () => {
-        if (messagesEnd) {
-           const m = messagesEnd as unknown as HTMLElement;
-        //    m.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+        if (messagesEnd && messagesEnd.current) {
+            //    const m = messagesEnd as unknown as HTMLDivElement;
+            messagesEnd.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
         }
     }
 
     useEffect(() => {
         scrollToBottom();
-    }, [...messages.messages.map(msg => msg.message)])
+    }, [[...messages.messages.map(msg => msg.message)]])
 
 
 

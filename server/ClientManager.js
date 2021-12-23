@@ -79,7 +79,7 @@ module.exports = function (client) {
   /////////// MESSAGES
   client.on('messageUser', ({ socketId, message, time, avatar }) => {
     console.log("sending to", socketId, "msg:", message);
-    io.to(socketId).emit('message', getMessageObject(client.id, socketId, message, time, avatar));
+    io.to(socketId).emit('messageUser', getMessageObject(client.id, socketId, message, time, avatar));
     // client.broadcast.emit('message', getMessageObject(client.id, socketId, message));
     // io.to(socketId).emit('message', getMessageObject(client.id, "private", message));
   })
@@ -88,14 +88,14 @@ module.exports = function (client) {
     // console.log("sending room message to", room, message);
     // io.sockets.in(room).emit('message', getMessageObject(client.id, "room", message))
     // client.to(room).emit('message', getMessageObject(client.id, room, message));
-    client.to(room).emit('message', getMessageObject(client.id, room, message, time, avatar));
+    client.to(room).emit('messageRoom', getMessageObject(client.id, room, message, time, avatar));
   })
 
   client.on('messageAll', ({ message, time, avatar }) => {
     // includes sender
     // io.emit('message', getMessageObject(client.id, "all", message));
 
-    client.broadcast.emit('message', getMessageObject(client.id, "all", message, time, avatar));
+    client.broadcast.emit('messageAll', getMessageObject(client.id, "all", message, time, avatar));
   })
 
   client.on('critique', (crit) => {

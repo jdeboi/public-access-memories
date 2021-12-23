@@ -6,24 +6,28 @@ import { selectUser, selectUserActive } from '../../../store/store';
 import { addCocktail } from '../../../store/user';
 import { addMessage } from '../../../store/messages';
 
+import { IMessage } from '../../../interfaces';
+
+import { getBar } from '../../../data/Bars';
+const cocktailLocation = getBar("cocktail");
 
 export const useCocktailBot = () => {
-    const cocktailLocation = { type: "cocktail", x: 0, y: 0, w: 100, h: 50 }
     const [cocktailBotJustAsked, setCocktailBotJustAsked] = useState(false);
 
     const user = useSelector(selectUser);
     const userActive = useSelector(selectUserActive);
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     if (props.message !== "") {
-    //         sendToWineBot(props.message);
-    //         props.onSent();
-    //     }
-    // }, [props.message]);
 
     const sendToCocktailBot = (txt: string) => {
-        const message = { to: "wineBot", from: "me", message: txt, time: new Date(), avatar: user.avatar };
+        const message: IMessage = {
+            to: "cocktailBot",
+            from: "me",
+            roomUrl: user.roomUrl,
+            message: txt,
+            time: JSON.stringify(new Date()),
+            avatar: user.avatar
+        };
         // console.log("MESSAGE", message);
         dispatch(addMessage(message));
         setTimeout(() => cocktailBotRespond(txt), 1000);
@@ -33,7 +37,14 @@ export const useCocktailBot = () => {
     const cocktailBotRespond = (txt: string) => {
         if (!cocktailBotJustAsked) {
             const phrase = "hi, would you like a martini? Y/N.";
-            dispatch(addMessage({ to: "me", from: "cocktailBot", message: phrase, time: new Date(), avatar: userActive.active.avatar }));
+            dispatch(addMessage({
+                to: "me",
+                from: "cocktailBot",
+                message: phrase,
+                time: JSON.stringify(new Date()),
+                roomUrl: user.roomUrl,
+                avatar: userActive.active.avatar
+            }));
             setCocktailBotJustAsked(true);
         }
         else {
@@ -46,7 +57,14 @@ export const useCocktailBot = () => {
             else {
                 phrase = "Cool, I don't drink either.";
             }
-            dispatch(addMessage({ to: "me", from: "cocktailBot", message: phrase, time: new Date(), avatar: userActive.active.avatar }));
+            dispatch(addMessage({
+                to: "me",
+                from: "cocktailBot",
+                message: phrase,
+                time: JSON.stringify(new Date()),
+                roomUrl: user.roomUrl,
+                avatar: userActive.active.avatar
+            }));
             setCocktailBotJustAsked(false);
         }
     }

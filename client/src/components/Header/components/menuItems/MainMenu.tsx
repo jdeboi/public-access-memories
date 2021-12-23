@@ -1,5 +1,6 @@
 import React from 'react';
-import { RoomConfig } from '../../../../views/rooms/RoomConfig';
+import { RoomConfig } from '../../../../data/RoomConfig';
+import { ShowConfig } from '../../../../data/ShowConfig';
 import FinderSubmenu from '../FinderSubmenu';
 
 // store
@@ -10,7 +11,6 @@ import { IMainMenu, IListItem } from '../../../../interfaces';
 
 
 const MainMenu = (props: IMainMenu) => {
-    const title = "white cube";
     const windowUI = useSelector(selectWindow);
     const user = useSelector(selectUser);
 
@@ -27,21 +27,21 @@ const MainMenu = (props: IMainMenu) => {
     })
 
     const justTitle = () => {
-        return <li><span id="pageTitle">{title}</span></li>
+        return <li><span id="pageTitle">{ShowConfig.galleryTitle}</span></li>
     }
 
     const isXXSmall = () => {
-        return (user.room !== "gallery" && windowUI.width < 445);
+        return (user.roomUrl !== "/" && windowUI.width < 445);
     }
 
 
     if (props.isMenuOn)
         return <FinderSubmenu
-            title={title}
+            title={ShowConfig.galleryTitle}
             specialClass=""
             listItems={roomsList}
         />
-    else if (isXXSmall() && user.room !== "gallery")
+    else if (isXXSmall())
         return <React.Fragment></React.Fragment>;
     else
         return justTitle();

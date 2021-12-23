@@ -2,17 +2,17 @@ export interface IUser {
     id: string;
     avatar: string;
     userName: string;
-    room: string;
+    roomUrl: string;
     comp: number | null;
     roomX: number;
     roomY: number;
     x: number;
     y: number;
-    wineTime: Date | null;
+    wineTime: string | null;
     needsWine: boolean;
-    cheeseTime: Date | null;
+    cheeseTime: string | null;
     needsCheese: boolean;
-    cocktailTime: Date | null;
+    cocktailTime: string | null;
     needsCocktail: boolean;
     outside: boolean;
 }
@@ -20,15 +20,16 @@ export interface IUser {
 
 export interface IUsers extends Array<IUser> { }
 
-export interface BarLocation {
+export interface IBar {
     type: string;
     x: number;
     y: number;
     w: number;
     h: number;
+    tender: IUser;
 }
 
-export interface BarLocations extends Array<BarLocation> { }
+export interface IBars extends Array<IBar> { }
 
 export interface IWindowUI {
     width: number;
@@ -87,8 +88,10 @@ export interface IMessage {
     from: string,
     to: string,
     message: string,
-    time: Date,
-    avatar: string
+    time: string,
+    roomUrl: string,
+    avatar: string,
+    socketId?: string
 }
 
 export interface IMessages {
@@ -109,13 +112,16 @@ export interface IChat {
 
 export interface IRoom {
     id: number,
-    roomName: string,
+    roomName?: string,
     shortcut?: string,
     classN?: string,
     link: string,
     title: string,
     artist: string,
-    medium: string,
+    medium?: string,
     description: string,
-    year: number
+    year: number,
+    x: number,
+    y: number,
+    dir: string
 }

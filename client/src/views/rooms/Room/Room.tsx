@@ -1,5 +1,5 @@
 import React from 'react';
-import { RoomConfig } from '../RoomConfig';
+import { RoomConfig } from '../../../data/RoomConfig';
 import { useParams } from "react-router-dom";
 
 const Room = () => {
@@ -19,7 +19,7 @@ const Room = () => {
 
     return (
         <div className="Room">
-            <h1>{room.roomName}</h1>
+            <h1>{room.title}</h1>
         </div>
     )
 };

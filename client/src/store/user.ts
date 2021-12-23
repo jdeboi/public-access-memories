@@ -4,7 +4,10 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { IUser, BarLocation, BarLocations } from '../interfaces';
+import { IUser, IBar, IBars } from '../interfaces';
+import { getBar } from '../data/Bars';
+
+import Cookies from 'js-cookie'
 
 import socket from '../helpers/Socket';
 
@@ -12,7 +15,7 @@ const initialState: IUser = {
     id: "0",
     avatar: "😀",
     userName: "",
-    room: "gallery",
+    roomUrl: "/",
     comp: null,
     roomX: 0,
     roomY: 0,
@@ -31,13 +34,13 @@ export const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        setUserRoom: (state, action: PayloadAction<{ room: string }>) => {
+        setUserRoomUrl: (state, action: PayloadAction<{ roomUrl: string }>) => {
             // redux toolkit allows us to "mutate" state (not exactly what's happening)
-            const prevRoom = state.room;
-            const nextRoom = action.payload.room;
+            const prevRoom = state.roomUrl;
+            const nextRoom = action.payload.roomUrl;
             state.roomX = 50;
             state.roomY = 50;
-            state.room = nextRoom;
+            state.roomUrl = nextRoom;
             // socket.emit("leaveRoom", prevRoom);
             // socket.emit("joinRoom", nextRoom);
             // socket.emit("setUser", state);
@@ -48,19 +51,22 @@ export const userSlice = createSlice({
             state.id = action.payload.id;
             state.x = action.payload.x;
             state.y = action.payload.y;
-            state.room = action.payload.room;
+            state.roomUrl = action.payload.roomUrl;
             // TODO
             // const comp = Cookies.get('comp');
             // if (comp)
             //   state.comp = comp;
-            // Cookies.set("hasAvatar", true);
-            // Cookies.set("avatar", user.avatar);
-            // Cookies.set("userName", user.userName);
+            Cookies.set("hasAvatar", "true");
+            Cookies.set("avatar", state.avatar);
+            Cookies.set("userName", state.userName);
             // socket.emit("setUser", state);
         },
         setUserLogin: (state, action: PayloadAction<{ userName: string, avatar: string }>) => {
             state.avatar = action.payload.avatar;
             state.userName = action.payload.userName;
+            Cookies.set("hasAvatar", "true");
+            Cookies.set("avatar", state.avatar);
+            Cookies.set("userName", state.userName);
         },
         setUserID: (state, action: PayloadAction<string>) => {
             state.id = action.payload;
@@ -74,34 +80,33 @@ export const userSlice = createSlice({
             state.comp = action.payload;
             // Cookies.set("comp", user.comp);
         },
-        moveUser: (state, action: PayloadAction<{ x: number, y: number, barLocations: BarLocations }>) => {
+        moveUser: (state, action: PayloadAction<{ x: number, y: number }>) => {
             state.x = action.payload.x;
             state.y = action.payload.y;
-            const barLocations = action.payload.barLocations;
-            if (userNearBar(state, barLocations[1]) && state.needsWine) {
+            if (userNearBar(state, getBar("wine")) && state.needsWine) {
                 state.needsWine = false;
-                state.wineTime = new Date();
+                state.wineTime = JSON.stringify(new Date());
             }
-            else if (userNearBar(state, barLocations[0]) && state.needsCheese) {
+            else if (userNearBar(state, getBar("cheese")) && state.needsCheese) {
                 state.needsCheese = false;
-                state.cheeseTime = new Date();
+                state.cheeseTime = JSON.stringify(new Date());
             }
-            else if (userNearBar(state, barLocations[2]) && state.needsCocktail) {
+            else if (userNearBar(state, getBar("cocktail")) && state.needsCocktail) {
                 state.needsCocktail = false;
-                state.cocktailTime = new Date();
+                state.cocktailTime = JSON.stringify(new Date());
             }
             // socket.emit("setUser", state);
         },
-        addWine: (state, action: PayloadAction<{ location: BarLocation }>) => {
+        addWine: (state, action: PayloadAction<{ location: IBar }>) => {
             state.needsWine = true;
             // console.log("WINE", location);
             if (userNearBar(state, action.payload.location)) {
                 state.needsWine = false;
-                state.wineTime = new Date();
+                state.wineTime = JSON.stringify(new Date());
             }
             // socket.emit("setUser", state);
         },
-        setWine: (state, action: PayloadAction<{ needsWine: boolean, wineTime: Date }>) => {
+        setWine: (state, action: PayloadAction<{ needsWine: boolean, wineTime: string }>) => {
             state.needsWine = action.payload.needsWine;
             state.wineTime = action.payload.wineTime;
             // socket.emit("setUser", state);
@@ -111,16 +116,16 @@ export const userSlice = createSlice({
             state.needsWine = false;
             // socket.emit("setUser", state);
         },
-        addCheese: (state, action: PayloadAction<{ location: BarLocation }>) => {
+        addCheese: (state, action: PayloadAction<{ location: IBar }>) => {
             state.needsCheese = true;
             let loc = action.payload.location;
             if (userNearBar(state, loc)) {
                 state.needsCheese = false;
-                state.cheeseTime = new Date();
+                state.cheeseTime = JSON.stringify(new Date());
             }
             // socket.emit("setUser", state);
         },
-        setCheese: (state, action: PayloadAction<{ needsCheese: boolean, cheeseTime: Date }>) => {
+        setCheese: (state, action: PayloadAction<{ needsCheese: boolean, cheeseTime: string }>) => {
             state.needsCheese = action.payload.needsCheese;
             state.cheeseTime = action.payload.cheeseTime;
             // socket.emit("setUser", state);
@@ -131,15 +136,15 @@ export const userSlice = createSlice({
             // socket.emit("setUser", state);
         },
 
-        addCocktail: (state, action: PayloadAction<{ location: BarLocation }>) => {
+        addCocktail: (state, action: PayloadAction<{ location: IBar }>) => {
             state.needsCocktail = true;
             if (userNearBar(state, action.payload.location)) {
                 state.needsCocktail = false;
-                state.cocktailTime = new Date();
+                state.cocktailTime = JSON.stringify(new Date());
             }
             // socket.emit("setUser", state);
         },
-        setCocktail: (state, action: PayloadAction<{ needsCocktail: boolean, cocktailTime: Date }>) => {
+        setCocktail: (state, action: PayloadAction<{ needsCocktail: boolean, cocktailTime: string }>) => {
             state.needsCocktail = action.payload.needsCocktail;
             state.cocktailTime = action.payload.cocktailTime;
             // socket.emit("setUser", state);
@@ -156,7 +161,7 @@ export const userSlice = createSlice({
 })
 
 
-function userNearBar(user: IUser, location: BarLocation) {
+function userNearBar(user: IUser, location: IBar) {
     var dx = user.x - (location.x + location.w / 2);
     var dy = user.y - (location.y + location.h / 2);
     var dis = Math.sqrt(dx * dx + dy * dy);
@@ -165,7 +170,7 @@ function userNearBar(user: IUser, location: BarLocation) {
 }
 
 export const {
-    setUserRoom, setUser, setUserID, setUserLogin, moveUser,
+    setUserRoomUrl, setUser, setUserID, setUserLogin, moveUser,
     addCheese, setCheese, resetCheese,
     addWine, setWine, resetWine,
     addCocktail, setCocktail, resetCocktail,

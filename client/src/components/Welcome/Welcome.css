@@ -1,0 +1,180 @@
+.Welcome {
+  position: absolute;
+  z-index: 2500;
+}
+
+.Welcome .Frame .content {
+  pointer-events: all;
+}
+
+.Welcome .WelcomeContent {
+  padding: 20px;
+  height: 291px;
+  width: 500px;
+}
+
+.Welcome .WelcomeContent .Instructions-list {
+  height: 100%;
+  border: 2px solid black;
+  border-radius: 6px;
+}
+
+.Welcome .WelcomeContent .SignInForm .SignIn-Content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  height: 296px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: black;
+}
+
+.Welcome .WelcomeContent .SignInForm .SignIn-Content .userBar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 38px;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  padding-bottom: 20px;
+}
+
+.Welcome .WelcomeContent .SignInForm .SignIn-Content .userBar .avatar {
+  font-size: 36px;
+  height: 38px;
+  width: 38px;
+  padding-right: 15px;
+}
+
+.Welcome .WelcomeContent .SignInForm .SignIn-Content .userBar input {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  border-bottom: 2px solid black;
+  font-size: 14px;
+  color: black;
+  width: 225px;
+}
+
+.Welcome .WelcomeContent .SignInForm .SignIn-Content .emoji-list {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  height: 80px;
+  border: 2px solid black;
+  border-radius: 6px;
+  overflow: auto;
+}
+
+.Welcome .WelcomeContent .SignInForm .SignIn-Content .emoji-list button {
+  font-size: 18px;
+  width: 24px;
+  height: 24px;
+  padding: 2px;
+  border: none;
+}
+
+.Welcome .WelcomeContent .SignInForm .SignIn-Content .submit {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 34px;
+          flex: 0 0 34px;
+  padding-top: 20px;
+}
+
+.Welcome .welcome-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  vertical-align: middle;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.Welcome .welcome-buttons button {
+  margin: 5px;
+}
+
+.Welcome .Welcome-Details {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.Welcome .Details {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.Welcome .Details div a {
+  text-decoration: none;
+  color: black;
+}
+
+.Welcome .Details.closed {
+  line-height: 1.6em;
+}
+
+.Welcome .Frame .circleButton {
+  color: darkgray;
+}
+
+.Welcome .Frame .circleButton:hover {
+  color: darkgray;
+}
+
+.Welcome .Glasses {
+  height: 100%;
+  line-height: 1.4em;
+}
+
+.Welcome .Glasses .instruction {
+  padding: 10px;
+}
+
+.Welcome .Glasses h2 {
+  font-size: 20px;
+}
+
+.Welcome .Glasses p {
+  font-size: 14px;
+}
+
+.Welcome .Glasses img {
+  padding-bottom: 20px;
+  width: 70%;
+}
+
+.Welcome .Glasses ul {
+  list-style-type: square;
+  font-size: 12px;
+  margin-left: 18px;
+}
+/*# sourceMappingURL=Welcome.css.map */

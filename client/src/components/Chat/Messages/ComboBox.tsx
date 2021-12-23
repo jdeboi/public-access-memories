@@ -10,6 +10,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectUser, selectUserActive } from '../../../store/store';
 import { resetNotifications } from '../../../store/messages';
 
+
+import { getNewUser } from '../../../helpers/helpers';
+import { setUserActiveChat } from '../../../store/userActive';
+
+const initialUsers: IUser[] = [];
+initialUsers.push(getNewUser("Everyone","👥", "everywhere"));
+initialUsers.push(getNewUser("Room","🚪" , "everywhere"));
+
 interface IComboBox {
     setRecipient: (user: IUser) => void,
     users: IUsers,
@@ -21,7 +29,6 @@ interface IComboUser {
     avatar: string
 }
 
-
 const ComboBox = (props: IComboBox) => {
     const dispatch = useDispatch();
     // really I only think this needs to rerender if someone joins/leaves a ROOM
@@ -29,37 +36,28 @@ const ComboBox = (props: IComboBox) => {
     const user = useSelector(selectUser);
     const userActive = useSelector(selectUserActive);
     const [inputValue, setInputValue] = useState("");
+    
+    const [localActiveUser, setLocalActiveUser] = useState({
+        userName: initialUsers[0].userName, 
+        id: initialUsers[0].id, 
+        avatar: initialUsers[0].avatar, 
+    });
 
-    const initialUsers = [{ userName: "Everyone", avatar: "👥" }, { userName: "Room", avatar: "🚪" }];
-
-    // if (this.props.room === "home") {
-    //   const wineBot = {};
-    //   const hostBot = {};
-    //   this.initialUsers.push(wineBot);
-    //   this.initialUsers.push(hostBot);
-    // }🤖
-
-
-
-
+  
 
     useEffect(() => {
         let label = "";
-        if (userActive.active) {
+        if (userActive.active && userActive.active.userName !== "") {
             label = getLabel(userActive.active);
             setInputValue(label);
+            setLocalActiveUser(userActive.active);
+        } else {
+            dispatch(setUserActiveChat(initialUsers[0]));
+            label = getLabel(initialUsers[0]);
+            setInputValue(label);
+            setLocalActiveUser(initialUsers[0])
         }
     }, [userActive.active.userName])
-
-
-
-    const getInitialUserNames = () => {
-        const names = [];
-        for (const user of initialUsers) {
-            names.push(user.userName);
-        }
-        return names;
-    }
 
     const getLabel = (user: IComboUser | null) => {
         if (!user)
@@ -77,57 +75,16 @@ const ComboBox = (props: IComboBox) => {
         }
     }
 
-    const getUserListInRoom = () => {
-        var users = getInitialUserNames();
-        if (props.users) {
-            for (let i = 0; i < props.users.length; i++) {
-                const usr = { ...props.users[i] };
-                // don't include winebot with id = 1
-                if (usr.room === user.room && usr.id !== "1") {
-                    users.push(getLabel(user));
-                }
-            }
-        }
-        return users;
-    }
-
-    const getUsersInRoomTrunc = () => {
-        var users = initialUsers;
-        if (props.users) {
-            for (let i = 0; i < props.users.length; i++) {
-                const usr = { ...props.users[i] };
-                if (usr.room === user.room && usr.id !== "1") {
-                    users.push({ avatar: user.avatar, userName: user.userName });
-                }
-            }
-        }
-        return users;
-    }
-
-    const getUserObjectByListID = (listID: string) => {
-        var users = [...initialUsers];
-        if (props.users)
-            users = [...users, ...props.users];
-        let obj = users.find(usr => listID === getLabel(usr));
-        return obj;
-    }
-
-    const getUsersInRoom = () => {
-        var users = [...initialUsers];
-        // if (props.users)
-        //     users = [...users, ...props.users];
+    const getUsersInRoom = () : IUser[] => {
+        const users = [...initialUsers];
         let usersInRoom: IUsers = [];
         if (props.users) {
-            usersInRoom = props.users.filter((usr, i) => {
-                // (i < 10 ) || ??? what was that about?
-                return (usr.room === user.room && usr.id);
+            usersInRoom = props.users.filter((usr) => {
+                return (usr.roomUrl === user.roomUrl || usr.roomUrl === "everywhere");
             })
         }
-        let namedUsers: IComboUser[] = usersInRoom.map((usr) => {
-            return { userName: usr.userName, avatar: usr.avatar }
-        })
-        users = [...users, ...namedUsers];
-        return users;
+        let all = users.concat([...usersInRoom]);
+        return all;
     }
 
 
@@ -135,8 +92,8 @@ const ComboBox = (props: IComboBox) => {
     // CHANGES WHEN HIT RETURN, CLICK,
     // I.E. SELECTED FROM LIST
     const setValue = (newValue: IComboUser) => {
-        // this.setState({value: newValue});
-        const usr = getUserByUserName(props.users, newValue.userName);
+        let allinroom = [...initialUsers, ...props.users];
+        const usr = getUserByUserName(allinroom, newValue.userName);
         if (usr)
             props.setRecipient(usr);
     }
@@ -150,7 +107,7 @@ const ComboBox = (props: IComboBox) => {
             <Autocomplete
                 id="combo-box-demo"
                 className="autocomplete"
-                value={userActive.active}
+                value={localActiveUser}
                 onChange={(event: any, newValue: IComboUser | null) => {
                     if (newValue)
                         setValue(newValue);
@@ -160,9 +117,10 @@ const ComboBox = (props: IComboBox) => {
                     setInputValue(newInputValue);
                 }}
                 onFocus={() => dispatch(resetNotifications())}
+                isOptionEqualToValue={(option: IComboUser, value: IComboUser) => getLabel(option) === getLabel(value)}
                 options={getUsersInRoom()}
                 getOptionLabel={(option: IComboUser) => getLabel(option)}
-                // getOptionSelected={() => console.log("??")}
+                
                 fullWidth
                 renderInput={(params: any) => {
                     // console.log("PARAMS", params);

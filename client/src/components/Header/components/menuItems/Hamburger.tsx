@@ -3,7 +3,7 @@
 import FinderSubmenu from '../FinderSubmenu';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { PageConfig } from '../../../../views/pages/PageConfig';
+import { PageConfig } from '../../../../data/PageConfig';
 
 const Hamburger = () => {
     return (

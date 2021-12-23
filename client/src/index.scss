@@ -1,6 +1,83 @@
 @import "./styles/reset.scss";
+@import "./styles/constants.scss";
 
 html, body, #root {
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
+
+
+button.standardButton {
+  font-size: $fontSize-desktop-3;
+  padding: 10px;
+
+  min-width: 140px;
+
+  text-align: center;
+  // border: 1px solid black;
+  color: black;
+  border-radius: 6px;
+
+  border: 2px solid black;
+  // box-shadow: -3px 5px rgb(65, 65, 65);
+  color: white;
+
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    // transform: translateY(-0.25em);
+    transform: scale(1.05);
+  }
+
+  &.primary {
+    background: black;
+    // background: linear-gradient(#000, #1);
+    color: white;
+  }
+
+  &.secondary {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+  }
+}
+
+input.standardInput {
+  font-size: $fontSize-desktop-3;
+  padding: 15px 10px;
+  text-align: left;
+  border: 2px solid black;
+  color: black;
+  border-radius: 6px;
+}
+
+input.standardInputWhite {
+  font-size: $fontSize-desktop-3;
+  padding: 15px 10px;
+  text-align: left;
+  border: 2px solid white;
+  color: white;
+  border-radius: 6px;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $scrollbarBgColor;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $scrollbarColor;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+// ::-webkit-scrollbar-thumb:hover {
+//   background: $scrollbarHoverColor;
+// }

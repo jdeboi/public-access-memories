@@ -4,17 +4,20 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUser, selectUserActive } from '../../../store/store';
 import { addWine } from '../../../store/user';
-import { addMessage} from '../../../store/messages';
+import { addMessage } from '../../../store/messages';
 
+import { IMessage } from '../../../interfaces';
+
+import { getBar } from '../../../data/Bars';
+const wineLocation = getBar("wine");
 
 export const useWineBot = () => {
-    const wineLocation = {type: "wine", x: 0, y: 0, w: 100, h: 50}
     const [wineBotJustAsked, setWineBotJustAsked] = useState(false);
 
     const user = useSelector(selectUser);
     const userActive = useSelector(selectUserActive);
     const dispatch = useDispatch();
-    
+
     // useEffect(() => {
     //     if (props.message !== "") {
     //         sendToWineBot(props.message);
@@ -23,22 +26,30 @@ export const useWineBot = () => {
     // }, [props.message]);
 
     const sendToWineBot = (txt: string) => {
-        const message = { to: "wineBot", from: "me", message: txt, time: new Date(), avatar: user.avatar };
+        const message: IMessage = {
+            to: "wineBot",
+            from: "me",
+            message: txt,
+            time: JSON.stringify(new Date()),
+            roomUrl: user.roomUrl,
+            avatar: user.avatar
+        };
         // console.log("MESSAGE", message);
         dispatch(addMessage(message));
         setTimeout(() => wineBotRespond(txt), 1000);
     }
 
     const wineBotRespond = (txt: string) => {
-        
+
         if (!wineBotJustAsked) {
             const phrase = "hi, would you like some wine? Y/N.";
-            dispatch(addMessage({ 
-                to: "me", 
-                from: "wineBot", 
-                message: phrase, 
-                time: new Date(), 
-                avatar: userActive.active.avatar 
+            dispatch(addMessage({
+                to: "me",
+                from: "wineBot",
+                message: phrase,
+                time: JSON.stringify(new Date()),
+                roomUrl: user.roomUrl,
+                avatar: userActive.active.avatar
             }));
             setWineBotJustAsked(true);
         }
@@ -47,7 +58,7 @@ export const useWineBot = () => {
             let phrase = "";
             if (lc === "y" || lc.indexOf("yes") > -1) {
                 phrase = "Stop by the bar to pick up your glass.";
-                dispatch(addWine({location: wineLocation}));
+                dispatch(addWine({ location: wineLocation }));
             }
             else {
                 phrase = "Cool, I don't drink either.";
@@ -56,7 +67,8 @@ export const useWineBot = () => {
                 to: "me",
                 from: "wineBot",
                 message: phrase,
-                time: new Date(),
+                time: JSON.stringify(new Date()),
+                roomUrl: user.roomUrl,
                 avatar: userActive.active.avatar
             }));
             setWineBotJustAsked(false);

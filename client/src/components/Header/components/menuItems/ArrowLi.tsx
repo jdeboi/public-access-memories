@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faHome } from "@fortawesome/free-solid-svg-icons";
@@ -8,14 +9,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectUser } from '../../../../store/store';
 
 const ArrowLi = () => {
-    const user = useSelector(selectUser);
+    const { pathname } = useLocation();
     const [arrowClass, setArrowClass] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
-        const ac = user.room === "gallery" ? "hidden" : "arrow expandable";
+        const ac = pathname === "/" ? "hidden" : "arrow expandable";
         setArrowClass(ac);
-    }, [user.room])
+    }, [pathname])
 
 
     return (

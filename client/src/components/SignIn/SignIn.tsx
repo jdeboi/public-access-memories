@@ -1,8 +1,14 @@
-import React, { useEffect, useState } from 'react';
+// forwardRef
+// because we have to call handleSubmit() from a parent (window)
+// https://stackoverflow.com/questions/62210286/declare-type-with-react-useimperativehandle
+// https://stackoverflow.com/questions/37949981/call-child-method-from-parent
+
+import React, { forwardRef, useImperativeHandle, useEffect, useState } from 'react';
 import './SignIn.css';
 
 // components
 import CenterModal from '../CenterModal/CenterModal';
+
 import { useLocation } from 'react-router-dom';
 
 // store
@@ -21,12 +27,23 @@ import { IUser } from '../../interfaces';
 interface SignInProps {
     isFrame: boolean,
     hasAvatar: boolean,
-    setClick?: (x: () => void) => void,
-    nextStep?: () => void
-    hasLoadedCookies: boolean
+    nextStep?: () => void,
+    hasLoadedCookies: boolean,
+    ref?: HTMLDivElement
 }
 
-const SignIn = (props: SignInProps) => {
+export type SignInSubmitType = {
+    clicked: () => void,
+}
+
+const SignIn = forwardRef<SignInSubmitType, SignInProps>((props, ref) => {
+    useImperativeHandle(ref, () => ({
+      // start() has type inferrence here
+      clicked() {
+        handleSubmit();
+      },
+    }));
+
 
     const user = useSelector(selectUser);
     const menu = useSelector(selectMenu);
@@ -39,11 +56,6 @@ const SignIn = (props: SignInProps) => {
     const [readyToClose, setReadyToClose] = useState(false);
     const [isHidden, setIsHidden] = useState(true);
 
-    useEffect(() => {
-        if (props.setClick) {
-            props.setClick(handleSubmit);
-        }
-    }, [])
 
     // check if the sign in menu should be displayed
     useEffect(() => {
@@ -53,6 +65,7 @@ const SignIn = (props: SignInProps) => {
         else {
             setIsHidden(menu.signIn.isHidden);
         }
+
     }, [windowUI.isMobile, windowUI.hasFooter, menu.signIn.isHidden, isHidden, menu.mobile])
 
 
@@ -125,6 +138,7 @@ const SignIn = (props: SignInProps) => {
         const checkUser: IUser = { ...user };
         checkUser.userName = userName;
         checkUser.avatar = avatar;
+        checkUser.roomUrl = pathname;
         socket.emit("registerUser", checkUser, userRegister);
     }
 
@@ -218,7 +232,7 @@ const SignIn = (props: SignInProps) => {
     if (props.isFrame)
         return getFrame();
     return getForm()
-}
+});
 
 
 

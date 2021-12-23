@@ -47,7 +47,7 @@ const ChatDesktop = (props: IChat) => {
             windowStyle={{ background: "rgba(0, 0, 0, .9)" }}
             content={
 
-                <div className="Chat">
+                <div className="Chat-Content">
 
                     <div className="Chat-messages"
                         style={{

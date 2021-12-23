@@ -1,0 +1,152 @@
+.Welcome {
+
+  position: absolute;
+  z-index: 2500;
+
+  .Frame {
+    .content {
+      pointer-events: all;
+    }
+  }
+
+  .WelcomeContent {
+    padding: 20px;
+    height: 400px-40px-34px-35px;
+    width: 500px;
+
+    .Instructions-list {
+      height: 100%;
+      border: 2px solid black;
+      border-radius: 6px;
+    }
+
+    .SignInForm {
+     
+      .SignIn-Content {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 400px-40px-34px-30px;
+        align-items: center;
+        color: black;
+
+        .userBar {
+          display: flex;
+          height: 38px;
+          flex-direction: row;
+          align-self: flex-start;
+          padding-bottom: 20px;
+
+          .avatar {
+            font-size: 36px;
+            height: 38px;
+            width: 38px;
+            padding-right: 15px;
+          }
+
+          input {
+            flex: 1;
+            border-bottom: 2px solid black;
+            font-size: 14px;
+            color: black;
+            width: 225px;
+          }
+        }
+
+        .emoji-list {
+          flex: 1;
+          height: 80px;
+          border: 2px solid black;
+          border-radius: 6px;
+          overflow: auto;
+
+          button {
+            font-size: 18px;
+            width: 24px;
+            height: 24px;
+            padding: 2px;
+            border: none;
+          }
+        }
+
+        .submit {
+          flex: 0 0 34px;
+          padding-top: 20px;
+        }
+      }
+    }
+  }
+
+  .welcome-buttons {
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+    justify-content: center;
+
+    button {
+      margin: 5px;
+    }
+  }
+
+  .Welcome-Details {
+    flex: 1;
+  }
+
+  .Details{
+    display: flex;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+
+    div a {
+      text-decoration: none;
+      color: black;
+    }
+  }
+
+  .Details.closed {
+    line-height: 1.6em;
+  }
+
+  .Frame .circleButton {
+    color: darkgray;
+
+    &:hover {
+      color: darkgray;
+    }
+  }
+
+  .Glasses {
+    height: 100%;
+    // border: 2px solid black;
+    // border-radius: 6px;
+
+    .instruction {
+      padding: 10px;
+    }
+
+    // text-align: center;
+    line-height: 1.4em;
+    h2 {
+      font-size: 20px;
+    }
+    p {
+      font-size: 14px;
+    }
+
+    img {
+      padding-bottom: 20px;
+      width: 70%;
+    }
+
+    ul {
+      list-style-type: square;
+      font-size: 12px;
+      margin-left: 18px;
+    }
+  }
+}

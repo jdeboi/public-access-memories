@@ -2,7 +2,9 @@
 import React, { useState, useEffect } from 'react';
 
 // interfaces
-import { IUser, IUsers } from '../interfaces/index';
+import { IUsers } from '../interfaces/index';
+
+import { bars } from '../data/Bars';
 
 // store
 import { IMessage } from '../interfaces';
@@ -25,15 +27,11 @@ export const useSockets = (props: ISockets) => {
     const user = useSelector(selectUser);
     const dispatch = useDispatch();
 
-    const [sessionID, setSessionID] = useState("");
-
-
     const socketSetup = () => {
         socket.on('connect', () => {
             dispatch(setUserID(socket.id))
-            socket.emit("joinRoom", user.room);
-            // TODO
-            // addBots()
+            socket.emit("joinRoom", user.roomUrl);
+            addBots();
         });
 
         socket.on("usersUpdate", (data: IUsers) => {
@@ -44,16 +42,27 @@ export const useSockets = (props: ISockets) => {
             // console.log(filteredArray, user.id)
         });
 
-        socket.on("message", (data: IMessage) => {
+        socket.on("messageAll", (data: IMessage) => {
             const message = { ...data }
-            if (message.to === user.room) {
-                message.to = "room"
-            }
-            else if (message.to !== "all") {
-                message.to = "me";
-            }
+            message.to = "me";
             message.from = getUserNameById(message.from);
+            dispatch(addMessage(message));
+            dispatch(incremendNotifications());
+        })
 
+        socket.on("messageRoom", (data: IMessage) => {
+            const message = { ...data }
+            if (message.to === user.roomUrl) {
+                message.to = "room";
+                message.from = getUserNameById(message.from);
+                dispatch(addMessage(message));
+                dispatch(incremendNotifications());
+            }
+        })
+
+        socket.on("messageUser", (data: IMessage) => {
+            const message = { ...data }
+            message.from = getUserNameById(message.from);
             dispatch(addMessage(message));
             dispatch(incremendNotifications());
         })
@@ -78,4 +87,12 @@ export const useSockets = (props: ISockets) => {
     }
 
     return socketSetup;
+}
+
+
+
+const addBots = () => {
+    for (const bar of bars) {
+        socket.emit("setBot", bar.tender);
+    }
 }

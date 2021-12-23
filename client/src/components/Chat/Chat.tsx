@@ -1,45 +1,47 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { IUser, IUsers } from '../../interfaces';
 import './Chat.css';
 
 import ChatMobile from './ChatMobile';
 import ChatDesktop from './ChatDesktop';
 
+import socket from "../../helpers/Socket";
+
 // store
 import { useSelector, useDispatch } from 'react-redux';
-import { selectUserActive, selectWindow } from '../../store/store';
+import { selectUser, selectUserActive, selectWindow } from '../../store/store';
 import { setUserActiveChat } from '../../store/userActive';
+import { addMessage } from '../../store/messages';
+
+// bot hooks
 import { useWineBot } from './hooks/useWineBot';
 import { useCocktailBot } from './hooks/useCocktailBot';
 
-
+import { IMessage } from '../../interfaces';
+import { useCheeseBot } from './hooks/useCheeseBot';
 
 interface ChatProps {
     users: IUsers;
 }
 
 const Chat = (props: ChatProps) => {
+    const user = useSelector(selectUser);
     const userActive = useSelector(selectUserActive);
     const windowUI = useSelector(selectWindow);
     const dispatch = useDispatch();
 
     const sendToWineBot = useWineBot();
     const sendToCocktailBot = useCocktailBot();
-    // currentRecipient: null,
-    // const textInput = React.createRef();
+    const sendToCheeseBot = useCheeseBot();
 
     const [textBox, setTextBox] = useState("");
     const [buttonDisabled, setButtonDisabled] = useState(false);
 
-    useEffect(() => {
-
-    }, [])
 
 
     const setRecipient = (user: IUser | null | undefined) => {
         if (user) {
             if (textBox !== "") {
-                // this.setState({currentRecipient: user, buttonDisabled: false});
                 setButtonDisabled(false);
                 dispatch(setUserActiveChat(user));
             }
@@ -80,14 +82,58 @@ const Chat = (props: ChatProps) => {
         }
     }
 
+    const sendToAll = (txt: string) => {
+        const message: IMessage = {
+            to: "all",
+            from: "me",
+            message: txt,
+            roomUrl: user.roomUrl,
+            time: JSON.stringify(new Date()),
+            avatar: user.avatar
+        };
+        if (socket.connected)
+            socket.emit('messageAll', message);
+        dispatch(addMessage(message));
+    }
+
+    const sendToRoom = (txt: string) => {
+        let t = JSON.stringify(new Date());
+        const message: IMessage = {
+            to: "room",
+            from: "me",
+            message: txt,
+            roomUrl: user.roomUrl,
+            time: t,
+            avatar: user.avatar
+        };
+        if (socket.connected)
+            socket.emit('messageRoom', message);
+        dispatch(addMessage(message));
+    }
+
+    const sendToOne = (txt: string, socketId: string) => {
+        const message: IMessage = {
+            from: "me",
+            to: userActive.active.userName,
+            socketId: socketId,
+            roomUrl: user.roomUrl,
+            message: txt,
+            time: JSON.stringify(new Date()),
+            avatar: user.avatar
+        };
+        if (socket.connected)
+            socket.emit('messageUser', message); //sending to individual socketid
+        dispatch(addMessage(message));
+    };
+
 
     const sendMessage = (txt: string) => {
         if (txt && userActive.active) {
             if (userActive.active.userName === "Everyone") {
-                // sendToAll(message);
+                sendToAll(txt);
             }
             else if (userActive.active.userName === "Room") {
-                // sendToRoom(message);
+                sendToRoom(txt);
             }
             else if (userActive.active.userName === "wineBot") {
                 sendToWineBot(txt);
@@ -96,7 +142,7 @@ const Chat = (props: ChatProps) => {
                 sendToCocktailBot(txt);
             }
             else if (userActive.active.userName === "cheeseBot") {
-                // sendToCheeseBot(message);
+                sendToCheeseBot(txt);
             }
             else if (userActive.active.userName === "DJ") {
                 // sendToDJ(message);
@@ -105,7 +151,7 @@ const Chat = (props: ChatProps) => {
                 // sendToHostBot(message);
             }
             else {
-                // sendToOne(txt, userActive.active.id);
+                sendToOne(txt, userActive.active.id);
             }
         }
     }
@@ -122,14 +168,14 @@ const Chat = (props: ChatProps) => {
     }
 
     return (
-        <React.Fragment>
+        <div className="Chat">
             {
                 windowUI.isMobile ?
                     <ChatMobile {...cprops} /> :
                     <ChatDesktop {...cprops} />
             }
 
-        </React.Fragment>
+        </div>
     )
 };
 

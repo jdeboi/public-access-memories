@@ -1,0 +1,22 @@
+.LoadingPage {
+    position: absolute;
+    // top: 45%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    color: white;
+    font-weight: normal;
+
+    .title {
+        font-size: 50px;
+        padding-bottom: 20px;
+    }
+
+    .loadingSymbol {
+        font-size: 20px;
+    }
+}
