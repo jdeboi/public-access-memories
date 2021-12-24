@@ -10,7 +10,9 @@
   },
   "scripts": {
     "start": "node server/index.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "dev": "concurrently \"nodemon index.js\" \"npm run react\"",
+    "react": "npm start --prefix client"
   },
   "dependencies": {
     "@emotion/react": "^11.7.1",
