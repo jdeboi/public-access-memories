@@ -9,7 +9,8 @@
     "node": "16.x"
   },
   "scripts": {
-    "start": "node server/index.js"
+    "start": "node server/index.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "dependencies": {
     "@emotion/react": "^11.7.1",
