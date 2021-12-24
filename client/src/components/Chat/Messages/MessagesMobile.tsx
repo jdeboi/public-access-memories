@@ -17,7 +17,7 @@ const MessagesMobile = () => {
 
     useEffect(() => {
         scrollToTop();
-    }, [...messages.messages.map(msg => msg.message)])
+    }, [[...messages.messages.map(msg => msg.message)]])
 
 
     return (

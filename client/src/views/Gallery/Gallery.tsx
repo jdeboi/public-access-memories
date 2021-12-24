@@ -18,7 +18,7 @@ import { setOneMenu, showChat } from '../../store/menu';
 import { setSketchVolume } from '../../store/music';
 import { doneLoadingApp } from '../../store/window';
 
-import { bars } from '../../data/Bars';
+import { bars, getBar } from '../../data/BotConfig';
 
 interface IGallery {
     users: IUsers,
@@ -42,7 +42,7 @@ const Gallery = (props: IGallery) => {
     }
 
     const getVolume = () => {
-        const dj = bars.filter((bar) => bar.type === "dj")[0];
+        const dj = getBar("DJ");
         let dx = dj.x - user.x;
         let dy = dj.y - user.y;
         let dis = Math.sqrt(dx * dx + dy * dy);
@@ -73,7 +73,7 @@ const Gallery = (props: IGallery) => {
             <div id="p5_loading" className="loadingclass"></div>
             <GallerySketch
                 users={props.users}
-                user={user}
+                // user={user}
                 roomCount={getRoomCount("gallery", props.users)}
                 isClosed={props.isClosed}
                 userMove={moveGalleryUser}
@@ -82,6 +82,7 @@ const Gallery = (props: IGallery) => {
                 toggleOutside={() => dispatch(toggleOutside())}
                 isMobile={windowUI.isMobile}
                 clickedUserChat={clickedUserChat}
+                setUserActive={clickedUserChat}
             />
             {/* {
                 windowUI.loading ?

@@ -1,5 +1,6 @@
 import Button from './Button';
-import { globalConfig, mouseToWorld } from "../../../constants";
+import { GlobalConfig } from "../../../../data/GlobalConfig";
+import { mouseToWorld } from '../../../../helpers/coordinates';
 
 export default class Draggable {
   constructor(id, x, y, w, h, p5, content) {
@@ -40,14 +41,14 @@ export default class Draggable {
   }
 
   initMask() {
-    this.mask = this.p5.createGraphics(this.w, this.h+this.barH);
+    this.mask = this.p5.createGraphics(this.w, this.h + this.barH);
     this.mask.background(0);
     this.mask.fill(255);
     this.mask.noStroke();
     // this.mask.rect(0, 0, this.w, this.h, this.bRad, this.bRad);
-    this.mask.ellipse(this.w/2, this.h/2, 50, 50);
+    this.mask.ellipse(this.w / 2, this.h / 2, 50, 50);
     if (this.content && this.content.width > 0) {
-   
+
       this.content.mask(this.mask);
     }
   }
@@ -70,8 +71,8 @@ export default class Draggable {
       if (!this.minimized) this.p5.rect(0, 10, this.w, (this.barH - 10));
       this.p5.rect(0, 0, this.w, this.barH, this.bRad);
 
-      let gx = globalConfig.x * globalConfig.scaler;
-      let gy = globalConfig.y * globalConfig.scaler;
+      let gx = GlobalConfig.x * GlobalConfig.scaler;
+      let gy = GlobalConfig.y * GlobalConfig.scaler;
       let mx = this.p5.mouseX + userX - gx - this.p5.windowWidth / 2 - this.x;
       let my = this.p5.mouseY + userY - gy - this.p5.windowHeight / 2 - this.y;
 
@@ -85,12 +86,12 @@ export default class Draggable {
   displayContent(userX, userY) {
     // this.p5.fill(255);
     this.p5.push();
-   
+
     this.p5.translate(0, this.barH);
     this.p5.image(this.content, 0, 0, this.w, this.h);
     this.p5.pop();
     this.displayFrame();
-    
+
   }
 
   displaySolidBack(col) {
@@ -108,9 +109,9 @@ export default class Draggable {
   }
 
   checkButtons(userX, userY) {
-    if (this.closed) 
+    if (this.closed)
       return false;
-    let mouse = mouseToWorld({x: userX, y: userY}, this.p5);
+    let mouse = mouseToWorld({ x: userX, y: userY }, this.p5);
     mouse.x -= this.x;
     mouse.y -= this.y;
     if (this.closeButton.mouseOver(mouse.x, mouse.y)) {
@@ -129,9 +130,9 @@ export default class Draggable {
   }
 
   checkDragging(userX, userY) {
-    if (this.closed) 
+    if (this.closed)
       return false;
-    let mouse = mouseToWorld({x: userX, y: userY}, this.p5);
+    let mouse = mouseToWorld({ x: userX, y: userY }, this.p5);
     // console.log(mx, my, userX, userY, this.x, this.y);
     if (this.overToolBar(mouse.x, mouse.y)) {
       // console.log("over toolbar");

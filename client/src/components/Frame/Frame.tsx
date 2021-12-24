@@ -5,7 +5,7 @@ import "./Frame.css";
 import Draggable, { DraggableEvent, DraggableData } from 'react-draggable';
 import Toolbar from './Toolbar';
 
-
+import {usePrevious} from '../../hooks/usePrevious';
 
 interface PointProps {
     x: number;
@@ -60,6 +60,7 @@ const Frame = (props: FrameProps) => {
     const [isMinimized, setIsMinimized] = useState(false);
     // const [isMaximized, setIsMaximized] = useState(false);
     const [controlledPosition, setControlledPosition] = useState<PointProps>({ x, y });
+    const [propsPosition, setPropsPosition] = useState({x:props.x, y: props.y});
 
     const contentVisibility = {
         display: isMinimized ? "none" : "block",
@@ -114,6 +115,14 @@ const Frame = (props: FrameProps) => {
             height: Math.floor(frameH)
         });
     }, [props.isHidden, isHidden, isMinimized, props.z])
+
+    useEffect(() => {
+        // TODO - is this the right way to get prev props?
+        const dx = props.x - propsPosition.x;
+        const dy = props.y - propsPosition.y;
+        setPropsPosition({x: props.x, y: props.y});
+        setControlledPosition(cp => { return { x: cp.x + dx, y: cp.y + dy } });
+    }, [props.x, props.y]);
 
     const onControlledDrag = (e: DraggableEvent, data: DraggableData): void | false => {
         const { x, y } = data;
@@ -176,8 +185,6 @@ const Frame = (props: FrameProps) => {
     }
 
 
-
-
     return (
         <Draggable
             axis="both"
@@ -195,7 +202,12 @@ const Frame = (props: FrameProps) => {
         >
             <div ref={wrapper} onClick={() => handleClick} className={frameClassName} style={frameStyle} >
                 <div className={props.window ? "window " + props.window : "window"} style={props.windowStyle}>
-                    <Toolbar title={frameTitle} toggleClosed={toggleClosed} toggleMinimzed={toggleMinimzed} toggleMaximized={toggleMaximized} />
+                    <Toolbar
+                        title={frameTitle}
+                        toggleClosed={toggleClosed}
+                        toggleMinimzed={toggleMinimzed}
+                        toggleMaximized={toggleMaximized}
+                    />
                     <div className="content" style={contentVisibility}>
                         {props.content}
                     </div>

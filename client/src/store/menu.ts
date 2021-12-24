@@ -28,21 +28,15 @@ export const menuSlice = createSlice({
         reset: () => initialState,
         hideMenus: (state) => {
             // redux toolkit allows us to "mutate" state (not exactly what's happening)
-            state.map.isHidden= true;
-            state.faq.isHidden= true;
-            state.signIn.isHidden= true;
-            state.volume.isHidden= true;
-            state.chat.isHidden= true;
-            state.userIcons.isHidden= true;
+            state.map.isHidden = true;
+            state.faq.isHidden = true;
+            state.signIn.isHidden = true;
+            state.volume.isHidden = true;
+            state.chat.isHidden = true;
+            state.userIcons.isHidden = true;
             state.liveStream.isHidden = true;
         },
         setOneMenu: (state, action: PayloadAction<string>) => {
-            // if the same menu is tapped, toggle it off (return init state)
-            if (action.payload === "" || state.mobile === action.payload) {
-                state.isGalleryActive = true;
-            }
-            state.mobile = action.payload;
-
             state.signIn.isHidden = true;
             state.faq.isHidden = true;
             state.volume.isHidden = true;
@@ -51,37 +45,47 @@ export const menuSlice = createSlice({
             state.chat.isHidden = true;
             state.userIcons.isHidden = true;
 
-            switch (action.payload) {
-                case "signIn":
-                    state.signIn.isHidden = false;
-                    state.isGalleryActive = false;
-                    break;
-                case "faq":
-                    state.faq.isHidden = false;
-                    state.isGalleryActive = false;
-                    break;
-                case "volume":
-                    state.volume.isHidden = false;
-                    break;
-                case "liveStream":
-                    state.liveStream.isHidden = false;
-                    state.liveStream.hasClicked = true;
-                    // Cookies.set("clickedLiveStream", true);
-                    break;
-                case "map":
-                    state.map.isHidden = false;
-                    state.isGalleryActive = true;
-                    break;
-                case "chat":
-                    state.chat.isHidden = false;
-                    state.isGalleryActive = false;
-                    break;
-                case "usersIcon":
-                    state.userIcons.isHidden = false;
-                    state.isGalleryActive = false;
-                    break;
-                default: break;
+            // if the same menu is tapped, toggle it off (return init state)
+            if (action.payload === "" || state.mobile === action.payload) {
+                state.isGalleryActive = true;
+                state.mobile = "";
             }
+            else {
+
+                switch (action.payload) {
+                    case "signIn":
+                        state.signIn.isHidden = false;
+                        state.isGalleryActive = false;
+                        break;
+                    case "faq":
+                        state.faq.isHidden = false;
+                        state.isGalleryActive = false;
+                        break;
+                    case "volume":
+                        state.volume.isHidden = false;
+                        break;
+                    case "liveStream":
+                        state.liveStream.isHidden = false;
+                        state.liveStream.hasClicked = true;
+                        // Cookies.set("clickedLiveStream", true);
+                        break;
+                    case "map":
+                        state.map.isHidden = false;
+                        state.isGalleryActive = true;
+                        break;
+                    case "chat":
+                        state.chat.isHidden = false;
+                        state.isGalleryActive = false;
+                        break;
+                    case "usersIcon":
+                        state.userIcons.isHidden = false;
+                        state.isGalleryActive = false;
+                        break;
+                    default: break;
+                }
+                state.mobile = action.payload;
+            }
+            
         },
         setGalleryActive: (state) => {
             state.isGalleryActive = true;

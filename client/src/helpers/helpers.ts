@@ -1,5 +1,5 @@
 import { IUser, IUsers, IRoom } from '../interfaces';
-import { RoomConfig } from '../data/RoomConfig';
+import { rooms } from '../data/RoomConfig';
 import { PageConfig } from '../data/PageConfig';
 
 export const getUserByUserName = (users: IUsers, userName: string) => {
@@ -50,7 +50,7 @@ export const getPageName = (link: string): string => {
   if (link === "/") {
     return "gallery";
   }
-  const roomPages = RoomConfig.filter((room) => link === room.link);
+  const roomPages = rooms.filter((room) => link === room.link);
   if (roomPages.length > 0) {
     return roomPages[0].title;
   }
@@ -62,7 +62,7 @@ export const getPageName = (link: string): string => {
 }
 
 export const getRoomByPath = (path: string): IRoom | null => {
-  let r = RoomConfig.filter((room) => room.link === path);
+  let r = rooms.filter((room) => room.link === path);
   if (r.length > 0)
     return r[0];
   return null;
@@ -110,4 +110,16 @@ export function constrain(val: number, min: number, max: number) {
 export function randomInRange(start: number, end: number) {
   let diff = end-start;
   return Math.random()*diff+start;
+}
+
+export const roundToMult = (num:number, mult:number) => {
+  let newNum = num + mult / 2; // to round up if necessary
+  let diff = newNum % mult;
+  return newNum - diff;
+}
+
+export const roundToMult2 = (num:number, mult:number) => {
+  let newNum = num; // to round up if necessary
+  let diff = newNum % mult;
+  return newNum - diff;
 }

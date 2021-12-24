@@ -52,14 +52,14 @@
 
     flex: 1 1 100%;
 
-    background-color: rgba(255, 255, 255, 0.25);
-    background-image: -webkit-gradient(
-        linear,
-        0% 0%,
-        0% 95%,
-        from(rgba(255, 255, 255, 0.7)),
-        to(rgba(255, 255, 255, 0))
-    );
+    background-color: #e3a587;
+    // background-image: -webkit-gradient(
+    //     linear,
+    //     0% 0%,
+    //     0% 95%,
+    //     from(rgba(255, 255, 255, 0.7)),
+    //     to(rgba(255, 255, 255, 0))
+    // );
 
     &.mobile {
         height: $headerMobileH;

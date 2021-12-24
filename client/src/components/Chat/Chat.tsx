@@ -170,7 +170,7 @@ const Chat = (props: ChatProps) => {
     return (
         <div className="Chat">
             {
-                windowUI.isMobile ?
+               ( windowUI.isMobile || windowUI.hasFooter) ?
                     <ChatMobile {...cprops} /> :
                     <ChatDesktop {...cprops} />
             }

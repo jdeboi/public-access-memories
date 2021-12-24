@@ -1,7 +1,8 @@
-import Draggable from './Draggable/Draggable';
+import Draggable from '../Draggable/Draggable';
 // import ShadowDraggable from './Draggable/ShadowDraggable'
-import { p5ToWorldCoords, globalConfig } from '../../constants';
-import { rooms }  from '../../../Sketches';
+import { GlobalConfig } from '../../../../data/GlobalConfig';
+import { p5ToWorldCoords } from '../../../../helpers/coordinates';
+import { rooms, roomConfig } from '../../../../data/RoomConfig';
 
 export default class RoomLabel extends Draggable {
 
@@ -10,27 +11,26 @@ export default class RoomLabel extends Draggable {
         // super(id, 0, 0, 160, 80, p5, null, shadow);
 
         this.eyeIcon = eyeIcon;
-        // this.heartIcon = heartIcon;
-
         const room = rooms[id];
+        
         const point = p5ToWorldCoords(room.x, room.y);
-        this.x = point.x - this.w/2 + 5*globalConfig.scaler/2;
-        this.y = point.y- this.h/2+ 5*globalConfig.scaler/2;
+        this.x = point.x - this.w / 2 + roomConfig.w * GlobalConfig.scaler / 2;
+        this.y = point.y - this.h / 2 + roomConfig.w * GlobalConfig.scaler / 2;
         this.title = room.title;
         this.link = room.link;
     }
 
-    display(dogica, roomCount) {
-        let rc = roomCount[this.link];
+    display(font, roomCount) {
+        // let rc = roomCount[this.link];
         this.p5.push();
         this.p5.translate(this.x, this.y);
         if (!this.closed) {
-            if (!this.minimized) this.displayContent(dogica,rc);
+            if (!this.minimized) this.displayContent(font, roomCount);
         }
         this.p5.pop();
     }
 
-    displayContent(dogica, count) {
+    displayContent(font, count) {
         this.p5.push();
 
 
@@ -41,13 +41,13 @@ export default class RoomLabel extends Draggable {
         this.p5.translate(0, this.barH);
         this.p5.push();
 
-        this.p5.textFont(dogica, 11);
+        this.p5.textFont(font, 11);
 
         this.p5.translate(15, 25);
         this.displayLabel();
 
-        
-       
+
+
 
         // if (this.title.length > 12) this.p5.translate(0, 35);
         // else 
@@ -80,7 +80,7 @@ export default class RoomLabel extends Draggable {
         this.p5.stroke(255);
         this.p5.strokeWeight(2);
         // this.p5.rect(0, 0, w, h, 10, 10);
-       
+
         this.p5.image(this.eyeIcon, 0, 5, 20, 20);
 
         /// eye count
@@ -95,21 +95,14 @@ export default class RoomLabel extends Draggable {
     }
 
     displayLabel() {
-     
+
         // draw title
         this.p5.fill(0);
         this.p5.noStroke();
-        if (this.title === "hard drives on seashores") {
-            let br = this.title.substring(9, this.title.length).indexOf(" ") + 9;
-            let t1 = this.title.substring(0, br);
-            let t2 = this.title.substring(br+1, this.title.length);
-            this.p5.text(t1, 0, 0);
-            this.p5.text(t2, 0, 17);
-        }
-        else if (this.title.length > 12) {
+        if (this.title.length > 12) {
             let br = this.title.indexOf(" ");
             let t1 = this.title.substring(0, br);
-            let t2 = this.title.substring(br+1, this.title.length);
+            let t2 = this.title.substring(br + 1, this.title.length);
             this.p5.text(t1, 0, 0);
             this.p5.text(t2, 0, 17);
         }

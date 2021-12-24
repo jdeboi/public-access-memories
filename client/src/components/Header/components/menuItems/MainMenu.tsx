@@ -1,5 +1,5 @@
 import React from 'react';
-import { RoomConfig } from '../../../../data/RoomConfig';
+import { rooms } from '../../../../data/RoomConfig';
 import { ShowConfig } from '../../../../data/ShowConfig';
 import FinderSubmenu from '../FinderSubmenu';
 
@@ -14,7 +14,7 @@ const MainMenu = (props: IMainMenu) => {
     const windowUI = useSelector(selectWindow);
     const user = useSelector(selectUser);
 
-    const roomsList = RoomConfig.map(rm => {
+    const roomsList = rooms.map(rm => {
         let val: IListItem = {
             title: rm.title,
             link: rm.link

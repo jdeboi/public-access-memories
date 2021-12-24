@@ -36,7 +36,7 @@ const ChatDesktop = (props: IChat) => {
         const y = windowUI.height - h - windowUI.edgeSpacing - windowUI.toolbarH;
         const x = windowUI.width - w - windowUI.edgeSpacing;
         setDimensions({ w, h, y, x });
-    }, [windowUI])
+    }, [windowUI.contentH, windowUI.contentW, windowUI.width, windowUI.height ])
 
 
     return (

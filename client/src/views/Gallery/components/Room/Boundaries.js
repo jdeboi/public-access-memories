@@ -1,4 +1,4 @@
-import { globalConfig } from '../../constants';
+import { GlobalConfig } from '../../../../data/GlobalConfig';
 
 // takes 4 points
 export function intersectionPoint(x1, y1, x2, y2, x3, y3, x4, y4) {
@@ -24,7 +24,7 @@ export function doorCrossing(nextPos, door, config = { x: 0, y: 0, scaler: 1 }) 
   door.x1 = (door.x1 + config.x) * config.scaler;
   door.y1 = (door.y1 + config.y) * config.scaler;
   // if (intersects(pos.x,pos.y,nextPos.x,nextPos.y,points[p].x,points[p].y,points[p+1].x,points[p+1].y)) {
-  if (intersects(nextPos.x, nextPos.y, door.x0, door.y0, door.x1, door.y1, globalConfig.stepS / 2)) {
+  if (intersects(nextPos.x, nextPos.y, door.x0, door.y0, door.x1, door.y1, GlobalConfig.scaler / 2)) {
     return door.to;
   }
   return null;
@@ -37,9 +37,9 @@ export function doorLineCrossing(pos, nextPos, door, config = { x: 0, y: 0, scal
   door.y0 = (door.y0 + config.y) * config.scaler;
   door.x1 = (door.x1 + config.x) * config.scaler;
   door.y1 = (door.y1 + config.y) * config.scaler;
-  
+
   if (intersectsOG(pos.x, pos.y, nextPos.x, nextPos.y, door.x0, door.y0, door.x1, door.y1)) {
-    // if (intersects(nextPos.x,nextPos.y,door.x0,door.y0,door.x1,door.y1, globalConfig.stepS/2)) {
+    // if (intersects(nextPos.x,nextPos.y,door.x0,door.y0,door.x1,door.y1, GlobalConfig.scaler/2)) {
     return door.to;
   }
   return null;
@@ -57,7 +57,7 @@ export function boundaryCrossing(nextPos, boundary, config = { x: 0, y: 0, scale
 
 
     // if (intersects(pos.x,pos.y,nextPos.x,nextPos.y,points[p].x,points[p].y,points[p+1].x,points[p+1].y)) {
-    if (intersects(nextPos.x, nextPos.y, point0.x, point0.y, point1.x, point1.y, globalConfig.stepS / 2)) {
+    if (intersects(nextPos.x, nextPos.y, point0.x, point0.y, point1.x, point1.y, GlobalConfig.scaler / 2)) {
       // console.log("boundc", nextPos.x, nextPos.y, point0.x, point0.y, point1.x, point1.y)
       return true;
     }
@@ -67,7 +67,9 @@ export function boundaryCrossing(nextPos, boundary, config = { x: 0, y: 0, scale
 }
 
 export function boundaryLineCrossing(pos, nextPos, boundary, config = { x: 0, y: 0, scaler: 1 }) {
-  if (!pos || !nextPos || !boundary) return false;
+  if (!pos || !nextPos || !boundary) {
+    return false;
+  }
   for (let p = 0; p < boundary.length - 1; p++) {
     const point0 = { ...boundary[p] };
     const point1 = { ...boundary[p + 1] };
@@ -75,17 +77,12 @@ export function boundaryLineCrossing(pos, nextPos, boundary, config = { x: 0, y:
     point0.y = (point0.y + config.y) * config.scaler;
     point1.x = (point1.x + config.x) * config.scaler;
     point1.y = (point1.y + config.y) * config.scaler;
-    // if (title == "wet-streams") console.log("boundlinec", pos.x, pos.y, nextPos.x, nextPos.y, point0, point1);
-    // console.log(point0.x, point0.y, point1.x, point1.y, nextPos.x, nextPos.y)
-
+    
+    
     if (intersectsOG(pos.x, pos.y, nextPos.x, nextPos.y, point0.x, point0.y, point1.x, point1.y)) {
-      // if (title == "wet-streams") console.log("woo", id, pos.x, pos.y, nextPos.x, nextPos.y, point0, point1);
-      // if (intersects(nextPos.x,nextPos.y,point0.x,point0.y,point1.x,point1.y, globalConfig.stepS/2)) {
-
       return true;
     }
   }
-
   return false;
 }
 
@@ -147,13 +144,13 @@ function intersectsOG(x1, y1, x2, y2, x3, y3, x4, y4) {
 
   //collinear
   if (denom === 0) {
-    const xBet = (x1 >= x3 && x1 <= x4 || x2 >= x3 && x2 <= x4 || x3 <= x1 && x3>=x2 );
-    const yBet = (y1 >= y3 && y1 <= y4 || y2 >= y3 && y2 <= y4 || y3 <= y1 && y3>=y2 );
-    if (xBet && yBet ) {
+    const xBet = (x1 >= x3 && x1 <= x4 || x2 >= x3 && x2 <= x4 || x3 <= x1 && x3 >= x2);
+    const yBet = (y1 >= y3 && y1 <= y4 || y2 >= y3 && y2 <= y4 || y3 <= y1 && y3 >= y2);
+    if (xBet && yBet) {
       return 1;
     }
     // console.log("denom0, nope")
-    return 0; 
+    return 0;
   }
 
   // lines_intersect

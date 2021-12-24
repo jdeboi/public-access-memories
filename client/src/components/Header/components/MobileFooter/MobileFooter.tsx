@@ -46,7 +46,7 @@ const MobileFooter = (props: { avatarClicked: () => void }) => {
             classChat += " top";
         }
         return (
-            <button className={classChat} onClick={chatClicked}>
+            <button className={classChat} onClick={() => chatClicked()}>
                 <FontAwesomeIcon icon={faComment} />
                 {getChatNotification()}
             </button>
@@ -80,7 +80,7 @@ const MobileFooter = (props: { avatarClicked: () => void }) => {
     }
 
     const chatClicked = () => {
-        dispatch(resetNotifications)();
+        dispatch(resetNotifications());
         // this.props.setOneMenu("chat");
         dispatch(setOneMenu("chat"));
     }

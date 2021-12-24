@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 // interfaces
 import { IUsers } from '../interfaces/index';
 
-import { bars } from '../data/Bars';
+import { barTenders } from '../data/BotConfig';
 
 // store
 import { IMessage } from '../interfaces';
@@ -92,7 +92,7 @@ export const useSockets = (props: ISockets) => {
 
 
 const addBots = () => {
-    for (const bar of bars) {
-        socket.emit("setBot", bar.tender);
+    for (const barTender of barTenders) {
+        socket.emit("setBot", barTender);
     }
 }

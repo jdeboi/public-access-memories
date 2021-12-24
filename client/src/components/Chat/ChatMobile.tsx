@@ -1,6 +1,7 @@
 
 
 import React, { useState, useEffect } from 'react';
+import './ChatMobile.css';
 
 import ComboBox from './Messages/ComboBox';
 import MessagesMobile from './Messages/MessagesMobile';

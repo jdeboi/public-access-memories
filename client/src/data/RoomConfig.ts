@@ -1,6 +1,13 @@
 import { IRoom } from '../interfaces';
 
-export const RoomConfig: IRoom[] = [
+export const roomConfig = {
+    w: 5,
+    h: 5,
+    start: .1,
+    end: .8
+}
+
+export const rooms: IRoom[] = [
     {
         id: 0,
         title: "memory motel",
@@ -9,8 +16,8 @@ export const RoomConfig: IRoom[] = [
         medium: "custom software",
         description: "",
         year: 2021,
-        x: 0, 
-        y: 0,
+        x: -4, 
+        y: -8,
         dir: "bottom"
     },
     {
@@ -21,8 +28,8 @@ export const RoomConfig: IRoom[] = [
         medium: "custom software",
         description: "",
         year: 2022,
-        x: 300,
-        y: 100,
+        x: 4,
+        y: 4,
         dir: "bottom"
     },
     {
@@ -33,8 +40,8 @@ export const RoomConfig: IRoom[] = [
         medium: "custom software",
         description: "",
         year: 2022,
-        x: 300,
-        y: -500,
+        x: 3,
+        y: -7,
         dir: "bottom"
     },
     {
@@ -45,8 +52,8 @@ export const RoomConfig: IRoom[] = [
         medium: "custom software",
         description: "",
         year: 2022,
-        x: -500,
-        y: -500,
+        x: -8,
+        y: -5,
         dir: "bottom"
     },
     {
@@ -57,8 +64,8 @@ export const RoomConfig: IRoom[] = [
         medium: "custom software",
         description: "",
         year: 2022,
-        x: 400,
-        y: 200,
+        x: -4,
+        y: 9,
         dir: "bottom"
     },
     {
@@ -69,8 +76,8 @@ export const RoomConfig: IRoom[] = [
         medium: "custom software",
         description: "",
         year: 2022,
-        x: 100,
-        y: -200,
+        x: 1,
+        y: -6,
         dir: "bottom"
     },
     {
@@ -81,8 +88,8 @@ export const RoomConfig: IRoom[] = [
         medium: "custom software",
         description: "",
         year: 2022,
-        x: -300,
-        y: -500,
+        x: -3,
+        y: -6,
         dir: "bottom"
     },
     {
@@ -93,8 +100,8 @@ export const RoomConfig: IRoom[] = [
         medium: "custom software",
         description: "",
         year: 2022,
-        x: 300,
-        y: 500,
+        x: 3,
+        y: 5,
         dir: "bottom"
     },
     {
@@ -105,8 +112,8 @@ export const RoomConfig: IRoom[] = [
         medium: "custom software",
         description: "",
         year: 2022,
-        x: 900,
-        y: 700,
+        x: 9,
+        y: 7,
         dir: "bottom"
     },
     {
@@ -117,8 +124,8 @@ export const RoomConfig: IRoom[] = [
         medium: "custom software",
         description: "",
         year: 2022,
-        x: 600,
-        y: 800,
+        x: 6,
+        y: 8,
         dir: "bottom"
     }
 ];

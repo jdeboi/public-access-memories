@@ -1,5 +1,5 @@
 export const ShowConfig = {
-    isClosed: true,
+    isClosed: false,
     isMenuOn: true,
     galleryTitle: "public access memories",
     showTitle: "home </body>",

@@ -4,9 +4,9 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { IUser, IBar, IBars } from '../interfaces';
-import { getBar } from '../data/Bars';
-
+import { IUser, IBar } from '../interfaces';
+import { getBar } from '../data/BotConfig';
+import { GlobalConfig } from '../data/GlobalConfig';
 import Cookies from 'js-cookie'
 
 import socket from '../helpers/Socket';
@@ -19,8 +19,8 @@ const initialState: IUser = {
     comp: null,
     roomX: 0,
     roomY: 0,
-    x: 0,
-    y: 0,
+    x: GlobalConfig.scaler / 2,
+    y: GlobalConfig.scaler / 2,
     wineTime: null,
     needsWine: false,
     cheeseTime: null,

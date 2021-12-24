@@ -84,9 +84,6 @@
 }
 
 .App .inner-outline {
-  border-left: 2px solid black;
-  border-right: 2px solid black;
-  /* border-bottom: 3px solid black; */
   -webkit-box-sizing: border-box;
   /* Safari/Chrome, other WebKit */
   /* Firefox, other Gecko */
