@@ -5,6 +5,9 @@
   "repository": "https://github.com/jdeboi/public-access-memories.git",
   "author": "Jenna deBoisblanc <jdeboi@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "start": "node server/index.js"
   },
