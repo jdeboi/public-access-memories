@@ -69,14 +69,11 @@ class GallerySketch extends React.Component<Props> {
 
 	preload = (p5: p5Types) => {
 		const url = "https://lmd-bucket.s3.us-east-2.amazonaws.com/sketches/gallery/";
-		//////////////
-		// lights
+
 		lightImgs[0] = p5.loadImage(url + "tracklights/tracklights_vert.jpg");
 		lightImgs[1] = p5.loadImage(url + "tracklights/light_shadow.png");
 		lightImgs[2] = p5.loadImage(url + "tracklights/tracklights_dark_vert.jpg");
 		lightImgs[3] = p5.loadImage(url + "tracklights/black_shadow.png");
-
-
 
 		barEmojis[0] = p5.loadImage(url + "emojis/bread.png");
 		barEmojis[1] = p5.loadImage(url + "emojis/cheese.png");
@@ -154,6 +151,7 @@ class GallerySketch extends React.Component<Props> {
 		addLightDivs(divs, lightImgs, p5);
 		addBarDivs(divs, lightImgs[3], p5);
 		addRoomLabelDivs(divs, eyeIcon, p5);
+		//
 	}
 
 
@@ -317,17 +315,6 @@ class GallerySketch extends React.Component<Props> {
 		}
 
 	}
-
-	// const help = (p5: p5Types) => {
-	// 	const dx = p5.mouseX > p5.windowWidth / 2 ? 50 : -50;
-	// 	const dy = p5.mouseY > p5.windowHeight / 2 ? 50 : -50;
-	// 	const mx = roundToMult2((p5.mouseX - p5.windowWidth / 2) + dx, GlobalConfig.scaler);
-	// 	const my = roundToMult2((p5.mouseY - p5.windowHeight / 2) + dy, GlobalConfig.scaler);
-	// 	if (!(mx === 0 && my === 0)) {
-
-	// 	}
-	// 	p5.text(`${dx} ${dy} ${mx} ${my}`, p5.mouseX, p5.mouseY);
-	// }
 
 	mouseStep = () => {
 		const t = new Date().getTime() - destination.time.getTime();
