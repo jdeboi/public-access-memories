@@ -2,6 +2,7 @@ const express = require("express");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const http = require("http");
+const path = require('path');
 const server = http.createServer(app);
 
 // sockets
