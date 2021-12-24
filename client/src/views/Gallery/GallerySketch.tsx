@@ -151,7 +151,6 @@ class GallerySketch extends React.Component<Props> {
 		addLightDivs(divs, lightImgs, p5);
 		addBarDivs(divs, lightImgs[3], p5);
 		addRoomLabelDivs(divs, eyeIcon, p5);
-		//
 	}
 
 
