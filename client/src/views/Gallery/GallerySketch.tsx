@@ -163,7 +163,7 @@ class GallerySketch extends React.Component<Props> {
 
 	displayRooms = () => {
 		for (const room of rooms) {
-			room.display(font, 0);
+			room.display(font, 0); //test
 		}
 	}
 
