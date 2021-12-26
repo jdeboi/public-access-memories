@@ -16,13 +16,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectUser, selectWindow, selectMenu } from '../../store/store';
 import { hideSignIn } from '../../store/menu';
 import { setUserLogin } from '../../store/user';
-// import { resetApp } from '../../store';
 
 import socket from "../../helpers/Socket";
 import { getEmojis } from '../../helpers/emojis';
 
 // interfaces
 import { IUser } from '../../interfaces';
+
+import Cookies from 'js-cookie';
 
 interface SignInProps {
     isFrame: boolean,
@@ -65,7 +66,6 @@ const SignIn = forwardRef<SignInSubmitType, SignInProps>((props, ref) => {
         else {
             setIsHidden(menu.signIn.isHidden);
         }
-
     }, [windowUI.isMobile, windowUI.hasFooter, menu.signIn.isHidden, isHidden, menu.mobile])
 
 
@@ -122,7 +122,8 @@ const SignIn = forwardRef<SignInSubmitType, SignInProps>((props, ref) => {
 
     const submitSuccess = (user: IUser) => {
         dispatch(setUserLogin({ userName: user.userName, avatar: user.avatar }));
-
+        // socket.emit("setUser", user);
+        // TODO - are we handling in app.tsx?
         // set the local state to this registered state
         setLocalAvatar(user.avatar);
         setLocalUserName(user.userName);
@@ -173,7 +174,10 @@ const SignIn = forwardRef<SignInSubmitType, SignInProps>((props, ref) => {
     }
 
     const resetApp = () => {
-        // this.props.resetApp();
+        dispatch({type: "reset"});
+        Cookies.remove("hasAvatar");
+        Cookies.remove("avatar");
+        Cookies.remove("userName");
         window.location.href = "/";
     }
 
@@ -182,9 +186,8 @@ const SignIn = forwardRef<SignInSubmitType, SignInProps>((props, ref) => {
         if (props.isFrame) {
             buttons =
                 <div className="center-buttons flexItem">
-                    <button className="standardButton secondary" onClick={resetApp}>logout</button>
+                    <button className="standardButton secondary" onClick={() => resetApp()}>logout</button>
                     <button className="standardButton primary" onClick={handleUserUpdate}>update</button>
-
                 </div>
         }
         else {

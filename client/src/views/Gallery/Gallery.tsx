@@ -5,9 +5,10 @@ import { useNavigate } from 'react-router-dom';
 
 import GallerySketch from './GallerySketch';
 import { IUser, IUsers } from '../../interfaces';
-import { getRoomCount, mapVal } from '../../helpers/helpers';
+import {  mapVal } from '../../helpers/helpers';
 
 import LoadingPage from '../../components/LoadingPage/LoadingPage';
+import MiniMap from './components/MiniMap/MiniMap';
 
 // store
 import { useSelector, useDispatch } from 'react-redux';
@@ -19,6 +20,8 @@ import { setSketchVolume } from '../../store/music';
 import { doneLoadingApp } from '../../store/window';
 
 import { bars, getBar } from '../../data/BotConfig';
+
+import socket from '../../helpers/Socket';
 
 interface IGallery {
     users: IUsers,
@@ -61,6 +64,11 @@ const Gallery = (props: IGallery) => {
     const moveGalleryUser = (x: number, y: number) => {
         dispatch(setSketchVolume(getVolume()));
         dispatch(moveUser({ x, y }));
+        const newUser = {...user};
+        newUser.x = x;
+        newUser.y = y;
+        // socket.emit("setUser", newUser);
+        // are we handling this in the app.tsx?
     }
 
     const userNewRoom = (room: string) => {
@@ -73,8 +81,6 @@ const Gallery = (props: IGallery) => {
             <div id="p5_loading" className="loadingclass"></div>
             <GallerySketch
                 users={props.users}
-                // user={user}
-                roomCount={getRoomCount("gallery", props.users)}
                 isClosed={props.isClosed}
                 userMove={moveGalleryUser}
                 userNewRoom={userNewRoom}
@@ -84,11 +90,11 @@ const Gallery = (props: IGallery) => {
                 clickedUserChat={clickedUserChat}
                 setUserActive={clickedUserChat}
             />
-            {/* {
+            {
                 windowUI.loading ?
                     <LoadingPage /> :
-                <MiniMap users={props.users} />
-            } */}
+                <MiniMap users={props.users} x={20} y={20} />
+            }
         </div>
     )
 };

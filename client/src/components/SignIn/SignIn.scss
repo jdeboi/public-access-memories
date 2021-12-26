@@ -1,3 +1,5 @@
+@import "../../../styles/constants.scss";
+
 .SignIn {
     position: absolute;
 
@@ -33,7 +35,7 @@
 
     .emoji-list {
         border: 2px solid black;
-        border-radius: 6px;
+        border-radius: $borderRad;
 
         button {
             font-size: 18px;

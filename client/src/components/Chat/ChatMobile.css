@@ -1,3 +1,11 @@
+/**
+ * 98.css
+ * Copyright (c) 2020 Jordan Scales <thatjdanisso.cool>
+ * https://github.com/jdan/98.css/blob/main/LICENSE
+ */
+/* Borders */
+/* Window borders flip button-face and button-highlight */
+/* Field borders (checkbox, input, etc) flip window-frame and button-shadow */
 .MuiAutocomplete-popper {
   z-index: 2600;
 }
@@ -14,7 +22,7 @@
 .ChatMobile .sendButton {
   background: black;
   color: white;
-  border-radius: 8px;
+  border-radius: 0px;
   height: 50px;
   width: 50px;
 }
@@ -27,7 +35,7 @@
   font-size: 10px;
   padding: 10px;
   border: 2px solid black;
-  border-radius: 8px;
+  border-radius: 0px;
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -78,7 +86,7 @@
 .ChatMobile .Chat-messages .Chat-messages-box .Chat-messages-inner-box .bubble {
   padding: 10px;
   color: black;
-  border-radius: 8px;
+  border-radius: 0px;
   background: #f1f1f1;
 }
 
@@ -90,7 +98,8 @@
 
 .ChatMobile .Chat-messages .Chat-messages-box .Chat-messages-inner-box .bubbleContainer.chat-from-me .bubble {
   color: white;
-  background: #4a47ff;
+  background: -webkit-gradient(linear, left top, right top, from(#000080), to(#1084d0));
+  background: linear-gradient(90deg, #000080, #1084d0);
 }
 
 .ChatMobile .Chat-messages .Chat-messages-box .Chat-messages-inner-box .bubbleContainer.chat-from-me .bubble .message-deets {

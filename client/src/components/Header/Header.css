@@ -27,8 +27,8 @@
 .Header {
   display: block;
   font-family: consoleFont;
-  border-top-right-radius: 8px;
-  border-top-left-radius: 8px;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
   -webkit-box-flex: 0;
       -ms-flex: 0 1 auto;
           flex: 0 1 auto;
@@ -67,7 +67,7 @@
 
 .Header.mobile .right .submenu ul {
   width: 140px;
-  border-top-left-radius: 8px;
+  border-top-left-radius: 0px;
   border-top-right-radius: 0px;
   -webkit-transform: translate(-95px, 0px);
           transform: translate(-95px, 0px);
@@ -214,7 +214,7 @@
   background: black;
   white-space: normal;
   border: white solid 2px;
-  border-radius: 0 8px 8px 8px;
+  border-radius: 0 0px 0px 0px;
   color: white;
   font-size: 18px;
   left: 0px;
@@ -311,7 +311,7 @@
   color: #fff;
   text-align: center;
   padding: 5px 0;
-  border-radius: 6px;
+  border-radius: 0px;
   /* Position the tooltip text */
   position: absolute;
   z-index: 1;
@@ -476,7 +476,7 @@
 
 .focus img {
   border: 2px solid rgba(225, 225, 225, 0.5) !important;
-  border-radius: 6px;
+  border-radius: 0px;
 }
 
 span.focus:after {

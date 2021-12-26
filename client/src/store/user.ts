@@ -33,6 +33,11 @@ const initialState: IUser = {
 export const userSlice = createSlice({
     name: "user",
     initialState,
+    extraReducers: {
+        reset: (state) => {
+            Object.assign(state, initialState);
+        },
+    },
     reducers: {
         setUserRoomUrl: (state, action: PayloadAction<{ roomUrl: string }>) => {
             // redux toolkit allows us to "mutate" state (not exactly what's happening)

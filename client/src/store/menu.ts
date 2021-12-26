@@ -24,8 +24,12 @@ const initialState: IMenu = {
 export const menuSlice = createSlice({
     name: "menu",
     initialState,
+    extraReducers: {
+        reset: (state) => {
+            Object.assign(state, initialState)
+        },
+    },
     reducers: {
-        reset: () => initialState,
         hideMenus: (state) => {
             // redux toolkit allows us to "mutate" state (not exactly what's happening)
             state.map.isHidden = true;

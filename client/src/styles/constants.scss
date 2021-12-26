@@ -1,6 +1,6 @@
 
 $borderH: 2px;
-$borderRad: 8px;
+$borderRad: 0px;
 $headerGradientStartC: #fc03ad;
 $headerGradientEndC: #335ef6;
 $headerGradient: -webkit-gradient(
@@ -55,3 +55,39 @@ $limeColor : #b4fa00;
 $scrollbarBgColor: rgb(0, 0, 0);
 $scrollbarColor: rgb(46, 46, 46);
 $scrollbarHoverColor: rgb(88, 88, 88);
+
+/////////////////////////////////////////////////////////////
+/**
+ * 98.css
+ * Copyright (c) 2020 Jordan Scales <thatjdanisso.cool>
+ * https://github.com/jdan/98.css/blob/main/LICENSE
+ */
+
+ $surface: #c0c0c0;
+ $button-highlight: #ffffff;
+ $button-face: #dfdfdf;
+ $button-shadow: #808080;
+ $window-frame: #0a0a0a;
+ $dialog-blue: #000080;
+ $dialog-blue-light: #1084d0;
+ $dialog-gray: #808080;
+ $dialog-gray-light: #b5b5b5;
+ $link-blue: #0000ff;
+ 
+ /* Borders */
+ $border-width: 1px;
+ $border-raised-outer: inset -1px -1px $window-frame, inset 1px 1px $button-highlight;
+ $border-raised-inner: inset -2px -2px $button-shadow, inset 2px 2px $button-face;
+ $border-sunken-outer: inset -1px -1px $button-highlight, inset 1px 1px $window-frame;
+ $border-sunken-inner: inset -2px -2px $button-face, inset 2px 2px $button-shadow;
+ 
+ /* Window borders flip button-face and button-highlight */
+ $border-window-outer: inset -1px -1px $window-frame, inset 1px 1px $button-face;
+ $border-window-inner: inset -2px -2px $button-shadow, inset 2px 2px $button-highlight;
+ 
+ /* Field borders (checkbox, input, etc) flip window-frame and button-shadow */
+ $border-field: inset -1px -1px $button-highlight, inset 1px 1px $button-shadow, inset -2px -2px $button-face,
+     inset 2px 2px $window-frame;
+ 
+ $windowsGradient: linear-gradient(90deg, $dialog-blue, $dialog-blue-light);
+ 

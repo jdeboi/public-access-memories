@@ -92,6 +92,11 @@ function getEdgeSpacing(w: number, h: number) {
 export const windowSlice = createSlice({
     name: "window",
     initialState,
+    extraReducers: {
+        reset: (state) => {
+            Object.assign(state, initialState)
+        },
+    },
     reducers: {
         resizeApp: (state, action) => {
             state.width = action.payload.width;

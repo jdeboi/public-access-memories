@@ -3,25 +3,25 @@ import Sketch from "react-p5";
 import p5Types from "p5"; //Import this for typechecking and intellisense
 import { IUser, IUsers } from '../../interfaces';
 import { GlobalConfig, limits } from "../../data/GlobalConfig";
-import {rooms as globalRooms} from '../../data/RoomConfig';
-import { roundToMult2 } from '../../helpers/helpers';
+import { rooms as globalRooms } from '../../data/RoomConfig';
+import { roundToMult2, filterUsers, getTotalRoomCount } from '../../helpers/helpers';
 
 import { connect } from "react-redux";
 import { selectUser, RootState } from '../../store/store';
-import {moveUser} from '../../store/user';
+import { moveUser } from '../../store/user';
 
-import { addLightDivs, checkDivPress, addBarDivs, addRoomLabelDivs, updateDivs, displayBarDivs, displayLightDivs, endDivDrag } from "./functions/divs";
+import { addLightDivs, checkDivPress, displayRoomLabelDivs, addBarDivs, addRoomLabelDivs, updateDivs, displayBarDivs, displayLightDivs, endDivDrag } from "./functions/divs";
 import { doorCrossing, roomDoorCrossing, roomDoorEntryCrossing, roomDoorBoundary, roomBoundary, wallBoundary } from './functions/crossing';
 import { reachedDestination, getNextStep, showMouseLoc, showUserEllipses, showDestination, mouseDidMove } from './functions/destination';
 import { drawUser, drawUsers, checkUserClicked } from './functions/users';
 import { boundaryLineCrossing } from './components/Room/Boundaries';
 
 import Room from './components/Room/Room';
+import { text } from "@fortawesome/fontawesome-svg-core";
 
 
 interface ComponentProps {
 	users: IUsers;
-	roomCount: number;
 	isClosed: boolean;
 	userMove: (x: number, y: number) => void;
 	userNewRoom: (room: string) => void;
@@ -40,7 +40,7 @@ interface StateProps {
 interface DispatchProps {
 }
 
-interface Props extends ComponentProps, StateProps, DispatchProps {}
+interface Props extends ComponentProps, StateProps, DispatchProps { }
 
 // TODO - convert these to Typescript
 let eyeIcon: any;
@@ -82,7 +82,7 @@ class GallerySketch extends React.Component<Props> {
 		barEmojis[4] = p5.loadImage(url + "emojis/chat.png");
 
 		eyeIcon = p5.loadImage(url + "eye.png")
-		font = p5.loadFont(url + "fonts/dogica.ttf");
+		font = p5.loadFont("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/fonts/sysfont.woff");
 	}
 
 	//See annotations in JS for more information
@@ -110,7 +110,8 @@ class GallerySketch extends React.Component<Props> {
 	};
 
 	draw = (p5: p5Types) => {
-		const { user, users } = this.props;
+		const { user, users, isClosed } = this.props;
+		const roomCount = getTotalRoomCount(users);
 		p5.clear();
 		p5.push();
 
@@ -123,6 +124,10 @@ class GallerySketch extends React.Component<Props> {
 		///////////////////////////////////
 		this.displayCheckers(40, 40, GlobalConfig.scaler / 2, GlobalConfig.scaler / 2, p5);
 		this.displayRooms();
+		// drawRooms(rooms, roomTextures, eyeIcon, roomCount, p5);
+		if (!isClosed)
+			displayRoomLabelDivs(font, roomCount, userEase.x, userEase.y, divs);
+
 		// displayWalls(p5);
 
 		///////////////////////////////////
@@ -144,6 +149,9 @@ class GallerySketch extends React.Component<Props> {
 			updateDivs(userEase, users, divs);
 		this.updateUserEase(p5);
 		this.manualResize(p5);
+		
+		p5.textFont(font, 40);
+		p5.text("hello world", 200, 200);
 	};
 
 
@@ -182,14 +190,14 @@ class GallerySketch extends React.Component<Props> {
 	}
 
 	drawOverTarget = (p5: p5Types) => {
-		const { users } = this.props;
+		const { users, user } = this.props;
 		p5.push();
 		p5.translate(p5.windowWidth / 2, p5.windowHeight / 2);
 		p5.translate(-userEase.x, -userEase.y);
 		p5.translate(GlobalConfig.x * GlobalConfig.scaler, GlobalConfig.y * GlobalConfig.scaler)
 
 		if (users)
-			drawUsers(userEase, users, font, p5, barEmojis);
+			drawUsers(userEase, filterUsers(user, users), font, p5, barEmojis);
 
 		p5.pop();
 	}
@@ -379,7 +387,7 @@ class GallerySketch extends React.Component<Props> {
 
 
 const mapStateToProps = (state: RootState) => ({
-  user: state.user,
+	user: state.user,
 });
 
-export default connect<StateProps, DispatchProps, ComponentProps, RootState>(mapStateToProps, {})(GallerySketch);;
+export default connect<StateProps, DispatchProps, ComponentProps, RootState>(mapStateToProps, {})(GallerySketch);

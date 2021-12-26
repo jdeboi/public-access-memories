@@ -82,7 +82,7 @@
 
 .Chat .Chat-Content .Chat-messages .Chat-messages-box .Chat-messages-inner-box .bubble {
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 0px;
   border: 1px solid #335ef6;
   background: #111111;
 }

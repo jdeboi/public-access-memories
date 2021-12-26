@@ -7,17 +7,6 @@ import { userActiveSlice } from './userActive';
 import { windowSlice } from './window';
 
 // reset app??
-// const rootReducer = (state, action) => {
-//     if (action.type === 'counter/logout') { // check for action type 
-//       state = undefined;
-//     }
-//     return combinedReducer(state, action);
-//   };
-
-//   export default configureStore({
-//     reducer: rootReducer,
-//     middleware: [...getDefaultMiddleware()]
-//   });
 
 
 const store = configureStore({

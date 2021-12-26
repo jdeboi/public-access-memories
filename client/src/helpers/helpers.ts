@@ -23,7 +23,7 @@ export const getUserNameById = (users: IUsers, id: string) => {
   return "";
 }
 
-export const getNewUser = (userName: string, avatar: string, room: string, id="0", x=0, y=0): IUser => {
+export const getNewUser = (userName: string, avatar: string, room: string, id = "0", x = 0, y = 0): IUser => {
   let newUser = {
     id: id,
     avatar: avatar,
@@ -43,6 +43,20 @@ export const getNewUser = (userName: string, avatar: string, room: string, id="0
     outside: false
   }
   return newUser;
+}
+
+export const filterUsers = (currentUser: IUser, data: IUsers) => {
+  var filteredArray = data.filter((usr: IUser) => {
+    return usr.id !== currentUser.id;
+  });
+  return filteredArray;
+}
+
+export const getUserChatList = (currentUser: IUser, users: IUsers) => {
+  var filteredArray = users.filter((usr: IUser) => {
+    return (usr.id !== currentUser.id && usr.roomUrl === currentUser.roomUrl) || usr.roomUrl === "everywhere";
+  });
+  return filteredArray; 
 }
 
 
@@ -68,11 +82,24 @@ export const getRoomByPath = (path: string): IRoom | null => {
   return null;
 }
 
-export const getRoomCount = (room : string, users: IUsers) : number => {
+export const getRoomCount = (room: string, users: IUsers): number => {
   let r = users.filter((usr) => usr.roomUrl === room);
   return r.length;
 }
 
+export const getTotalRoomCount = (users: IUsers) => {
+  let roomLinks = rooms.map(room => room.link);
+  const roomCount: any = {};
+  for (const roomLink of roomLinks) {
+    roomCount[roomLink] = 0;
+  }
+  for (const user of users) {
+    if (user.roomUrl in roomCount) {
+      roomCount[user.roomUrl]++;
+    }
+  }
+  return roomCount;
+}
 
 export function getRandomNum(val: number) {
   var x = Math.sin(val) * 10000;
@@ -88,7 +115,7 @@ export function getNewZIndices(indexToTop: number, array: number[]) {
   let newArr = [];
   for (let i = 0; i < array.length; i++) {
     if (array[i] > maxVal) maxVal = array[i];
-    if (array[i] > prevVal) newArr[i] = array[i]-1;
+    if (array[i] > prevVal) newArr[i] = array[i] - 1;
     else newArr[i] = array[i];
   }
   newArr[indexToTop] = maxVal;
@@ -108,18 +135,28 @@ export function constrain(val: number, min: number, max: number) {
 }
 
 export function randomInRange(start: number, end: number) {
-  let diff = end-start;
-  return Math.random()*diff+start;
+  let diff = end - start;
+  return Math.random() * diff + start;
 }
 
-export const roundToMult = (num:number, mult:number) => {
+export const roundToMult = (num: number, mult: number) => {
   let newNum = num + mult / 2; // to round up if necessary
   let diff = newNum % mult;
   return newNum - diff;
 }
 
-export const roundToMult2 = (num:number, mult:number) => {
+export const roundToMult2 = (num: number, mult: number) => {
   let newNum = num; // to round up if necessary
   let diff = newNum % mult;
   return newNum - diff;
+}
+
+
+export const getParsedJSONDate = (d: string) => {
+  if (!d)
+      return null;
+  let newD = new Date(JSON.parse(d));
+  if (newD && !isNaN(newD.getTime()))
+      return newD;
+  return null;
 }

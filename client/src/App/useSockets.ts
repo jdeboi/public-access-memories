@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 // interfaces
-import { IUsers } from '../interfaces/index';
+import { IUser, IUsers } from '../interfaces/index';
 
 import { barTenders } from '../data/BotConfig';
 

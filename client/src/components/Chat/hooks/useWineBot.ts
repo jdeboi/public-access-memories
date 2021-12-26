@@ -9,6 +9,7 @@ import { addMessage } from '../../../store/messages';
 import { IMessage } from '../../../interfaces';
 
 import { getBar } from '../../../data/BotConfig';
+import socket from '../../../helpers/Socket';
 const wineLocation = getBar("wine");
 
 export const useWineBot = () => {

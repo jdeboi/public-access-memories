@@ -1,10 +1,5 @@
 @import "../../styles/constants.scss";
 
-$lightGray: rgba(0, 0, 0, 0.2);
-$appBlueDisabled: #335ef699;
-$appPink: #c9a7ff;
-$appLightBlue: #43909e;
-
 .MuiAutocomplete-popper {
     z-index: 2600;
 }
@@ -28,7 +23,6 @@ $appLightBlue: #43909e;
 
     .Chat-messages {
         overflow: hidden;
-        
 
         .Chat-messages-box {
             font-size: 10px;
@@ -85,10 +79,7 @@ $appLightBlue: #43909e;
                     padding: 10px;
                     color: black;
                     border-radius: $borderRad;
-                    //   border: 2px solid $appBlue;
-                    // background: linear-gradient(#000, #333);
-                   background: rgb(241, 241, 241);
-
+                    background: rgb(241, 241, 241);
                 }
 
                 .bubbleContainer.chat-from-me {
@@ -96,7 +87,8 @@ $appLightBlue: #43909e;
 
                     .bubble {
                         color: white;
-                        background: rgb(74, 71, 255);
+                        // background: rgb(74, 71, 255);
+                        background: $windowsGradient;
 
                         .message-deets {
                             text-align: right;
@@ -104,20 +96,17 @@ $appLightBlue: #43909e;
                             .message-from {
                                 color: #ddd;
                             }
-            
+
                             .message-to {
                                 color: #ddd;
                             }
-            
+
                             .message-to-red {
                                 // color: $appAlertColor;
                                 color: #ddd;
                             }
-            
                         }
                     }
-
-
                 }
 
                 .bubbleContainer.chat-from-other {
@@ -126,7 +115,6 @@ $appLightBlue: #43909e;
 
                     .message-deets {
                         text-align: left;
-                        
                     }
                 }
             }
@@ -137,12 +125,10 @@ $appLightBlue: #43909e;
         }
 
         .Chat-form {
-            // flex: 0 0 auto;
             display: flex;
             flex-direction: column;
             padding-bottom: 10px;
             height: 90px;
-            // background-color: pink;
 
             .to-form {
                 width: 220px;
@@ -166,7 +152,6 @@ $appLightBlue: #43909e;
                     background-color: transparent;
 
                     div {
-
                         input {
                             background-color: transparent;
                             // border-bottom: 2px solid $appBlue;
@@ -174,7 +159,7 @@ $appLightBlue: #43909e;
                             padding: 5px;
                             color: black;
                             height: 30px;
-                            font-size:16px;
+                            font-size: 16px;
                             &:focused {
                                 color: black;
                             }
@@ -190,9 +175,8 @@ $appLightBlue: #43909e;
 
                 input {
                     width: 100%;
-                    font-size:16px;
+                    font-size: 16px;
                 }
-
             }
         }
     }

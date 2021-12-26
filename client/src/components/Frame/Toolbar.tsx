@@ -9,7 +9,7 @@ interface ToolbarProps {
 
 function Toolbar({title, toggleClosed, toggleMinimzed, toggleMaximized} : ToolbarProps) {
   return(
-    <div className="titlebar menuTheme handle">
+    <div className="titlebar windowsBar handle">
       <div className="buttons">
         <div className="close circleButton" onClick={toggleClosed}>
           <div className="closebutton"><div className="innerC"></div></div>

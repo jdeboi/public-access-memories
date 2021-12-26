@@ -22,11 +22,11 @@ export default function DetailsStart() {
     <div className="Welcome-Details">
       <div className="Details" >
         <div className="Details-txt">
-          <div style={{ fontSize: fonts[0], paddingBottom: "0px" }}>Hyper</div>
-          <div style={{ fontSize: fonts[0], paddingBottom: "0px" }}>Textual</div>
-          <div style={{ fontSize: fonts[0], paddingBottom: "80px" }}>Gallery</div>
+          <div style={{ fontSize: fonts[0], paddingBottom: "0px" }}>public</div>
+          <div style={{ fontSize: fonts[0], paddingBottom: "0px" }}>access</div>
+          <div style={{ fontSize: fonts[0], paddingBottom: "80px" }}>memories</div>
 
-          <div style={{ fontSize: fonts[3], paddingBottom: "10px" }}><a href="https://www.instagram.com/jdeboi/">a pavillion</a></div>
+          <div style={{ fontSize: fonts[3], paddingBottom: "10px" }}>a <a href="https://thewrong.org/">wrong biennale</a> pavillion</div>
           <div style={{ fontSize: fonts[3], paddingBottom: "10px" }}>2022</div>
         </div>
       </div>

@@ -17,12 +17,9 @@
 }
 
 .Frame .window {
-  background: black;
-  /* margin: auto; */
-  /* margin-top: 12.5vh; */
   border: 0.14em solid black;
   /* #acacac; */
-  border-radius: 10px;
+  border-radius: 0px;
   -webkit-box-shadow: 0px 0px 20px #000000;
           box-shadow: 0px 0px 20px #000000;
   /* #6c6c6c; */
@@ -38,15 +35,12 @@
   position: relative;
   height: 26px;
   pointer-events: all;
-  /* background: white; */
   font-family: consoleFont, sans-serif;
   font-size: .8em;
   line-height: 20px;
   text-align: center;
   width: 100%;
   border-bottom: .15em solid black;
-  /* border-top-left-radius: 4px;
-    border-top-right-radius: 4px; */
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -161,8 +155,8 @@
 }
 
 .Frame .content video {
-  border-bottom-left-radius: calc(10px-2);
-  border-bottom-right-radius: calc(10px-2);
+  border-bottom-left-radius: calc(0px-2);
+  border-bottom-right-radius: calc(0px-2);
 }
 
 /* window BEGIN */

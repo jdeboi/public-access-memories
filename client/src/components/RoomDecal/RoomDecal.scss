@@ -1,3 +1,6 @@
+@import "../../styles/constants.scss";
+
+
 .RoomDecal {
     display: flex;
     flex-direction: column;
@@ -21,7 +24,7 @@
         .usersEye {
             padding: 8px;
             border: 1px solid black;
-            border-radius: 6px;
+            border-radius: $borderRad;
             display: inline-block;
         }
         .participants-box {

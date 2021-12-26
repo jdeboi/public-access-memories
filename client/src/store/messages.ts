@@ -12,6 +12,11 @@ const initialState: IMessages = {
 export const messagesSlice = createSlice({
     name: "messages",
     initialState,
+    extraReducers: {
+        reset: (state) => {
+            Object.assign(state, initialState)
+        },
+    },
     reducers: {
         addMessage: (state, action: PayloadAction<IMessage>) => {
             state.messages = [...state.messages, action.payload];

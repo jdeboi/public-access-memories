@@ -1,0 +1,15 @@
+@import './constants.scss';
+
+.windowsGradient {
+    background: $windowsGradient;
+}
+
+.windowsWindow {
+    box-shadow: $border-window-outer, $border-window-inner;
+    background: $surface;
+}
+
+.windowsBar {
+    background: $windowsGradient;
+    color: white;
+}

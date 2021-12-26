@@ -1,5 +1,6 @@
 @import "./styles/reset.scss";
 @import "./styles/constants.scss";
+@import "./styles/myWindows98.scss";
 
 html, body, #root {
   height: 100%;
@@ -17,7 +18,7 @@ button.standardButton {
   text-align: center;
   // border: 1px solid black;
   color: black;
-  border-radius: 6px;
+  border-radius: $borderRad;
 
   border: 2px solid black;
   // box-shadow: -3px 5px rgb(65, 65, 65);
@@ -48,7 +49,7 @@ input.standardInput {
   text-align: left;
   border: 2px solid black;
   color: black;
-  border-radius: 6px;
+  border-radius: $borderRad;
 }
 
 input.standardInputWhite {
@@ -57,7 +58,7 @@ input.standardInputWhite {
   text-align: left;
   border: 2px solid white;
   color: white;
-  border-radius: 6px;
+  border-radius: $borderRad;
 }
 
 
@@ -74,7 +75,7 @@ input.standardInputWhite {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: $scrollbarColor;
-  border-radius: 5px;
+  border-radius: $borderRad;
 }
 
 /* Handle on hover */

@@ -36,7 +36,7 @@
 .RoomDecal .decal-content .usersEye {
   padding: 8px;
   border: 1px solid black;
-  border-radius: 6px;
+  border-radius: 0px;
   display: inline-block;
 }
 

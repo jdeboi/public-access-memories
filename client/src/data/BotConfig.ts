@@ -14,16 +14,19 @@ const wineBotCoords = p5ToDomCoords(-4, 4);
 const cocktailBotCoords = p5ToDomCoords(8, 9);
 const hostBotCoords = p5ToDomCoords(1, 1);
 
-export const barTenders: IUser[] = [
-    getNewUser("wineBot", "🤖", "/", "1", wineBotCoords.x, wineBotCoords.y),
-    getNewUser("cocktailBot", "🤖", "/", "2", cocktailBotCoords.x, cocktailBotCoords.y),
-    getNewUser("cheeseBot", "🤖", "/", "3", cheeseBotCoords.x, cheeseBotCoords.y),
-    getNewUser("DJBot", "🤖", "/", "4", DJBotCoords.x, DJBotCoords.y),
-    getNewUser("hostBot", "🤖", "/", "5", hostBotCoords.x, hostBotCoords.y)
-]
-
 const barW = 87;
 const barH = 175;
+const botDX = -50;
+const botDY = barH/2;
+export const barTenders: IUser[] = [
+    getNewUser("wineBot", "🤖", "/", "1", wineBotCoords.x+botDX, wineBotCoords.y+botDY),
+    getNewUser("cocktailBot", "🤖", "/", "2", cocktailBotCoords.x+botDX, cocktailBotCoords.y+botDY),
+    getNewUser("cheeseBot", "🤖", "/", "3", cheeseBotCoords.x+botDX, cheeseBotCoords.y+botDY),
+    getNewUser("DJBot", "🤖", "/", "4", DJBotCoords.x, DJBotCoords.y),
+    getNewUser("hostBot", "🤖", "/", "5", hostBotCoords.x+botDX, hostBotCoords.y)
+]
+
+
 
 export const bars: IBar[] = [
     {

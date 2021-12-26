@@ -22,6 +22,11 @@ const initialState = {
 export const musicSlice = createSlice({
     name: "music",
     initialState,
+    extraReducers: {
+        reset: (state) => {
+            Object.assign(state, initialState)
+        },
+    },
     reducers: {
         muteVolume: (state) => {
             state.isMuted = true;

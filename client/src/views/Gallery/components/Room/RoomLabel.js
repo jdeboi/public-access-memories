@@ -21,11 +21,11 @@ export default class RoomLabel extends Draggable {
     }
 
     display(font, roomCount) {
-        // let rc = roomCount[this.link];
+        let rc = roomCount[this.link];
         this.p5.push();
         this.p5.translate(this.x, this.y);
         if (!this.closed) {
-            if (!this.minimized) this.displayContent(font, roomCount);
+            if (!this.minimized) this.displayContent(font, rc);
         }
         this.p5.pop();
     }

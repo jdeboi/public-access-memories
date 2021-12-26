@@ -111,16 +111,17 @@ const Chat = (props: ChatProps) => {
         dispatch(addMessage(message));
     }
 
-    const sendToOne = (txt: string, socketId: string) => {
+    const sendToOne = (txt: string) => {
         const message: IMessage = {
             from: "me",
             to: userActive.active.userName,
-            socketId: socketId,
+            socketId: userActive.active.id,
             roomUrl: user.roomUrl,
             message: txt,
             time: JSON.stringify(new Date()),
             avatar: user.avatar
         };
+        console.log(userActive.active.userName);
         if (socket.connected)
             socket.emit('messageUser', message); //sending to individual socketid
         dispatch(addMessage(message));
@@ -151,7 +152,7 @@ const Chat = (props: ChatProps) => {
                 // sendToHostBot(message);
             }
             else {
-                sendToOne(txt, userActive.active.id);
+                sendToOne(txt);
             }
         }
     }

@@ -24,7 +24,9 @@ import RoomDecal from '../components/RoomDecal/RoomDecal';
 
 // socket
 import { useSockets } from './useSockets';
-import { withCookies, Cookies } from 'react-cookie';
+import socket from "../helpers/Socket";
+
+import Cookies from 'js-cookie';
 
 // store
 import { IMessage } from '../interfaces';
@@ -35,12 +37,9 @@ import { setUser, setUserRoomUrl } from '../store/user';
 import { startComposition, resizeApp, loadingApp } from '../store/window';
 import { addMessage, incremendNotifications } from '../store/messages';
 
-interface AppInterface {
-    cookies: Cookies;
-}
 
 
-function App({ cookies }: AppInterface) {
+function App() {
     const user = useSelector(selectUser);
     const windowUI = useSelector(selectWindow);
 
@@ -60,16 +59,21 @@ function App({ cookies }: AppInterface) {
     const [currentPage, setCurrentPage] = useState(pathname);
 
 
+    // when route changes
     useEffect(() => {
         pageChange();
-    }, [pathname])
+    }, [pathname]);
 
+    // Make sure sockets update when user does
+    useEffect(() => {
+        socket.emit("setUser", user);
+    }, [{...user}])
+
+    // TODO - reason for class components?
     const setUsersData = (data: IUsers) => {
-        var filteredArray = data.filter((usr: IUser) => {
-            return usr.id !== user.id;
-        });
-        setUsers(filteredArray);
+        setUsers(data);
     }
+
     const socketSetup = useSockets({ users, setUsersData });
 
     useEffect(() => {
@@ -88,11 +92,7 @@ function App({ cookies }: AppInterface) {
         };
     }, []);
 
-    // useEffect(() => {
-    //     setRoomCount();
-    // }, [[...users.map(usr => usr.room)]])
-
-
+    
     useEffect(() => {
         if (hasAvatar && !hasLoadedCookies) {
             setHasLoadedCookies(true);
@@ -122,16 +122,23 @@ function App({ cookies }: AppInterface) {
     }
 
     const checkSavedUser = () => {
-        const hasAv = cookies.get('hasAvatar');
+        const hasAv = Cookies.get('hasAvatar');
 
         if (hasAv) {
             const newUser = { ...user };
-            newUser.userName = cookies.get('userName');
-            newUser.avatar = cookies.get('avatar');
-            dispatch(setUser(newUser));
-
-            setHasAvatar(true);
-            setShowWelcome(false);
+            let userName = Cookies.get('userName');
+            let avatar = Cookies.get('avatar');
+            if (userName && avatar) {
+                newUser.userName = userName;
+                newUser.avatar = avatar;
+                dispatch(setUser(newUser));
+                setHasAvatar(true);
+                setShowWelcome(false);
+            }
+            else {
+                setHasAvatar(false);
+                setShowWelcome(true);
+            }
         }
         else {
             setHasAvatar(false);
@@ -146,8 +153,15 @@ function App({ cookies }: AppInterface) {
         if (nextRoomUrl !== user.roomUrl) {
             dispatch(loadingApp());
             setHasLoadedRoom(false);
+
+            const newUser = {...user}
+            newUser.roomUrl = pathname;
+            socket.emit("leaveRoom", user.roomUrl);
+            socket.emit("joinRoom", nextRoomUrl);
+            // socket.emit("setUser", newUser);
+            // TODO - are we handling in app.tsx?
+            dispatch(setUserRoomUrl({ roomUrl: nextRoomUrl }));
         }
-        dispatch(setUserRoomUrl({ roomUrl: nextRoomUrl }));
     }
 
     const startMedia = () => {
@@ -216,4 +230,5 @@ function App({ cookies }: AppInterface) {
     )
 }
 
-export default withCookies(App);
+// export default withCookies(App);
+export default App;

@@ -166,6 +166,39 @@ button {
   border: 0;
 }
 
+/**
+ * 98.css
+ * Copyright (c) 2020 Jordan Scales <thatjdanisso.cool>
+ * https://github.com/jdan/98.css/blob/main/LICENSE
+ */
+/* Borders */
+/* Window borders flip button-face and button-highlight */
+/* Field borders (checkbox, input, etc) flip window-frame and button-shadow */
+/**
+ * 98.css
+ * Copyright (c) 2020 Jordan Scales <thatjdanisso.cool>
+ * https://github.com/jdan/98.css/blob/main/LICENSE
+ */
+/* Borders */
+/* Window borders flip button-face and button-highlight */
+/* Field borders (checkbox, input, etc) flip window-frame and button-shadow */
+.windowsGradient {
+  background: -webkit-gradient(linear, left top, right top, from(#000080), to(#1084d0));
+  background: linear-gradient(90deg, #000080, #1084d0);
+}
+
+.windowsWindow {
+  -webkit-box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff;
+          box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff;
+  background: #c0c0c0;
+}
+
+.windowsBar {
+  background: -webkit-gradient(linear, left top, right top, from(#000080), to(#1084d0));
+  background: linear-gradient(90deg, #000080, #1084d0);
+  color: white;
+}
+
 html, body, #root {
   height: 100%;
   width: 100%;
@@ -173,12 +206,12 @@ html, body, #root {
 }
 
 button.standardButton {
-  font-size: 12px;
+  font-size: 14px;
   padding: 10px;
   min-width: 140px;
   text-align: center;
   color: black;
-  border-radius: 6px;
+  border-radius: 0px;
   border: 2px solid black;
   color: white;
   -webkit-transition: all 0.2s ease-in-out;
@@ -202,21 +235,21 @@ button.standardButton.secondary {
 }
 
 input.standardInput {
-  font-size: 12px;
+  font-size: 14px;
   padding: 15px 10px;
   text-align: left;
   border: 2px solid black;
   color: black;
-  border-radius: 6px;
+  border-radius: 0px;
 }
 
 input.standardInputWhite {
-  font-size: 12px;
+  font-size: 14px;
   padding: 15px 10px;
   text-align: left;
   border: 2px solid white;
   color: white;
-  border-radius: 6px;
+  border-radius: 0px;
 }
 
 /* width */
@@ -232,7 +265,7 @@ input.standardInputWhite {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #2e2e2e;
-  border-radius: 5px;
+  border-radius: 0px;
 }
 
 /* Handle on hover */

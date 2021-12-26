@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App/App';
 import { BrowserRouter as Router } from "react-router-dom";
-import { CookiesProvider } from 'react-cookie';
 
 // store
 import { Provider } from 'react-redux';
@@ -14,12 +13,9 @@ import store from './store/store';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store} >
-      <CookiesProvider>
         <Router>
-
           <App />
         </Router>
-      </CookiesProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

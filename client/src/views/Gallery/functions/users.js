@@ -1,6 +1,7 @@
 
 
 import { mouseToWorld, domCoordsToP5World } from "../../../helpers/coordinates";
+import { getParsedJSONDate } from "../../../helpers/helpers";
 
 export function checkUserClicked(userEase, users, p5) {
 
@@ -52,7 +53,7 @@ export function seeUserClicked(userEase, users, p5) {
 
 
 export function drawUser(user, p5, imgs) {
-    const foodTime = 75 * 1000;
+
 
     p5.fill(255);
     p5.noStroke();
@@ -62,17 +63,8 @@ export function drawUser(user, p5, imgs) {
     p5.text(user.avatar, -17, 17);
 
     p5.translate(0, 16);
-    if (user.hasCheese && new Date() - user.hasCheese < foodTime) {
-        drawCheese(p5, imgs[0], imgs[1]);
-    }
-
-    if (user.hasWine && new Date() - user.hasWine < foodTime) {
-        drawWine(p5, imgs[2]);
-    }
-
-    if (user.hasCocktail && new Date() - user.hasCocktail < foodTime) {
-        drawCocktail(p5, imgs[3]);
-    }
+    
+    drawUserFoods(p5, user, imgs);
 
     p5.pop();
 }
@@ -110,21 +102,30 @@ export function drawUsers(userEase, users, font, p5, imgs) {
             }
 
 
-            if (otherUser.hasCheese) {
-                drawCheese(p5, imgs[0], imgs[1]);
-            }
-
-            if (otherUser.hasWine) {
-                drawWine(p5, imgs[2]);
-            }
-
-            if (otherUser.hasCocktail) {
-                drawCocktail(p5, imgs[3]);
-            }
+            drawUserFoods(p5, otherUser, imgs);
 
             p5.pop()
         }
 
+    }
+}
+
+function drawUserFoods (p5, user, imgs) {
+    const foodTime = 75 * 1000;
+    let cheeseDate = getParsedJSONDate(user.cheeseTime);
+    let wineDate = getParsedJSONDate(user.wineTime);
+    let cocktailDate = getParsedJSONDate(user.cocktailTime);
+
+    if (cheeseDate && new Date() - cheeseDate < foodTime) {
+        drawCheese(p5, imgs[0], imgs[1]);
+    }
+
+    if (wineDate && new Date() - wineDate < foodTime) {
+        drawWine(p5, imgs[2]);
+    }
+
+    if (cocktailDate && new Date() - cocktailDate < foodTime) {
+        drawCocktail(p5, imgs[3]);
     }
 }
 

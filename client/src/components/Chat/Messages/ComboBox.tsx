@@ -11,7 +11,7 @@ import { selectUser, selectUserActive } from '../../../store/store';
 import { resetNotifications } from '../../../store/messages';
 
 
-import { getNewUser } from '../../../helpers/helpers';
+import { getNewUser, getUserChatList } from '../../../helpers/helpers';
 import { setUserActiveChat } from '../../../store/userActive';
 
 const initialUsers: IUser[] = [];
@@ -77,12 +77,12 @@ const ComboBox = (props: IComboBox) => {
 
     const getUsersInRoom = () : IUser[] => {
         const users = [...initialUsers];
-        let usersInRoom: IUsers = [];
-        if (props.users) {
-            usersInRoom = props.users.filter((usr) => {
-                return (usr.roomUrl === user.roomUrl || usr.roomUrl === "everywhere");
-            })
-        }
+        let usersInRoom: IUsers = getUserChatList(user, props.users);
+        // if (props.users) {
+        //     usersInRoom = props.users.filter((usr) => {
+        //         return (usr.roomUrl === user.roomUrl || usr.roomUrl === "everywhere");
+        //     })
+        // }
         let all = users.concat([...usersInRoom]);
         return all;
     }

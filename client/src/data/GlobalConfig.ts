@@ -1,13 +1,14 @@
 import { p5ToDomCoords } from '../helpers/coordinates';
+import { roomConfig } from './RoomConfig';
 
 export const GlobalConfig = {
     scaler: 70,
-    minX: -15,
-    maxX: 15,
-    minY: -15,
-    maxY: 15,
-    x: 0,
-    y: 0
+    minX: 0,
+    maxX: 9*roomConfig.w,
+    minY: 0,
+    maxY: 9*roomConfig.w,
+    x: -4.5*roomConfig.w,
+    y: -4.5*roomConfig.w
 }
 
 export const limits = [
