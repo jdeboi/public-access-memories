@@ -12,7 +12,11 @@ export const PageConfig: IPageConfig[] = [
         title: "about"
     },
     {
-        link: "/statement",
-        title: "statement"
+        link: "/exhibition",
+        title: "current exhibition"
+    },
+    {
+        link: "/artists",
+        title: "artists"
     },
 ]

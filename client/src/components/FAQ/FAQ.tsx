@@ -73,18 +73,37 @@ const FAQ = (props: FAQProps) => {
 
                 {/* MOVING */}
                 <div className="instruction">
-                    <div className="faqImg"></div>
+                    <div className="faqImg"><img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/gallery/arrows.jpeg" /></div>
                     <div className="instruction-txt">
                         <h4>Move</h4>
+                        <hr />
                         <p>Click/tap on tiles or press arrow keys.</p>
+                    </div>
+                </div>
+                {/* enter gallery */}
+                <div className="instruction">
+                    <div className="faqImg"><img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/gallery/gallery_enter.png" /></div>
+                    <div className="instruction-txt">
+                        <h4>Enter Gallery</h4>
+                        <hr />
+                        <p>Enter the gallery through the sliding doors.</p>
+                    </div>
+                </div>
+                <div className="instruction">
+                    <div className="faqImg"><img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/gallery/room_enter.png" /></div>
+                    <div className="instruction-txt">
+                        <h4>Enter Room</h4>
+                        <hr />
+                        <p>View work by entering rooms via staircases.</p>
                     </div>
                 </div>
 
                 {/* CHATTING */}
                 <div className="instruction">
-                    <div className="faqImg"></div>
+                    <div className="faqImg"><img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/gallery/chat.png" /></div>
                     <div className="instruction-txt">
                         <h4>Chat</h4>
+                        <hr />
                         <p>Click a user to begin a chat or select the chat icon
                             from the menu.</p>
                     </div>

@@ -118,6 +118,10 @@ p {
   padding: 15px 0 15px 0;
 }
 
+p.small {
+  font-size: $fontSize-desktop-p2;
+}
+
 .container {
   flex: 1;
   padding-top: 50px;

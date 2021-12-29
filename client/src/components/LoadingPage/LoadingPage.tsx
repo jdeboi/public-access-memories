@@ -15,6 +15,7 @@ export default function LoadingPage() {
             <div className="LoadingPage">
                 <div className="title" style={sty}>
                    <div>{ShowConfig.showTitle}</div>
+                   <p>a <a href="https://thewrong.org/">wrong biennale</a> pavillion</p>
                 </div>
             </div>
         </div>

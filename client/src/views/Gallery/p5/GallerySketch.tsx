@@ -234,7 +234,7 @@ class GallerySketch extends React.Component<Props> {
     addTreeDivs(divs, tree, p5);
     addTableDivs(divs, tableImgs, p5);
     addBarDivs(divs, lightImgs[3], p5);
-    addTrashDivs(divs, trashFiles, lightImgs[3], p5);
+    // addTrashDivs(divs, trashFiles, lightImgs[3], p5);
     addFolderDivs(divs, instaImg, txtFile, p5);
     addRoomLabelDivs(divs, eyeIcon, p5);
     addSwingDivs(divs, baby, null, p5);
@@ -349,7 +349,7 @@ class GallerySketch extends React.Component<Props> {
 
     p5.textFont(font, 12);
     displayFolderDivs(divs);
-    displayTrashDivs(userEase.x, userEase.y, divs);
+    // displayTrashDivs(userEase.x, userEase.y, divs);
 
     treeSlider.display(p5);
 

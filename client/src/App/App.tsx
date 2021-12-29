@@ -37,6 +37,7 @@ import { setUser, setUserRoomUrl } from '../store/user';
 import { startComposition, resizeApp, loadingApp } from '../store/window';
 import { addMessage, incremendNotifications } from '../store/messages';
 import FAQ from '../components/FAQ/FAQ';
+import Artists from '../views/pages/Artists/Artists';
 
 
 
@@ -194,7 +195,8 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Gallery users={users} isClosed={isClosed} />} />
                     <Route path="/about" element={<About />} />
-                    <Route path="/statement" element={<Statement />} />
+                    <Route path="/exhibition" element={<Statement />} />
+                    <Route path="/artists" element={<Artists />} />
                     <Route path="room/:id" element={<Room />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>

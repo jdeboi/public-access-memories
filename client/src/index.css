@@ -305,6 +305,10 @@ p {
   padding: 15px 0 15px 0;
 }
 
+p.small {
+  font-size: 11pt;
+}
+
 .container {
   -webkit-box-flex: 1;
       -ms-flex: 1;
