@@ -22,7 +22,7 @@ interface DispatchProps {
   setOneMenu: () => void;
 }
 
-interface StateProps { 
+interface StateProps {
   menu: IMenu;
   user: IUser;
   window: IWindowUI;
@@ -71,19 +71,24 @@ class MiniMap extends React.Component<Props> {
         content={
           /*<video width={dimW-2} height={dimH} muted loop autoPlay><source src={videoDimURL} type="video/mp4"></source></video>*/
           <div className="MiniMap">
-            {/* <img src={window.AWS + "/gallery/miniMap.png"} width="100%" height="100%" /> */}
+            <img src={"https://lmd-bucket.s3.us-east-2.amazonaws.com/sketches/gallery/miniMap.png"} width="100%" height="100%" />
             <div className="otherAvatarsMiniMap">
               <div className="mini-avatars">
                 {users ? this.getUsers(dim) : null}
                 <AvatarMiniMap
                   dim={dim}
+                  user={user}
                   isUser={true}
                 />
               </div>
             </div>
           </div>
         }
-        width={dim} height={dim} x={x} y={y} z={1000}
+        width={dim}
+        height={dim}
+        x={x}
+        y={y}
+        z={1000}
       />
 
     )
@@ -98,6 +103,7 @@ class MiniMap extends React.Component<Props> {
             key={i}
             dim={dim}
             isUser={false}
+            user={otherUser}
           />
         )
       })

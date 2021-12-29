@@ -20,6 +20,7 @@ import { useCocktailBot } from './hooks/useCocktailBot';
 import { IMessage } from '../../interfaces';
 import { useCheeseBot } from './hooks/useCheeseBot';
 import { useHostBot } from './hooks/useHostBot';
+import { useDJBot } from './hooks/useDJBot';
 
 interface ChatProps {
     users: IUsers;
@@ -35,6 +36,7 @@ const Chat = (props: ChatProps) => {
     const sendToCocktailBot = useCocktailBot();
     const sendToCheeseBot = useCheeseBot();
     const sendToHostBot = useHostBot();
+    const sendToDJBot = useDJBot();
 
     const [textBox, setTextBox] = useState("");
     const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -123,7 +125,6 @@ const Chat = (props: ChatProps) => {
             time: JSON.stringify(new Date()),
             avatar: user.avatar
         };
-        console.log(userActive.active.userName);
         if (socket.connected)
             socket.emit('messageUser', message); //sending to individual socketid
         dispatch(addMessage(message));
@@ -147,8 +148,8 @@ const Chat = (props: ChatProps) => {
             else if (userActive.active.userName === "cheeseBot") {
                 sendToCheeseBot(txt);
             }
-            else if (userActive.active.userName === "DJ") {
-                // sendToDJ(message);
+            else if (userActive.active.userName === "DJBot") {
+                sendToDJBot(txt);
             }
             else if (userActive.active.userName === "hostBot") {
                 sendToHostBot(txt);

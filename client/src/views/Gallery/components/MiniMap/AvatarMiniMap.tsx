@@ -2,13 +2,12 @@ import React from 'react';
 import { GlobalConfig } from '../../../../data/GlobalConfig';
 
 // store
-import { useSelector } from 'react-redux';
-import { selectUser } from '../../../../store/store';
+import { IUser } from '../../../../interfaces';
 
 
-const AvatarMiniMap = (props: { isUser: boolean, dim: number }) => {
-  const user = useSelector(selectUser);
-  const scaler = props.dim / 200;
+const AvatarMiniMap = (props: { isUser: boolean, dim: number, user: IUser }) => {
+  const { user, dim } = props;
+  const scaler = dim / 200;
   const miniScaler = 4 * scaler;
   const miniX = 45 * scaler;
   const miniY = 40 * scaler;
@@ -33,12 +32,13 @@ const AvatarMiniMap = (props: { isUser: boolean, dim: number }) => {
     avatar = "🍸";
   else if (!props.isUser)
     avatar = user.avatar;
-  const hidden = (user.roomUrl !== "/");
-
+  
+  // const hidden = (user.roomUrl !== "/");
   return (
 
     <div
-      className={"emojiMiniMap" + (hidden ? " hidden" : "")}
+      // className={"emojiMiniMap" + (hidden ? " hidden" : "")}
+      className={"emojiMiniMap"}
       style={sty}
     >
       {avatar}

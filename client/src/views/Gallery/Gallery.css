@@ -9,4 +9,27 @@
 .Gallery {
   background-image: url("./assets/wallpaper3.jpg");
 }
+
+.Gallery .MiniMap .otherAvatarsMiniMap {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 200px;
+  height: 200px;
+}
+
+.Gallery .MiniMap .otherAvatarsMiniMap .mini-avatars {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.Gallery .MiniMap .otherAvatarsMiniMap .mini-avatars .emojiMiniMap {
+  position: absolute;
+  font-size: 12px;
+  margin-top: -6px;
+  margin-left: -6px;
+  width: 20px;
+  height: 20px;
+}
 /*# sourceMappingURL=Gallery.css.map */

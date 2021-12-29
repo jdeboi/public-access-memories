@@ -25,8 +25,13 @@ export const danceFloor = {
     w: GlobalConfig.scaler * danceFloorP5.w,
     h: GlobalConfig.scaler * danceFloorP5.h
 };
-export const DJBotCoords = p5ToDomCoords(danceFloorP5.x + 3.5, danceFloorP5.y - 1);
 
+const DJBotCoords = {
+    x: danceFloorP5.x + 3.5,
+    y: danceFloorP5.y - 1
+}
+
+export const DJBotDomCoords = p5ToDomCoords(DJBotCoords.x, DJBotCoords.y);
 
 //// wine
 const cheeseBotCoords = {
@@ -72,7 +77,7 @@ const barUsers: IUser[] = [
     getNewUser("wineBot", "🤖", "/", "1", wineBotCoords.x + botDX, wineBotCoords.y + botDY),
     getNewUser("cocktailBot", "🤖", "/", "2", cocktailBotCoords.x + botDX, cocktailBotCoords.y + botDY),
     getNewUser("cheeseBot", "🤖", "/", "3", cheeseBotCoords.x - 1, cheeseBotCoords.y + botDY),
-    getNewUser("DJBot", "🤖", "/", "4", DJBotCoords.x, DJBotCoords.y),
+    getNewUser("DJBot", "🤖", "/", "4", DJBotCoords.x+botDX, DJBotCoords.y-.1),
     getNewUser("hostBot", "🤖", "/", "5", hostBotCoords.x + botDX, hostBotCoords.y)
 ]
 

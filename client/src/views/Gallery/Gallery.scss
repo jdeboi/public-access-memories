@@ -1,9 +1,8 @@
-@import '../../styles/constants.scss';
-
+@import "../../styles/constants.scss";
 
 .Gallery {
     // background-color: white;
-    background-image: url('./assets/wallpaper3.jpg');
+    background-image: url("./assets/wallpaper3.jpg");
     // background-repeat: repeat;
     // background-size: 40% 40%;
 
@@ -13,4 +12,29 @@
     // background: $headerGradientEndC;
     // background: linear-gradient(0deg, $headerGradientEndC 0%, rgba(227,165,135,1) 100%);
 
+    .MiniMap {
+        .otherAvatarsMiniMap {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 200px;
+            height: 200px;
+
+            .mini-avatars {
+                position: relative;
+                width: 200px;
+                height: 200px;
+
+                .emojiMiniMap {
+                    position: absolute;
+                    font-size: 12px;
+                    margin-top: -6px;
+                    margin-left: -6px;
+                    width: 20px;
+                    height: 20px;
+                    // z-index: 600;
+                }
+            }
+        }
+    }
 }

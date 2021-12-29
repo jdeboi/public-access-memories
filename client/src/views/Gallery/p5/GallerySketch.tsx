@@ -142,8 +142,9 @@ class GallerySketch extends React.Component<Props> {
 
     //////////////
     // plants
+    const pamURL = "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/";
     tree = p5.loadImage(url + "grass/tree.png");
-    ivory = p5.loadImage("/online_assets/palm.png");
+    ivory = p5.loadImage(pamURL + "gallery/palm.png");
     flowerRow = p5.loadImage(url + "grass/cac3.png")
     oakImg = p5.loadImage(url + "grass/oak.png");
 
@@ -169,7 +170,7 @@ class GallerySketch extends React.Component<Props> {
     lightImgs[3] = p5.loadImage(url + "tracklights/black_shadow.png");
 
     // columnGif = p5.loadImage(url + "column.gif");
-    columnGif = p5.loadImage("/online_assets/column.png"); //not sure why this one has a cors issue
+    columnGif = p5.loadImage(pamURL + "gallery/column.png"); //not sure why this one has a cors issue
 
     // font
     font = p5.loadFont("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/fonts/sysfont.woff");
