@@ -79,6 +79,7 @@ export const userSlice = createSlice({
         },
         setFollowingHost: (state,  action: PayloadAction<boolean>) => {
             state.isFollowingHost = action.payload;
+            console.log("following", state.isFollowingHost);
         },
         removeUserComp: (state) => {
             state.comp = null;

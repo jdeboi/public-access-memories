@@ -4,6 +4,7 @@ import p5Types from 'p5';
 import { IUser, IUsers } from "../../../interfaces";
 import { connect } from "react-redux";
 import { RootState } from '../../../store/store';
+import { setFollowingHost } from '../../../store/user';
 
 //////////////
 // HELPERS
@@ -30,7 +31,10 @@ import Dancer from './components/Dancer';
 import { GlobalConfig, limits } from "../../../data/GlobalConfig";
 import { rooms as globalRooms } from "../../../data/RoomConfig";
 import { filterUsers, getTotalRoomCount } from "../../../helpers/helpers";
-import { displayWall } from "../functions/ground";
+import { displayWall } from "./functions/ground";
+import { hostBotPoints } from "../../../data/BotConfig";
+import { Dispatch } from "@reduxjs/toolkit";
+import { p5ToUserCoords, p5ToWorldCoords } from "../../../helpers/coordinates";
 var isClosed: boolean;
 
 //////////////
@@ -83,7 +87,7 @@ const stepTo = { x: 0, y: 0 };
 const userEase = { x: 0, y: 0 };
 const destination = { x: 0, y: 0, time: new Date() };
 var lastMouseMove = new Date();
-
+let currentHostStep = 0;
 
 interface ComponentProps {
   users: IUsers;
@@ -103,6 +107,7 @@ interface StateProps {
 }
 // dispatch props = functions to execute
 interface DispatchProps {
+  setFollowingHost: (isFollowing: boolean) => void;
 }
 
 interface Props extends ComponentProps, StateProps, DispatchProps { }
@@ -234,7 +239,7 @@ class GallerySketch extends React.Component<Props> {
     addTreeDivs(divs, tree, p5);
     addTableDivs(divs, tableImgs, p5);
     addBarDivs(divs, lightImgs[3], p5);
-    // addTrashDivs(divs, trashFiles, lightImgs[3], p5);
+    addTrashDivs(divs, trashFiles, lightImgs[3], p5);
     addFolderDivs(divs, instaImg, txtFile, p5);
     addRoomLabelDivs(divs, eyeIcon, p5);
     addSwingDivs(divs, baby, null, p5);
@@ -316,6 +321,7 @@ class GallerySketch extends React.Component<Props> {
     if (users)
       updateDivs(userEase, users, doors, divs);
     treeSlider.update(p5);
+    this.checkFollowHost();
     this.updateUserEase(p5);
 
   };
@@ -349,7 +355,7 @@ class GallerySketch extends React.Component<Props> {
 
     p5.textFont(font, 12);
     displayFolderDivs(divs);
-    // displayTrashDivs(userEase.x, userEase.y, divs);
+    displayTrashDivs(userEase.x, userEase.y, divs);
 
     treeSlider.display(p5);
 
@@ -426,6 +432,40 @@ class GallerySketch extends React.Component<Props> {
     else {
       stepTo.x = userStep.x;
       stepTo.y = userStep.y;
+      // console.log("step", stepTo)
+    }
+  }
+
+  checkFollowHost = () => {
+    const { user } = this.props;
+    if (user.isFollowingHost) {
+      if (currentHostStep === 0 && isWalking === false) {
+        isWalking = true;
+        const pt = p5ToUserCoords(hostBotPoints[0].x, hostBotPoints[0].y);
+        destination.x = pt.x;
+        destination.y = pt.y;
+        destination.time = new Date();
+      }
+    }
+  }
+
+  nextHostStep = () => {
+    const { user } = this.props;
+    if (!user.isFollowingHost) {
+      return;
+    }
+    currentHostStep++;
+    console.log("next", currentHostStep)
+    if (currentHostStep < hostBotPoints.length) {
+      isWalking = true;
+      const pt = p5ToUserCoords(hostBotPoints[currentHostStep].x, hostBotPoints[currentHostStep].y);
+      destination.x = pt.x;
+      destination.y = pt.y;
+      destination.time = new Date();
+    }
+    else {
+      currentHostStep = 0;
+      this.props.setFollowingHost(false);
     }
   }
 
@@ -447,7 +487,11 @@ class GallerySketch extends React.Component<Props> {
   }
 
   triggerMove = (p5: p5Types) => {
-    const { users, setUserActive, user } = this.props;
+    const { user } = this.props;
+    if (this.props.user.isFollowingHost)
+      return;
+
+    const { users, setUserActive, } = this.props;
     let userClicked = null;
     if (users)
       userClicked = checkUserClicked(userEase, users, p5);
@@ -476,21 +520,37 @@ class GallerySketch extends React.Component<Props> {
 
   mouseStep = () => {
     const t = new Date().getTime() - destination.time.getTime();
-
+    const { user } = this.props;
     if (isWalking) {
-      if (reachedDestination(stepTo, destination)) {
-        isWalking = false;
+      if (user.isFollowingHost) {
+        if (reachedDestination(stepTo, destination)) {
+          isWalking = false;
+          this.nextHostStep();
+        }
+        else if (t > 300) {
+          let step = getNextStep(stepTo, destination);
+          this.userTakeStep(step[0], step[1]);
+          destination.time = new Date();
+        }
       }
-      else if (t > 150) {
-        let step = getNextStep(stepTo, destination);
 
-        this.userTakeStep(step[0], step[1]);
-        destination.time = new Date();
+      else {
+        if (reachedDestination(stepTo, destination)) {
+          isWalking = false;
+        }
+        else if (t > 150) {
+          let step = getNextStep(stepTo, destination);
+          this.userTakeStep(step[0], step[1]);
+          destination.time = new Date();
+        }
       }
     }
   }
 
   keyPressed = (p5: p5Types) => {
+    if (this.props.user.isFollowingHost)
+      return;
+
     if (p5.keyCode === p5.UP_ARROW) {
       this.userTakeStep(0, -1);
     }
@@ -522,7 +582,6 @@ class GallerySketch extends React.Component<Props> {
   }
 
   doubleClicked = (p5: p5Types) => {
-    // console.log("db");
     checkFolderDivsDouble(userEase.x, userEase.y, divs);
     checkTrashDivsDouble(userEase.x, userEase.y, divs);
   }
@@ -547,5 +606,12 @@ const mapStateToProps = (state: RootState) => ({
   user: state.user,
 });
 
-export default connect<StateProps, DispatchProps, ComponentProps, RootState>(mapStateToProps, {})(GallerySketch);
+
+const mapDispatchToProps = (dispatch: Dispatch) => {
+  return {
+    setFollowingHost: (isFollowing: boolean) => dispatch(setFollowingHost(isFollowing))
+  }
+}
+
+export default connect<StateProps, DispatchProps, ComponentProps, RootState>(mapStateToProps, mapDispatchToProps)(GallerySketch);
 

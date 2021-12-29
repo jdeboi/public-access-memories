@@ -19,7 +19,7 @@ interface OwnProps {
 interface DispatchProps {
   toggleMap: () => void;
   hideMap: () => void;
-  setOneMenu: () => void;
+  setOneMenu: (menu: string) => void;
 }
 
 interface StateProps {
@@ -40,6 +40,7 @@ class MiniMap extends React.Component<Props> {
     const { hasFooter, isMobile } = this.props.window;
     const { toggleMap } = this.props;
 
+    // ????
     if (!isMobile && !hasFooter) {
       toggleMap();
     }
@@ -47,7 +48,6 @@ class MiniMap extends React.Component<Props> {
 
   onHide = () => {
     this.props.hideMap();
-    // this.props.setOneMenu(null);
   }
 
   render() {
@@ -60,7 +60,7 @@ class MiniMap extends React.Component<Props> {
 
     let isHidden = (window.isMobile || window.hasFooter) ? menu.mobile !== "map" : menu.map.isHidden;
     const dim = (window.isMobile || window.hasFooter) ? 135 : 200;
-
+    // console.log("hidde", isHidden);
     return (
       <Frame
         title="map"
@@ -122,9 +122,9 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    hideMap: () => dispatch(hideMap),
-    toggleMap: () => dispatch(toggleMap),
-    setOneMenu: () => dispatch(setOneMenu),
+    hideMap: () => dispatch(hideMap()),
+    toggleMap: () => dispatch(toggleMap()),
+    setOneMenu: (menu: string) => dispatch(setOneMenu(menu)),
   }
 }
 

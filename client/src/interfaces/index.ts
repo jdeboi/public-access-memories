@@ -120,6 +120,7 @@ export interface IRoom {
     link: string,
     title: string,
     artist: string,
+    artistLink: string,
     medium?: string,
     description: string,
     year: number,

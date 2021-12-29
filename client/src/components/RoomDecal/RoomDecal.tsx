@@ -117,9 +117,16 @@ const RoomDecal = (props: IRoomDecal) => {
 
     }
 
+
+    const getArtistLink = (artistLink: string, artist: string) => {
+        if (artistLink && artistLink !== "#" && artistLink !== "")
+            return <div><a href={artistLink}>{artist}</a></div>;
+        return <div>{artist}</div>;
+    }
+
     if (room) {
         const buttons = getButtons();
-        const { title, description, medium, year } = room;
+        const { title, description, medium, year, artist, artistLink } = room;
 
         return (
             <CenterModal
@@ -134,12 +141,11 @@ const RoomDecal = (props: IRoomDecal) => {
                 content={
                     <div className="decal-content">
                         <div className="identify">
-                            <p style={{ fontSize: 20, paddingBottom: 0, fontWeight: 900 }}>
-                                <span className="">{title}</span>
-                            </p>
-                            <p style={{ fontSize: 12 }}>{year}</p>
-                            <p style={{ fontSize: 12 }}>{medium}</p>
-                            <p style={{ fontSize: 12 }}>{description}</p>
+                            <h2><span className="">{title}</span></h2>
+                            {getArtistLink(artistLink, artist)}
+                            <div>{year}</div>
+                            <div>{medium}</div>
+                            <div>{description}</div>
                         </div>
 
                     </div>
@@ -148,6 +154,7 @@ const RoomDecal = (props: IRoomDecal) => {
             />
         );
     }
+
 
 
     return null;

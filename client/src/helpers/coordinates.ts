@@ -38,3 +38,9 @@ export const domCoordsToP5World = (x: number, y: number) => {
     return { x: xx, y: yy }
 }
 
+export const p5ToUserCoords = (x: number, y: number) => {
+    // + GlobalConfig.scaler/2 to get middle of square issue
+    let xx = (x + GlobalConfig.x) * GlobalConfig.scaler + GlobalConfig.scaler/2;
+    let yy = (y + GlobalConfig.y) * GlobalConfig.scaler+ GlobalConfig.scaler/2;
+    return {x: xx, y: yy};
+}

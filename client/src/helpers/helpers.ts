@@ -1,6 +1,8 @@
 import { IUser, IUsers, IRoom } from '../interfaces';
 import { rooms } from '../data/RoomConfig';
 import { PageConfig } from '../data/PageConfig';
+import { hostBotPoints } from '../data/BotConfig';
+import { domCoordsToP5 } from './coordinates';
 
 export const getUserByUserName = (users: IUsers, userName: string) => {
   if (users)
@@ -60,6 +62,13 @@ export const getUserChatList = (currentUser: IUser, users: IUsers) => {
   return filteredArray; 
 }
 
+export const userNearEntrance = (user: IUser) => {
+  let entrance = {...hostBotPoints[0]};
+  let userCoords = domCoordsToP5(user.x, user.y);
+  
+  return (userCoords.x >= entrance.x - 8 && userCoords.x <= entrance.x + 8
+    && userCoords.y >= 28 && userCoords.y <= 35 );
+}
 
 export const getPageName = (link: string): string => {
   if (link === "/") {

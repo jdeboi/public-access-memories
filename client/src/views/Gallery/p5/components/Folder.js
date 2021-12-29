@@ -6,9 +6,10 @@ export default class Folder extends Draggable {
 
     constructor(p5, id, x, y, label, link, img) {
         super(id, x, y, 80, 80, p5, img);
-        let point = domCoordsToP5World(x, y);
-        this.x = point.x;
-        this.y = point.y;
+        // TODO - my coordinate system needs formalization
+        // let point = domCoordsToP5World(x, y);
+        // this.x = point.x;
+        // this.y = point.y;
         this.label = label;
         this.link = link;
         this.img = img;
@@ -78,6 +79,14 @@ export default class Folder extends Draggable {
         // console.log(mx, my, userX, userY, this.x, this.y);
         if (this.checkOver(mouse.x, mouse.y)) {
             this.openInNewTab(this.link);
+        }
+    }
+
+    checkDoubleClickedAlert = (userX, userY) =>  {
+        let mouse = mouseToWorld({ x: userX, y: userY }, this.p5);
+        // console.log(mx, my, userX, userY, this.x, this.y);
+        if (this.checkOver(mouse.x, mouse.y)) {
+            alert("Don't dig through the trash. You're in a gallery. Geez.")
         }
     }
 

@@ -1,5 +1,5 @@
-import { GlobalConfig } from "../../../data/GlobalConfig";
-import { roomConfig } from "../../../data/RoomConfig";
+import { GlobalConfig } from "../../../../data/GlobalConfig";
+import { roomConfig } from "../../../../data/RoomConfig";
 import { displayPopOut } from "./boxes";
 
 export const displayCheckers = (numW, numH, w, h, p5) => {

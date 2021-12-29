@@ -1,5 +1,3 @@
-import { p5ToDomCoords } from '../helpers/coordinates';
-import { roomConfig } from './RoomConfig';
 
 export const GlobalConfig = {
     scaler: 70,
@@ -30,14 +28,6 @@ export const limits = [
 //     { x: GlobalConfig.minX, y: GlobalConfig.minY }
 // ];
 
-
-export const limitsDiv = [
-    p5ToDomCoords(limits[0].x, limits[0].y),
-    p5ToDomCoords(limits[1].x, limits[1].y),
-    p5ToDomCoords(limits[2].x, limits[2].y)
-];
-
-
 ///// doors
 export const outsideDoors = [
     { x0: 22.5, y0: 5.2, x1: 24, y1: 5.2, to: "outside" }, // top
@@ -45,12 +35,6 @@ export const outsideDoors = [
     { x0: 14, y0: 27.2, x1: 16, y1: 27.2, to: "outside" }, // bottom
     { x0: 22.5, y0: 15.2, x1: 24, y1: 15.2, to: "outside" }, // right
 ];
-
-const outsideDoorFramesInit = [];
-for (const door of outsideDoors) {
-    outsideDoorFramesInit.push(p5ToDomCoords((door.x0 + door.x1) / 2, (door.y0 + door.y1) / 2));
-}
-export const outsideDoorFrames = outsideDoorFramesInit;
 
 
 ///// lights
@@ -67,12 +51,7 @@ export const lightsP5 = [
     { x: 13, y: 20 }
 ];
 
-export const lights = [
-    p5ToDomCoords(lightsP5[0].x, lightsP5[0].y),
-    p5ToDomCoords(lightsP5[1].x, lightsP5[1].y),
-    p5ToDomCoords(lightsP5[2].x, lightsP5[2].y),
-    // p5ToDomCoords(lightsP5[3].x, lightsP5[3].y)
-];
+
 
 // pools
 let startX = limits[0].x;

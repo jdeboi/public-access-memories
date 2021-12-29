@@ -11,13 +11,14 @@ import DJBar from '../components/Bars/DJBar';
 
 import Tree from '../components/Tree';
 import RoomLabel from '../components/RoomLabel';
-import Trash from '../components/Trash';
-import TrashFolder from '../components/TrashFolder';
+// import Trash from '../components/Trash';
+// import TrashFolder from '../components/TrashFolder';
 import Swing from '../components/Swing';
 import Table from '../components/Table';
 
 import { GlobalConfig } from '../../../../data/GlobalConfig';
 import { rooms } from '../../../../data/RoomConfig';
+import { domCoordsToP5World } from '../../../../helpers/coordinates';
 
 
 export const addRoomLabelDivs = (divs, eyeIcon, p5) => {
@@ -84,7 +85,6 @@ export const addColumnDivs = (divs, columnGif, shadow, p5) => {
 
 export const addTrashDivs = (divs, trashFiles, shadow, p5) => {
     divs.trashCans = [];
-    divs.trashFolders = [];
     let sc = GlobalConfig.scaler;
     // let labels = [
     //     { x0: 9 * sc, y0: 13 * sc, x1: 10.5*sc, y1: 13*sc },
@@ -100,32 +100,31 @@ export const addTrashDivs = (divs, trashFiles, shadow, p5) => {
     for (let i = 0; i < 3; i++) {
         const { x0, y0 } = labels[i];
         // p5, id, x, y, label, link, img
-        const tf = new TrashFolder(i, x0, y0, 422 * .5, 265 * .5, p5, trashFiles[i + 1], shadow)
-        const t = new Trash(p5, i * 2, x0, y0, "recycle bin", trashFiles[0], tf);
+        // const tf = new TrashFolder(i, x0, y0, 422 * .5, 265 * .5, p5, trashFiles[i + 1], shadow)
+        // const t = new Trash(p5, i * 2, x0, y0, "recycle bin", trashFiles[0], tf);
 
-        // const r = new Trash(p5, i * 2 + 1, x1, y1, "recycling", trash);
-        // trashCans.push(t);
-        // trashCans.push(r);
-        divs.trashFolders.push(tf);
-        divs.trashCans.push(t);
-        // divs.trashCans.push(r);
+        const tf = new Folder(p5, i, x0, y0, "recycle bin", "/trash", trashFiles[0]);
+        // divs.trashFolders.push(tf);
+        divs.trashCans.push(tf);
     }
 }
 
 
 export const addFolderDivs = (divs, instaImg, txtFile, p5) => {
     divs.folders = [];
+    // yeah, why are these in dom coords...
+    let p0 = domCoordsToP5World(560, 0);
+    let p1 = domCoordsToP5World(620, 130);
+    let p2 = domCoordsToP5World(510, 230);
     let labels = [
-        { x: 560, y: 0, label: "statement", link: "https://publicaccessmemories.com/statement" },
-        { x: 620, y: 130, label: "about", link: "https://publicaccessmemories.com/about" },
-        { x: 510, y: 230, label: "@public.access.memories", link: "https://www.instagram.com/public.access.memories/" }
+        { x: p0.x, y: p0.y, label: "show statement", link: "https://publicaccessmemories.com/exhibition" },
+        { x: p1.x, y: p1.y, label: "about gallery", link: "https://publicaccessmemories.com/about" },
+        { x: p2.x, y: p2.y, label: "@public.access.memories", link: "https://www.instagram.com/public.access.memories/" }
     ];
 
     for (let i = 0; i < 3; i++) {
         const { x, y, label, link } = labels[i];
-
         const folder = new Folder(p5, i, x, y, label, link, (i === 2 ? instaImg : txtFile));
-        // folders.push(folder)
         divs.folders.push(folder);
     }
 }
@@ -248,10 +247,6 @@ export const displayTrashDivs = (userX, userY, divs) => {
     for (const trash of divs.trashCans) {
         trash.display();
     }
-    for (const trashF of divs.trashFolders) {
-        trashF.display(userX, userY);
-        trashF.displayToolBar(userX, userY);
-    }
 }
 
 export const displayColumnDivs = (userX, userY, divs) => {
@@ -338,31 +333,9 @@ export function updateDivs(userEase, users, doors, divs, isPanGallery = false) {
 export const checkDivPress = (userX, userY, divs) => {
     let keys = Object.keys(divs);
     for (const key of keys) {
-        if (key !== "trashCans") {
-            if (key === "trashFolders") {
-                for (const div of divs.trashFolders) {
-                    if (checkDiv(userX, userY, div))
-                        return true;
-                    else if (checkTrashDiv(userX, userY, div))
-                        return true;
-                }
-                for (const div of divs.trashCans) {
-                    if (checkDiv(userX, userY, div))
-                        return true;
-                }
-            }
-            else
-                for (const div of divs[key])
-                    if (checkDiv(userX, userY, div))
-                        return true;
-        }
-    }
-    return false;
-}
-
-const checkTrashDiv = (userX, userY, div) => {
-    if (div.checkContentsClicked(userX, userY)) {
-        return true;
+        for (const div of divs[key])
+            if (checkDiv(userX, userY, div))
+                return true;
     }
     return false;
 }
@@ -385,6 +358,6 @@ export const checkFolderDivsDouble = (userX, userY, divs) => {
 
 export const checkTrashDivsDouble = (userX, userY, divs) => {
     for (const trash of divs.trashCans) {
-        trash.checkDoubleClicked(userX, userY);
+        trash.checkDoubleClickedAlert(userX, userY);
     }
 }

@@ -6,7 +6,7 @@
 
 .ChatMobile {
     color: black;
-    font-size: 12px;
+    font-size: $fontSize-desktop-p2;
 
     .chat-buttons {
         padding-top: 10px;
@@ -25,7 +25,7 @@
         overflow: hidden;
 
         .Chat-messages-box {
-            font-size: 10px;
+            font-size: $fontSize-desktop-p2;
             padding: 10px;
             border: 2px solid black;
             border-radius: $borderRad;
@@ -48,12 +48,12 @@
 
                 .message-deets {
                     padding-bottom: 7px;
-                    font-size: 10px;
+                    font-size: $fontSize-desktop-p3;
                 }
 
                 .message-txt {
-                    font-size: 12px;
-                    line-height: 1.8em;
+                    font-size: $fontSize-desktop-p2;
+                    line-height: 1.4em;
                 }
 
                 .bubbleContainer {
@@ -88,7 +88,7 @@
                     .bubble {
                         color: white;
                         // background: rgb(74, 71, 255);
-                        background: $windowsGradient;
+                        background: $headerGradientStartC;
 
                         .message-deets {
                             text-align: right;
@@ -159,7 +159,7 @@
                             padding: 5px;
                             color: black;
                             height: 30px;
-                            font-size: 16px;
+                            font-size: $fontSize-desktop-p2;
                             &:focused {
                                 color: black;
                             }
@@ -175,7 +175,7 @@
 
                 input {
                     width: 100%;
-                    font-size: 16px;
+                    font-size: $fontSize-desktop-p2;
                 }
             }
         }

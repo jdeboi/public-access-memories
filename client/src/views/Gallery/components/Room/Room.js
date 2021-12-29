@@ -4,7 +4,8 @@
 import { rooms, roomConfig } from '../../../../data/RoomConfig';
 import { doorLineCrossing, boundaryLineCrossing } from './Boundaries';
 import { GlobalConfig } from '../../../../data/GlobalConfig';
-import { displayCheckers, displayWall } from '../functions/ground';
+import { displayPopOut, displayPopIn } from '../../functions/boxes';
+import { displayCheckers, displayWall } from '../../p5/functions/ground';
 
 export default class Room {
 
@@ -50,11 +51,11 @@ export default class Room {
     this.p5.fill(200);
     // this.p5.rect(x, y, w, h);
 
-    // this.p5.push();
-    // this.p5.translate(x, y);
+    this.p5.push();
+    this.p5.translate(x, y);
 
-    // displayCheckers(9, 9, GlobalConfig.scaler / 3, GlobalConfig.scaler / 3, this.p5);
-    // this.p5.pop();
+    displayCheckers(9, 9, GlobalConfig.scaler / 3, GlobalConfig.scaler / 3, this.p5);
+    this.p5.pop();
 
     // displayPopOut(x, y, w, h, this.p5.color(255), this.p5);
     // displayPopIn(x, y+h-50, 50, 50, this.p5.color(255), this.p5);
@@ -63,15 +64,15 @@ export default class Room {
     this.displayTxt();
 
     // top
-    // displayWall({ x, y }, { x: x + this.w * GlobalConfig.scaler, y }, this.p5);
-    // // right
-    // displayWall({ x: x + this.w * GlobalConfig.scaler, y }, { x: x + this.w * GlobalConfig.scaler, y: y + this.h * GlobalConfig.scaler }, this.p5);
+    displayWall({ x, y }, { x: x + this.w * GlobalConfig.scaler, y }, this.p5);
+    // right
+    displayWall({ x: x + this.w * GlobalConfig.scaler, y }, { x: x + this.w * GlobalConfig.scaler, y: y + this.h * GlobalConfig.scaler }, this.p5);
 
-    // // bottom
-    // displayWall({ x: x + this.w * GlobalConfig.scaler, y: y + this.h * GlobalConfig.scaler }, { x: x + GlobalConfig.scaler, y: y + this.h * GlobalConfig.scaler }, this.p5);
+    // bottom
+    displayWall({ x: x + this.w * GlobalConfig.scaler, y: y + this.h * GlobalConfig.scaler }, { x: x + GlobalConfig.scaler, y: y + this.h * GlobalConfig.scaler }, this.p5);
 
-    // // left
-    // displayWall({ x, y: y + (this.h - 1) * GlobalConfig.scaler }, { x, y }, this.p5);
+    // left
+    displayWall({ x, y: y + (this.h - 1) * GlobalConfig.scaler }, { x, y }, this.p5);
 
 
     const fac = .24;

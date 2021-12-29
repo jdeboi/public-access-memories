@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-, "../old/GallerySketch.tsx", "../old/ArtistTalk"  ]
+, "../old/RoomConfig1.ts", "../old/GallerySketch.tsx", "../old/ArtistTalk"  ]
 }

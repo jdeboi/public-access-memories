@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import GallerySketch from './p5/GallerySketch';
 import { IUser, IUsers } from '../../interfaces';
-import { mapVal } from '../../helpers/helpers';
+import { filterUsers, mapVal } from '../../helpers/helpers';
 
 import LoadingPage from '../../components/LoadingPage/LoadingPage';
 import MiniMap from './components/MiniMap/MiniMap';
@@ -94,7 +94,7 @@ const Gallery = (props: IGallery) => {
             {
                 windowUI.loading ?
                     <LoadingPage /> :
-                    <MiniMap users={props.users} x={20} y={20} />
+                    <MiniMap users={filterUsers(user, props.users)} x={20} y={20} />
             }
         </div>
     )

@@ -51,6 +51,12 @@ const hostBotCoords = {
     y: 30
 }
 
+export const hostBotFirstRoom = 7;
+export const hostBotPoints = [
+    {x: 15, y: 28}, // entrance
+    {x: 15, y: 22},  // inside
+    {x: 27, y: 22}
+]
 
 
 //// bar tenders

@@ -21,7 +21,7 @@
   width: 300px;
   height: 400px;
   color: white;
-  font-size: 12pt;
+  font-size: 11pt;
 }
 
 .Chat .Chat-Content .Chat-title {
@@ -60,8 +60,8 @@
 }
 
 .Chat .Chat-Content .Chat-messages .Chat-messages-box .Chat-messages-inner-box .message-txt {
-  font-size: 12pt;
-  line-height: 1.8em;
+  font-size: 11pt;
+  line-height: 1.4em;
 }
 
 .Chat .Chat-Content .Chat-messages .Chat-messages-box .Chat-messages-inner-box .bubbleContainer {
@@ -91,7 +91,7 @@
   border-radius: 8px;
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid #4B57D6;
+  border: 1px solid #5b43cd;
   background: #111111;
 }
 
@@ -102,7 +102,7 @@
 }
 
 .Chat .Chat-Content .Chat-messages .Chat-messages-box .Chat-messages-inner-box .bubbleContainer.chat-from-me .bubble {
-  background: #4B57D6;
+  background: #5b43cd;
 }
 
 .Chat .Chat-Content .Chat-messages .Chat-messages-box .Chat-messages-inner-box .bubbleContainer.chat-from-other {

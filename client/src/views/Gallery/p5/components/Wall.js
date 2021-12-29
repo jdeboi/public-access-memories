@@ -1,7 +1,7 @@
 
 import {boundaryLineCrossing, intersectionPoint} from './Boundaries';
 import { limits } from '../../../../data/GlobalConfig';
-import { displayWall } from '../../functions/ground';
+import { displayWall } from '../functions/ground';
 
 export default class Wall {
 
