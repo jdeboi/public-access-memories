@@ -1,0 +1,58 @@
+/**
+ * 98.css
+ * Copyright (c) 2020 Jordan Scales <thatjdanisso.cool>
+ * https://github.com/jdan/98.css/blob/main/LICENSE
+ */
+/* Borders */
+/* Window borders flip button-face and button-highlight */
+/* Field borders (checkbox, input, etc) flip window-frame and button-shadow */
+.Instructions-list {
+  text-align: center;
+  overflow: auto;
+  border: 2px solid black;
+  pointer-events: all;
+  border-radius: 8px;
+}
+
+.Instructions-list .instruction {
+  text-align: left;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 20px;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.Instructions-list .instruction h3 {
+  border-bottom: 1px solid #cfcfcf;
+  margin-bottom: 5px;
+}
+
+.Instructions-list .instruction p {
+  line-height: 14px;
+}
+
+.Instructions-list .instruction .faqImg {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding-right: 20px;
+}
+
+.Instructions-list .instruction .faqImg img {
+  border-radius: 6px;
+  border: 2px solid black;
+  width: 100%;
+}
+
+.Instructions-list .instruction .instruction-txt {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+/*# sourceMappingURL=FAQ.css.map */

@@ -1,6 +1,12 @@
+/**
+ * 98.css
+ * Copyright (c) 2020 Jordan Scales <thatjdanisso.cool>
+ * https://github.com/jdan/98.css/blob/main/LICENSE
+ */
+/* Borders */
+/* Window borders flip button-face and button-highlight */
+/* Field borders (checkbox, input, etc) flip window-frame and button-shadow */
 .Gallery {
-  background-color: white;
-  background-image: url("./assets/birds.gif");
-  background-repeat: repeat;
+  background-image: url("./assets/wallpaper3.jpg");
 }
 /*# sourceMappingURL=Gallery.css.map */

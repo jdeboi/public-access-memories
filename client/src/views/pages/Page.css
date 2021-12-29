@@ -1,0 +1,27 @@
+/**
+ * 98.css
+ * Copyright (c) 2020 Jordan Scales <thatjdanisso.cool>
+ * https://github.com/jdan/98.css/blob/main/LICENSE
+ */
+/* Borders */
+/* Window borders flip button-face and button-highlight */
+/* Field borders (checkbox, input, etc) flip window-frame and button-shadow */
+.Page {
+  color: white;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4B57D6), color-stop(100%, #22c1c3));
+  color: white;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  line-height: 140%;
+  overflow: auto;
+}
+/*# sourceMappingURL=Page.css.map */

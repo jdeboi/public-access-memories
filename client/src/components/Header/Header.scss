@@ -31,11 +31,11 @@
     display: block;
     font-family: consoleFont;
     // border: $borderH solid black;
-    border-top-right-radius: $borderRad;
-    border-top-left-radius: $borderRad;
+    // border-top-right-radius: $borderRad;
+    // border-top-left-radius: $borderRad;
     flex: 0 1 auto;
 
-    font-size: $fontSize-desktop-1;
+    font-size: $fontSize-desktop-p1;
     height: $headerH;
     color: white;
     // color: blue;
@@ -52,7 +52,7 @@
 
     flex: 1 1 100%;
 
-    background-color: #e3a587;
+    background-color: $headerBackgroundC;
     // background-image: -webkit-gradient(
     //     linear,
     //     0% 0%,
@@ -110,7 +110,7 @@
     }
 
     .currentPage {
-        color: #335ef6dd; //$headerGradientEndC; // #fc03ad99;//
+        color: $headerGradientEndC; // #fc03ad99;//
     }
 
     .header-avatar {
@@ -157,8 +157,7 @@
         }
 
         .arrow.expandable {
-            color: $headerGradientEndC; //#ff0080;
-
+            color: $headerGradientStartC; //#ff0080;
             &:hover {
                 color: white;
             }
@@ -237,7 +236,7 @@
             border: white solid 2px;
             border-radius: 0 $borderRad $borderRad $borderRad;
             color: white;
-            font-size: $fontSize-desktop-2;
+            font-size: $fontSize-desktop-p2;
             left: 0px;
             margin: 0 !important;
             overflow: hidden;
@@ -448,45 +447,45 @@
     }
 
     @media screen and (max-width: 830px) {
-        // font-size: $fontSize-tablet-1;
+        font-size: $fontSize-tablet-p2;
         .submenu ul {
-            font-size: $fontSize-tablet-2;
+            font-size: $fontSize-tablet-p2;
             overflow-y: auto;
             overflow-x: hidden;
         }
     }
 
     @media screen and (max-width: 400px) {
-        font-size: $fontSize-mobile-2;
+        font-size: $fontSize-mobile-p2;
         .submenu ul {
-            font-size: $fontSize-mobile-3;
+            font-size: $fontSize-mobile-p2;
         }
     }
 
     @media screen and (max-width: 340px) {
-        font-size: $fontSize-mobile-3;
+        font-size: $fontSize-mobile-p3;
         .submenu ul {
-            font-size: $fontSize-mobile-4;
+            font-size: $fontSize-mobile-p3;
         }
     }
 
-    @media screen and (max-width: 314px) {
-        font-size: $fontSize-mobile-5;
+    @media screen and (max-width: 320px) {
+        font-size: $fontSize-mobile-p4;
         .submenu ul {
-            font-size: $fontSize-mobile-5;
+            font-size: $fontSize-mobile-p4;
         }
     }
 }
 
-.Header.menuTheme.clickMe {
-    border-color: $limeColor;
-    // color: $limeColor;
+// .Header.menuTheme.clickMe {
+//     border-color: $limeColor;
+//     // color: $limeColor;
 
-    .submenu ul {
-        // color: $limeColor;
-        border-color: $limeColor;
-    }
-}
+//     .submenu ul {
+//         // color: $limeColor;
+//         border-color: $limeColor;
+//     }
+// }
 
 .BackHeader {
     position: absolute;

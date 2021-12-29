@@ -24,14 +24,14 @@
 
 .App {
   background-color: black;
+  border: 0px;
   height: 100%;
   width: 100%;
   font-family: consoleFont;
-  letter-spacing: .2em;
   overflow: hidden;
   padding: 0;
   perspective-origin: 0 0;
-  font-size: 10px;
+  letter-spacing: $normalLetterSpacing;
 
   // I want this to be container; header fixed, content div takes up rest of height
   display: flex;
@@ -45,7 +45,6 @@
   .App-Header {
     flex: 0 0 auto;
     height: $headerH;
-
     /* The above is shorthand for:
     flex-grow: 0,
     flex-shrink: 1,
@@ -134,7 +133,7 @@
     background-color: black;
     border: 2px solid red;
     text-align: center;
-    font-size: 16px;
+    // font-size: 16px;
     color: white;
     top: 45px;
     right: 10px;
@@ -206,12 +205,6 @@
     position: fixed;
     min-width: 100%;
     min-height: 100%;
-
-    // position: absolute;
-    // top: 0px;
-    // left: 0px;
-    // height: 100vh;
-    // width: 100vw;
   }
 
   .flippedX {
@@ -243,21 +236,31 @@
   }
 }
 
-.App.clickMe {
-  .inner-outline {
-    border-left: 2px solid $limeColor;
-    border-right: 2px solid $limeColor;
-    border-bottom: 2px solid $limeColor;
-  }
-}
+// .App.clickMe {
+//   .inner-outline {
+//     border-left: 2px solid $limeColor;
+//     border-right: 2px solid $limeColor;
+//     border-bottom: 2px solid $limeColor;
+//   }
+// }
+
 
 @font-face {
   font-family: consoleFont;
   // src: url(./assets/fonts/dogica.ttf);
   src: url(./assets/fonts/sysfont/sysfont.otf);
+  // src: url(./assets/fonts/ms_sans_serif.woff) format("woff");
+  // src: url(./assets/fonts/ms_sans_serif.woff2) format("woff2");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
   font-family: consoleFontBold;
-  src: url(./assets/fonts/dogicabold.ttf);
+    src: url(./assets/fonts/sysfont/sysfont.otf);
+
+  // src: url(./assets/fonts/ms_sans_serif_bold.woff) format("woff");
+  // src: url(./assets/fonts/ms_sans_serif_bold.woff2) format("woff2");
+  font-weight: bold;
+  font-style: normal;
 }

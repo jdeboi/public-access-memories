@@ -2,29 +2,87 @@ import { getNewUser } from "../helpers/helpers"
 import { IUser, IBar } from "../interfaces"
 import { p5ToDomCoords } from "../helpers/coordinates";
 import { GlobalConfig } from "./GlobalConfig";
+import { roomConfig } from "./RoomConfig";
 
 //// dance dance dance
-const danceFloorP5 = { x: 12, y: -12, w: 10, h: 5 };
-export const danceFloor = { x: GlobalConfig.scaler * danceFloorP5.x, y: GlobalConfig.scaler * danceFloorP5.y, w: GlobalConfig.scaler * danceFloorP5.w, h: GlobalConfig.scaler * danceFloorP5.h };
+//// dance dance dance
+const danceFloorP5 = {
+    x: 24 - 3,
+    y: -1,
+    w: 10,
+    h: 5
+};
+
+// const danceFloorP5 = {
+//     x: 1 * roomConfig.w,
+//     y: -3 * roomConfig.w,
+//     w: 3 * roomConfig.w,
+//     h: 2 * roomConfig.w
+// };
+export const danceFloor = {
+    x: GlobalConfig.scaler * danceFloorP5.x,
+    y: GlobalConfig.scaler * danceFloorP5.y,
+    w: GlobalConfig.scaler * danceFloorP5.w,
+    h: GlobalConfig.scaler * danceFloorP5.h
+};
 export const DJBotCoords = p5ToDomCoords(danceFloorP5.x + 3.5, danceFloorP5.y - 1);
 
-//// bar tenders
-const cheeseBotCoords = p5ToDomCoords(-8, 5); // cheese
-const wineBotCoords = p5ToDomCoords(-4, 4);
-const cocktailBotCoords = p5ToDomCoords(8, 9);
-const hostBotCoords = p5ToDomCoords(1, 1);
 
+//// wine
+const cheeseBotCoords = {
+    x: -8,
+    y: 5
+}; // cheese
+const wineBotCoords = {
+    x: 30,
+    y: 19
+}
+const cocktailBotCoords = {
+    x: 32,
+    y: 0
+}
+const hostBotCoords = {
+    x: 10,
+    y: 30
+}
+
+
+
+//// bar tenders
+// const cheeseBotCoords = {
+//     x: 1 * roomConfig.w,
+//     y: 8 * roomConfig.w
+// };
+// const wineBotCoords = {
+//     x: 4 * roomConfig.w,
+//     y: 0 * roomConfig.w
+// };
+// const cocktailBotCoords = {
+//     x: 7.5 * roomConfig.w, 
+//     y: 7.25 * roomConfig.w
+// };
+// const hostBotCoords = { x: 1 * roomConfig.w, y: 8 * roomConfig.w };
+
+export const numBarItems = 4;
 const barW = 87;
-const barH = 175;
-const botDX = -50;
-const botDY = barH/2;
-export const barTenders: IUser[] = [
-    getNewUser("wineBot", "🤖", "/", "1", wineBotCoords.x+botDX, wineBotCoords.y+botDY),
-    getNewUser("cocktailBot", "🤖", "/", "2", cocktailBotCoords.x+botDX, cocktailBotCoords.y+botDY),
-    getNewUser("cheeseBot", "🤖", "/", "3", cheeseBotCoords.x+botDX, cheeseBotCoords.y+botDY),
+const barH = 175;// + 80;
+const botDX = 1.5;
+const botDY = 2;
+const barUsers: IUser[] = [
+    getNewUser("wineBot", "🤖", "/", "1", wineBotCoords.x + botDX, wineBotCoords.y + botDY),
+    getNewUser("cocktailBot", "🤖", "/", "2", cocktailBotCoords.x + botDX, cocktailBotCoords.y + botDY),
+    getNewUser("cheeseBot", "🤖", "/", "3", cheeseBotCoords.x - 1, cheeseBotCoords.y + botDY),
     getNewUser("DJBot", "🤖", "/", "4", DJBotCoords.x, DJBotCoords.y),
-    getNewUser("hostBot", "🤖", "/", "5", hostBotCoords.x+botDX, hostBotCoords.y)
+    getNewUser("hostBot", "🤖", "/", "5", hostBotCoords.x + botDX, hostBotCoords.y)
 ]
+
+export const barTenders: IUser[] = barUsers.map(user => {
+    const usr = { ...user };
+    let pt = p5ToDomCoords(usr.x, usr.y);
+    usr.x = pt.x;
+    usr.y = pt.y;
+    return usr;
+})
 
 
 
@@ -35,7 +93,8 @@ export const bars: IBar[] = [
         y: wineBotCoords.y,
         w: barW,
         h: barH,
-        tender: barTenders[0]
+        tender: barTenders[0],
+        isFlipped: false
     },
     {
         type: "cocktail",
@@ -43,15 +102,17 @@ export const bars: IBar[] = [
         y: cocktailBotCoords.y,
         w: barW,
         h: barH,
-        tender: barTenders[1]
+        tender: barTenders[1],
+        isFlipped: false
     },
     {
         type: "cheese",
         x: cheeseBotCoords.x,
         y: cheeseBotCoords.y,
         w: barW,
-        h: barH+80,
-        tender: barTenders[2]
+        h: barH, // + 80
+        tender: barTenders[2],
+        isFlipped: false
     },
     {
         type: "DJ",
@@ -59,7 +120,8 @@ export const bars: IBar[] = [
         y: DJBotCoords.y,
         w: 210,
         h: 45,
-        tender: barTenders[3]
+        tender: barTenders[3],
+        isFlipped: false
     },
     {
         type: "host",
@@ -67,7 +129,8 @@ export const bars: IBar[] = [
         y: hostBotCoords.y,
         w: barW,
         h: barH,
-        tender: barTenders[4]
+        tender: barTenders[4],
+        isFlipped: false
     }
 ]
 

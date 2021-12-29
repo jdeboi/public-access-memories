@@ -4,12 +4,13 @@ import { faMapMarker } from "@fortawesome/free-solid-svg-icons";
 
 // store
 import { useSelector, useDispatch } from 'react-redux';
-import { selectMenu } from '../../../../store/store';
+import { selectMenu, selectUser } from '../../../../store/store';
 import { toggleMap } from '../../../../store/menu';
 
 
 const MapLi = () => {
     const dispatch = useDispatch();
+    const user = useSelector(selectUser);
     const menu = useSelector(selectMenu);
     const [classN, setClassN] = useState("expandable icon");
 
@@ -22,17 +23,21 @@ const MapLi = () => {
 
         setClassN(classMap);
 
-    }, [menu.map.isHidden])
+    }, [menu.map.isHidden, user.roomUrl])
 
     const mapClicked = () => {
         dispatch(toggleMap());
     }
 
-    return (
-        <li className={classN} onClick={mapClicked}>
-            <FontAwesomeIcon icon={faMapMarker} />
-        </li>
-    )
+    if (user.roomUrl === "/") {
+        return (
+            <li className={classN} onClick={mapClicked}>
+                <FontAwesomeIcon icon={faMapMarker} />
+            </li>
+        )
+    }
+    return null;
+    
 };
 
 export default MapLi;

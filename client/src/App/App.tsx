@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import "./App.css";
-
 import { Route, Routes, useLocation } from "react-router-dom";
 
 // interfaces
@@ -15,6 +14,7 @@ import Room from '../views/rooms/Room/Room';
 import NotFound from "../views/pages/NotFound/NotFound";
 
 // components
+import ReactAudioPlayer from 'react-audio-player';
 import Header from '../components/Header/Header';
 import Chat from '../components/Chat/Chat';
 import Welcome from '../components/Welcome/Welcome';
@@ -31,17 +31,20 @@ import Cookies from 'js-cookie';
 // store
 import { IMessage } from '../interfaces';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState, selectUser, selectWindow, selectMessages } from '../store/store';
+import { RootState, selectUser, selectWindow, selectMusic } from '../store/store';
 import { setOneMenu, showSignIn, hideMenus } from '../store/menu';
 import { setUser, setUserRoomUrl } from '../store/user';
 import { startComposition, resizeApp, loadingApp } from '../store/window';
 import { addMessage, incremendNotifications } from '../store/messages';
+import FAQ from '../components/FAQ/FAQ';
 
 
 
 function App() {
     const user = useSelector(selectUser);
+    const music = useSelector(selectMusic);
     const windowUI = useSelector(selectWindow);
+    const audioPlayer = useRef(null);
 
     const dispatch = useDispatch();
 
@@ -67,7 +70,7 @@ function App() {
     // Make sure sockets update when user does
     useEffect(() => {
         socket.emit("setUser", user);
-    }, [{...user}])
+    }, [{ ...user }])
 
     // TODO - reason for class components?
     const setUsersData = (data: IUsers) => {
@@ -92,7 +95,7 @@ function App() {
         };
     }, []);
 
-    
+
     useEffect(() => {
         if (hasAvatar && !hasLoadedCookies) {
             setHasLoadedCookies(true);
@@ -154,7 +157,7 @@ function App() {
             dispatch(loadingApp());
             setHasLoadedRoom(false);
 
-            const newUser = {...user}
+            const newUser = { ...user }
             newUser.roomUrl = pathname;
             socket.emit("leaveRoom", user.roomUrl);
             socket.emit("joinRoom", nextRoomUrl);
@@ -180,7 +183,7 @@ function App() {
 
     return (
         <div className="App">
-            <div className={""}>
+            <div className={"App-Header" + (windowUI.isMobile || windowUI.hasFooter ? " mobile" : "")}>
                 <Header
                     isClosed={isClosed}
                     isMenuOn={isMenuOn}
@@ -196,13 +199,14 @@ function App() {
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </div>
-            <h1>{windowUI.compositionStarted}</h1>
-
 
             <SignIn
                 isFrame={true}
                 hasAvatar={hasAvatar}
                 hasLoadedCookies={hasLoadedCookies}
+            />
+            <FAQ
+                isFrame={true}
             />
             <Chat users={users} />
 
@@ -224,7 +228,16 @@ function App() {
 
 
             <MobileFooter avatarClicked={avatarClicked} />
-
+            {(user.roomUrl === "/" && !showWelcome) ?
+                <ReactAudioPlayer
+                    src={music.currentSongTitle}
+                    autoPlay={true}
+                    volume={music.isMuted ? 0 : music.volume}
+                    controls={false}
+                    loop={true}
+                    ref={audioPlayer}
+                /> : null
+            }
         </div>
 
     )

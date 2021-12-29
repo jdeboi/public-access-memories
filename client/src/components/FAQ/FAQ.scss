@@ -1,0 +1,41 @@
+@import "../../styles/constants.scss";
+
+.Instructions-list {
+  text-align: center;
+  overflow: auto;
+  border: 2px solid black;
+  pointer-events: all;
+  border-radius: $borderRad;
+
+  .instruction {
+    text-align: left;
+    display: flex;
+    padding: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    h3 {
+      border-bottom: 1px solid rgb(207, 207, 207);
+      margin-bottom: 5px;
+    }
+    p {
+      line-height: 14px;
+    }
+
+    .faqImg {
+      flex: 1;
+      padding-right: 20px;
+
+      img {
+        border-radius: 6px;
+        border: 2px solid black;
+        width: 100%;
+      }
+    }
+
+    .instruction-txt {
+      flex: 1;
+     
+    }
+  }
+}

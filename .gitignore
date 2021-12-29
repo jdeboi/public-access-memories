@@ -47,3 +47,6 @@ yarn-debug.log*
 yarn-error.log*
 
 .parcel-cache
+
+online_assets
+old

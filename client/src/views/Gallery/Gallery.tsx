@@ -3,9 +3,9 @@ import Frame from '../../components/Frame/Frame';
 import './Gallery.css';
 import { useNavigate } from 'react-router-dom';
 
-import GallerySketch from './GallerySketch';
+import GallerySketch from './p5/GallerySketch';
 import { IUser, IUsers } from '../../interfaces';
-import {  mapVal } from '../../helpers/helpers';
+import { mapVal } from '../../helpers/helpers';
 
 import LoadingPage from '../../components/LoadingPage/LoadingPage';
 import MiniMap from './components/MiniMap/MiniMap';
@@ -21,12 +21,11 @@ import { doneLoadingApp } from '../../store/window';
 
 import { bars, getBar } from '../../data/BotConfig';
 
-import socket from '../../helpers/Socket';
-
 interface IGallery {
     users: IUsers,
     isClosed: boolean
 }
+
 const Gallery = (props: IGallery) => {
     const user = useSelector(selectUser);
     const windowUI = useSelector(selectWindow);
@@ -35,13 +34,15 @@ const Gallery = (props: IGallery) => {
     const navigate = useNavigate();
 
     const clickedUserChat = (otherUser: IUser) => {
-        // const { ui, setUserActiveChat, showChat, setOneMenu } = this.props;
-        dispatch(setUserActiveChat(otherUser));
-        // if we use both, setOneMenu will have a toggle effect on Desktop
-        if (windowUI.isMobile || windowUI.hasFooter)
-            dispatch(setOneMenu("chat"));
-        else
-            dispatch(showChat());
+        if (otherUser.id !== user.id) {
+            // const { ui, setUserActiveChat, showChat, setOneMenu } = this.props;
+            dispatch(setUserActiveChat(otherUser));
+            // if we use both, setOneMenu will have a toggle effect on Desktop
+            if (windowUI.isMobile || windowUI.hasFooter)
+                dispatch(setOneMenu("chat"));
+            else
+                dispatch(showChat());
+        }
     }
 
     const getVolume = () => {
@@ -64,7 +65,7 @@ const Gallery = (props: IGallery) => {
     const moveGalleryUser = (x: number, y: number) => {
         dispatch(setSketchVolume(getVolume()));
         dispatch(moveUser({ x, y }));
-        const newUser = {...user};
+        const newUser = { ...user };
         newUser.x = x;
         newUser.y = y;
         // socket.emit("setUser", newUser);
@@ -93,7 +94,7 @@ const Gallery = (props: IGallery) => {
             {
                 windowUI.loading ?
                     <LoadingPage /> :
-                <MiniMap users={props.users} x={20} y={20} />
+                    <MiniMap users={props.users} x={20} y={20} />
             }
         </div>
     )

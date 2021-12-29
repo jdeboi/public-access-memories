@@ -199,19 +199,21 @@ button {
   color: white;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   width: 100%;
   overflow: hidden;
 }
 
 button.standardButton {
-  font-size: 14px;
+  font-size: 11pt;
   padding: 10px;
   min-width: 140px;
   text-align: center;
   color: black;
-  border-radius: 0px;
+  border-radius: 8px;
   border: 2px solid black;
   color: white;
   -webkit-transition: all 0.2s ease-in-out;
@@ -235,21 +237,21 @@ button.standardButton.secondary {
 }
 
 input.standardInput {
-  font-size: 14px;
+  font-size: 11pt;
   padding: 15px 10px;
   text-align: left;
   border: 2px solid black;
   color: black;
-  border-radius: 0px;
+  border-radius: 8px;
 }
 
 input.standardInputWhite {
-  font-size: 14px;
+  font-size: 11pt;
   padding: 15px 10px;
   text-align: left;
   border: 2px solid white;
   color: white;
-  border-radius: 0px;
+  border-radius: 8px;
 }
 
 /* width */
@@ -259,14 +261,60 @@ input.standardInputWhite {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: black;
+  background: transparent;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #2e2e2e;
-  border-radius: 0px;
+  background: #0000004d;
+  border-radius: 8px;
 }
 
 /* Handle on hover */
+a {
+  color: cyan;
+}
+
+h1 {
+  font-size: 40pt;
+  padding: 20px 0 20px 0;
+  line-height: 60px;
+}
+
+h2 {
+  font-size: 28pt;
+  padding: 10px 0 10px 0;
+  line-height: 34pt;
+}
+
+h3 {
+  font-size: 22pt;
+  padding: 10px 0 10px 0;
+  line-height: 28pt;
+}
+
+h4 {
+  font-size: 14pt;
+  padding: 8px 0 8px 0;
+  line-height: 18pt;
+}
+
+p {
+  font-size: 13pt;
+  line-height: 22px;
+  padding: 15px 0 15px 0;
+}
+
+.container {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding-top: 50px;
+  padding-bottom: 70px;
+  width: 87%;
+  max-width: 900px;
+  margin: auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
 /*# sourceMappingURL=index.css.map */

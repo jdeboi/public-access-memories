@@ -34,6 +34,7 @@ export const getNewUser = (userName: string, avatar: string, room: string, id = 
     roomY: 0,
     x: x,
     y: y,
+    isFollowingHost: false,
     wineTime: null,
     needsWine: false,
     cheeseTime: null,

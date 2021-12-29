@@ -28,9 +28,17 @@ export default function CenterModal({ title, classN, z, height, width, isHidden,
     const [classT, setClassT] = useState("");
 
     useEffect(() => {
+        if (!isHidden)
+            setClassT(" GrayedOut");
+        else
+            setClassT("");
+    }, [isHidden])
+
+    useEffect(() => {
+        const dim = getCenterModalDim(windowUI, isRelative);
         if (height && width) {
-            let h = Math.min(dimensions.h, height);
-            let w = Math.min(dimensions.w, width);
+            let h = Math.min(dim.h, height);
+            let w = Math.min(dim.w, width);
             let y = (windowUI.contentH - h - windowUI.toolbarH) / 2;
             if (!isRelative)
                 y += windowUI.headerH;
@@ -38,11 +46,10 @@ export default function CenterModal({ title, classN, z, height, width, isHidden,
 
             setDimensions({x, y, w, h});
         }
-        if (!isHidden)
-            setClassT(" GrayedOut");
-        else
-            setClassT("");
-    }, [isHidden])
+        else {
+            setDimensions(dim);
+        }
+    }, [windowUI.headerH, windowUI.contentH, windowUI.contentW, windowUI.width, windowUI.height])
 
 
     // const handleMouse = (e: MouseEvent) => {

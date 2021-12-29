@@ -6,6 +6,7 @@ export interface IUser {
     comp: number | null;
     roomX: number;
     roomY: number;
+    isFollowingHost: boolean;
     x: number;
     y: number;
     wineTime: string | null;
@@ -27,6 +28,7 @@ export interface IBar {
     w: number;
     h: number;
     tender: IUser;
+    isFlipped: boolean;
 }
 
 export interface IBars extends Array<IBar> { }
@@ -101,14 +103,14 @@ export interface IMessages {
 
 export interface IChat {
     sendMessage: (txt: string) => void;
-    users: IUsers, 
+    users: IUsers,
     textBox: string,
     onSubmit: (txt: string) => void;
     setRecipient: (user: IUser | null | undefined) => void;
     handleKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
     handleTextBoxChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
-    
+
 
 export interface IRoom {
     id: number,
@@ -124,4 +126,14 @@ export interface IRoom {
     x: number,
     y: number,
     dir: string
+}
+
+export interface IDivs {
+    doors: any[],
+    bars: any[],
+    lights: any[],
+    roomLabels: any[],
+    folders: any[],
+    trashCans: any[],
+    trashFolders: any[]
 }

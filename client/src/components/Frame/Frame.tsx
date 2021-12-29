@@ -108,14 +108,18 @@ const Frame = (props: FrameProps) => {
 
         setTitle();
         setClass();
+       
+    }, [props.isHidden, isHidden, isMinimized])
+
+    useEffect(() => {
         const frameH = toolBarH + (isMinimized ? 0 : props.height);
         setFrameStyle({
             width: Math.floor(props.width) + 2,
             zIndex: props.z ? props.z : 0,
             height: Math.floor(frameH)
         });
-    }, [props.isHidden, isHidden, isMinimized, props.z])
-
+    }, [props.z, props.width, props.height]);
+    
     useEffect(() => {
         // TODO - is this the right way to get prev props?
         const dx = props.x - propsPosition.x;

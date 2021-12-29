@@ -17,6 +17,7 @@
     "js-cookie": "^3.0.1",
     "node-sass": "^7.0.0",
     "react": "^17.0.2",
+    "react-audio-player": "^0.17.0",
     "react-cookie": "^4.1.1",
     "react-dom": "^17.0.2",
     "react-draggable": "^4.4.4",

@@ -4,6 +4,7 @@ import './LoadingPage.css';
 
 import { useSelector } from 'react-redux';
 import { selectWindow } from '../../store/store';
+import { ShowConfig } from '../../data/ShowConfig';
 
 export default function LoadingPage() {
     const windowUI = useSelector(selectWindow);
@@ -13,7 +14,7 @@ export default function LoadingPage() {
         <div className="backgroundCover">
             <div className="LoadingPage">
                 <div className="title" style={sty}>
-                   <div>title goes here</div>
+                   <div>{ShowConfig.showTitle}</div>
                 </div>
             </div>
         </div>

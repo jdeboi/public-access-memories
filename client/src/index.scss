@@ -2,15 +2,16 @@
 @import "./styles/constants.scss";
 @import "./styles/myWindows98.scss";
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   width: 100%;
   overflow: hidden;
 }
 
-
 button.standardButton {
-  font-size: $fontSize-desktop-3;
+  font-size: $fontSize-desktop-p2;
   padding: 10px;
 
   min-width: 140px;
@@ -44,7 +45,7 @@ button.standardButton {
 }
 
 input.standardInput {
-  font-size: $fontSize-desktop-3;
+  font-size: $fontSize-desktop-p2;
   padding: 15px 10px;
   text-align: left;
   border: 2px solid black;
@@ -53,14 +54,13 @@ input.standardInput {
 }
 
 input.standardInputWhite {
-  font-size: $fontSize-desktop-3;
+  font-size: $fontSize-desktop-p2;
   padding: 15px 10px;
   text-align: left;
   border: 2px solid white;
   color: white;
   border-radius: $borderRad;
 }
-
 
 /* width */
 ::-webkit-scrollbar {
@@ -69,12 +69,13 @@ input.standardInputWhite {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: $scrollbarBgColor;
+  background: transparent;
+  
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: $scrollbarColor;
+  background: #0000004d;
   border-radius: $borderRad;
 }
 
@@ -82,3 +83,48 @@ input.standardInputWhite {
 // ::-webkit-scrollbar-thumb:hover {
 //   background: $scrollbarHoverColor;
 // }
+
+a {
+  color: cyan;
+}
+
+h1 {
+  font-size: $fontSize-h1;
+  padding: 20px 0 20px 0;
+  line-height: 60px;
+}
+
+h2 {
+  font-size: $fontSize-h2;
+  padding: 10px 0 10px 0;
+  line-height: $fontSize-h2+6;
+}
+
+h3 {
+  font-size: $fontSize-h3;
+  padding: 10px 0 10px 0;
+  line-height: $fontSize-h3+6;
+}
+
+h4 {
+  font-size: $fontSize-h4;
+  padding: 8px 0 8px 0;
+  line-height: $fontSize-h4+4;
+}
+
+p {
+  font-size: $fontSize-desktop-p1;
+  line-height: 22px;
+  padding: 15px 0 15px 0;
+}
+
+.container {
+  flex: 1;
+  padding-top: 50px;
+  padding-bottom: 70px;
+
+  width: 87%;
+  max-width: 900px;
+  margin: auto;
+  box-sizing: border-box;
+}

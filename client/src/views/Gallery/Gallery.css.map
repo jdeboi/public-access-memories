@@ -1,8 +1,9 @@
 {
     "version": 3,
-    "mappings": "AAEA,AAAA,QAAQ,CAAC;EACL,gBAAgB,EAAE,KAAK;EACvB,gBAAgB,EAAE,yBAAyB;EAC3C,iBAAiB,EAAE,MAAM;CAC5B",
+    "mappings": "AC8EA;;;;GAIG;AAaF,aAAa;AAOb,0DAA0D;AAI1D,8EAA8E;ADvG/E,AAAA,QAAQ,CAAC;EAEL,gBAAgB,EAAE,8BAA8B;CAUnD",
     "sources": [
-        "Gallery.scss"
+        "Gallery.scss",
+        "../../styles/constants.scss"
     ],
     "names": [],
     "file": "Gallery.css"

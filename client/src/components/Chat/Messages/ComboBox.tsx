@@ -47,7 +47,7 @@ const ComboBox = (props: IComboBox) => {
 
     useEffect(() => {
         let label = "";
-        if (userActive.active && userActive.active.userName !== "") {
+        if (userActive.active && userActive.active.userName !== "" && userActive.active.id !== user.id) {
             label = getLabel(userActive.active);
             setInputValue(label);
             setLocalActiveUser(userActive.active);

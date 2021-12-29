@@ -1,7 +1,6 @@
 @import "../../styles/constants.scss";
 
 $lightGray: rgba(0, 0, 0, 0.2);
-// $appBlue: #335ef6;
 $appBlueDisabled: #335ef699;
 $appPink: #fc03ad;
 $appLightBlue: #03cefc;
@@ -25,7 +24,7 @@ $appLightBlue: #03cefc;
         height: 400px;
         color: white;
         // background-color: red;
-        font-size: 12px;
+        font-size: $fontSize-desktop-p2;
 
         .Chat-title {
             // flex: 0 0 auto;
@@ -38,30 +37,21 @@ $appLightBlue: #03cefc;
             overflow: hidden;
 
             .Chat-messages-box {
-                // border: 1px solid rgba(255, 255, 255, .23);
-                // border: 2px solid $appBlue;
-                // border-radius: $borderRad;
-
-                font-size: 10px;
+                // font-size: $fontSize-desktop-p3;
                 padding: 10px;
 
                 min-height: 200px;
                 flex: 1;
-                // background-color: blue;
                 overflow: auto;
 
                 .Chat-messages-inner-box {
-                    // height:200px;
 
                     .message-from {
-                        // color: white;
                         color: #ddd;
                     }
 
                     .message-to {
                         color: #ddd;
-                        // color: white;
-                        // color: #dddddd;
                     }
 
                     .message-to-red {
@@ -72,11 +62,11 @@ $appLightBlue: #03cefc;
                     .message-deets {
                         // opacity: .6;
                         padding-bottom: 7px;
-                        font-size: 10px;
+                        font-size: $fontSize-desktop-p3;
                     }
 
                     .message-txt {
-                        font-size: 12px;
+                        font-size: $fontSize-desktop-p2;
                         line-height: 1.8em;
                     }
 
@@ -86,11 +76,8 @@ $appLightBlue: #03cefc;
                         padding-top: 10px;
 
                         .avatar {
-                            // border-radius: 50%;
-                            // background-color: white;
                             width: 20px;
                             height: 20px;
-                            // border: 2px solid blue;
                             font-size: 20px;
                             padding-top: 8px;
                             padding-right: 8px;
@@ -102,11 +89,11 @@ $appLightBlue: #03cefc;
                     }
 
                     .bubble {
-                        // border-radius: 12px;
+                        border-radius: $borderRad;
                         padding: 10px;
                         border-radius: $borderRad;
-                        border: 1px solid $appBlue;
-                        // background: linear-gradient(#000, #333);
+                        // border: 1px solid $appBlue;
+                        border: 1px solid $headerGradientStartC;
                         background: #111111;
                     }
 
@@ -116,22 +103,15 @@ $appLightBlue: #03cefc;
                         .avatar {
                         }
                         .bubble {
-                            // background-color: red;
-                            // box-shadow: -3px 5px #aaaaaa88;
-                            // color: $appLightBlue;
-                            // background: linear-gradient(#000, $appBlue);
-                            background: $appBlue;
+                            // background: $appBlue;
+                            background: $headerGradientStartC;
                         }
                     }
 
                     .bubbleContainer.chat-from-other {
-                        // text-align: right;
                         justify-content: flex-start;
 
                         .bubble {
-                            // border: 1px solid white;
-                            // background: $headerSelectedGradient;
-                            // box-shadow: -3px 5px #ffffff88;
                         }
                     }
                 }
@@ -201,8 +181,6 @@ $appLightBlue: #03cefc;
 
                         input {
                             flex: 1;
-                            // border: 2px solid $appBlue;
-                            // background-color: transparent;
                         }
                     }
 

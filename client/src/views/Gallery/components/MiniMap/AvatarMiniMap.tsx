@@ -22,7 +22,7 @@ const AvatarMiniMap = (props: { isUser: boolean, dim: number }) => {
   const sty = { top: y, left: x };
 
 
-  var avatar = user.avatar;
+  let avatar = user.avatar;
   if (user.userName === "wineBot")
     avatar = "🍷";
   else if (user.userName === "DJ")

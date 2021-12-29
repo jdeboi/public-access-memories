@@ -1,3 +1,11 @@
+/**
+ * 98.css
+ * Copyright (c) 2020 Jordan Scales <thatjdanisso.cool>
+ * https://github.com/jdan/98.css/blob/main/LICENSE
+ */
+/* Borders */
+/* Window borders flip button-face and button-highlight */
+/* Field borders (checkbox, input, etc) flip window-frame and button-shadow */
 .Chat {
   position: absolute;
   height: 100vh;
@@ -13,7 +21,7 @@
   width: 300px;
   height: 400px;
   color: white;
-  font-size: 12px;
+  font-size: 12pt;
 }
 
 .Chat .Chat-Content .Chat-title {
@@ -26,7 +34,6 @@
 }
 
 .Chat .Chat-Content .Chat-messages .Chat-messages-box {
-  font-size: 10px;
   padding: 10px;
   min-height: 200px;
   -webkit-box-flex: 1;
@@ -49,11 +56,11 @@
 
 .Chat .Chat-Content .Chat-messages .Chat-messages-box .Chat-messages-inner-box .message-deets {
   padding-bottom: 7px;
-  font-size: 10px;
+  font-size: 10pt;
 }
 
 .Chat .Chat-Content .Chat-messages .Chat-messages-box .Chat-messages-inner-box .message-txt {
-  font-size: 12px;
+  font-size: 12pt;
   line-height: 1.8em;
 }
 
@@ -81,9 +88,10 @@
 }
 
 .Chat .Chat-Content .Chat-messages .Chat-messages-box .Chat-messages-inner-box .bubble {
+  border-radius: 8px;
   padding: 10px;
-  border-radius: 0px;
-  border: 1px solid #335ef6;
+  border-radius: 8px;
+  border: 1px solid #4B57D6;
   background: #111111;
 }
 
@@ -94,7 +102,7 @@
 }
 
 .Chat .Chat-Content .Chat-messages .Chat-messages-box .Chat-messages-inner-box .bubbleContainer.chat-from-me .bubble {
-  background: #335ef6;
+  background: #4B57D6;
 }
 
 .Chat .Chat-Content .Chat-messages .Chat-messages-box .Chat-messages-inner-box .bubbleContainer.chat-from-other {

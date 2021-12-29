@@ -1,0 +1,15 @@
+@import '../../styles/constants.scss';
+
+.Page {
+    color: white;
+    background: $headerGradient;
+    color: white;
+    width: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    line-height: 140%;
+    overflow: auto;
+
+
+}

@@ -1,9 +1,17 @@
+/**
+ * 98.css
+ * Copyright (c) 2020 Jordan Scales <thatjdanisso.cool>
+ * https://github.com/jdan/98.css/blob/main/LICENSE
+ */
+/* Borders */
+/* Window borders flip button-face and button-highlight */
+/* Field borders (checkbox, input, etc) flip window-frame and button-shadow */
 .Frame {
   color: #000;
   font-family: consoleFont, HelveticaNeue, 'Helvetica Neue', 'Lucida Grande', Arial, sans-serif;
   position: absolute;
   margin-bottom: -33px;
-  font-size: 16px;
+  font-size: 16pt;
   pointer-events: none;
 }
 
@@ -17,9 +25,7 @@
 }
 
 .Frame .window {
-  border: 0.14em solid black;
-  /* #acacac; */
-  border-radius: 0px;
+  border-radius: 8px;
   -webkit-box-shadow: 0px 0px 20px #000000;
           box-shadow: 0px 0px 20px #000000;
   /* #6c6c6c; */
@@ -40,7 +46,8 @@
   line-height: 20px;
   text-align: center;
   width: 100%;
-  border-bottom: .15em solid black;
+  color: white;
+  background: black;
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -155,8 +162,8 @@
 }
 
 .Frame .content video {
-  border-bottom-left-radius: calc(0px-2);
-  border-bottom-right-radius: calc(0px-2);
+  border-bottom-left-radius: calc(8px-2);
+  border-bottom-right-radius: calc(8px-2);
 }
 
 /* window BEGIN */

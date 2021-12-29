@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faVolumeOff, faVolumeUp } from "@fortawesome/free-solid-svg-icons";
+import { faVolumeMute, faVolumeUp } from "@fortawesome/free-solid-svg-icons";
 
 // store
 import { useSelector, useDispatch } from 'react-redux';
@@ -31,7 +31,7 @@ const VolumeLi = () => {
 
     const getVolumeIcon = () => {
         if (music.isMuted || music.volume == 0)
-            return <FontAwesomeIcon icon={faVolumeOff} />
+            return <FontAwesomeIcon icon={faVolumeMute} />
         return <FontAwesomeIcon icon={faVolumeUp} />
     }
 

@@ -19,6 +19,7 @@ import { useCocktailBot } from './hooks/useCocktailBot';
 
 import { IMessage } from '../../interfaces';
 import { useCheeseBot } from './hooks/useCheeseBot';
+import { useHostBot } from './hooks/useHostBot';
 
 interface ChatProps {
     users: IUsers;
@@ -33,6 +34,7 @@ const Chat = (props: ChatProps) => {
     const sendToWineBot = useWineBot();
     const sendToCocktailBot = useCocktailBot();
     const sendToCheeseBot = useCheeseBot();
+    const sendToHostBot = useHostBot();
 
     const [textBox, setTextBox] = useState("");
     const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -149,7 +151,7 @@ const Chat = (props: ChatProps) => {
                 // sendToDJ(message);
             }
             else if (userActive.active.userName === "hostBot") {
-                // sendToHostBot(message);
+                sendToHostBot(txt);
             }
             else {
                 sendToOne(txt);

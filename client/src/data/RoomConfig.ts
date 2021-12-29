@@ -1,11 +1,17 @@
 import { IRoom } from '../interfaces';
 
 export const roomConfig = {
-    w: 3,
-    h: 3,
-    start: .1,
-    end: .8
+    w: 5,
+    h: 5,
+    start: 0,
+    end: 1
 }
+
+// port const rooms = [
+//   { id: 11, short: "home", link: "home-page", title: "home page", x: 27, y: 10, rot: 90, dir: "left", about: "thinking about digital privacy, digital/analog movement", shortcut: "&#x2318;F2", year: 2020 },
+//     { id: 12, short: "yose", link: "yosemite", title: "yosemite", x: -5, y: 12, rot: -90, dir: "right", about: "How do digital representations of ", shortcut: "&#x2318;F3", year: 2021 },
+//     { id: 13, short: "click", link: "click-me-baby", title: "click me, baby", x: 10, y: 0, rot: 0, dir: "bottom", about: "buy something!", shortcut: "&#x2318;F4", year: 2021 },
+// ];
 
 export const rooms: IRoom[] = [
     {
@@ -16,9 +22,10 @@ export const rooms: IRoom[] = [
         medium: "custom software",
         description: "",
         year: 2021,
-        x: 1*roomConfig.w, 
-        y: 1*roomConfig.w,
-        dir: "bottom"
+        x: 5,
+        y: 22,
+        // rot: -90,
+        dir: "right"
     },
     {
         id: 1,
@@ -28,8 +35,9 @@ export const rooms: IRoom[] = [
         medium: "custom software",
         description: "",
         year: 2022,
-        x: 2*roomConfig.w,
-        y: 2*roomConfig.w,
+        x: 12,
+        y: 13,
+        // rot: 0, 
         dir: "bottom"
     },
     {
@@ -40,9 +48,10 @@ export const rooms: IRoom[] = [
         medium: "custom software",
         description: "",
         year: 2022,
-        x: 3*roomConfig.w,
-        y: 4*roomConfig.w,
-        dir: "bottom"
+        x: 12, 
+        y: 8, 
+        // rot: -90, 
+        dir: "right"
     },
     {
         id: 3,
@@ -52,9 +61,10 @@ export const rooms: IRoom[] = [
         medium: "custom software",
         description: "",
         year: 2022,
-        x: 2*roomConfig.w,
-        y: 5*roomConfig.w,
-        dir: "bottom"
+        x: 7, 
+        y: 8, 
+        // rot: 90, 
+        dir: "left",
     },
     {
         id: 4,
@@ -64,9 +74,10 @@ export const rooms: IRoom[] = [
         medium: "custom software",
         description: "",
         year: 2022,
-        x: 1*roomConfig.w,
-        y: 6*roomConfig.w,
-        dir: "bottom"
+        x: 0, 
+        y: 17, 
+        // rot: -90, 
+        dir: "right",
     },
     {
         id: 5,
@@ -76,9 +87,10 @@ export const rooms: IRoom[] = [
         medium: "custom software",
         description: "",
         year: 2022,
-        x: 4*roomConfig.w,
-        y: 7*roomConfig.w,
-        dir: "bottom"
+        x: 0, 
+        y: 0, 
+        // rot: 0, 
+        dir: "bottom", 
     },
     {
         id: 6,
@@ -88,9 +100,10 @@ export const rooms: IRoom[] = [
         medium: "custom software",
         description: "",
         year: 2022,
-        x: 5*roomConfig.w,
-        y: 8*roomConfig.w,
-        dir: "bottom"
+        x: 5, 
+        y: 0, 
+        // rot: 0, 
+        dir: "bottom",
     },
     {
         id: 7,
@@ -100,9 +113,10 @@ export const rooms: IRoom[] = [
         medium: "custom software",
         description: "",
         year: 2022,
-        x: 6*roomConfig.w,
-        y: 5*roomConfig.w,
-        dir: "bottom"
+        x: 20, 
+        y: 22, 
+        // rot: 90, 
+        dir: "left",
     },
     {
         id: 8,
@@ -112,9 +126,10 @@ export const rooms: IRoom[] = [
         medium: "custom software",
         description: "",
         year: 2022,
-        x: 7*roomConfig.w,
-        y: 4*roomConfig.w,
-        dir: "bottom"
+        x: 15, 
+        y: 0, 
+        // rot: 0, 
+        dir: "bottom",
     },
     {
         id: 9,
@@ -124,8 +139,9 @@ export const rooms: IRoom[] = [
         medium: "custom software",
         description: "",
         year: 2022,
-        x: 8*roomConfig.w,
-        y: 3*roomConfig.w,
-        dir: "bottom"
+        x: 10, 
+        y: 0, 
+        // rot: 90, 
+        dir: "bottom",
     }
 ];

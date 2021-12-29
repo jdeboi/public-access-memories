@@ -3,6 +3,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const songs = [
     "https://lmd-bucket.s3.us-east-2.amazonaws.com/sketches/gallery/music/lounge.mp3",
+    "https://lmd-bucket.s3.us-east-2.amazonaws.com/sketches/gallery/music/sexy.mp3",
+    "https://lmd-bucket.s3.us-east-2.amazonaws.com/sketches/gallery/music/jazzriff.mp3",
+    "https://lmd-bucket.s3.us-east-2.amazonaws.com/sketches/gallery/music/samba.mp3",
+    "https://lmd-bucket.s3.us-east-2.amazonaws.com/sketches/gallery/music/jazzpiano.mp3",
+    "https://lmd-bucket.s3.us-east-2.amazonaws.com/sketches/gallery/music/trap.mp3",
 ]
 
 
@@ -37,15 +42,15 @@ export const musicSlice = createSlice({
         toggleVolume: (state) => {
             state.isMuted = !state.isMuted;
         },
-        setVolume: (state, action) => {
-            state.mainVolume = action.payload.volume;
+        setVolume: (state, action: PayloadAction<number>) => {
+            state.mainVolume = action.payload;
             state.volume = state.sketchVolume * state.mainVolume;
         },
-        setSketchVolume: (state, action) => {
-            state.sketchVolume = action.payload.volume;
+        setSketchVolume: (state, action: PayloadAction<number>) => {
+            state.sketchVolume = action.payload;
             state.volume = state.sketchVolume * state.mainVolume;
         },
-        setSketchMusic: (state, action) => {
+        setSketchMusic: (state, action: PayloadAction<{id: number, sketch: string, volume: number}>) => {
             let sketch = action.payload.sketch;
             let id = action.payload.id;
             let song = "song"; //songs[sketch][id];
@@ -59,30 +64,35 @@ export const musicSlice = createSlice({
         setNoSketchMusic: (state) => {
             state = initialState;
         },
-        setSong: (state, action) => {
-            let song2 = action.payload.song;
-            // if (song2 >= 0 && song2 < songs[state.currentSketch].length) {
-            //     state.currentSong = song2;
-            //     state.currentSongTitle = songs[state.currentSketch][song2];
-            // }
+        setSong: (state, action: PayloadAction<number>) => {
+            let song = action.payload;
+            if (song >= 0 && song < songs.length) {
+                state.currentSong = song;
+                state.currentSongTitle = songs[song];
+            }
         },
-        incrementSong: (state, action) => {
+        incrementSong: (state) => {
             state.currentSong += 1;
-            // state.currentSong %= songs[state.currentSketch].length;
+            if (state.currentSong >= songs.length) {
+                state.currentSong = 0;
+            }
+            const song = state.currentSong;
+            state.currentSongTitle = songs[song];
         },
-        decrementSong: (state, action) => {
+        decrementSong: (state) => {
             state.currentSong -= 1;
             if (state.currentSong < 0) {
-                // state.currentSong = songs[state.currentSketch].length - 1;
+                state.currentSong = songs.length;
             }
-            // state.currentSongTitle = songs[state.currentSketch][state.currentSong];
+            const song = state.currentSong;
+            state.currentSongTitle = songs[song];
         },
         setRandomSong: (state) => {
-            let numSongs = 0; // songs[state.currentSketch].length;
+            let numSongs = songs.length; 
             let current = state.currentSong;
             let r = Math.floor(Math.random() * (numSongs - 2) + 1);
             state.currentSong = (current + r) % numSongs;
-            // state.currentSongTitle = songs[state.currentSketch][state.currentSong];
+            state.currentSongTitle = songs[state.currentSong];
         }
     }
 })

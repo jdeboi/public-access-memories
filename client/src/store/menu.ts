@@ -89,7 +89,7 @@ export const menuSlice = createSlice({
                 }
                 state.mobile = action.payload;
             }
-            
+
         },
         setGalleryActive: (state) => {
             state.isGalleryActive = true;
@@ -105,13 +105,19 @@ export const menuSlice = createSlice({
         },
 
         showFaq: (state) => {
+            state.mobile = "faq";
             state.faq.isHidden = false;
         },
         hideFaq: (state) => {
+            state.mobile = "";
             state.faq.isHidden = true;
         },
         toggleFaq: (state) => {
             state.faq.isHidden = !state.faq.isHidden;
+            if (state.faq.isHidden)
+                state.mobile = "";
+            else
+                state.mobile = "faq";
         },
         showSignIn: (state) => {
             state.mobile = "signIn";
@@ -129,7 +135,7 @@ export const menuSlice = createSlice({
                 state.mobile = "signIn";
         },
         showChat: (state) => {
-            state.mobile = "signIn";
+            state.mobile = "chat";
             state.chat.isHidden = false;
         },
         hideChat: (state) => {
@@ -141,7 +147,7 @@ export const menuSlice = createSlice({
             if (state.chat.isHidden)
                 state.mobile = "";
             else
-                state.mobile = "signIn";
+                state.mobile = "chat";
         },
         showLiveStream: (state) => {
             state.signIn.isHidden = false;

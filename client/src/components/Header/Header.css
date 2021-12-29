@@ -1,12 +1,20 @@
+/**
+ * 98.css
+ * Copyright (c) 2020 Jordan Scales <thatjdanisso.cool>
+ * https://github.com/jdan/98.css/blob/main/LICENSE
+ */
+/* Borders */
+/* Window borders flip button-face and button-highlight */
+/* Field borders (checkbox, input, etc) flip window-frame and button-shadow */
 .expandable:hover {
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fc03ad), color-stop(100%, #335ef6));
-  border-bottom: 2px solid #335ef6;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5b43cd), color-stop(100%, #0da6ff));
+  border-bottom: 2px solid #0da6ff;
   height: 34px;
 }
 
 .clickable:hover {
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fc03ad), color-stop(100%, #335ef6));
-  border-bottom: 2px solid #335ef6;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5b43cd), color-stop(100%, #0da6ff));
+  border-bottom: 2px solid #0da6ff;
   height: 34px;
 }
 
@@ -27,12 +35,10 @@
 .Header {
   display: block;
   font-family: consoleFont;
-  border-top-right-radius: 0px;
-  border-top-left-radius: 0px;
   -webkit-box-flex: 0;
       -ms-flex: 0 1 auto;
           flex: 0 1 auto;
-  font-size: 20px;
+  font-size: 13pt;
   height: 34px;
   color: white;
   -webkit-touch-callout: none;
@@ -46,7 +52,7 @@
   -webkit-box-flex: 1;
       -ms-flex: 1 1 100%;
           flex: 1 1 100%;
-  background-color: #e3a587;
+  background-color: black;
   /* Tooltip container */
   /* Tooltip text */
   /* Tooltip arrow */
@@ -67,7 +73,7 @@
 
 .Header.mobile .right .submenu ul {
   width: 140px;
-  border-top-left-radius: 0px;
+  border-top-left-radius: 8px;
   border-top-right-radius: 0px;
   -webkit-transform: translate(-95px, 0px);
           transform: translate(-95px, 0px);
@@ -93,7 +99,7 @@
 }
 
 .Header .currentPage {
-  color: #335ef6dd;
+  color: #0da6ff;
 }
 
 .Header .disabled {
@@ -126,9 +132,9 @@
 }
 
 .Header .selected {
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fc03ad), color-stop(100%, #335ef6));
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5b43cd), color-stop(100%, #0da6ff));
   color: #fff;
-  border-bottom: 0.1em solid #335ef6;
+  border-bottom: 0.1em solid #0da6ff;
   height: 34px;
 }
 
@@ -141,7 +147,7 @@
 }
 
 .Header ul .arrow.expandable {
-  color: #335ef6;
+  color: #5b43cd;
 }
 
 .Header ul .arrow.expandable:hover {
@@ -214,9 +220,9 @@
   background: black;
   white-space: normal;
   border: white solid 2px;
-  border-radius: 0 0px 0px 0px;
+  border-radius: 0 8px 8px 8px;
   color: white;
-  font-size: 18px;
+  font-size: 11pt;
   left: 0px;
   margin: 0 !important;
   overflow: hidden;
@@ -253,7 +259,7 @@
 }
 
 .Header .submenu ul li:hover:not(.volume) {
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fc03ad), color-stop(100%, #335ef6));
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5b43cd), color-stop(100%, #0da6ff));
   color: #fff;
 }
 
@@ -311,7 +317,7 @@
   color: #fff;
   text-align: center;
   padding: 5px 0;
-  border-radius: 0px;
+  border-radius: 8px;
   /* Position the tooltip text */
   position: absolute;
   z-index: 1;
@@ -400,8 +406,11 @@
 }
 
 @media screen and (max-width: 830px) {
+  .Header {
+    font-size: 14pt;
+  }
   .Header .submenu ul {
-    font-size: 12px;
+    font-size: 14pt;
     overflow-y: auto;
     overflow-x: hidden;
   }
@@ -409,37 +418,29 @@
 
 @media screen and (max-width: 400px) {
   .Header {
-    font-size: 14px;
+    font-size: 14pt;
   }
   .Header .submenu ul {
-    font-size: 12px;
+    font-size: 14pt;
   }
 }
 
 @media screen and (max-width: 340px) {
   .Header {
-    font-size: 12px;
+    font-size: 12pt;
   }
   .Header .submenu ul {
-    font-size: 8px;
+    font-size: 12pt;
   }
 }
 
-@media screen and (max-width: 314px) {
+@media screen and (max-width: 320px) {
   .Header {
-    font-size: 10px;
+    font-size: 10pt;
   }
   .Header .submenu ul {
-    font-size: 10px;
+    font-size: 10pt;
   }
-}
-
-.Header.menuTheme.clickMe {
-  border-color: #b4fa00;
-}
-
-.Header.menuTheme.clickMe .submenu ul {
-  border-color: #b4fa00;
 }
 
 .BackHeader {
@@ -476,7 +477,7 @@
 
 .focus img {
   border: 2px solid rgba(225, 225, 225, 0.5) !important;
-  border-radius: 0px;
+  border-radius: 8px;
 }
 
 span.focus:after {

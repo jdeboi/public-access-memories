@@ -1,3 +1,11 @@
+/**
+ * 98.css
+ * Copyright (c) 2020 Jordan Scales <thatjdanisso.cool>
+ * https://github.com/jdan/98.css/blob/main/LICENSE
+ */
+/* Borders */
+/* Window borders flip button-face and button-highlight */
+/* Field borders (checkbox, input, etc) flip window-frame and button-shadow */
 .App.overflow-all {
   overflow: auto;
   height: 100%;
@@ -22,15 +30,15 @@
 
 .App {
   background-color: black;
+  border: 0px;
   height: 100%;
   width: 100%;
   font-family: consoleFont;
-  letter-spacing: .2em;
   overflow: hidden;
   padding: 0;
   -webkit-perspective-origin: 0 0;
           perspective-origin: 0 0;
-  font-size: 10px;
+  letter-spacing: 0.1em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -127,7 +135,6 @@
   background-color: black;
   border: 2px solid red;
   text-align: center;
-  font-size: 16px;
   color: white;
   top: 45px;
   right: 10px;
@@ -183,19 +190,17 @@
   -o-transform: rotate(-90deg);
 }
 
-.App.clickMe .inner-outline {
-  border-left: 2px solid #b4fa00;
-  border-right: 2px solid #b4fa00;
-  border-bottom: 2px solid #b4fa00;
-}
-
 @font-face {
   font-family: consoleFont;
   src: url(./assets/fonts/sysfont/sysfont.otf);
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
   font-family: consoleFontBold;
-  src: url(./assets/fonts/dogicabold.ttf);
+  src: url(./assets/fonts/sysfont/sysfont.otf);
+  font-weight: bold;
+  font-style: normal;
 }
 /*# sourceMappingURL=App.css.map */

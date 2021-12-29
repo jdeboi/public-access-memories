@@ -1,8 +1,14 @@
 
 $borderH: 2px;
-$borderRad: 0px;
-$headerGradientStartC: #fc03ad;
-$headerGradientEndC: #335ef6;
+$borderRad: 8px;
+
+$headerBackgroundC: black;
+// $headerGradientStartC: #4B57D6;
+// $headerGradientEndC: rgb(34,193,195);
+//#253c20
+$headerGradientStartC: #5b43cd;
+$headerGradientEndC: rgb(13, 166, 255);
+// #4B57D6
 $headerGradient: -webkit-gradient(
   linear,
   left top,
@@ -20,37 +26,53 @@ $headerSelectedGradient: -webkit-gradient(
   color-stop(100%, $headerSelectedGradientEnd)
 );
 
+// H1: 32 pt (30–34pt) 
+// H2: 26 pt (24–28pt) 
+// H3: 22 pt (20–24pt) 
+// H4: 20 pt (18–22pt)
 $headerH: 34px;
 $headerMobileH: 60px;
-$fontSize-desktop-1: 20px;
-$fontSize-desktop-2: 18px;
-$fontSize-desktop-3: 14px;
 
-$fontSize-tablet-1: 14px;
-$fontSize-tablet-2: 12px;
-$fontSize-tablet-3: 10px;
+$fontSize-h1: 40pt;
+$fontSize-h2: 28pt;
+$fontSize-h3: 22pt;
+$fontSize-h4: 14pt;
 
-$fontSize-mobile-1: 16px;
-$fontSize-mobile-2: 14px;
-$fontSize-mobile-3: 12px;
-$fontSize-mobile-4: 8px;
-$fontSize-mobile-5: 10px;
+$fontSize-desktop-p1: 13pt;
+$fontSize-desktop-p2: 11pt;
+$fontSize-desktop-p3: 10pt;
+$fontSize-desktop-p4: 8pt;
 
-$appBlue: #335ef6;
-$appAlertColor: #03cefc;
+$fontSize-tablet-p1: 18pt;
+$fontSize-tablet-p2: 14pt;
+$fontSize-tablet-p3: 12pt;
+$fontSize-tablet-p4: 10pt;
 
-$pearlyGradientStartC: #f1eeff;
-$pearlyGradientEndC: #1e03fc42;
-$pearlyGradient: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $pearlyGradientStartC), color-stop(100%, $pearlyGradientEndC));
-$buttonCol: $pearlyGradientEndC;
+$fontSize-mobile-p1: 16pt;
+$fontSize-mobile-p2: 14pt;
+$fontSize-mobile-p3: 12pt;
+$fontSize-mobile-p4: 10pt;
 
-$tweetColPrimary: #6666cc;
-$tweetColSecondary: #aaaadd; //#000011;
-$tweetColTertiary: #111199;
-$tweetColHover: #aaaaff;
-$tweetColHr: #aaaadd88;
+$largeLetterSpacing: .2em;
+$normalLetterSpacing: .1em;
+$smallLetterSpacing: .05em;
 
-$limeColor : #b4fa00; 
+
+// $appBlue: #335ef6;
+// $appAlertColor: #03cefc;
+
+// $pearlyGradientStartC: #f1eeff;
+// $pearlyGradientEndC: #1e03fc42;
+// $pearlyGradient: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $pearlyGradientStartC), color-stop(100%, $pearlyGradientEndC));
+// $buttonCol: $pearlyGradientEndC;
+
+// $tweetColPrimary: #6666cc;
+// $tweetColSecondary: #aaaadd; //#000011;
+// $tweetColTertiary: #111199;
+// $tweetColHover: #aaaaff;
+// $tweetColHr: #aaaadd88;
+
+// $limeColor : #b4fa00; 
 
 $scrollbarBgColor: rgb(0, 0, 0);
 $scrollbarColor: rgb(46, 46, 46);

@@ -21,6 +21,7 @@ const initialState: IUser = {
     roomY: 0,
     x: GlobalConfig.scaler / 2,
     y: GlobalConfig.scaler / 2,
+    isFollowingHost: false,
     wineTime: null,
     needsWine: false,
     cheeseTime: null,
@@ -76,6 +77,9 @@ export const userSlice = createSlice({
         setUserID: (state, action: PayloadAction<string>) => {
             state.id = action.payload;
         },
+        setFollowingHost: (state,  action: PayloadAction<boolean>) => {
+            state.isFollowingHost = action.payload;
+        },
         removeUserComp: (state) => {
             state.comp = null;
             // TODO
@@ -100,26 +104,25 @@ export const userSlice = createSlice({
                 state.needsCocktail = false;
                 state.cocktailTime = JSON.stringify(new Date());
             }
-            // socket.emit("setUser", state);
+        },
+        moveUserRoom: (state, action: PayloadAction<{ x: number, y: number }>) => {
+            state.roomX = action.payload.x;
+            state.roomY = action.payload.y;
         },
         addWine: (state, action: PayloadAction<{ location: IBar }>) => {
             state.needsWine = true;
-            // console.log("WINE", location);
             if (userNearBar(state, action.payload.location)) {
                 state.needsWine = false;
                 state.wineTime = JSON.stringify(new Date());
             }
-            // socket.emit("setUser", state);
         },
         setWine: (state, action: PayloadAction<{ needsWine: boolean, wineTime: string }>) => {
             state.needsWine = action.payload.needsWine;
             state.wineTime = action.payload.wineTime;
-            // socket.emit("setUser", state);
         },
         resetWine: (state) => {
             state.wineTime = null;
             state.needsWine = false;
-            // socket.emit("setUser", state);
         },
         addCheese: (state, action: PayloadAction<{ location: IBar }>) => {
             state.needsCheese = true;
@@ -128,17 +131,14 @@ export const userSlice = createSlice({
                 state.needsCheese = false;
                 state.cheeseTime = JSON.stringify(new Date());
             }
-            // socket.emit("setUser", state);
         },
         setCheese: (state, action: PayloadAction<{ needsCheese: boolean, cheeseTime: string }>) => {
             state.needsCheese = action.payload.needsCheese;
             state.cheeseTime = action.payload.cheeseTime;
-            // socket.emit("setUser", state);
         },
         resetCheese: (state) => {
             state.cheeseTime = null;
             state.needsCheese = false;
-            // socket.emit("setUser", state);
         },
 
         addCocktail: (state, action: PayloadAction<{ location: IBar }>) => {
@@ -147,17 +147,14 @@ export const userSlice = createSlice({
                 state.needsCocktail = false;
                 state.cocktailTime = JSON.stringify(new Date());
             }
-            // socket.emit("setUser", state);
         },
         setCocktail: (state, action: PayloadAction<{ needsCocktail: boolean, cocktailTime: string }>) => {
             state.needsCocktail = action.payload.needsCocktail;
             state.cocktailTime = action.payload.cocktailTime;
-            // socket.emit("setUser", state);
         },
         resetCocktail: (state) => {
             state.needsCocktail = false;
             state.cocktailTime = null;
-            // socket.emit("setUser", state);
         },
         toggleOutside: (state) => {
             state.outside = !state.outside;
@@ -175,7 +172,8 @@ function userNearBar(user: IUser, location: IBar) {
 }
 
 export const {
-    setUserRoomUrl, setUser, setUserID, setUserLogin, moveUser,
+    setUserRoomUrl, setUser, setUserID, setUserLogin, 
+    moveUser, moveUserRoom,setFollowingHost,
     addCheese, setCheese, resetCheese,
     addWine, setWine, resetWine,
     addCocktail, setCocktail, resetCocktail,

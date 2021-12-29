@@ -49,6 +49,14 @@ export default class Light extends Draggable {
         return false;
     }
 
+    display(userX, userY) {
+        super.display();
+        this.p5.push();
+        this.p5.translate(this.x, this.y);
+        this.displayButton(userX, userY);
+        this.p5.pop();
+    }
+
     displayButton(userX, userY) {
         let mouse = mouseToWorld({ x: userX, y: userY }, this.p5);
         mouse.x -= this.x;
@@ -60,7 +68,7 @@ export default class Light extends Draggable {
         this.isOn = !this.isOn;
     }
 
-    displayContent(userX, userY) {
+    displayContent() {
         this.p5.push();
 
         var img, imgBack, backW, backH, backY;
@@ -119,7 +127,7 @@ export default class Light extends Draggable {
             this.p5.image(imgBack, -backW + 20, backY, backW, backH);
             this.p5.pop();
 
-            this.displaySolidBack(this.p5.color(255));
+            this.displaySolidBack(this.p5.color("255"));
             this.p5.translate(0, this.barH);
 
             this.p5.push();
@@ -134,7 +142,7 @@ export default class Light extends Draggable {
 
         this.p5.pop();
         this.displayFrame();
-        this.displayButton(userX, userY);
+        // this.displayButton(userX, userY);
     }
 
 
