@@ -71,7 +71,7 @@ class MiniMap extends React.Component<Props> {
         content={
           /*<video width={dimW-2} height={dimH} muted loop autoPlay><source src={videoDimURL} type="video/mp4"></source></video>*/
           <div className="MiniMap">
-            <img src={"https://lmd-bucket.s3.us-east-2.amazonaws.com/sketches/gallery/miniMap.png"} width="100%" height="100%" />
+            <img src={"https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/gallery/miniMap10.png"} width="100%" height="100%" />
             <div className="otherAvatarsMiniMap">
               <div className="mini-avatars">
                 {users ? this.getUsers(dim) : null}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { faInstagram, faGithub } from '@fortawesome/free-brands-svg-icons';
 import '../Page.css';
 
 export const About = () => {
@@ -12,7 +12,7 @@ export const About = () => {
                 <p>
                     public access memories gallery originally began as an MFA thesis exhibition. Created by Jenna deBoisblanc
                     (<a href="https://instagram.com/jdeboi">@jdeboi</a>), the virtual gallery space invites collaborative
-                    brainstorming and critical reflection on the the nature of the white cube online. An evolving canvas, the 
+                    brainstorming and critical reflection on the the nature of the white cube online. An evolving canvas, the
                     gallery seeks to host exhibitions (solo and group), artist
                     talks, and more.
                 </p>
@@ -32,7 +32,11 @@ export const About = () => {
                     to <a href="mailto:publicaccessmemories@gmail.compublicaccessmemories@gmail.com">publicaccessmemories@gmail.com</a>. For developers, you can
                     check out the <a href="https://github.com/jdeboi/public-access-memories">github repo.</a>
                 </p>
-                <h3><a href="https://www.instagram.com/public.access.memories/"><FontAwesomeIcon icon={faInstagram} /></a></h3>
+                <h3>
+                    <a href="https://www.instagram.com/public.access.memories/"><FontAwesomeIcon icon={faInstagram} /></a>
+                    <span style={{paddingRight: 10}}></span>
+                    <a href="https://github.com/jdeboi/public-access-memories"><FontAwesomeIcon icon={faGithub} /></a>
+                </h3>
             </div >
         </div>
     )

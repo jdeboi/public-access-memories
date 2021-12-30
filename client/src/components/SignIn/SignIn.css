@@ -1,3 +1,11 @@
+/**
+ * 98.css
+ * Copyright (c) 2020 Jordan Scales <thatjdanisso.cool>
+ * https://github.com/jdan/98.css/blob/main/LICENSE
+ */
+/* Borders */
+/* Window borders flip button-face and button-highlight */
+/* Field borders (checkbox, input, etc) flip window-frame and button-shadow */
 .SignIn {
   position: absolute;
 }
@@ -25,13 +33,12 @@
 
 .SignInForm .userBar input {
   border-bottom: 2px solid black;
-  font-size: 16px;
   width: 225px;
 }
 
 .SignInForm .emoji-list {
   border: 2px solid black;
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 .SignInForm .emoji-list button {

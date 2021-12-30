@@ -1,4 +1,4 @@
-@import "../../../styles/constants.scss";
+@import "../../styles/constants.scss";
 
 .SignIn {
     position: absolute;
@@ -28,7 +28,7 @@
 
         input {
             border-bottom: 2px solid black;
-            font-size: 16px;
+            // font-size: 16px;
             width: 225px;
         }
     }

@@ -208,7 +208,7 @@ body,
 }
 
 button.standardButton {
-  font-size: 11pt;
+  font-size: 12pt;
   padding: 10px;
   min-width: 140px;
   text-align: center;
@@ -236,8 +236,16 @@ button.standardButton.secondary {
   border: 2px solid black;
 }
 
+button {
+  font-size: 12pt;
+}
+
+input {
+  font-size: 12pt;
+}
+
 input.standardInput {
-  font-size: 11pt;
+  font-size: 12pt;
   padding: 15px 10px;
   text-align: left;
   border: 2px solid black;
@@ -246,7 +254,7 @@ input.standardInput {
 }
 
 input.standardInputWhite {
-  font-size: 11pt;
+  font-size: 12pt;
   padding: 15px 10px;
   text-align: left;
   border: 2px solid white;
@@ -306,7 +314,7 @@ p {
 }
 
 p.small {
-  font-size: 11pt;
+  font-size: 12pt;
 }
 
 .container {

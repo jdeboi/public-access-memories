@@ -44,6 +44,14 @@ button.standardButton {
   }
 }
 
+button {
+  font-size: $fontSize-desktop-p2;
+}
+
+input {
+  font-size: $fontSize-desktop-p2;
+}
+
 input.standardInput {
   font-size: $fontSize-desktop-p2;
   padding: 15px 10px;
