@@ -55,19 +55,31 @@ export const filterUsers = (currentUser: IUser, data: IUsers) => {
   return filteredArray;
 }
 
+export const filterGalleryUsers = (currentUser: IUser, data: IUsers) => {
+  var filteredArray = data.filter((usr: IUser) => {
+    return usr.id !== currentUser.id && (usr.userName !== "");
+  });
+  return filteredArray;
+}
+
+
 export const getUserChatList = (currentUser: IUser, users: IUsers) => {
   var filteredArray = users.filter((usr: IUser) => {
-    return (usr.id !== currentUser.id && usr.roomUrl === currentUser.roomUrl) || usr.roomUrl === "everywhere";
+    return (
+      usr.id !== currentUser.id
+      && usr.roomUrl === currentUser.roomUrl
+      && usr.userName !== "")
+      || usr.roomUrl === "everywhere";
   });
-  return filteredArray; 
+  return filteredArray;
 }
 
 export const userNearEntrance = (user: IUser) => {
-  let entrance = {...hostBotPoints[0]};
+  let entrance = { ...hostBotPoints[0] };
   let userCoords = domCoordsToP5(user.x, user.y);
-  
+
   return (userCoords.x >= entrance.x - 8 && userCoords.x <= entrance.x + 8
-    && userCoords.y >= 28 && userCoords.y <= 35 );
+    && userCoords.y >= 28 && userCoords.y <= 35);
 }
 
 export const getPageName = (link: string): string => {
@@ -164,9 +176,9 @@ export const roundToMult2 = (num: number, mult: number) => {
 
 export const getParsedJSONDate = (d: string) => {
   if (!d)
-      return null;
+    return null;
   let newD = new Date(JSON.parse(d));
   if (newD && !isNaN(newD.getTime()))
-      return newD;
+    return newD;
   return null;
 }

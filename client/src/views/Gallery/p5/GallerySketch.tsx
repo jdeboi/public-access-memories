@@ -30,7 +30,7 @@ import Dancer from './components/Dancer';
 // CONFIG
 import { GlobalConfig, limits } from "../../../data/GlobalConfig";
 import { rooms as globalRooms } from "../../../data/RoomConfig";
-import { filterUsers, getTotalRoomCount } from "../../../helpers/helpers";
+import { filterGalleryUsers, getTotalRoomCount } from "../../../helpers/helpers";
 import { displayWall } from "./functions/ground";
 import { hostBotPoints } from "../../../data/BotConfig";
 import { Dispatch } from "@reduxjs/toolkit";
@@ -335,7 +335,7 @@ class GallerySketch extends React.Component<Props> {
     p5.translate(GlobalConfig.x * GlobalConfig.scaler, GlobalConfig.y * GlobalConfig.scaler)
 
     if (users)
-      drawUsers(userEase, filterUsers(user, users), font, p5, barEmojis);
+      drawUsers(userEase, filterGalleryUsers(user, users), font, p5, barEmojis);
 
     p5.pop();
   }
