@@ -8,13 +8,14 @@ import { useSelector } from 'react-redux';
 import { selectWindow, selectUser } from '../../../../store/store';
 
 import { IMainMenu, IListItem } from '../../../../interfaces';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 
 const MainMenu = (props: IMainMenu) => {
     const windowUI = useSelector(selectWindow);
     const user = useSelector(selectUser);
     const navigate = useNavigate();
+    const { pathname } = useLocation();
 
     const roomsList = rooms.map(rm => {
         let val: IListItem = {
@@ -29,8 +30,12 @@ const MainMenu = (props: IMainMenu) => {
     })
 
     const justTitle = () => {
+        let classN = "";
+        if (pathname !== "/") {
+            classN += "expandable";
+        }
         return (
-            <li className="expandable" onClick={() => navigate("/")}>
+            <li className={classN} onClick={() => navigate("/")}>
                 <span id="pageTitle">{ShowConfig.galleryTitle}</span>
             </li>
         )

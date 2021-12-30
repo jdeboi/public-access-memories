@@ -42,7 +42,7 @@ const MobileFooter = (props: { avatarClicked: () => void }) => {
     const getChatButton = () => {
         var classChat = "icon" + (menu.mobile === "chat" ? " opened" : " closed");
         if (messages.notifications) classChat += " notify";
-        if (user.roomUrl !== "gallery") {
+        if (user.roomUrl !== "/") {
             classChat += " top";
         }
         return (
@@ -66,7 +66,7 @@ const MobileFooter = (props: { avatarClicked: () => void }) => {
 
     const getMapButton = () => {
         var classMap = "icon";
-        if (user.roomUrl === "gallery") {
+        if (user.roomUrl === "/") {
             classMap += (menu.mobile === "map" ? " opened" : " closed");
             classMap += " top";
         }
@@ -104,7 +104,7 @@ const MobileFooter = (props: { avatarClicked: () => void }) => {
     if (windowUI.hasFooter) {
         return (
             <div className={footerClass}>
-                {user.roomUrl === "gallery" ? getMapButton() : null}
+                {user.roomUrl === "/" ? getMapButton() : null}
                 {getChatButton()}
                 {getFAQButton()}
                 {getSignInButton()}
