@@ -4,13 +4,15 @@ import { faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
 // store
 import { useSelector, useDispatch } from 'react-redux';
-import { selectMenu } from '../../../../store/store';
+import { selectMenu, selectUser } from '../../../../store/store';
 import { toggleFaq } from '../../../../store/menu';
+import { shouldShowLoggedInComponents } from '../../../../helpers/helpers';
 
 
 const FaqLi = () => {
     const dispatch = useDispatch();
     const menu = useSelector(selectMenu);
+    const user = useSelector(selectUser);
     const [classN, setClassN] = useState("expandable icon");
 
     useEffect(() => {
@@ -25,14 +27,19 @@ const FaqLi = () => {
     }, [menu.faq.isHidden])
 
     const faqClicked = () => {
-        dispatch(toggleFaq());
+        if (shouldShowLoggedInComponents(user))
+            dispatch(toggleFaq());
     }
 
-    return (
-        <li className={classN} onClick={faqClicked}>
-            <FontAwesomeIcon icon={faQuestionCircle} />
-        </li>
-    )
+    if (shouldShowLoggedInComponents(user)) {
+        return (
+            <li className={classN} onClick={faqClicked}>
+                <FontAwesomeIcon icon={faQuestionCircle} />
+            </li>
+        )
+    }
+
+    return null;
 };
 
 export default FaqLi;

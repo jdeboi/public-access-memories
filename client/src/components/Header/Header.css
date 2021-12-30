@@ -222,7 +222,7 @@
   border: white solid 2px;
   border-radius: 0 8px 8px 8px;
   color: white;
-  font-size: 11pt;
+  font-size: 12pt;
   left: 0px;
   margin: 0 !important;
   overflow: hidden;
@@ -425,7 +425,7 @@
   }
 }
 
-@media screen and (max-width: 340px) {
+@media screen and (max-width: 362px) {
   .Header {
     font-size: 12pt;
   }
@@ -434,7 +434,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 332px) {
   .Header {
     font-size: 10pt;
   }

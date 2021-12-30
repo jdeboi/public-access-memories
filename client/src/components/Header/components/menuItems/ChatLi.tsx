@@ -5,13 +5,15 @@ import { faComment, faBell } from "@fortawesome/free-solid-svg-icons";
 
 // store
 import { useSelector, useDispatch } from 'react-redux';
-import { selectMenu, selectMessages } from '../../../../store/store';
+import { selectMenu, selectMessages, selectUser } from '../../../../store/store';
 import { toggleChat } from '../../../../store/menu';
 import { resetNotifications } from '../../../../store/messages';
+import { shouldShowLoggedInComponents } from '../../../../helpers/helpers';
 
 
 const ChatLi = () => {
     const dispatch = useDispatch();
+    const user = useSelector(selectUser);
     const menu = useSelector(selectMenu);
     const messages = useSelector(selectMessages);
     const [classN, setClassN] = useState("expandable icon");
@@ -31,8 +33,10 @@ const ChatLi = () => {
     }, [menu.chat.isHidden, messages.notifications])
 
     const chatClicked = () => {
-        dispatch(resetNotifications());
-        dispatch(toggleChat());
+        if (shouldShowLoggedInComponents(user)) {
+            dispatch(resetNotifications());
+            dispatch(toggleChat());
+        }
     }
 
     const getChatNotification = () => {
@@ -47,12 +51,17 @@ const ChatLi = () => {
         return (<div className="notification"><span className="badge">{n}</span></div>);
     }
 
-    return (
-        <li className={classN} onClick={chatClicked}>
-            <FontAwesomeIcon icon={faComment} />
-            {getChatNotification()}
-        </li>
-    )
+    if (shouldShowLoggedInComponents(user)) {
+        return (
+            <li className={classN} onClick={chatClicked}>
+                <FontAwesomeIcon icon={faComment} />
+                {getChatNotification()}
+            </li>
+        )
+    }
+
+    return null;
+   
 };
 
 export default ChatLi;

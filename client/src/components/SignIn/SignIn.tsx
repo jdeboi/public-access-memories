@@ -60,14 +60,18 @@ const SignIn = forwardRef<SignInSubmitType, SignInProps>((props, ref) => {
 
     // check if the sign in menu should be displayed
     useEffect(() => {
+        if (user.roomUrl !== "/") {
+            setIsHidden(true);
+            return;
+        }
+
         if (windowUI.isMobile || windowUI.hasFooter) {
             setIsHidden(menu.mobile !== "signIn");
         }
         else {
             setIsHidden(menu.signIn.isHidden);
         }
-    }, [windowUI.isMobile, windowUI.hasFooter, menu.signIn.isHidden, isHidden, menu.mobile])
-
+    }, [user.roomUrl, windowUI.isMobile, windowUI.hasFooter, menu.signIn.isHidden, isHidden, menu.mobile])
 
     // THIS COMES IN IF THE PAGE LOADS AND THERE AREN'T ANY COOKIES,
     // AND THEN COOKIES LOAD

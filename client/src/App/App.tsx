@@ -38,6 +38,8 @@ import { startComposition, resizeApp, loadingApp } from '../store/window';
 import { addMessage, incremendNotifications } from '../store/messages';
 import FAQ from '../components/FAQ/FAQ';
 import Artists from '../views/pages/Artists/Artists';
+import { PageConfig } from '../data/PageConfig';
+import { shouldShowLoggedInComponents } from '../helpers/helpers';
 
 
 
@@ -118,7 +120,7 @@ function App() {
     }
 
     const avatarClicked = () => {
-        console.log("avatar clicked")
+        // console.log("avatar clicked")
         if (!showWelcome) {
             //   setShowSignInDiv(true);
             dispatch(showSignIn());
@@ -182,6 +184,46 @@ function App() {
         setHasLoadedRoom(true);
     }
 
+    const getSignedInComponents = () => {
+        if (!shouldShowLoggedInComponents(user))
+            return null;
+        return (
+            <React.Fragment>
+                <SignIn
+                    isFrame={true}
+                    hasAvatar={hasAvatar}
+                    hasLoadedCookies={hasLoadedCookies}
+                />
+                <FAQ isFrame={true} />
+                <Chat users={users} />
+                <RoomDecal
+                    startMedia={startMedia}
+                    hasLoadedRoom={hasLoadedRoom}
+                    users={users}
+                />
+                <Welcome
+                    isClosed={isClosed}
+                    hasAvatar={hasAvatar}
+                    hasLoadedCookies={hasLoadedCookies}
+                    showWelcome={showWelcome}
+                    closeWelcome={closeWelcome}
+                />
+
+                <MobileFooter avatarClicked={avatarClicked} />
+                {(user.roomUrl === "/" && !showWelcome) ?
+                    <ReactAudioPlayer
+                        src={music.currentSongTitle}
+                        autoPlay={true}
+                        volume={music.isMuted ? 0 : music.volume}
+                        controls={false}
+                        loop={true}
+                        ref={audioPlayer}
+                    /> : null
+                }
+            </React.Fragment>
+        )
+    }
+
     return (
         <div className="App">
             <div className={"App-Header" + (windowUI.isMobile || windowUI.hasFooter ? " mobile" : "")}>
@@ -202,44 +244,10 @@ function App() {
                 </Routes>
             </div>
 
-            <SignIn
-                isFrame={true}
-                hasAvatar={hasAvatar}
-                hasLoadedCookies={hasLoadedCookies}
-            />
-            <FAQ
-                isFrame={true}
-            />
-            <Chat users={users} />
-
-            {/* <Volume /> */}
-            {/* <FAQFrame /> */}
-
-            <RoomDecal
-                startMedia={startMedia}
-                hasLoadedRoom={hasLoadedRoom}
-                users={users}
-            />
-            <Welcome
-                isClosed={isClosed}
-                hasAvatar={hasAvatar}
-                hasLoadedCookies={hasLoadedCookies}
-                showWelcome={showWelcome}
-                closeWelcome={closeWelcome}
-            />
+            {/* check if user hasn't logged in and on a basic page */}
+            {getSignedInComponents()}
 
 
-            <MobileFooter avatarClicked={avatarClicked} />
-            {(user.roomUrl === "/" && !showWelcome) ?
-                <ReactAudioPlayer
-                    src={music.currentSongTitle}
-                    autoPlay={true}
-                    volume={music.isMuted ? 0 : music.volume}
-                    controls={false}
-                    loop={true}
-                    ref={audioPlayer}
-                /> : null
-            }
         </div>
 
     )

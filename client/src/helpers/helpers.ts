@@ -82,6 +82,13 @@ export const userNearEntrance = (user: IUser) => {
     && userCoords.y >= 28 && userCoords.y <= 35);
 }
 
+export const shouldShowLoggedInComponents = (user: IUser) => {
+  if (user.userName === "" && user.roomUrl !== "/") {
+    return false;
+  }
+  return true;
+}
+
 export const getPageName = (link: string): string => {
   if (link === "/") {
     return "gallery";
