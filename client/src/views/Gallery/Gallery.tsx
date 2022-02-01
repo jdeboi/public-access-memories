@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Frame from '../../components/Frame/Frame';
+import ReactAudioPlayer from 'react-audio-player';
 import './Gallery.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,26 +13,29 @@ import MiniMap from './components/MiniMap/MiniMap';
 
 // store
 import { useSelector, useDispatch } from 'react-redux';
-import { selectUser, selectUserActive, selectWindow } from '../../store/store';
+import { selectMusic, selectUser, selectUserActive, selectWindow } from '../../store/store';
 import { setUserRoomUrl, moveUser, toggleOutside } from '../../store/user';
 import { setUserActiveChat } from '../../store/userActive';
 import { setOneMenu, showChat } from '../../store/menu';
-import { setSketchVolume } from '../../store/music';
+import { setSketchMusic, setSketchVolume, setSong } from '../../store/music';
 import { doneLoadingApp } from '../../store/window';
 
 import { bars, getBar } from '../../data/BotConfig';
 
 interface IGallery {
     users: IUsers,
-    isClosed: boolean
+    isClosed: boolean,
+    showWelcome: boolean
 }
 
 const Gallery = (props: IGallery) => {
     const user = useSelector(selectUser);
     const windowUI = useSelector(selectWindow);
+    const music = useSelector(selectMusic);
     const dispatch = useDispatch();
     const userActive = useSelector(selectUserActive);
     const navigate = useNavigate();
+    const audioPlayer = useRef(null);
 
     const clickedUserChat = (otherUser: IUser) => {
         if (otherUser.id !== user.id) {
@@ -95,6 +99,17 @@ const Gallery = (props: IGallery) => {
                 windowUI.loading ?
                     <LoadingPage /> :
                     <MiniMap users={filterUsers(user, props.users)} x={20} y={20} />
+            }
+
+            {!props.showWelcome ?
+                <ReactAudioPlayer
+                    src={music.currentSongTitle}
+                    autoPlay={true}
+                    volume={music.isMuted ? 0 : music.volume}
+                    controls={false}
+                    loop={true}
+                    ref={audioPlayer}
+                /> : null
             }
         </div>
     )

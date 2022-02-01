@@ -12,11 +12,12 @@ export default class RoomLabel extends Draggable {
 
         this.eyeIcon = eyeIcon;
         const room = rooms[id];
-        
+
         const point = p5ToWorldCoords(room.x, room.y);
         this.x = point.x - this.w / 2 + roomConfig.w * GlobalConfig.scaler / 2;
         this.y = point.y - this.h / 2 + roomConfig.w * GlobalConfig.scaler / 2;
         this.title = room.title;
+        this.artist = room.artist;
         this.link = room.link;
     }
 
@@ -98,17 +99,28 @@ export default class RoomLabel extends Draggable {
     displayLabel() {
 
         // draw title
-        this.p5.fill(0);
+        
         this.p5.noStroke();
-        if (this.title.length > 12) {
-            let br = this.title.indexOf(" ");
-            let t1 = this.title.substring(0, br);
-            let t2 = this.title.substring(br + 1, this.title.length);
-            this.p5.text(t1, 0, 0);
-            this.p5.text(t2, 0, 17);
+        let t = this.title;
+        let maxL = 20;
+        if (t.length > maxL) {
+            // let br = this.title.indexOf(" ");
+            // let t1 = this.title.substring(0, br);
+            // let t2 = this.title.substring(br + 1, this.title.length);
+            // this.p5.text(t1, 0, 0);
+            // this.p5.text(t2, 0, 17);
+            t = t.substring(0, maxL) + "...";
         }
-        else
-            this.p5.text(this.title, 0, 0);
+        // else
+
+        this.p5.fill(0, 0, 255);
+        this.p5.textSize(14);
+        this.p5.text(t, 0, 0);
+
+        this.p5.textSize(11);
+        this.p5.fill(0);
+        this.p5.text(this.artist, 0, 17);
+
 
     }
 }

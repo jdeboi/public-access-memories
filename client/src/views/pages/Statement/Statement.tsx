@@ -6,13 +6,13 @@ export const Statement = () => {
     return (
         <div className="Statement  Page">
             <div className="container">
-                <h1>Home &lt;/body&gt;</h1>
+                <h1>home &lt;/body&gt;</h1>
                 <h3>A <a href="https://thewrong.org/">wrong biennale</a> pavilion</h3>
                 <h4>hosted by Public Access Memories Gallery</h4>
                 <br />
                 {/* <hr /> */}
                 <p>
-                    <strong>Home &lt;/body&gt;</strong> invites submissions that consider the spaces,
+                    <strong>home &lt;/body&gt;</strong> considers the spaces,
                     experiences, and ephemera of digital homemaking. From housekeeping
                     chores (decluttering desktops and inboxes) to nesting rituals
                     (websurfing for superlative sourdough starter), the meaning of home

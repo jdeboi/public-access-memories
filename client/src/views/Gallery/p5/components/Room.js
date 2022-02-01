@@ -60,7 +60,7 @@ export default class Room {
     // displayPopIn(x, y+h-50, 50, 50, this.p5.color(255), this.p5);
 
 
-    this.displayTxt();
+    // this.displayTxt();
 
     // top
     // displayWall({ x, y }, { x: x + this.w * GlobalConfig.scaler, y }, this.p5);
@@ -105,8 +105,6 @@ export default class Room {
 
     this.p5.fill(255);
     this.p5.noStroke();
-    this.p5.textSize(18);
-    this.p5.text(this.title, 0, 0);
   }
 
   displayOutline(p5 = this.p5, scaler = GlobalConfig.scaler) {

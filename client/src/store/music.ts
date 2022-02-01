@@ -12,6 +12,7 @@ const songs = [
 
 
 
+
 const initialState = {
     currentSong: 0,
     currentSketch: "default",
@@ -61,6 +62,15 @@ export const musicSlice = createSlice({
             state.sketchVolume = action.payload.volume;
             state.volume = state.sketchVolume * state.mainVolume;
         },
+        setSketchMusicPath: (state, action: PayloadAction<{sketch: string, path: string, volume: number}>) => {
+            let song = action.payload.path; //songs[sketch][id];
+            state.hasAudio = true;
+            state.currentSong = 0;
+            state.currentSketch = action.payload.sketch;
+            state.currentSongTitle = song;
+            state.sketchVolume = action.payload.volume;
+            state.volume = state.sketchVolume * state.mainVolume;
+        },
         setNoSketchMusic: (state) => {
             state = initialState;
         },
@@ -101,6 +111,6 @@ export const musicSlice = createSlice({
 
 export const {
     muteVolume, unMuteVolume, toggleVolume, setVolume, setSketchVolume,
-    setSketchMusic, setNoSketchMusic, setSong,
+    setSketchMusic, setSketchMusicPath, setNoSketchMusic, setSong,
     incrementSong, decrementSong, setRandomSong
 } = musicSlice.actions;

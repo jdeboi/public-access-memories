@@ -11,10 +11,11 @@ import Gallery from '../views/Gallery/Gallery';
 import About from '../views/pages/About/About';
 import Statement from '../views/pages/Statement/Statement';
 import Room from '../views/rooms/Room/Room';
+import TestRoom from '../views/rooms/TestRoom/TestRoom';
 import NotFound from "../views/pages/NotFound/NotFound";
 
 // components
-import ReactAudioPlayer from 'react-audio-player';
+// import ReactAudioPlayer from 'react-audio-player';
 import Header from '../components/Header/Header';
 import Chat from '../components/Chat/Chat';
 import Welcome from '../components/Welcome/Welcome';
@@ -45,9 +46,9 @@ import { shouldShowLoggedInComponents } from '../helpers/helpers';
 
 function App() {
     const user = useSelector(selectUser);
-    const music = useSelector(selectMusic);
+    // const music = useSelector(selectMusic);
     const windowUI = useSelector(selectWindow);
-    const audioPlayer = useRef(null);
+    
 
     const dispatch = useDispatch();
 
@@ -210,16 +211,7 @@ function App() {
                 />
 
                 <MobileFooter avatarClicked={avatarClicked} />
-                {(user.roomUrl === "/" && !showWelcome) ?
-                    <ReactAudioPlayer
-                        src={music.currentSongTitle}
-                        autoPlay={true}
-                        volume={music.isMuted ? 0 : music.volume}
-                        controls={false}
-                        loop={true}
-                        ref={audioPlayer}
-                    /> : null
-                }
+                
             </React.Fragment>
         )
     }
@@ -235,11 +227,12 @@ function App() {
             </div>
             <div className="App-Content inner-outline">
                 <Routes>
-                    <Route path="/" element={<Gallery users={users} isClosed={isClosed} />} />
+                    <Route path="/" element={<Gallery users={users} isClosed={isClosed} showWelcome={showWelcome} />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/exhibition" element={<Statement />} />
                     <Route path="/artists" element={<Artists />} />
-                    <Route path="/rooms/:id" element={<Room />} />
+                    <Route path="/test/rooms/:id" element={<TestRoom />} />
+                    <Route path="/homebody/rooms/:id" element={<Room />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </div>

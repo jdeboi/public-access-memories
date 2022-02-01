@@ -1,9 +1,4 @@
-
-
-
 import Button from './Button';
-import { mouseToWorld } from "../../../../../helpers/coordinates";
-import { GlobalConfig } from '../../../../../data/GlobalConfig';
 
 export default class Draggable {
   constructor(id, x, y, w, h, p5, content) {
@@ -39,97 +34,142 @@ export default class Draggable {
     this.maxButton = new Button(xp + sp * 2, yp, p5);
 
     this.content = content;
+
+    this.sw = 2;
     // this.mask;
     // this.initMask();
   }
 
   initMask() {
-    this.mask = this.p5.createGraphics(this.w, this.h+this.barH);
+    this.mask = this.p5.createGraphics(this.w, this.h + this.barH);
     this.mask.background(0);
     this.mask.fill(255);
     this.mask.noStroke();
     // this.mask.rect(0, 0, this.w, this.h, this.bRad, this.bRad);
-    this.mask.ellipse(this.w/2, this.h/2, 50, 50);
+    this.mask.ellipse(this.w / 2, this.h / 2, 50, 50);
     if (this.content && this.content.width > 0) {
-   
+
       this.content.mask(this.mask);
     }
   }
 
-  display(userX, userY) {
+  display(col) {
     this.p5.push();
     this.p5.translate(this.x, this.y);
     if (!this.closed) {
-      if (!this.minimized) this.displayContent(userX, userY);
+      if (!this.minimized) this.displayContent(col);
     }
     this.p5.pop();
   }
 
-  displayToolBar(userX, userY) {
+  displayArcToolbar(fillC, strokeC) {
+    this.p5.strokeWeight(2);
+    this.p5.fill(fillC);
+    this.p5.stroke(strokeC);
+    // this.p5.push();
+
+    // this.p5.translate(this.x, this.y);
+    // top arcs
+    this.p5.arc(this.bRad, this.bRad, this.bRad * 2, this.bRad * 2, Math.PI, Math.PI + Math.PI / 2);
+    this.p5.arc(this.w - this.bRad, this.bRad, this.bRad * 2, this.bRad * 2, Math.PI + Math.PI / 2, 0);
+
+    this.p5.noStroke();
+    this.p5.rect(this.bRad, 0, this.w - this.bRad * 2, this.bRad);
+    this.p5.rect(0, this.bRad, this.w, this.barH - this.bRad);
+
+    this.p5.stroke(strokeC);
+    // top bottom
+    this.p5.line(this.bRad, 0, this.w - this.bRad, 0);
+    this.p5.line(0, this.barH, this.w, this.barH);
+    // left and right
+    this.p5.line(0, this.bRad, 0, this.barH - this.bRad);
+    this.p5.line(this.w, this.bRad, this.w, this.barH - this.bRad);
+    // this.p5.pop();
+  }
+
+  displayArcFrame(strokeC) {
+    this.p5.strokeWeight(2);
+    this.p5.noFill();
+    this.p5.stroke(strokeC);
+    // bottom arcs
+
+    this.p5.push();
+    this.p5.translate(0, this.h+this.barH - this.bRad);
+    this.p5.arc(this.bRad, 0, this.bRad * 2, this.bRad * 2, Math.PI / 2, Math.PI);
+    this.p5.arc(this.w - this.bRad, 0, this.bRad * 2, this.bRad * 2, 0, Math.PI/2);
+    this.p5.pop();
+
+    // bottom
+    this.p5.line(this.bRad, this.h + this.barH, this.w-this.bRad, this.h+this.barH);
+
+    // left and right
+    this.p5.line(0, this.bRad, 0, this.barH+this.h - this.bRad);
+    this.p5.line(this.w, this.bRad, this.w, this.barH+this.h - this.bRad);
+  }
+
+  displayToolBar(toolC, frameC, buttonC) {
     this.p5.push();
     this.p5.translate(this.x, this.y);
     if (!this.closed) {
-      this.p5.fill(0);
+      this.p5.fill(toolC);
       this.p5.noStroke();
-      if (!this.minimized) this.p5.rect(0, 10, this.w, (this.barH - 10));
-      this.p5.rect(0, 0, this.w, this.barH, this.bRad);
+      // this.p5.stroke(frameC);
+      // this.p5.strokeWeight(2);
+      if (!this.minimized)
+        // this.p5.rect(0, 10, this.w, (this.barH - 10));
+        this.displayArcToolbar(toolC, frameC)
+      else this.p5.rect(0, 0, this.w, this.barH, this.bRad);
 
-      const {x,y} = this.getMouseCoords(userX, userY);
-      this.closeButton.display(x,y);
-      this.minButton.display(x,y);
-      this.maxButton.display(x,y);
+      let mx = this.p5.mouseX - this.x;
+      let my = this.p5.mouseY - this.y;
+
+      this.closeButton.display(mx, my, buttonC);
+      this.minButton.display(mx, my, buttonC);
+      this.maxButton.display(mx, my, buttonC);
+
+
+      if (!this.minimized)
+        this.displayArcFrame(frameC);
+      else this.displayFrame(frameC);
+      // this.p5.line(0, this.barH, this.w, this.barH);
     }
+
     this.p5.pop();
+
   }
 
-  getMouseCoords(userX, userY) {
-    let gx = GlobalConfig.x * GlobalConfig.scaler;
-    let gy = GlobalConfig.y * GlobalConfig.scaler;
-    let mx = this.p5.mouseX + userX - gx - this.p5.windowWidth / 2 - this.x;
-    let my = this.p5.mouseY + userY - gy - this.p5.windowHeight / 2 - this.y;
-    return {x: mx, y: my}
-  }
-
-  getMouseButtons(userX, userY) {
-    let mouse = mouseToWorld({x: userX, y: userY}, this.p5);
-    mouse.x -= this.x;
-    mouse.y -= this.y;
-    return mouse;
-  }
-
-  getMouse(userX, userY) {
-    return mouseToWorld({x: userX, y: userY}, this.p5);
-  }
-
-  displayContent(userX, userY) {
+  displayContent(col) {
     // this.p5.fill(255);
     this.p5.push();
-   
+
     this.p5.translate(0, this.barH);
-    this.p5.image(this.content, 0, 0, this.w, this.h);
+    if (this.content)
+      this.p5.image(this.content, 0, 0, this.w, this.h);
     this.p5.pop();
-    this.displayFrame();
-    
+    this.displayFrame(col);
+
   }
 
-  displaySolidBack(col) {
-    this.p5.fill(col);
-    this.p5.stroke(0);
-    this.p5.strokeWeight(2);
-    this.p5.rect(0, 0, this.w, this.h + this.barH, this.bRad);
-  }
+  // displaySolidBack(col) {
+  //   this.p5.fill(col);
+  //   this.p5.stroke(0);
+  //   this.p5.strokeWeight(2);
+  //   this.p5.rect(0, 0, this.w, this.h + this.barH, this.bRad);
+  // }
 
-  displayFrame() {
+  displayFrame(col) {
     this.p5.noFill();
-    this.p5.stroke(0);
-    this.p5.strokeWeight(2);
+    this.p5.stroke(col);
+    this.p5.strokeWeight(this.sw);
     this.p5.rect(0, 0, this.w, this.h + this.barH, this.bRad);
   }
 
-  checkButtons(userX, userY) {
-    if (this.closed) 
+  checkButtons() {
+    if (this.closed)
       return false;
-    let mouse = this.getMouseButtons(userX, userY);
+    let mouse = { x: this.p5.mouseX, y: this.p5.mouseY };
+    mouse.x -= this.x;
+    mouse.y -= this.y;
     if (this.closeButton.mouseOver(mouse.x, mouse.y)) {
       this.closeWindow();
       return true;
@@ -145,12 +185,13 @@ export default class Draggable {
     return false;
   }
 
-  checkDragging(userX, userY) {
-    if (this.closed) 
+  checkDragging() {
+    if (this.closed)
       return false;
-    let mouse = this.getMouse(userX, userY);
+    // let mouse = { x: this.p5.mouseX, y: this.p5.mouseY };
     // console.log(mx, my, userX, userY, this.x, this.y);
-    if (this.overToolBar(mouse.x, mouse.y)) {
+    let overTool = this.overToolBar(this.p5.mouseX, this.p5.mouseY);
+    if (overTool) {
       // console.log("over toolbar");
       // this.draggingOn(mx, my);
       this.dragging = true;
@@ -215,11 +256,11 @@ export default class Draggable {
     this.y = this.origY;
     this.locked = false;
     this.closeWindow(div);
-    div.position(this.x, this.y);
-    div.style("display", "block");
+    // div.position(this.x, this.y);
+    // div.style("display", "block");
     this.minimized = false;
     this.minimizeWindow(this.content);
-    this.setSize(400);
+    // this.setSize(400);
   }
 
   toggleMinimze() {

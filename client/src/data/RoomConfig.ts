@@ -15,16 +15,22 @@ export const roomConfig = {
 const titles = ["memory motel", "dotcommmunion", "flash-ephemera",
     "interstitial states", "good host", "cachebox"
 ]
+
+// title: "the still life",
+// link: "/homebody/rooms/0",
+// artist: "Jenna deBoisblanc",
+// artistLink: "https://jdeboi.com/",
+
 export const rooms: IRoom[] = [
     {
         id: 0,
         title: "room 0",
-        link: "/rooms/0",
+        link: "/homebody/rooms/1",
         artist: "Artist TBA",
         artistLink: "#",
         medium: "custom software",
         description: "",
-        year: 2021,
+        year: 2022,
         x: 5,
         y: 22,
         // rot: -90,
@@ -33,7 +39,7 @@ export const rooms: IRoom[] = [
     {
         id: 1,
         title: "room 1",
-        link: "/rooms/1",
+        link: "/homebody/rooms/1",
         artist: "Artist TBA",
         artistLink: "#",
         medium: "custom software",
@@ -47,7 +53,7 @@ export const rooms: IRoom[] = [
     {
         id: 2,
         title: "room 2",
-        link: "/rooms/2",
+        link: "/homebody/rooms/2",
         artist: "Artist TBA",
         artistLink: "#",
         medium: "custom software",
@@ -61,7 +67,7 @@ export const rooms: IRoom[] = [
     {
         id: 3,
         title: "room 3",
-        link: "/rooms/3",
+        link: "/homebody/rooms/3",
         artist: "Artist TBA",
         artistLink: "#",
         medium: "custom software",
@@ -75,7 +81,7 @@ export const rooms: IRoom[] = [
     {
         id: 4,
         title: "room 4",
-        link: "/rooms/4",
+        link: "/homebody/rooms/4",
         artist: "Artist TBA",
         artistLink: "#",
         medium: "custom software",
@@ -89,7 +95,7 @@ export const rooms: IRoom[] = [
     {
         id: 5,
         title: "room 5",
-        link: "/rooms/5",
+        link: "/homebody/rooms/5",
         artist: "Artist TBA",
         artistLink: "#",
         medium: "custom software",
@@ -103,7 +109,7 @@ export const rooms: IRoom[] = [
     {
         id: 6,
         title: "room 6",
-        link: "/rooms/6",
+        link: "/homebody/rooms/6",
         artist: "Artist TBA",
         artistLink: "#",
         medium: "custom software",
@@ -117,7 +123,7 @@ export const rooms: IRoom[] = [
     {
         id: 7,
         title: "room 7",
-        link: "/rooms/7",
+        link: "/homebody/rooms/7",
         artist: "Artist TBA",
         artistLink: "#",
         medium: "custom software",
@@ -131,7 +137,7 @@ export const rooms: IRoom[] = [
     {
         id: 8,
         title: "room 8",
-        link: "/rooms/8",
+        link: "/homebody/rooms/8",
         artist: "Artist TBA",
         artistLink: "#",
         medium: "custom software",
@@ -145,7 +151,7 @@ export const rooms: IRoom[] = [
     {
         id: 9,
         title: "room 9",
-        link: "/rooms/9",
+        link: "/homebody/rooms/9",
         artist: "Artist TBA",
         artistLink: "#",
         medium: "custom software",

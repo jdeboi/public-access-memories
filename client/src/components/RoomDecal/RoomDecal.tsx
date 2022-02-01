@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 // store
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectUser, selectWindow } from '../../store/store';
 import { startComposition } from '../../store/window';
 
@@ -27,7 +27,7 @@ interface IRoomDecal {
 }
 
 const RoomDecal = (props: IRoomDecal) => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const windowUI = useSelector(selectWindow);
     const user = useSelector(selectUser);
     const { pathname } = useLocation();
