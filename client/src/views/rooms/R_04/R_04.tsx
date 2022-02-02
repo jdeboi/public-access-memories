@@ -7,13 +7,13 @@ import { selectWindow } from '../../../store/store';
 import { doneLoadingApp } from '../../../store/window';
 
 
-const R_01 = () => {
+const R_04 = () => {
     const windowUI = useSelector(selectWindow);
     const dispatch = useDispatch();
 
 
     return (
-        <div className="Room Room_01 Sketch">
+        <div className="Room R_04 Sketch">
             {/* <div id="p5_loading" className="loadingclass"></div> */}
             <h1>room1</h1>
             {
@@ -25,4 +25,4 @@ const R_01 = () => {
     )
 };
 
-export default R_01;
+export default R_04;

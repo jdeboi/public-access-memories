@@ -26,14 +26,14 @@ setInterval(() => {
 }, 500);
 
 module.exports = function (client) {
-  console.log('client connected...', client.id)
+  // console.log('client connected...', client.id)
   io.sockets.emit('userJoined', client.id);
 
 
   client.on('registerUser', (user, callback) => {
-    console.log("REGISTER USER", user)
+    // console.log("REGISTER USER", user)
     if (isUser(user.userName)) {
-      console.log("isuser...")
+      // console.log("isuser...")
       callback({ isUser: true, user: user })
     }
     else {
@@ -51,7 +51,7 @@ module.exports = function (client) {
   })
 
   client.on('setUser', user => {
-    console.log("client socket set", user)
+    // console.log("client socket set", user)
     user.id = client.id;
     clients.set(client.id, user);
   })
@@ -72,13 +72,13 @@ module.exports = function (client) {
   })
 
   client.on('error', (err) => {
-    console.log('received error from client:', client.id)
+    // console.log('received error from client:', client.id)
     console.log(err)
   })
 
   /////////// MESSAGES
   client.on('messageUser', ({ socketId, message, time, avatar }) => {
-    console.log("sending to", socketId, "msg:", message);
+    // console.log("sending to", socketId, "msg:", message);
     io.to(socketId).emit('messageUser', getMessageObject(client.id, socketId, message, time, avatar));
     // client.broadcast.emit('message', getMessageObject(client.id, socketId, message));
     // io.to(socketId).emit('message', getMessageObject(client.id, "private", message));

@@ -126,7 +126,6 @@ const RoomDecal = (props: IRoomDecal) => {
     if (room) {
         const buttons = getButtons();
         const { title, description, medium, year, artist, artistLink } = room;
-        console.log("room", props.hasLoadedRoom)
         return (
             <CenterModal
                 title={""}

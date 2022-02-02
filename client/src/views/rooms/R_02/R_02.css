@@ -1,4 +1,213 @@
 .R_02 {
   background: black;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.R_02 #gameCanvas {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  bottom: 0px;
+  right: 0px;
+  border: 0px;
+  background-color: black;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  -ms-interpolation-mode: nearest-neighbor;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: -o-pixelated;
+      image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.R_02 h1 {
+  color: lightblue;
+  font-weight: normal;
+}
+
+.R_02 a {
+  color: lightblue;
+}
+
+.R_02 .title {
+  background-color: none;
+  text-align: center;
+  font-size: 100%;
+  float: center;
+  color: gray;
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 0%;
+  height: 10%;
+}
+
+.R_02 .footer {
+  background-color: none;
+  text-align: center;
+  float: center;
+  color: white;
+  position: absolute;
+  margin-top: 10px;
+  left: 10%;
+  right: 10%;
+  top: 90%;
+  bottom: 10%;
+}
+
+.R_02 .gameContainer {
+  background-color: none;
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 70px;
+  bottom: 70px;
+  -ms-touch-action: none;
+      touch-action: none;
+}
+
+.R_02 .mobile-menu {
+  position: relative;
+  top: 4em;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bold;
+  border-radius: 0.25em;
+}
+
+.R_02 .mobile-menu.item-count-3 {
+  width: 30em;
+}
+
+.R_02 .mobile-menu.item-count-3 .button {
+  width: 28.3333%;
+  padding: 7.5% 0%;
+}
+
+.R_02 .mobile-menu.item-count-2 {
+  width: 20em;
+}
+
+.R_02 .mobile-menu.item-count-2 .button {
+  width: 46%;
+  padding: 12.1765% 0%;
+}
+
+.R_02 .mobile-menu.item-count-1 {
+  width: 10em;
+}
+
+.R_02 .mobile-menu.item-count-1 .button {
+  width: 98%;
+  padding: 26.5% 0%;
+}
+
+.R_02 .mobile-menu,
+.R_02 .tab-icon,
+.R_02 .mobile-menu .close {
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  color: white;
+}
+
+.R_02 .mobile-menu .button {
+  margin: 2%;
+  border-radius: 0.25em;
+  text-align: center;
+  float: left;
+}
+
+.R_02 .mobile-menu .clear {
+  clear: both;
+}
+
+.R_02 .tab-affordance,
+.R_02 .close-affordance {
+  width: 6em;
+  height: 6em;
+  position: absolute;
+  z-index: 1000;
+}
+
+.R_02 .tab-affordance {
+  left: -2em;
+  top: 55px;
+}
+
+.R_02 .close-affordance {
+  left: -4em;
+  top: -1em;
+}
+
+.R_02 .tab-icon,
+.R_02 .mobile-menu .close {
+  height: 48px;
+  position: absolute;
+  border-radius: 6px;
+}
+
+.R_02 .tab-icon {
+  left: -0.5em;
+  top: 70px;
+  width: 18px;
+  border-radius: 0 6px 6px 0;
+  border-left: 0;
+}
+
+.R_02 .mobile-menu .close {
+  left: -18px;
+  width: 18px;
+  top: 0px;
+  border-radius: 6px 0 0 6px;
+  border-right: 0;
+}
+
+.R_02 .tab-icon .slice,
+.R_02 .mobile-menu .close .slice {
+  margin: 4.5px 1px;
+  width: 2px;
+  height: 80%;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.R_02 .tab-icon .slice {
+  float: right;
+}
+
+.R_02 .tab-icon .slice:first-child {
+  margin-right: 4.5px;
+}
+
+.R_02 .mobile-menu .close .slice {
+  float: left;
+}
+
+.R_02 .mobile-menu .close .slice:first-child {
+  margin-left: 4.5px;
+}
+
+@media screen and (max-width: 32em) {
+  .R_02 .mobile-menu {
+    font-size: 0.8em;
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 24em) {
+  .R_02 .mobile-menu {
+    font-size: 0.65em;
+    width: 90%;
+  }
+}
+
+.R_02 .disable-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 /*# sourceMappingURL=R_02.css.map */
