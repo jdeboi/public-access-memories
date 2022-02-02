@@ -105,9 +105,19 @@ export const getPageName = (link: string): string => {
 }
 
 export const getRoomByPath = (path: string): IRoom | null => {
-  let r = rooms.filter((room) => room.link === path);
-  if (r.length > 0)
-    return r[0];
+  if (path.indexOf("test") > -1) {
+    let pathPrefix = "/homebody";
+    // /test
+    let p = pathPrefix + path.substring(5, path.length);
+    let r = rooms.filter((room) => room.link === p);
+    if (r.length > 0)
+      return r[0];
+  }
+  else {
+    let r = rooms.filter((room) => room.link === path);
+    if (r.length > 0)
+      return r[0];
+  }
   return null;
 }
 

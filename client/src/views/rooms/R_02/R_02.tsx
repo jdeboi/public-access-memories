@@ -13,9 +13,9 @@ const R_01 = () => {
 
 
     return (
-        <div className="Room Room_01 Sketch">
+        <div className="Room Room_02 Sketch">
             {/* <div id="p5_loading" className="loadingclass"></div> */}
-            <h1>room1</h1>
+            <iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVORKiXw0=/?moveToViewport=-8352,-2762,6533,5731" frameBorder="0" scrolling="no" allowFullScreen></iframe> 
             {
                 windowUI.loading ?
                     <LoadingPage /> :

@@ -39,7 +39,7 @@ const R_00 = () => {
             {
                 windowUI.compositionStarted ?
                     <ReactAudioPlayer
-                        src={"http://localhost:3000/online_assets/fly.mp3"}
+                        src={"https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/deBoisblanc/fly.mp3https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/deBoisblanc/fly.mp3"}
                         autoPlay={true}
                         volume={music.isMuted ? 0 : vol}
                         controls={false}

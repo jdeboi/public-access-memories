@@ -33,7 +33,6 @@ const RoomDecal = (props: IRoomDecal) => {
     const { pathname } = useLocation();
     const room = getRoomByPath(pathname)
 
-
     const getParticipantsBox = () => {
         if (windowUI.hasFooter && windowUI.orientation === "landscape")
             return null;
