@@ -8,7 +8,7 @@ import MessagesMobile from './Messages/MessagesMobile';
 import CenterModal from '../CenterModal/CenterModal';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 import {IChat} from '../../interfaces';
 
@@ -68,7 +68,7 @@ const ChatMobile = (props: IChat) => {
                             <button className="sendButton"
                                 disabled={buttonDisabled}
                                 onClick={() => props.onSubmit(props.textBox)}>
-                                <FontAwesomeIcon icon={faUser} />
+                                <FontAwesomeIcon icon={faPaperPlane} />
                             </button>
                         </div>
                     </div>

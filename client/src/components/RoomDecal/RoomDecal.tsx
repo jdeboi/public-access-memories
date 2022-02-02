@@ -31,7 +31,7 @@ const RoomDecal = (props: IRoomDecal) => {
     const windowUI = useSelector(selectWindow);
     const user = useSelector(selectUser);
     const { pathname } = useLocation();
-    const room = getRoomByPath(pathname)
+    const room = getRoomByPath(pathname);
 
     const getParticipantsBox = () => {
         if (windowUI.hasFooter && windowUI.orientation === "landscape")
@@ -126,7 +126,7 @@ const RoomDecal = (props: IRoomDecal) => {
     if (room) {
         const buttons = getButtons();
         const { title, description, medium, year, artist, artistLink } = room;
-
+        console.log("room", props.hasLoadedRoom)
         return (
             <CenterModal
                 title={""}

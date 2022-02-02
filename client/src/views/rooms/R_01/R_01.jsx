@@ -12,12 +12,13 @@ import { selectWindow } from '../../../store/store';
 import { doneLoadingApp } from '../../../store/window';
 
 import LoadingPage from '../../../components/LoadingPage/LoadingPage';
+import { mapVal } from '../../../helpers/helpers';
 
 
 
 function Loader() {
   const { progress } = useProgress()
-  return <Html center>{progress} % loaded</Html>
+  return <Html><LoadingPage progress={progress} /></Html>
 }
 
 function Model() {
@@ -34,13 +35,14 @@ function Model() {
 
 const R_01 = () => {
     const windowUI = useSelector(selectWindow);
+
     // const dispatch = useDispatch();
 
     return (
         <div className="Room R_01 Sketch">
             <Canvas camera={{
                 fov: 35,
-                zoom: 1,
+                zoom: mapVal(windowUI.contentW, 400, 2300, .7, 1.3),
                 near: 1,
                 far: 1000
             }}>

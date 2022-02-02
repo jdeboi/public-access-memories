@@ -1,28 +1,29 @@
 import React from 'react';
-import LoadingPage from '../../../components/LoadingPage/LoadingPage';
+// import LoadingPage from '../../../components/LoadingPage/LoadingPage';
 
 // store
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectWindow } from '../../../store/store';
-import { doneLoadingApp } from '../../../store/window';
+// import { doneLoadingApp } from '../../../store/window';
 
+import './R_02.css';
 
-const R_01 = () => {
+const R_02 = () => {
     const windowUI = useSelector(selectWindow);
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
 
     return (
-        <div className="Room Room_02 Sketch">
+        <div className="Room R_02 Sketch">
             {/* <div id="p5_loading" className="loadingclass"></div> */}
-            <iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVORKiXw0=/?moveToViewport=-8352,-2762,6533,5731" frameBorder="0" scrolling="no" allowFullScreen></iframe> 
-            {
+            <iframe src="https://leetusman.com/everyday/224/" style={{zIndex: 2}} height={window.innerHeight} width={window.innerWidth}></iframe>
+            {/* {
                 windowUI.loading ?
                     <LoadingPage /> :
                     null
-            }
+            } */}
         </div>
     )
 };
 
-export default R_01;
+export default R_02;

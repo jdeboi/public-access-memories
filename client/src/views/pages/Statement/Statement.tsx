@@ -19,24 +19,17 @@ export const Statement = () => {
                     is rapidly evolving.
                 </p>
                 <p>
-                    Beyond probing a new visual language, the exhibition encourages
-                    critical observations that seek to uncover tensions of
+                    In addition to a new visual language, the exhibition seeks to uncover tensions of
                     digital denizenship, for example, the nature of home as a &ldquo;safe
                     haven&rdquo; in an age of surveillance capitalism, fake news, and
                     internet trolls. Particularly in the context of a global pandemic,
                     the paradox of home as both sanctuary and asylum, as both a confined
                     and liberated space, offers ample opportunity for reflection.
                 </p>
-                <hr/>
-                <h4>Submissions by February 1st, 2022</h4>
-                <hr/>
                 <p>
-                    In order to probe the new meaning of home, Public Access Memories
-                    Gallery offers the HTML gallery as a canvas and accepts any digital
-                    media format that runs on the web (images, gifs, videos, 3D models,
-                    html / JavaScript, etc.). Please submit work to 
-                    <a href="mailto:publicaccessmemories@gmail.com"> publicaccessmemories@gmail.com</a> by February 1st for inclusion in the wrong biennale. In addition to
-                    work/ links, please include a brief artist bio and statement.
+                    Situating digital works within their native environment, Public Access Memories
+                    Gallery offers the HTML gallery as a canvas. Artists in this pavilion 
+                    use various digital media formats as they probe the new meaning of home.
                 </p>
             </div>
         </div>
