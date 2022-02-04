@@ -104,6 +104,8 @@ const pagePos = { x: 0, y: 0 };
 
 const creatures: any[] = [];
 
+let imgTest: any;
+
 class RoomSketch extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
@@ -115,6 +117,8 @@ class RoomSketch extends React.Component<Props> {
       const index = creature.imgs[0];
       creatures.push(new Creature(creature, p5));
     }
+
+    imgTest = p5.loadImage("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/Ivans/5.png");
   }
 
   ////////////////////////////////////////////////////////////////////////
@@ -146,6 +150,7 @@ class RoomSketch extends React.Component<Props> {
     p5.pop();
 
     this.setPagePos(p5);
+    p5.image(imgTest, 0, 0);
   };
 
   setPagePos = (p5: p5Types) => {
