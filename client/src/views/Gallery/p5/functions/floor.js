@@ -278,6 +278,13 @@ const drawGalleryGround = (floorTex, p5) => {
         //     p5.image(floorTex, 20 * GlobalConfig.scaler, 2 * GlobalConfig.scaler, w, h);
         // }
 
+        // extra 14th
+        // {
+        //     const ix = -5 * GlobalConfig.scaler;
+        //     const iy = 2* GlobalConfig.scaler
+        //     p5.image(floorTex, ix, iy, w, h);
+        // }
+
         // 2nd
         for (let x = 0; x < 25; x += 5) {
             const ix = x * GlobalConfig.scaler;
@@ -332,6 +339,7 @@ const drawGalleryGrid = (p5) => {
     p5.strokeWeight(2);
     let sc = GlobalConfig.scaler;
     let step = 1;
+
     for (let x = 0; x < 27; x += step) {
         const y0 = 5;
         const y1 = 15;
@@ -378,6 +386,18 @@ const drawGalleryRects = (p5) => {
     p5.stroke(255, 150);
     let sc = GlobalConfig.scaler;
     let step = 1;
+
+    // that extra 14th
+    // for (let x = -5; x < 0; x += step) {
+    //     for (let y = 5; y < 7; y += step) {
+    //         if ((yind + xind) % 2 == 0) p5.fill(cDark);
+    //         else p5.fill(cFilled);
+    //         p5.rect(x * sc, y * sc, sc, sc);
+    //         yind++;
+    //     }
+    //     xind++;
+    // }
+
     for (let x = 0; x < 27; x += step) {
         for (let y = 5; y < 15; y += step) {
             if ((yind + xind) % 2 == 0) p5.fill(cDark);

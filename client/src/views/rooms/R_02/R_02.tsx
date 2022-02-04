@@ -19,15 +19,26 @@ const R_02 = () => {
             console.log(iFrameRef.current);
             ifref.focus()
         }
-            
+
     }, [windowUI.compositionStarted])
 
-    
+    let leeURL = "/leeurl";
+    if (process.env.NODE_ENV === "development") {
+        leeURL = "http://localhost:3001/leetusman"
+    }
 
     return (
         <div className="Room R_02 Sketch">
             {/* <div id="p5_loading" className="loadingclass"></div> */}
-            <iframe ref={iFrameRef} id="ltiframe" src="/leetusman" style={{ zIndex: 2 }} height={window.innerHeight} width={window.innerWidth}></iframe>
+            <iframe
+                ref={iFrameRef}
+                id="ltiframe"
+                src={leeURL}
+                style={{ zIndex: 2 }}
+                height={windowUI.contentH}
+                width={windowUI.contentW}
+            >
+            </iframe>
         </div>
     )
 };
