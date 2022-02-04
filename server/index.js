@@ -10,9 +10,10 @@ const server = http.createServer(app);
 // const ClientManager = require('./websockets/ClientManager');
 // io.on('connection', ClientManager);
 
+const origin = process.env.PORT === "development"? "http://localhost:3000": "https://www.publicaccessmemories.com/"
 const io = require("socket.io")(server, {
     cors: {
-        origin: "http://localhost:3000",
+        origin: origin,
         methods: ["GET", "POST"]
     }
 });
