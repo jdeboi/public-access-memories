@@ -31,6 +31,8 @@ export const Statement = () => {
                     Gallery offers the HTML gallery as a canvas. Artists in this pavilion 
                     use various digital media formats as they probe the new meaning of home.
                 </p>
+                <br />
+                <img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/tw5_logo.png" width={200} />
             </div>
         </div>
     )

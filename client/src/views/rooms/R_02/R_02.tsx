@@ -22,14 +22,13 @@ const R_02 = () => {
 
     }, [windowUI.compositionStarted])
 
-    const leeURL = "/leeurl";
-    // if (process.env.NODE_ENV === "development") {
-    //     leeURL = "http://localhost:3001/leetusman"
-    // }
+    let leeURL = "/leetusman";
+    if (process.env.NODE_ENV === "development") {
+        leeURL = "http://localhost:3001/leetusman"
+    }
 
     return (
         <div className="Room R_02 Sketch">
-            {/* <div id="p5_loading" className="loadingclass"></div> */}
             <iframe
                 ref={iFrameRef}
                 id="ltiframe"
