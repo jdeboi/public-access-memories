@@ -113,10 +113,10 @@ class RoomSketch extends React.Component<Props> {
 
   preload = (p5: p5Types) => {
 
-    for (const creature of creaturesJSON) {
-      const index = creature.imgs[0];
-      creatures.push(new Creature(creature, p5));
-    }
+    // for (const creature of creaturesJSON) {
+    //   const index = creature.imgs[0];
+    //   creatures.push(new Creature(creature, p5));
+    // }
 
     imgTest = p5.loadImage("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/Ivans/5.png");
   }
