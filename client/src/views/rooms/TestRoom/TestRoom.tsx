@@ -8,7 +8,7 @@ import R_01 from '../R_01/R_01';
 import R_02 from '../R_02/R_02';
 import R_03 from '../R_03/R_03';
 import R_04 from '../R_04/R_04';
-import R_05 from '../R_05/R_05';
+import R_05 from '../R_05/Room';
 import R_06 from '../R_06/R_06';
 import R_07 from '../R_07/R_07';
 import R_08 from '../R_08/R_08';

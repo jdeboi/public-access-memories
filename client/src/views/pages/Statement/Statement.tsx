@@ -32,7 +32,7 @@ export const Statement = () => {
                     use various digital media formats as they probe the new meaning of home.
                 </p>
                 <br />
-                <img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/tw5_logo.png" width={200} />
+                <img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/tw5_logo_w.png" width={200} />
             </div>
         </div>
     )
