@@ -22,10 +22,10 @@ const R_02 = () => {
 
     }, [windowUI.compositionStarted])
 
-    let leeURL = "/leeurl";
-    if (process.env.NODE_ENV === "development") {
-        leeURL = "http://localhost:3001/leetusman"
-    }
+    const leeURL = "/leeurl";
+    // if (process.env.NODE_ENV === "development") {
+    //     leeURL = "http://localhost:3001/leetusman"
+    // }
 
     return (
         <div className="Room R_02 Sketch">
