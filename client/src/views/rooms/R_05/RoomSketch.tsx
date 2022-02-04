@@ -112,13 +112,13 @@ class RoomSketch extends React.Component<Props> {
   }
 
   preload = (p5: p5Types) => {
-
-    // for (const creature of creaturesJSON) {
-    //   const index = creature.imgs[0];
-    //   creatures.push(new Creature(creature, p5));
-    // }
-
     imgTest = p5.loadImage("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/Ivans/5.png");
+    
+    for (const creature of creaturesJSON) {
+      const index = creature.imgs[0];
+      creatures.push(new Creature(creature, p5));
+    }
+
   }
 
   ////////////////////////////////////////////////////////////////////////
@@ -150,21 +150,21 @@ class RoomSketch extends React.Component<Props> {
     p5.pop();
 
     this.setPagePos(p5);
-    p5.image(imgTest, 0, 0);
+    // p5.image(imgTest, 0, 0);
   };
 
   setPagePos = (p5: p5Types) => {
     let dFromMid = p5.dist(p5.mouseX, p5.mouseY, p5.width / 2, p5.height / 2);
-    
+
     if (dFromMid > 200) {
       const speed = 5;
       const ang = p5.atan2(p5.mouseY - p5.height / 2, p5.mouseX - p5.width / 2);
       pagePos.x += speed * p5.cos(ang);
-      pagePos.x = p5.constrain(pagePos.x, -1840, 1400/2);
+      pagePos.x = p5.constrain(pagePos.x, -1840, 1400 / 2);
       pagePos.y += speed * p5.sin(ang);
-      pagePos.y = p5.constrain(pagePos.y, -1840, 1400/2);
+      pagePos.y = p5.constrain(pagePos.y, -1840, 1400 / 2);
     }
-    
+
 
   }
 

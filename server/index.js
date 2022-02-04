@@ -5,12 +5,15 @@ const http = require("http");
 const path = require('path');
 const server = http.createServer(app);
 
+const cors = require('cors')
+app.use(cors())
+
 // sockets
 // var io = module.exports.io = require('socket.io')(server);
 // const ClientManager = require('./websockets/ClientManager');
 // io.on('connection', ClientManager);
 
-const origin = process.env.PORT === "development"? "http://localhost:3000": "https://www.publicaccessmemories.com/"
+const origin = process.env.NODE_ENV === "development"? "http://localhost:3000": "https://www.publicaccessmemories.com/"
 const io = require("socket.io")(server, {
     cors: {
         origin: origin,
