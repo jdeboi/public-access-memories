@@ -103,8 +103,7 @@ const creaturesJSON = [
 const pagePos = { x: 0, y: 0 };
 
 const creatures: any[] = [];
-
-let imgTest: any;
+const creatureImgs: any[] = [];
 
 class RoomSketch extends React.Component<Props> {
   constructor(props: Props) {
@@ -112,13 +111,14 @@ class RoomSketch extends React.Component<Props> {
   }
 
   preload = (p5: p5Types) => {
-    imgTest = p5.loadImage("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/Ivans/5.png");
-    
-    for (const creature of creaturesJSON) {
-      const index = creature.imgs[0];
-      creatures.push(new Creature(creature, p5));
+    // imgTest = p5.loadImage("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/Ivans/5.png");
+    const ivansURL = "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/Ivans/"
+
+    for (let i = 0; i < creaturesJSON.length; i++) {
+      creatureImgs[i] = p5.loadImage(ivansURL + creaturesJSON[i].imgs[0] + ".png");
     }
 
+  
   }
 
   ////////////////////////////////////////////////////////////////////////
@@ -128,6 +128,10 @@ class RoomSketch extends React.Component<Props> {
     const { user, loadingDone } = this.props;
     // use parent to render the canvas in this ref
     // (without that p5 will render the canvas outside of your component)
+    let index = 0;
+    for (const creature of creaturesJSON) {
+      creatures.push(new Creature(creature, creatureImgs[index++], p5));
+    }
 
     const cnv = p5.createCanvas(p5.windowWidth, p5.windowHeight);
     cnv.parent(canvasParentRef);
