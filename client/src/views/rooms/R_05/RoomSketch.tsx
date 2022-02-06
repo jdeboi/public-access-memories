@@ -28,7 +28,7 @@ let lightImgs: p5Types.Image[] = [];
 const creaturesJSON = [
   {
     name: "менкв",
-    imgs: [0, 6],
+    imgs: [ 6], //0,
     x: 0,
     y: 200,
     text: "Menquah-keeper of the Polum-Torum-Oyka River, Pelym (Ivdel district, Sverdlovsk region). \nThe Mēӈkv is a relict forest giant. According to folklore stories, the Menquas can be hostile to humans, but they can also but they can also be helpful. The Menquas are subdivided into several species: warriors, sanctuary guards, and cannibals.They live in their own time dimension. They have one more sense than a man. Therefore, a man does not meet with them, and if he encroaches on their territory, the Menquas will get their revenge in their own way: a man gets tension and fear (from the collection of Vogul (Mansi) sacred poetry collected by Arturi Cannisto, translated by E.I. Rombandeeva)"
