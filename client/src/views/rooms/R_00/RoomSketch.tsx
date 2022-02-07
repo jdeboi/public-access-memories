@@ -9,7 +9,6 @@ import { text } from "@fortawesome/fontawesome-svg-core";
 import RoomDraggable from '../../Gallery/p5/components/Draggable/RoomDraggable';
 
 interface ComponentProps {
-  setSketchVol: (vol: number) => void;
   loadingDone: () => void;
   isMobile: boolean;
 }
@@ -24,10 +23,8 @@ interface DispatchProps {
 
 interface Props extends ComponentProps, StateProps, DispatchProps { }
 
-let lightImgs: p5Types.Image[] = [];
-let flies: any = [];
-let banana: p5Types.Image;
-let spoiledWindow: any;
+let imgs : any[] = [];
+let dx  = 0;
 
 class RoomSketch extends React.Component<Props> {
   constructor(props: Props) {
@@ -35,15 +32,11 @@ class RoomSketch extends React.Component<Props> {
   }
 
   preload = (p5: p5Types) => {
-    const url = "https://lmd-bucket.s3.us-east-2.amazonaws.com/sketches/gallery/";
-    // const url = "http://localhost:3000/online_assets/banana.jpeg";
-    banana = p5.loadImage("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/deBoisblanc/rotten4.jpeg");
+    const url = "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/Craft/"
 
-    lightImgs[0] = p5.loadImage(url + "tracklights/tracklights_vert.jpg");
-    lightImgs[1] = p5.loadImage(url + "tracklights/light_shadow.png");
-    lightImgs[2] = p5.loadImage(url + "tracklights/tracklights_dark_vert.jpg");
-    lightImgs[3] = p5.loadImage(url + "tracklights/black_shadow.png");
-
+    for (let i = 1; i < 5; i++) {
+      imgs[i-1] = p5.loadImage(url + i + ".png");
+    }
   }
 
   ////////////////////////////////////////////////////////////////////////
@@ -58,13 +51,6 @@ class RoomSketch extends React.Component<Props> {
     cnv.parent(canvasParentRef);
     cnv.mousePressed(() => this.clickedCanvas(p5));
 
-    for (let i = 0; i < 10; i++) {
-      flies.push(new Fly(p5));
-    }
-
-    const w = 500;
-    const h = 333;
-    spoiledWindow = new RoomDraggable(0, (p5.width - w) / 2, (p5.height - h) / 2, w, h, p5, banana, lightImgs[3])
     loadingDone();
   };
 
@@ -74,63 +60,46 @@ class RoomSketch extends React.Component<Props> {
   draw = (p5: p5Types) => {
     p5.clear();
 
-    // p5.background(255);
-    // let w = banana.width*.3;
-    // let h = banana.height*.3;
-    // p5.image(banana, (p5.width-w)/2, (p5.height-h)/2, w, h);
-
-    spoiledWindow.display();
-    spoiledWindow.displayToolBar();
-    spoiledWindow.update();
-
-    for (const fly of flies) {
-      fly.setTarget(spoiledWindow.x + spoiledWindow.w / 2, spoiledWindow.y + spoiledWindow.h / 2);
-      fly.move();
-      fly.display();
-    }
-
-
-
-    // p5.fill(0);
-    // p5.text(p5.frameRate(), 10, 10);
-    if (p5.frameCount % 20 === 0)
-      this.setVolume(p5);
+    this.setDx(p5);
+    this.drawBg(p5);
   };
 
-  getNumFlying() {
-    let n = 0;
-    for (const fly of flies) {
-      if (fly.isFlying) {
-        n++;
-      }
+  drawBg = (p5: p5Types) => {
+    const w = this.getW(p5);
+    p5.push();
+    p5.translate(-dx, 0);
+    const order = [1, 0, 2, 3];
+    for (let i = 0; i < imgs.length; i++) {
+      const x = -w + i * w;
+      p5.image(imgs[order[i]], x, 0, w, p5.height);
     }
-    return n;
+   
+    p5.pop();
   }
 
-  setVolume(p5: p5Types) {
-    const { setSketchVol } = this.props;
-    let v = p5.map(this.getNumFlying(), 0, flies.length, 0, 1);
-    setSketchVol(v);
+  getW = (p5: p5Types): number => {
+    return p5.height/imgs[0].height * imgs[0].width;
   }
 
+  setDx = (p5: p5Types) => {
+    if (p5.mouseX > p5.width/2 + 200) {
+      dx += 10;
+    }
+    else if (p5.mouseX < p5.width/2 - 200){
+      dx -= 10;
+    }
+    dx = p5.constrain(dx, -this.getW(p5), this.getW(p5)*(imgs.length-2)- (p5.width-this.getW(p5)));
+  }
+  
   clickedCanvas = (p5: p5Types) => {
-    for (const fly of flies) {
-      fly.clicked();
-    }
-    this.checkDiv();
+   
 
   }
 
 
 
   checkDiv() {
-    if (spoiledWindow.checkButtons(0, 0)) {
-      return true;
-    }
-    else if (spoiledWindow.checkDragging(0, 0)) {
-      return true;
-    }
-    return false;
+   
   }
 
   keyPressed = (p5: p5Types) => {
@@ -140,7 +109,7 @@ class RoomSketch extends React.Component<Props> {
   }
 
   mouseReleased = (p5: p5Types) => {
-    if (spoiledWindow) spoiledWindow.endDrag();
+    
   }
 
   manualResize = (p5: p5Types) => {

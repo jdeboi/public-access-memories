@@ -3,7 +3,7 @@ import { rooms } from '../../../data/RoomConfig';
 import { useParams } from "react-router-dom";
 import '../Room/Room.css';
 
-import R_00 from '../R_00/R_00';
+import R_00 from '../R_00/Room';
 import R_01 from '../R_01/R_01';
 import R_02 from '../R_02/R_02';
 import R_03 from '../R_03/R_03';

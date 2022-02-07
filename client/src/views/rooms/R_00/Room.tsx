@@ -6,15 +6,23 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectWindow } from '../../../store/store';
 import { doneLoadingApp } from '../../../store/window';
 
+import RoomSketch from './RoomSketch';
 
-const R_00 = () => {
+import './RoomCraft.css';
+
+const Room = () => {
     const windowUI = useSelector(selectWindow);
     const dispatch = useDispatch();
 
 
     return (
-        <div className="Room R_00 Sketch">
-            {/* <div id="p5_loading" className="loadingclass"></div> */}
+        <div className="Room RoomCraft Sketch">
+            <div id="p5_loading" className="loadingclass"></div>
+            <RoomSketch
+                loadingDone={() => dispatch(doneLoadingApp())}
+                isMobile={windowUI.isMobile}
+            />
+
             <h1>room1</h1>
             {
                 windowUI.loading ?
@@ -25,4 +33,4 @@ const R_00 = () => {
     )
 };
 
-export default R_00;
+export default Room;

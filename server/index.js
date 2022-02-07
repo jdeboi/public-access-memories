@@ -13,7 +13,8 @@ app.use(cors())
 // const ClientManager = require('./websockets/ClientManager');
 // io.on('connection', ClientManager);
 
-const origin = process.env.NODE_ENV === "development"? "http://localhost:3000": "https://www.publicaccessmemories.com/"
+const origin = process.env.NODE_ENV == "development"? "http://localhost:3000": "https://www.publicaccessmemories.com/"
+console.log("origin:", origin, process.env.NODE_ENV);
 const io = require("socket.io")(server, {
     cors: {
         origin: origin,

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import './Room.css';
+import './RoomIvans.css';
 
 import RoomSketch from './RoomSketch';
 
@@ -19,7 +19,7 @@ const Room = () => {
 
  
     return (
-        <div className="Room Sketch">
+        <div className="Room RoomIvans Sketch">
             <div id="p5_loading" className="loadingclass"></div>
             <RoomSketch
                 loadingDone={() => dispatch(doneLoadingApp())}
