@@ -12,7 +12,7 @@
 
 .ChatMobile {
   color: black;
-  font-size: 11pt;
+  font-size: 12pt;
 }
 
 .ChatMobile .chat-buttons {
@@ -32,7 +32,7 @@
 }
 
 .ChatMobile .Chat-messages .Chat-messages-box {
-  font-size: 11pt;
+  font-size: 12pt;
   padding: 10px;
   border: 2px solid black;
   border-radius: 8px;
@@ -56,7 +56,7 @@
 }
 
 .ChatMobile .Chat-messages .Chat-messages-box .Chat-messages-inner-box .message-txt {
-  font-size: 11pt;
+  font-size: 12pt;
   line-height: 1.4em;
 }
 
@@ -172,7 +172,7 @@
   padding: 5px;
   color: black;
   height: 30px;
-  font-size: 11pt;
+  font-size: 12pt;
 }
 
 .ChatMobile .Chat-messages .Chat-form .to-form .AutoComplete div input:focused {
@@ -192,6 +192,6 @@
 
 .ChatMobile .Chat-messages .Chat-form .Chat-send input {
   width: 100%;
-  font-size: 11pt;
+  font-size: 12pt;
 }
 /*# sourceMappingURL=ChatMobile.css.map */

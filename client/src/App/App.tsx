@@ -48,7 +48,7 @@ function App() {
     const user = useSelector(selectUser);
     // const music = useSelector(selectMusic);
     const windowUI = useSelector(selectWindow);
-    
+
 
     const dispatch = useDispatch();
 
@@ -197,11 +197,6 @@ function App() {
                 />
                 <FAQ isFrame={true} />
                 <Chat users={users} />
-                <RoomDecal
-                    startMedia={startMedia}
-                    hasLoadedRoom={hasLoadedRoom}
-                    users={users}
-                />
                 <Welcome
                     isClosed={isClosed}
                     hasAvatar={hasAvatar}
@@ -211,7 +206,7 @@ function App() {
                 />
 
                 <MobileFooter avatarClicked={avatarClicked} />
-                
+
             </React.Fragment>
         )
     }
@@ -239,6 +234,11 @@ function App() {
 
             {/* check if user hasn't logged in and on a basic page */}
             {getSignedInComponents()}
+            <RoomDecal
+                startMedia={startMedia}
+                hasLoadedRoom={hasLoadedRoom}
+                // users={users}
+            />
 
 
         </div>

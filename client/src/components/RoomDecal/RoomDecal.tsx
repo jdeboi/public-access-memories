@@ -22,7 +22,7 @@ import { IUsers } from '../../interfaces/index';
 
 interface IRoomDecal {
     hasLoadedRoom: boolean,
-    users: IUsers,
+    // users: IUsers,
     startMedia: () => void,
 }
 
@@ -33,78 +33,78 @@ const RoomDecal = (props: IRoomDecal) => {
     const { pathname } = useLocation();
     const room = getRoomByPath(pathname);
 
-    const getParticipantsBox = () => {
-        if (windowUI.hasFooter && windowUI.orientation === "landscape")
-            return null;
-        return (
-            <div className="participants-box">
-                <br />
-                <br />
-                <div className="usersEye">
-                    <FontAwesomeIcon icon={faEye} />
-                    {getRoomCount(user.roomUrl, props.users)}
-                </div>
-                <br />
-                <br />
-                <div className="participants">
-                    <span
-                        data-tip={"me"}
-                    >
-                        {user.avatar}
+    // const getParticipantsBox = () => {
+    //     if (windowUI.hasFooter && windowUI.orientation === "landscape")
+    //         return null;
+    //     return (
+    //         <div className="participants-box">
+    //             <br />
+    //             <br />
+    //             <div className="usersEye">
+    //                 <FontAwesomeIcon icon={faEye} />
+    //                 {getRoomCount(user.roomUrl, props.users)}
+    //             </div>
+    //             <br />
+    //             <br />
+    //             <div className="participants">
+    //                 <span
+    //                     data-tip={"me"}
+    //                 >
+    //                     {user.avatar}
 
-                    </span>
-                    {/* {this.getFakeUsers()} */}
-                    {getUsers()}
+    //                 </span>
+    //                 {/* {this.getFakeUsers()} */}
+    //                 {getUsers()}
 
-                </div>
-                <ReactTooltip />
-            </div>
-        )
+    //             </div>
+    //             <ReactTooltip />
+    //         </div>
+    //     )
 
-    }
+    // }
 
-    const getFakeUsers = () => {
-        const users = [
-            { avatar: "🤣", userName: "bob" },
-            { avatar: "🎃", userName: "george" },
-            { avatar: "🤢", userName: "hannah" },
-            { avatar: "🤪", userName: "jdeboisblanc" },
-            { avatar: "🥵", userName: "ok" },
-            { avatar: "😎", userName: "ashley123" },
-            { avatar: "🤣", userName: "bob" },
-        ]
-        return users.map((usr, i) => {
-            return (
-                <span
-                    key={i}
-                    data-tip={usr.userName}
-                >
-                    {usr.avatar}
+    // const getFakeUsers = () => {
+    //     const users = [
+    //         { avatar: "🤣", userName: "bob" },
+    //         { avatar: "🎃", userName: "george" },
+    //         { avatar: "🤢", userName: "hannah" },
+    //         { avatar: "🤪", userName: "jdeboisblanc" },
+    //         { avatar: "🥵", userName: "ok" },
+    //         { avatar: "😎", userName: "ashley123" },
+    //         { avatar: "🤣", userName: "bob" },
+    //     ]
+    //     return users.map((usr, i) => {
+    //         return (
+    //             <span
+    //                 key={i}
+    //                 data-tip={usr.userName}
+    //             >
+    //                 {usr.avatar}
 
-                </span>
-            )
-        });
+    //             </span>
+    //         )
+    //     });
 
-    }
+    // }
 
-    const getUsers = () => {
-        return props.users.map((usr, i) => {
-            if (usr.roomUrl !== user.roomUrl)
-                return null;
-            return (
-                <span
-                    key={i}
-                    data-tip={usr.userName}
-                >
-                    {usr.avatar}
+    // const getUsers = () => {
+    //     return props.users.map((usr, i) => {
+    //         if (usr.roomUrl !== user.roomUrl)
+    //             return null;
+    //         return (
+    //             <span
+    //                 key={i}
+    //                 data-tip={usr.userName}
+    //             >
+    //                 {usr.avatar}
 
-                </span>
-            )
-        })
+    //             </span>
+    //         )
+    //     })
 
-        return <div></div>;
+    //     return <div></div>;
 
-    }
+    // }
 
 
     const getButtons = () => {

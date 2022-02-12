@@ -4,15 +4,14 @@ import { IWindowUI } from '../../interfaces';
 const padding = 15;
 // const heading = 60; // top header
 // const barBot = 60; // mobile footer / landscape menu
-const minW = 540;
-const minH = 400;
+
 const borderW = 2;
 const buffer = 40;
 
-export function getCenterModalDim(windowUI: IWindowUI, isRelative: boolean) {
+export function getCenterModalDim(windowUI: IWindowUI, isRelative: boolean, minW=540, minH=400) {
 
 
-    if (getWidthTooSmall(windowUI) || getHeightTooSmall(windowUI)) {
+    if (getWidthTooSmall(windowUI, minW, minH) || getHeightTooSmall(windowUI, minW, minH)) {
         if (windowUI.orientation === "portrait")
             return getPortraitSmall(windowUI, isRelative);
         return getLandscapeSmall(windowUI, isRelative);
@@ -27,37 +26,18 @@ export function getCenterModalDim(windowUI: IWindowUI, isRelative: boolean) {
         if (!isRelative)
             y += headerH;
 
-        // if (width < 600) {
-        //     w = width - padding * 2;
-        //     h = height - padding * 2 - headerH - barBot - heading;
-        //     let y = padding; // + heading;
-        //     if (!isRelative)
-        //         y += heading;
-        // }
-        // else if (height < 400) {
-        //     w = 540;
-        //     h = height - padding * 2 - headerH - barBot;
-        //     let y = padding; // + heading;
-        //     if (!isRelative)
-        //         y += heading;
-        // }
-
         let x = (contentW - w) / 2 - borderW;
         return { w, h, x, y };
-        // console.log(w, h, x, y);
     }
-
-
-    // return {w: 100, h: 100, x: 100, y: 100}
 }
 
 
-function getWidthTooSmall(windowUI: IWindowUI) {
+function getWidthTooSmall(windowUI: IWindowUI, minW: number, minH: number) {
     const { contentW } = windowUI;
     return contentW < minW + padding * 2 + buffer;
 }
 
-function getHeightTooSmall(windowUI: IWindowUI) {
+function getHeightTooSmall(windowUI: IWindowUI, minW: number, minH: number) {
     const { toolbarH, contentH } = windowUI;
     return contentH < minH + padding * 2 + toolbarH + buffer;
 }

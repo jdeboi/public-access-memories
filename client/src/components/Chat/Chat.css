@@ -21,7 +21,7 @@
   width: 300px;
   height: 400px;
   color: white;
-  font-size: 11pt;
+  font-size: 12pt;
 }
 
 .Chat .Chat-Content .Chat-title {
@@ -60,7 +60,7 @@
 }
 
 .Chat .Chat-Content .Chat-messages .Chat-messages-box .Chat-messages-inner-box .message-txt {
-  font-size: 11pt;
+  font-size: 12pt;
   line-height: 1.4em;
 }
 

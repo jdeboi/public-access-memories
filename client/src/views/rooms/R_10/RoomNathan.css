@@ -1,0 +1,42 @@
+.App .Sketch.RoomNathan {
+  background: black;
+  overflow-y: scroll;
+}
+
+.App .Sketch .NathanImages, .RoomNathan .NathanImages {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+}
+
+.App .Sketch .NathanImages div.responsive, .RoomNathan .NathanImages div.responsive {
+  margin: 0 auto;
+  padding: 30px;
+  width: 80vw;
+  height: 80vw;
+  max-width: 789px;
+  max-height: 789px;
+}
+
+.App .Sketch .NathanImages div.responsive div, .RoomNathan .NathanImages div.responsive div {
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.App .Sketch .NathanImages #spawnPoint1, .RoomNathan .NathanImages #spawnPoint1 {
+  background-image: url(https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/Nathan/SpawnPoint1.png);
+}
+
+.App .Sketch .NathanImages #spawnPoint2, .RoomNathan .NathanImages #spawnPoint2 {
+  background-image: url(https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/Nathan/SpawnPoint2.png);
+}
+
+.App .Sketch .NathanImages #spawnPoint3, .RoomNathan .NathanImages #spawnPoint3 {
+  background-image: url(https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/Nathan/SpawnPoint3.png);
+}
+/*# sourceMappingURL=RoomNathan.css.map */
