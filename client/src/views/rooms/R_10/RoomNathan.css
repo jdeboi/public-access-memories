@@ -1,17 +1,20 @@
-.App .Sketch, .RoomNathan {
+.App .Sketch.RoomNathan {
   background: black;
   overflow-y: scroll;
+}
+
+.RoomNathan {
   line-height: 1.3em;
 }
 
-.App .Sketch .mouseTip, .RoomNathan .mouseTip {
+.RoomNathan .mouseTip {
   position: absolute;
   background-color: black;
   width: 200px;
   height: auto;
 }
 
-.App .Sketch .NathanImages, .RoomNathan .NathanImages {
+.RoomNathan .NathanImages {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -21,11 +24,11 @@
   width: 100%;
 }
 
-.App .Sketch .NathanImages span.title, .RoomNathan .NathanImages span.title {
+.RoomNathan .NathanImages span.title {
   font-size: 120%;
 }
 
-.App .Sketch .NathanImages div.responsive, .RoomNathan .NathanImages div.responsive {
+.RoomNathan .NathanImages div.responsive {
   margin: 0 auto;
   padding: 50px;
   display: -webkit-box;
@@ -40,7 +43,7 @@
       flex-wrap: wrap;
 }
 
-.App .Sketch .NathanImages div.responsive .spawnPoint, .RoomNathan .NathanImages div.responsive .spawnPoint {
+.RoomNathan .NathanImages div.responsive .spawnPoint {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -49,36 +52,36 @@
   padding-bottom: 30px;
 }
 
-.App .Sketch .NathanImages div.responsive .spawnPoint:after, .RoomNathan .NathanImages div.responsive .spawnPoint:after {
+.RoomNathan .NathanImages div.responsive .spawnPoint:after {
   content: "";
   display: block;
   padding-bottom: 100%;
 }
 
-.App .Sketch .NathanImages div.responsive .spawnPointImg, .RoomNathan .NathanImages div.responsive .spawnPointImg {
+.RoomNathan .NathanImages div.responsive .spawnPointImg {
   background-repeat: none;
   background-size: cover;
   width: 100%;
   height: 100%;
 }
 
-.App .Sketch .NathanImages div.responsive .label, .RoomNathan .NathanImages div.responsive .label {
+.RoomNathan .NathanImages div.responsive .label {
   width: 200px;
 }
 
-.App .Sketch .NathanImages div.responsive .label div, .RoomNathan .NathanImages div.responsive .label div {
+.RoomNathan .NathanImages div.responsive .label div {
   padding-bottom: 15px;
 }
 
-.App .Sketch .NathanImages #spawnPoint1, .RoomNathan .NathanImages #spawnPoint1 {
+.RoomNathan .NathanImages #spawnPoint1 {
   background-image: url(https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/Nathan/SpawnPoint1.png);
 }
 
-.App .Sketch .NathanImages #spawnPoint2, .RoomNathan .NathanImages #spawnPoint2 {
+.RoomNathan .NathanImages #spawnPoint2 {
   background-image: url(https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/Nathan/SpawnPoint2.png);
 }
 
-.App .Sketch .NathanImages #spawnPoint3, .RoomNathan .NathanImages #spawnPoint3 {
+.RoomNathan .NathanImages #spawnPoint3 {
   background-image: url(https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/Nathan/SpawnPoint3.png);
 }
 /*# sourceMappingURL=RoomNathan.css.map */

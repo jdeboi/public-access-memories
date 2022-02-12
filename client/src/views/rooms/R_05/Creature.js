@@ -9,14 +9,21 @@ class Creature {
         this.img = img;
         this.timer = this.getRandomT(p5);
 
-        
+        this.currentFactor = 1;
     }
 
     display(p5, pagePos) {
         const d = this.getMouseDist(p5, pagePos);
-        const f = p5.constrain(p5.map(d, 0, 500, .1, 1), .1, 1);
-        const imgW =  f *this.img.width;
-        const imgH = f*this.img.height;
+        // p5.map(d, 0, 500, .1, 1)
+        if (d < 300) {
+            this.currentFactor-= .005;
+        }
+        else {
+            this.currentFactor+= .005;
+        }
+        this.currentFactor = p5.constrain(this.currentFactor, .1, 1);
+        const imgW =  this.currentFactor *this.img.width;
+        const imgH = this.currentFactor*this.img.height;
         p5.imageMode(p5.CENTER);
         p5.image(this.img, this.x, this.y,imgW, imgH);
     
@@ -46,7 +53,7 @@ class Creature {
     }
 
     getRandomT(p5) {
-        return p5.random(4000,12000);
+        return p5.random(12000,22000);
     }
 }
 

@@ -1,6 +1,9 @@
-.App .Sketch, .RoomNathan {
+.App .Sketch.RoomNathan {
     background: black;
     overflow-y: scroll;
+} 
+
+.RoomNathan {
     line-height: 1.3em;
 
     .mouseTip {

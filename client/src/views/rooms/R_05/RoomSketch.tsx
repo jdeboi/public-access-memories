@@ -161,7 +161,7 @@ class RoomSketch extends React.Component<Props> {
     let dFromMid = p5.dist(p5.mouseX, p5.mouseY, p5.width / 2, p5.height / 2);
 
     if (dFromMid > 200) {
-      const speed = 5;
+      const speed = 3;
       const ang = p5.atan2(p5.mouseY - p5.height / 2, p5.mouseX - p5.width / 2);
       pagePos.x += speed * p5.cos(ang);
       pagePos.x = p5.constrain(pagePos.x, -1840, 1400 / 2);

@@ -29,14 +29,15 @@ export default function DetailsStart() {
           <div style={{ fontSize: fonts[3], paddingBottom: "10px" }}>a <a href="https://thewrong.org/">wrong biennale</a> pavillion</div>
           <div style={{ fontSize: fonts[3], paddingBottom: "10px" }}>2022</div> */}
 
-          <h2 style={{ paddingBottom: "50px" }}>home &lt;/body&gt;</h2>
-
-          <h4 style={{ paddingBottom: "10px" }}><a href="https://thewrong.org/">a wrong biennale pavillion</a></h4>
-          <h4 style={{ paddingBottom: "10px" }}>
+          <h2 style={{ paddingBottom: "20px" }}>home &lt;/body&gt;</h2>
+          {/* <h4 style={{ paddingBottom: "10px" }}><a href="https://thewrong.org/">a wrong biennale pavillion</a></h4> */}
+          <h4 style={{ paddingBottom: "40px" }}>
             hosted by
             <br />
             public access memories gallery
           </h4>
+          <a href="https://thewrong.org/"><img width="130px" src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/tw5_logo.png" /></a>
+         
         </div>
       </div>
 

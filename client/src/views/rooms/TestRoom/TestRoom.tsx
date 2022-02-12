@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import '../Room/Room.css';
 
 import R_00 from '../R_00/Room';
-import R_01 from '../R_01/R_01';
+import R_01 from '../R_01/Room';
 import R_02 from '../R_02/R_02';
 import R_03 from '../R_03/R_03';
 import R_04 from '../R_04/R_04';
@@ -14,6 +14,8 @@ import R_07 from '../R_07/R_07';
 import R_08 from '../R_08/R_08';
 import R_09 from '../R_09/Room';
 import R_10 from '../R_10/Room';
+import R_11 from '../R_11/Room';
+
 
 import { ShowConfig } from '../../../data/ShowConfig';
 const { isClosed } = ShowConfig;
@@ -66,8 +68,8 @@ const TestRoom = () => {
             return <R_09 />
         case '10':
             return <R_10 />
-        // case '11':
-        //     return <R_11 />
+        case '11':
+            return <R_11 />
         // case '12':
         //     return <R_12 />
         default:

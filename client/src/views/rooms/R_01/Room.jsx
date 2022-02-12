@@ -4,7 +4,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 // import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { Html, useProgress, useGLTF, OrbitControls } from '@react-three/drei';
 
-import './R_01.css';
+import './RoomS.css';
 
 // store
 import { useSelector } from 'react-redux';
@@ -33,13 +33,13 @@ function Model() {
 
 
 
-const R_01 = () => {
+const Room = () => {
     const windowUI = useSelector(selectWindow);
 
     // const dispatch = useDispatch();
 
     return (
-        <div className="Room R_01 Sketch">
+        <div className="Room RoomS Sketch">
             <Canvas camera={{
                 fov: 35,
                 zoom: mapVal(windowUI.contentW, 400, 2300, .7, 1.3),
@@ -59,13 +59,9 @@ const R_01 = () => {
                     <Model />
                 </Suspense>
             </Canvas>
-            {/* {
-                windowUI.loading ?
-                    <LoadingPage /> :
-                    null
-            } */}
+          
         </div>
     )
 };
 
-export default R_01;
+export default Room;
