@@ -39,7 +39,7 @@ function Model() {
 
 function VideoTex({ windowUI }) {
     // const windowUI = useSelector(selectWindow);
-    const size = useAspect(1920, 1080, .09);
+    const size = useAspect(1920, 1080, .5);
     const [video] = useState(() => {
         const vid = document.createElement("video");
         vid.src = "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/lydia/homebody.mp4";
@@ -53,11 +53,14 @@ function VideoTex({ windowUI }) {
             video.play();
         }
     }, [windowUI.compositionStarted]);
+
+    const rx = -16*Math.PI/180;
     return (
         <mesh
             scale={size}
-            rotation={[-16*Math.PI/180, 0, 0]}
-            position={[-.03, -.5+.2,.4]}
+            rotation={[0, 0, 0]}
+            position={[-.03, -.5+.2,-2]}
+            
         >
             <planeBufferGeometry />
             <meshBasicMaterial>
@@ -74,17 +77,20 @@ const Room = () => {
     // const dispatch = useDispatch();
 
     return (
+        // zoom: mapVal(windowUI.contentW, 400, 2300, .7, 2),
         <div className="Room RoomLydia Sketch">
             <Canvas camera={{
-                zoom: mapVal(windowUI.contentW, 400, 2300, .7, 2),
+                
                 near: 1,
-                far: 1000
+                far: 10000
             }}>
 
                 <Suspense fallback={<VideoTex windowUI={windowUI} />}>
                     <OrbitControls
                         minPolarAngle={Math.PI / 2-.2}
                         maxPolarAngle={Math.PI / 2+.2}
+                        minAzimuthAngle={-.5}
+                        maxAzimuthAngle={.5}
                         minDistance={1.5}
                         maxDistance={3}
                     />
