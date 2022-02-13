@@ -57,13 +57,18 @@ class RoomSketch extends React.Component<Props> {
     const cnv = p5.createCanvas(p5.windowWidth, p5.windowHeight);
     cnv.parent(canvasParentRef);
     cnv.mousePressed(() => this.clickedCanvas(p5));
+    // cnv.touchStarted(() => this.touchedCanvas(p5));
 
     for (let i = 0; i < 10; i++) {
       flies.push(new Fly(p5));
     }
 
-    const w = 500;
-    const h = 333;
+    let w = 500;
+    let h = 333;
+    if (p5.width < w) {
+      w = Math.floor(p5.width - 20);
+      h = Math.floor(w / 550 * h);
+    }
     spoiledWindow = new RoomDraggable(0, (p5.width - w) / 2, (p5.height - h) / 2, w, h, p5, banana, lightImgs[3])
     loadingDone();
   };
@@ -97,7 +102,7 @@ class RoomSketch extends React.Component<Props> {
       this.setVolume(p5);
   };
 
-  getNumFlying() {
+  getNumFlying = () => {
     let n = 0;
     for (const fly of flies) {
       if (fly.isFlying) {
@@ -107,7 +112,7 @@ class RoomSketch extends React.Component<Props> {
     return n;
   }
 
-  setVolume(p5: p5Types) {
+  setVolume = (p5: p5Types) => {
     const { setSketchVol } = this.props;
     let v = p5.map(this.getNumFlying(), 0, flies.length, 0, 1);
     setSketchVol(v);
@@ -117,13 +122,13 @@ class RoomSketch extends React.Component<Props> {
     for (const fly of flies) {
       fly.clicked();
     }
-    this.checkDiv();
-
+    if (!this.props.isMobile) {
+      this.checkDiv();
+    }
   }
 
 
-
-  checkDiv() {
+  checkDiv = () => {
     if (spoiledWindow.checkButtons(0, 0)) {
       return true;
     }
@@ -139,8 +144,24 @@ class RoomSketch extends React.Component<Props> {
     }
   }
 
+
+  mousePressed = (p5: p5Types) => {
+    return;
+  }
+
   mouseReleased = (p5: p5Types) => {
     if (spoiledWindow) spoiledWindow.endDrag();
+    return;
+  }
+
+  touchStarted = (p5: p5Types) => {
+    this.checkDiv();
+    return;
+  }
+
+  touchEnded = (p5: p5Types) => {
+    if (spoiledWindow) spoiledWindow.endDrag();
+    return;
   }
 
   manualResize = (p5: p5Types) => {
@@ -165,8 +186,11 @@ class RoomSketch extends React.Component<Props> {
         draw={this.draw}
         windowResized={this.windowResized}
         keyPressed={this.keyPressed}
+        mousePressed={this.mousePressed}
         mouseReleased={this.mouseReleased}
         doubleClicked={this.doubleClicked}
+        touchStarted={this.touchStarted}
+        touchEnded={this.touchEnded}
       />
     );
   }

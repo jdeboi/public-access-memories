@@ -27,7 +27,7 @@ const R_07 = () => {
     return (
         <div className="Room R_07 Sketch" style={{background: bgColor}}>
             <div style={{position: "absolute", top: vidPos.y, left:vidPos.x }}>
-                <ReactPlayer url='https://netscapes.s3.us-east-2.amazonaws.com/mojave/elon.mp4https://netscapes.s3.us-east-2.amazonaws.com/mojave/elon.mp4' />
+                <ReactPlayer url='https://netscapes.s3.us-east-2.amazonaws.com/mojave/elon.mp4' />
             </div>
             {
                 windowUI.loading ?

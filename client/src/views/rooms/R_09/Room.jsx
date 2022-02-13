@@ -22,18 +22,22 @@ function Loader() {
 }
 
 function Model() {
-    const [url, set] = useState('https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/lydia/lydia.glb')
+    // const [url, set] = useState('https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/lydia/lydia.glb')
+    const [url, set] = useState('/online_assets/models/macbookpro.glb')
+
     useEffect(() => {
-        setTimeout(() => set('https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/lydia/lydia.glb'), 2000)
+        setTimeout(() => set('/online_assets/models/macbookpro.glb'), 2000)
+
+        // setTimeout(() => set('https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/lydia/lydia.glb'), 2000)
     }, [])
     const { scene } = useGLTF(url);
     //Load background texture
     return (
         <primitive
             object={scene}
-            rotation={[0, Math.PI / 2, 0]}
-            scale={[4, 4, 4]}
-            position={[0, .2, 0]}
+            rotation={[0, 0, 0]}
+            scale={[2.4, 2, 2]}
+            position={[0, -1, -1]}
         />);
 }
 
@@ -42,7 +46,8 @@ function VideoTex({ windowUI }) {
     const size = useAspect(1920, 1080, .5);
     const [video] = useState(() => {
         const vid = document.createElement("video");
-        vid.src = "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/lydia/homebody.mp4";
+        // vid.src = "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/lydia/homebody.mp4";
+        vid.src = "/online_assets/homebody720.mp4";
         vid.crossOrigin = "Anonymous";
         vid.loop = true;
         return vid;
@@ -58,8 +63,8 @@ function VideoTex({ windowUI }) {
     return (
         <mesh
             scale={size}
-            rotation={[0, 0, 0]}
-            position={[-.03, -.5+.2,-2]}
+            rotation={[-.35, 0, 0]}
+            position={[0, 1.1,-3.74]}
             
         >
             <planeBufferGeometry />
@@ -87,16 +92,16 @@ const Room = () => {
 
                 <Suspense fallback={<VideoTex windowUI={windowUI} />}>
                     <OrbitControls
-                        minPolarAngle={Math.PI / 2-.2}
-                        maxPolarAngle={Math.PI / 2+.2}
-                        minAzimuthAngle={-.5}
-                        maxAzimuthAngle={.5}
+                        minPolarAngle={Math.PI / 2-.3}
+                        maxPolarAngle={Math.PI / 2+.3}
+                        minAzimuthAngle={-.6}
+                        maxAzimuthAngle={.6}
                         minDistance={1.5}
                         maxDistance={3}
                     />
-                    <ambientLight intensity={0.2} />
-                    <directionalLight color="white" position={[3, 0, 1]} />
-                    {/* <Model /> */}
+                    <ambientLight intensity={0.4} />
+                    <directionalLight color="white" position={[1, 2, 1]} />
+                    <Model />
                     <VideoTex windowUI={windowUI} />
                 </Suspense>
             </Canvas>
