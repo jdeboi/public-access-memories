@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,WAAW,CAAC;EACR,UAAU,EAAE,KAAK;CAKpB",
+    "sources": [
+        "RoomSidney.scss"
+    ],
+    "names": [],
+    "file": "RoomSidney.css"
+}
