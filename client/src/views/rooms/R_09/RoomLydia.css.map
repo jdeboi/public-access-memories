@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "AAAA,AAAA,UAAU,CAAC;EACP,UAAU,EAAE,KAAK;EACjB,gBAAgB,EAAE,gHAAgH;EAClI,iBAAiB,EAAE,MAAM;CAC5B",
+    "mappings": "AACA,AAAA,UAAU,CAAC;EACP,UAAU,EAAE,KAAK;EACjB,gBAAgB,EAAE,gHAAgH;EAClI,iBAAiB,EAAE,MAAM;CAC5B",
     "sources": [
         "RoomLydia.scss"
     ],

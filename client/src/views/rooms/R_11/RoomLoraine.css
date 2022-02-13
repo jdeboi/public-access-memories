@@ -1,5 +1,22 @@
+.App .Sketch.RoomLoraine {
+  overflow-y: scroll;
+}
+
+.RoomLoraine {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
 .RoomLoraine .instaContainer {
-  width: 400px;
-  height: 400px;
+  height: 100%;
+  min-width: 350px;
+  margin-top: 20px;
 }
 /*# sourceMappingURL=RoomLoraine.css.map */

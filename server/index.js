@@ -35,13 +35,29 @@ app.get("/api", (req, res) => {
 app.use(express.static(path.join(__dirname, '/../client/build')));
 
 
+///////////////////////////////////////////////////
+// CUSTOM ARTISTS
+///////////////////////////////////////////////////
 app.get('/leetusman', (req, res) => {
     res.sendFile(path.join(__dirname + '/../client/build/leetusman.html'));
 })
 
+
+app.get('/loraine1', (req, res) => {
+    res.sendFile(path.join(__dirname + '/../client/build/loraine1.html'));
+})
+app.get('/loraine2', (req, res) => {
+    res.sendFile(path.join(__dirname + '/../client/build/loraine2.html'));
+})
+app.get('/loraine3', (req, res) => {
+    res.sendFile(path.join(__dirname + '/../client/build/loraine3.html'));
+})
+///////////////////////////////////////////////////
+
 app.get('/privacy', (req, res) => {
     res.sendFile(path.join(__dirname + '/../client/build/privacy.html'));
 })
+
 
 // Anything that doesn't match the above, send back index.html
 app.get('*', (req, res) => {
