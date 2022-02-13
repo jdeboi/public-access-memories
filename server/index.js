@@ -34,9 +34,13 @@ app.get("/api", (req, res) => {
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, '/../client/build')));
 
-// Anything that doesn't match the above, send back index.html
+
 app.get('/leetusman', (req, res) => {
     res.sendFile(path.join(__dirname + '/../client/build/leetusman.html'));
+})
+
+app.get('/privacy', (req, res) => {
+    res.sendFile(path.join(__dirname + '/../client/build/privacy.html'));
 })
 
 // Anything that doesn't match the above, send back index.html
