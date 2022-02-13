@@ -15,6 +15,7 @@ import R_08 from '../R_08/R_08';
 import R_09 from '../R_09/Room';
 import R_10 from '../R_10/Room';
 import R_11 from '../R_11/Room';
+import R_12 from '../R_12/Room';
 import R_13 from '../R_13/Room';
 
 
@@ -71,6 +72,8 @@ const TestRoom = () => {
             return <R_10 />
         case '11':
             return <R_11 />
+        case '12':
+            return <R_12 />
         case '13':
             return <R_13 />
         default:
