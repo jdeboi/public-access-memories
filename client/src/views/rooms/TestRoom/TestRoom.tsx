@@ -11,7 +11,7 @@ import R_04 from '../R_04/Room';
 import R_05 from '../R_05/Room';
 import R_06 from '../R_06/R_06';
 import R_07 from '../R_07/Room';
-import R_08 from '../R_08/R_08';
+import R_08 from '../R_08/Room';
 import R_09 from '../R_09/Room';
 import R_10 from '../R_10/Room';
 import R_11 from '../R_11/Room';
@@ -20,30 +20,14 @@ import R_13 from '../R_13/Room';
 
 
 import { ShowConfig } from '../../../data/ShowConfig';
+import { getRoomFromID } from '../../../helpers/helpers';
 const { isClosed } = ShowConfig;
 
 
 const TestRoom = () => {
 
-    const getRoom = (id: string | undefined) => {
-        let roomID = 0;
-        if (id) {
-            // let rid = id.substring(4, id.length);
-            // roomID = parseInt(rid);
-            roomID = parseInt(id);
-        }
-
-        if (isNaN(roomID))
-            roomID = 0;
-        if (roomID >= rooms.length || roomID < 0)
-            roomID = 0;
-        // console.log("room id", roomID)
-        const room = rooms[roomID];
-        return room;
-    }
-
     const { id } = useParams();
-    const room = getRoom(id);
+    const room = getRoomFromID(id);
 
 
 

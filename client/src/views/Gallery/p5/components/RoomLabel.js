@@ -2,7 +2,7 @@ import Draggable from './Draggable/Draggable';
 // import ShadowDraggable from './Draggable/ShadowDraggable'
 import { GlobalConfig } from '../../../../data/GlobalConfig';
 import { p5ToWorldCoords } from '../../../../helpers/coordinates';
-import { rooms, roomConfig } from '../../../../data/RoomConfig';
+import { artists, rooms, roomConfig } from '../../../../data/RoomConfig';
 
 export default class RoomLabel extends Draggable {
 
@@ -12,12 +12,13 @@ export default class RoomLabel extends Draggable {
 
         this.eyeIcon = eyeIcon;
         const room = rooms[id];
+        const artist = artists[room.artistID];
 
         const point = p5ToWorldCoords(room.x, room.y);
         this.x = point.x - this.w / 2 + roomConfig.w * GlobalConfig.scaler / 2;
         this.y = point.y - this.h / 2 + roomConfig.w * GlobalConfig.scaler / 2;
-        this.title = room.title;
-        this.artist = room.artist;
+        this.title = artist.title;
+        this.artist = artist.name;
         this.link = room.link;
     }
 
@@ -102,7 +103,7 @@ export default class RoomLabel extends Draggable {
         
         this.p5.noStroke();
         let t = this.title;
-        let maxL = 20;
+        let maxL = 16;
         if (t.length > maxL) {
             // let br = this.title.indexOf(" ");
             // let t1 = this.title.substring(0, br);

@@ -52,7 +52,7 @@ function VideoTex({ windowUI }) {
             >
                 <boxGeometry attach="geometry" args={[sz, sz, sz]} />
                 <meshBasicMaterial attach="material" side={THREE.BackSide} >
-                    <videoTexture attach="map" args={[video]} />
+                    <videoTexture encoding={THREE.sRGBEncoding} attach="map" args={[video]} />
                 </meshBasicMaterial>
             </mesh>
 
@@ -67,7 +67,7 @@ function VideoTex({ windowUI }) {
                         >
                             <boxGeometry attach="geometry" args={[1, 1, 1]} />
                             <meshBasicMaterial attach="material" >
-                                <videoTexture attach="map" args={[video]} />
+                                <videoTexture encoding={THREE.sRGBEncoding} attach="map" args={[video]} />
                             </meshBasicMaterial>
                         </mesh>
                     )
@@ -86,8 +86,7 @@ const Room = () => {
     return (
         // zoom: mapVal(windowUI.contentW, 400, 2300, .7, 2),
         <div className="Room RoomL Sketch">
-            <Canvas camera={{
-
+            <Canvas colorManagement={true} camera={{
                 near: 1,
                 far: 10000
             }}>
@@ -100,8 +99,8 @@ const Room = () => {
                         minDistance={1.5}
                         maxDistance={3}
                     />
-                    <ambientLight intensity={0.1} />
-                    <directionalLight color="white" position={[1, 2, 1]} />
+                    <ambientLight  color="white" intensity={.1} />
+                    {/* <directionalLight color="white" position={[1, 2, 1]} /> */}
                     {/* <Model  windowUI={windowUI} /> */}
                     <VideoTex windowUI={windowUI} />
                 </Suspense>

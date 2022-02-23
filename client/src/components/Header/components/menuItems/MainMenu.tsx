@@ -1,5 +1,5 @@
 import React from 'react';
-import { rooms } from '../../../../data/RoomConfig';
+import { rooms, artists } from '../../../../data/RoomConfig';
 import { ShowConfig } from '../../../../data/ShowConfig';
 import FinderSubmenu from '../FinderSubmenu';
 
@@ -17,9 +17,9 @@ const MainMenu = (props: IMainMenu) => {
     const navigate = useNavigate();
     const { pathname } = useLocation();
 
-    const roomsList = rooms.map(rm => {
+    const roomsList = rooms.map((rm, i) => {
         let val: IListItem = {
-            title: rm.title,
+            title: artists[rm.artistID].name,
             link: rm.link
         };
         if (rm.shortcut)

@@ -4,7 +4,7 @@ import './RoomDecal.css';
 import { useLocation } from 'react-router';
 
 // pages & rooms
-import { getRoomByPath, getRoomCount } from '../../helpers/helpers';
+import { getRoomByPath } from '../../helpers/helpers';
 
 // components
 import ReactTooltip from 'react-tooltip';
@@ -19,6 +19,7 @@ import { startComposition } from '../../store/window';
 
 // interface
 import { IUsers } from '../../interfaces/index';
+import { artists } from '../../data/RoomConfig';
 
 interface IRoomDecal {
     hasLoadedRoom: boolean,
@@ -32,6 +33,7 @@ const RoomDecal = (props: IRoomDecal) => {
     const user = useSelector(selectUser);
     const { pathname } = useLocation();
     const room = getRoomByPath(pathname);
+    const artist =  room ? artists[room.artistID] : artists[0];
 
     // const getParticipantsBox = () => {
     //     if (windowUI.hasFooter && windowUI.orientation === "landscape")
@@ -117,7 +119,7 @@ const RoomDecal = (props: IRoomDecal) => {
     }
 
 
-    const getArtistLink = (artistLink: string, artist: string) => {
+    const getArtistLink = (artistLink: string | undefined, artist: string) => {
         if (artistLink && artistLink !== "#" && artistLink !== "")
             return <div><a href={artistLink}>{artist}</a></div>;
         return <div>{artist}</div>;
@@ -125,7 +127,7 @@ const RoomDecal = (props: IRoomDecal) => {
 
     if (room) {
         const buttons = getButtons();
-        const { title, description, medium, year, artist, artistLink } = room;
+        const { title, description, medium, year, name, id } = artist;
         return (
             <CenterModal
                 title={""}
@@ -139,11 +141,11 @@ const RoomDecal = (props: IRoomDecal) => {
                 content={
                     <div className="decal-content">
                         <div className="identify">
-                            <h2><span className="">{title}</span></h2>
-                            {getArtistLink(artistLink, artist)}
+                            <h2><a href={`/artist/${id}`}>{name}</a></h2>
+                            <br />
+                            <div><span className="workTitle">{title}</span></div>
                             <div>{year}</div>
                             <div>{medium}</div>
-                            <div>{description}</div>
                         </div>
 
                     </div>

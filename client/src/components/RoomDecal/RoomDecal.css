@@ -42,6 +42,14 @@
   margin: auto;
 }
 
+.RoomDecal .decal-content .identify h2 a {
+  color: blue;
+}
+
+.RoomDecal .decal-content .workTitle {
+  font-size: 150%;
+}
+
 .RoomDecal .decal-content .usersEye {
   padding: 8px;
   border: 1px solid black;

@@ -39,18 +39,22 @@ app.use(express.static(path.join(__dirname, '/../client/build')));
 // CUSTOM ARTISTS
 ///////////////////////////////////////////////////
 app.get('/leetusman', (req, res) => {
-    res.sendFile(path.join(__dirname + '/../client/build/leetusman.html'));
+    res.sendFile(path.join(__dirname + '/../client/build/iframes/leetusman.html'));
 })
 
 
 app.get('/loraine1', (req, res) => {
-    res.sendFile(path.join(__dirname + '/../client/build/loraine1.html'));
+    res.sendFile(path.join(__dirname + '/../client/build/iframes/loraine1.html'));
 })
 app.get('/loraine2', (req, res) => {
-    res.sendFile(path.join(__dirname + '/../client/build/loraine2.html'));
+    res.sendFile(path.join(__dirname + '/../client/build/iframes/loraine2.html'));
 })
 app.get('/loraine3', (req, res) => {
-    res.sendFile(path.join(__dirname + '/../client/build/loraine3.html'));
+    res.sendFile(path.join(__dirname + '/../client/build/iframes/loraine3.html'));
+})
+
+app.get('/lydia', (req, res) => {
+    res.sendFile(path.join(__dirname + '/../client/build/iframes/lydia.html'));
 })
 ///////////////////////////////////////////////////
 

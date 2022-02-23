@@ -6,4 +6,5 @@ export const ShowConfig = {
     showDescription: "",
     showOpens: "February 15, 2022",
     showCloses: "March 15, 2022",
+    link: "homebody"
 }

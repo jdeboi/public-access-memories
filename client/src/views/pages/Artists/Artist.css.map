@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AACI,OADG,CACH,KAAK,CAAC;EAEF,SAAS,EAAE,IAAI;CAClB;;AAJL,AAMI,OANG,CAMH,MAAM,CAAC;EACH,SAAS,EAAE,IAAI;CAClB;;AARL,AAUI,OAVG,CAUH,EAAE,CAAC;EACC,aAAa,EAAE,eAAe;CACjC",
+    "sources": [
+        "Artist.scss"
+    ],
+    "names": [],
+    "file": "Artist.css"
+}

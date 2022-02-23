@@ -1,7 +1,7 @@
 
 
 
-import { rooms, roomConfig } from '../../../../data/RoomConfig';
+import { artists, rooms, roomConfig } from '../../../../data/RoomConfig';
 import { doorLineCrossing, boundaryLineCrossing } from './Boundaries';
 import { GlobalConfig } from '../../../../data/GlobalConfig';
 import { displayCheckers, displayWall } from '../functions/ground';
@@ -11,13 +11,12 @@ export default class Room {
 
   constructor(p5, door, i) {
     const room = rooms[i];
-
     this.p5 = p5;
     this.x = room.x;
     this.y = room.y;
     this.dir = room.dir;
     this.link = room.link;
-    this.title = room.title;
+    this.title = artists[room.artistID];
 
     this.w = roomConfig.w;
     this.h = roomConfig.w;

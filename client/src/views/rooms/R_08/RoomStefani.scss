@@ -1,0 +1,26 @@
+.App .Sketch.RoomStefani {
+    overflow-y: scroll;
+    background: white;
+}
+
+.RoomStefani {
+    background: white;
+    color: black;
+    flex-wrap: wrap;
+    padding-top: 50px;
+
+    .Carousel-Box {
+        display: flex;
+        flex: 1;
+    }
+
+    .info {
+        padding: 10%;
+        padding-bottom: 80px;
+    }
+
+    .player {
+        margin: auto;
+        padding-bottom: 100px;
+    }
+}

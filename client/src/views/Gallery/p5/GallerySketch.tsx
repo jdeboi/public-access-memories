@@ -226,6 +226,7 @@ class GallerySketch extends React.Component<Props> {
     //   rooms.push(new Room(p5, i));
     // }
     for (let i = 0; i < globalRooms.length; i++) {
+      
       rooms.push(new Room(p5, doorImgs[0], i));
     }
 
@@ -401,6 +402,7 @@ class GallerySketch extends React.Component<Props> {
     // const walls = limits.map(pt => { return { x: pt.x * GlobalConfig.scaler, y: pt.y * GlobalConfig.scaler } });
 
     if (!isClosed && roomDoor) {
+      
       if (!isMobile) {
         if (window.confirm('Leave the main gallery?')) {
           userNewRoom(roomDoor);

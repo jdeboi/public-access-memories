@@ -1,6 +1,17 @@
-
 .RoomLydia {
-    background: black;
-    background-image: url(https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/lydia/publicaccess_sm.gif);
+    background: white;
+    background-image: url(https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/lydia/publicaccess.gif);
+    background-size: 50% 50%;
     background-repeat: repeat;
+
+    .player {
+        position: absolute;
+        // background-image: url(https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/lydia/publicaccess.gif);
+        // background-size: contain;
+        // background-repeat: no-repeat;
+    }
+
+    .vidBox {
+        position: absolute;
+    }
 }

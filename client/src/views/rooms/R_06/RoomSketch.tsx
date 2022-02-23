@@ -36,7 +36,6 @@ class RoomSketch extends React.Component<Props> {
 
   preload = (p5: p5Types) => {
     const url = "https://lmd-bucket.s3.us-east-2.amazonaws.com/sketches/gallery/";
-    // const url = "http://localhost:3000/online_assets/banana.jpeg";
     banana = p5.loadImage("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/deBoisblanc/rotten4.jpeg");
 
     lightImgs[0] = p5.loadImage(url + "tracklights/tracklights_vert.jpg");

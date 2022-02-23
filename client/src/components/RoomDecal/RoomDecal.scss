@@ -20,6 +20,17 @@
         .identify {
             // flex-grow: 1;
             margin: auto;
+
+            h2 a {
+                color: blue;
+                // background-color: black;
+                // padding: 0px;
+                // margin-bottom: 10px;
+            }
+        }
+
+        .workTitle {
+            font-size: 150%;
         }
 
         .usersEye {

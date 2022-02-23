@@ -1,5 +1,5 @@
-import { IUser, IUsers, IRoom } from '../interfaces';
-import { rooms } from '../data/RoomConfig';
+import { IUser, IUsers, IRoom, IArtist } from '../interfaces';
+import { artists, rooms } from '../data/RoomConfig';
 import { PageConfig } from '../data/PageConfig';
 import { hostBotPoints } from '../data/BotConfig';
 import { domCoordsToP5 } from './coordinates';
@@ -95,13 +95,21 @@ export const getPageName = (link: string): string => {
   }
   const roomPages = rooms.filter((room) => link === room.link);
   if (roomPages.length > 0) {
-    return roomPages[0].title;
+    return getArtistFromRoom(roomPages[0]).title;
   }
   const pages = PageConfig.filter((page) => link === page.link);
   if (pages.length > 0) {
     return pages[0].title;
   }
   return "404";
+}
+
+export const getArtistFromRoom = (room: IRoom): IArtist => {
+  return artists[room.artistID];
+}
+
+export const getRoomFromArtist = (artist: IArtist): IRoom => {
+  return rooms[artist.roomID];
 }
 
 export const getRoomByPath = (path: string): IRoom | null => {
@@ -139,6 +147,37 @@ export const getTotalRoomCount = (users: IUsers) => {
   }
   return roomCount;
 }
+
+export const getRoomID = (id: string | undefined) => {
+  let roomID = 0;
+  if (id) {
+    // let rid = id.substring(4, id.length);
+    // roomID = parseInt(rid);
+    roomID = parseInt(id);
+  }
+
+  if (isNaN(roomID))
+    roomID = 0;
+  if (roomID >= rooms.length || roomID < 0)
+    roomID = 0;
+
+  return roomID;
+}
+
+export const getRoomFromID = (id: string | undefined) => {
+  const room = rooms[getRoomID(id)];
+  return room;
+}
+
+
+export const getArtistFromID = (id: string | undefined) => {
+  return artists[getRoomID(id)];
+}
+
+export const getArtistRoomLink = (id: string | undefined) => {
+  return rooms[getRoomID(id)].link;
+}
+
 
 export function getRandomNum(val: number) {
   var x = Math.sin(val) * 10000;

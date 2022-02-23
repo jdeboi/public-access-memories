@@ -1,0 +1,20 @@
+.Artists {
+
+    .artists-list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        .artist-box {
+            // width: 350px;
+            
+            padding: 10px;
+            padding-bottom: 30px;
+        }
+
+        img.thumb {
+            width: 200px;
+            height: 200px;
+        }
+    }
+}

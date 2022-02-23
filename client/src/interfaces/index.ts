@@ -19,6 +19,7 @@ export interface IUser {
 }
 
 
+
 export interface IUsers extends Array<IUser> { }
 
 export interface IBar {
@@ -118,16 +119,32 @@ export interface IRoom {
     shortcut?: string,
     classN?: string,
     link: string,
-    title: string,
-    artist: string,
-    artistLink: string,
-    medium?: string,
-    description: string,
-    year: number,
+    // title: string,
+    // artist: string,
+    // artistLink: string,
+    // medium?: string,
+    // description: string,
+    // year: number,
+    artistID: number,
     x: number,
     y: number,
     dir: string
 }
+
+export interface IArtist {
+    id: number;
+    roomID: number;
+    name: string;
+    thumb: string;
+    instaLink?: string;
+    webLink?: string;
+    medium?: string;
+    description: string;
+    bio: string;
+    title: string;
+    year: number;
+}
+
 
 export interface IDivs {
     doors: any[],

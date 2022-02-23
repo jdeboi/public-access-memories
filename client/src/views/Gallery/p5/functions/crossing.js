@@ -9,9 +9,9 @@
   }
 
 
-  export const roomDoorCrossing = (rooms, prevStep, userStep) => {
-    for (const room of rooms) {
-      const cross = room.roomDoorCrossing(prevStep, userStep, 1);
+  export const roomDoorCrossing = (therooms, prevStep, userStep) => {
+    for (const rm of therooms) {
+      const cross = rm.roomDoorCrossing(prevStep, userStep, 1);
       if (cross) return cross;
     }
     return null;

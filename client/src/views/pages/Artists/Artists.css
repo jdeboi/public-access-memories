@@ -1,0 +1,22 @@
+.Artists .artists-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.Artists .artists-list .artist-box {
+  padding: 10px;
+  padding-bottom: 30px;
+}
+
+.Artists .artists-list img.thumb {
+  width: 200px;
+  height: 200px;
+}
+/*# sourceMappingURL=Artists.css.map */

@@ -13,6 +13,8 @@ import Statement from '../views/pages/Statement/Statement';
 import Room from '../views/rooms/Room/Room';
 import TestRoom from '../views/rooms/TestRoom/TestRoom';
 import NotFound from "../views/pages/NotFound/NotFound";
+import Artists from '../views/pages/Artists/Artists';
+import Artist from '../views/pages/Artists/Artist';
 
 // components
 // import ReactAudioPlayer from 'react-audio-player';
@@ -38,7 +40,8 @@ import { setUser, setUserRoomUrl } from '../store/user';
 import { startComposition, resizeApp, loadingApp } from '../store/window';
 import { addMessage, incremendNotifications } from '../store/messages';
 import FAQ from '../components/FAQ/FAQ';
-import Artists from '../views/pages/Artists/Artists';
+
+
 import { PageConfig } from '../data/PageConfig';
 import { shouldShowLoggedInComponents } from '../helpers/helpers';
 
@@ -226,8 +229,9 @@ function App() {
                     <Route path="/about" element={<About />} />
                     <Route path="/exhibition" element={<Statement />} />
                     <Route path="/artists" element={<Artists />} />
+                    <Route path="/artist/:id" element={<Artist />} />
                     <Route path="/test/rooms/:id" element={<TestRoom />} />
-                    <Route path="/homebody/rooms/:id" element={<Room />} />
+                    <Route path={`/${ShowConfig.link}/rooms/:id`} element={<Room />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </div>
