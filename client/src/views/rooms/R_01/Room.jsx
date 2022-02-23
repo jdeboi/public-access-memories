@@ -18,7 +18,7 @@ import { mapVal } from '../../../helpers/helpers';
 
 function Loader() {
   const { progress } = useProgress()
-  return <Html><LoadingPage progress={progress} /></Html>
+  return <Html>{progress}</Html>
 }
 
 function Model() {
