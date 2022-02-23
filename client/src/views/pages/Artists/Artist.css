@@ -1,12 +1,13 @@
 .Artist .door {
-  font-size: 140%;
+  font-size: 150%;
+  padding-bottom: 80px;
 }
 
 .Artist .links {
   font-size: 200%;
 }
 
-.Artist h3 {
-  border-bottom: 1px solid white;
+.Artist hr {
+  border-top: 1px solid black;
 }
 /*# sourceMappingURL=Artist.css.map */

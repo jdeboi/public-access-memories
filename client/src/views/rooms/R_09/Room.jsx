@@ -119,12 +119,20 @@ function VideoTex({ windowUI }) {
         vid.loop = true;
         return vid;
     });
-    // Keep in mind videos can only play once the user has interacted with the site ...
+   
+    
     useEffect(() => {
         if (windowUI.compositionStarted) {
             video.play();
         }
     }, [windowUI.compositionStarted]);
+
+    useEffect(() => {
+        return () => {
+            video.src= "";
+        }
+    }, []);
+
 
     const rx = -16 * Math.PI / 180;
     return (

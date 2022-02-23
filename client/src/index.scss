@@ -135,8 +135,20 @@ p.small {
   padding-top: 50px;
   padding-bottom: 70px;
 
-  width: 87%;
-  max-width: 900px;
+  width: 95%;
+  max-width: 1200px;
   margin: auto;
   box-sizing: border-box;
+}
+
+.windows {
+  box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080;
+  padding: 20px;
+  // padding: 20px;
+  background: #5a43cd6b;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+}
+
+hr {
+  border: 1px solid white;
 }

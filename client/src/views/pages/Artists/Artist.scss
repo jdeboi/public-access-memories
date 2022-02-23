@@ -1,14 +1,19 @@
 .Artist {
     .door {
-
-        font-size: 140%;
+        // background: black;
+        font-size: 150%;
+        padding-bottom: 80px;
     }
 
     .links {
         font-size: 200%;
     }
 
-    h3 {
-        border-bottom: 1px solid white;
+    // h3 {
+    //     // border-bottom: 1px solid white;
+    // }
+
+    hr {
+        border-top: 1px solid black;
     }
 }

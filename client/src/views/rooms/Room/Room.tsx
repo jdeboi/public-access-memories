@@ -48,8 +48,20 @@ const Room = () => {
         )
     }
 
+    const roomClosed = () => {
+        return (
+            <div className="Room Sketch">
+                <div className='container'>
+                    <h1>Gallery Closed</h1>
+                    <h3>Please join us for the opening!</h3>
+                    <h4>{ShowConfig.showOpens}</h4>
+                </div>
+            </div>
+        )
+    }
+
     if (isClosed) {
-        return roomUnderConstruction();
+        return roomClosed();
     }
 
     // switch (id) {
@@ -77,7 +89,7 @@ const Room = () => {
     //         return roomUnderConstruction();
     // }
 
-    return roomUnderConstruction()
+    return roomClosed()
 
 
 };

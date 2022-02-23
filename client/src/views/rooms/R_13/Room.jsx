@@ -27,7 +27,7 @@ function getCubes() {
 
 function VideoTex({ windowUI }) {
     const [cubes] = useState(getCubes())
-    const [video] = useState(() => {
+    const [video, setVideo] = useState(() => {
         const vid = document.createElement("video");
         vid.src = "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/linda/linda.mp4";
         vid.crossOrigin = "Anonymous";
@@ -41,6 +41,13 @@ function VideoTex({ windowUI }) {
             video.play();
         }
     }, [windowUI.compositionStarted]);
+
+    useEffect(() => {
+        return () => {
+            video.src= "";
+        }
+    }, []);
+
 
 
 

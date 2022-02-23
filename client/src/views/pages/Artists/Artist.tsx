@@ -14,33 +14,35 @@ export const Artist = () => {
 
     const Insta = () => {
         if (artist.instaLink) {
-            return(<a href={artist.instaLink}><FontAwesomeIcon icon={faInstagram} /></a>)
+            return (<a href={artist.instaLink}><FontAwesomeIcon icon={faInstagram} /></a>)
         }
         return null;
     }
 
     const Web = () => {
         if (artist.webLink) {
-            return(<a href={artist.webLink}><FontAwesomeIcon icon={faInternetExplorer} /></a>)
+            return (<a href={artist.webLink}><FontAwesomeIcon icon={faInternetExplorer} /></a>)
         }
         return null;
     }
-    
+
     return (
         <div className="Artist Page">
             <div className="container">
-                <h1>{artist.name}</h1>
-            
-                <div className="door"><a href={room.link}>🚪 {artist.title}</a></div>
+                <h1 className="">{artist.name}</h1>
+               <br />
+                {/* <img width={200} height={200} className="thumb" src={`https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/thumbs/${artist.thumb}.png`} /> */}
+                <div className="door"><a className="windows" href={room.link}>🚪 {artist.title}</a></div>
+                <hr/>
+                <div className="info">
+                    <h3>Statement</h3>
+                    <p>{artist.description}</p>
+                    <h3>Bio</h3>
+                    <p>{artist.bio}</p>
+                </div>
                 <br />
-                <br />
-                <br />
-                {/* <br /> */}
-                <h3>Statement</h3>
-                <p>{artist.description}</p>
-                <h3>Bio</h3>
-                <p>{artist.bio}</p>
-                <br />
+                <hr/>
+                
                 <p className="links"><Insta /> <Web /></p>
             </div>
         </div>

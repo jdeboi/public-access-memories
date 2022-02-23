@@ -1,20 +1,39 @@
 .Artists {
 
+
     .artists-list {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
 
+       
+
         .artist-box {
             // width: 350px;
             
-            padding: 10px;
+            // padding: 10px;
             padding-bottom: 30px;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            // box-shadow: 10px 10px black;
+            
         }
 
         img.thumb {
             width: 200px;
             height: 200px;
+            // border: 2px solid white;
         }
+
+        .artist-name {
+            // text-align: center;
+            // padding: 5px;
+        }
+
+
+
     }
+
+  
+    
 }

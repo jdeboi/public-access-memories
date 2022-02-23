@@ -4,7 +4,7 @@ export const ShowConfig = {
     galleryTitle: "public access memories",
     showTitle: "home </body>",
     showDescription: "",
-    showOpens: "February 15, 2022",
-    showCloses: "March 15, 2022",
+    showOpens: "March 3, 2022",
+    showCloses: "April 1, 2022",
     link: "homebody"
 }

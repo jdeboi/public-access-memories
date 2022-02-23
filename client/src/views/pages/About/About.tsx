@@ -8,15 +8,17 @@ export const About = () => {
     return (
         <div className="About Page">
             <div className="container">
-                <h1>About </h1>
-                <p>
-                    public access memories gallery originally began as an MFA thesis exhibition. Created by Jenna deBoisblanc
-                    (<a href="https://instagram.com/jdeboi">@jdeboi</a>), the virtual gallery space invites collaborative
-                    brainstorming and critical reflection on the the nature of the white cube online. An evolving canvas, the
-                    gallery seeks to host exhibitions (solo and group), artist
-                    talks, and more.
-                </p>
-                {/* <p>
+                <h1 className="">About </h1>
+                <br />
+                <div className="">
+                    <p>
+                        public access memories gallery originally began as an MFA thesis exhibition. Created by Jenna deBoisblanc
+                        (<a href="https://instagram.com/jdeboi">@jdeboi</a>), the virtual gallery space invites collaborative
+                        brainstorming and critical reflection on the the nature of the white cube online. An evolving canvas, the
+                        gallery seeks to host exhibitions (solo and group), artist
+                        talks, and more.
+                    </p>
+                    {/* <p>
                     What is the nature of the white cube online? Ostensibly
                     cyberspace creates the opportunity for radical,
                     limitless reinvention. To what extent are we leveraging
@@ -26,17 +28,21 @@ export const About = () => {
                     we code facilitate or detract from the process of viewing,
                     analyzing, sharing, and enjoying art?
                 </p> */}
-                <p>
-                    To suggest a curatorial project, collaborate on a gallery
-                    feature, and/or submit work, please feel free to reach out
-                    to <a href="mailto:publicaccessmemories@gmail.compublicaccessmemories@gmail.com">publicaccessmemories@gmail.com</a>. For developers, you can
-                    check out the <a href="https://github.com/jdeboi/public-access-memories">github repo.</a>
-                </p>
-                <h3>
-                    <a href="https://www.instagram.com/public.access.memories/"><FontAwesomeIcon icon={faInstagram} /></a>
-                    <span style={{paddingRight: 10}}></span>
-                    <a href="https://github.com/jdeboi/public-access-memories"><FontAwesomeIcon icon={faGithub} /></a>
-                </h3>
+                    <p>
+                        To suggest a curatorial project, collaborate on a gallery
+                        feature, and/or submit work, please feel free to reach out
+                        to <a href="mailto:publicaccessmemories@gmail.compublicaccessmemories@gmail.com">publicaccessmemories@gmail.com</a>. For developers, you can
+                        check out the <a href="https://github.com/jdeboi/public-access-memories">github repo.</a>
+                    </p>
+                </div>
+                <br />
+                <div className="">
+                    <h3>
+                        <a href="https://www.instagram.com/public.access.memories/"><FontAwesomeIcon icon={faInstagram} /></a>
+                        <span style={{ paddingRight: 10 }}></span>
+                        <a href="https://github.com/jdeboi/public-access-memories"><FontAwesomeIcon icon={faGithub} /></a>
+                    </h3>
+                </div>
             </div >
         </div>
     )
