@@ -401,7 +401,7 @@ class GallerySketch extends React.Component<Props> {
 
     // const walls = limits.map(pt => { return { x: pt.x * GlobalConfig.scaler, y: pt.y * GlobalConfig.scaler } });
 
-    if (!isClosed && roomDoor) {
+    if (roomDoor) {
       
       if (!isMobile) {
         if (window.confirm('Leave the main gallery?')) {
@@ -413,19 +413,19 @@ class GallerySketch extends React.Component<Props> {
       }
       isWalking = false;
     }
-    else if (!isClosed && outsideDoor) {
+    else if (outsideDoor) {
       stepTo.x = userStep.x;
       stepTo.y = userStep.y;
       toggleOutside();
     }
-    else if (!isClosed && roomDoorEntry) {
+    else if (roomDoorEntry) {
       stepTo.x = userStep.x;
       stepTo.y = userStep.y;
     }
-    else if (!isClosed && roomBoundary(rooms, prevStep, userStep)) {
+    else if (roomBoundary(rooms, prevStep, userStep)) {
       isWalking = false;
     }
-    else if (!isClosed && roomDoorB) {
+    else if (roomDoorB) {
       isWalking = false;
     }
     else if (wallBoundary(walls, prevStep, userStep)) {

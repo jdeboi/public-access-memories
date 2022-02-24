@@ -2,6 +2,7 @@ import React from 'react';
 // store
 import { useSelector } from 'react-redux';
 import { selectWindow } from '../../../store/store';
+import { ShowConfig } from '../../../data/ShowConfig';
 
 export default function DetailsClosed() {
   const windowUI = useSelector(selectWindow);
@@ -23,11 +24,11 @@ export default function DetailsClosed() {
     <div className="Welcome-Deets">
       <div className="Details closed" >
         <div className="Details-txt">
-          <div style={{fontSize: fonts[3], paddingBottom: "30px"}}>While you're free to roam the grounds, we're sorry to inform you that the gallery is currently</div>
+          <div style={{fontSize: fonts[2], paddingBottom: "30px"}}>While you're free to roam the grounds, we're sorry to inform you that the gallery is currently</div>
           <div style={{fontSize: fonts[0], paddingBottom: "30px"}}>CLOSED</div>
-          <div style={{fontSize: fonts[3], paddingBottom: "10px"}}>Please join us for the opening on:</div>
-          <div style={{fontSize: fonts[1], paddingBottom: "5px"}}>February 15th</div>
-          <div style={{fontSize: fonts[1], paddingBottom: "10px"}}>2022</div>
+          <div style={{fontSize: fonts[2], paddingBottom: "10px"}}>Please join us for the opening on:</div>
+          <div style={{fontSize: fonts[1], paddingBottom: "5px"}}>{ShowConfig.showOpens.date}</div>
+          <div style={{fontSize: fonts[1], paddingBottom: "10px"}}>{ShowConfig.showOpens.time}</div>
         </div>
       </div>
 
