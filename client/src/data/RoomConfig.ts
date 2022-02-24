@@ -23,14 +23,14 @@ export const artists: IArtist[] = [
     {
         id: 0,
         roomID: 0,
-        title: "room 0",
+        title: "Forest 5",
         name: "Mitchell Craft",
         thumb: "mitchell-thumb",
         instaLink: "https://mitchellcraft.net/",
         webLink: "https://mitchellcraft.net/",
         medium: "Unreal Engine",
-        description: "",
-        bio: "",
+        description: "Forest 5 is an experiment in procedural landscape design.",
+        bio: "Mitchell Craft is a 3D Artist based in Brooklyn, NY.",
         year: 2022,
     },
     {
