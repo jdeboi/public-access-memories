@@ -35,7 +35,7 @@ export const artists: IArtist[] = [
     },
     {
         id: 1,
-        roomID: 1,
+        roomID: 5,
         title: "perfect_day_at_the_beach.jpg",
         name: "Samantha Blumenfeld",
         thumb: "sam-thumb",
@@ -48,7 +48,7 @@ export const artists: IArtist[] = [
     },
     {
         id: 2,
-        roomID: 2,
+        roomID: 11,
         title: "Sleeping in the Pandemic",
         name: "Lee Tusman",
         instaLink: "https://www.instagram.com/leetusman/",
@@ -61,7 +61,7 @@ export const artists: IArtist[] = [
     },
     {
         id: 3,
-        roomID: 3,
+        roomID: 13,
         title: "Room / Me",
         name: "Kat Zhang",
         webLink: "https://katzhang.itch.io/room-me",
@@ -86,7 +86,7 @@ export const artists: IArtist[] = [
     },
     {
         id: 5,
-        roomID: 5,
+        roomID: 1,
         title: "the Northern Ural's sacred places",
         name: "Daria Ivans",
         instaLink: "https://www.instagram.com/_lshfn/",
@@ -98,7 +98,7 @@ export const artists: IArtist[] = [
     },
     {
         id: 6,
-        roomID: 6,
+        roomID: 12,
         title: "the still life",
         name: "Jenna deBoisblanc",
         instaLink: "https://www.instagram.com/jdeboi",
@@ -111,7 +111,7 @@ export const artists: IArtist[] = [
     },
     {
         id: 7,
-        roomID: 7,
+        roomID: 8,
         title: "How to Be a Homemaker When You Have No Body",
         name: "Sidney Astl",
         instaLink: "https://www.instagram.com/sidneyastl.art/",
@@ -123,7 +123,7 @@ export const artists: IArtist[] = [
     },
     {
         id: 8,
-        roomID: 8,
+        roomID: 10,
         title: "domicile",
         name: "Stefani Byrd",
         webLink: "http://www.stefanibyrd.com/",
@@ -135,20 +135,20 @@ export const artists: IArtist[] = [
     },
     {
         id: 9,
-        roomID: 9,
+        roomID: 7,
         title: "Homebody",
         name: "Lydia Mattson",
         instaLink: "https://www.instagram.com/mudmaid/",
         medium: "HD video",
-        bio: "",
-        description: '',
+        bio: "Lydia Mattson (she/her) grew up in Connecticut and will graduate from Tulane University in May 2022. She is pursuing a Bachelor of Fine Arts in Digital Art alongside a BA in Communication.",
+        description: 'Mattson\'s work explores digital routines and media consumption through maximalist collage, combining diverse imagery and complicating visual relationships. Mattson’s mixed-media approach utilizes both print and video techniques, often in direct conversation with each other, and raises questions about online identities and the overlap between our physical and digital realities.',
         year: 2022,
 
         thumb: "lydia-thumb"
     },
     {
         id: 10,
-        roomID: 10,
+        roomID: 2,
         title: "Spawn Point",
         name: "Nathan Caldecott",
         webLink: "http://www.nathancaldecott.com/pixel",
@@ -161,7 +161,7 @@ export const artists: IArtist[] = [
     },
     {
         id: 11,
-        roomID: 11,
+        roomID: 6,
         title: "Prof Pata",
         name: "Loraine Wible",
         instaLink: "https://www.instagram.com/lorainewibleart/",
@@ -174,7 +174,7 @@ export const artists: IArtist[] = [
     },
     {
         id: 12,
-        roomID: 12,
+        roomID: 9,
         title: "Field of View",
         name: "Freya Björg Olafson",
         webLink: "https://www.freyaolafson.com/",
@@ -186,7 +186,7 @@ export const artists: IArtist[] = [
     },
     {
         id: 13,
-        roomID: 13,
+        roomID: 3,
         title: "Feral Kettle",
         name: "Linda Loh",
         webLink: "https://lindaloh.com/",
@@ -198,7 +198,7 @@ export const artists: IArtist[] = [
     },
 ];
 
-const roomIds = artists.map((artist) => artist.roomID);
+// const roomIds = artists.map((artist) => artist.roomID);
 
 const roomDetails = [
     {
@@ -209,13 +209,27 @@ const roomDetails = [
     },
     {
         id: 1,
+        x: 0,
+        y: 17,
+        // rot: -90, 
+        dir: "right",
+    },
+    {
+        id: 2,
+        x: -5,
+        y: 12,
+        // rot: 90, 
+        dir: "right",
+    },
+    {
+        id: 3,
         x: 12,
         y: 13,
         // rot: 0, 
         dir: "bottom"
     },
     {
-        id: 2,
+        id: 4,
         title: "room 2",
         x: 12,
         y: 8,
@@ -223,25 +237,11 @@ const roomDetails = [
         dir: "right"
     },
     {
-        id: 3,
+        id: 5,
         x: 7,
         y: 8,
         // rot: 90, 
         dir: "left",
-    },
-    {
-        id: 4,
-        x: 0,
-        y: 17,
-        // rot: -90, 
-        dir: "right",
-    },
-    {
-        id: 5,
-        x: -5,
-        y: 12,
-        // rot: 90, 
-        dir: "right",
     },
     {
         id: 6,
@@ -301,10 +301,18 @@ const roomDetails = [
 ]
 
 const roomsArray: IRoom[] = [];
+function getArtistID(roomID: number) {
+   let artist = artists.find((artist) => artist.roomID === roomID);
+   if (artist) {
+       return artist.id;
+   }
+   return 0;
+}
+
 for (let i = 0; i < artists.length; i++) {
     const roomDeets: IRoom = {
         ...roomDetails[i],
-        artistID: artists[roomIds[i]].id,
+        artistID: getArtistID(i),
         link: `/${ShowConfig.link}/rooms/${i}`
     };
     roomsArray.push(roomDeets)
