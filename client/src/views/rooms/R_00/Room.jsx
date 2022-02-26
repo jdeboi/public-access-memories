@@ -54,7 +54,7 @@ const Room = () => {
                         dampingFactor={0.2}
                         autoRotate
                         autoRotateSpeed={-0.8}
-                        rotateSpeed={.4}
+                        rotateSpeed={.3}
                     />
                     <ambientLight intensity={1} />
                     <pointLight intensity={.5} position={[10, 10, 10]} />
