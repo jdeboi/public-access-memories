@@ -25,8 +25,8 @@ function Controls(props) {
 }
 
 function Dome({ dispatch }) {
-    // https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/Craft
-    const texture = useLoader(THREE.TextureLoader, '/online_assets/Forest-5.jpg')
+    const url = "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/Craft/Forest-5.png";
+    const texture = useLoader(THREE.TextureLoader, url);
     useEffect(() => {
         dispatch(doneLoadingApp());
     }, [])
@@ -52,8 +52,9 @@ const Room = () => {
                         enablePan={false}
                         enableDamping
                         dampingFactor={0.2}
-                        // autoRotate
-                        rotateSpeed={-0.1}
+                        autoRotate
+                        autoRotateSpeed={-0.8}
+                        rotateSpeed={.4}
                     />
                     <ambientLight intensity={1} />
                     <pointLight intensity={.5} position={[10, 10, 10]} />
