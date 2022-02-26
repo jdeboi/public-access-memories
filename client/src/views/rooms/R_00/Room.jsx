@@ -25,8 +25,8 @@ function Controls(props) {
 }
 
 function Dome({ dispatch }) {
-    // const url = "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/Craft/Forest-5.png";
-    const url = "/online_assets/Forest-5srgb.png";
+    const url = "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/Craft/Forest-5.png";
+    // const url = "/online_assets/Forest-5srgb.png";
     const texture = useLoader(THREE.TextureLoader, url);
     useEffect(() => {
         dispatch(doneLoadingApp());
@@ -59,8 +59,8 @@ const Room = () => {
                         rotateSpeed={.3}
                     />
                     <ambientLight intensity={.5} />
-                    <pointLight intensity={.4} position={[0, 2, 0]} />
-                    <pointLight intensity={.3} position={[-10, -10, -10]} />
+                    <pointLight intensity={.6} position={[0, 1, 0]} />
+                    {/* <pointLight intensity={.3} position={[-10, -10, -10]} /> */}
                     <Dome dispatch={dispatch} />
                 </Suspense>
             </Canvas>
