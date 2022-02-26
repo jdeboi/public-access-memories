@@ -25,11 +25,13 @@ function Controls(props) {
 }
 
 function Dome({ dispatch }) {
-    const url = "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/Craft/Forest-5.png";
+    // const url = "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/Craft/Forest-5.png";
+    const url = "/online_assets/Forest-5srgb.png";
     const texture = useLoader(THREE.TextureLoader, url);
     useEffect(() => {
         dispatch(doneLoadingApp());
     }, [])
+    texture.encoding = THREE.sRGBEncoding;
     return (
         <mesh>
             <sphereBufferGeometry attach="geometry" args={[500, 60, 40]} />
@@ -51,14 +53,14 @@ const Room = () => {
                         enableZoom={false}
                         enablePan={false}
                         enableDamping
-                        dampingFactor={0.2}
+                        dampingFactor={0.3}
                         autoRotate
-                        autoRotateSpeed={-0.8}
+                        autoRotateSpeed={-0.07}
                         rotateSpeed={.3}
                     />
-                    <ambientLight intensity={1} />
-                    <pointLight intensity={.5} position={[10, 10, 10]} />
-                    <pointLight intensity={.5} position={[-10, -10, -10]} />
+                    <ambientLight intensity={.5} />
+                    <pointLight intensity={.4} position={[0, 2, 0]} />
+                    <pointLight intensity={.3} position={[-10, -10, -10]} />
                     <Dome dispatch={dispatch} />
                 </Suspense>
             </Canvas>

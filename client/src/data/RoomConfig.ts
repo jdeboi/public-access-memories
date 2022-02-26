@@ -28,7 +28,7 @@ export const artists: IArtist[] = [
         thumb: "mitchell-thumb",
         instaLink: "https://mitchellcraft.net/",
         webLink: "https://mitchellcraft.net/",
-        medium: "Unreal Engine",
+        medium: "Blender, procedurally-generated 3D terrain",
         description: "Forest 5 is an experiment in procedural landscape design.",
         bio: "Mitchell Craft is a 3D Artist based in Brooklyn, NY.",
         year: 2022,
