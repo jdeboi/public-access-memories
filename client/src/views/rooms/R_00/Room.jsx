@@ -21,7 +21,7 @@ function Controls(props) {
     const { camera, gl } = useThree()
     const ref = useRef()
     useFrame(() => ref.current.update())
-    return <orbitControls ref={ref} target={[0, 0, 0]} {...props} args={[camera, gl.domElement]} />
+    return <orbitControls ref={ref} target={[0, 1, 0]} {...props} args={[camera, gl.domElement]} />
 }
 
 function Dome({ dispatch }) {
@@ -45,7 +45,7 @@ const Room = () => {
     return (
         // zoom: mapVal(windowUI.contentW, 400, 2300, .7, 2),
         <div className="Room RoomCraft Sketch">
-            <Canvas colorManagement={true}>
+            <Canvas colorManagement={true} camera={{ rotation: [0, 1, 0] }}>
                 <Suspense fallback={null}>
                     <Controls
                         enableZoom={false}
