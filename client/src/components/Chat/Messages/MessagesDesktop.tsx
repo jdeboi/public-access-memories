@@ -29,11 +29,12 @@ const MessagesDesktop = () => {
                     // console.log("MESSAGE", message);
                     let avatarHidden = message.from === "me" ? "hidden" : "";
                     let messageToCol = message.to === "room" || message.to === "all" ? "message-to-red" : "message-to";
+                    let msg = (message.to === "room" || message.to === "all") ? message.to : "me";
                     return (
                         <div key={i} className={"bubbleContainer " + classN}>
                             <div className={"avatar" + " " + avatarHidden}>{message.avatar}</div>
                             <div className={"bubble"} key={i}>
-                                <div className="message-deets"><span className="message-from">{message.from}</span> <span className={messageToCol}>(to {message.to})</span>:</div>
+                                <div className="message-deets"><span className="message-from">{message.from}</span> <span className={messageToCol}>(to {msg})</span>:</div>
                                 <div className="message-txt">{message.message}</div>
                             </div>
 

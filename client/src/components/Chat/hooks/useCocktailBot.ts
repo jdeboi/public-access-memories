@@ -23,6 +23,7 @@ export const useCocktailBot = () => {
         const message: IMessage = {
             to: "cocktailBot",
             from: "me",
+            fromUser: "me",
             roomUrl: user.roomUrl,
             message: txt,
             time: JSON.stringify(new Date()),
@@ -40,6 +41,7 @@ export const useCocktailBot = () => {
             dispatch(addMessage({
                 to: "me",
                 from: "cocktailBot",
+                fromUser: "cocktailBot",
                 message: phrase,
                 time: JSON.stringify(new Date()),
                 roomUrl: user.roomUrl,

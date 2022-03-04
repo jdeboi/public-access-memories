@@ -29,6 +29,7 @@ export const useDJBot = () => {
         const message: IMessage = {
             to: "DJBot",
             from: "me",
+            fromUser: "me",
             message: txt,
             time: JSON.stringify(new Date()),
             roomUrl: user.roomUrl,
@@ -46,6 +47,7 @@ export const useDJBot = () => {
             dispatch(addMessage({
                 to: "me",
                 from: "DJBot",
+                fromUser: "DJBot",
                 message: phrase,
                 time: JSON.stringify(new Date()),
                 roomUrl: user.roomUrl,

@@ -31,6 +31,7 @@ export const useHostBot = () => {
         const message: IMessage = {
             to: "hostBot",
             from: "me",
+            fromUser: "me",
             message: txt,
             time: JSON.stringify(new Date()),
             roomUrl: user.roomUrl,
@@ -141,6 +142,7 @@ export const useHostBot = () => {
         dispatch(addMessage({
             to: "me",
             from: "hostBot",
+            fromUser: "hostBot",
             message: phrase,
             time: JSON.stringify(new Date()),
             roomUrl: user.roomUrl,

@@ -30,6 +30,7 @@ export const useWineBot = () => {
         const message: IMessage = {
             to: "wineBot",
             from: "me",
+            fromUser: "me",
             message: txt,
             time: JSON.stringify(new Date()),
             roomUrl: user.roomUrl,
@@ -47,6 +48,7 @@ export const useWineBot = () => {
             dispatch(addMessage({
                 to: "me",
                 from: "wineBot",
+                fromUser: "wineBot",
                 message: phrase,
                 time: JSON.stringify(new Date()),
                 roomUrl: user.roomUrl,
@@ -67,6 +69,7 @@ export const useWineBot = () => {
             dispatch(addMessage({
                 to: "me",
                 from: "wineBot",
+                fromUser: "wineBot",
                 message: phrase,
                 time: JSON.stringify(new Date()),
                 roomUrl: user.roomUrl,

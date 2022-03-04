@@ -85,25 +85,23 @@ module.exports = function (client) {
   // time: JSON.stringify(new Date()),
   // avatar: user.avatar
             
-  client.on('messageUser', ({ socketId, message, time, avatar }) => {
-    // console.log("sending to", socketId, "msg:", message);
-    io.to(socketId).emit('messageUser', getMessageObject(client.id, socketId, message, time, avatar));
-    // client.broadcast.emit('message', getMessageObject(client.id, socketId, message));
-    // io.to(socketId).emit('message', getMessageObject(client.id, "private", message));
+  client.on('messageUser', ({ socketId, fromUser, message, time, avatar }) => {
+    io.to(socketId).emit('messageUser', getMessageObject(client.id, socketId, message, time, avatar, fromUser));
+
   })
 
-  client.on('messageRoom', ({ room, message, time, avatar }) => {
+  client.on('messageRoom', ({ room, message, time, avatar, fromUser }) => {
     // console.log("sending room message to", room, message);
     // io.sockets.in(room).emit('message', getMessageObject(client.id, "room", message))
     // client.to(room).emit('message', getMessageObject(client.id, room, message));
-    client.to(room).emit('messageRoom', getMessageObject(client.id, room, message, time, avatar));
+    client.to(room).emit('messageRoom', getMessageObject(client.id, room, message, time, avatar, fromUser));
   })
 
-  client.on('messageAll', ({ message, time, avatar }) => {
+  client.on('messageAll', ({ message, time, avatar, fromUser }) => {
     // includes sender
     // io.emit('message', getMessageObject(client.id, "all", message));
 
-    client.broadcast.emit('messageAll', getMessageObject(client.id, "all", message, time, avatar));
+    client.broadcast.emit('messageAll', getMessageObject(client.id, "all", message, time, avatar, fromUser));
   })
 
   client.on('critique', (crit) => {
@@ -111,9 +109,9 @@ module.exports = function (client) {
   })
 }
 
-function getMessageObject(from, to, msg, time, avatar) {
-  console.log("messageobj", obj);
-  return { from: from, to: to, message: msg, time: time, avatar: avatar };
+function getMessageObject(from, to, msg, time, avatar, fromUser) {
+  // console.log("messageobj", obj);
+  return { from: from, to: to, message: msg, time: time, avatar: avatar, fromUser: fromUser };
 }
 
 function isUser(userName) {

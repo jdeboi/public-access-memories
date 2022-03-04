@@ -54,7 +54,7 @@ export const useSockets = (props: ISockets) => {
             const message = { ...data }
             if (message.to === user.roomUrl) {
                 message.to = "room";
-                message.fromUser = user.userName;
+                // message.fromUser = user.userName;
                 dispatch(addMessage(message));
                 dispatch(incremendNotifications());
             }
@@ -63,6 +63,7 @@ export const useSockets = (props: ISockets) => {
         socket.on("messageUser", (data: IMessage) => {
             const message = { ...data }
             // message.fromUser = user.userName;
+            message.from = message.fromUser? message.fromUser : "";
             console.log("socketuse", message);
             dispatch(addMessage(message));
             dispatch(incremendNotifications());

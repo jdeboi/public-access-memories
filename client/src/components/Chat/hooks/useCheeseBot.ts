@@ -29,6 +29,7 @@ export const useCheeseBot = () => {
         const message: IMessage = {
             to: "cheeseBot",
             from: "me",
+            fromUser: "me",
             message: txt,
             time: JSON.stringify(new Date()),
             roomUrl: user.roomUrl,
@@ -45,6 +46,7 @@ export const useCheeseBot = () => {
             dispatch(addMessage({
                 to: "me",
                 from: "cheeseBot",
+                fromUser: "cheeseBot",
                 message: phrase,
                 time: JSON.stringify(new Date()),
                 roomUrl: user.roomUrl,
