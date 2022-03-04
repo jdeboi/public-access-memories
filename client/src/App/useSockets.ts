@@ -45,7 +45,7 @@ export const useSockets = (props: ISockets) => {
         socket.on("messageAll", (data: IMessage) => {
             const message = { ...data }
             message.to = "me";
-            message.from = getUserNameById(message.from);
+            // message.fromUser = user.userName; // getUserNameById(message.from);
             dispatch(addMessage(message));
             dispatch(incremendNotifications());
         })
@@ -54,7 +54,7 @@ export const useSockets = (props: ISockets) => {
             const message = { ...data }
             if (message.to === user.roomUrl) {
                 message.to = "room";
-                message.from = getUserNameById(message.from);
+                message.fromUser = user.userName;
                 dispatch(addMessage(message));
                 dispatch(incremendNotifications());
             }
@@ -62,7 +62,8 @@ export const useSockets = (props: ISockets) => {
 
         socket.on("messageUser", (data: IMessage) => {
             const message = { ...data }
-            message.from = getUserNameById(message.from);
+            // message.fromUser = user.userName;
+            console.log("socketuse", message);
             dispatch(addMessage(message));
             dispatch(incremendNotifications());
         })
@@ -77,7 +78,7 @@ export const useSockets = (props: ISockets) => {
 
     }
 
-    const getUserNameById = (id: string) => {
+    const getUserNameById = (id: string, users: IUsers) => {
         if (props.users) {
             let obj = props.users.find(o => o.id === id);
             if (obj)

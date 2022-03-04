@@ -90,6 +90,7 @@ const Chat = (props: ChatProps) => {
         const message: IMessage = {
             to: "all",
             from: "me",
+            fromUser: user.userName,
             message: txt,
             roomUrl: user.roomUrl,
             time: JSON.stringify(new Date()),
@@ -105,6 +106,7 @@ const Chat = (props: ChatProps) => {
         const message: IMessage = {
             to: "room",
             from: "me",
+            fromUser: user.userName,
             message: txt,
             roomUrl: user.roomUrl,
             time: t,
@@ -118,6 +120,7 @@ const Chat = (props: ChatProps) => {
     const sendToOne = (txt: string) => {
         const message: IMessage = {
             from: "me",
+            fromUser: user.userName,
             to: userActive.active.userName,
             socketId: userActive.active.id,
             roomUrl: user.roomUrl,
@@ -125,9 +128,11 @@ const Chat = (props: ChatProps) => {
             time: JSON.stringify(new Date()),
             avatar: user.avatar
         };
-        if (socket.connected)
+        if (socket.connected) {
+            console.log("messagesent", message);
             socket.emit('messageUser', message); //sending to individual socketid
-        dispatch(addMessage(message));
+            dispatch(addMessage(message));
+        }
     };
 
 

@@ -1,7 +1,7 @@
 import * as THREE from 'three'
-import React, { Suspense, useEffect, useRef, useState, useLayoutEffect } from 'react'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
-// import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import React, { Suspense, useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { Canvas } from '@react-three/fiber'
 import { Html, useProgress, useGLTF, OrbitControls } from '@react-three/drei';
 
 import './RoomS.css';
@@ -15,18 +15,18 @@ import LoadingPage from '../../../components/LoadingPage/LoadingPage';
 import { mapVal } from '../../../helpers/helpers';
 
 
-
-function Loader() {
-  const { progress } = useProgress()
-  return <Html>{progress}</Html>
-}
-
-function Model() {
+function Model({ dispatch }) {
     const [url, set] = useState('https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/Blumenfeld/perfect_day4.glb')
     useEffect(() => {
         setTimeout(() => set('https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/Blumenfeld/perfect_day4.glb'), 2000)
     }, [])
     const { scene } = useGLTF(url);
+
+    // this only executes after the model loads (model is blocking?)
+    useEffect(() => {
+        dispatch(doneLoadingApp());
+    }, [])
+
     //Load background texture
     return <primitive object={scene} />
 }
@@ -36,7 +36,7 @@ function Model() {
 const Room = () => {
     const windowUI = useSelector(selectWindow);
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     return (
         <div className="Room RoomS Sketch">
@@ -47,7 +47,7 @@ const Room = () => {
                 far: 1000
             }}>
 
-                <Suspense fallback={<Loader />}>
+                <Suspense fallback={null}>
                     <OrbitControls
                         minPolarAngle={Math.PI / 2}
                         maxPolarAngle={Math.PI / 2}
@@ -56,10 +56,15 @@ const Room = () => {
                     />
                     <ambientLight intensity={0.2} />
                     <directionalLight color="white" position={[3, 0, 1]} />
-                    <Model />
+                    <Model dispatch={dispatch} />
                 </Suspense>
             </Canvas>
-          
+
+            {
+                windowUI.loading ?
+                    <LoadingPage /> :
+                    null
+            }
         </div>
     )
 };

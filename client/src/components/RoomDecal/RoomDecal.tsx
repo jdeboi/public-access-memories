@@ -15,10 +15,8 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 // store
 import { useSelector } from 'react-redux';
 import { selectUser, selectWindow } from '../../store/store';
-import { startComposition } from '../../store/window';
 
 // interface
-import { IUsers } from '../../interfaces/index';
 import { artists } from '../../data/RoomConfig';
 
 interface IRoomDecal {
@@ -34,79 +32,6 @@ const RoomDecal = (props: IRoomDecal) => {
     const { pathname } = useLocation();
     const room = getRoomByPath(pathname);
     const artist =  room ? artists[room.artistID] : artists[0];
-
-    // const getParticipantsBox = () => {
-    //     if (windowUI.hasFooter && windowUI.orientation === "landscape")
-    //         return null;
-    //     return (
-    //         <div className="participants-box">
-    //             <br />
-    //             <br />
-    //             <div className="usersEye">
-    //                 <FontAwesomeIcon icon={faEye} />
-    //                 {getRoomCount(user.roomUrl, props.users)}
-    //             </div>
-    //             <br />
-    //             <br />
-    //             <div className="participants">
-    //                 <span
-    //                     data-tip={"me"}
-    //                 >
-    //                     {user.avatar}
-
-    //                 </span>
-    //                 {/* {this.getFakeUsers()} */}
-    //                 {getUsers()}
-
-    //             </div>
-    //             <ReactTooltip />
-    //         </div>
-    //     )
-
-    // }
-
-    // const getFakeUsers = () => {
-    //     const users = [
-    //         { avatar: "🤣", userName: "bob" },
-    //         { avatar: "🎃", userName: "george" },
-    //         { avatar: "🤢", userName: "hannah" },
-    //         { avatar: "🤪", userName: "jdeboisblanc" },
-    //         { avatar: "🥵", userName: "ok" },
-    //         { avatar: "😎", userName: "ashley123" },
-    //         { avatar: "🤣", userName: "bob" },
-    //     ]
-    //     return users.map((usr, i) => {
-    //         return (
-    //             <span
-    //                 key={i}
-    //                 data-tip={usr.userName}
-    //             >
-    //                 {usr.avatar}
-
-    //             </span>
-    //         )
-    //     });
-
-    // }
-
-    // const getUsers = () => {
-    //     return props.users.map((usr, i) => {
-    //         if (usr.roomUrl !== user.roomUrl)
-    //             return null;
-    //         return (
-    //             <span
-    //                 key={i}
-    //                 data-tip={usr.userName}
-    //             >
-    //                 {usr.avatar}
-
-    //             </span>
-    //         )
-    //     })
-
-    //     return <div></div>;
-
-    // }
 
 
     const getButtons = () => {
@@ -127,7 +52,7 @@ const RoomDecal = (props: IRoomDecal) => {
 
     if (room) {
         const buttons = getButtons();
-        const { title, description, medium, year, name, id } = artist;
+        const { title, description, medium, year, name, nameLink } = artist;
         return (
             <CenterModal
                 title={""}
@@ -141,7 +66,7 @@ const RoomDecal = (props: IRoomDecal) => {
                 content={
                     <div className="decal-content">
                         <div className="identify">
-                            <h2><a href={`/artist/${id}`}>{name}</a></h2>
+                            <h2><a href={`/artist/${nameLink}`}>{name}</a></h2>
                             <br />
                             <div><span className="workTitle">{title}</span></div>
                             <div>{year}</div>

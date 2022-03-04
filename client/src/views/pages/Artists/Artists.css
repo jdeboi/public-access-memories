@@ -11,9 +11,10 @@
 }
 
 .Artists .artists-list .artist-box {
-  padding-bottom: 30px;
   margin-right: 20px;
   margin-bottom: 20px;
+  padding: 2px;
+  text-align: center;
 }
 
 .Artists .artists-list img.thumb {

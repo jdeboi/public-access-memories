@@ -4,48 +4,54 @@ import { doorLineCrossing } from './Boundaries';
 import { domCoordsToP5World } from '../../../../helpers/coordinates';
 import { GlobalConfig, outsideDoors } from '../../../../data/GlobalConfig';
 
+function getCoord(id) {
+  let isFlipped = id === 1;
+  let x = outsideDoors[id].x0 * GlobalConfig.scaler;
+  let y = outsideDoors[id].y0 * GlobalConfig.scaler;
+  let w = 0;
+  let h = 0;
+
+
+  let scaler = GlobalConfig.scaler / 100;
+  if (isFlipped) {
+    w = 180;
+    h = 500;
+  }
+  else {
+    w = 500;
+    h = 180;
+  }
+  w *= scaler;
+  h *= scaler;
+
+
+  if (id === 2) {
+    x -= 150 * scaler;
+    y -= h + 24;
+  }
+  else if (!isFlipped) {
+    x -= 180 * scaler;
+    y -= h + 24;
+
+  }
+  else {
+    x -= 2;
+    y -= w + 34;
+  }
+
+  return {x, y, w, h};
+}
 export default class Door extends Draggable {
 
   constructor(p5, id, imgs) {
-    super(id, 0, 0, 0, 0, p5, null);
+    super(id, getCoord(id).x, getCoord(id).y, getCoord(id).w, getCoord(id).h, p5, null);
     this.isFlipped = this.id === 1;
-
-    this.scaler = GlobalConfig.scaler / 100;
-    if (this.isFlipped) {
-      this.w = 180;
-      this.h = 500;
-    }
-    else {
-      this.w = 500;
-      this.h = 180;
-    }
-    this.w *= this.scaler;
-    this.h *= this.scaler;
     this.point = outsideDoors[id];
-    this.x = this.point.x0 * GlobalConfig.scaler;
-    this.y = this.point.y0 * GlobalConfig.scaler;
-
-    if (this.id === 2) {
-      this.x -= 150 * this.scaler;
-      this.y -= this.h + 24;
-    }
-    else if (!this.isFlipped) {
-      this.x -= 180 * this.scaler;
-      this.y -= this.h + 24;
-
-    }
-    else {
-      this.x -= 2;
-      this.y -= this.w + 34;
-    }
+    this.scaler = GlobalConfig.scaler / 100;
     this.config = GlobalConfig;
-
     this.imgs = imgs;
-
     this.isOpen = true;
     this.openAmt = 0;
-
-
   }
 
   checkOpen(user, users) {
@@ -92,7 +98,8 @@ export default class Door extends Draggable {
     this.p5.push();
     this.p5.translate(this.x, this.y);
     if (!this.closed) {
-      if (!this.minimized) this.displayContent(userX, userY, isClosed, closedSign);
+      if (!this.minimized)
+        this.displayContent(userX, userY, isClosed, closedSign);
     }
     this.p5.pop();
   }

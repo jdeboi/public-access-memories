@@ -23,7 +23,7 @@ setInterval(() => {
   catch (error) {
     console.log("nope", error);
   }
-}, 500);
+}, 300);
 
 module.exports = function (client) {
   // console.log('client connected...', client.id)
@@ -77,6 +77,14 @@ module.exports = function (client) {
   })
 
   /////////// MESSAGES
+  // from: "me",
+  // to: userActive.active.userName,
+  // socketId: userActive.active.id,
+  // roomUrl: user.roomUrl,
+  // message: txt,
+  // time: JSON.stringify(new Date()),
+  // avatar: user.avatar
+            
   client.on('messageUser', ({ socketId, message, time, avatar }) => {
     // console.log("sending to", socketId, "msg:", message);
     io.to(socketId).emit('messageUser', getMessageObject(client.id, socketId, message, time, avatar));
@@ -104,6 +112,7 @@ module.exports = function (client) {
 }
 
 function getMessageObject(from, to, msg, time, avatar) {
+  console.log("messageobj", obj);
   return { from: from, to: to, message: msg, time: time, avatar: avatar };
 }
 

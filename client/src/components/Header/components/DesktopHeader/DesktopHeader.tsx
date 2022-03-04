@@ -11,6 +11,7 @@ import MapLi from '../menuItems/MapLi';
 import FaqLi from '../menuItems/FaqLi';
 import VolumeLi from '../menuItems/VolumeLi';
 import AvatarLi from '../menuItems/AvatarLi';
+import LiveStreamLi from '../menuItems/LiveStreamLi';
 
 interface IDH extends IMainMenu {
     avatarClicked: () => void
@@ -29,6 +30,7 @@ const DesktopHeader = (props: IDH) => {
                 />
             </ul>
             <ul className="right">
+                {/* <LiveStreamLi /> */}
                 <ChatLi />
                 <MapLi />
                 <FaqLi />

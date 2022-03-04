@@ -9,7 +9,7 @@
 .Gallery {
   background-image: url("./assets/wallpaper3.jpg");
   background-repeat: repeat;
-  background-size: 40% 40%;
+  background-size: 350px 200px;
 }
 
 .Gallery .MiniMap .otherAvatarsMiniMap {

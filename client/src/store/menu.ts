@@ -152,15 +152,15 @@ export const menuSlice = createSlice({
                 state.mobile = "chat";
         },
         showLiveStream: (state) => {
-            state.signIn.isHidden = false;
+            state.liveStream.isHidden = false;
             state.liveStream.hasClicked = true;
         },
         hideLiveStream: (state) => {
-            state.signIn.isHidden = true;
+            state.liveStream.isHidden = true;
         },
         toggleLiveStream: (state) => {
-            state.signIn.isHidden = !state.liveStream.isHidden;
-            if (state.signIn.isHidden)
+            state.liveStream.isHidden = !state.liveStream.isHidden;
+            if (state.liveStream.isHidden)
                 state.mobile = "";
         },
     }

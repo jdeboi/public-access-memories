@@ -96,13 +96,14 @@ export const barTenders: IUser[] = barUsers.map(user => {
 })
 
 
-
+// TODO - my system of units is bonkers
+// I mix and match pixels, world coords, dom coords ...
 export const bars: IBar[] = [
     {
         type: "wine",
         x: wineBotCoords.x,
         y: wineBotCoords.y,
-        w: barW,
+        w: barW, // stupid to use pixels here but "whatever" units for x & y
         h: barH,
         tender: barTenders[0],
         isFlipped: false

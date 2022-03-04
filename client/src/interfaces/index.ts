@@ -89,6 +89,7 @@ export interface IMenu {
 
 export interface IMessage {
     from: string,
+    fromUser?: string,
     to: string,
     message: string,
     time: string,
@@ -136,6 +137,7 @@ export interface IArtist {
     roomID: number;
     name: string;
     thumb: string;
+    nameLink: string;
     instaLink?: string;
     webLink?: string;
     medium?: string;

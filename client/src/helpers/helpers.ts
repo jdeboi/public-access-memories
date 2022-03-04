@@ -164,13 +164,27 @@ export const getRoomID = (id: string | undefined) => {
   return roomID;
 }
 
+// takes ID and returns room information
 export const getRoomFromID = (id: string | undefined) => {
   const room = rooms[getRoomID(id)];
   return room;
 }
 
 
-export const getArtistFromID = (id: string | undefined) => {
+export const getArtistFromNameLink = (name: string | undefined) => {
+  const artist = artists.find((art) => art.nameLink === name);
+  if (artist) {
+    return artist;
+  }
+  return artists[0];
+}
+
+export const getRoomFromArtistRoomID = (id: number): IRoom =>{
+  return rooms[id];
+}
+
+// takes room ID and returns artist associated with roomID
+export const getArtistFromRoomID = (id: string | undefined) => {
   return artists[getRoomID(id)];
 }
 

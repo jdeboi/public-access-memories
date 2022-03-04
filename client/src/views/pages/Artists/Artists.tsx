@@ -11,11 +11,11 @@ export const Artists = () => {
 
     function getArtistListing(artist: IArtist, index: number) {
         return (
-            <div key={index} className="artist-box">
-                <a href={`/artist/${index}`}><img className="thumb" src={`https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/thumbs/${artist.thumb}.png`} /></a>
+            <div key={index} className="artist-box windows">
+                <a href={`/artist/${artist.nameLink}`}><img className="thumb" src={`https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/thumbs/${artist.thumb}.png`} /></a>
                 <div className="artist-name">
                 {/* <a href={getArtistRoomLink(index + '')}>🚪</a>  */}
-                    <div><a href={`/artist/${index}`}>{artist.name}</a></div>
+                    <div><a href={`/artist/${artist.nameLink}`}>{artist.name}</a></div>
                     {/* <div className="door"><a href={`/homebody/rooms/${artist.id}`}>🚪</a></div>
                     <div>🌎</div> */}
                 </div>

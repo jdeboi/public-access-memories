@@ -10,6 +10,8 @@ import { GlobalConfig } from '../data/GlobalConfig';
 import Cookies from 'js-cookie'
 
 import socket from '../helpers/Socket';
+import { p5ToDomCoords, p5ToUserCoords } from '../helpers/coordinates';
+import { Global } from '@emotion/react';
 
 const initialState: IUser = {
     id: "0",
@@ -165,10 +167,15 @@ export const userSlice = createSlice({
 
 
 function userNearBar(user: IUser, location: IBar) {
-    var dx = user.x - (location.x + location.w / 2);
-    var dy = user.y - (location.y + location.h / 2);
-    var dis = Math.sqrt(dx * dx + dy * dy);
-    // console.log("DIS", dis < 200);
+    var p5coords = p5ToDomCoords(location.x,location.y);
+    // TODO - b/c width is in pixels, unlike x & y ...
+    p5coords.x += location.w/2; 
+    p5coords.y += location.h/2;
+
+    var dx = user.x - p5coords.x;
+    var dy = user.y - p5coords.y;
+    var dis = Math.sqrt(dx*dx + dy*dy);
+
     return dis < 200;
 }
 

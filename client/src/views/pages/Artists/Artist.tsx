@@ -2,15 +2,15 @@ import { faInstagram, faInternetExplorer } from '@fortawesome/free-brands-svg-ic
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { getArtistFromID, getRoomFromID } from '../../../helpers/helpers';
+import { getArtistFromNameLink, getRoomFromArtistRoomID } from '../../../helpers/helpers';
 import '../Page.css';
 import './Artist.css';
 
 export const Artist = () => {
-    const { id } = useParams();
-    // const room = getRoom(id);
-    const artist = getArtistFromID(id);
-    const room = getRoomFromID(id);
+    const { name } = useParams();
+    const artist = getArtistFromNameLink(name);
+    const room = getRoomFromArtistRoomID(artist.roomID);
+
 
     const Insta = () => {
         if (artist.instaLink) {

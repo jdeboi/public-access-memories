@@ -79,6 +79,7 @@ var font: p5Types.Font;
 var divs = {};
 
 // var miniMap;
+// let updateObj = { dx: 0, dy: 0, mx: 0, my: 0, destX: 0, destY: 0 };
 
 //////////////
 // MOVEMENT
@@ -226,7 +227,7 @@ class GallerySketch extends React.Component<Props> {
     //   rooms.push(new Room(p5, i));
     // }
     for (let i = 0; i < globalRooms.length; i++) {
-      
+
       rooms.push(new Room(p5, doorImgs[0], i));
     }
 
@@ -327,6 +328,14 @@ class GallerySketch extends React.Component<Props> {
 
   };
 
+  debugMove = (p5: p5Types) => {
+    p5.fill(0);
+    p5.noStroke();
+    p5.textSize(20);
+    // p5.text(updateObj.destX + " " + updateObj.destY, p5.mouseX, p5.mouseY);
+    p5.text(p5.round(userEase.x) + " " + p5.round(userEase.y), p5.width / 2, p5.height / 2)
+  }
+
 
   drawOverTarget = (p5: p5Types) => {
     const { user, users } = this.props;
@@ -402,7 +411,7 @@ class GallerySketch extends React.Component<Props> {
     // const walls = limits.map(pt => { return { x: pt.x * GlobalConfig.scaler, y: pt.y * GlobalConfig.scaler } });
 
     if (roomDoor) {
-      
+
       if (!isMobile) {
         if (window.confirm('Leave the main gallery?')) {
           userNewRoom(roomDoor);
@@ -423,19 +432,26 @@ class GallerySketch extends React.Component<Props> {
       stepTo.y = userStep.y;
     }
     else if (roomBoundary(rooms, prevStep, userStep)) {
-      isWalking = false;
+      this.stopWalking();
     }
     else if (roomDoorB) {
-      isWalking = false;
+      this.stopWalking();
     }
     else if (wallBoundary(walls, prevStep, userStep)) {
-      isWalking = false;
+      this.stopWalking();
     }
     else {
       stepTo.x = userStep.x;
       stepTo.y = userStep.y;
       // console.log("step", stepTo)
     }
+  }
+
+  stopWalking = () => {
+    isWalking = false;
+    // destination.x = stepTo.x;
+    // destination.y = stepTo.y;
+    // console.log("stop walking");
   }
 
   checkFollowHost = () => {
@@ -510,9 +526,16 @@ class GallerySketch extends React.Component<Props> {
       const dy = p5.mouseY > p5.windowHeight / 2 ? steps : -steps;
       const mx = roundToMult2((p5.mouseX - p5.windowWidth / 2) + dx, GlobalConfig.scaler);
       const my = roundToMult2((p5.mouseY - p5.windowHeight / 2) + dy, GlobalConfig.scaler);
+
+      // console.log(mx, my, dx, dy);
       if (!(mx === 0 && my === 0)) {
-        destination.x += mx;
-        destination.y += my;
+        // TODO - issue is if that destination is a no go, effs up future destinations
+        // destination.x += mx;
+        // destination.y += my;
+        const x = mx + user.x;
+        const y = my + user.y;
+        destination.x = x;
+        destination.y = y;
         destination.time = new Date();
         isWalking = true;
       }
@@ -524,28 +547,28 @@ class GallerySketch extends React.Component<Props> {
     const t = new Date().getTime() - destination.time.getTime();
     const { user } = this.props;
     if (isWalking) {
-      if (user.isFollowingHost) {
-        if (reachedDestination(stepTo, destination)) {
-          isWalking = false;
-          this.nextHostStep();
-        }
-        else if (t > 300) {
-          let step = getNextStep(stepTo, destination);
-          this.userTakeStep(step[0], step[1]);
-          destination.time = new Date();
-        }
-      }
+      // if (user.isFollowingHost) {
+      //   if (reachedDestination(stepTo, destination)) {
+      //     isWalking = false;
+      //     this.nextHostStep();
+      //   }
+      //   else if (t > 300) {
+      //     let step = getNextStep(stepTo, destination);
+      //     this.userTakeStep(step[0], step[1]);
+      //     destination.time = new Date();
+      //   }
+      // }
 
-      else {
-        if (reachedDestination(stepTo, destination)) {
-          isWalking = false;
-        }
-        else if (t > 150) {
-          let step = getNextStep(stepTo, destination);
-          this.userTakeStep(step[0], step[1]);
-          destination.time = new Date();
-        }
+      // else {
+      if (reachedDestination(stepTo, destination)) {
+        isWalking = false;
       }
+      else if (t > 150) {
+        let step = getNextStep(stepTo, destination);
+        this.userTakeStep(step[0], step[1]);
+        destination.time = new Date();
+      }
+    // }
     }
   }
 

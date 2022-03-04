@@ -229,7 +229,7 @@ function App() {
                     <Route path="/about" element={<About />} />
                     <Route path="/exhibition" element={<Statement />} />
                     <Route path="/artists" element={<Artists />} />
-                    <Route path="/artist/:id" element={<Artist />} />
+                    <Route path="/artist/:name" element={<Artist />} />
                     <Route path="/test/rooms/:id" element={<TestRoom />} />
                     <Route path={`/${ShowConfig.link}/rooms/:id`} element={<Room />} />
                     <Route path="*" element={<NotFound />} />

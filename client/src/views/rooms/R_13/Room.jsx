@@ -71,6 +71,7 @@ function VideoTex({ windowUI }) {
                             scale={[cube.s, cube.s, cube.s]}
                             rotation={[-.1, .4, 0]}
                             position={[cube.x, cube.y, cube.z]}
+                            key={i}
                         >
                             <boxGeometry attach="geometry" args={[1, 1, 1]} />
                             <meshBasicMaterial attach="material" >
