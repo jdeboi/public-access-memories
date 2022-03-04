@@ -517,9 +517,10 @@ class GallerySketch extends React.Component<Props> {
       setUserActive(userClicked);
       return;
     }
-    else if (checkDivPress(userEase.x, user.y, divs))
+    else if (checkDivPress(userEase.x, userEase.y, divs))
       return;
-
+    else if (treeSlider.checkDragging(userEase.x, userEase.y, p5))
+      return;
     else {
       let steps = GlobalConfig.scaler - 20;
       const dx = p5.mouseX > p5.windowWidth / 2 ? steps : -steps;
@@ -568,7 +569,7 @@ class GallerySketch extends React.Component<Props> {
         this.userTakeStep(step[0], step[1]);
         destination.time = new Date();
       }
-    // }
+      // }
     }
   }
 
@@ -639,4 +640,5 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 }
 
 export default connect<StateProps, DispatchProps, ComponentProps, RootState>(mapStateToProps, mapDispatchToProps)(GallerySketch);
+
 
