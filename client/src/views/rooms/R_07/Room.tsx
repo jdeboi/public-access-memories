@@ -18,10 +18,11 @@ const Room = () => {
     const windowUI = useSelector(selectWindow);
     const dispatch = useDispatch();
 
+
  
     return (
         <div className="Room RoomSidney Sketch">
-            <div id="p5_loading" className="loadingclass"></div>
+            {/* <div id="p5_loading" className="loadingclass"></div> */}
             <RoomSketch
                 loadingDone={() => dispatch(doneLoadingApp())}
                 isMobile={windowUI.isMobile}

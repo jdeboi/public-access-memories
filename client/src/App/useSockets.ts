@@ -44,17 +44,13 @@ export const useSockets = (props: ISockets) => {
 
         socket.on("messageAll", (data: IMessage) => {
             const message = { ...data }
-            message.to = "me";
-            // message.fromUser = user.userName; // getUserNameById(message.from);
             dispatch(addMessage(message));
             dispatch(incremendNotifications());
         })
 
         socket.on("messageRoom", (data: IMessage) => {
             const message = { ...data }
-            if (message.to === user.roomUrl) {
-                message.to = "room";
-                // message.fromUser = user.userName;
+            if (message.to === "room" && message.roomUrl === user.roomUrl) {
                 dispatch(addMessage(message));
                 dispatch(incremendNotifications());
             }
@@ -62,9 +58,7 @@ export const useSockets = (props: ISockets) => {
 
         socket.on("messageUser", (data: IMessage) => {
             const message = { ...data }
-            // message.fromUser = user.userName;
-            message.from = message.fromUser? message.fromUser : "";
-            console.log("socketuse", message);
+            // console.log("socketuse", message);
             dispatch(addMessage(message));
             dispatch(incremendNotifications());
         })

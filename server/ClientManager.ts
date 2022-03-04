@@ -1,4 +1,4 @@
-// import { IMessage } from '../client/src/interfaces';
+import { IMessage } from '../client/src/interfaces';
 
 const io = require('./index').io;
 
@@ -78,18 +78,18 @@ module.exports = function (client) {
 
  
 
-  client.on('messageUser', (messageObj) => {
+  client.on('messageUser', (messageObj: IMessage) => {
     io.to(messageObj.socketId).emit('messageUser', getMessageToUser(messageObj));
   })
 
-  client.on('messageRoom', (messageObj) => {
+  client.on('messageRoom', (messageObj: IMessage) => {
     // console.log("sending room message to", room, message);
     // io.sockets.in(room).emit('message', getMessageObject(client.id, "room", message))
     // client.to(room).emit('message', getMessageObject(client.id, room, message));
     client.to(messageObj.roomUrl).emit('messageRoom', getMessageToRoom(messageObj));
   })
 
-  client.on('messageAll', (messageObj) => {
+  client.on('messageAll', (messageObj: IMessage) => {
     // includes sender
     // io.emit('message', getMessageObject(client.id, "all", message));
 
@@ -110,19 +110,19 @@ module.exports = function (client) {
   // time: JSON.stringify(new Date()),
   // avatar: user.avatar
 
-function getMessageToUser(messageObj) {
+function getMessageToUser(messageObj: IMessage) {
   // console.log("messageobj", obj);
   const { fromUser, message, time, roomUrl, avatar } = messageObj;
   return { from: fromUser, to: "me", roomUrl, message, time, avatar};
 }
 
-function getMessageToRoom(messageObj) {
+function getMessageToRoom(messageObj: IMessage) {
   // console.log("messageobj", obj);
   const { fromUser, roomUrl, message, time, avatar } = messageObj;
   return { from: fromUser, to: "room", roomUrl, message, time, avatar};
 }
 
-function getMessageToAll(messageObj) {
+function getMessageToAll(messageObj: IMessage) {
   // console.log("messageobj", obj);
   const { fromUser, roomUrl, message, time, avatar } = messageObj;
   return { from: fromUser, to: "all", roomUrl, message, time, avatar};
