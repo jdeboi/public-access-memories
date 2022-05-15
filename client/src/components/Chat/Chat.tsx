@@ -129,7 +129,7 @@ const Chat = (props: ChatProps) => {
             avatar: user.avatar
         };
         if (socket.connected) {
-            console.log("messagesent", message);
+            // console.log("messagesent", message);
             socket.emit('messageUser', message); //sending to individual socketid
             dispatch(addMessage(message));
         }

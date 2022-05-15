@@ -1,6 +1,7 @@
 import { GlobalConfig } from "../data/GlobalConfig";
 import p5Types from 'p5';
 
+
 export const p5ToWorldCoords = (x: number, y: number) => {
     let xx = (x) * GlobalConfig.scaler;
     let yy = (y) * GlobalConfig.scaler;

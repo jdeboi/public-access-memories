@@ -6,7 +6,8 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import { ShowConfig } from '../data/ShowConfig';
 import { IUser, IUsers } from '../interfaces';
 
-// views
+///////////////////////////////
+// VIEWS
 import Gallery from '../views/Gallery/Gallery';
 import About from '../views/pages/About/About';
 import Statement from '../views/pages/Statement/Statement';
@@ -15,8 +16,12 @@ import TestRoom from '../views/rooms/TestRoom/TestRoom';
 import NotFound from "../views/pages/NotFound/NotFound";
 import Artists from '../views/pages/Artists/Artists';
 import Artist from '../views/pages/Artists/Artist';
+// past exhibitions
+import PastExhibitions from '../views/pages/PastExhibitions/PastExhibitions';
+import HomeBody from '../views/pages/PastExhibitions/HomeBody/HomeBody';
 
-// components
+///////////////////////////////
+// COMPONENTS
 // import ReactAudioPlayer from 'react-audio-player';
 import Header from '../components/Header/Header';
 import Chat from '../components/Chat/Chat';
@@ -31,7 +36,8 @@ import socket from "../helpers/Socket";
 
 import Cookies from 'js-cookie';
 
-// store
+///////////////////////////////
+// STORE
 import { IMessage } from '../interfaces';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, selectUser, selectWindow, selectMusic } from '../store/store';
@@ -228,22 +234,28 @@ function App() {
                     <Route path="/" element={<Gallery users={users} isClosed={isClosed} showWelcome={showWelcome} />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/exhibition" element={<Statement />} />
+                    <Route path="/opencall" element={<Statement />} />
                     <Route path="/artists" element={<Artists />} />
                     <Route path="/artist/:name" element={<Artist />} />
                     <Route path="/test/rooms/:id" element={<TestRoom />} />
                     <Route path={`/${ShowConfig.link}/rooms/:id`} element={<Room />} />
+
+                    <Route path="/pastexhibitions" element={<PastExhibitions />} />
+                    <Route path="/pastexhibitions/homebody" element={<HomeBody />} />
+
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </div>
 
             {/* check if user hasn't logged in and on a basic page */}
             {getSignedInComponents()}
-            <RoomDecal
-                startMedia={startMedia}
-                hasLoadedRoom={hasLoadedRoom}
+            {ShowConfig.isClosed || ShowConfig.underConstruction ? null :
+                <RoomDecal
+                    startMedia={startMedia}
+                    hasLoadedRoom={hasLoadedRoom}
                 // users={users}
-            />
-
+                />
+            }
 
         </div>
 

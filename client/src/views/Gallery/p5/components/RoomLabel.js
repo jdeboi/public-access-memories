@@ -1,6 +1,7 @@
 import Draggable from './Draggable/Draggable';
 // import ShadowDraggable from './Draggable/ShadowDraggable'
 import { GlobalConfig } from '../../../../data/GlobalConfig';
+import { ShowConfig } from '../../../../data/ShowConfig';
 import { p5ToWorldCoords } from '../../../../helpers/coordinates';
 import { artists, rooms, roomConfig } from '../../../../data/RoomConfig';
 
@@ -48,25 +49,27 @@ export default class RoomLabel extends Draggable {
         this.p5.textFont(font, 11);
 
         this.p5.translate(15, 25);
-        this.displayLabel();
 
-
-
+        if (ShowConfig.isClosed || ShowConfig.underConstruction) {
+            this.displayLabel(`Room ${this.id}`, "artist TBA");
+        }
+        else
+            this.displayLabel(this.title, this.artist);
 
         // if (this.title.length > 12) this.p5.translate(0, 35);
         // else 
         this.p5.translate(0, 20);
 
-        // hr
-        // this.p5.stroke(0, 70);
-        // this.p5.strokeWeight(1);
-        // this.p5.line(0, -5, this.w - 40, -5);
 
         // eye
         this.displayEye(count);
 
         this.p5.pop();
         this.p5.pop();
+
+    }
+
+    displayOpenContent() {
 
     }
 
@@ -97,30 +100,23 @@ export default class RoomLabel extends Draggable {
         this.p5.pop();
     }
 
-    displayLabel() {
+    displayLabel(title, artist) {
 
         // draw title
-        
+
         this.p5.noStroke();
-        let t = this.title;
+        let t = title;
         let maxL = 16;
         if (t.length > maxL) {
-            // let br = this.title.indexOf(" ");
-            // let t1 = this.title.substring(0, br);
-            // let t2 = this.title.substring(br + 1, this.title.length);
-            // this.p5.text(t1, 0, 0);
-            // this.p5.text(t2, 0, 17);
             t = t.substring(0, maxL) + "...";
         }
-        // else
-
         this.p5.fill(0, 0, 255);
         this.p5.textSize(14);
         this.p5.text(t, 0, 0);
 
         this.p5.textSize(11);
         this.p5.fill(0);
-        this.p5.text(this.artist, 0, 17);
+        this.p5.text(artist, 0, 17);
 
 
     }

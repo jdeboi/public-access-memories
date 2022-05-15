@@ -208,7 +208,6 @@ export default class Draggable {
     this.y = this.origY;
     this.offsetX = 0;
     this.offsetY = 0;
-    console.log("test")
   }
 
   resetWindow(div = this.div) {

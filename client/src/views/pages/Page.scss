@@ -1,4 +1,4 @@
-@import '../../styles/constants.scss';
+@import "../../styles/constants.scss";
 
 .Page {
     color: white;
@@ -11,5 +11,15 @@
     line-height: 140%;
     overflow: auto;
 
+    .showTitle {
+        font-style: italic;
+        font-family: monospace;
+    }
 
+    blockquote {
+        padding-left: 50px;
+        // color: rgb(240, 240, 240);
+        // letter-spacing: normal;
+        // font-family: monospace;
+    }
 }

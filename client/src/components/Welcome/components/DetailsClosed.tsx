@@ -21,14 +21,14 @@ export default function DetailsClosed() {
   
   
   return (
-    <div className="Welcome-Deets">
+    <div className="Welcome-Details">
       <div className="Details closed" >
         <div className="Details-txt">
           <div style={{fontSize: fonts[2], paddingBottom: "30px"}}>While you're free to roam the grounds, we're sorry to inform you that the gallery is currently</div>
           <div style={{fontSize: fonts[0], paddingBottom: "30px"}}>CLOSED</div>
           <div style={{fontSize: fonts[2], paddingBottom: "10px"}}>Please join us for the opening on:</div>
           <div style={{fontSize: fonts[1], paddingBottom: "5px"}}>{ShowConfig.showOpens.date}</div>
-          <div style={{fontSize: fonts[1], paddingBottom: "10px"}}>{ShowConfig.showOpens.time}</div>
+          {ShowConfig.showOpens.time !== "" ? <div style={{fontSize: fonts[1], paddingBottom: "10px"}}>{ShowConfig.showOpens.time}</div> : null}
         </div>
       </div>
 

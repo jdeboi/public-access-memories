@@ -32,7 +32,7 @@ class RoomSketch extends React.Component<Props> {
 
   preload = (p5: p5Types) => {
 
-    vid = p5.createVideo(['https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/sidney/sidney205.mp4']);
+    vid = p5.createVideo(['https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/sidney/sidney.mp4']);
     vid.hide(); // by default video shows up in separate dom
     // element. hide it and draw it to the canvas
     // instead

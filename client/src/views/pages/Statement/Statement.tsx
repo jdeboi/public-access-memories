@@ -6,33 +6,43 @@ export const Statement = () => {
     return (
         <div className="Statement  Page">
             <div className="container">
-                <h1>home &lt;/body&gt;</h1>
-                <h3>A <a href="https://thewrong.org/">wrong biennale</a> pavilion</h3>
-                <h4>hosted by Public Access Memories Gallery</h4>
+
+                <h1>OPEN CALL</h1>
                 <br />
-                {/* <hr /> */}
-                <p>
-                    <strong>home &lt;/body&gt;</strong> considers the spaces,
-                    experiences, and ephemera of digital homemaking. From housekeeping
-                    chores (decluttering desktops and inboxes) to nesting rituals
-                    (websurfing for superlative sourdough starter), the meaning of home
-                    is rapidly evolving.
-                </p>
-                <p>
-                    In addition to a new visual language, the exhibition seeks to uncover tensions of
-                    digital denizenship, for example, the nature of home as a &ldquo;safe
-                    haven&rdquo; in an age of surveillance capitalism, fake news, and
-                    internet trolls. Particularly in the context of a global pandemic,
-                    the paradox of home as both sanctuary and asylum, as both a confined
-                    and liberated space, offers ample opportunity for reflection.
-                </p>
-                <p>
-                    Situating digital works within their native environment, Public Access Memories
-                    Gallery offers the HTML gallery as a canvas. Artists in this pavilion 
-                    use various digital media formats as they probe the new meaning of home.
-                </p>
                 <br />
-                <img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/tw5_logo_w.png" width={200} />
+                <br />
+                <div className="windows">
+                <h2 className="showTitle">as I recall</h2>
+                <h4>Deadline July 15, 2022</h4>
+                <h5>publicaccessmemories@gmail.com</h5>
+                </div>
+                <br />
+                <br />
+
+                <blockquote className="quoteC" cite="https://doi.org/10.3389/fpsyg.2012.00257">
+                    “If anything has been learned about memory, it is that it is fragile and error prone...
+                    Although often associated with negative consequences there is growing evidence to suggest
+                    that memory's imperfections may also be a virtue. The reconstructive nature of memory is
+                    believed to provide greater cognitive flexibility...and support the construction and
+                    maintenance of self-identity and life-stories” (<a href="https://doi.org/10.3389/fpsyg.2012.00257">citation</a>)
+                </blockquote>
+                <br />
+                <p>
+                    Public Access Memories invites submissions that reflect upon the implications of digital memory-making.
+                    For example, how do social media stories form or infiltrate our personal narratives?
+                    How does the persistence and fixed-nature of our data disrupt or augment the ability to reshape visions of the past?
+                    To what extent have we maintained control over our memories as tech companies mine and monetize our digital histories?
+                    These are just a few questions that seek to probe the evolving nature of memory—one that is simultaneously
+                    analog and digital, permanent and pliable.
+                </p>
+                <p>
+                    Situating digital works within their native environment, Public Access Memories Gallery offers the HTML gallery as a canvas and accepts any digital media formats.
+                </p>
+                <p>To submit work, email file(s), a brief statement, and bio to publicaccessmemories@gmail.com.</p>
+
+                <p>
+                    <img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/as_i_recall.png" width="500px" />
+                </p>
             </div>
         </div>
     )

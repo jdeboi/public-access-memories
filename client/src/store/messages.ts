@@ -19,7 +19,6 @@ export const messagesSlice = createSlice({
     },
     reducers: {
         addMessage: (state, action: PayloadAction<IMessage>) => {
-            console.log("red", action.payload)
             state.messages = [...state.messages, action.payload];
         },
         incremendNotifications: (state) => {

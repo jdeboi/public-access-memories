@@ -24,4 +24,13 @@
   line-height: 140%;
   overflow: auto;
 }
+
+.Page .showTitle {
+  font-style: italic;
+  font-family: monospace;
+}
+
+.Page blockquote {
+  padding-left: 50px;
+}
 /*# sourceMappingURL=Page.css.map */

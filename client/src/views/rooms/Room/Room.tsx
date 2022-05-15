@@ -55,11 +55,11 @@ const Room = () => {
     const roomClosed = () => {
         return (
             <div className="Room Sketch">
-                <div className='container'>
+                <div className='container' style={{flex: "unset"}}>
                     <h1>Gallery Closed</h1>
                     <h2>Please join us for the opening!</h2>
                     <h3>{ShowConfig.showOpens.date}</h3>
-                    <h4>{ShowConfig.showOpens.time}</h4>
+                    {ShowConfig.showOpens.time !== "" ? <h4>{ShowConfig.showOpens.time}</h4> : null}
                 </div>
             </div>
         )
