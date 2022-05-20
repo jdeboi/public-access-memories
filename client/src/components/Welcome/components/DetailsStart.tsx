@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import { ShowConfig } from '../../../data/ShowConfig';
 import { selectWindow } from '../../../store/store';
 
+
+
 export default function DetailsStart() {
   const windowUI = useSelector(selectWindow);
 
@@ -38,7 +40,7 @@ export default function DetailsStart() {
             public access memories gallery
           </h4>
           {/* <a href="https://thewrong.org/"><img width="130px" src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/tw5_logo.png" /></a> */}
-         
+          <h4><a href="/opencall">open call</a></h4>
         </div>
       </div>
 
