@@ -1,6 +1,7 @@
 import React from 'react';
 // store
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { ShowConfig } from '../../../data/ShowConfig';
 import { selectWindow } from '../../../store/store';
 
@@ -37,7 +38,7 @@ export default function DetailsStart() {
             <br />
             public access memories gallery
           </h4>
-          {/* <a href="https://thewrong.org/"><img width="130px" src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/tw5_logo.png" /></a> */}
+          <Link to="/opencall">open call</Link>
          
         </div>
       </div>

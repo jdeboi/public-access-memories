@@ -1,23 +1,11 @@
 export const ShowConfig = {
-    isClosed: false,
-    isMenuOn: true,
-    underConstruction: false,
+    isClosed: true,
+    isMenuOn: false,
+    underConstruction: true,
     galleryTitle: "public access memories",
-    showTitle: "home </body>",
+    showTitle: "as i recall",
     showDescription: "",
-    showOpens: {date:"August 2022", time: "5PM Pacific (GMT-8)"},
+    showOpens: {date:"August 2022", time: ""},
     showCloses: "April 1, 2022",
-    link: "homebody"
+    link: "as-i-recall"
 }
-
-// export const ShowConfig = {
-//     isClosed: false,
-//     underConstruction: false,
-//     isMenuOn: false,
-//     galleryTitle: "public access memories",
-//     showTitle: "as i recall",
-//     showDescription: "",
-//     showOpens: {date:"August 2022", time: ""},
-//     showCloses: "April 1, 2022",
-//     link: "as-i-recall"
-// }
