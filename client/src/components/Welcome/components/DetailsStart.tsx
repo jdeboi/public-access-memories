@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { ShowConfig } from '../../../data/ShowConfig';
 import { selectWindow } from '../../../store/store';
 
+
+
 export default function DetailsStart() {
   const windowUI = useSelector(selectWindow);
 
@@ -38,8 +40,7 @@ export default function DetailsStart() {
             <br />
             public access memories gallery
           </h4>
-          <Link to="/opencall">open call</Link>
-         
+          <h4><a href="/opencall">open call</a></h4>
         </div>
       </div>
 

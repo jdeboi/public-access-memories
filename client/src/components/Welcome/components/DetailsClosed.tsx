@@ -28,6 +28,7 @@ export default function DetailsClosed() {
           <div style={{fontSize: fonts[0], paddingBottom: "30px"}}>CLOSED</div>
           <div style={{fontSize: fonts[2], paddingBottom: "10px"}}>Please join us for the opening on:</div>
           <div style={{fontSize: fonts[1], paddingBottom: "5px"}}>{ShowConfig.showOpens.date}</div>
+          {/* <div><a href="/opencall">open call</a></div> */}
           {ShowConfig.showOpens.time !== "" ? <div style={{fontSize: fonts[1], paddingBottom: "10px"}}>{ShowConfig.showOpens.time}</div> : null}
         </div>
       </div>
