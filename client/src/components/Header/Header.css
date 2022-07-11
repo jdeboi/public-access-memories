@@ -7,14 +7,14 @@
 /* Window borders flip button-face and button-highlight */
 /* Field borders (checkbox, input, etc) flip window-frame and button-shadow */
 .expandable:hover {
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5b43cd), color-stop(100%, #0da6ff));
-  border-bottom: 2px solid #0da6ff;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5b43cd), color-stop(100%, rgb(13, 166, 255)));
+  border-bottom: 2px solid rgb(13, 166, 255);
   height: 34px;
 }
 
 .clickable:hover {
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5b43cd), color-stop(100%, #0da6ff));
-  border-bottom: 2px solid #0da6ff;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5b43cd), color-stop(100%, rgb(13, 166, 255)));
+  border-bottom: 2px solid rgb(13, 166, 255);
   height: 34px;
 }
 
@@ -23,7 +23,6 @@
 .mobile .selected {
   height: 60px;
 }
-
 .mobile .expandable:hover,
 .mobile .clickable:hover,
 .mobile .selected:hover {
@@ -35,9 +34,7 @@
 .Header {
   display: block;
   font-family: consoleFont;
-  -webkit-box-flex: 0;
-      -ms-flex: 0 1 auto;
-          flex: 0 1 auto;
+  flex: 0 1 auto;
   font-size: 13pt;
   height: 34px;
   color: white;
@@ -46,149 +43,115 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  -webkit-box-shadow: 0px 0px 20px #000000;
-          box-shadow: 0px 0px 20px #000000;
+  box-shadow: 0px 0px 20px #000000;
   z-index: 2200;
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 100%;
-          flex: 1 1 100%;
+  flex: 1 1 100%;
   background-color: black;
   /* Tooltip container */
   /* Tooltip text */
   /* Tooltip arrow */
   /* Show the tooltip text when you mouse over the tooltip container */
 }
-
 .Header.mobile {
   height: 60px;
 }
-
 .Header.mobile ul li {
   line-height: 60px;
 }
-
 .Header.mobile .submenu ul {
   top: 58px;
 }
-
 .Header.mobile .right .submenu ul {
   width: 140px;
   border-top-left-radius: 8px;
   border-top-right-radius: 0px;
-  -webkit-transform: translate(-95px, 0px);
-          transform: translate(-95px, 0px);
+  transform: translate(-95px, 0px);
 }
-
 .Header.mobile .apple {
   font-size: 26px;
 }
-
 .Header.mobile .arrow {
   font-size: 22px;
 }
-
 .Header.mobile .arrow.expandable {
   padding: 0px;
   padding-left: 4px;
   padding-right: 4px;
 }
-
 .Header.mobile .xxsmall {
   line-height: 60px;
   height: 60px;
 }
-
 .Header .currentPage {
-  color: #0da6ff;
+  color: rgb(13, 166, 255);
 }
-
 .Header .disabled {
   color: rgba(255, 255, 255, 0.4);
 }
-
 .Header .opened {
   color: white;
 }
-
 .Header .closed {
   color: rgba(255, 255, 255, 0.4);
 }
-
 .Header .icon {
   font-size: 20px;
   line-height: 34px;
 }
-
 .Header .icon svg {
   vertical-align: middle;
 }
-
 .Header .icon.notify {
   padding-right: 20px;
 }
-
 .Header .liveStreamOn {
   color: pink;
 }
-
 .Header .selected {
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5b43cd), color-stop(100%, #0da6ff));
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5b43cd), color-stop(100%, rgb(13, 166, 255)));
   color: #fff;
-  border-bottom: 0.1em solid #0da6ff;
+  border-bottom: 0.1em solid rgb(13, 166, 255);
   height: 34px;
 }
-
 .Header ul {
   margin: 0 5px;
 }
-
 .Header ul .hidden {
   display: none;
 }
-
 .Header ul .arrow.expandable {
   color: #5b43cd;
 }
-
 .Header ul .arrow.expandable:hover {
   color: white;
 }
-
 .Header ul li {
   display: inline-block;
   line-height: 34px;
   padding: 0 0.5em;
   position: relative;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
-
 .Header ul li a {
   color: white;
 }
-
 .Header ul a {
   color: #000;
   text-decoration: none;
 }
-
 .Header ul.left {
   float: left;
   white-space: nowrap;
 }
-
 .Header ul.right {
   float: right;
 }
-
 .Header .fa {
   color: white;
 }
-
 .Header .submenu {
   display: none;
 }
-
 .Header .submenu .spacer {
   background: rgba(211, 211, 211, 0.8);
   height: 1px !important;
@@ -197,25 +160,20 @@
   width: 102%;
   position: relative;
 }
-
 .Header .submenu .spacer:hover {
   background: rgba(211, 211, 211, 0.8);
 }
-
-.Header .submenu input[type="text"] {
+.Header .submenu input[type=text] {
   border-radius: 2em;
   border: 1px solid #333;
   height: 2em;
   padding: 0 10px;
 }
-
-.Header .submenu input[type="range"] {
-  -webkit-transform: rotate(-90deg);
-          transform: rotate(-90deg);
+.Header .submenu input[type=range] {
+  transform: rotate(-90deg);
   margin-left: -50px;
   margin-top: 65px;
 }
-
 .Header .submenu ul {
   background: black;
   white-space: normal;
@@ -232,21 +190,17 @@
   white-space: nowrap;
   z-index: 200;
 }
-
 .Header .submenu ul.mobile {
   max-height: 250px;
 }
-
 .Header .submenu ul.mobile li {
   border-bottom: 1px solid white;
   padding: 8px 8px 8px 15px;
   white-space: normal;
 }
-
 .Header .submenu ul a:last-child li {
   border-bottom: 0px;
 }
-
 .Header .submenu ul li {
   display: block !important;
   vertical-align: middle;
@@ -257,22 +211,18 @@
   color: white;
   line-height: 1.8em;
 }
-
 .Header .submenu ul li:hover:not(.volume) {
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5b43cd), color-stop(100%, #0da6ff));
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5b43cd), color-stop(100%, rgb(13, 166, 255)));
   color: #fff;
 }
-
 .Header .submenu ul li.shortcut:after {
   content: attr(shortcut);
   float: right;
   padding-right: 20px;
 }
-
 .Header .submenu ul li.noShortcut {
   margin-right: 0px;
 }
-
 .Header .submenu .hasSubMenu:after {
   content: "\f04b";
   font-family: FontAwesome;
@@ -281,35 +231,22 @@
   position: absolute;
   right: 25px;
 }
-
 .Header .flexRow {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  flex-direction: row;
   padding: 3px 3px 3px 15px;
 }
-
 .Header .flexRow div {
   padding-right: 5px;
 }
-
 .Header .flex1 {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  flex: 1;
 }
-
 .Header .tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black;
-  /* If you want dots under the hoverable text */
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
 }
-
 .Header .tooltip .tooltiptext {
   visibility: hidden;
   width: 120px;
@@ -326,10 +263,8 @@
   margin-left: -60px;
   /* Fade in tooltip */
   opacity: 0;
-  -webkit-transition: opacity 0.3s;
   transition: opacity 0.3s;
 }
-
 .Header .tooltip .tooltiptext::after {
   content: "";
   position: absolute;
@@ -340,12 +275,10 @@
   border-style: solid;
   border-color: #555 transparent transparent transparent;
 }
-
 .Header .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
 }
-
 .Header .hamburger-button {
   color: white;
   background: red;
@@ -354,19 +287,15 @@
   margin-top: -1px;
   vertical-align: middle;
 }
-
 .Header .glitz {
-  background: -webkit-gradient(linear, right top, left top, from(#00ffbd), color-stop(#e98fea), to(#8fcdea));
   background: linear-gradient(270deg, #00ffbd, #e98fea, #8fcdea);
   background-size: 600% 600%;
   -webkit-animation: ClickMeGradient 0.6s ease infinite;
   animation: ClickMeGradient 0.6s ease infinite;
 }
-
 .Header .notification {
   position: relative;
 }
-
 .Header .notification .badge {
   position: absolute;
   font-size: 10px;
@@ -380,7 +309,6 @@
   background: red;
   color: white;
 }
-
 @-webkit-keyframes ClickMeGradient {
   0% {
     background-position: 0% 48%;
@@ -392,7 +320,6 @@
     background-position: 0% 48%;
   }
 }
-
 @keyframes ClickMeGradient {
   0% {
     background-position: 0% 48%;
@@ -404,7 +331,6 @@
     background-position: 0% 48%;
   }
 }
-
 @media screen and (max-width: 830px) {
   .Header {
     font-size: 14pt;
@@ -415,7 +341,6 @@
     overflow-x: hidden;
   }
 }
-
 @media screen and (max-width: 400px) {
   .Header {
     font-size: 14pt;
@@ -424,7 +349,6 @@
     font-size: 14pt;
   }
 }
-
 @media screen and (max-width: 362px) {
   .Header {
     font-size: 12pt;
@@ -433,7 +357,6 @@
     font-size: 12pt;
   }
 }
-
 @media screen and (max-width: 332px) {
   .Header {
     font-size: 10pt;
@@ -488,5 +411,4 @@ span.focus:after {
 
 span#pageTitle {
   white-space: nowrap;
-}
-/*# sourceMappingURL=Header.css.map */
+}/*# sourceMappingURL=Header.css.map */

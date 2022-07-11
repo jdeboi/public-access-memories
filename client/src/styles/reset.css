@@ -100,7 +100,6 @@ textarea {
   font-size: 100%;
   font: inherit;
   background: transparent;
-  -webkit-box-shadow: none;
   box-shadow: none;
   border: none;
 }
@@ -164,5 +163,4 @@ button {
   background-color: transparent;
   outline: none;
   border: 0;
-}
-/*# sourceMappingURL=reset.css.map */
+}/*# sourceMappingURL=reset.css.map */

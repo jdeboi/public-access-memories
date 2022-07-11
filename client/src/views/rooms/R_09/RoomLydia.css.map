@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,UAAU,CAAC;EACP,UAAU,EAAE,KAAK;EACjB,gBAAgB,EAAE,6GAA6G;EAC/H,eAAe,EAAE,OAAO;EACxB,iBAAiB,EAAE,MAAM;CAY5B;;AAhBD,AAMI,UANM,CAMN,OAAO,CAAC;EACJ,QAAQ,EAAE,QAAQ;CAIrB;;AAXL,AAaI,UAbM,CAaN,OAAO,CAAC;EACJ,QAAQ,EAAE,QAAQ;CACrB",
-    "sources": [
-        "RoomLydia.scss"
-    ],
-    "names": [],
-    "file": "RoomLydia.css"
-}

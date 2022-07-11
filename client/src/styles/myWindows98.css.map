@@ -1,10 +1,1 @@
-{
-    "version": 3,
-    "mappings": "ACiFA;;;;GAIG;AAaF,aAAa;AAOb,0DAA0D;AAI1D,8EAA8E;AD3G/E,AAAA,gBAAgB,CAAC;EACb,UAAU,EC8GK,wCAAwD;CD7G1E;;AAED,AAAA,cAAc,CAAC;EACX,UAAU,ECmGS,KAAK,CAAE,IAAG,CAAE,IAAG,CAftB,OAAO,EAe+B,KAAK,CAAC,GAAG,CAAC,GAAG,CAjBpD,OAAO,EAkBC,KAAK,CAAE,IAAG,CAAE,IAAG,CAjBrB,OAAO,EAiB+B,KAAK,CAAC,GAAG,CAAC,GAAG,CAnBhD,OAAO;EDhFvB,UAAU,EC+EH,OAAO;CD9EjB;;AAED,AAAA,WAAW,CAAC;EACR,UAAU,ECqGK,wCAAwD;EDpGvE,KAAK,EAAE,KAAK;CACf",
-    "sources": [
-        "myWindows98.scss",
-        "constants.scss"
-    ],
-    "names": [],
-    "file": "myWindows98.css"
-}
+{"version":3,"sources":["constants.scss","myWindows98.scss","myWindows98.css"],"names":[],"mappings":"AAiFA;;;;EAAA;AAiBC,YAAA;AAOA,yDAAA;AAIA,6EAAA;AC3GD;EACI,oDD8Ge;AEvGnB;;ADJA;EACI,0GAAA;EACA,mBD+EO;AExEX;;ADJA;EACI,oDDqGe;ECpGf,YAAA;ACOJ","file":"myWindows98.css"}

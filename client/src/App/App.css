@@ -17,7 +17,6 @@
   line-height: 1.6em;
   color: white;
 }
-
 .App.overflow-all .App-Content {
   overflow: auto;
   height: 100%;
@@ -36,91 +35,50 @@
   font-family: consoleFont;
   overflow: hidden;
   padding: 0;
-  -webkit-perspective-origin: 0 0;
-          perspective-origin: 0 0;
+  perspective-origin: 0 0;
   letter-spacing: 0.1em;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: column;
-          flex-flow: column;
+  flex-flow: column;
 }
-
 .App .App-Header {
-  -webkit-box-flex: 0;
-      -ms-flex: 0 0 auto;
-          flex: 0 0 auto;
+  flex: 0 0 auto;
   height: 34px;
   /* The above is shorthand for:
-    flex-grow: 0,
-    flex-shrink: 1,
-    flex-basis: auto
-    */
-  display: -webkit-box;
-  display: -ms-flexbox;
+  flex-grow: 0,
+  flex-shrink: 1,
+  flex-basis: auto
+  */
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: column;
-          flex-flow: column;
-  -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
+  flex-flow: column;
+  align-items: stretch;
 }
-
 .App .App-Header.mobile {
   height: 60px;
 }
-
 .App .App-Content {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  flex: 1 1 auto;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: column;
-          flex-flow: column;
-  -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
+  flex-flow: column;
+  align-items: stretch;
   overflow: hidden;
 }
-
-.App .inner-outline {
-  -webkit-box-sizing: border-box;
-  /* Safari/Chrome, other WebKit */
-  /* Firefox, other Gecko */
-  box-sizing: border-box;
-  /* Opera/IE 8+ */
+.App .inner-outline { /* Safari/Chrome, other WebKit */ /* Firefox, other Gecko */
+  box-sizing: border-box; /* Opera/IE 8+ */
 }
-
 .App .Sketch {
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1 100%;
-          flex: 1 1 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
+  flex: 1 1 100%;
   display: flex;
   width: 100%;
   overflow: hidden;
   position: relative;
 }
-
 .App #babylon-canvas {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  flex: 1;
   display: block;
   /* needs absolute so that frames don't appear below page. dunno why */
   /* making 0 for hard drives */
   z-index: 0;
 }
-
 .App .noSelect {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -129,7 +87,6 @@
   user-select: none;
   pointer-events: none;
 }
-
 .App #fps {
   position: absolute;
   background-color: black;
@@ -141,16 +98,13 @@
   width: 60px;
   height: 20px;
 }
-
 .App .bold {
   font-weight: bold;
 }
-
 .App .dottedBG1 {
   background-image: radial-gradient(ellipse farthest-corner, transparent 0%, transparent 35%, #fff 30%, #fff 40%, transparent 90%), radial-gradient(ellipse farthest-corner at 0px 0px, transparent 0%, transparent 20%, #fff 15%, #fff 20%, transparent 50%), radial-gradient(ellipse farthest-corner at 8px 8px, transparent 0%, transparent 20%, #fff 15%, #fff 20%, transparent 50%), radial-gradient(ellipse farthest-corner at 0px 8px, transparent 0%, transparent 20%, #fff 15%, #fff 20%, transparent 40%), radial-gradient(ellipse farthest-corner at 8px 0px, transparent 0%, transparent 20%, #fff 15%, #fff 20%, transparent 50%), linear-gradient(120deg, #11ffff 0, #ff11ff 100%);
   background-size: 8px 8px, 8px 8px, 8px 8px, 8px 8px, 8px 8px, 100% 100%;
 }
-
 .App .backgroundCover {
   /*  made 0, was -200, because clouds were behind app-frame-box thing */
   z-index: 0;
@@ -159,21 +113,15 @@
   min-width: 100%;
   min-height: 100%;
 }
-
 .App .flippedX {
-  -webkit-transform: scaleX(-1);
-          transform: scaleX(-1);
+  transform: scaleX(-1);
 }
-
 .App .flippedY {
-  -webkit-transform: scaleY(-1);
-          transform: scaleY(-1);
+  transform: scaleY(-1);
 }
-
 .App .bold {
   font-family: consoleFontBold;
 }
-
 .App .rot90 {
   transform: rotate(90deg);
   -webkit-transform: rotate(90deg);
@@ -181,7 +129,6 @@
   -ms-transform: rotate(90deg);
   -o-transform: rotate(90deg);
 }
-
 .App .rotNeg90 {
   transform: rotate(-90deg);
   -webkit-transform: rotate(-90deg);
@@ -196,11 +143,9 @@
   font-weight: normal;
   font-style: normal;
 }
-
 @font-face {
   font-family: consoleFontBold;
   src: url(./assets/fonts/sysfont/sysfont.otf);
   font-weight: bold;
   font-style: normal;
-}
-/*# sourceMappingURL=App.css.map */
+}/*# sourceMappingURL=App.css.map */

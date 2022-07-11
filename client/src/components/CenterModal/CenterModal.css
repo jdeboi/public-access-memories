@@ -9,55 +9,30 @@
 }
 
 .CenterModal .CenterModal-Container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   pointer-events: all;
 }
-
 .CenterModal .flex1 {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  flex: 1;
   overflow: auto;
 }
-
 .CenterModal .flexRow {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  flex-direction: row;
 }
-
 .CenterModal .flexPad {
   margin-bottom: 15px;
 }
-
 .CenterModal .center-buttons {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  flex-direction: row;
   vertical-align: middle;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
 }
-
 .CenterModal .center-buttons button {
   margin: 5px;
 }
-
 @media only screen and (max-width: 350px) {
   .CenterModal button.standardButton {
     min-width: 120px;
@@ -69,5 +44,4 @@
   margin-left: auto;
   margin-right: auto;
   width: 50%;
-}
-/*# sourceMappingURL=CenterModal.css.map */
+}/*# sourceMappingURL=CenterModal.css.map */

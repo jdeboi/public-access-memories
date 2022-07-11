@@ -7,11 +7,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IUser, IBar } from '../interfaces';
 import { getBar } from '../data/BotConfig';
 import { GlobalConfig } from '../data/GlobalConfig';
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 
-import socket from '../helpers/Socket';
-import { p5ToDomCoords, p5ToUserCoords } from '../helpers/coordinates';
-import { Global } from '@emotion/react';
+import { p5ToDomCoords } from '../helpers/coordinates';
 
 const initialState: IUser = {
     id: "0",

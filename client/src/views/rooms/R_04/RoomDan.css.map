@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,QAAQ,CAAC;EACL,UAAU,EAAE,KAAK;CAKpB;;AAND,AAGI,QAHI,CAGJ,OAAO,CAAC;EACJ,QAAQ,EAAE,QAAQ;CACrB",
-    "sources": [
-        "RoomDan.scss"
-    ],
-    "names": [],
-    "file": "RoomDan.css"
-}

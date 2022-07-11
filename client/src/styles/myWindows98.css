@@ -7,19 +7,15 @@
 /* Window borders flip button-face and button-highlight */
 /* Field borders (checkbox, input, etc) flip window-frame and button-shadow */
 .windowsGradient {
-  background: -webkit-gradient(linear, left top, right top, from(#000080), to(#1084d0));
   background: linear-gradient(90deg, #000080, #1084d0);
 }
 
 .windowsWindow {
-  -webkit-box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff;
-          box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff;
   background: #c0c0c0;
 }
 
 .windowsBar {
-  background: -webkit-gradient(linear, left top, right top, from(#000080), to(#1084d0));
   background: linear-gradient(90deg, #000080, #1084d0);
   color: white;
-}
-/*# sourceMappingURL=myWindows98.css.map */
+}/*# sourceMappingURL=myWindows98.css.map */

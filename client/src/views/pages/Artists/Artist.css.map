@@ -1,9 +1,1 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AACI,OADG,CACH,KAAK,CAAC;EAEF,SAAS,EAAE,IAAI;EACf,cAAc,EAAE,IAAI;CACvB;;AALL,AAOI,OAPG,CAOH,MAAM,CAAC;EACH,SAAS,EAAE,IAAI;CAClB",
-    "sources": [
-        "Artist.scss"
-    ],
-    "names": [],
-    "file": "Artist.css"
-}
+{"version":3,"sources":["Artist.scss","Artist.css"],"names":[],"mappings":"AACI;EAEI,eAAA;EACA,oBAAA;ACDR;ADII;EACI,eAAA;ACFR","file":"Artist.css"}

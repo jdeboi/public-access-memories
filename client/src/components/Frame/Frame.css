@@ -8,41 +8,34 @@
 /* Field borders (checkbox, input, etc) flip window-frame and button-shadow */
 .Frame {
   color: #000;
-  font-family: consoleFont, HelveticaNeue, 'Helvetica Neue', 'Lucida Grande', Arial, sans-serif;
+  font-family: consoleFont, HelveticaNeue, "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
   position: absolute;
   margin-bottom: -33px;
   font-size: 13pt;
   pointer-events: none;
 }
-
 .Frame input, .Frame button, .Frame select, .Frame textarea {
   pointer-events: all;
 }
-
 .Frame span {
   line-height: 8px;
   vertical-align: 50%;
 }
-
 .Frame .window {
   border-radius: 8px;
-  -webkit-box-shadow: 0px 0px 20px #000000;
-          box-shadow: 0px 0px 20px #000000;
-  /* #6c6c6c; */
+  box-shadow: 0px 0px 20px #000000; /* #6c6c6c; */
   padding-bottom: 2px;
   overflow: hidden;
 }
-
 .Frame .stair-window {
   overflow: visible;
 }
-
 .Frame .titlebar {
   position: relative;
   height: 26px;
   pointer-events: all;
   font-family: consoleFont, sans-serif;
-  font-size: .8em;
+  font-size: 0.8em;
   line-height: 20px;
   text-align: center;
   width: 100%;
@@ -53,65 +46,36 @@
   -moz-user-select: none;
   -ms-user-select: none;
   -o-user-select: none;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
+  flex-direction: row;
+  flex-wrap: nowrap;
 }
-
 .Frame .titleTxtContainer {
   position: relative;
   height: 26px;
   white-space: nowrap;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
+  flex-grow: 1;
   text-align: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  /* <--- I added this */
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  /* <--- Change here */
+  justify-content: center;
+  flex-direction: column; /* <--- I added this */
+  align-items: center; /* <--- Change here */
   width: 100%;
 }
-
 .Frame .buttons {
   padding-left: 5px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   float: left;
   white-space: nowrap;
   line-height: 0px;
   /* made them match titlebar to show up on Stair */
-  font-family: HelveticaNeue, 'Helvetica Neue', 'Lucida Grande', Arial, sans-serif;
+  font-family: HelveticaNeue, "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
   height: 26px;
   width: 70px;
-  -ms-flex-negative: 0;
-      flex-shrink: 0;
+  flex-shrink: 0;
 }
-
 .Frame .circleButton {
   /* border: .15em solid black; */
   border-radius: 50%;
@@ -126,11 +90,9 @@
   /* doing this to position inner circle absolute relative to inner */
   position: relative;
 }
-
 .Frame .circleButton:hover {
   background: white;
 }
-
 .Frame .circleButton .innerC {
   position: absolute;
   background: black;
@@ -138,21 +100,19 @@
   height: 8px;
   width: 8px;
   /*
-      Put top edge and left edge in the center
-      */
+  Put top edge and left edge in the center
+  */
   top: 50%;
   left: 50%;
   margin: -4px 0px 0px -4px;
   /*
-      Offset the position correctly with
-      minus half of the width and minus half of the height
-      */
+  Offset the position correctly with
+  minus half of the width and minus half of the height
+  */
 }
-
 .Frame .circleButton .innerC:hover {
   background: white;
 }
-
 .Frame .content {
   position: relative;
   padding: 0px;
@@ -160,7 +120,6 @@
   /* margin-left: -1px; */
   /* making relative b/c video content from react-player was set to absolute and was bubbling right on top of title bar */
 }
-
 .Frame .content video {
   border-bottom-left-radius: calc(8px-2);
   border-bottom-right-radius: calc(8px-2);
@@ -174,7 +133,6 @@
 .minimized .content {
   display: none;
 }
-
 .minimized .window {
   height: 22px !important;
 }
@@ -189,5 +147,4 @@
 
 .Frame.static {
   position: static;
-}
-/*# sourceMappingURL=Frame.css.map */
+}/*# sourceMappingURL=Frame.css.map */

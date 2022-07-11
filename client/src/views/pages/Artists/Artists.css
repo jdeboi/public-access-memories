@@ -1,24 +1,15 @@
 .Artists .artists-list {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
-
 .Artists .artists-list .artist-box {
   margin-right: 20px;
   margin-bottom: 20px;
   padding: 2px;
   text-align: center;
 }
-
 .Artists .artists-list img.thumb {
   width: 200px;
   height: 200px;
-}
-/*# sourceMappingURL=Artists.css.map */
+}/*# sourceMappingURL=Artists.css.map */

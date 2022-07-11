@@ -1,9 +1,1 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAGI,QAHI,CAGJ,aAAa,CAAC;EACV,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,GAAG;EACnB,SAAS,EAAE,IAAI;CA+BlB;;AArCL,AAUQ,QAVA,CAGJ,aAAa,CAOT,WAAW,CAAC;EAKR,YAAY,EAAE,IAAI;EAClB,aAAa,EAAE,IAAI;EACnB,OAAO,EAAE,GAAG;EACZ,UAAU,EAAE,MAAM;CAIrB;;AAtBT,AAwBQ,QAxBA,CAGJ,aAAa,CAqBT,GAAG,AAAA,MAAM,CAAC;EACN,KAAK,EAAE,KAAK;EACZ,MAAM,EAAE,KAAK;CAEhB",
-    "sources": [
-        "Artists.scss"
-    ],
-    "names": [],
-    "file": "Artists.css"
-}
+{"version":3,"sources":["Artists.scss","Artists.css"],"names":[],"mappings":"AAGI;EACI,aAAA;EACA,mBAAA;EACA,eAAA;ACFR;ADMQ;EAKI,kBAAA;EACA,mBAAA;EACA,YAAA;EACA,kBAAA;ACRZ;ADcQ;EACI,YAAA;EACA,aAAA;ACZZ","file":"Artists.css"}

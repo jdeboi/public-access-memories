@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,UAAU,CAAC;EACP,UAAU,EAAE,KAAK;CAKpB;;AAND,AAGI,UAHM,CAGN,OAAO,CAAC;EACJ,QAAQ,EAAE,QAAQ;CACrB",
-    "sources": [
-        "RoomFreya.scss"
-    ],
-    "names": [],
-    "file": "RoomFreya.css"
-}

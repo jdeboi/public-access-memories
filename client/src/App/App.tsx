@@ -4,7 +4,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 
 // interfaces
 import { ShowConfig } from '../data/ShowConfig';
-import { IUser, IUsers } from '../interfaces';
+import { IUsers } from '../interfaces';
 
 ///////////////////////////////
 // VIEWS
@@ -38,17 +38,13 @@ import Cookies from 'js-cookie';
 
 ///////////////////////////////
 // STORE
-import { IMessage } from '../interfaces';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState, selectUser, selectWindow, selectMusic } from '../store/store';
-import { setOneMenu, showSignIn, hideMenus } from '../store/menu';
+import { selectUser, selectWindow, selectMusic } from '../store/store';
+import { showSignIn, hideMenus } from '../store/menu';
 import { setUser, setUserRoomUrl } from '../store/user';
 import { startComposition, resizeApp, loadingApp } from '../store/window';
-import { addMessage, incremendNotifications } from '../store/messages';
 import FAQ from '../components/FAQ/FAQ';
 
-
-import { PageConfig } from '../data/PageConfig';
 import { shouldShowLoggedInComponents } from '../helpers/helpers';
 
 
@@ -130,9 +126,7 @@ function App() {
     }
 
     const avatarClicked = () => {
-        // console.log("avatar clicked")
         if (!showWelcome) {
-            //   setShowSignInDiv(true);
             dispatch(showSignIn());
         }
     }
@@ -253,7 +247,6 @@ function App() {
                 <RoomDecal
                     startMedia={startMedia}
                     hasLoadedRoom={hasLoadedRoom}
-                // users={users}
                 />
             }
 
@@ -262,5 +255,4 @@ function App() {
     )
 }
 
-// export default withCookies(App);
 export default App;

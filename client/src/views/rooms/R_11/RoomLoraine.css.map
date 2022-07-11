@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,IAAI,CAAC,OAAO,AAAA,YAAY,CAAC;EACrB,UAAU,EAAE,MAAM;CACrB;;AAGD,AAAA,YAAY,CAAC;EACT,eAAe,EAAE,MAAM;EACvB,SAAS,EAAE,IAAI;EACf,cAAc,EAAE,GAAG;CAOtB;;AAVD,AAKI,YALQ,CAKR,eAAe,CAAC;EACb,MAAM,EAAE,IAAI;EACZ,SAAS,EAAE,KAAK;EAChB,UAAU,EAAE,IAAI;CAClB",
-    "sources": [
-        "RoomLoraine.scss"
-    ],
-    "names": [],
-    "file": "RoomLoraine.css"
-}

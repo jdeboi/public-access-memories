@@ -100,7 +100,6 @@ textarea {
   font-size: 100%;
   font: inherit;
   background: transparent;
-  -webkit-box-shadow: none;
   box-shadow: none;
   border: none;
 }
@@ -183,18 +182,15 @@ button {
 /* Window borders flip button-face and button-highlight */
 /* Field borders (checkbox, input, etc) flip window-frame and button-shadow */
 .windowsGradient {
-  background: -webkit-gradient(linear, left top, right top, from(#000080), to(#1084d0));
   background: linear-gradient(90deg, #000080, #1084d0);
 }
 
 .windowsWindow {
-  -webkit-box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff;
-          box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px #808080, inset 2px 2px #ffffff;
   background: #c0c0c0;
 }
 
 .windowsBar {
-  background: -webkit-gradient(linear, left top, right top, from(#000080), to(#1084d0));
   background: linear-gradient(90deg, #000080, #1084d0);
   color: white;
 }
@@ -216,20 +212,15 @@ button.standardButton {
   border-radius: 8px;
   border: 2px solid black;
   color: white;
-  -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
-
 button.standardButton:hover {
-  -webkit-transform: scale(1.05);
-          transform: scale(1.05);
+  transform: scale(1.05);
 }
-
 button.standardButton.primary {
   background: black;
   color: white;
 }
-
 button.standardButton.secondary {
   background-color: white;
   color: black;
@@ -274,7 +265,7 @@ input.standardInputWhite {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #0000004d;
+  background: rgba(0, 0, 0, 0.3019607843);
   border-radius: 8px;
 }
 
@@ -318,28 +309,22 @@ p.small {
 }
 
 .container {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  flex: 1;
   padding-top: 50px;
   padding-bottom: 70px;
   width: 95%;
   max-width: 1200px;
   margin: auto;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .windows {
-  -webkit-box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080;
-          box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080;
+  box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080;
   padding: 20px;
-  background: #5a43cd6b;
-  -webkit-box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
-          box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+  background: rgba(90, 67, 205, 0.4196078431);
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
 }
 
 hr {
   border: 1px solid white;
-}
-/*# sourceMappingURL=index.css.map */
+}/*# sourceMappingURL=index.css.map */

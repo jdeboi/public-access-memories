@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,UAAU,CAAC;EACP,gBAAgB,EAAE,kGAAkG;EACpH,eAAe,EAAE,OAAO;CAC3B",
-    "sources": [
-        "RoomIvans.scss"
-    ],
-    "names": [],
-    "file": "RoomIvans.css"
-}

@@ -8,6 +8,5 @@
 /* Field borders (checkbox, input, etc) flip window-frame and button-shadow */
 .Room {
   color: white;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5b43cd), color-stop(100%, #0da6ff));
-}
-/*# sourceMappingURL=Room.css.map */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5b43cd), color-stop(100%, rgb(13, 166, 255)));
+}/*# sourceMappingURL=Room.css.map */

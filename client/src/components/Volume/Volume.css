@@ -1,25 +1,16 @@
 .VolumeBar .content {
   pointer-events: all;
 }
-
 .VolumeBar .content .volume-slider {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  flex-direction: row;
 }
-
 .VolumeBar .content .volume-slider button {
   width: 40px;
   height: 40px;
   color: white;
   top: 0;
 }
-
 .VolumeBar .content .volume-slider .MuiSlider-root {
   margin-left: 10px;
-}
-/*# sourceMappingURL=Volume.css.map */
+}/*# sourceMappingURL=Volume.css.map */

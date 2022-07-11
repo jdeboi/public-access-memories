@@ -1,9 +1,1 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,UAAU,CAAC;EACP,UAAU,EAAE,MAAM;EAClB,OAAO,EAAE,IAAI;CAKhB;;AAPD,AAII,UAJM,CAIN,CAAC,CAAA;EACG,KAAK,EAAE,KAAK;CACf",
-    "sources": [
-        "LiveStream.scss"
-    ],
-    "names": [],
-    "file": "LiveStream.css"
-}
+{"version":3,"sources":["LiveStream.scss","LiveStream.css"],"names":[],"mappings":"AAAA;EACI,kBAAA;EACA,aAAA;ACCJ;ADCI;EACI,YAAA;ACCR","file":"LiveStream.css"}

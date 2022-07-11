@@ -5,9 +5,7 @@
   overflow: hidden;
   background: transparent;
   color: black;
-  -webkit-box-shadow: 0px 0px 20px #000000;
-          box-shadow: 0px 0px 20px #000000;
-  /* #6c6c6c; */
+  box-shadow: 0px 0px 20px #000000; /* #6c6c6c; */
   border-radius: 8px;
   border: 2px solid white;
   z-index: 2000;
@@ -15,20 +13,14 @@
 
 .toolbar {
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  flex-direction: row;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   border-bottom: 2px solid white;
   background: black;
   height: 25px;
-  -ms-flex-wrap: nowrap;
-      flex-wrap: nowrap;
+  flex-wrap: nowrap;
   pointer-events: all;
   /* margin-top: -20px; */
   /* position: absolute; */
@@ -38,8 +30,7 @@
   height: 25px;
   width: 70px;
   /* background-color: red; */
-  -ms-flex-negative: 0;
-      flex-shrink: 0;
+  flex-shrink: 0;
 }
 
 .buttons div {
@@ -52,7 +43,7 @@
 }
 
 .buttons div:hover {
-  background-color: #6464ff;
+  background-color: rgb(100, 100, 255);
 }
 
 .button1 {
@@ -68,8 +59,8 @@
 }
 
 /* .button1:hover{
-  background-color: red;
-  } */
+background-color: red;
+} */
 .button2 {
   left: 30px;
 }
@@ -83,18 +74,18 @@
 }
 
 /* .button2:hover{
-  background-color: yellow;
-  } */
+background-color: yellow;
+} */
 .button3 {
   left: 50px;
 }
 
 /* .button3:hover{
-  background-color: green;
-  } */
+background-color: green;
+} */
 .content {
   /* width: 450px;
-    height: 375px; */
+  height: 375px; */
   /* background-color: red; */
   background-repeat: no-repeat;
   background-size: cover;
@@ -135,9 +126,7 @@ button {
   height: 25px;
   /* background: yellow; */
   white-space: nowrap;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
+  flex-grow: 1;
   /* padding-left: 40px; */
   overflow: hidden;
   text-align: center;
@@ -145,5 +134,4 @@ button {
   /* float: right; */
   /* padding-left: 70px; */
   color: white;
-}
-/*# sourceMappingURL=Draggable.css.map */
+}/*# sourceMappingURL=Draggable.css.map */

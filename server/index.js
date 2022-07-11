@@ -8,11 +8,6 @@ const server = http.createServer(app);
 const cors = require('cors')
 app.use(cors())
 
-// sockets
-// var io = module.exports.io = require('socket.io')(server);
-// const ClientManager = require('./websockets/ClientManager');
-// io.on('connection', ClientManager);
-
 const origin = process.env.NODE_ENV == "development"? "http://localhost:3000": "https://www.publicaccessmemories.com/"
 console.log("origin:", origin, process.env.NODE_ENV);
 const io = require("socket.io")(server, {
@@ -35,33 +30,9 @@ app.get("/api", (req, res) => {
 app.use(express.static(path.join(__dirname, '/../client/build')));
 
 
-///////////////////////////////////////////////////
-// CUSTOM ARTISTS
-///////////////////////////////////////////////////
-app.get('/leetusman', (req, res) => {
-    res.sendFile(path.join(__dirname + '/../client/build/iframes/leetusman.html'));
-})
-
-
-app.get('/loraine1', (req, res) => {
-    res.sendFile(path.join(__dirname + '/../client/build/iframes/loraine1.html'));
-})
-app.get('/loraine2', (req, res) => {
-    res.sendFile(path.join(__dirname + '/../client/build/iframes/loraine2.html'));
-})
-app.get('/loraine3', (req, res) => {
-    res.sendFile(path.join(__dirname + '/../client/build/iframes/loraine3.html'));
-})
-
-app.get('/lydia', (req, res) => {
-    res.sendFile(path.join(__dirname + '/../client/build/iframes/lydia.html'));
-})
-///////////////////////////////////////////////////
-
 app.get('/privacy', (req, res) => {
     res.sendFile(path.join(__dirname + '/../client/build/privacy.html'));
 })
-
 
 // Anything that doesn't match the above, send back index.html
 app.get('*', (req, res) => {

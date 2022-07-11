@@ -14,11 +14,9 @@
   color: black;
   font-size: 12pt;
 }
-
 .ChatMobile .chat-buttons {
   padding-top: 10px;
 }
-
 .ChatMobile .sendButton {
   background: black;
   color: white;
@@ -26,51 +24,36 @@
   height: 50px;
   width: 50px;
 }
-
 .ChatMobile .Chat-messages {
   overflow: hidden;
 }
-
 .ChatMobile .Chat-messages .Chat-messages-box {
   font-size: 12pt;
   padding: 10px;
   border: 2px solid black;
   border-radius: 8px;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  flex: 1;
   overflow: auto;
 }
-
 .ChatMobile .Chat-messages .Chat-messages-box .Chat-messages-inner-box .message-from {
   color: black;
 }
-
 .ChatMobile .Chat-messages .Chat-messages-box .Chat-messages-inner-box .message-to {
   color: gray;
 }
-
 .ChatMobile .Chat-messages .Chat-messages-box .Chat-messages-inner-box .message-deets {
   padding-bottom: 7px;
   font-size: 10pt;
 }
-
 .ChatMobile .Chat-messages .Chat-messages-box .Chat-messages-inner-box .message-txt {
   font-size: 12pt;
   line-height: 1.4em;
 }
-
 .ChatMobile .Chat-messages .Chat-messages-box .Chat-messages-inner-box .bubbleContainer {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  flex-direction: row;
   padding-top: 10px;
 }
-
 .ChatMobile .Chat-messages .Chat-messages-box .Chat-messages-inner-box .bubbleContainer .avatar {
   width: 20px;
   height: 20px;
@@ -78,95 +61,65 @@
   padding-top: 8px;
   padding-right: 8px;
 }
-
 .ChatMobile .Chat-messages .Chat-messages-box .Chat-messages-inner-box .bubbleContainer .hidden {
   visibility: hidden;
 }
-
 .ChatMobile .Chat-messages .Chat-messages-box .Chat-messages-inner-box .bubble {
   padding: 10px;
   color: black;
   border-radius: 8px;
-  background: #f1f1f1;
+  background: rgb(241, 241, 241);
 }
-
 .ChatMobile .Chat-messages .Chat-messages-box .Chat-messages-inner-box .bubbleContainer.chat-from-me {
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  justify-content: flex-end;
 }
-
 .ChatMobile .Chat-messages .Chat-messages-box .Chat-messages-inner-box .bubbleContainer.chat-from-me .bubble {
   color: white;
   background: #5b43cd;
 }
-
 .ChatMobile .Chat-messages .Chat-messages-box .Chat-messages-inner-box .bubbleContainer.chat-from-me .bubble .message-deets {
   text-align: right;
 }
-
 .ChatMobile .Chat-messages .Chat-messages-box .Chat-messages-inner-box .bubbleContainer.chat-from-me .bubble .message-deets .message-from {
   color: #ddd;
 }
-
 .ChatMobile .Chat-messages .Chat-messages-box .Chat-messages-inner-box .bubbleContainer.chat-from-me .bubble .message-deets .message-to {
   color: #ddd;
 }
-
 .ChatMobile .Chat-messages .Chat-messages-box .Chat-messages-inner-box .bubbleContainer.chat-from-me .bubble .message-deets .message-to-red {
   color: #ddd;
 }
-
 .ChatMobile .Chat-messages .Chat-messages-box .Chat-messages-inner-box .bubbleContainer.chat-from-other {
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  justify-content: flex-start;
 }
-
 .ChatMobile .Chat-messages .Chat-messages-box .Chat-messages-inner-box .bubbleContainer.chat-from-other .message-deets {
   text-align: left;
 }
-
 .ChatMobile .Chat-messages .margR {
   margin-right: 5px;
 }
-
 .ChatMobile .Chat-messages .Chat-form {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   padding-bottom: 10px;
   height: 90px;
 }
-
 .ChatMobile .Chat-messages .Chat-form .to-form {
   width: 220px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  flex-direction: row;
   padding-bottom: 5px;
 }
-
 .ChatMobile .Chat-messages .Chat-form .to-form .to-div {
   width: 30px;
   margin-top: 15px;
   padding-right: 10px;
 }
-
 .ChatMobile .Chat-messages .Chat-form .to-form .AutoComplete {
   height: 30px;
   color: black;
   background-color: transparent;
 }
-
 .ChatMobile .Chat-messages .Chat-form .to-form .AutoComplete div input {
   background-color: transparent;
   padding: 5px;
@@ -174,24 +127,15 @@
   height: 30px;
   font-size: 12pt;
 }
-
 .ChatMobile .Chat-messages .Chat-form .to-form .AutoComplete div input:focused {
   color: black;
 }
-
 .ChatMobile .Chat-messages .Chat-form .Chat-send {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  flex-direction: row;
   padding: 5px 0 5px 0;
 }
-
 .ChatMobile .Chat-messages .Chat-form .Chat-send input {
   width: 100%;
   font-size: 12pt;
-}
-/*# sourceMappingURL=ChatMobile.css.map */
+}/*# sourceMappingURL=ChatMobile.css.map */
