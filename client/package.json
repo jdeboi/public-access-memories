@@ -32,6 +32,7 @@
     "react-tooltip": "^4.2.21",
     "socket.io-client": "^4.5.1",
     "typescript": "^4.7.4",
+    "use-sound": "^4.0.1",
     "web-vitals": "^2.1.4"
   },
   "proxy": "http://localhost:3001",
@@ -58,8 +59,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    
   }
 }

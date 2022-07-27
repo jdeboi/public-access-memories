@@ -16,6 +16,7 @@ import TestRoom from '../views/rooms/TestRoom/TestRoom';
 import NotFound from "../views/pages/NotFound/NotFound";
 import Artists from '../views/pages/Artists/Artists';
 import Artist from '../views/pages/Artists/Artist';
+import Spaghetti from '../views/rooms/R_03/Spaghetti';
 // past exhibitions
 import PastExhibitions from '../views/pages/PastExhibitions/PastExhibitions';
 import HomeBody from '../views/pages/PastExhibitions/HomeBody/HomeBody';
@@ -231,8 +232,10 @@ function App() {
                     <Route path="/opencall" element={<Statement />} />
                     <Route path="/artists" element={<Artists />} />
                     <Route path="/artist/:name" element={<Artist />} />
+                    
                     <Route path="/test/rooms/:id" element={<TestRoom />} />
                     <Route path={`/${ShowConfig.link}/rooms/:id`} element={<Room />} />
+                    <Route path={`/${ShowConfig.link}/spaghetti`} element={<Spaghetti />} />
 
                     <Route path="/pastexhibitions" element={<PastExhibitions />} />
                     <Route path="/pastexhibitions/homebody" element={<HomeBody />} />

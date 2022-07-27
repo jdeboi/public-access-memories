@@ -4,7 +4,7 @@ import ReactAudioPlayer from 'react-audio-player';
 import './Gallery.css';
 import { useNavigate } from 'react-router-dom';
 
-import GallerySketch from './p5/GallerySketch';
+import GallerySketch from './p5/1_GallerySketch';
 import { IUser, IUsers } from '../../interfaces';
 import { filterUsers, mapVal } from '../../helpers/helpers';
 

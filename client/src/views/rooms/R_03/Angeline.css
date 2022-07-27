@@ -1,0 +1,10 @@
+.Angeline {
+  background-color: #8a0000;
+  background: #8a0000;
+  display: flex;
+  flex: 1;
+}
+.Angeline iframe {
+  flex: 1;
+  width: 100%;
+}/*# sourceMappingURL=Angeline.css.map */

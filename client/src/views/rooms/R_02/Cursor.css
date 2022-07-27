@@ -1,0 +1,10 @@
+.Cursor {
+  background-color: black;
+  background: black;
+  display: flex;
+  flex: 1;
+}
+.Cursor iframe {
+  flex: 1;
+  width: 100%;
+}/*# sourceMappingURL=Cursor.css.map */

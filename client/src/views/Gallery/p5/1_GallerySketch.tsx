@@ -574,21 +574,25 @@ class GallerySketch extends React.Component<Props> {
   }
 
   keyPressed = (p5: p5Types) => {
-    if (this.props.user.isFollowingHost)
-      return;
+    // TODO - why running twice??
+    if (p5.frameCount > 0) {
+      if (this.props.user.isFollowingHost)
+        return;
 
-    if (p5.keyCode === p5.UP_ARROW) {
-      this.userTakeStep(0, -1);
+      if (p5.keyCode === p5.UP_ARROW) {
+        this.userTakeStep(0, -1);
+      }
+      else if (p5.keyCode === p5.RIGHT_ARROW) {
+        this.userTakeStep(1, 0);
+      }
+      else if (p5.keyCode === p5.LEFT_ARROW) {
+        this.userTakeStep(-1, 0);
+      }
+      else if (p5.keyCode === p5.DOWN_ARROW) {
+        this.userTakeStep(0, 1);
+      }
     }
-    else if (p5.keyCode === p5.RIGHT_ARROW) {
-      this.userTakeStep(1, 0);
-    }
-    else if (p5.keyCode === p5.LEFT_ARROW) {
-      this.userTakeStep(-1, 0);
-    }
-    else if (p5.keyCode === p5.DOWN_ARROW) {
-      this.userTakeStep(0, 1);
-    }
+
   }
 
   mouseReleased = (p5: p5Types) => {

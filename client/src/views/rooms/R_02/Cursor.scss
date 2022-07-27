@@ -1,0 +1,11 @@
+.Cursor {
+    background-color: black;
+    background: black;
+    display: flex;
+    flex: 1;
+    
+    iframe {
+        flex: 1;
+        width: 100%;
+    } 
+}

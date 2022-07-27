@@ -1,8 +1,8 @@
 
 export const ShowConfig = {
-    isClosed: true,
-    underConstruction: true,
-    isMenuOn: false,
+    isClosed: false,
+    underConstruction: false,
+    isMenuOn: true,
     galleryTitle: "public access memories",
     showTitle: "as i recall",
     showDescription: "",

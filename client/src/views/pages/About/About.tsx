@@ -32,7 +32,7 @@ export const About = () => {
                         To suggest a curatorial project, collaborate on a gallery
                         feature, and/or submit work, please feel free to reach out
                         to <a href="mailto:publicaccessmemories@gmail.compublicaccessmemories@gmail.com">publicaccessmemories@gmail.com</a>. For developers, you can
-                        check out the <a href="https://github.com/jdeboi/public-access-memories">github repo.</a>
+                        check out the <a href="https://github.com/jdeboi/public-access-memories">github repo</a>.
                     </p>
                 </div>
                 <br />
