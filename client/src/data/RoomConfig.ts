@@ -34,7 +34,8 @@ export const artists: IArtist[] = [
         instaLink: "https://www.instagram.com/vidgiri/",
         webLink: "https://vidyagiri.com/",
         medium: "custom software, 3D models",
-        description: "Vidya Giri is an artist from Houston, TX. Her art is reflective of her background, balanced between cultures, environments, and disciplines. Her work has spanned between virtual spaces, video projection, and painting on real and digital canvases. Additionally, her work often contains digital elements and thematic ties to her home of Texas, her adolescence in Southeast Asia, and her Indian heritage. Her current explorations revolve around collecting as a form of reflection and the parallels between natural and human-made identities and the environments they encompass.", bio: "Mitchell Craft is a 3D Artist based in Brooklyn, NY.",
+        description: "The collectiblr project, equipped with augmented reality and 3d capabilities, combines the nostalgia of collectible objects, observations, and memories in a speculative, virtual space. The work transports these physical forms into the digital, confronting viewers with thoughts on physicality, materialism, and memories. collectiblr is an ongoing 3D/AR project that reflects on what makes something collectible, valuable, and worth remembering in the internet age.",
+        bio: "Vidya Giri is an artist from Houston, TX. Her art is reflective of her background, balanced between cultures, environments, and disciplines. Her work has spanned between virtual spaces, video projection, and painting on real and digital canvases. Additionally, her work often contains digital elements and thematic ties to her home of Texas, her adolescence in Southeast Asia, and her Indian heritage. Her current explorations revolve around collecting as a form of reflection and the parallels between natural and human-made identities and the environments they encompass.",
         year: 2022,
     },
     {
@@ -69,15 +70,15 @@ export const artists: IArtist[] = [
         id: 3,
         roomID: 3,
         title: "Spaghetti",
-        name: "Angeline",
-        nameLink: "angeline",
+        name: "Angeline Marie Michael Meitzler",
+        nameLink: "meitzler",
         thumb: "-thumb",
-        webLink: "",
-        instaLink: "",
-        medium: "",
+        webLink: "https://angeline-meitzler.com/#/",
+        instaLink: "https://www.instagram.com/angelinefromspace/",
+        medium: "custom software",
         description: "This piece considers the violence and impact of the Philippines colonized history through situating cultural media and personal memories of spaghetti from an American and Philippine perspective. The web program randomly positions youtube videos featuring either American or Philippine spaghetti onto multidimensional surfaces inside the browser. The audio overlayed connects memories of eating the dish from both my childhood home in Michigan to my family's home in the Philippines. After the web program is initiated, the site endlessly spawns new windows until the amount of processing power causes the computer to overwhelm and the browser to eventually collapse, freeze and deprecate; mimicking my inability to understand or to make sense of the unanswered questions of the origins of this dish.",
-        year: 2022,
-        bio: ""
+        year: 2020,
+        bio: "Angeline Marie Michael Meitzler is a Filipino American artist, writer and software worker based in Brooklyn, NY. Her work and research have revolved around an interdisciplinary reflection on how legacies of empire inform social and economic value systems. She has been a Masters Candidate at Georgia Institute of Technology and received her MFA from the School of the Arts Institute of Chicago. Her work has been included in new media festivals, and galleries including Digital Research in the Humanities and Arts Conference, Berlin (2021), The Human Terminal, Anonymous Gallery, NYC (2021); Initial Public Offering, Reddit, online (2019); Beyond The Hashtag: Failures and Becomings, HTMlles Festival, Montreal (2018), Feminist Media Studio, Montreal (2018). She was recently awarded the New Artist and Society Scholarship and Harvests Works Educational Scholarship. She has given lectures and presentations at academic institutions and cultural organizations such as The New School, TU München, Pioneer Works and Asia Society. Her work as a collaborator, software worker and environment artist has been at MUDAM Musee d’Art Moderne Grand-Duc Jean, Ogden Contemporary Arts, Carnegie Mellon University, the New Museum, Rhizome, de Young Museum, Istanbul Biennial 2019, Koenig & Clinton, Ringling Museum of Art, Kunsthalle Basel, Rubin Museum, Sadie Coles HQ, the 2019 Whitney Biennial."
     },
     {
         id: 4,
@@ -105,7 +106,7 @@ export const artists: IArtist[] = [
         medium: "1920x1080 video",
         description: "A life-sized digitally modified personal photo album recreating some of the most memorable, crucial and intimate moments lived through. The use of accessible computer applications including Photo Booth and Google Earth Street View allow the artist to attempt to relive a perfect moment, capturing the seconds of anticipation before the desired moment of happiness is replicated.",
         year: 2016,
-        bio: ""
+        bio: "Ciara O’Kelly is an Irish visual artist currently living in Amsterdam. Her work takes the form of large scale video installations incorporating both digital and physical entities. Throughout her process, she meticulously examines the systematic generation of cyberspace whilst constructing each piece, aiming to critique our relationship to corporate bodies within a largely capitalist and digitised world. O’Kelly is particularly interested in the individual’s dual role as both a consumer and a product within the system of data capitalism and its free labour nature. She primarily uses 3D modelling programs to create virtual environments to stage videos within, whilst using these grounds to challenge the capabilities of digital forms through carefully curated physical encounters."
     },
     {
         id: 6,

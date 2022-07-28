@@ -1,5 +1,6 @@
 .Vidya {
   background-color: black;
+  background: black;
   display: flex;
   flex: 1;
 }
