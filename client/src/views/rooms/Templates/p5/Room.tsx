@@ -1,13 +1,10 @@
-
-import React, { useEffect } from 'react';
-import P5Sketch from './Sketch';
-import './Allison.css';
-import useScript from '../../../hooks/useScript';
+import React from 'react';
+import P5Sketch from './P5Sketch';
 
 // store
-import { useDispatch, useSelector } from 'react-redux';
-import { doneLoadingApp } from '../../../store/window';
-import { selectWindow } from '../../../store/store';
+import { useSelector, useDispatch } from 'react-redux';
+import { doneLoadingApp } from '../../../../store/window';
+import { selectWindow } from '../../../../store/store';
 
 
 
@@ -19,6 +16,7 @@ const Room = () => {
         <div className="Room Sketch">
             <div id="p5_loading" className="loadingclass"></div>
             <P5Sketch
+                isMobile={windowUI.isMobile}
                 loadingDone={() => dispatch(doneLoadingApp())}
             />
         </div>

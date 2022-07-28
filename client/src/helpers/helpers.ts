@@ -3,6 +3,7 @@ import { artists, rooms } from '../data/RoomConfig';
 import { PageConfig } from '../data/PageConfig';
 import { hostBotPoints } from '../data/BotConfig';
 import { domCoordsToP5 } from './coordinates';
+import { ShowConfig } from '../data/ShowConfig';
 
 export const getUserByUserName = (users: IUsers, userName: string) => {
   if (users)
@@ -113,11 +114,12 @@ export const getRoomFromArtist = (artist: IArtist): IRoom => {
 }
 
 export const getRoomByPath = (path: string): IRoom | null => {
+  // If this is the test link
+  // /test/rooms/1
   if (path.indexOf("test") > -1) {
-    let pathPrefix = "/homebody";
-    // /test
-    let p = pathPrefix + path.substring(5, path.length);
-    let r = rooms.filter((room) => room.link === p);
+    // let pathPrefix = "/" + ShowConfig.link;
+    let p = path.substring(12, path.length);
+    let r = rooms.filter((room) => (room.artistID +'') === p);
     if (r.length > 0)
       return r[0];
   }

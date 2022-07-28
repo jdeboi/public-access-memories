@@ -8,6 +8,7 @@ export default class Button {
     }
 
     display(mx, my) {
+        
         this.p5.stroke(255);
         this.p5.strokeWeight(2);
         this.p5.noFill();

@@ -120,6 +120,7 @@ export const windowSlice = createSlice({
         doneLoadingApp: (state) => {
             state.loading = false;
             // TODO WHY IS THIS LINE HERE? ... I commented it out
+            // and added to loadingApp...
             // state.compositionStarted = false;
         },
         startComposition: (state) => {

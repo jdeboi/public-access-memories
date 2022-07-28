@@ -16,6 +16,7 @@ import TestRoom from '../views/rooms/TestRoom/TestRoom';
 import NotFound from "../views/pages/NotFound/NotFound";
 import Artists from '../views/pages/Artists/Artists';
 import Artist from '../views/pages/Artists/Artist';
+import ArtistsList from '../views/pages/ArtistsList/ArtistsList';
 import Spaghetti from '../views/rooms/R_03/Spaghetti';
 // past exhibitions
 import PastExhibitions from '../views/pages/PastExhibitions/PastExhibitions';
@@ -158,10 +159,10 @@ function App() {
     }
 
     const pageChange = () => {
-
         dispatch(hideMenus());
         const nextRoomUrl = pathname;
         if (nextRoomUrl !== user.roomUrl) {
+            dispatch(startComposition());
             dispatch(loadingApp());
             setHasLoadedRoom(false);
 
@@ -189,6 +190,27 @@ function App() {
         setHasLoadedRoom(true);
     }
 
+    const getRoomDecal = () => {
+        if (ShowConfig.isClosed || ShowConfig.underConstruction) {
+            if (pathname.substring(1, 5) == "test") {
+                return (
+                    <RoomDecal
+                        startMedia={startMedia}
+                        hasLoadedRoom={hasLoadedRoom}
+                    />
+                )
+            }
+            return null; 
+        }
+        else {
+            return (
+                <RoomDecal
+                    startMedia={startMedia}
+                    hasLoadedRoom={hasLoadedRoom}
+                />
+            )
+        }
+    }
     const getSignedInComponents = () => {
         if (!shouldShowLoggedInComponents(user))
             return null;
@@ -232,7 +254,8 @@ function App() {
                     <Route path="/opencall" element={<Statement />} />
                     <Route path="/artists" element={<Artists />} />
                     <Route path="/artist/:name" element={<Artist />} />
-                    
+                    <Route path="/artistslist" element={<ArtistsList />} />
+
                     <Route path="/test/rooms/:id" element={<TestRoom />} />
                     <Route path={`/${ShowConfig.link}/rooms/:id`} element={<Room />} />
                     <Route path={`/${ShowConfig.link}/spaghetti`} element={<Spaghetti />} />
@@ -246,16 +269,13 @@ function App() {
 
             {/* check if user hasn't logged in and on a basic page */}
             {getSignedInComponents()}
-            {ShowConfig.isClosed || ShowConfig.underConstruction ? null :
-                <RoomDecal
-                    startMedia={startMedia}
-                    hasLoadedRoom={hasLoadedRoom}
-                />
-            }
+            {getRoomDecal()}
 
         </div>
 
     )
+
+
 }
 
 export default App;

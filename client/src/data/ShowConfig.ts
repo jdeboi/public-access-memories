@@ -1,12 +1,12 @@
 
 export const ShowConfig = {
-    isClosed: false,
-    underConstruction: false,
-    isMenuOn: true,
+    isClosed: true,
+    underConstruction: true,
+    isMenuOn: false,
     galleryTitle: "public access memories",
     showTitle: "as i recall",
     showDescription: "",
-    showOpens: {date:"August 2022", time: ""},
+    showOpens: {date:"September 2022", time: ""},
     showCloses: "",
     link: "as-i-recall"
 }
