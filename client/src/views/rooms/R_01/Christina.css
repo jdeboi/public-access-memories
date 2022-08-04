@@ -1,14 +1,4 @@
-.Christina {
-  background-color: black;
-  background: black;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow-y: scroll;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  letter-spacing: normal;
-}
-.Christina .above {
+.above {
   z-index: 2;
   position: absolute;
   top: 0;
@@ -16,119 +6,153 @@
   flex-direction: column;
   width: 100%;
 }
-.Christina .below {
+
+.goPointers {
+  pointer-events: all;
+}
+
+.noPointers {
+  pointer-events: none;
+}
+
+.below {
   z-index: 1;
   position: relative;
   width: 100%;
   cursor: s-resize;
-  display: flex;
-  flex-direction: column;
 }
-.Christina .pageoverlay {
+
+.pageoverlay {
   position: fixed;
-  width: 70%;
   top: 0%;
   left: 0%;
   right: 0%;
   bottom: 0%;
   z-index: 2;
   cursor: n-resize;
-  overflow-x: hidden;
   overflow: hidden;
   display: flex;
   flex-direction: row-reverse;
 }
-.Christina .scrolling-element-inside {
+
+.scrolling-element-inside {
   transform: rotate(-180deg);
 }
-.Christina .overlay-content {
+
+.overlay-content {
   overflow-y: scroll;
   height: calc(100% - 20px);
   font-family: sans-serif;
   color: white;
 }
-.Christina .imgoverlay {
+
+.imgoverlay {
   overflow-y: visible;
   width: 100%;
 }
-.Christina .below img {
+
+.below img {
   width: 100%;
 }
-.Christina .left {
+
+.left {
   align-self: flex-start;
 }
-.Christina .right {
+
+.right {
   align-self: flex-end;
 }
-.Christina .blur-effect {
+
+.blur-effect {
   transition: filter 2s;
 }
-.Christina .blur-effect:hover {
+
+.blur-effect:hover {
   filter: blur(10px);
   -webkit-filter: blur(10px);
 }
-.Christina .blur-reverse {
+
+.blur-reverse {
   transition: filter 2s;
   filter: blur(10px);
   -webkit-filter: blur(10px);
 }
-.Christina .blur-reverse:hover {
+
+.blur-reverse:hover {
   filter: blur(0px);
   -webkit-filter: blur(0px);
 }
-.Christina .skew-effect {
+
+.skew-effect {
   transition: transform 2s;
 }
-.Christina .skew-effect:hover {
+
+.skew-effect:hover {
   transform: skewX(90deg);
 }
-.Christina .opacity-effect {
+
+.opacity-effect {
   opacity: 0.3;
   transition: opacity 2s;
 }
-.Christina .opacity-effect:hover {
+
+.opacity-effect:hover {
   opacity: 1;
 }
-.Christina .grow-effect {
+
+.grow-effect {
   transition: transform 2s;
 }
-.Christina .grow-effect:hover {
+
+.grow-effect:hover {
   transform: scale(2);
 }
-.Christina .shrink-effect {
+
+.shrink-effect {
   transition: transform 2s;
 }
-.Christina .shrink-effect:hover {
+
+.shrink-effect:hover {
   transform: scale(0.1);
 }
-.Christina .disappear {
+
+.disappear {
   transition: opacity 2s;
 }
-.Christina .disappear:hover {
+
+.disappear:hover {
   opacity: 0;
 }
-.Christina .shift {
+
+.shift {
   transition: transform 5s;
 }
-.Christina .shift:hover {
+
+.shift:hover {
   transform: translate(200px, 300%);
 }
-.Christina .shiftdown {
+
+.shiftdown {
   transition: transform 5s;
 }
-.Christina .shiftdown:hover {
+
+.shiftdown:hover {
   transform: translate(200px, -300%);
 }
-.Christina .rotate {
+
+.rotate {
   transition: transform 2s;
 }
-.Christina .rotate:hover {
+
+.rotate:hover {
   transform: rotate(-180deg);
 }
-.Christina .turnup {
+
+.turnup {
   transform: rotate(180deg);
 }
-.Christina .style1 {
+
+.style1 {
   width: 600px;
   height: 95%;
   margin-left: auto;
@@ -136,54 +160,62 @@
   margin-bottom: auto;
   margin-right: auto;
 }
-.Christina .style2 {
+
+.style2 {
   width: 300px;
   -webkit-margin-start: 50px;
           margin-inline-start: 50px;
 }
-.Christina .style3 {
+
+.style3 {
   width: 300px;
   -webkit-margin-end: 50px;
           margin-inline-end: 50px;
   -webkit-margin-before: 800px;
           margin-block-start: 800px;
 }
-.Christina .style4 {
+
+.style4 {
   width: 500px;
   -webkit-margin-start: 50px;
           margin-inline-start: 50px;
   -webkit-margin-before: 400px;
           margin-block-start: 400px;
 }
-.Christina .style5 {
+
+.style5 {
   width: 250px;
   -webkit-margin-end: 100px;
           margin-inline-end: 100px;
   -webkit-margin-before: 400px;
           margin-block-start: 400px;
 }
-.Christina .style6 {
+
+.style6 {
   width: 350px;
   -webkit-margin-start: 100px;
           margin-inline-start: 100px;
   -webkit-margin-before: 50px;
           margin-block-start: 50px;
 }
-.Christina .style7 {
+
+.style7 {
   width: 300px;
   -webkit-margin-end: 50px;
           margin-inline-end: 50px;
   -webkit-margin-before: 800px;
           margin-block-start: 800px;
 }
-.Christina .style8 {
+
+.style8 {
   width: 350px;
   -webkit-margin-end: 200px;
           margin-inline-end: 200px;
   -webkit-margin-before: 200px;
           margin-block-start: 200px;
 }
-.Christina .style9 {
+
+.style9 {
   width: 550px;
   -webkit-margin-start: 50px;
           margin-inline-start: 50px;

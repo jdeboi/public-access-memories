@@ -1,12 +1,4 @@
-.Christina {
-    background-color: black;
-    background: black;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    letter-spacing: normal;
+// .Christina {
 
     .above {
         z-index: 2;
@@ -18,26 +10,33 @@
     }
 
 
+    .goPointers {
+        pointer-events: all;
+    }
+    .noPointers {
+        pointer-events: none;
+    }
+
     .below {
         z-index: 1;
         position: relative;
         width: 100%;
         cursor: s-resize;
 
-        display: flex;
-        flex-direction: column;
+        // display: flex;
+        // flex-direction: column;
     }
 
     .pageoverlay {
         position: fixed;
-        width: 70%;
+        // width: 70%;
         top: 0%;
         left: 0%;
         right: 0%;
         bottom: 0%;
         z-index: 2;
         cursor: n-resize;
-        overflow-x: hidden;
+        // overflow-x: hidden;
         overflow: hidden;
         display: flex;
         flex-direction: row-reverse;
@@ -218,4 +217,4 @@
         margin-inline-start: 50px;
         margin-block-start: 600px;
     }
-}
+// }
