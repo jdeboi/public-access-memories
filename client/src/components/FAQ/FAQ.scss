@@ -14,12 +14,15 @@
     flex-direction: row;
     flex-wrap: wrap;
 
+    h4 {
+      border-bottom: 1px solid rgb(207, 207, 207);
+    }
     h3 {
       border-bottom: 1px solid rgb(207, 207, 207);
       margin-bottom: 5px;
     }
     p {
-      line-height: 14px;
+      line-height: 18px;
     }
 
     .faqImg {

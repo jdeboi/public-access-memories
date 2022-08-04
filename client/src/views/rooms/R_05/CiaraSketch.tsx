@@ -4,7 +4,7 @@ import p5Types from 'p5';
 import { connect } from "react-redux";
 import { RootState } from '../../../store/store';
 import { Dispatch } from "@reduxjs/toolkit";
-import RoomDraggable from '../../Gallery/p5/components/Draggable/RoomDraggable';
+import RoomDraggable from '../../Gallery/Gallery1/p5/components/Draggable/RoomDraggable';
 import { time } from "console";
 
 //////////////// 
@@ -54,7 +54,7 @@ class CiaraSketch extends React.Component<Props> {
         cnv.mousePressed(() => this.clickedCanvas(p5));
 
         this.setVidDim(p5);
-        frame = new RoomDraggable(0, vidDim.x, vidDim.y, vidDim.w, vidDim.h, p5, shadow, shadow);
+        frame = new RoomDraggable(0, vidDim.x, vidDim.y, vidDim.w, vidDim.h, p5, null);
         loadingDone();
 
     };

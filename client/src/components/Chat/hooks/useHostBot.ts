@@ -11,6 +11,7 @@ import { IMessage } from '../../../interfaces';
 import { getBar, hostBotFirstRoom } from '../../../data/BotConfig';
 import { rooms } from '../../../data/RoomConfig';
 import { userNearEntrance } from '../../../helpers/helpers';
+import { ShowConfig } from '../../../data/ShowConfig';
 const hostLocation = getBar("host");
 
 export const useHostBot = () => {
@@ -105,7 +106,12 @@ export const useHostBot = () => {
         else if (hostBotJustAsked === 1) {
             const lc = txt.toLowerCase();
             if (lc === "y" || lc.indexOf("yes") > -1) {
-                sendMessage("Enter the glass doors to get into the gallery.");
+                if (ShowConfig.link == "homebody")
+                    sendMessage("Enter the glass doors to get into the gallery.");
+                else if (ShowConfig.link == "as-i-recall")
+                    sendMessage("Click / tap on the floppies to see artists' work!");
+                else
+                    sendMessage("There's an FAQ button on the top menu. Look for the question mark.");
                 setHostBotJustAsked(2);
             }
             else {
@@ -114,11 +120,14 @@ export const useHostBot = () => {
             }
         }
         else if (hostBotJustAsked === 2) {
-            sendMessage("See artwork in rooms by walking in the doorway and down the stairs.");
+            if (ShowConfig.link == "homebody")
+                sendMessage("See artwork in rooms by walking in the doorway and down the stairs.");
+            else if (ShowConfig.link == "as-i-recall")
+                sendMessage("Try dragging the floppies!");
             setHostBotJustAsked(3);
         }
         else if (hostBotJustAsked === 3) {
-            sendMessage("You can also click the menu in the title bar to access rooms and / or get additional information about artists. Enjoy the show!");
+            sendMessage("You can also click the menu in the title bar to get additional information about artists. Enjoy the show!");
             setHostBotJustAsked(4);
         }
         else if (hostBotJustAsked === 4) {
@@ -132,7 +141,7 @@ export const useHostBot = () => {
                 "public access memories was created in 2022",
                 "I hope you enjoy the show!"
             ];
-            let r = Math.floor(Math.random()*phrases.length);
+            let r = Math.floor(Math.random() * phrases.length);
             sendMessage(phrases[r]);
         }
 

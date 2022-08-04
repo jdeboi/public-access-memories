@@ -9,6 +9,8 @@ import CenterModal from '../CenterModal/CenterModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectWindow, selectMenu } from '../../store/store';
 import { hideFaq } from '../../store/menu';
+import { GlobalConfig } from '../../data/GlobalConfig';
+import { ShowConfig } from '../../data/ShowConfig';
 
 
 interface FAQProps {
@@ -67,6 +69,46 @@ const FAQ = (props: FAQProps) => {
         )
     }
 
+    const getEnterHB = () => {
+        return (
+            <React.Fragment>
+                <div className="instruction">
+                    <div className="faqImg"><img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/gallery/gallery_enter.png" /></div>
+                    <div className="instruction-txt">
+                        <h4>Enter Gallery</h4>
+                        <hr />
+                        <p>Enter the gallery through the sliding doors.</p>
+                    </div>
+                </div>
+                {/* enter room */}
+                <div className="instruction">
+                    <div className="faqImg"><img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/gallery/room_enter.png" /></div>
+                    <div className="instruction-txt">
+                        <h4>Enter Room</h4>
+                        <hr />
+                        <p>View work by entering rooms via staircases.</p>
+                    </div>
+                </div>
+            </React.Fragment>
+        )
+    }
+
+    const getEnterAIR = () => {
+        return (
+            <React.Fragment>
+                {/* enter gallery */}
+                <div className="instruction">
+                    <div className="faqImg"><img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/gallery/enter.png" /></div>
+                    <div className="instruction-txt">
+                        <h4>Enter Room</h4>
+                        <hr />
+                        <p>Click/ tap (or double click) floppy disk to enter artist's room.</p>
+                    </div>
+                </div>
+            </React.Fragment>
+        )
+    }
+
     const getForm = () => {
         return (
             <div className="Instructions-list flexPad flex1">
@@ -80,23 +122,10 @@ const FAQ = (props: FAQProps) => {
                         <p>Click/tap on tiles or press arrow keys.</p>
                     </div>
                 </div>
+                
                 {/* enter gallery */}
-                <div className="instruction">
-                    <div className="faqImg"><img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/gallery/gallery_enter.png" /></div>
-                    <div className="instruction-txt">
-                        <h4>Enter Gallery</h4>
-                        <hr />
-                        <p>Enter the gallery through the sliding doors.</p>
-                    </div>
-                </div>
-                <div className="instruction">
-                    <div className="faqImg"><img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/gallery/room_enter.png" /></div>
-                    <div className="instruction-txt">
-                        <h4>Enter Room</h4>
-                        <hr />
-                        <p>View work by entering rooms via staircases.</p>
-                    </div>
-                </div>
+                {ShowConfig.link == "homebody"? getEnterHB(): null}
+                {ShowConfig.link == "as-i-recall"? getEnterAIR(): null}
 
                 {/* CHATTING */}
                 <div className="instruction">

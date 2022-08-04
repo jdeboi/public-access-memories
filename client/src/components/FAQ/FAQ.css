@@ -20,12 +20,15 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
+.Instructions-list .instruction h4 {
+  border-bottom: 1px solid rgb(207, 207, 207);
+}
 .Instructions-list .instruction h3 {
   border-bottom: 1px solid rgb(207, 207, 207);
   margin-bottom: 5px;
 }
 .Instructions-list .instruction p {
-  line-height: 14px;
+  line-height: 18px;
 }
 .Instructions-list .instruction .faqImg {
   flex: 1;

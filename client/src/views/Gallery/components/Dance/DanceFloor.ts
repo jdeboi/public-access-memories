@@ -2,8 +2,8 @@ import p5Types from 'p5';
 import { GlobalConfig } from "../../../../data/GlobalConfig";
 import { roomConfig } from "../../../../data/RoomConfig";
 import { danceFloor } from "../../../../data/BotConfig";
-import { displayPopOut } from '../../p5/functions/boxes';
-import { displayWall } from "../../p5/functions/ground";
+import { displayPopOut } from '../../Gallery1/p5/functions/boxes';
+import { displayWall } from "../../Gallery1/p5/functions/ground";
 
 
 
