@@ -1,6 +1,10 @@
 .Allison {
 
-    background-image: url('./assets/1.gif');
+    background-image: url('./assets/3.gif');
     background-size: 300px 300px;
     background-repeat: repeat;
+
+    .player {
+        position: absolute;
+    }
 }

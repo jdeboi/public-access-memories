@@ -31,7 +31,7 @@ export const Artist = () => {
             <div className="container">
                 <h1 className="">{artist.name}</h1>
                <br />
-                {/* <img width={200} height={200} className="thumb" src={`https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/thumbs/${artist.thumb}.png`} /> */}
+                {/* <img width={200} height={200} className="thumb" src={`https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/thumbs/${artist.thumb}.png`} /> */}
                 <div className="door"><a className="windows" href={room.link}>🚪 {artist.title}</a></div>
                 <hr/>
                 <div className="info">

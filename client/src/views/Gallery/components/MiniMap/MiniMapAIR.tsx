@@ -67,7 +67,7 @@ class MiniMapAIR extends React.Component<Props> {
         isHidden={isHidden}
         onHide={this.onHide}
         unbounded={false}
-        windowStyle={{ background: "rgba(0, 0, 0, .9)" }}
+        windowStyle={{ background: "rgba(30, 37, 42, .9)" }}
         content={
           /*<video width={dimW-2} height={dimH} muted loop autoPlay><source src={videoDimURL} type="video/mp4"></source></video>*/
           <div className="MiniMap">

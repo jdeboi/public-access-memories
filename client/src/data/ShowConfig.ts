@@ -1,8 +1,9 @@
+const development = (process.env.NODE_ENV === "development");
 
 export const ShowConfig = {
-    isClosed: true,
-    underConstruction: true,
-    isMenuOn: false,
+    isClosed: !development,
+    underConstruction: !development,
+    isMenuOn: development,
     galleryTitle: "public access memories",
     showTitle: "as i recall",
     showDescription: "",
