@@ -15,7 +15,7 @@ const Room = () => {
     const getDimensions = () => {
         // let w = Math.max(windowUI.contentW, 
         
-        let w = Math.min(windowUI.contentW*.95, 1920);
+        let w = Math.min(windowUI.contentW*.75, 1920);
         let h = w / 1920 * 1080;
         let y = (windowUI.contentH - h)/2;
         let x = (windowUI.contentW - w) / 2;
