@@ -12,8 +12,8 @@ export const PageConfig: IPageConfig[] = [
         title: "about"
     },
     {
-        link: "/opencall",
-        title: "open call"
+        link: "/statement",
+        title: "statement"
     },
     {
         link: "/pastexhibitions",

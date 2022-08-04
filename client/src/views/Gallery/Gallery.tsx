@@ -9,7 +9,7 @@ import { IUser, IUsers } from '../../interfaces';
 import { filterUsers, mapVal } from '../../helpers/helpers';
 
 import LoadingPage from '../../components/LoadingPage/LoadingPage';
-import MiniMap from './components/MiniMap/MiniMap';
+import MiniMapAIR from './components/MiniMap/MiniMapAIR';
 
 // store
 import { useSelector, useDispatch } from 'react-redux';
@@ -98,7 +98,7 @@ const Gallery = (props: IGallery) => {
             {
                 windowUI.loading ?
                     <LoadingPage /> :
-                    <MiniMap users={filterUsers(user, props.users)} x={20} y={20} />
+                    <MiniMapAIR users={filterUsers(user, props.users)} x={20} y={20} />
             }
 
             {!props.showWelcome ?

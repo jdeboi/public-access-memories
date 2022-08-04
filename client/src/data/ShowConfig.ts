@@ -6,7 +6,7 @@ export const ShowConfig = {
     galleryTitle: "public access memories",
     showTitle: "as i recall",
     showDescription: "",
-    showOpens: {date:"August 2022", time: ""},
+    showOpens: {date:"September 1st 2022", time: "5PM PST (GMT-7)"},
     showCloses: "",
     link: "as-i-recall"
 }

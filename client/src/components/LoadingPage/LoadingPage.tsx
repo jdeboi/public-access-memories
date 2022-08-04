@@ -17,7 +17,7 @@ export default function LoadingPage(props: { progress?: number }) {
                     <div>{ShowConfig.showTitle}</div>
                     {/* <p>a <a href="https://thewrong.org/">wrong biennale</a> pavillion</p> */}
                     {/* <img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/tw5_logo_w.png" width={130} /> */}
-                    <p><a href="/opencall">open call</a></p>
+                    {/* <p><a href="/opencall">open call</a></p> */}
                     <p>public access memories gallery</p>
                     {props.progress ?
                         <p>{props.progress}%</p>

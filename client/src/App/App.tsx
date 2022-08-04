@@ -250,8 +250,8 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Gallery users={users} isClosed={isClosed} showWelcome={showWelcome} />} />
                     <Route path="/about" element={<About />} />
-                    <Route path="/exhibition" element={<Statement />} />
-                    <Route path="/opencall" element={<Statement />} />
+                    <Route path="/statement" element={<Statement />} />
+                    {/* <Route path="/opencall" element={<Statement />} /> */}
                     <Route path="/artists" element={<Artists />} />
                     <Route path="/artist/:name" element={<Artist />} />
                     <Route path="/artistslist" element={<ArtistsList />} />

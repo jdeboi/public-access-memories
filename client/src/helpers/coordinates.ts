@@ -1,3 +1,10 @@
+// P5 Coords = block units (1, 4, ... ~40)
+
+// World Coords = the (arbitrary) origin is in the top left of sketch world
+// so world coords are block units * scaler relative to origin (0, 0)
+
+// Dom Coords = like world coords but we have to add the starting x & y ?
+
 import { GlobalConfig } from "../data/GlobalConfig";
 import p5Types from 'p5';
 
@@ -43,5 +50,12 @@ export const p5ToUserCoords = (x: number, y: number) => {
     // + GlobalConfig.scaler/2 to get middle of square issue
     let xx = (x + GlobalConfig.x) * GlobalConfig.scaler + GlobalConfig.scaler/2;
     let yy = (y + GlobalConfig.y) * GlobalConfig.scaler+ GlobalConfig.scaler/2;
+    return {x: xx, y: yy};
+}
+
+export const userToWorldCoords = (userX: number, userY: number) => {
+    const {scaler, x, y} = GlobalConfig;
+    let xx = userX - scaler/2 - scaler* x;
+    let yy = userY - scaler/2 - scaler* y;
     return {x: xx, y: yy};
 }
