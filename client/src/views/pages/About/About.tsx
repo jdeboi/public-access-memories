@@ -1,7 +1,11 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faGithub } from '@fortawesome/free-brands-svg-icons';
+// import SubscribeForm from '../SubscribeForm/SubscribeForm';
+import SubscribeSendInBlue from '../SubscribeForm/SubscribeSendInBlue';
+
 import '../Page.css';
+import { Link } from 'react-router-dom';
 
 export const About = () => {
 
@@ -43,6 +47,11 @@ export const About = () => {
                         <a href="https://github.com/jdeboi/public-access-memories"><FontAwesomeIcon icon={faGithub} /></a>
                     </h3>
                 </div>
+                <div>
+                    <p><Link to="/newsletter">Join the newsletter!</Link></p>
+                </div>
+                {/* <SubscribeForm /> */}
+                {/* <SubscribeSendInBlue /> */}
             </div >
         </div>
     )

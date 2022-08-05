@@ -48,6 +48,7 @@ import { startComposition, resizeApp, loadingApp } from '../store/window';
 import FAQ from '../components/FAQ/FAQ';
 
 import { shouldShowLoggedInComponents } from '../helpers/helpers';
+import SubscribeSendInBlue from '../views/pages/SubscribeForm/SubscribeSendInBlue';
 
 
 
@@ -250,6 +251,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Gallery users={users} isClosed={isClosed} showWelcome={showWelcome} />} />
                     <Route path="/about" element={<About />} />
+                    <Route path="/newsletter" element={<SubscribeSendInBlue />} />
                     <Route path="/statement" element={<Statement />} />
                     {/* <Route path="/opencall" element={<Statement />} /> */}
                     <Route path="/artists" element={<Artists />} />

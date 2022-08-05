@@ -40,7 +40,7 @@ const Room = () => {
             <div className="player" style={{ top: dim.y, left: dim.x, width: dim.w, height: dim.h }}>
                 <ReactPlayer
                     url='https://vimeo.com/619125453/db594d3249'
-                    muted={music.isMuted}
+                    muted={!windowUI.compositionStarted || music.isMuted}
                     loop={true}
                     playsinline={true}
                     playing={isPlaying}

@@ -35,13 +35,13 @@ export default function DetailsStart() {
 
           <h2 style={{ paddingBottom: "20px" }}>{ShowConfig.showTitle}</h2>
           {/* <h4 style={{ paddingBottom: "10px" }}><a href="https://thewrong.org/">a wrong biennale pavillion</a></h4> */}
-          <p></p>
           <h4 style={{ paddingBottom: "40px" }}>
             hosted by
             <br />
             public access memories gallery
           </h4>
           {/* <h4><a href="/opencall">open call</a></h4> */}
+          <h4><a href="/newsletter">join newsletter</a></h4>
         </div>
       </div>
 
