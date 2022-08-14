@@ -1,3 +1,4 @@
+// https://pragmaticpineapple.com/add-newsletter-subscription-form-to-react-website/
 import React, {useState} from 'react';
 
 const SubscribeForm = () => {

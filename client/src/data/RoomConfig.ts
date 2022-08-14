@@ -126,15 +126,15 @@ export const artists: IArtist[] = [
         id: 7,
         roomID: 7,
         title: "",
-        name: "",
-        nameLink: "",
-        thumb: "-thumb",
-        webLink: "",
-        instaLink: "",
-        medium: "",
-        description: "",
+        name: "Lizz Stringfield",
+        nameLink: "stringfield",
+        thumb: "lizz-thumb",
+        webLink: "https://www.lizzstringfield.com/",
+        instaLink: "https://www.instagram.com/lizz_stringfield/",
+        medium: "digital collage",
+        description: "My work focuses on human and environmental interactions as collaborations. Blending the vernacular of landscape, snapshot, and scientific photography, I use perceptual trickery to subvert expectations. I allow time between making the raw photographs and transforming them through digital collage. This is necessary to my process because I photograph in personal spaces, yet the content of the work is not situated in the material world. Dissolving parts of my relationship to a place or an image of a place, allows new questions and perspectives. By manipulating the readable information through digital collage, elements of drawing, and unique lighting conditions, the images remain open- familiar yet enigmatic.",
         year: 2022,
-        bio: ""
+        bio: "Lizz Stringfield earned an MFA in Photography from the University of Arizona, Tucson. Stringfield has shown art in China, Bulgaria, and across the United States; including University of Michigan School of Art and Design and Newspace Center for Photography, Portland, OR. Collages from her Post Nuclear series are part of the Center for Creative Photography: Voices of Photography Collection and she created a Site-Specific Installation for Visitor Engagement in Residence at MoMA PS1. She makes digital collages and paintings that focus on human and environmental interactions as collaborations. Her next solo exhibition will be at Thelma Sadoff Center for the Arts in September 2022. Stringfield currently lives in Cincinnati, Ohio with her partner, Francis, and their cat, Lillian."
     },
     {
         id: 8,
