@@ -1,4 +1,12 @@
-.above {
+.Christina {
+  background-color: black;
+  background: black;
+  flex: 1;
+  overflow-y: scroll;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  letter-spacing: normal;
+}
+.Christina .above {
   z-index: 2;
   position: absolute;
   top: 0;
@@ -6,23 +14,19 @@
   flex-direction: column;
   width: 100%;
 }
-
-.goPointers {
+.Christina .goPointers {
   pointer-events: all;
 }
-
-.noPointers {
+.Christina .noPointers {
   pointer-events: none;
 }
-
-.below {
+.Christina .below {
   z-index: 1;
   position: relative;
   width: 100%;
   cursor: s-resize;
 }
-
-.pageoverlay {
+.Christina .pageoverlay {
   position: fixed;
   top: 0%;
   left: 0%;
@@ -34,125 +38,97 @@
   display: flex;
   flex-direction: row-reverse;
 }
-
-.scrolling-element-inside {
+.Christina .scrolling-element-inside {
   transform: rotate(-180deg);
 }
-
-.overlay-content {
+.Christina .overlay-content {
   overflow-y: scroll;
   height: calc(100% - 20px);
   font-family: sans-serif;
   color: white;
 }
-
-.imgoverlay {
+.Christina .imgoverlay {
   overflow-y: visible;
   width: 100%;
 }
-
-.below img {
+.Christina .below img {
   width: 100%;
 }
-
-.left {
+.Christina .left {
   align-self: flex-start;
 }
-
-.right {
+.Christina .right {
   align-self: flex-end;
 }
-
-.blur-effect {
+.Christina .blur-effect {
   transition: filter 2s;
 }
-
-.blur-effect:hover {
+.Christina .blur-effect:hover {
   filter: blur(10px);
   -webkit-filter: blur(10px);
 }
-
-.blur-reverse {
+.Christina .blur-reverse {
   transition: filter 2s;
   filter: blur(10px);
   -webkit-filter: blur(10px);
 }
-
-.blur-reverse:hover {
+.Christina .blur-reverse:hover {
   filter: blur(0px);
   -webkit-filter: blur(0px);
 }
-
-.skew-effect {
+.Christina .skew-effect {
   transition: transform 2s;
 }
-
-.skew-effect:hover {
+.Christina .skew-effect:hover {
   transform: skewX(90deg);
 }
-
-.opacity-effect {
+.Christina .opacity-effect {
   opacity: 0.3;
   transition: opacity 2s;
 }
-
-.opacity-effect:hover {
+.Christina .opacity-effect:hover {
   opacity: 1;
 }
-
-.grow-effect {
+.Christina .grow-effect {
   transition: transform 2s;
 }
-
-.grow-effect:hover {
+.Christina .grow-effect:hover {
   transform: scale(2);
 }
-
-.shrink-effect {
+.Christina .shrink-effect {
   transition: transform 2s;
 }
-
-.shrink-effect:hover {
+.Christina .shrink-effect:hover {
   transform: scale(0.1);
 }
-
-.disappear {
+.Christina .disappear {
   transition: opacity 2s;
 }
-
-.disappear:hover {
+.Christina .disappear:hover {
   opacity: 0;
 }
-
-.shift {
+.Christina .shift {
   transition: transform 5s;
 }
-
-.shift:hover {
+.Christina .shift:hover {
   transform: translate(200px, 300%);
 }
-
-.shiftdown {
+.Christina .shiftdown {
   transition: transform 5s;
 }
-
-.shiftdown:hover {
+.Christina .shiftdown:hover {
   transform: translate(200px, -300%);
 }
-
-.rotate {
+.Christina .rotate {
   transition: transform 2s;
 }
-
-.rotate:hover {
+.Christina .rotate:hover {
   transform: rotate(-180deg);
 }
-
-.turnup {
+.Christina .turnup {
   transform: rotate(180deg);
 }
-
-.style1 {
+.Christina .style1 {
   width: 600px;
   height: 95%;
   margin-left: auto;
@@ -160,62 +136,54 @@
   margin-bottom: auto;
   margin-right: auto;
 }
-
-.style2 {
+.Christina .style2 {
   width: 300px;
   -webkit-margin-start: 50px;
           margin-inline-start: 50px;
 }
-
-.style3 {
+.Christina .style3 {
   width: 300px;
   -webkit-margin-end: 50px;
           margin-inline-end: 50px;
   -webkit-margin-before: 800px;
           margin-block-start: 800px;
 }
-
-.style4 {
+.Christina .style4 {
   width: 500px;
   -webkit-margin-start: 50px;
           margin-inline-start: 50px;
   -webkit-margin-before: 400px;
           margin-block-start: 400px;
 }
-
-.style5 {
+.Christina .style5 {
   width: 250px;
   -webkit-margin-end: 100px;
           margin-inline-end: 100px;
   -webkit-margin-before: 400px;
           margin-block-start: 400px;
 }
-
-.style6 {
+.Christina .style6 {
   width: 350px;
   -webkit-margin-start: 100px;
           margin-inline-start: 100px;
   -webkit-margin-before: 50px;
           margin-block-start: 50px;
 }
-
-.style7 {
+.Christina .style7 {
   width: 300px;
   -webkit-margin-end: 50px;
           margin-inline-end: 50px;
   -webkit-margin-before: 800px;
           margin-block-start: 800px;
 }
-
-.style8 {
+.Christina .style8 {
   width: 350px;
   -webkit-margin-end: 200px;
           margin-inline-end: 200px;
   -webkit-margin-before: 200px;
           margin-block-start: 200px;
 }
-
-.style9 {
+.Christina .style9 {
   width: 550px;
   -webkit-margin-start: 50px;
           margin-inline-start: 50px;

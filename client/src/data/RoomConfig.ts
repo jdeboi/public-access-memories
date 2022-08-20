@@ -139,16 +139,16 @@ export const artists: IArtist[] = [
     {
         id: 8,
         roomID: 8,
-        title: "",
-        name: "",
-        nameLink: "",
-        thumb: "-thumb",
-        webLink: "",
-        instaLink: "",
-        medium: "",
-        description: "",
+        title: "DALL*E",
+        name: "Apostolos Zerdevas",
+        nameLink: "zerdevas",
+        thumb: "apos-thumb",
+        webLink: "https://apostolos-zerdevas.format.com/",
+        instaLink: "https://www.instagram.com/apostoloszd/",
+        medium: "3D model",
+        description: "description",
         year: 2022,
-        bio: ""
+        bio: "bio"
     },
     // {
     //     id: 9,
