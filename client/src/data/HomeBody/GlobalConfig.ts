@@ -1,10 +1,10 @@
 
 export const GlobalConfig = {
     scaler: 70,
-    minX: 0,
-    maxX: 27,
-    minY: 5,
-    maxY: 27,
+    // minX: 0,
+    // maxX: 27,
+    // minY: 5,
+    // maxY: 27,
     x: -15,
     y: -35,
 }

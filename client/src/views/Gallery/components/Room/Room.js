@@ -5,7 +5,7 @@ import { rooms, roomConfig } from '../../../../data/RoomConfig';
 import { doorLineCrossing, boundaryLineCrossing } from './Boundaries';
 import { GlobalConfig } from '../../../../data/GlobalConfig';
 import { displayPopOut, displayPopIn } from '../../functions/boxes';
-import { displayCheckers, displayWall } from '../../p5/functions/ground';
+import { displayCheckers, displayWall } from '../../Gallery1/p5/functions/ground';
 
 export default class Room {
 

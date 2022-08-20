@@ -22,7 +22,6 @@ export default class Folder extends Draggable {
     }
 
 
-
     display() {
         this.p5.push();
         this.p5.translate(this.x, this.y);

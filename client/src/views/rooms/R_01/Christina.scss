@@ -1,4 +1,12 @@
-// .Christina {
+.Christina {
+    background-color: black;
+    background: black;
+    flex: 1;
+    // display: flex;
+    // flex-direction: column;
+    overflow-y: scroll;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    letter-spacing: normal;
 
     .above {
         z-index: 2;
@@ -217,4 +225,4 @@
         margin-inline-start: 50px;
         margin-block-start: 600px;
     }
-// }
+}

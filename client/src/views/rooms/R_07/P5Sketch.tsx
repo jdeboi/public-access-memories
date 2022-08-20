@@ -39,6 +39,8 @@ let wasp3Img: p5Types.Image;
 let nycBg: p5Types.Image;
 const nycLights: Light[] = [];
 
+let picBg: p5Types.Image;
+
 let tree: Tree;
 let treeBg: p5Types.Image;
 
@@ -69,19 +71,21 @@ class P5Sketch extends React.Component<Props> {
       wasps[i + 2] = new Wasp(wasp3Img, p5);
     }
 
-    nycBg =  p5.loadImage("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/lizz/nyc/bg2.jpg");
+    nycBg = p5.loadImage("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/lizz/nyc/bg.jpg");
     let light1 = p5.loadImage("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/lizz/nyc/lightbot.png");
     let light2 = p5.loadImage("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/lizz/nyc/lightmid.png");
     let light3 = p5.loadImage("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/lizz/nyc/lighttp.png");
-   
-   
-    nycLights[0] = new Light(1316, 267, light3, p5); //1320, 260 //-480
-    nycLights[1] = new Light(1380, 308, light2, p5); // 1410, 340
-    nycLights[2] = new Light(1460, 1290, light1, p5); // 1460, 1290 - 460
+
+
+    nycLights[0] = new Light(0, 1320, 270, light3, p5); //1320, 260 //-480
+    nycLights[1] = new Light(1, 1415, 342, light2, p5); // 1410, 340
+    nycLights[2] = new Light(2, 1473, 1302, light1, p5); // 1460, 1290 - 460
 
     tree = new Tree(825, 530, p5);
     treeBg = p5.loadImage("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/lizz/treebg.jpg");
-   
+
+    picBg = p5.loadImage("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/lizz/water.jpg");
+
     // img = p5.loadImage("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/lizz/without_water.png");
   }
 
@@ -104,7 +108,7 @@ class P5Sketch extends React.Component<Props> {
 
     // this.getFirstClip();
 
-    switch (sceneNum % 4) {
+    switch (sceneNum % 5) {
       case 0:
         // this.display0(p5);
         this.displayTree(p5);
@@ -113,9 +117,12 @@ class P5Sketch extends React.Component<Props> {
         this.displayHead(p5);
         break;
       case 2:
-        this.displayWasps(p5);
+        this.displayPic(p5);
         break;
       case 3:
+        this.displayWasps(p5);
+        break;
+      case 4:
         this.displayNYCLights(p5);
         break;
       default:
@@ -151,12 +158,17 @@ class P5Sketch extends React.Component<Props> {
 
   }
 
+  displayPic = (p5: p5Types) => {
+    const { x, y, w, h } = this.getCoverImgCenterDim(picBg, p5);
+    p5.image(picBg, x, y, w, h);
+  }
+
   displayTree = (p5: p5Types) => {
     const { x, y, w, h } = this.getCoverImgCenterDim(treeBg, p5, treeBg.width, treeBg.height);
     p5.image(treeBg, x, y, w, h);
     p5.push();
     p5.translate(x, y);
-    let factor = w/treeBg.width;
+    let factor = w / treeBg.width;
     tree.display(factor);
     p5.pop();
   }
@@ -184,10 +196,10 @@ class P5Sketch extends React.Component<Props> {
     p5.clear();
     const { x, y, w, h } = this.getCoverImgCenterDim(waspBg, p5, nycBg.width, nycBg.height);
     p5.image(nycBg, x, y, w, h);
- 
+
     p5.push();
     p5.translate(x, y);
-    const factor = w/nycBg.width;
+    const factor = w / nycBg.width;
     for (const light of nycLights) {
       light.display(factor);
     }

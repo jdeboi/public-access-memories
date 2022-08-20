@@ -125,7 +125,7 @@ export const artists: IArtist[] = [
      {
         id: 7,
         roomID: 7,
-        title: "",
+        title: "Cognitive Environment",
         name: "Lizz Stringfield",
         nameLink: "stringfield",
         thumb: "lizz-thumb",
