@@ -9,7 +9,7 @@ export const addFolderDivs = (divs: any, instaImg: p5Types.Image, txtFile:  p5Ty
     let p1 = {x: GlobalConfig.scaler* 27.5, y: GlobalConfig.scaler* 24.5}
     let p2 = {x: GlobalConfig.scaler* 25, y: GlobalConfig.scaler* 13.5}
     let labels = [
-        { x: p0.x, y: p0.y, label: "show statement", link: "https://publicaccessmemories.com/exhibition" },
+        { x: p0.x, y: p0.y, label: "show statement", link: "https://publicaccessmemories.com/statement" },
         { x: p1.x, y: p1.y, label: "about gallery", link: "https://publicaccessmemories.com/about" },
         { x: p2.x, y: p2.y, label: "@public.access.memories", link: "https://www.instagram.com/public.access.memories/" }
     ];

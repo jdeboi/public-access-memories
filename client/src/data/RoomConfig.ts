@@ -40,7 +40,7 @@ export const artists: IArtist[] = [
     },
     {
         id: 1,
-        roomID: 1,
+        roomID: 2,
         title: "flatbed___",
         name: "Christina Humphreys",
         nameLink: "humphreys",
@@ -54,7 +54,7 @@ export const artists: IArtist[] = [
     },
     {
         id: 2,
-        roomID: 2,
+        roomID: 1,
         title: "Cursor Echo",
         name: "Matthis Grunsky",
         nameLink: "grunsky",
@@ -68,7 +68,7 @@ export const artists: IArtist[] = [
     },
     {
         id: 3,
-        roomID: 3,
+        roomID: 7,
         title: "Spaghetti",
         name: "Angeline Meitzler",
         nameLink: "meitzler",
@@ -124,7 +124,7 @@ export const artists: IArtist[] = [
     },
      {
         id: 7,
-        roomID: 7,
+        roomID: 3,
         title: "Cognitive Environment",
         name: "Lizz Stringfield",
         nameLink: "stringfield",
@@ -139,16 +139,16 @@ export const artists: IArtist[] = [
     {
         id: 8,
         roomID: 8,
-        title: "DALL*E",
+        title: "SPACE (Of speech, nothing. Silence)",
         name: "Apostolos Zerdevas",
         nameLink: "zerdevas",
         thumb: "apos-thumb",
         webLink: "https://apostolos-zerdevas.format.com/",
         instaLink: "https://www.instagram.com/apostoloszd/",
         medium: "3D model",
-        description: "description",
+        description: "This 3d rendering of a photo of a graffiti-filled wall was taken in a concentration camp Memorial in Mauthausen, Austria, and is in a series of rooms that work as informal monuments within a monument where the visitors of the memorial can inscribe their names and thoughts in the concertation camp walls, creating a space that essentially works as memorial within a memorial and becomes a living link between a traumatic historical past and a fleeting present that hangs between the temporal experience of a visitor and the same time the permanent inscribing of the graffiti on the walls of the monument. This particularity of the presence of inscribed present in a memorial space, especially one that was part and is weighted by the traumatic effects of the Shoah genocide, its history, and legacies, raises new questions about how a place that has been designated as a place of suffering and death interacts with the present. The reprocess that takes place through AI makes all the writing on the walls regenerate randomly and produces writing that simulates language but doesn’t convey coherent meaning. Echoing the idea of the impossibility of writing poetry after the holocaust stated by Adorno, by emphasizing the impossible task of art practice, in general, to inscribe and explain what is perceived as unimaginable but at the same time exists as part of the historical past. The presentation of the work as a 3d video rendering makes possible the dissociation from an event that has been formulated in the past within a specific contextual and spatial space and presents it in the present in a virtual immaterial form that mimics the original. Reminding us that the unimaginable will always exist as a possibility in the present.",
         year: 2022,
-        bio: "bio"
+        bio: "Apostolos Zerdevas born in Athens. He studied photography in Focus school of photography and obtained a Masters in fine art form Chelsea College of art and design. He has participated in numerous exhibitions, in art spaces and museums such as. The DESTE Foundation, the Hellenic American Union, the ICA, London the Macedonian Museum of Contemporary Art. From 2003 he is working at Focus School of Photography. He is a Ph.D. candidate at the University of Reading Fine Art Department And an associate curator of Athens Photo festival. Contact - apostoloszerdevas@focus.edu.gr"
     },
     // {
     //     id: 9,

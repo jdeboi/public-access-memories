@@ -8,4 +8,12 @@
         flex: 1;
         width: 100%;
     } 
+
+    .roomAlert {
+        position: absolute;
+        top: 50vh;
+        left: 20vw;
+        font-size: 30px;
+        color: white;
+    }
 }

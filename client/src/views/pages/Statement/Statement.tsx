@@ -7,7 +7,8 @@ export const Statement = () => {
         <div className="Statement  Page">
             <div className="container">
 
-                <h1>OPEN CALL</h1>
+                {/* <h1>OPEN CALL</h1> */}
+                <h1>Statement</h1>
                 <br />
                 <br />
                 <br />
