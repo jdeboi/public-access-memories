@@ -19,7 +19,7 @@ const MobileHeaderPortrait = (props: IMBP) => {
   return (
     <header className={headerClass}>
       <ul className="left">
-        <ArrowLi />
+        {/* <ArrowLi /> */}
         <MainMenu isClosed={props.isClosed} isMenuOn={props.isMenuOn} />
       </ul>
       <ul className="right">

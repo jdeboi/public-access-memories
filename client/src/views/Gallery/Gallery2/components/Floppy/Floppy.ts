@@ -282,7 +282,7 @@ export default class Floppy extends Draggable {
 
 
     newPage = () => {
-        if (window.confirm('Leave the main gallery?')) {
+        if (window.confirm('Open work in a new tab?')) {
             this.openInNewTab(this.link);
         }
     }

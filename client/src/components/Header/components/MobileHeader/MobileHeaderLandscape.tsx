@@ -18,7 +18,7 @@ const MobileHeaderLandscape = (props: IMainMenu) => {
   return (
     <header className={headerClass}>
       <ul className="left">
-        <ArrowLi />
+        {/* <ArrowLi /> */}
         <Hamburger />
         <MainMenu isClosed={props.isClosed} isMenuOn={props.isMenuOn} />
       </ul>

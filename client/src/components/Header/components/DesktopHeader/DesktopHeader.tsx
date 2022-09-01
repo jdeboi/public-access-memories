@@ -22,7 +22,7 @@ const DesktopHeader = (props: IDH) => {
     return (
         <header className="Header menuTheme">
             <ul className="left">
-                <ArrowLi />
+                {/* <ArrowLi /> */}
                 <Hamburger />
                 <MainMenu
                     isClosed={props.isClosed}
