@@ -27,4 +27,27 @@
         max-width: 500px;
         padding-right: 10px;
     }
+
+    #p5Frame {
+        // max-width: 500px;
+        // width: 100%;
+        // height: auto;
+        width: 500px;
+        height: 500px;
+    }
+
+    .twoCol {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 50px;
+    }
+
+    .twoCol div {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 100%;
+        flex: 1;
+    }
 }

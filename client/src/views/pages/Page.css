@@ -27,4 +27,21 @@
 .Page .galleryImg img {
   max-width: 500px;
   padding-right: 10px;
+}
+.Page #p5Frame {
+  width: 500px;
+  height: 500px;
+}
+.Page .twoCol {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 50px;
+}
+.Page .twoCol div {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
 }/*# sourceMappingURL=Page.css.map */

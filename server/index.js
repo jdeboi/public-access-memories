@@ -20,8 +20,12 @@ module.exports.io = io;
 const ClientManager = require('./ClientManager');
 io.on('connection', ClientManager);
 
-app.get("/christina", (req, res) => {
-    res.sendFile(path.join(__dirname + '/../client/build/iframes/christina.html'));
+// app.get("/christina", (req, res) => {
+//     res.sendFile(path.join(__dirname + '/../client/build/iframes/christina.html'));
+// })
+
+app.get("/opencall", (req, res) => {
+    res.sendFile(path.join(__dirname + '/../client/build/iframes/opencall/opencall.html'));
 })
 
 app.get("/api", (req, res) => {
