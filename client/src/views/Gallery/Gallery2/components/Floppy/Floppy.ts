@@ -1,9 +1,9 @@
-import Draggable from '../../../Gallery1/p5/components/Draggable/Draggable';
+import Draggable from '../../../../Gallery/components/p5/Draggable/Draggable';
 import p5Types from 'p5';
 import { domCoordsToP5World, mouseToWorld } from '../../../../../helpers/coordinates';
-import { roomConfig } from '../../../../../data/RoomConfig';
-import { GlobalConfig } from '../../../../../data/GlobalConfig';
-import RoomLabel from '../../../Gallery1/p5/components/RoomLabel';
+import { roomConfig, artists, rooms } from '../../../../../data/AsIRecall/RoomConfig';
+import { GlobalConfig } from '../../../../../data/AsIRecall/GlobalConfig';
+import RoomLabel from '../../../../Gallery/components/p5/RoomLabel';
 import { setTraceStroke } from '../../functions/floor';
 import FloppyButton from './FloppyButton';
 
@@ -21,13 +21,13 @@ export default class Floppy extends Draggable {
     dragCount: number;
 
     constructor(p5: p5Types, id: number, x: number, y: number, link: string, eyeIcon: p5Types.Image, img: p5Types.Image, slider: p5Types.Image, font: p5Types.Font, connection: { x: number, y: number }) {
-        super(id, x, y, roomConfig.w * GlobalConfig.scaler, roomConfig.h * GlobalConfig.scaler, p5, img);
+        super(id, x, y, roomConfig.w * GlobalConfig.scaler, roomConfig.h * GlobalConfig.scaler, p5, img, GlobalConfig);
         // TODO - my coordinate system needs formalization
         // let point = domCoordsToP5World(x, y);
         // this.x = point.x;
         // this.y = point.y;
         this.slider = slider;
-        this.label = new RoomLabel(p5, id, eyeIcon, font);
+        this.label = new RoomLabel(p5, id, eyeIcon, font,GlobalConfig, artists, rooms, roomConfig);
         this.link = link;
         // this.img = img;
         this.tw = roomConfig.w * .8;
@@ -68,13 +68,13 @@ export default class Floppy extends Draggable {
     checkOpen(userEase: any, users: any) {
 
         // user position
-        let coord = domCoordsToP5World(userEase.x, userEase.y);
+        let coord = domCoordsToP5World(userEase.x, userEase.y, GlobalConfig);
         if (this.p5.dist(coord.x, coord.y, this.x + this.w / 2, this.y + this.h / 2) < 250) {
             return true;
         }
         
         // mouse position
-        let mouse = mouseToWorld(userEase, this.p5);
+        let mouse = mouseToWorld(userEase, this.p5, GlobalConfig);
         if (this.checkOver(mouse.x, mouse.y)) {
             return true;
         }
@@ -215,7 +215,7 @@ export default class Floppy extends Draggable {
     }
 
     checkDragging(userX: number, userY: number) {
-        let mouse = mouseToWorld({ x: userX, y: userY }, this.p5);
+        let mouse = mouseToWorld({ x: userX, y: userY }, this.p5, GlobalConfig);
         // console.log(mx, my, userX, userY, this.x, this.y);
         if (this.checkOver(mouse.x, mouse.y)) {
             // console.log("over toolbar");
@@ -231,15 +231,17 @@ export default class Floppy extends Draggable {
         return false;
     }
 
-    endDrag() {
+    endFloppyDrag(p5: p5Types) {
         super.endDrag();
         // if (this.p5.frameCount - this.dragCount < 10) {
         //     this.newPage();
         // } 
-        let d = this.p5.dist(this.startDrag.x, this.startDrag.y, this.p5.mouseX, this.p5.mouseY);
+        let d = this.p5.dist(this.startDrag.x, this.startDrag.y, p5.mouseX, p5.mouseY);
         if (d < 2) {
-            this.newPage();
+            // this.newPage();
+            return this.link;
         }
+        return null;
     }
 
     checkOver = (mx: number, my: number) => {
@@ -264,16 +266,16 @@ export default class Floppy extends Draggable {
     }
 
     checkDoubleClicked = (userX: number, userY: number) => {
-        let mouse = mouseToWorld({ x: userX, y: userY }, this.p5);
+        let mouse = mouseToWorld({ x: userX, y: userY }, this.p5, GlobalConfig);
         if (this.checkOver(mouse.x, mouse.y)) {
-            this.newPage();
+            // this.newPage();
             return true;
         }
         return false;;
     }
 
     checkDoubleClickedAlert = (userX: number, userY: number) => {
-        let mouse = mouseToWorld({ x: userX, y: userY }, this.p5);
+        let mouse = mouseToWorld({ x: userX, y: userY }, this.p5, GlobalConfig);
         // console.log(mx, my, userX, userY, this.x, this.y);
         if (this.checkOver(mouse.x, mouse.y)) {
             // alert("Don't dig through the trash. You're in a gallery. Geez.")

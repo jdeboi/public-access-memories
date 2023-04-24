@@ -5,8 +5,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { IUser, IBar } from '../interfaces';
-import { getBar } from '../data/BotConfig';
-import { GlobalConfig } from '../data/GlobalConfig';
+import { getBar } from '../data/CurrentShow/BotConfig';
+import { GlobalConfig } from '../data/CurrentShow/GlobalConfig';
 import Cookies from 'js-cookie';
 
 import { p5ToDomCoords } from '../helpers/coordinates';
@@ -20,7 +20,7 @@ const initialState: IUser = {
     roomX: 0,
     roomY: 0,
     x: GlobalConfig.scaler / 2,
-    y: GlobalConfig.scaler / 2,
+    y:  GlobalConfig.scaler / 2,
     isFollowingHost: false,
     wineTime: null,
     needsWine: false,
@@ -79,7 +79,7 @@ export const userSlice = createSlice({
         },
         setFollowingHost: (state,  action: PayloadAction<boolean>) => {
             state.isFollowingHost = action.payload;
-            console.log("following", state.isFollowingHost);
+            // console.log("following", state.isFollowingHost);
         },
         removeUserComp: (state) => {
             state.comp = null;
@@ -93,15 +93,15 @@ export const userSlice = createSlice({
         moveUser: (state, action: PayloadAction<{ x: number, y: number }>) => {
             state.x = action.payload.x;
             state.y = action.payload.y;
-            if (userNearBar(state, getBar("wine")) && state.needsWine) {
+            if (userNearBar(state, getBar("wine"), GlobalConfig) && state.needsWine) {
                 state.needsWine = false;
                 state.wineTime = JSON.stringify(new Date());
             }
-            else if (userNearBar(state, getBar("cheese")) && state.needsCheese) {
+            else if (userNearBar(state, getBar("cheese"), GlobalConfig) && state.needsCheese) {
                 state.needsCheese = false;
                 state.cheeseTime = JSON.stringify(new Date());
             }
-            else if (userNearBar(state, getBar("cocktail")) && state.needsCocktail) {
+            else if (userNearBar(state, getBar("cocktail"), GlobalConfig) && state.needsCocktail) {
                 state.needsCocktail = false;
                 state.cocktailTime = JSON.stringify(new Date());
             }
@@ -112,7 +112,7 @@ export const userSlice = createSlice({
         },
         addWine: (state, action: PayloadAction<{ location: IBar }>) => {
             state.needsWine = true;
-            if (userNearBar(state, action.payload.location)) {
+            if (userNearBar(state, action.payload.location, GlobalConfig)) {
                 state.needsWine = false;
                 state.wineTime = JSON.stringify(new Date());
             }
@@ -128,7 +128,7 @@ export const userSlice = createSlice({
         addCheese: (state, action: PayloadAction<{ location: IBar }>) => {
             state.needsCheese = true;
             let loc = action.payload.location;
-            if (userNearBar(state, loc)) {
+            if (userNearBar(state, loc, GlobalConfig)) {
                 state.needsCheese = false;
                 state.cheeseTime = JSON.stringify(new Date());
             }
@@ -142,9 +142,9 @@ export const userSlice = createSlice({
             state.needsCheese = false;
         },
 
-        addCocktail: (state, action: PayloadAction<{ location: IBar }>) => {
+        addCocktail: (state, action: PayloadAction<{ location: IBar}>) => {
             state.needsCocktail = true;
-            if (userNearBar(state, action.payload.location)) {
+            if (userNearBar(state, action.payload.location, GlobalConfig)) {
                 state.needsCocktail = false;
                 state.cocktailTime = JSON.stringify(new Date());
             }
@@ -164,8 +164,8 @@ export const userSlice = createSlice({
 })
 
 
-function userNearBar(user: IUser, location: IBar) {
-    var p5coords = p5ToDomCoords(location.x,location.y);
+function userNearBar(user: IUser, location: IBar, GlobalConfig: any) {
+    var p5coords = p5ToDomCoords(location.x,location.y, GlobalConfig);
     // TODO - b/c width is in pixels, unlike x & y ...
     p5coords.x += location.w/2; 
     p5coords.y += location.h/2;

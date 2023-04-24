@@ -1,16 +1,15 @@
 
 
 
-import { rooms, roomConfig } from '../../../../data/RoomConfig';
+// import { rooms, roomConfig } from '../../../../data/RoomConfig';
 import { doorLineCrossing, boundaryLineCrossing } from './Boundaries';
-import { GlobalConfig } from '../../../../data/GlobalConfig';
-import { displayPopOut, displayPopIn } from '../../functions/boxes';
-import { displayCheckers, displayWall } from '../../Gallery1/p5/functions/ground';
+// import { displayPopOut, displayPopIn } from '../../functions/boxes';
+import { displayCheckers, displayWall } from '../../Gallery1/functions/ground';
 
 export default class Room {
 
 
-  constructor(p5, door, i) {
+  constructor(p5, door, i, roomConfig, GlobalConfig) {
     const room = rooms[i];
 
     this.p5 = p5;
@@ -19,6 +18,7 @@ export default class Room {
     this.dir = room.dir;
     this.link = room.link;
     this.title = room.title;
+
 
     this.w = roomConfig.w;
     this.h = roomConfig.w;
@@ -32,18 +32,18 @@ export default class Room {
 
     this.p5.push();
 
-    var x = (this.x + this.w / 2) * GlobalConfig.scaler;
-    var y = (this.y + this.h / 2) * GlobalConfig.scaler;
+    var x = (this.x + this.w / 2) * this.GlobalConfig.scaler;
+    var y = (this.y + this.h / 2) * this.GlobalConfig.scaler;
     this.p5.translate(x, y);
 
 
 
     this.p5.push();
 
-    x = -this.w / 2 * GlobalConfig.scaler;
-    y = -this.h / 2 * GlobalConfig.scaler;
-    var w = this.w * GlobalConfig.scaler;
-    var h = this.h * GlobalConfig.scaler;
+    x = -this.w / 2 * this.GlobalConfig.scaler;
+    y = -this.h / 2 * this.GlobalConfig.scaler;
+    var w = this.w * this.GlobalConfig.scaler;
+    var h = this.h * this.GlobalConfig.scaler;
 
     // if (roomTextures[0] && this.dir === "bottom") this.p5.image(roomTextures[0], x, y, w, h);
     // else if (roomTextures[1] && this.dir === "right") this.p5.image(roomTextures[1], x, y, w, h);
@@ -54,7 +54,7 @@ export default class Room {
     this.p5.push();
     this.p5.translate(x, y);
 
-    displayCheckers(9, 9, GlobalConfig.scaler / 3, GlobalConfig.scaler / 3, this.p5);
+    displayCheckers(9, 9, this.GlobalConfig.scaler / 3, this.GlobalConfig.scaler / 3, this.p5);
     this.p5.pop();
 
     // displayPopOut(x, y, w, h, this.p5.color(255), this.p5);
@@ -64,15 +64,15 @@ export default class Room {
     this.displayTxt();
 
     // top
-    displayWall({ x, y }, { x: x + this.w * GlobalConfig.scaler, y }, this.p5);
+    displayWall({ x, y }, { x: x + this.w * this.GlobalConfig.scaler, y }, this.p5);
     // right
-    displayWall({ x: x + this.w * GlobalConfig.scaler, y }, { x: x + this.w * GlobalConfig.scaler, y: y + this.h * GlobalConfig.scaler }, this.p5);
+    displayWall({ x: x + this.w * this.GlobalConfig.scaler, y }, { x: x + this.w * this.GlobalConfig.scaler, y: y + this.h * this.GlobalConfig.scaler }, this.p5);
 
     // bottom
-    displayWall({ x: x + this.w * GlobalConfig.scaler, y: y + this.h * GlobalConfig.scaler }, { x: x + GlobalConfig.scaler, y: y + this.h * GlobalConfig.scaler }, this.p5);
+    displayWall({ x: x + this.w * this.GlobalConfig.scaler, y: y + this.h * this.GlobalConfig.scaler }, { x: x + this.GlobalConfig.scaler, y: y + this.h * this.GlobalConfig.scaler }, this.p5);
 
     // left
-    displayWall({ x, y: y + (this.h - 1) * GlobalConfig.scaler }, { x, y }, this.p5);
+    displayWall({ x, y: y + (this.h - 1) * this.GlobalConfig.scaler }, { x, y }, this.p5);
 
 
     const fac = .24;
@@ -110,7 +110,7 @@ export default class Room {
     this.p5.text(this.title, 0, 0);
   }
 
-  displayOutline(p5 = this.p5, scaler = GlobalConfig.scaler) {
+  displayOutline(p5 = this.p5, scaler = this.GlobalConfig.scaler) {
     var w = this.w * scaler;
     var h = this.h * scaler;
     p5.push();
@@ -123,7 +123,7 @@ export default class Room {
   // time to go to a new room; this is 90deg from entrance
   drawRoomDoorCrossing(p5 = this.p5) {
     var x0, x1, y0, y1;
-    let sc = GlobalConfig.scaler;
+    let sc = this.GlobalConfig.scaler;
     if (this.dir === "bottom") {
       x0 = this.x + 1;
       x1 = this.x + 1;
@@ -171,8 +171,8 @@ export default class Room {
       x1 = this.x + this.w;
     }
     const doorC = { x0: x0, y0: y0, x1: x1, y1: y1, to: this.link };
-    // return doorCrossing(userStep, doorC, GlobalConfig);
-    return doorLineCrossing(prevStep, userStep, doorC, GlobalConfig);
+    // return doorCrossing(userStep, doorC, this.GlobalConfig);
+    return doorLineCrossing(prevStep, userStep, doorC, this.GlobalConfig);
   }
 
   /////////////////////////////////////////////////////
@@ -199,12 +199,12 @@ export default class Room {
       x1 = this.x + this.w - 1;
     }
     const doorC = { x0: x0, y0: y0, x1: x1, y1: y1, to: this.title };
-    return doorLineCrossing(prevStep, userStep, doorC, GlobalConfig);
+    return doorLineCrossing(prevStep, userStep, doorC, this.GlobalConfig);
   }
 
   drawRoomDoorBoundary(p5 = this.p5) {
     var x0, x1, y0, y1;
-    let sc = GlobalConfig.scaler;
+    let sc = this.GlobalConfig.scaler;
     if (this.dir === "bottom") {
       x0 = this.x + this.start;
       x1 = this.x + this.end;
@@ -252,7 +252,7 @@ export default class Room {
       x1 = this.x + this.w;
     }
     const doorC = { x0: x0, y0: y0, x1: x1, y1: y1, to: this.title };
-    return doorLineCrossing(prevStep, userStep, doorC, GlobalConfig);
+    return doorLineCrossing(prevStep, userStep, doorC, this.GlobalConfig);
   }
 
   drawRoomDoorEntryCrossing(p5 = this.p5) {
@@ -277,7 +277,7 @@ export default class Room {
     }
     p5.stroke(0, 255, 0);
     p5.strokeWeight(10);
-    let sc = GlobalConfig.scaler;
+    let sc = this.GlobalConfig.scaler;
     p5.line(x0 * sc, y0 * sc, x1 * sc, y1 * sc);
   }
 
@@ -289,6 +289,6 @@ export default class Room {
       { x: (this.x), y: (this.y + this.h) },
       { x: (this.x), y: this.y }
     ];
-    return boundaryLineCrossing(prevStep, userStep, roomWalls, GlobalConfig);
+    return boundaryLineCrossing(prevStep, userStep, roomWalls, this.GlobalConfig);
   }
 }

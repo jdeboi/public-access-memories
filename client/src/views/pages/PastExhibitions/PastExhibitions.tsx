@@ -17,6 +17,10 @@ export const HomeBody = () => {
                         <a href="/pastexhibitions/homebody"><img className="thumb" src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/gallery_HB_thumb.png" /></a>
                         <div className="artist-name"><a href="/pastexhibitions/homebody">home &lt;/body&gt;</a></div>
                     </div>
+                    <div className="artist-box windows">
+                        <a href="/pastexhibitions/asirecall"><img className="thumb" src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/thumbs/gallery_thumb.jpg" /></a>
+                        <div className="artist-name"><a href="/pastexhibitions/asirecall">As I Recall</a></div>
+                    </div>
                 </div>
 
             </div>

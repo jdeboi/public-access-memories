@@ -12,31 +12,31 @@ import useSound from 'use-sound';
 
 const Room = () => {
     // const { pathname } = useLocation();
-    const iFrameRef = useRef<HTMLIFrameElement>(null);
-    const [play, { stop }] = useSound("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/spag2.mp4");
-    const windowUI = useSelector(selectWindow);
+    // const iFrameRef = useRef<HTMLIFrameElement>(null);
+    // const [play, { stop }] = useSound("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/spag2.mp4");
+    // const windowUI = useSelector(selectWindow);
 
-    useEffect(() => {
-        play()
-        return () => stop()
-    }, [windowUI.compositionStarted])
+    // useEffect(() => {
+    //     play()
+    //     return () => stop()
+    // }, [windowUI.compositionStarted])
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            let url = process.env.PUBLIC_URL + "/as-i-recall/spaghetti";
-            if (windowUI.compositionStarted)
-                openInNewTab(url);
-        }, 20000);
-        return () => clearInterval(interval);
-    }, [windowUI.compositionStarted]);
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         let url = process.env.PUBLIC_URL + "/as-i-recall/spaghetti";
+    //         if (windowUI.compositionStarted)
+    //             openInNewTab(url);
+    //     }, 20000);
+    //     return () => clearInterval(interval);
+    // }, [windowUI.compositionStarted]);
 
-    const openInNewTab = (url: string) => {
-        window.open(url, '_blank', 'noopener,noreferrer');
-    };
+    // const openInNewTab = (url: string) => {
+    //     window.open(url, '_blank', 'noopener,noreferrer');
+    // };
 
     return (
         <div className="Room Angeline Sketch">
-            <iframe src="https://spaghetti-0000.netlify.app/" />
+            {/* <iframe src="https://spaghetti-0000.netlify.app/" /> */}
         </div>
     )
 

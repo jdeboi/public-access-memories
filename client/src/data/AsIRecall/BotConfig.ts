@@ -26,7 +26,7 @@ const DJBotCoords = {
     y: danceFloorP5.y - .5
 }
 
-export const DJBotDomCoords = p5ToDomCoords(DJBotCoords.x, DJBotCoords.y);
+export const DJBotDomCoords = p5ToDomCoords(DJBotCoords.x, DJBotCoords.y, GlobalConfig);
 
 //// wine
 const cheeseBotCoords = {
@@ -84,7 +84,7 @@ const barUsers: IUser[] = [
 
 export const barTenders: IUser[] = barUsers.map(user => {
     const usr = { ...user };
-    let pt = p5ToDomCoords(usr.x, usr.y);
+    let pt = p5ToDomCoords(usr.x, usr.y, GlobalConfig);
     usr.x = pt.x;
     usr.y = pt.y;
     return usr;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { rooms } from '../../../data/RoomConfig';
+import { rooms } from '../../../data/CurrentShow/RoomConfig';
 import { useParams } from "react-router-dom";
 import './Room.css';
 
@@ -18,7 +18,7 @@ import R_11 from '../R_11/Room';
 import R_12 from '../R_12/Room';
 import R_13 from '../R_13/Room';
 
-import { ShowConfig } from '../../../data/ShowConfig';
+import { ShowConfig } from '../../../data/CurrentShow/ShowConfig';
 const { isClosed } = ShowConfig;
 
 

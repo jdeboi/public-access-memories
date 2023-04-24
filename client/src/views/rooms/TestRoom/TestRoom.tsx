@@ -1,5 +1,5 @@
 import React from 'react';
-import { rooms } from '../../../data/RoomConfig';
+import { rooms } from '../../../data/CurrentShow/RoomConfig';
 import { useParams } from "react-router-dom";
 import '../Room/Room.css';
 
@@ -19,15 +19,14 @@ import R_12 from '../R_12/Room';
 import R_13 from '../R_13/Room';
 
 
-import { ShowConfig } from '../../../data/ShowConfig';
+import { ShowConfig } from '../../../data/CurrentShow/ShowConfig';
 import { getRoomFromID } from '../../../helpers/helpers';
 const { isClosed } = ShowConfig;
-
 
 const TestRoom = () => {
 
     const { id } = useParams();
-    const room = getRoomFromID(id);
+    const room = getRoomFromID(id, rooms);
 
 
 

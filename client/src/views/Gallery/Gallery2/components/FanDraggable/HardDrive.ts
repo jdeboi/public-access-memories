@@ -1,6 +1,6 @@
-import ShadowDraggable from '../../../Gallery1/p5/components/Draggable/ShadowDraggable';
+import ShadowDraggable from '../../../components/p5/Draggable/ShadowDraggable';
 import p5Types from 'p5';
-import { factory } from 'typescript';
+import { GlobalConfig } from '../../../../../data/AsIRecall/GlobalConfig';
 
 export default class HardDrive extends ShadowDraggable {
 
@@ -10,7 +10,7 @@ export default class HardDrive extends ShadowDraggable {
 
     constructor(id: number, x: number, y: number, w: number, h: number, p5: p5Types) {
 
-        super(id, x, y, w, h, p5, null);
+        super(id, x, y, w, h, p5, null, GlobalConfig);
         this.drive = p5.loadImage("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/gallery/drive.png");
         this.needle = p5.loadImage("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/gallery/needle.png");
     }

@@ -5,11 +5,12 @@ import { useParams } from 'react-router-dom';
 import { getArtistFromNameLink, getRoomFromArtistRoomID } from '../../../helpers/helpers';
 import '../Page.css';
 import './Artist.css';
+import { artists, rooms } from '../../../data/CurrentShow/RoomConfig';
 
 export const Artist = () => {
     const { name } = useParams();
-    const artist = getArtistFromNameLink(name);
-    const room = getRoomFromArtistRoomID(artist.roomID);
+    const artist = getArtistFromNameLink(name, artists);
+    const room = getRoomFromArtistRoomID(artist.roomID, rooms);
 
 
     const Insta = () => {

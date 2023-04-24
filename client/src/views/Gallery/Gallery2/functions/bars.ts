@@ -1,8 +1,9 @@
-import { getBar } from "../../../../data/BotConfig";
-import CheeseBar from "../../Gallery1/p5/components/Bars/CheeseBar";
-import CocktailBar from "../../Gallery1/p5/components/Bars/CocktailBar";
-import DJBar from "../../Gallery1/p5/components/Bars/DJBar";
-import WineBar from "../../Gallery1/p5/components/Bars/WineBar";
+import { GlobalConfig } from "../../../../data/AsIRecall/GlobalConfig";
+import { getBar, numBarItems } from "../../../../data/AsIRecall/BotConfig";
+import CheeseBar from "../../components/p5/Bars/CheeseBar";
+import CocktailBar from "../../components/p5/Bars/CocktailBar";
+import DJBar from "../../components/p5/Bars/DJBar";
+import WineBar from "../../components/p5/Bars/WineBar";
 import p5Types from 'p5';
 
 export const addBarDivs = (bars: [any], lightImg: p5Types.Image, p5: p5Types) => {
@@ -13,16 +14,16 @@ export const addBarDivs = (bars: [any], lightImg: p5Types.Image, p5: p5Types) =>
         const bar = getBar(barType);
         switch (barType) {
             case "wine":
-                bars.push(new WineBar(i, { ...bar }, lightImg, p5));
+                bars.push(new WineBar(i, { ...bar }, lightImg, numBarItems, p5, GlobalConfig));
                 break;
             case "cocktail":
-                bars.push(new CocktailBar(i, { ...bar }, lightImg, p5));
+                bars.push(new CocktailBar(i, { ...bar }, lightImg, numBarItems, p5, GlobalConfig));
                 break;
             case "DJ":
-                bars.push(new DJBar(i, { ...bar }, lightImg, p5));
+                bars.push(new DJBar(i, { ...bar }, lightImg, numBarItems, p5, GlobalConfig));
                 break;
             case "cheese":
-                bars.push(new CheeseBar(i, { ...bar }, lightImg, p5));
+                bars.push(new CheeseBar(i, { ...bar }, lightImg, numBarItems, p5, GlobalConfig));
                 break;
         }
         i++;

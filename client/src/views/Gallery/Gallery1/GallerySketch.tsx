@@ -8,33 +8,36 @@ import { setFollowingHost } from '../../../store/user';
 
 //////////////
 // HELPERS
-import { doorCrossing, roomDoorCrossing, roomDoorEntryCrossing, roomDoorBoundary, roomBoundary, wallBoundary } from './p5/functions/crossing';
-import { roundToMult2 } from './p5/functions/round';
-import { drawAllFloors } from './p5/functions/floor';
-import { drawWalls, drawRooms, initHomeBodyWalls, initOuterWalls } from './p5/functions/building';
-import { displayDancers, updateDucks } from './p5/functions/emojis';
-import { reachedDestination, getNextStep, showMouseLoc, showUserEllipses, showDestination, mouseDidMove } from './p5/functions/destination';
-import { drawUser, drawUsers, checkUserClicked } from './p5/functions/users';
-import { drawPlantRow, drawGrassPatch } from './p5/functions/garden';
-import { addTableDivs, displayTableDivs, addSwingDivs, displaySwingDivs, displayOakDivs, displayTreeDivs, displayBarDivs, displayTrashDivs, checkTrashDivsDouble, addTrashDivs, displayRoomLabelDivs, addDoorDivs, addLightDivs, addColumnDivs, addTreeDivs, addBarDivs, addOakDivs, addFolderDivs, displayDoorDivs, displayLightDivs, displayColumnDivs, endDivDrag, updateDivs, checkDivPress, displayFolderDivs, checkFolderDivsDouble, addRoomLabelDivs } from './p5/functions/divs';
-import TreeSlider from './p5/components/TreeSlider';
+import { doorCrossing, roomDoorCrossing, roomDoorEntryCrossing, roomDoorBoundary, roomBoundary, wallBoundary } from './functions/crossing';
+import { roundToMult2 } from './functions/round';
+import { drawAllFloors } from './functions/floor';
+import { drawWalls, drawRooms, initHomeBodyWalls, initOuterWalls } from './functions/building';
+import { displayDancers, updateDucks } from './functions/emojis';
+import { reachedDestination, getNextStep, showMouseLoc, showUserEllipses, showDestination, mouseDidMove } from './functions/destination';
+import { drawUser, drawUsers, checkUserClicked } from './functions/users';
+import { drawPlantRow, drawGrassPatch } from './functions/garden';
+import { addTableDivs, displayTableDivs, addSwingDivs, displaySwingDivs, displayOakDivs, displayTreeDivs, displayBarDivs, displayTrashDivs, checkTrashDivsDouble, addTrashDivs, displayRoomLabelDivs, addDoorDivs, addLightDivs, addColumnDivs, addTreeDivs, addBarDivs, addOakDivs, addFolderDivs, displayDoorDivs, displayLightDivs, displayColumnDivs, endDivDrag, updateDivs, checkDivPress, displayFolderDivs, checkFolderDivsDouble, addRoomLabelDivs } from './functions/divs';
+import TreeSlider from '../components/p5/TreeSlider';
 
 //////////////
 // COMPONENTS
-import Wall from "./p5/components/Wall";
-import Room from "./p5/components/Room";
-import Duck from './p5/components/Duck';
-import Dancer from './p5/components/Dancer';
+// import Wall from "../components/p5/Wall";
+// import Room from "../components/p5/Room";
+import Duck from '../components/p5/Duck';
+import Dancer from '../components/p5/Dancer';
 
 //////////////
 // CONFIG
-import { GlobalConfig, limits } from "../../../data/GlobalConfig";
-import { rooms as globalRooms } from "../../../data/RoomConfig";
+import { GlobalConfig, limits } from "../../../data/HomeBody/GlobalConfig";
+import { rooms as globalRooms } from "../../../data/HomeBody/RoomConfig";
 import { filterGalleryUsers, getTotalRoomCount } from "../../../helpers/helpers";
-import { displayWall } from "./p5/functions/ground";
-import { hostBotPoints } from "../../../data/BotConfig";
+// import { displayWall } from "./p5/functions/ground";
+import { hostBotPoints, danceFloor } from "../../../data/HomeBody/BotConfig";
 import { Dispatch } from "@reduxjs/toolkit";
-import { p5ToUserCoords, p5ToWorldCoords } from "../../../helpers/coordinates";
+import { p5ToUserCoords } from "../../../helpers/coordinates";
+// import { danceFloor } from "../../../data/BotConfig";
+// import { artists, roomConfig } from "../../../data/RoomConfig";
+import HBRoom from "./components/HBRoom";
 var isClosed: boolean;
 
 //////////////
@@ -73,6 +76,7 @@ var barEmojis: p5Types.Image[] = [];
 //////////////
 // FONT
 var font: p5Types.Font;
+var timesFont: p5Types.Font;
 
 //////////////
 // DRAGGABLE DIVS
@@ -180,6 +184,7 @@ class GallerySketch extends React.Component<Props> {
 
     // font
     font = p5.loadFont("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/fonts/sysfont.woff");
+    // timesFont = p5.loadFont("https://cdn.jsdelivr.net/gh/googlefonts/noto-emoji/fonts/NotoColorEmoji.ttf");
 
   }
 
@@ -187,15 +192,14 @@ class GallerySketch extends React.Component<Props> {
   // INITIALIZE
   ////////////////////////////////////////////////////////////////////////
   setup = (p5: p5Types, canvasParentRef: Element) => {
-    const { user, loadingDone, setUserActive } = this.props;
+    const { user, userMove, loadingDone } = this.props;
     // use parent to render the canvas in this ref
     // (without that p5 will render the canvas outside of your component)
 
     this.initBuilding(p5);
     this.initEmojis(p5);
     this.initDivs(p5);
-    treeSlider = new TreeSlider(31, 40, 2);
-    // miniMap = new MiniMap(p5, 50, p5.windowHeight - 200 - 80, 200, 200);
+    treeSlider = new TreeSlider(31, 40, 2, GlobalConfig);
     stepTo.x = user.x;
     stepTo.y = user.y;
     destination.x = stepTo.x;
@@ -212,11 +216,11 @@ class GallerySketch extends React.Component<Props> {
 
   initEmojis = (p5: p5Types) => {
     for (let i = 0; i < 8; i++) {
-      ducks.push(new Duck(p5, 300, 2200, duckImg));
+      ducks.push(new Duck(p5, 300, 2200, duckImg, GlobalConfig));
     }
-    dancers[0] = new Dancer(p5, dancerImgs[0], 10, 160, false);
-    dancers[1] = new Dancer(p5, dancerImgs[1], 200, 380, false);
-    dancers[2] = new Dancer(p5, dancerImgs[2], 300, 150, true);
+    dancers[0] = new Dancer(p5, dancerImgs[0], 10, 160, false, danceFloor);
+    dancers[1] = new Dancer(p5, dancerImgs[1], 200, 380, false, danceFloor);
+    dancers[2] = new Dancer(p5, dancerImgs[2], 300, 150, true, danceFloor);
   }
 
   initBuilding = (p5: p5Types) => {
@@ -227,7 +231,7 @@ class GallerySketch extends React.Component<Props> {
     // }
    
     for (let i = 0; i < globalRooms.length; i++) {
-      rooms.push(new Room(p5, doorImgs[0], i));
+      rooms.push(new HBRoom(p5, doorImgs[0], i));
     }
 
   }
@@ -243,7 +247,7 @@ class GallerySketch extends React.Component<Props> {
     addTrashDivs(divs, trashFiles, p5);
     addFolderDivs(divs, instaImg, txtFile, p5);
     addRoomLabelDivs(divs, eyeIcon, font, p5);
-    addSwingDivs(divs, baby, null, p5);
+    // addSwingDivs(divs, baby, null, p5);
   }
 
   ////////////////////////////////////////////////////////////////////////
@@ -281,7 +285,7 @@ class GallerySketch extends React.Component<Props> {
 
     //////////////
     // building
-    const roomCount = getTotalRoomCount(users);
+    const roomCount = getTotalRoomCount(users, rooms);
     drawRooms(rooms, roomTextures);
     drawWalls(walls, p5);
     if (!isClosed)
@@ -297,7 +301,7 @@ class GallerySketch extends React.Component<Props> {
     displayOakDivs(userEase.x, userEase.y, divs);
     displayTableDivs(userEase.x, userEase.y, divs);
     p5.textFont(font, 10);
-    displaySwingDivs(userEase.x, userEase.y, divs);
+    // displaySwingDivs(userEase.x, userEase.y, divs);
     // this.displayOuterWalls(p5);
 
     // seeUserClicked(userEase, users, p5)
@@ -314,6 +318,7 @@ class GallerySketch extends React.Component<Props> {
     //////////////
     // drawing
     this.drawOverTarget(p5);
+    // p5.textFont(font, 34);
     drawUser(user, p5, barEmojis);
     this.drawOverUser(p5);
 
@@ -343,9 +348,11 @@ class GallerySketch extends React.Component<Props> {
     p5.translate(-userEase.x, -userEase.y);
     p5.translate(GlobalConfig.x * GlobalConfig.scaler, GlobalConfig.y * GlobalConfig.scaler)
 
-    if (users)
-      drawUsers(userEase, filterGalleryUsers(user, users), font, p5, barEmojis);
-
+    if (users) {
+      // p5.textFont(font, 34);
+      drawUsers(userEase, filterGalleryUsers(user, users), font, p5, barEmojis, GlobalConfig);
+    }
+     
     p5.pop();
   }
 
@@ -458,7 +465,7 @@ class GallerySketch extends React.Component<Props> {
     if (user.isFollowingHost) {
       if (currentHostStep === 0 && isWalking === false) {
         isWalking = true;
-        const pt = p5ToUserCoords(hostBotPoints[0].x, hostBotPoints[0].y);
+        const pt = p5ToUserCoords(hostBotPoints[0].x, hostBotPoints[0].y, GlobalConfig);
         destination.x = pt.x;
         destination.y = pt.y;
         destination.time = new Date();
@@ -475,7 +482,7 @@ class GallerySketch extends React.Component<Props> {
     console.log("next", currentHostStep)
     if (currentHostStep < hostBotPoints.length) {
       isWalking = true;
-      const pt = p5ToUserCoords(hostBotPoints[currentHostStep].x, hostBotPoints[currentHostStep].y);
+      const pt = p5ToUserCoords(hostBotPoints[currentHostStep].x, hostBotPoints[currentHostStep].y, GlobalConfig);
       destination.x = pt.x;
       destination.y = pt.y;
       destination.time = new Date();
@@ -511,7 +518,7 @@ class GallerySketch extends React.Component<Props> {
     const { users, setUserActive, } = this.props;
     let userClicked = null;
     if (users)
-      userClicked = checkUserClicked(userEase, users, p5);
+      userClicked = checkUserClicked(userEase, users, p5, GlobalConfig);
     if (userClicked) {
       setUserActive(userClicked);
       return;

@@ -8,7 +8,7 @@ import { addMessage } from '../../../store/messages';
 
 import { IMessage } from '../../../interfaces';
 
-import { getBar } from '../../../data/BotConfig';
+import { getBar } from '../../../data/CurrentShow/BotConfig';
 const cocktailLocation = getBar("cocktail");
 
 export const useCocktailBot = () => {

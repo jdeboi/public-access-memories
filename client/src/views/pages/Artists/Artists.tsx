@@ -2,8 +2,8 @@ import React from 'react';
 import '../Page.css';
 import './Artists.css';
 
-import { ShowConfig } from '../../../data/ShowConfig';
-import { artists } from '../../../data/RoomConfig';
+import { ShowConfig } from '../../../data/CurrentShow/ShowConfig';
+import { artists } from '../../../data/CurrentShow/RoomConfig';
 import { IArtist } from '../../../interfaces';
 
 import DetailsClosed from '../../../components/Welcome/components/DetailsClosed';

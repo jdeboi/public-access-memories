@@ -2,7 +2,7 @@ import React from 'react';
 import '../Page.css';
 import '../Artists/Artists.css';
 
-import { artists } from '../../../data/RoomConfig';
+import { artists } from '../../../data/CurrentShow/RoomConfig';
 import { IArtist } from '../../../interfaces';
 
 export const ArtistsList = () => {

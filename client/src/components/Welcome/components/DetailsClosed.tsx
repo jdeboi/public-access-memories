@@ -2,7 +2,7 @@ import React from 'react';
 // store
 import { useSelector } from 'react-redux';
 import { selectWindow } from '../../../store/store';
-import { ShowConfig } from '../../../data/ShowConfig';
+import { ShowConfig } from '../../../data/CurrentShow/ShowConfig';
 
 export default function DetailsClosed() {
   const windowUI = useSelector(selectWindow);

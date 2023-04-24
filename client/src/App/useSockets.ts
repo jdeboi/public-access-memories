@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 // interfaces
 import { IUser, IUsers } from '../interfaces/index';
 
-import { barTenders } from '../data/BotConfig';
+import { barTenders } from '../data/CurrentShow/BotConfig';
 
 // store
 import { IMessage } from '../interfaces';

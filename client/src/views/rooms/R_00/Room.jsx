@@ -6,7 +6,7 @@ const Room = () => {
 
     return (
         <div className="Room Vidya Sketch">
-            <iframe src="https://www.collectiblr.com/"></iframe>
+            {/* <iframe src="https://www.collectiblr.com/"></iframe> */}
         </div>
     )
 };

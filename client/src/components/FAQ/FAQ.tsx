@@ -9,8 +9,7 @@ import CenterModal from '../CenterModal/CenterModal';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectWindow, selectMenu } from '../../store/store';
 import { hideFaq } from '../../store/menu';
-import { GlobalConfig } from '../../data/GlobalConfig';
-import { ShowConfig } from '../../data/ShowConfig';
+import { ShowConfig } from '../../data/CurrentShow/ShowConfig';
 
 
 interface FAQProps {

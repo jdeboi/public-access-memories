@@ -1,9 +1,9 @@
 import { IUser, IUsers, IRoom, IArtist } from '../interfaces';
-import { artists, rooms } from '../data/RoomConfig';
-import { PageConfig } from '../data/PageConfig';
-import { hostBotPoints } from '../data/BotConfig';
+// import { artists, rooms } from '../data/RoomConfig';
+import { PageConfig } from '../data/CurrentShow/PageConfig';
+// import { hostBotPoints } from '../data/BotConfig';
 import { domCoordsToP5 } from './coordinates';
-import { ShowConfig } from '../data/ShowConfig';
+// import { ShowConfig } from '../data/ShowConfig';
 
 export const getUserByUserName = (users: IUsers, userName: string) => {
   if (users)
@@ -75,9 +75,9 @@ export const getUserChatList = (currentUser: IUser, users: IUsers) => {
   return filteredArray;
 }
 
-export const userNearEntrance = (user: IUser) => {
+export const userNearEntrance = (user: IUser, hostBotPoints:any, GlobalConfig: any) => {
   let entrance = { ...hostBotPoints[0] };
-  let userCoords = domCoordsToP5(user.x, user.y);
+  let userCoords = domCoordsToP5(user.x, user.y, GlobalConfig);
 
   return (userCoords.x >= entrance.x - 8 && userCoords.x <= entrance.x + 8
     && userCoords.y >= 28 && userCoords.y <= 35);
@@ -90,13 +90,13 @@ export const shouldShowLoggedInComponents = (user: IUser) => {
   return true;
 }
 
-export const getPageName = (link: string): string => {
+export const getPageName = (link: string, rooms: IRoom[], artists: IArtist[]): string => {
   if (link === "/") {
     return "gallery";
   }
-  const roomPages = rooms.filter((room) => link === room.link);
+  const roomPages = rooms.filter((room: IRoom) => link === room.link);
   if (roomPages.length > 0) {
-    return getArtistFromRoom(roomPages[0]).title;
+    return getArtistFromRoom(roomPages[0], artists).title;
   }
   const pages = PageConfig.filter((page) => link === page.link);
   if (pages.length > 0) {
@@ -105,15 +105,15 @@ export const getPageName = (link: string): string => {
   return "404";
 }
 
-export const getArtistFromRoom = (room: IRoom): IArtist => {
+export const getArtistFromRoom = (room: IRoom, artists: IArtist[]): IArtist => {
   return artists[room.artistID];
 }
 
-export const getRoomFromArtist = (artist: IArtist): IRoom => {
+export const getRoomFromArtist = (artist: IArtist, rooms: IRoom[]): IRoom => {
   return rooms[artist.roomID];
 }
 
-export const getRoomByPath = (path: string): IRoom | null => {
+export const getRoomByPath = (path: string, rooms: IRoom[]): IRoom | null => {
   // If this is the test link
   // /test/rooms/1
   if (path.indexOf("test") > -1) {
@@ -136,7 +136,7 @@ export const getRoomCount = (room: string, users: IUsers): number => {
   return r.length;
 }
 
-export const getTotalRoomCount = (users: IUsers) => {
+export const getTotalRoomCount = (users: IUsers, rooms: IRoom[]) => {
   let roomLinks = rooms.map(room => room.link);
   const roomCount: any = {};
   for (const roomLink of roomLinks) {
@@ -150,7 +150,7 @@ export const getTotalRoomCount = (users: IUsers) => {
   return roomCount;
 }
 
-export const getRoomID = (id: string | undefined) => {
+export const getRoomID = (id: string | undefined, rooms: IRoom[]) => {
   let roomID = 0;
   if (id) {
     // let rid = id.substring(4, id.length);
@@ -167,13 +167,13 @@ export const getRoomID = (id: string | undefined) => {
 }
 
 // takes ID and returns room information
-export const getRoomFromID = (id: string | undefined) => {
-  const room = rooms[getRoomID(id)];
+export const getRoomFromID = (id: string | undefined, rooms: IRoom[]) => {
+  const room = rooms[getRoomID(id, rooms)];
   return room;
 }
 
 
-export const getArtistFromNameLink = (name: string | undefined) => {
+export const getArtistFromNameLink = (name: string | undefined, artists: IArtist[]) => {
   const artist = artists.find((art) => art.nameLink === name);
   if (artist) {
     return artist;
@@ -181,17 +181,17 @@ export const getArtistFromNameLink = (name: string | undefined) => {
   return artists[0];
 }
 
-export const getRoomFromArtistRoomID = (id: number): IRoom =>{
+export const getRoomFromArtistRoomID = (id: number, rooms: IRoom[]): IRoom =>{
   return rooms[id];
 }
 
 // takes room ID and returns artist associated with roomID
-export const getArtistFromRoomID = (id: string | undefined) => {
-  return artists[getRoomID(id)];
+export const getArtistFromRoomID = (id: string | undefined, artists: IArtist[], rooms: IRoom[]) => {
+  return artists[getRoomID(id, rooms)];
 }
 
-export const getArtistRoomLink = (id: string | undefined) => {
-  return rooms[getRoomID(id)].link;
+export const getArtistRoomLink = (id: string | undefined, rooms: IRoom[]) => {
+  return rooms[getRoomID(id, rooms)].link;
 }
 
 

@@ -7,42 +7,59 @@ export const Statement = () => {
         <div className="Statement  Page">
             <div className="container">
 
-                {/* <h1>OPEN CALL</h1> */}
-                <h1>Statement</h1>
+                <h1>OPEN CALL</h1>
+                {/* <h1>Statement</h1> */}
+
                 <br />
                 <br />
                 <br />
                 <div className="windows">
-                <h2 className="showTitle">as I recall</h2>
-                {/* <h4>Deadline July 15, 2022</h4> */}
-                {/* <h5>publicaccessmemories@gmail.com</h5> */}
+                    <h2 className="showTitle">Fields of View</h2>
+                    <h3>A <a href="https://thewrong.org/">wrong biennale</a> pavilion</h3>
+                    <h4>Deadline July 1st, 2023</h4>
+                    <h5><a href="mailto:publicaccessmemories@gmail.com">publicaccessmemories@gmail.com</a></h5>
                 </div>
                 <br />
                 <br />
+                {/* <img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/as_i_recall.png" width="500px" /> */}
 
-                <blockquote className="quoteC" cite="https://doi.org/10.3389/fpsyg.2012.00257">
-                    “If anything has been learned about memory, it is that it is fragile and error prone...
-                    Although often associated with negative consequences there is growing evidence to suggest
-                    that memory's imperfections may also be a virtue. The reconstructive nature of memory is
-                    believed to provide greater cognitive flexibility...and support the construction and
-                    maintenance of self-identity and life-stories” (<a href="https://doi.org/10.3389/fpsyg.2012.00257">citation</a>)
-                </blockquote>
+                {/* <hr /> */}
+                <h3>Statement</h3>
+                <p>As part of the 2023-24 <a href="https://thewrong.org/">wrong biennale</a>, Public Access Memories Gallery invites submissions for Fields of View, an exhibition that aims to reimagine the dimensionality of virtual space. Submissions will be accepted in any digital media format and will be exhibited within the HTML Gallery hosted by Public Access Memories.</p>
+
+                <p>The primary channel for communication in many aspects of our contemporary reality is the flatscreen computer monitor; however, our perceptions of this
+                    technology are often altered by illusions of space that betray
+                    the conditions of its surface. At the two-dimensional level,
+                    scrolling and hyperlinking operate as methods of expanding the spatial
+                    boundaries of the screen into a dense, multidimensional experience.
+                    Three-dimensional projections push this expansion further,
+                    but rarely deviate from conventional systems of linear perspective.
+                    Within such conventions exist assumptions about the relationship
+                    between ourselves and the environments we inhabit that limit our potential scope of
+                    experience. Public Access Memories encourages submissions that break these
+                    conventions of virtual space, exploring fresh, inventive, and critical
+                    perspectives that open divergent fields of view.</p>
+
+
+                <br />
+                <br />
+                {/* <hr /> */}
+                <h3>Submissions</h3>
+                <p>To submit work, email <a href="mailto:publicaccessmemories@gmail.com">publicaccessmemories@gmail.com</a>:</p>
+                <ul>
+                    <li>&#8627; file(s)</li>
+                    <li>&#8627; a brief statement</li>
+                    <li>&#8627; a brief bio</li>
+                </ul>
+                <h4>Deadline July 1st, 2023</h4>
+                <br />
+                <br />
+                <br />
                 <br />
                 <p>
-                    "As I Recall" reflects upon the implications of digital memory-making.
-                    For example, how do social media stories form or infiltrate our personal narratives, and to what extent have we maintained control over our memories as tech companies mine and monetize our digital histories?
-                    How does the persistence and fixed-nature of our data (e.g. decades-old content preserved on Myspace) disrupt or augment the ability to reshape visions of the past? 
-                    On the other hand, does the continual copy / paste / transfer of internet imagery slowly degrade visual memories until low res web junk is all that remains? 
-                    These are just a few questions that seek to probe the evolving nature of memory—one that is simultaneously
-                    analog and digital, permanent and pliable.
-                </p>
-                <p>
-                    Situating digital works within their native environment, Public Access Memories Gallery offers the HTML gallery as a canvas and accepts any digital media formats.
-                </p>
-                {/* <p>To submit work, email file(s), a brief statement, and bio to publicaccessmemories@gmail.com.</p> */}
+                    <img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/tw5_logo_w.png" width={200} />
 
-                <p>
-                    <img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/as_i_recall.png" width="500px" />
+                    {/* <img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/as_i_recall.png" width="500px" /> */}
                 </p>
             </div>
         </div>

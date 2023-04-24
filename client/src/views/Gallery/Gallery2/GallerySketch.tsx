@@ -8,14 +8,14 @@ import { setFollowingHost } from '../../../store/user';
 
 //////////////
 // HELPERS
-import {  wallBoundary } from '../Gallery1/p5/functions/crossing';
-import { roundToMult2 } from '../Gallery1/p5/functions/round';
+import { wallBoundary } from '../Gallery1/functions/crossing';
+import { roundToMult2 } from '../Gallery1/functions/round';
 import { drawAllFloors } from './functions/floor';
-import { drawWalls, initOuterWalls } from '../Gallery1/p5/functions/building';
-import { displayDancers } from '../Gallery1/p5/functions/emojis';
-import { reachedDestination, getNextStep, showMouseLoc, showUserEllipses, showDestination, mouseDidMove } from '../Gallery1/p5/functions/destination';
-import { drawUser, drawUsers, checkUserClicked } from '../Gallery1/p5/functions/users';
-import { addTableDivs, displayTrashDivs, checkTrashDivsDouble, addTrashDivs, addLightDivs, displayLightDivs, displayColumnDivs, endDivDrag, updateDivs, checkDivPress, displayFolderDivs, checkFolderDivsDouble } from '../Gallery1/p5/functions/divs';
+import { drawWalls, initOuterWalls } from './functions/building';
+import { displayDancers } from '../Gallery1/functions/emojis';
+import { reachedDestination, getNextStep, showMouseLoc, showUserEllipses, showDestination, mouseDidMove } from '../Gallery1/functions/destination';
+import { drawUser, drawUsers, checkUserClicked } from '../Gallery1/functions/users';
+import { addTableDivs, displayTrashDivs, checkTrashDivsDouble, addTrashDivs, addLightDivs, displayLightDivs, displayColumnDivs, endDivDrag, updateDivs, checkDivPress, displayFolderDivs, checkFolderDivsDouble } from '../Gallery1/functions/divs';
 import { addColumnDivs } from "./functions/columns";
 import { addFolderDivs } from "./functions/folders";
 import { checkFanDivs, displayFans, endFanDivDrag, addFanDivs, updateFanDivs } from "./functions/fans";
@@ -25,18 +25,19 @@ import { addBarDivs, displayBarDivs, checkBarDivs, endBarDivDrag, updateBarDivs 
 
 //////////////
 // COMPONENTS
-import Dancer from '../Gallery1/p5/components/Dancer';
+import Dancer from '../components/p5/Dancer';
 import FanDraggable from "./components/FanDraggable/FanDraggable";
 import Floppy from "./components/Floppy/Floppy";
 import HardDrive from "./components/FanDraggable/HardDrive";
 
 //////////////
 // CONFIG
-import { GlobalConfig } from "../../../data/GlobalConfig";
-import { rooms as globalRooms } from "../../../data/RoomConfig";
+import { GlobalConfig } from "../../../data/AsIRecall/GlobalConfig";
+import { rooms } from "../../../data/AsIRecall/RoomConfig";
 import { filterGalleryUsers, getTotalRoomCount } from "../../../helpers/helpers";
 import { Dispatch } from "@reduxjs/toolkit";
-import { p5ToUserCoords, p5ToWorldCoords } from "../../../helpers/coordinates";
+// import { p5ToUserCoords, p5ToWorldCoords } from "../../../helpers/coordinates";
+import { danceFloor } from "../../../data/AsIRecall/BotConfig";
 
 //////////////
 // BUILDING 
@@ -78,7 +79,7 @@ let hardDrive: HardDrive;
 const floppies: Floppy[] = [];
 let floppyImg: p5Types.Image;
 let sliderImg: p5Types.Image;
-let bars : any = [];
+let bars: any = [];
 
 // var miniMap;
 // let updateObj = { dx: 0, dy: 0, mx: 0, my: 0, destX: 0, destY: 0 };
@@ -208,14 +209,14 @@ class GallerySketch extends React.Component<Props> {
     p5.textFont(font, 14);
     p5.frameRate(20);
     p5.pixelDensity(2);
-    
+
     loadingDone();
   };
 
   initEmojis = (p5: p5Types) => {
-    dancers[0] = new Dancer(p5, dancerImgs[0], 10, 160, false);
-    dancers[1] = new Dancer(p5, dancerImgs[1], 200, 380, false);
-    dancers[2] = new Dancer(p5, dancerImgs[2], 300, 150, true);
+    dancers[0] = new Dancer(p5, dancerImgs[0], 10, 160, false, danceFloor);
+    dancers[1] = new Dancer(p5, dancerImgs[1], 200, 380, false, danceFloor);
+    dancers[2] = new Dancer(p5, dancerImgs[2], 300, 150, true, danceFloor);
   }
 
 
@@ -225,7 +226,7 @@ class GallerySketch extends React.Component<Props> {
     addTableDivs(divs, tableImgs, p5);
     addTrashDivs(divs, trashFiles, p5);
     addFolderDivs(divs, instaImg, txtFile, p5);
-    hardDrive = new HardDrive(0, 17*GlobalConfig.scaler, 13*GlobalConfig.scaler, 434/2, 616/2, p5)
+    hardDrive = new HardDrive(0, 17 * GlobalConfig.scaler, 13 * GlobalConfig.scaler, 434 / 2, 616 / 2, p5)
     addFloppyDivs(floppies, eyeIcon, floppyImg, sliderImg, font, p5);
     addBarDivs(bars, lightImgs[3], p5);
     addFanDivs(fans, p5);
@@ -270,7 +271,7 @@ class GallerySketch extends React.Component<Props> {
     p5.textFont(font, 10);
     displayFans(userEase.x, userEase.y, fans, hardDrive);
 
-    const roomCount = getTotalRoomCount(users);
+    const roomCount = getTotalRoomCount(users, rooms);
     displayFloppyDivs(userEase.x, userEase.y, roomCount, this.props.isMobile, floppies);
     // p5.textFont(font, 12);
     displayFolderDivs(divs);
@@ -320,7 +321,7 @@ class GallerySketch extends React.Component<Props> {
     p5.translate(GlobalConfig.x * GlobalConfig.scaler, GlobalConfig.y * GlobalConfig.scaler)
 
     if (users)
-      drawUsers(userEase, filterGalleryUsers(user, users), font, p5, barEmojis);
+      drawUsers(userEase, filterGalleryUsers(user, users), font, p5, barEmojis, GlobalConfig);
 
     p5.pop();
   }
@@ -336,7 +337,7 @@ class GallerySketch extends React.Component<Props> {
     // displayLightDivs(userEase.x, userEase.y, divs);
     displayColumnDivs(userEase.x, userEase.y, divs);
 
-    
+
 
 
     p5.pop();
@@ -400,9 +401,9 @@ class GallerySketch extends React.Component<Props> {
     const { user } = this.props;
     const { users, setUserActive, } = this.props;
     let userClicked = null;
-    
+
     if (users)
-      userClicked = checkUserClicked(userEase, users, p5);
+      userClicked = checkUserClicked(userEase, users, p5, GlobalConfig);
     if (userClicked) {
       setUserActive(userClicked);
       return;
@@ -475,7 +476,12 @@ class GallerySketch extends React.Component<Props> {
     if (p5.frameCount > 0) {
       endDivDrag(divs);
       endFanDivDrag(fans, hardDrive);
-      endFloppyDivDrag(floppies);
+      let endD = endFloppyDivDrag(floppies, p5);
+      if (endD) {
+        if (window.confirm('Leave the main gallery?')) {
+          this.props.userNewRoom(endD);
+        }
+      }
       endBarDivDrag(bars);
     }
   }
@@ -491,16 +497,16 @@ class GallerySketch extends React.Component<Props> {
   }
 
   doubleClicked = (p5: p5Types) => {
-    if (p5.frameCount> 0) {
+    if (p5.frameCount > 0) {
       checkFolderDivsDouble(userEase.x, userEase.y, divs);
       // checkTrashDivsDouble(userEase.x, userEase.y, divs);
-      checkFloppyDivsDouble(userEase.x, userEase.y, floppies);
+      // checkFloppyDivsDouble(userEase.x, userEase.y, floppies);
     }
     return;
   }
 
   render() {
-     // TODO - key & mouse listeners called twice (like 2 instances... one always at frame count 0)
+    // TODO - key & mouse listeners called twice (like 2 instances... one always at frame count 0)
     return (
       <Sketch
         preload={this.preload}

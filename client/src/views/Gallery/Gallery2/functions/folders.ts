@@ -1,6 +1,6 @@
-import { GlobalConfig } from "../../../../data/GlobalConfig";
+import { GlobalConfig } from "../../../../data/AsIRecall/GlobalConfig";
 import p5Types from 'p5';
-import Folder from "../../Gallery1/p5/components/Folder";
+import Folder from "../../components/p5/Folder";
 
 export const addFolderDivs = (divs: any, instaImg: p5Types.Image, txtFile:  p5Types.Image, p5: p5Types) => {
     divs.folders = [];
@@ -16,7 +16,7 @@ export const addFolderDivs = (divs: any, instaImg: p5Types.Image, txtFile:  p5Ty
 
     for (let i = 0; i < 3; i++) {
         const { x, y, label, link } = labels[i];
-        const folder = new Folder(p5, i, x, y, label, link, (i === 2 ? instaImg : txtFile));
+        const folder = new Folder(p5, i, x, y, label, link, (i === 2 ? instaImg : txtFile), GlobalConfig);
         divs.folders.push(folder);
     }
 }

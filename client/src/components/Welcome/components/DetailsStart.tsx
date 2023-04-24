@@ -2,7 +2,7 @@ import React from 'react';
 // store
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { ShowConfig } from '../../../data/ShowConfig';
+import { ShowConfig } from '../../../data/CurrentShow/ShowConfig';
 import { selectWindow } from '../../../store/store';
 
 

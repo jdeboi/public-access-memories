@@ -1,7 +1,7 @@
 
-import { roundToMult } from '../../Gallery1/p5/functions/round';
-import { GlobalConfig, limits } from '../../../../data/GlobalConfig';
-import { danceFloor } from '../../../../data/BotConfig';
+// import { roundToMult } from '../../Gallery1/p5/functions/round';
+import { GlobalConfig, limits } from '../../../../data/AsIRecall/GlobalConfig';
+import { danceFloor } from '../../../../data/AsIRecall/BotConfig';
 import p5Types from 'p5';
 import Floppy from '../components/Floppy/Floppy';
 

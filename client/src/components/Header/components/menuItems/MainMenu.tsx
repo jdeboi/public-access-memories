@@ -1,6 +1,6 @@
 import React from 'react';
-import { rooms, artists } from '../../../../data/RoomConfig';
-import { ShowConfig } from '../../../../data/ShowConfig';
+import { rooms, artists } from '../../../../data/CurrentShow/RoomConfig';
+import { ShowConfig } from '../../../../data/CurrentShow/ShowConfig';
 import FinderSubmenu from '../FinderSubmenu';
 
 // store

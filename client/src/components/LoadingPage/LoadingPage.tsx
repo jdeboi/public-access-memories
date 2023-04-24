@@ -4,7 +4,7 @@ import './LoadingPage.css';
 
 import { useSelector } from 'react-redux';
 import { selectWindow } from '../../store/store';
-import { ShowConfig } from '../../data/ShowConfig';
+import { ShowConfig } from '../../data/CurrentShow/ShowConfig';
 
 export default function LoadingPage(props: { progress?: number }) {
     // const windowUI = useSelector(selectWindow);

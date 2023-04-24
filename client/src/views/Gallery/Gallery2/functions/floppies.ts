@@ -1,8 +1,8 @@
 import Floppy from "../components/Floppy/Floppy";
 import p5Types from 'p5';
-import { artists, rooms } from "../../../../data/RoomConfig";
+import {GlobalConfig} from "../../../../data/AsIRecall/GlobalConfig";
+import { artists, rooms } from "../../../../data/AsIRecall/RoomConfig";
 import { p5ToWorldCoords } from "../../../../helpers/coordinates";
-import { is } from "immer/dist/internal";
 
 
 const connections = [
@@ -25,8 +25,8 @@ const connections = [
 export const addFloppyDivs = (floppies: Floppy[], eyeIcon: p5Types.Image, floppyImg: p5Types.Image,slider: p5Types.Image, font: p5Types.Font, p5: p5Types) => {
     for (let i = 0; i < rooms.length; i++) {
         const { x, y, link } = rooms[i];
-        let coord = p5ToWorldCoords(x, y);
-        let connection = p5ToWorldCoords(connections[i][0], connections[i][1]);
+        let coord = p5ToWorldCoords(x, y, GlobalConfig);
+        let connection = p5ToWorldCoords(connections[i][0], connections[i][1], GlobalConfig);
         const floppy = new Floppy(p5, i, coord.x, coord.y,  link, eyeIcon, floppyImg, slider, font, connection);
         floppies.push(floppy);
     }
@@ -48,11 +48,12 @@ export const updateFloppyDivs = (userEase: {x: number, y: number}, users: any, f
     }
 }
 
-export const endFloppyDivDrag = (floppies: Floppy[]) => {
+export const endFloppyDivDrag = (floppies: Floppy[], p5: p5Types) => {
     for (const floppy of floppies) {
-        if (floppy)
-            floppy.endDrag();
+        if (floppy.endFloppyDrag(p5))
+            return floppy.endFloppyDrag(p5);
     }
+    return null;
 }
 
 export const checkFloppyDivsDouble = (userX: number, userY: number, floppies: Floppy[]) => {

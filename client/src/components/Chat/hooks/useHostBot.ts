@@ -3,16 +3,12 @@ import React, { useState } from 'react';
 // store
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUser, selectUserActive } from '../../../store/store';
-import { setFollowingHost } from '../../../store/user';
 import { addMessage } from '../../../store/messages';
 
 import { IMessage } from '../../../interfaces';
 
-import { getBar, hostBotFirstRoom } from '../../../data/BotConfig';
-import { rooms } from '../../../data/RoomConfig';
-import { userNearEntrance } from '../../../helpers/helpers';
-import { ShowConfig } from '../../../data/ShowConfig';
-const hostLocation = getBar("host");
+import { getBar, hostBotFirstRoom } from '../../../data/CurrentShow/BotConfig';
+import { ShowConfig } from '../../../data/CurrentShow/ShowConfig';
 
 export const useHostBot = () => {
     const [hostBotJustAsked, setHostBotJustAsked] = useState(0);

@@ -1,18 +1,17 @@
-
-export const GlobalConfig = {
-    scaler: 40,
-    // minX: 0,
-    // maxX: 27,
-    // minY: 5,
-    // maxY: 27,
-    x: -3*5,
-    y: -5*5,
-}
-
 let xMin = 0;
 let xMax = 8*5;
 let yMin = 0;
 let yMax = 8*5;
+
+export const GlobalConfig = {
+    scaler: 40,
+    x: -3*5,
+    y: -5*5,
+    worldW: xMax - xMin,
+    worldH: yMax - yMin
+}
+
+
 export const limits = [
     { x: xMin, y: yMin }, // outer limit
     { x: xMax, y: yMin },

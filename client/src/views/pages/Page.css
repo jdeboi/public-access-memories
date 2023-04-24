@@ -23,4 +23,8 @@
 }
 .Page blockquote {
   padding-left: 50px;
+}
+.Page .galleryImg img {
+  max-width: 500px;
+  padding-right: 10px;
 }/*# sourceMappingURL=Page.css.map */

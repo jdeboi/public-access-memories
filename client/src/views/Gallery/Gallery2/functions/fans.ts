@@ -1,6 +1,6 @@
 import FanDraggable from "../components/FanDraggable/FanDraggable";
 import p5Types from 'p5';
-import { GlobalConfig } from "../../../../data/GlobalConfig";
+import { GlobalConfig } from "../../../../data/AsIRecall/GlobalConfig";
 import HardDrive from "../components/FanDraggable/HardDrive";
 
 export const addFanDivs = (fans: FanDraggable[], p5: p5Types) => {

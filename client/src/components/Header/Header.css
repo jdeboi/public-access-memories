@@ -41,7 +41,6 @@
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   box-shadow: 0px 0px 20px #000000;
   z-index: 2200;
@@ -290,7 +289,6 @@
 .Header .glitz {
   background: linear-gradient(270deg, #00ffbd, #e98fea, #8fcdea);
   background-size: 600% 600%;
-  -webkit-animation: ClickMeGradient 0.6s ease infinite;
   animation: ClickMeGradient 0.6s ease infinite;
 }
 .Header .notification {
@@ -308,17 +306,6 @@
   border-radius: 50%;
   background: red;
   color: white;
-}
-@-webkit-keyframes ClickMeGradient {
-  0% {
-    background-position: 0% 48%;
-  }
-  50% {
-    background-position: 100% 53%;
-  }
-  100% {
-    background-position: 0% 48%;
-  }
 }
 @keyframes ClickMeGradient {
   0% {

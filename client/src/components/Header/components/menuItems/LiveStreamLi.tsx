@@ -5,7 +5,7 @@ import { faStream } from "@fortawesome/free-solid-svg-icons";
 // store
 import { useSelector, useDispatch } from 'react-redux';
 import { selectMenu, selectUser } from '../../../../store/store';
-import { ShowConfig } from '../../../../data/ShowConfig';
+import { ShowConfig } from '../../../../data/CurrentShow/ShowConfig';
 import { toggleLiveStream } from '../../../../store/menu';
 
 

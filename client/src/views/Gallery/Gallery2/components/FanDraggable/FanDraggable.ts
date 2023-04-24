@@ -1,4 +1,5 @@
-import ShadowDraggable from '../../../Gallery1/p5/components/Draggable/ShadowDraggable';
+import { GlobalConfig } from '../../../../../data/AsIRecall/GlobalConfig';
+import ShadowDraggable from '../../../components/p5/Draggable/ShadowDraggable';
 import p5Types from 'p5';
 
 export default class FanDraggable extends ShadowDraggable {
@@ -8,7 +9,7 @@ export default class FanDraggable extends ShadowDraggable {
 
     constructor(id: number, x: number, y: number, w: number, h: number, p5: p5Types) {
 
-        super(id, x, y, w, h, p5, null);
+        super(id, x, y, w, h, p5, null, GlobalConfig);
         this.fan = p5.loadImage("https://netscapes.s3.us-east-2.amazonaws.com/infrastructure/fan.png");
         this.blades = p5.loadImage("https://netscapes.s3.us-east-2.amazonaws.com/infrastructure/blades.png");
     }

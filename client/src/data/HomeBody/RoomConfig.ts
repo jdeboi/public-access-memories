@@ -1,5 +1,5 @@
 import { IRoom, IArtist } from '../../interfaces';
-import { ShowConfig } from '../ShowConfig';
+import { ShowConfig } from '../CurrentShow/ShowConfig';
 
 export const roomConfig = {
     w: 5,

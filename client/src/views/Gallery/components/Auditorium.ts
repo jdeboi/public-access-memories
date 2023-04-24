@@ -1,8 +1,8 @@
 import p5Types from 'p5';
-import { GlobalConfig } from "../../../data/GlobalConfig";
-import { roomConfig } from "../../../data/RoomConfig";
-import { displayPopOut } from '../Gallery1/p5/functions/boxes';
-import { displayWall } from "../Gallery1/p5/functions/ground";
+import { GlobalConfig } from "../../../data/CurrentShow/GlobalConfig";
+import { roomConfig } from "../../../data/CurrentShow/RoomConfig";
+import { displayPopOut } from '../Gallery1/functions/boxes';
+import { displayWall } from "../Gallery1/functions/ground";
 
 
 

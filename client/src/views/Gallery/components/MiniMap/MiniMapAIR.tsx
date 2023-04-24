@@ -1,6 +1,6 @@
 import React from 'react';
 import Frame from '../../../../components/Frame/Frame';
-import AvatarMiniMap from './AvatarMiniMap';
+import AvatarMiniMap from './AvatarMiniMapAIR';
 
 import { IUser, IUsers, IMenu, IWindowUI } from '../../../../interfaces';
 import { connect } from 'react-redux';

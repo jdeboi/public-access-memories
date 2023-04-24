@@ -35,8 +35,8 @@ const Room = () => {
 
     return (
         <div className="Room Allison Sketch">
-            <div className="player" style={{ top: dim.y, left: dim.x, width: dim.w, height: dim.h }}>
-                <ReactPlayer
+            {/* <div className="player" style={{ top: dim.y, left: dim.x, width: dim.w, height: dim.h }}> */}
+                {/* <ReactPlayer
                     url='https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/allison.mp4'
                     muted={!windowUI.compositionStarted || music.isMuted}
                     loop={true}
@@ -44,8 +44,8 @@ const Room = () => {
                     playing={isPlaying}
                     width='100%'
                     height='100%'
-                />
-            </div>
+                /> */}
+            {/* </div> */}
 
 
         </div>

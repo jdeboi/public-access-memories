@@ -11,8 +11,8 @@ const Room = () => {
 
     return (
         <div className="Room Cursor Sketch">
-            <iframe src="https://cursor-echo.herokuapp.com/" />
-            <div className="roomAlert" style={{display: isHidden?"none":"block"}}>This room works better on desktop.</div>
+            {/* <iframe src="https://cursor-echo.herokuapp.com/" /> */}
+            {/* <div className="roomAlert" style={{display: isHidden?"none":"block"}}>This room works better on desktop.</div> */}
         </div>
     )
 };

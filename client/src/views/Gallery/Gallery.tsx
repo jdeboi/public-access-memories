@@ -1,15 +1,26 @@
 import React, { useEffect, useRef } from 'react';
+// import { useParams } from "react-router-dom";
 import Frame from '../../components/Frame/Frame';
 import ReactAudioPlayer from 'react-audio-player';
 import './Gallery.css';
 import { useNavigate } from 'react-router-dom';
 
-import GallerySketch from './Gallery2/GallerySketch';
+import GallerySketch1 from './Gallery1/GallerySketch';
+import GallerySketch2 from './Gallery2/GallerySketch';
+import GallerySketch3 from './Gallery3/GallerySketch';
+
+import { GlobalConfig as GC_HB } from '../../data/HomeBody/GlobalConfig';
+import { GlobalConfig as GC_AIR } from '../../data/AsIRecall/GlobalConfig';
+import { GlobalConfig as GC_FV } from '../../data/FieldsOfView/GlobalConfig';
+import { GlobalConfig  } from '../../data/CurrentShow/GlobalConfig';
+
+
 import { IUser, IUsers } from '../../interfaces';
 import { filterUsers, mapVal } from '../../helpers/helpers';
 
 import LoadingPage from '../../components/LoadingPage/LoadingPage';
 import MiniMapAIR from './components/MiniMap/MiniMapAIR';
+import MiniMap from './components/MiniMap/MiniMap';
 
 // store
 import { useSelector, useDispatch } from 'react-redux';
@@ -17,18 +28,21 @@ import { selectMusic, selectUser, selectUserActive, selectWindow } from '../../s
 import { setUserRoomUrl, moveUser, toggleOutside } from '../../store/user';
 import { setUserActiveChat } from '../../store/userActive';
 import { setOneMenu, showChat } from '../../store/menu';
-import { setSketchMusic, setSketchVolume, setSong } from '../../store/music';
+import { setSketchVolume } from '../../store/music';
 import { doneLoadingApp } from '../../store/window';
 
-import { bars, getBar } from '../../data/BotConfig';
+import { getBar } from '../../data/CurrentShow/BotConfig';
+
 
 interface IGallery {
+    id: number,
     users: IUsers,
     isClosed: boolean,
     showWelcome: boolean
 }
 
 const Gallery = (props: IGallery) => {
+
     const user = useSelector(selectUser);
     const windowUI = useSelector(selectWindow);
     const music = useSelector(selectMusic);
@@ -37,6 +51,7 @@ const Gallery = (props: IGallery) => {
     const navigate = useNavigate();
     const audioPlayer = useRef(null);
 
+  
     const clickedUserChat = (otherUser: IUser) => {
         if (otherUser.id !== user.id) {
             // const { ui, setUserActiveChat, showChat, setOneMenu } = this.props;
@@ -66,9 +81,23 @@ const Gallery = (props: IGallery) => {
         return .1;
     }
 
+    const getGlobalConfig = () => {
+        if (props.id == 0) {
+            return GC_HB;
+        }
+        else if (props.id == 1) {
+            return GC_AIR;
+        }
+        else if (props.id == 2) {
+            return GC_FV;
+        }
+        return GlobalConfig;
+    }
+
     const moveGalleryUser = (x: number, y: number) => {
+        const GlobalConfig = getGlobalConfig()
         dispatch(setSketchVolume(getVolume()));
-        dispatch(moveUser({ x, y }));
+        dispatch(moveUser({ x, y}));
         const newUser = { ...user };
         newUser.x = x;
         newUser.y = y;
@@ -81,24 +110,76 @@ const Gallery = (props: IGallery) => {
         dispatch(setUserRoomUrl({ roomUrl: room }));
     }
 
+    const getGallery = () => {
+        let gal = props.id ? props.id : 1;
+        switch (gal) {
+            case 1:
+                return (
+                    <GallerySketch1
+                        users={props.users}
+                        isClosed={props.isClosed}
+                        userMove={moveGalleryUser}
+                        userNewRoom={userNewRoom}
+                        loadingDone={() => dispatch(doneLoadingApp())}
+                        toggleOutside={() => dispatch(toggleOutside())}
+                        isMobile={windowUI.isMobile}
+                        clickedUserChat={clickedUserChat}
+                        setUserActive={clickedUserChat}
+                    />
+                );
+            case 2:
+                return (
+                    <GallerySketch2
+                        users={props.users}
+                        isClosed={props.isClosed}
+                        userMove={moveGalleryUser}
+                        userNewRoom={userNewRoom}
+                        loadingDone={() => dispatch(doneLoadingApp())}
+                        toggleOutside={() => dispatch(toggleOutside())}
+                        isMobile={windowUI.isMobile}
+                        clickedUserChat={clickedUserChat}
+                        setUserActive={clickedUserChat}
+                    />
+                );
+            case 3:
+                return (
+                    <GallerySketch3
+                        users={props.users}
+                        isClosed={props.isClosed}
+                        userMove={moveGalleryUser}
+                        userNewRoom={userNewRoom}
+                        loadingDone={() => dispatch(doneLoadingApp())}
+                        toggleOutside={() => dispatch(toggleOutside())}
+                        isMobile={windowUI.isMobile}
+                        clickedUserChat={clickedUserChat}
+                        setUserActive={clickedUserChat}
+                    />
+                );
+            default:
+                return (<GallerySketch1
+                    users={props.users}
+                    isClosed={props.isClosed}
+                    userMove={moveGalleryUser}
+                    userNewRoom={userNewRoom}
+                    loadingDone={() => dispatch(doneLoadingApp())}
+                    toggleOutside={() => dispatch(toggleOutside())}
+                    isMobile={windowUI.isMobile}
+                    clickedUserChat={clickedUserChat}
+                    setUserActive={clickedUserChat}
+                />)
+        }
+    }
+
     return (
         <div className="Gallery Sketch">
             <div id="p5_loading" className="loadingclass"></div>
-            <GallerySketch
-                users={props.users}
-                isClosed={props.isClosed}
-                userMove={moveGalleryUser}
-                userNewRoom={userNewRoom}
-                loadingDone={() => dispatch(doneLoadingApp())}
-                toggleOutside={() => dispatch(toggleOutside())}
-                isMobile={windowUI.isMobile}
-                clickedUserChat={clickedUserChat}
-                setUserActive={clickedUserChat}
-            />
+            {getGallery()}
             {
                 windowUI.loading ?
                     <LoadingPage /> :
-                    <MiniMapAIR users={filterUsers(user, props.users)} x={20} y={20} />
+                    // <MiniMapAIR users={filterUsers(user, props.users)} x={20} y={20} />
+                <MiniMap users={filterUsers(user, props.users)} x={20} y={20} />
+
             }
 
             {!props.showWelcome ?

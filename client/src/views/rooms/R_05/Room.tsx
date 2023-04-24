@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react';
-import P5Sketch from './CiaraSketch';
+// import P5Sketch from './CiaraSketch';
 import './Ciara.css';
 
 // store
@@ -15,12 +15,12 @@ const Room = () => {
 
     return (
         <div className="Room Ciara Sketch">
-            <div id="p5_loading" className="loadingclass"></div>
+            {/* <div id="p5_loading" className="loadingclass"></div>
             <P5Sketch
                 hasStarted={windowUI.compositionStarted}
                 isMobile={windowUI.isMobile}
                 loadingDone={() => dispatch(doneLoadingApp())}
-            />
+            /> */}
         </div>
     )
 };

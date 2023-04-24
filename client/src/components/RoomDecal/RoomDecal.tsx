@@ -7,20 +7,23 @@ import { useLocation } from 'react-router';
 import { getRoomByPath } from '../../helpers/helpers';
 
 // components
-import ReactTooltip from 'react-tooltip';
+// import ReactTooltip from 'react-tooltip';
 import CenterModal from '../CenterModal/CenterModal';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 // store
 import { useSelector } from 'react-redux';
 import { selectUser, selectWindow } from '../../store/store';
 
 // interface
-import { artists } from '../../data/RoomConfig';
+// import { artists } from '../../data/RoomConfig';
+import { IRoom, IArtist } from '../../interfaces';
 
 interface IRoomDecal {
     hasLoadedRoom: boolean,
+    rooms: IRoom[],
+    artists: IArtist[],
     // users: IUsers,
     startMedia: () => void,
 }
@@ -30,8 +33,8 @@ const RoomDecal = (props: IRoomDecal) => {
     const windowUI = useSelector(selectWindow);
     const user = useSelector(selectUser);
     const { pathname } = useLocation();
-    const room = getRoomByPath(pathname);
-    const artist =  room ? artists[room.artistID] : artists[0];
+    const room = getRoomByPath(pathname, props.rooms);
+    const artist =  room ? props.artists[room.artistID] : props.artists[0];
 
 
     const getButtons = () => {

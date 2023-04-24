@@ -3,7 +3,7 @@ import "./App.css";
 import { Route, Routes, useLocation } from "react-router-dom";
 
 // interfaces
-import { ShowConfig } from '../data/ShowConfig';
+import { ShowConfig } from '../data/CurrentShow/ShowConfig';
 import { IUsers } from '../interfaces';
 
 ///////////////////////////////
@@ -17,10 +17,11 @@ import NotFound from "../views/pages/NotFound/NotFound";
 import Artists from '../views/pages/Artists/Artists';
 import Artist from '../views/pages/Artists/Artist';
 import ArtistsList from '../views/pages/ArtistsList/ArtistsList';
-import Spaghetti from '../views/rooms/R_03/Spaghetti';
+// import Spaghetti from '../views/rooms/R_03/Spaghetti';
 // past exhibitions
 import PastExhibitions from '../views/pages/PastExhibitions/PastExhibitions';
 import HomeBody from '../views/pages/PastExhibitions/HomeBody/HomeBody';
+import AsIRecall from '../views/pages/PastExhibitions/AsIRecall/AsIRecall';
 
 ///////////////////////////////
 // COMPONENTS
@@ -50,7 +51,7 @@ import FAQ from '../components/FAQ/FAQ';
 import { shouldShowLoggedInComponents } from '../helpers/helpers';
 import SubscribeSendInBlue from '../views/pages/SubscribeForm/SubscribeSendInBlue';
 
-
+import { artists, rooms } from '../data/CurrentShow/RoomConfig';
 
 function App() {
     const user = useSelector(selectUser);
@@ -192,11 +193,14 @@ function App() {
     }
 
     const getRoomDecal = () => {
+        
         if (ShowConfig.isClosed || ShowConfig.underConstruction) {
             if (pathname.substring(1, 5) == "test") {
                 return (
                     <RoomDecal
                         startMedia={startMedia}
+                        artists={artists}
+                        rooms={rooms}
                         hasLoadedRoom={hasLoadedRoom}
                     />
                 )
@@ -207,6 +211,8 @@ function App() {
             return (
                 <RoomDecal
                     startMedia={startMedia}
+                    rooms={rooms}
+                    artists={artists}
                     hasLoadedRoom={hasLoadedRoom}
                 />
             )
@@ -249,21 +255,27 @@ function App() {
             </div>
             <div className="App-Content inner-outline">
                 <Routes>
-                    <Route path="/" element={<Gallery users={users} isClosed={isClosed} showWelcome={showWelcome} />} />
+                    <Route path="/" element={<Gallery id={1} users={users} isClosed={isClosed} showWelcome={showWelcome} />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/newsletter" element={<SubscribeSendInBlue />} />
                     <Route path="/statement" element={<Statement />} />
-                    {/* <Route path="/opencall" element={<Statement />} /> */}
+                    <Route path="/opencall" element={<Statement />} />
+
                     <Route path="/artists" element={<Artists />} />
                     <Route path="/artist/:name" element={<Artist />} />
                     <Route path="/artistslist" element={<ArtistsList />} />
 
+                    <Route path="/galleries/homebody" element={<Gallery id={1} users={users} isClosed={isClosed} showWelcome={showWelcome} />} />
+                    <Route path="/galleries/asirecall" element={<Gallery id={2} users={users} isClosed={isClosed} showWelcome={showWelcome} />} />
+
+
                     <Route path="/test/rooms/:id" element={<TestRoom />} />
                     <Route path={`/${ShowConfig.link}/rooms/:id`} element={<Room />} />
-                    <Route path={`/${ShowConfig.link}/spaghetti`} element={<Spaghetti />} />
+                    {/* <Route path={`/${ShowConfig.link}/spaghetti`} element={<Spaghetti />} /> */}
 
                     <Route path="/pastexhibitions" element={<PastExhibitions />} />
                     <Route path="/pastexhibitions/homebody" element={<HomeBody />} />
+                    <Route path="/pastexhibitions/asirecall" element={<AsIRecall />} />
 
                     <Route path="*" element={<NotFound />} />
                 </Routes>
