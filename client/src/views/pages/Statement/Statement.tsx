@@ -42,7 +42,7 @@ export const Statement = () => {
                             perspectives that open divergent fields of view.</p>
                     </div>
                     <div>
-                        <iframe id="p5Frame" src="https://editor.p5js.org/jdeboi/full/GWP3u7rQU"></iframe>
+                        <iframe id="p5Frame" src="https://www.publicaccessmemories.com/opencallp5"></iframe>
                     </div>
                 </div>
 
