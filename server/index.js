@@ -24,7 +24,7 @@ io.on('connection', ClientManager);
 //     res.sendFile(path.join(__dirname + '/../client/build/iframes/christina.html'));
 // })
 
-app.get("/opencall", (req, res) => {
+app.get("/opencallp5", (req, res) => {
     res.sendFile(path.join(__dirname + '/../client/build/iframes/opencall/opencall.html'));
 })
 
