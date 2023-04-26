@@ -131,6 +131,7 @@ function App() {
 
     const avatarClicked = () => {
         if (!showWelcome) {
+            console.log("show signin")
             dispatch(showSignIn());
         }
     }

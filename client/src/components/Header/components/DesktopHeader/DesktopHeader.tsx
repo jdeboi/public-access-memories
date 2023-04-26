@@ -12,17 +12,19 @@ import FaqLi from '../menuItems/FaqLi';
 import VolumeLi from '../menuItems/VolumeLi';
 import AvatarLi from '../menuItems/AvatarLi';
 import LiveStreamLi from '../menuItems/LiveStreamLi';
+import { useLocation } from 'react-router-dom';
 
 interface IDH extends IMainMenu {
     avatarClicked: () => void
 }
 
 const DesktopHeader = (props: IDH) => {
+    const { pathname } = useLocation();
 
     return (
         <header className="Header menuTheme">
             <ul className="left">
-                {/* <ArrowLi /> */}
+                <ArrowLi />
                 <Hamburger />
                 <MainMenu
                     isClosed={props.isClosed}
@@ -32,7 +34,7 @@ const DesktopHeader = (props: IDH) => {
             <ul className="right">
                 {/* <LiveStreamLi /> */}
                 <ChatLi />
-                <MapLi />
+                {pathname == "/" ? <MapLi /> : null}
                 <FaqLi />
                 <li></li>
                 <li><Clock /></li>

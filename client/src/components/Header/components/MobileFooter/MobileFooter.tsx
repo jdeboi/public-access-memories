@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectWindow, selectMenu, selectUser, selectMessages } from '../../../../store/store';
 import { setOneMenu } from '../../../../store/menu';
 import { resetNotifications } from '../../../../store/messages';
+import { useLocation } from 'react-router-dom';
 
 
 const MobileFooter = (props: { avatarClicked: () => void }) => {
@@ -20,7 +21,7 @@ const MobileFooter = (props: { avatarClicked: () => void }) => {
     const messages = useSelector(selectMessages);
     const user = useSelector(selectUser);
     const [footerClass, setFooterClass] = useState("");
-
+    const { pathname } = useLocation();
 
     useEffect(() => {
         var fc = "MobileFooter"
@@ -42,7 +43,7 @@ const MobileFooter = (props: { avatarClicked: () => void }) => {
     const getChatButton = () => {
         var classChat = "icon" + (menu.mobile === "chat" ? " opened" : " closed");
         if (messages.notifications) classChat += " notify";
-        if (user.roomUrl !== "/") {
+        if (pathname !== "/") {
             classChat += " top";
         }
         return (
@@ -66,7 +67,7 @@ const MobileFooter = (props: { avatarClicked: () => void }) => {
 
     const getMapButton = () => {
         var classMap = "icon";
-        if (user.roomUrl === "/") {
+        if (pathname === "/") {
             classMap += (menu.mobile === "map" ? " opened" : " closed");
             classMap += " top";
         }
@@ -81,7 +82,6 @@ const MobileFooter = (props: { avatarClicked: () => void }) => {
 
     const chatClicked = () => {
         dispatch(resetNotifications());
-        // this.props.setOneMenu("chat");
         dispatch(setOneMenu("chat"));
     }
 
@@ -104,7 +104,7 @@ const MobileFooter = (props: { avatarClicked: () => void }) => {
     if (windowUI.hasFooter) {
         return (
             <div className={footerClass}>
-                {user.roomUrl === "/" ? getMapButton() : null}
+                {pathname === "/" ? getMapButton() : null}
                 {getChatButton()}
                 {getFAQButton()}
                 {getSignInButton()}
@@ -113,7 +113,7 @@ const MobileFooter = (props: { avatarClicked: () => void }) => {
     }
 
     return (
-       <React.Fragment></React.Fragment>
+        <React.Fragment></React.Fragment>
     )
 
 }

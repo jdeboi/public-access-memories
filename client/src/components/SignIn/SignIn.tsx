@@ -60,10 +60,16 @@ const SignIn = forwardRef<SignInSubmitType, SignInProps>((props, ref) => {
 
     // check if the sign in menu should be displayed
     useEffect(() => {
-        if (user.roomUrl !== "/") {
-            setIsHidden(true);
-            return;
-        }
+        
+        // I think this was to prevent showing signin for opencall (?)
+        // but let's just not show the bottom footer for these pages
+        // unless they already logged in
+
+        // if (pathname !== "/") {
+        //     setIsHidden(true);
+        //     console.log("not /")
+        //     return;
+        // }
 
         if (windowUI.isMobile || windowUI.hasFooter) {
             setIsHidden(menu.mobile !== "signIn");
@@ -71,6 +77,7 @@ const SignIn = forwardRef<SignInSubmitType, SignInProps>((props, ref) => {
         else {
             setIsHidden(menu.signIn.isHidden);
         }
+        
     }, [user.roomUrl, windowUI.isMobile, windowUI.hasFooter, menu.signIn.isHidden, isHidden, menu.mobile])
 
     // THIS COMES IN IF THE PAGE LOADS AND THERE AREN'T ANY COOKIES,
@@ -88,6 +95,7 @@ const SignIn = forwardRef<SignInSubmitType, SignInProps>((props, ref) => {
             setShouldClose(false);
             setReadyToClose(false);
             dispatch(hideSignIn());
+            console.log("hiding")
         }
     }, [shouldClose, readyToClose])
 

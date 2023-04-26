@@ -38,6 +38,7 @@
   flex-wrap: wrap;
   width: 100%;
   gap: 50px;
+  flex: 1;
 }
 .Page .twoCol div {
   display: flex;

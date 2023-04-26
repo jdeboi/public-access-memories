@@ -64,7 +64,7 @@ export const Statement = () => {
                 <br />
                 <br />
                 <p>
-                    <img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/tw5_logo_w.png" width={200} />
+                    <img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/assets/LOGO-BLACK_small.png" width={200} />
 
                     {/* <img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/as_i_recall.png" width="500px" /> */}
                 </p>
