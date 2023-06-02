@@ -4,68 +4,39 @@ import { p5ToDomCoords } from "../../helpers/coordinates";
 import { GlobalConfig } from "./GlobalConfig";
 
 
-const danceFloorP5 = {
-    x: 26,
-    y: 2.5,
-    w: 12,
-    h: 6
-};
-
 
 export const danceFloor = {
-    x: GlobalConfig.scaler * danceFloorP5.x,
-    y: GlobalConfig.scaler * danceFloorP5.y,
-    w: GlobalConfig.scaler * danceFloorP5.w,
-    h: GlobalConfig.scaler * danceFloorP5.h
+    x: 1300,
+    y: 1800,
+    w: 600,
+    h: 750/2
 };
 
 const DJBotCoords = {
-    x: danceFloorP5.x + 3.5,
-    y: danceFloorP5.y - .5
+    x: danceFloor.x/GlobalConfig.scaler+3,
+    y: danceFloor.y/GlobalConfig.scaler
 }
 
 export const DJBotDomCoords = p5ToDomCoords(DJBotCoords.x, DJBotCoords.y, GlobalConfig);
 
-//// wine
+
 const cheeseBotCoords = {
-    x: 2.5,
-    y: 14
+    x: 40,
+    y: 12
 }; // cheese
 const wineBotCoords = {
-    x: 36,
-    y: 26
+    x: 40,
+    y: 20
 }
 const cocktailBotCoords = {
-    x: 36,
-    y: 3
+    x: 40,
+    y: 39.5
 }
 const hostBotCoords = {
-    x: 17,
-    y: 23.5
+    x: 18,
+    y: 16.5
 }
 
-export const hostBotFirstRoom = 7;
-export const hostBotPoints = [
-    {x: 15, y: 28}, // entrance
-    {x: 15, y: 22},  // inside
-    {x: 27, y: 22}
-]
-
-
-//// bar tenders
-// const cheeseBotCoords = {
-//     x: 1 * roomConfig.w,
-//     y: 8 * roomConfig.w
-// };
-// const wineBotCoords = {
-//     x: 4 * roomConfig.w,
-//     y: 0 * roomConfig.w
-// };
-// const cocktailBotCoords = {
-//     x: 7.5 * roomConfig.w, 
-//     y: 7.25 * roomConfig.w
-// };
-// const hostBotCoords = { x: 1 * roomConfig.w, y: 8 * roomConfig.w };
 
 export const numBarItems = 4;
 const barW = 87;
@@ -75,7 +46,9 @@ const botDY = 2;
 const barUsers: IUser[] = [
     getNewUser("wineBot", "🤖", "/", "1", wineBotCoords.x + botDX, wineBotCoords.y + botDY),
     getNewUser("cocktailBot", "🤖", "/", "2", cocktailBotCoords.x + botDX, cocktailBotCoords.y + botDY),
-    getNewUser("cheeseBot", "🤖", "/", "3", cheeseBotCoords.x - botDX*.6, cheeseBotCoords.y + botDY),
+    // getNewUser("cheeseBot", "🤖", "/", "3", cheeseBotCoords.x - botDX*.6, cheeseBotCoords.y + botDY),
+    getNewUser("cheeseBot", "🤖", "/", "3", cheeseBotCoords.x + botDX, cheeseBotCoords.y + botDY),
+
     getNewUser("DJBot", "🤖", "/", "4", DJBotCoords.x+botDX, DJBotCoords.y-botDX*.2),
     getNewUser("hostBot", "🤖", "/", "5", hostBotCoords.x + botDX, hostBotCoords.y)
 ]

@@ -7,15 +7,16 @@ export default class ButtonTog {
         this.h = h;
         this.p5 = p5;
         this.r = this.h/2;
+        this.isOn = false;
     }
 
-    display(isChecked, mx, my) {
+    display(mx, my) {
         this.p5.push();
         this.p5.translate(this.x, this.y);
         this.p5.noFill();
 
 
-        if (isChecked) {
+        if (this.isOn) {
             this.p5.strokeWeight(2);
             this.p5.stroke(255);
             this.p5.fill('#026ef0');
@@ -43,6 +44,10 @@ export default class ButtonTog {
         }
 
         this.p5.pop();
+    }
+
+    toggle() {
+        this.isOn = !this.isOn;
     }
 
     mouseOver(mx, my) {

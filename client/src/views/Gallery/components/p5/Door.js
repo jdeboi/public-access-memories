@@ -103,6 +103,7 @@ export default class Door extends Draggable {
       if (!this.minimized)
         this.displayContent(userX, userY, isClosed, closedSign);
     }
+    this.displayLine();
     this.p5.pop();
   }
 

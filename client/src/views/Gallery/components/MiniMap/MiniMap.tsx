@@ -67,11 +67,13 @@ class MiniMap extends React.Component<Props> {
         isHidden={isHidden}
         onHide={this.onHide}
         unbounded={false}
+        
         windowStyle={{ background: "rgba(255, 255, 255, .9)" }}
         content={
           /*<video width={dimW-2} height={dimH} muted loop autoPlay><source src={videoDimURL} type="video/mp4"></source></video>*/
-          <div className="MiniMap">
+          <div className="MiniMap" unselectable="on">
             <img src={"https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/gallery/miniMap14.png"} width="100%" height="100%" />
+            {/* <img src={"https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/gallery/map12_FOV.png"} width="101%" height="100%" /> */}
             <div className="otherAvatarsMiniMap">
               <div className="mini-avatars">
                 {users ? this.getUsers(dim) : null}

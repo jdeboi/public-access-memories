@@ -11,6 +11,7 @@ export default class Room {
 
   constructor(p5, door, i, GlobalConfig, artists, rooms, roomConfig) {
     this.GlobalConfig = GlobalConfig;
+    this.id = i;
     const room = rooms[i];
     this.p5 = p5;
     this.x = room.x;
@@ -44,38 +45,8 @@ export default class Room {
     var w = this.w * this.GlobalConfig.scaler;
     var h = this.h * this.GlobalConfig.scaler;
 
-    // if (roomTextures[0] && this.dir === "bottom") this.p5.image(roomTextures[0], x, y, w, h);
-    // else if (roomTextures[1] && this.dir === "right") this.p5.image(roomTextures[1], x, y, w, h);
-    // else if (roomTextures[2]) this.p5.image(roomTextures[2], x, y, w, h);
     this.p5.fill(200);
-    // this.p5.rect(x, y, w, h);
-
-    // this.p5.push();
-    // this.p5.translate(x, y);
-
-    // displayCheckers(9, 9, GlobalConfig.scaler / 3, GlobalConfig.scaler / 3, this.p5);
-    // this.p5.pop();
-
-    // displayPopOut(x, y, w, h, this.p5.color(255), this.p5);
-    // displayPopIn(x, y+h-50, 50, 50, this.p5.color(255), this.p5);
-
-
-    // this.displayTxt();
-
-    // top
-    // displayWall({ x, y }, { x: x + this.w * GlobalConfig.scaler, y }, this.p5);
-    // // right
-    // displayWall({ x: x + this.w * GlobalConfig.scaler, y }, { x: x + this.w * GlobalConfig.scaler, y: y + this.h * GlobalConfig.scaler }, this.p5);
-
-    // // bottom
-    // displayWall({ x: x + this.w * GlobalConfig.scaler, y: y + this.h * GlobalConfig.scaler }, { x: x + GlobalConfig.scaler, y: y + this.h * GlobalConfig.scaler }, this.p5);
-
-    // // left
-    // displayWall({ x, y: y + (this.h - 1) * GlobalConfig.scaler }, { x, y }, this.p5);
-
-
-    const fac = .24;
-    // this.p5.image(this.door, x - 40, y + h - 220, this.door.width * fac, this.door.height * fac);
+  
 
 
     if (roomTextures[0] && this.dir === "bottom")
@@ -89,11 +60,6 @@ export default class Room {
 
 
     this.p5.pop();
-
-    // this.drawRoomDoorEntryCrossing();
-    // this.drawRoomDoorCrossing();
-    // this.drawRoomDoorBoundary();
-
 
 
   }

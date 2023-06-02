@@ -37,7 +37,8 @@ import { rooms } from "../../../data/AsIRecall/RoomConfig";
 import { filterGalleryUsers, getTotalRoomCount } from "../../../helpers/helpers";
 import { Dispatch } from "@reduxjs/toolkit";
 // import { p5ToUserCoords, p5ToWorldCoords } from "../../../helpers/coordinates";
-import { danceFloor } from "../../../data/AsIRecall/BotConfig";
+import { barTenders, danceFloor } from "../../../data/AsIRecall/BotConfig";
+import { addBots } from "../../../App/useSockets";
 
 //////////////
 // BUILDING 
@@ -211,6 +212,7 @@ class GallerySketch extends React.Component<Props> {
     p5.pixelDensity(2);
 
     loadingDone();
+    addBots(barTenders);
   };
 
   initEmojis = (p5: p5Types) => {

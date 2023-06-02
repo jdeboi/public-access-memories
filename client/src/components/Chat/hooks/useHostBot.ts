@@ -7,7 +7,6 @@ import { addMessage } from '../../../store/messages';
 
 import { IMessage } from '../../../interfaces';
 
-import { getBar, hostBotFirstRoom } from '../../../data/CurrentShow/BotConfig';
 import { ShowConfig } from '../../../data/CurrentShow/ShowConfig';
 
 export const useHostBot = () => {

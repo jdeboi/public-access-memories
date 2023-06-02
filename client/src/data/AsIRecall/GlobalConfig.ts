@@ -27,12 +27,6 @@ export const outsideDoors = [
     { x0: 22.5, y0: 15.2, x1: 24, y1: 15.2, to: "outside" }, // right
 ];
 
-export const lightsP5 = [
-    { x: 22.5, y: 7 },
-    { x: 8, y: 15 },
-    { x: 13, y: 20 }
-];
-
 
 // pools
 let startX = limits[0].x;

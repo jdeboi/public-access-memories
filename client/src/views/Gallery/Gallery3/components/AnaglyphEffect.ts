@@ -7,6 +7,8 @@ import p5Types from 'p5';
 
 class AnaglyphEffect {
 
+    width: number;
+    height: number;
     swapLeftRight: number;
     divergence: number;
     adjustTargetFactor: number;
@@ -49,7 +51,7 @@ class AnaglyphEffect {
 
     pInst: p5Types;
 
-    constructor(p5: p5Types) {
+    constructor(w: number, h: number, p5: p5Types) {
         // TODO
         // the original library (camera3D) had divergence + swapLeftRight at 1 
         // but the terrain example makes it look like left / right are 
@@ -63,6 +65,9 @@ class AnaglyphEffect {
         this.cameraDivergenceZ = 0;
         this.frustrumSkew = 0;
 
+        this.width = w;
+        this.height = h;
+
         this.RAD_TO_DEG = 57.2957795130823208767981548;
         this.LEFT_IMG = 0;
         this.RIGHT_IMG = 1;
@@ -71,9 +76,9 @@ class AnaglyphEffect {
 
         this.pInst = p5;
 
-        this.imgLeft = this.pInst.createGraphics(this.pInst.width, this.pInst.height, this.pInst.WEBGL);
-        this.imgRight = this.pInst.createGraphics(this.pInst.width, this.pInst.height, this.pInst.WEBGL);
-        this.output = this.pInst.createGraphics(this.pInst.width, this.pInst.height, this.pInst.WEBGL);
+        this.imgLeft = this.pInst.createGraphics(w, h, this.pInst.WEBGL);
+        this.imgRight = this.pInst.createGraphics(w, h, this.pInst.WEBGL);
+        this.output = this.pInst.createGraphics(w, h, this.pInst.WEBGL);
 
         this.config = {
             cameraPositionX: 0,
@@ -162,19 +167,19 @@ class AnaglyphEffect {
             this.config = {
                 cameraPositionX: 0,
                 cameraPositionY: 0,
-                cameraPositionZ: this.pInst.height / 2 / this.pInst.tan(this.pInst.PI / 6),
+                cameraPositionZ: this.height / 2 / this.pInst.tan(this.pInst.PI / 6),
                 cameraTargetX: 0,
                 cameraTargetY: 0,
                 cameraTargetZ: 0,
                 cameraUpX: 0,
                 cameraUpY: 1,
                 cameraUpZ: 0,
-                frustumLeft: -this.pInst.width / 2,
-                frustumRight: this.pInst.width / 2,
-                frustumBottom: -this.pInst.height / 2,
-                frustumTop: this.pInst.height / 2,
+                frustumLeft: -this.width / 2,
+                frustumRight: this.width / 2,
+                frustumBottom: -this.height / 2,
+                frustumTop: this.height / 2,
                 frustumNear: 0,
-                frustumFar: this.pInst.max(this.pInst.width, this.pInst.height),
+                frustumFar: this.pInst.max(this.width, this.height),
                 fovy: this.pInst.PI / 3,
             };
 
@@ -204,7 +209,7 @@ class AnaglyphEffect {
         }
         else {
             this.drawScene(this.LEFT_IMG, this.imgLeft, scene);
-            this.pInst.image(this.imgLeft, -this.pInst.width / 2, -this.pInst.height / 2);
+            this.pInst.image(this.imgLeft, -this.width / 2, -this.height / 2);
         }
     }
 
@@ -214,14 +219,14 @@ class AnaglyphEffect {
 
     updateShader() {
         if (this.theShader) {
-            this.theShader.setUniform("u_resolution", [this.pInst.width, this.pInst.height]);
+            this.theShader.setUniform("u_resolution", [this.width, this.height]);
             this.theShader.setUniform("mapLeft", this.imgLeft);
             this.theShader.setUniform("mapRight", this.imgRight);
             this.output.clear();
             this.output.shader(this.theShader);
-            this.output.rect(0, 0, this.pInst.width, this.pInst.height);
+            this.output.rect(0, 0, this.width, this.height);
 
-            this.pInst.image(this.output, -this.pInst.width / 2, -this.pInst.height / 2);
+            this.pInst.image(this.output, -this.width / 2, -this.height / 2);
         }
 
     }
@@ -381,9 +386,9 @@ class AnaglyphEffect {
     }
 
     perspective() {
-        let cameraZ = this.pInst.height / 2 / Math.tan((this.pInst.PI * 60.0) / 360.0);
+        let cameraZ = this.height / 2 / Math.tan((this.pInst.PI * 60.0) / 360.0);
         let fovy = this.pInst.PI / 3;
-        let aspect = this.pInst.width / this.pInst.height;
+        let aspect = this.width / this.height;
         let zNear = cameraZ / 10;
         let zFar = cameraZ * 10;
         let ymax = zNear * Math.tan(fovy / 2);

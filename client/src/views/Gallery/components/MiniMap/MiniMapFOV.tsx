@@ -1,6 +1,6 @@
 import React from 'react';
 import Frame from '../../../../components/Frame/Frame';
-import AvatarMiniMap from './AvatarMiniMapAIR';
+import AvatarMiniMap from './AvatarMiniMapFOV';
 
 import { IUser, IUsers, IMenu, IWindowUI } from '../../../../interfaces';
 import { connect } from 'react-redux';
@@ -30,7 +30,7 @@ interface StateProps {
 
 interface Props extends StateProps, DispatchProps, OwnProps { }
 
-class MiniMapAIR extends React.Component<Props> {
+class MiniMap extends React.Component<Props> {
 
   constructor(props: Props) {
     super(props);
@@ -60,18 +60,20 @@ class MiniMapAIR extends React.Component<Props> {
 
     let isHidden = (window.isMobile || window.hasFooter) ? menu.mobile !== "map" : menu.map.isHidden;
     const dim = (window.isMobile || window.hasFooter) ? 135 : 200;
-
+    // console.log("hidde", isHidden);
     return (
       <Frame
         title="map"
         isHidden={isHidden}
         onHide={this.onHide}
         unbounded={false}
-        windowStyle={{ background: "rgba(30, 37, 42, .9)" }}
+        
+        windowStyle={{ background: "rgba(255, 255, 255, .9)" }}
         content={
           /*<video width={dimW-2} height={dimH} muted loop autoPlay><source src={videoDimURL} type="video/mp4"></source></video>*/
           <div className="MiniMap" unselectable="on">
-            <img src={"https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/gallery/map_AIR.png"} width="100%" height="100%" />
+            {/* <img src={"https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/gallery/miniMap14.png"} width="100%" height="100%" /> */}
+            <img src={"https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/gallery/map12_FOV.png"} width="101%" height="100%" />
             <div className="otherAvatarsMiniMap">
               <div className="mini-avatars">
                 {users ? this.getUsers(dim) : null}
@@ -128,5 +130,5 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   }
 }
 
-export default connect<StateProps, DispatchProps, OwnProps, RootState>(mapStateToProps, mapDispatchToProps)(MiniMapAIR);
+export default connect<StateProps, DispatchProps, OwnProps, RootState>(mapStateToProps, mapDispatchToProps)(MiniMap);
 

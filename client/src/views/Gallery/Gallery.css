@@ -7,9 +7,14 @@
 /* Window borders flip button-face and button-highlight */
 /* Field borders (checkbox, input, etc) flip window-frame and button-shadow */
 .Gallery {
-  background-image: url("./Gallery2/assets/asirecall_bg.png");
+  background-image: url("./Gallery3/assets/bg.png");
   background-repeat: repeat;
   background-size: 700px 700px;
+}
+.Gallery .MiniMap img {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 .Gallery .MiniMap .otherAvatarsMiniMap {
   position: absolute;

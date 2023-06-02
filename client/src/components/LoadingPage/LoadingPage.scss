@@ -8,10 +8,14 @@
     align-items: center;
 
     text-align: center;
-    color: white;
+    // color: white;
+    color: black;
     font-weight: normal;
     z-index: 1;
 
+    a {
+        color: darkcyan;
+    }
     .title {
         font-size: 50px;
         padding-bottom: 20px;

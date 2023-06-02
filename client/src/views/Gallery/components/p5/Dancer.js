@@ -1,9 +1,6 @@
 
 
 
-
-// import { danceFloor } from '../../../../../data/HomeBody/BotConfig';
-
 class Dancer {
 
     constructor(p5, img, x, y, isFlipped, danceFloor) {

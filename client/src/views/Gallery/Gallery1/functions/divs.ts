@@ -16,7 +16,7 @@ import RoomLabel from '../../components/p5/RoomLabel';
 import Swing from '../../components/p5/Swing';
 import Table from '../../components/p5/Table';
 
-import { GlobalConfig, lightsP5, outsideDoors } from '../../../../data/HomeBody/GlobalConfig';
+import { GlobalConfig, outsideDoors } from '../../../../data/HomeBody/GlobalConfig';
 import { numBarItems } from '../../../../data/HomeBody/BotConfig';
 import { artists, roomConfig, rooms } from '../../../../data/HomeBody/RoomConfig';
 import { domCoordsToP5World } from '../../../../helpers/coordinates';
@@ -53,6 +53,12 @@ export const addDoorDivs = (divs: any, doors: any, doorImgs: p5Types.Image[], p5
 export const addLightDivs = (divs: any, lightImgs: p5Types.Image[], p5: p5Types) => {
     divs.lights = [];
     let numLights = 3;
+    const lightsP5 = [
+        { x: 22.5, y: 7, isFlipped: false },
+        { x: 8, y: 15, isFlipped: true },
+        { x: 13, y: 20, isFlipped: false }
+    ];
+    
     for (let i = 0; i < numLights; i++) {
         let light = new Light(p5, i, lightImgs, lightsP5, GlobalConfig);
         // lights.push(light);
@@ -120,8 +126,8 @@ export const addFolderDivs = (divs: any, instaImg: p5Types.Image, txtFile: p5Typ
     let p1 = domCoordsToP5World(620, 130, GlobalConfig);
     let p2 = domCoordsToP5World(510, 230, GlobalConfig);
     let labels = [
-        { x: p0.x, y: p0.y, label: "show statement", link: "/statement" },
-        { x: p1.x, y: p1.y, label: "about gallery", link: "/about" },
+        { x: p0.x, y: p0.y, label: "statement", link: "/statement" },
+        { x: p1.x, y: p1.y, label: "about", link: "/about" },
         { x: p2.x, y: p2.y, label: "@public.access.memories", link: "https://www.instagram.com/public.access.memories/" }
     ];
 

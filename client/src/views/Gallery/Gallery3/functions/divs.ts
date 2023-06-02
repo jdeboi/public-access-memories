@@ -3,22 +3,22 @@ import Draggable from '../../components/p5/Draggable/Draggable';
 import ShadowDraggable from '../../components/p5/Draggable/ShadowDraggable';
 import Door from "../../components/p5/Door";
 import Light from '../../components/p5/Light';
-import { getBar } from '../../../../data/HomeBody/BotConfig';
+import { getBar } from '../../../../data/FieldsOfView/BotConfig';
 import CheeseBar from '../../components/p5/Bars/CheeseBar';
 import CocktailBar from '../../components/p5/Bars/CocktailBar';
 import WineBar from '../../components/p5/Bars/WineBar';
 import DJBar from '../../components/p5/Bars/DJBar';
 
 import Tree from '../../components/p5/Tree';
-import RoomLabel from '../../components/p5/RoomLabel';
+import FOVRoomLabel from '../components/FOVRoomLabel';
 // import Trash from '../components/Trash';
 // import TrashFolder from '../components/TrashFolder';
 import Swing from '../../components/p5/Swing';
 import Table from '../../components/p5/Table';
 
-import { GlobalConfig, lightsP5, outsideDoors } from '../../../../data/HomeBody/GlobalConfig';
-import { numBarItems } from '../../../../data/HomeBody/BotConfig';
-import { artists, roomConfig, rooms } from '../../../../data/HomeBody/RoomConfig';
+import { GlobalConfig, outsideDoors } from '../../../../data/FieldsOfView/GlobalConfig';
+import { numBarItems } from '../../../../data/FieldsOfView/BotConfig';
+import { artists, roomConfig, rooms } from '../../../../data/FieldsOfView/RoomConfig';
 import { domCoordsToP5World } from '../../../../helpers/coordinates';
 
 import p5Types from 'p5';
@@ -26,7 +26,7 @@ import p5Types from 'p5';
 export const addRoomLabelDivs = (divs: any, eyeIcon: p5Types.Image, font: p5Types.Font, p5: p5Types) => {
     divs.roomLabels = [];
     for (let i = 0; i < rooms.length; i++) {
-        let roomL = new RoomLabel(p5, i, eyeIcon, font, GlobalConfig, artists, rooms, roomConfig);
+        let roomL = new FOVRoomLabel(p5, i, eyeIcon, font);
         divs.roomLabels.push(roomL);
     }
 }
@@ -52,8 +52,18 @@ export const addDoorDivs = (divs: any, doors: any, doorImgs: p5Types.Image[], p5
 
 export const addLightDivs = (divs: any, lightImgs: p5Types.Image[], p5: p5Types) => {
     divs.lights = [];
-    let numLights = 3;
-    for (let i = 0; i < numLights; i++) {
+    const lightsP5 = [
+        { x: 13.5, y: 1.5, isFlipped: false },
+        { x: 18, y: 3.5, isFlipped: true },
+        { x: 31, y: 26.5, isFlipped: true },
+        { x: 13.5, y: 24.5, isFlipped: false },
+        { x: 13.5, y: 37.5, isFlipped: false }
+        // { x: 16, y: 7, isFlipped: false },
+        // { x: 20, y: 14, isFlipped: true },
+        // { x: 2.5, y: 20, isFlipped: true },
+        // { x: 25, y: 25, isFlipped: false }
+    ];
+    for (let i = 0; i < lightsP5.length; i++) {
         let light = new Light(p5, i, lightImgs, lightsP5, GlobalConfig);
         // lights.push(light);
         divs.lights.push(light);
@@ -64,39 +74,47 @@ export const addColumnDivs = (divs: any, columnGif: p5Types.Image, p5: p5Types, 
     divs.columns = [];
     let sc = GlobalConfig.scaler;
     let numCols = 4;
-    const dy = 140;
-    const dx = 140;
-    let gx = 16.5 * sc
-    let gy = 34.5 * sc
+    let dy = 50;
+    let dx = 100;
+    let gx = 11 * sc
+    let gy = 14 * sc
     for (let i = 0; i < numCols; i++) {
-        let column = new ShadowDraggable(i, gx + dx * i, gy, 80 * factor, 280 * factor, p5, columnGif, GlobalConfig)
+        let column = new ShadowDraggable(i, gx + dx * i, gy + dy * i, 80 * factor, 280 * factor, p5, columnGif, GlobalConfig)
         divs.columns.push(column)
     }
 
+     gx = 27 * sc
+     gy = 31 * sc
+    for (let i = 0; i < numCols; i++) {
+        let column = new ShadowDraggable(i, gx - dx * i, gy + dy * i, 80 * factor, 280 * factor, p5, columnGif, GlobalConfig)
+        divs.columns.push(column)
+    }
+
+    gx = 31 * sc
+     gy = 11 * sc
+    for (let i = 0; i < numCols; i++) {
+        let column = new ShadowDraggable(i, gx + dx * i, gy + dy * i, 80 * factor, 280 * factor, p5, columnGif, GlobalConfig)
+        divs.columns.push(column)
+    }
+
+    // let column = new ShadowDraggable(numCols*2, sc*26, sc*14, 80 * factor, 280 * factor, p5, columnGif, GlobalConfig)
+    // divs.columns.push(column)
+    // column = new ShadowDraggable(numCols*2+1, sc*31, sc*14, 80 * factor, 280 * factor, p5, columnGif, GlobalConfig)
+    // divs.columns.push(column)
 }
 
 export const addTrashDivs = (divs: any, trashFiles: any, p5: p5Types) => {
     divs.trashCans = [];
     let sc = GlobalConfig.scaler;
-    // let labels = [
-    //     { x0: 9 * sc, y0: 13 * sc, x1: 10.5*sc, y1: 13*sc },
-    //     { x0: 30 * sc, y0: 20.5 * sc, x1: sc*31.5, y1: 20.5 * sc},
-    //     { x0: -8.5 * sc, y0: 1.5 * sc, x1: -8.5*sc, y1: 3*sc }
-    // ];
+
     let labels = [
-        { x0: 18 * sc, y0: 27.5 * sc },
-        { x0: 30 * sc, y0: 22.5 * sc },
-        { x0: -8 * sc, y0: 3 * sc }
+        { x0: 42.5 * sc, y0: 17 * sc },
+        { x0: 42.5 * sc, y0: 37 * sc }
     ];
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < labels.length; i++) {
         const { x0, y0 } = labels[i];
-        // p5, id, x, y, label, link, img
-        // const tf = new TrashFolder(i, x0, y0, 422 * .5, 265 * .5, p5, trashFiles[i + 1], shadow, GlobalConfig)
-        // const t = new Trash(p5, i * 2, x0, y0, "recycle bin", trashFiles[0], tf, GlobalConfig);
-
         const tf = new Folder(p5, i, x0, y0, "recycle bin", "/trash", trashFiles[0], GlobalConfig);
-        // divs.trashFolders.push(tf);
         divs.trashCans.push(tf);
     }
 }
@@ -105,13 +123,14 @@ export const addTrashDivs = (divs: any, trashFiles: any, p5: p5Types) => {
 export const addFolderDivs = (divs: any, instaImg: p5Types.Image, txtFile: p5Types.Image, p5: p5Types) => {
     divs.folders = [];
     // yeah, why are these in dom coords...
-    let p0 = domCoordsToP5World(560, 0, GlobalConfig);
-    let p1 = domCoordsToP5World(620, 130, GlobalConfig);
-    let p2 = domCoordsToP5World(510, 230, GlobalConfig);
+    let sc = GlobalConfig.scaler;
+    let p0 = {x: 19.5,y: 18.5};
+    let p1 = {x: 22,y: 19.5};
+    let p2 = {x: 20, y: 21};
     let labels = [
-        { x: p0.x, y: p0.y, label: "show statement", link: "https://publicaccessmemories.com/exhibition" },
-        { x: p1.x, y: p1.y, label: "about gallery", link: "https://publicaccessmemories.com/about" },
-        { x: p2.x, y: p2.y, label: "@public.access.memories", link: "https://www.instagram.com/public.access.memories/" }
+        { x: p0.x*sc, y: p0.y*sc, label: "statement", link: "https://publicaccessmemories.com/exhibition" },
+        { x: p1.x*sc, y: p1.y*sc, label: "about", link: "https://publicaccessmemories.com/about" },
+        { x: p2.x*sc, y: p2.y*sc, label: "@public.access.memories", link: "https://www.instagram.com/public.access.memories/" }
     ];
 
     for (let i = 0; i < 3; i++) {

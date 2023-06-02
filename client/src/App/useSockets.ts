@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 // interfaces
 import { IUser, IUsers } from '../interfaces/index';
 
-import { barTenders } from '../data/CurrentShow/BotConfig';
+// import { barTenders } from '../data/CurrentShow/BotConfig';
 
 // store
 import { IMessage } from '../interfaces';
@@ -31,7 +31,7 @@ export const useSockets = (props: ISockets) => {
         socket.on('connect', () => {
             dispatch(setUserID(socket.id))
             socket.emit("joinRoom", user.roomUrl);
-            addBots();
+            // addBots();
         });
 
         socket.on("usersUpdate", (data: IUsers) => {
@@ -87,7 +87,7 @@ export const useSockets = (props: ISockets) => {
 
 
 
-const addBots = () => {
+export const addBots = (barTenders: IUser[]) => {
     for (const barTender of barTenders) {
         socket.emit("setBot", barTender);
     }

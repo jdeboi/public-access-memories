@@ -131,7 +131,6 @@ function App() {
 
     const avatarClicked = () => {
         if (!showWelcome) {
-            console.log("show signin")
             dispatch(showSignIn());
         }
     }
@@ -256,7 +255,7 @@ function App() {
             </div>
             <div className="App-Content inner-outline">
                 <Routes>
-                    <Route path="/" element={<Gallery id={1} users={users} isClosed={isClosed} showWelcome={showWelcome} />} />
+                    <Route path="/" element={<Gallery id={3} users={users} isClosed={isClosed} showWelcome={showWelcome} />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/newsletter" element={<SubscribeSendInBlue />} />
                     <Route path="/statement" element={<Statement />} />

@@ -1,11 +1,19 @@
 @import "../../styles/constants.scss";
 
 .Gallery {
-    background-image: url("./Gallery2/assets/asirecall_bg.png");
+
+    // background-image: url("https://lmd-bucket.s3.us-east-2.amazonaws.com/sketches/gallery/concrete-512.jpg");
+    background-image: url("./Gallery3/assets/bg.png");
     background-repeat: repeat;
     background-size: 700px 700px;
+    // background-size: cover;
 
     .MiniMap {
+
+        img {
+            user-select: none;
+        }
+        
         .otherAvatarsMiniMap {
             position: absolute;
             top: 0px;

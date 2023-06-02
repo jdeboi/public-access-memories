@@ -1,6 +1,6 @@
 import Floppy from "../components/Floppy/Floppy";
 import p5Types from 'p5';
-import {GlobalConfig} from "../../../../data/AsIRecall/GlobalConfig";
+import { GlobalConfig } from "../../../../data/AsIRecall/GlobalConfig";
 import { artists, rooms } from "../../../../data/AsIRecall/RoomConfig";
 import { p5ToWorldCoords } from "../../../../helpers/coordinates";
 
@@ -22,12 +22,12 @@ const connections = [
     [15, 11],
 ]
 
-export const addFloppyDivs = (floppies: Floppy[], eyeIcon: p5Types.Image, floppyImg: p5Types.Image,slider: p5Types.Image, font: p5Types.Font, p5: p5Types) => {
+export const addFloppyDivs = (floppies: Floppy[], eyeIcon: p5Types.Image, floppyImg: p5Types.Image, slider: p5Types.Image, font: p5Types.Font, p5: p5Types) => {
     for (let i = 0; i < rooms.length; i++) {
         const { x, y, link } = rooms[i];
         let coord = p5ToWorldCoords(x, y, GlobalConfig);
         let connection = p5ToWorldCoords(connections[i][0], connections[i][1], GlobalConfig);
-        const floppy = new Floppy(p5, i, coord.x, coord.y,  link, eyeIcon, floppyImg, slider, font, connection);
+        const floppy = new Floppy(p5, i, coord.x, coord.y, link, eyeIcon, floppyImg, slider, font, connection);
         floppies.push(floppy);
     }
 }
@@ -36,12 +36,12 @@ export const displayFloppyDivs = (x: number, y: number, roomCount: any, isMobile
     for (const floppy of floppies) {
         floppy.displayWithLabel(x, y, roomCount);
         // if (isMobile) {
-            // floppy.displayMobileButton(x, y);
+        // floppy.displayMobileButton(x, y);
         // }
     }
 }
 
-export const updateFloppyDivs = (userEase: {x: number, y: number}, users: any, floppies: Floppy[]) => {
+export const updateFloppyDivs = (userEase: { x: number, y: number }, users: any, floppies: Floppy[]) => {
     for (const floppy of floppies) {
         floppy.update();
         floppy.openDoor(userEase, users);

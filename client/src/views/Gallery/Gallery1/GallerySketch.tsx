@@ -32,12 +32,13 @@ import { GlobalConfig, limits } from "../../../data/HomeBody/GlobalConfig";
 import { rooms as globalRooms } from "../../../data/HomeBody/RoomConfig";
 import { filterGalleryUsers, getTotalRoomCount } from "../../../helpers/helpers";
 // import { displayWall } from "./p5/functions/ground";
-import { hostBotPoints, danceFloor } from "../../../data/HomeBody/BotConfig";
+import { hostBotPoints, danceFloor, barTenders } from "../../../data/HomeBody/BotConfig";
 import { Dispatch } from "@reduxjs/toolkit";
 import { p5ToUserCoords } from "../../../helpers/coordinates";
 // import { danceFloor } from "../../../data/BotConfig";
 // import { artists, roomConfig } from "../../../data/RoomConfig";
 import HBRoom from "./components/HBRoom";
+import { addBots } from "../../../App/useSockets";
 var isClosed: boolean;
 
 //////////////
@@ -212,6 +213,7 @@ class GallerySketch extends React.Component<Props> {
     p5.textFont(font, 14);
     p5.frameRate(20);
     loadingDone();
+    addBots(barTenders);
   };
 
   initEmojis = (p5: p5Types) => {
@@ -449,7 +451,6 @@ class GallerySketch extends React.Component<Props> {
     else {
       stepTo.x = userStep.x;
       stepTo.y = userStep.y;
-      // console.log("step", stepTo)
     }
   }
 
@@ -503,7 +504,6 @@ class GallerySketch extends React.Component<Props> {
       if (d < 15) {
         userEase.x = stepTo.x;
         userEase.y = stepTo.y;
-        // isStepping = false;
         userMove(userEase.x, userEase.y);
       }
 
@@ -512,8 +512,8 @@ class GallerySketch extends React.Component<Props> {
 
   triggerMove = (p5: p5Types) => {
     const { user } = this.props;
-    if (this.props.user.isFollowingHost)
-      return;
+    // if (this.props.user.isFollowingHost)
+    //   return;
 
     const { users, setUserActive, } = this.props;
     let userClicked = null;
@@ -536,6 +536,7 @@ class GallerySketch extends React.Component<Props> {
 
       // console.log(mx, my, dx, dy);
       if (!(mx === 0 && my === 0)) {
+        // resolved???
         // TODO - issue is if that destination is a no go, effs up future destinations
         // destination.x += mx;
         // destination.y += my;
@@ -554,19 +555,6 @@ class GallerySketch extends React.Component<Props> {
     const t = new Date().getTime() - destination.time.getTime();
     const { user } = this.props;
     if (isWalking) {
-      // if (user.isFollowingHost) {
-      //   if (reachedDestination(stepTo, destination)) {
-      //     isWalking = false;
-      //     this.nextHostStep();
-      //   }
-      //   else if (t > 300) {
-      //     let step = getNextStep(stepTo, destination);
-      //     this.userTakeStep(step[0], step[1]);
-      //     destination.time = new Date();
-      //   }
-      // }
-
-      // else {
       if (reachedDestination(stepTo, destination)) {
         isWalking = false;
       }
@@ -575,7 +563,6 @@ class GallerySketch extends React.Component<Props> {
         this.userTakeStep(step[0], step[1]);
         destination.time = new Date();
       }
-      // }
     }
   }
 

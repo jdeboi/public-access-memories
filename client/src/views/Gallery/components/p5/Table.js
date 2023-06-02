@@ -16,7 +16,7 @@ export default class Table extends Draggable {
         this.button = new ButtonTog(this.w - 40, this.h , 30, 15, p5);
         this.closedImg = closed;
 
-        this.isUmbrellaOpen = false;
+        // this.isUmbrellaOpen = false;
     }
 
     displayContent(userX, userY) {
@@ -24,7 +24,7 @@ export default class Table extends Draggable {
         // this.p5.translate(this.origin.x, this.origin.y);
         this.p5.translate(0, this.barH);
 
-        if (this.isUmbrellaOpen)
+        if (this.button.isOn)
             this.p5.image(this.content, 0, 0, this.w, this.h);
         else
             this.p5.image(this.closedImg, 0, 0, this.w, this.h);
@@ -48,7 +48,7 @@ export default class Table extends Draggable {
         mouse.x -= this.x;
         mouse.y -= this.y;
         if (this.button.mouseOver(mouse.x, mouse.y)) {
-            this.toggleButton();
+            this.button.toggle();
             return true;
         }
         return false;
@@ -58,11 +58,9 @@ export default class Table extends Draggable {
         let mouse = mouseToWorld({ x: userX, y: userY }, this.p5, this.GlobalConfig);
         mouse.x -= this.x;
         mouse.y -= this.y;
-        this.button.display(this.isUmbrellaOpen, mouse.x, mouse.y);
+        this.button.display(mouse.x, mouse.y);
     }
 
-    toggleButton() {
-        this.isUmbrellaOpen = !this.isUmbrellaOpen;
-    }
+   
 
 }

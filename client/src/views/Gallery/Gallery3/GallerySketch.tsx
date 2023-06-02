@@ -8,51 +8,54 @@ import { setFollowingHost } from '../../../store/user';
 
 //////////////
 // HELPERS
-import { wallBoundary } from '../Gallery1/functions/crossing';
+import { roomBoundary, roomDoorCrossing, wallBoundary } from '../Gallery1/functions/crossing';
 import { roundToMult2 } from '../Gallery1/functions/round';
-import { drawWalls, initOuterWalls } from '../Gallery1/functions/building';
-import { drawAllFloors } from "./functions/floor";
+import { drawWalls } from '../Gallery1/functions/building';
+import {initOuterFOVWalls} from './functions/building';
+import { displayDanceFloor, drawAllFloors } from "./functions/floor";
 import { displayDancers } from '../Gallery1/functions/emojis';
+
 import { reachedDestination, getNextStep, showMouseLoc, showUserEllipses, showDestination, mouseDidMove } from '../Gallery1/functions/destination';
 import { drawUser, drawUsers, checkUserClicked } from '../Gallery1/functions/users';
-import { addTableDivs, displayTrashDivs, checkTrashDivsDouble, addTrashDivs, addLightDivs, displayLightDivs, displayColumnDivs, endDivDrag, updateDivs, checkDivPress, displayFolderDivs, checkFolderDivsDouble } from '../Gallery1/functions/divs';
+import { displayTrashDivs, checkTrashDivsDouble, addTrashDivs, addLightDivs, displayLightDivs, displayColumnDivs, endDivDrag, updateDivs, checkDivPress, displayFolderDivs, checkFolderDivsDouble, addRoomLabelDivs, displayRoomLabelDivs, addFolderDivs, addBarDivs, displayBarDivs } from './functions/divs';
 import { addColumnDivs } from "./functions/divs";
-// import { addFolderDivs } from "./functions/folders";
-// import { checkFanDivs, displayFans, endFanDivDrag, addFanDivs, updateFanDivs } from "./functions/fans";
-// import { addFloppyDivs, checkFloppyDivs, checkFloppyDivsDouble, displayFloppyDivs, endFloppyDivDrag, updateFloppyDivs } from "./functions/floppies";
-// import { addBarDivs, displayBarDivs, checkBarDivs, endBarDivDrag, updateBarDivs } from "./functions/bars";
-
+import { drawRooms } from './functions/building';
 
 //////////////
 // COMPONENTS
-// import Dancer from '../Gallery1/p5/components/Dancer';
-// import FanDraggable from "./components/FanDraggable/FanDraggable";
-// import Floppy from "./components/Floppy/Floppy";
-// import HardDrive from "./components/FanDraggable/HardDrive";
+import AnaglyphEffect from "./components/AnaglyphEffect";
+import FOVRoom from "./components/FOVRoom";
+import FOVIsometricCube from "./components/FOVIsometricCube";
 
 //////////////
 // CONFIG
 import { GlobalConfig } from "../../../data/FieldsOfView/GlobalConfig";
-// import { rooms as globalRooms } from "../../../data/RoomConfig";
+import { rooms as globalRooms } from "../../../data/FieldsOfView/RoomConfig";
 import { filterGalleryUsers, getTotalRoomCount } from "../../../helpers/helpers";
 import { Dispatch } from "@reduxjs/toolkit";
-import AnaglyphEffect from "./components/AnaglyphEffect";
+import { displayIsometricGrid, initCubes } from "./functions/isometric";
+import Dancer from "../components/p5/Dancer";
+import { barTenders, danceFloor } from "../../../data/FieldsOfView/BotConfig";
+import { addBots } from "../../../App/useSockets";
+
 // import { p5ToUserCoords, p5ToWorldCoords } from "../../../helpers/coordinates";
 
 //////////////
 // BUILDING 
 var walls: any = [];
-// var rooms: any = [];
-var roomTextures: p5Types.Image[] = [];
+var rooms: any = [];
 var eyeIcon: p5Types.Image;
 var doors: any = [];
 var doorImgs: p5Types.Image[] = [];
 var floorTex: p5Types.Image;
 var lightImgs: p5Types.Image[] = [];
-var tableImgs: p5Types.Image[] = [];
 var trashFiles: p5Types.Image[] = [];
 var columnGif: p5Types.Image;
+let cubeTex: p5Types.Image;
+let treeTex: p5Types.Image;
 
+var cubes: FOVIsometricCube[] = [];
+var isoAssets: p5Types.Image[] = [];
 
 //////////////
 // ICONS
@@ -60,26 +63,17 @@ var txtFile: p5Types.Image, instaImg: p5Types.Image;
 
 //////////////
 // EMOJIS
-var ducks: any = [];
-var duckImg: p5Types.Image;
 var dancers: any = [];
 var dancerImgs: p5Types.Image[] = [];
-var baby: any;
 var barEmojis: p5Types.Image[] = [];
 
 //////////////
 // FONT
 var font: p5Types.Font;
-var timesFont: p5Types.Font;
 
 //////////////
 // DRAGGABLE DIVS
 var divs = {};
-// const fans: FanDraggable[] = [];
-// let hardDrive: HardDrive;
-// const floppies: Floppy[] = [];
-let floppyImg: p5Types.Image;
-let sliderImg: p5Types.Image;
 let bars: any = [];
 
 // var miniMap;
@@ -92,9 +86,8 @@ const stepTo = { x: 0, y: 0 };
 const userEase = { x: 0, y: 0 };
 const destination = { x: 0, y: 0, time: new Date() };
 var lastMouseMove = new Date();
-let fan: any;
 
-let prevFrame = 0;
+var isClosed: boolean;
 
 let anaglyph: AnaglyphEffect;
 
@@ -132,26 +125,26 @@ class GallerySketch extends React.Component<Props> {
 
     //////////////
     // building textures
-    floorTex = p5.loadImage(url + "concrete-512.jpg");
+    // floorTex = p5.loadImage(url + "concrete-512.jpg");
+    cubeTex = p5.loadImage("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/fields_of_view/spacepond.png");// url + "concrete-512.jpg");
+    floorTex = p5.loadImage("/online_assets/Transparency500.jpg")
+    treeTex = p5.loadImage(url + "grass/tree.png");
     doorImgs[0] = p5.loadImage(url + "door/frame2.png");
     doorImgs[1] = p5.loadImage(url + "door/leftdoor2.png");
-    roomTextures[0] = p5.loadImage(url + "rooms/bot.png");
-    roomTextures[1] = p5.loadImage(url + "rooms/right.png");
-    roomTextures[2] = p5.loadImage(url + "rooms/left.png");
     eyeIcon = p5.loadImage(url + "eye.png")
+
 
     //////////////
     // emojis
-    duckImg = p5.loadImage(url + "duck.png");
     dancerImgs[0] = p5.loadImage(url + "dancers/dancer0.png");
     dancerImgs[1] = p5.loadImage(url + "dancers/dancer1.png");
     dancerImgs[2] = p5.loadImage(url + "dancers/dancer2.png");
-    baby = p5.loadImage(url + "swing/baby.png");
     barEmojis[0] = p5.loadImage(url + "emojis/bread.png");
     barEmojis[1] = p5.loadImage(url + "emojis/cheese.png");
     barEmojis[2] = p5.loadImage(url + "emojis/wine.png");
     barEmojis[3] = p5.loadImage(url + "emojis/cocktail.png");
     barEmojis[4] = p5.loadImage(url + "emojis/chat.png");
+
 
     //////////////
     // plants
@@ -167,8 +160,9 @@ class GallerySketch extends React.Component<Props> {
 
     //////////////
     // tables
-    tableImgs[0] = p5.loadImage(url + "table/um_open.png")
-    tableImgs[1] = p5.loadImage(url + "table/um_closed.png")
+    isoAssets[0] = p5.loadImage(pamURL + "fields_of_view/isometric/0.png");
+    isoAssets[1] = p5.loadImage(pamURL + "fields_of_view/isometric/1.png");
+    isoAssets[2] = p5.loadImage(pamURL + "fields_of_view/isometric/2.png");
 
     //////////////
     // lights
@@ -178,12 +172,9 @@ class GallerySketch extends React.Component<Props> {
     lightImgs[3] = p5.loadImage(url + "tracklights/black_shadow.png");
 
     columnGif = p5.loadImage(pamURL + "gallery/column.png"); //not sure why this one has a cors issue
-    floppyImg = p5.loadImage(pamURL + "as_i_recall/gallery/floppy_base2.png");
-    sliderImg = p5.loadImage(pamURL + "as_i_recall/gallery/floppy_slider2.png");
 
     // font
     font = p5.loadFont("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/fonts/sysfont.woff");
-    // timesFont = p5.loadFont("'https://cdn.jsdelivr.net/gh/googlefonts/noto-emoji/fonts/NotoColorEmoji.ttf'");
 
   }
 
@@ -192,15 +183,19 @@ class GallerySketch extends React.Component<Props> {
   ////////////////////////////////////////////////////////////////////////
   setup = (p5: p5Types, canvasParentRef: Element) => {
     const { user, loadingDone, setUserActive } = this.props;
-    // use parent to render the canvas in this ref
-    // (without that p5 will render the canvas outside of your component)
 
     p5.textFont(font, 14);
 
-    initOuterWalls(p5, walls);
+    initOuterFOVWalls(p5, walls);
+    for (let i = 0; i < globalRooms.length; i++) {
+      rooms.push(new FOVRoom(p5, i));
+    }
+
+
     this.initEmojis(p5);
     this.initDivs(p5);
 
+    cubes = initCubes(isoAssets, p5);
 
     // miniMap = new MiniMap(p5, 50, p5.windowHeight - 200 - 80, 200, 200);
     stepTo.x = user.x;
@@ -212,7 +207,7 @@ class GallerySketch extends React.Component<Props> {
     cnv.parent(canvasParentRef);
     cnv.mousePressed(() => this.triggerMove(p5));
 
-    anaglyph = new AnaglyphEffect(p5);
+    anaglyph = new AnaglyphEffect(400, 400, p5);
     anaglyph.setDivergence(-.3);
 
 
@@ -220,45 +215,42 @@ class GallerySketch extends React.Component<Props> {
     p5.pixelDensity(2);
 
     loadingDone();
+
+    addBots(barTenders);
   };
 
   initEmojis = (p5: p5Types) => {
-    // dancers[0] = new Dancer(p5, dancerImgs[0], 10, 160, false);
-    // dancers[1] = new Dancer(p5, dancerImgs[1], 200, 380, false);
-    // dancers[2] = new Dancer(p5, dancerImgs[2], 300, 150, true);
+    dancers[0] = new Dancer(p5, dancerImgs[0], 0, 160, false, danceFloor);
+    dancers[1] = new Dancer(p5, dancerImgs[1], 100, 380, false, danceFloor);
+    dancers[2] = new Dancer(p5, dancerImgs[2], 200, 150, true, danceFloor);
   }
 
 
   initDivs = (p5: p5Types) => {
-    // addLightDivs(divs, lightImgs, p5);
+    addLightDivs(divs, lightImgs, p5);
     addColumnDivs(divs, columnGif, p5, .83);
-    addTableDivs(divs, tableImgs, p5);
     addTrashDivs(divs, trashFiles, p5);
-    // addFolderDivs(divs, instaImg, txtFile, p5);
-    // hardDrive = new HardDrive(0, 17 * GlobalConfig.scaler, 13 * GlobalConfig.scaler, 434 / 2, 616 / 2, p5)
-    // addFloppyDivs(floppies, eyeIcon, floppyImg, sliderImg, font, p5);
-    // addBarDivs(bars, lightImgs[3], p5);
-    // addFanDivs(fans, p5);
-    // addRoomLabelDivs(divs, eyeIcon, p5);
+    addFolderDivs(divs, instaImg, txtFile, p5);
+    addBarDivs(bars, lightImgs[3], p5);
+    addRoomLabelDivs(divs, eyeIcon, font, p5);
   }
 
   ////////////////////////////////////////////////////////////////////////
   // DRAW
   ////////////////////////////////////////////////////////////////////////
 
-
   draw = (p5: p5Types) => {
+    anaglyph.draw((pg) => scene(pg, p5, floorTex));
+
     const { user, users } = this.props;
     p5.clear();
-
+    
     p5.push();
-    p5.translate(p5.width/2, p5.height/2);
-    anaglyph.draw((pg) => scene(pg, p5));
+    p5.translate(p5.width / 2, p5.height / 2);
+
     p5.pop();
 
-    // NOTE: Do not use setState in the draw function or in functions that are executed
-    // in the draw function...
-    // please use normal variables or class properties for these purposes
+   
     p5.push();
     p5.translate(p5.windowWidth / 2, p5.windowHeight / 2);
 
@@ -271,8 +263,22 @@ class GallerySketch extends React.Component<Props> {
 
     //////////////
     // floors
-    drawAllFloors(p5);
+    // drawAllFloors(p5);
 
+    displayIsometricGrid(500, 450, 1000, 1000, p5);
+    displayIsometricGrid(1500, 750, 1500, 1500, p5);
+    displayIsometricGrid(1700, 1750, 1200, 750, p5);
+    displayIsometricGrid(700, 1550, 600, 600, p5);
+
+
+    p5.push();
+    p5.translate(GlobalConfig.scaler*10, -GlobalConfig.scaler);
+    for (const cube of cubes) {
+      cube.display();
+    }
+    p5.pop();
+
+    
 
     //////////////
     // building
@@ -280,16 +286,17 @@ class GallerySketch extends React.Component<Props> {
 
     //////////////
     // emojis
-    // displayDancers(dancers);
+    displayDancers(dancers);
+    displayDanceFloor(danceFloor.x, danceFloor.y, danceFloor.w, danceFloor.h, p5);
 
     //////////////
     // draggable
-    // p5.textFont(font, 10);
-    // displayFans(userEase.x, userEase.y, fans, hardDrive);
 
-    // const roomCount = getTotalRoomCount(users);
-    // displayFloppyDivs(userEase.x, userEase.y, roomCount, this.props.isMobile, floppies);
-    // displayFolderDivs(divs);
+    const roomCount = getTotalRoomCount(users, rooms);
+    drawRooms(rooms, anaglyph.output);
+    drawWalls(walls, p5);
+    if (!isClosed)
+      displayRoomLabelDivs(font, roomCount, divs);
 
 
     p5.pop();
@@ -304,8 +311,7 @@ class GallerySketch extends React.Component<Props> {
     //////////////
     // drawing
 
-    // this.drawOverTarget(p5);
-    // p5.textFont(font, 34);
+    this.drawOverTarget(p5);
     drawUser(user, p5, barEmojis);
     this.drawOverUser(p5);
 
@@ -313,10 +319,8 @@ class GallerySketch extends React.Component<Props> {
     // updating
     if (users)
       updateDivs(userEase, users, divs);
-    // updateFanDivs(fans, hardDrive);
-    // updateBarDivs(bars);
-    // updateFloppyDivs(userEase, users, floppies);
     this.updateUserEase(p5);
+
 
   };
 
@@ -326,6 +330,12 @@ class GallerySketch extends React.Component<Props> {
     // p5.textSize(20);
     // p5.text(updateObj.destX + " " + updateObj.destY, p5.mouseX, p5.mouseY);
     // p5.text(p5.round(userEase.x) + " " + p5.round(userEase.y), p5.width / 2, p5.height / 2)
+  }
+
+  displayFrameRate = (p5: p5Types) => {
+    p5.fill(0);
+    p5.textSize(30);
+    p5.text(p5.frameRate(), 50, 50);
   }
 
 
@@ -351,9 +361,13 @@ class GallerySketch extends React.Component<Props> {
     p5.translate(p5.windowWidth / 2, p5.windowHeight / 2);
     p5.translate(-userEase.x, -userEase.y);
     p5.translate(GlobalConfig.x * GlobalConfig.scaler, GlobalConfig.y * GlobalConfig.scaler);
-    // displayBarDivs(userEase.x, userEase.y, bars);
-    // displayLightDivs(userEase.x, userEase.y, divs);
+    displayBarDivs(userEase.x, userEase.y, bars);
+    displayLightDivs(userEase.x, userEase.y, divs);
     displayColumnDivs(userEase.x, userEase.y, divs);
+    displayTrashDivs(userEase.x, userEase.y, divs);
+
+    p5.textFont(font, 12);
+    displayFolderDivs(divs);
 
 
 
@@ -379,12 +393,30 @@ class GallerySketch extends React.Component<Props> {
   }
 
   userTakeStep = (x: number, y: number) => {
-    const { isClosed, isMobile, userNewRoom, toggleOutside } = this.props;
+    const { isClosed, isMobile, userNewRoom } = this.props;
     var t = new Date();
     let space = GlobalConfig.scaler;
     const prevStep = { x: stepTo.x, y: stepTo.y }
     const userStep = { x: stepTo.x + x * space, y: stepTo.y + y * space };
-    if (wallBoundary(walls, prevStep, userStep)) {
+    const roomDoor = roomDoorCrossing(rooms, prevStep, userStep);
+   
+    if (roomDoor) {
+
+      if (!isMobile) {
+        if (window.confirm('Leave the main gallery?')) {
+          userNewRoom(roomDoor);
+        }
+      }
+      else {
+        userNewRoom(roomDoor);
+      }
+      isWalking = false;
+    }
+
+    else if (roomBoundary(rooms, prevStep, userStep)) {
+      this.stopWalking();
+    } 
+    else if (wallBoundary(walls, prevStep, userStep)) {
       this.stopWalking();
     }
     else {
@@ -426,13 +458,11 @@ class GallerySketch extends React.Component<Props> {
       setUserActive(userClicked);
       return;
     }
-    else if (checkDivPress(userEase.x, userEase.y, divs))
+    else if (checkDivPress(userEase.x, userEase.y, divs)) {
+
       return;
-    // else if (checkFanDivs(userEase.x, userEase.y, fans, hardDrive))
-    //   return;
-    // else if (checkFloppyDivs(userEase.x, userEase.y, floppies)) {
-    //   return;
-    // }
+    }
+
     // else if (checkBarDivs(userEase.x, userEase.y, bars)) {
     //   return;
     // }
@@ -517,7 +547,7 @@ class GallerySketch extends React.Component<Props> {
   doubleClicked = (p5: p5Types) => {
     if (p5.frameCount > 0) {
       checkFolderDivsDouble(userEase.x, userEase.y, divs);
-      // checkTrashDivsDouble(userEase.x, userEase.y, divs);
+      checkTrashDivsDouble(userEase.x, userEase.y, divs);
       // checkFloppyDivsDouble(userEase.x, userEase.y, floppies);
     }
     return;
@@ -552,35 +582,116 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 }
 
 
-function scene(pg: p5Types.Graphics, p5: p5Types) {
+function scene(pg: p5Types.Graphics, p5: p5Types, floorTex: p5Types.Image) {
   const boxW = 300;
 
   pg.background(0);
 
   pg.rectMode(pg.CENTER);
+  pg.imageMode(pg.CENTER);
   pg.noFill();
-  pg.strokeWeight(10);
+  pg.strokeWeight(8);
   pg.stroke(255);
   for (let z = 0; z < 30; z++) {
     pg.push();
     let dz = (z * 100 + p5.millis() / 100) % 2000;
     dz -= 800;
     pg.translate(0, 0, dz);
-    pg.rect(0, 0, boxW, boxW);
+
+    pg.rect(0, 0, boxW, boxW * 2);
     pg.pop();
   }
 
   pg.push();
+  // pg.translate(0, 0, -150 + 250 * pg.sin(p5.millis() / 1000));
+  // pg.noStroke();
+  // pg.texture(cubeTex);
+  // pg.box(30);
+  pg.translate(0, 0, -800);
+  // pg.image(treeTex, 0, 0, boxW, boxW);
+  pg.pop();
+
+  pg.push();
+
+  pg.rotateY(pg.PI / 2);
+  pg.translate(0, 0, boxW / 2);
+
+  // right
+  pg.push();
+  pg.translate(0, 0, 30);
+  pg.textureWrap(pg.CLAMP);
+  pg.texture(treeTex);
+  pg.noStroke();
+  pg.plane(1800, boxW);
+  
+  // pg.image(cubeTex, 0, 0, 1800, boxW);
+  pg.pop();
+
+  // left
+  pg.translate(0, 0, -boxW);
+  pg.push();
+  pg.translate(0, 0, -20);
+  pg.texture(treeTex);
+  pg.noStroke();
+  pg.plane(1800, boxW);
+  // pg.image(cubeTex, 0, 0, 1800, boxW);
+  pg.pop();
+  pg.pop();
+
+  pg.push();
   pg.rotateX(pg.PI / 2);
+
   // floor
   pg.translate(0, 0, -boxW / 2);
+  pg.push();
+  pg.translate(0, 0, -2);
+  pg.image(floorTex, 0, 0, boxW, 1800);
+  pg.pop();
   pg.rect(0, 0, boxW, 1800);
+
   // ceiling
   pg.translate(0, 0, boxW);
+  pg.push();
+  pg.translate(0, 0, 2);
+  pg.image(floorTex, 0, 0, boxW, 1800);
+  pg.pop();
   pg.rect(0, 0, boxW, 1800);
+
   pg.pop();
 }
 
+
+function circleLines(p5: p5Types) {
+  // p5.background("black");
+  p5.randomSeed(0);
+  p5.colorMode(p5.RGB, 255);
+  let circs = [];
+  for (let i = 0; i < 30; i++) {
+    let x = p5.random(p5.width);
+    let y = p5.random(p5.height);
+    let diam = p5.random(50, 400);
+    let r = p5.random(10, 100);
+    r = p5.constrain(r, 10, diam);
+    let sW = p5.random(1, 5)
+    let sp = p5.random(4, 10);
+    let spinR = p5.random(6000, 12000);
+    let str = p5.random(30, 85);
+    if (i % 2 == 0) spinR *= -1;
+    circs.push({ x, y, diam, r, sW, sp, str, spinR });
+  }
+  for (const c of circs) {
+    p5.push();
+    p5.translate(c.x, c.y);
+    p5.rotate(p5.millis() / c.spinR);
+    for (let i = 0; i < 360; i += c.sp / c.diam * 100) {
+      p5.rotate(p5.radians(c.sp));
+      p5.stroke(255, c.str);
+      p5.strokeWeight(c.sW);
+      p5.line(0, c.diam - c.r, 0, c.diam);
+    }
+    p5.pop();
+  }
+}
 export default connect<StateProps, DispatchProps, ComponentProps, RootState>(mapStateToProps, mapDispatchToProps)(GallerySketch);
 
 

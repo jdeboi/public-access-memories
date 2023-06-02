@@ -16,11 +16,12 @@ export default class Light extends Draggable {
         this.w *= this.scaler;
         this.h *= this.scaler;
 
-        this.isFlipped = this.id !== 0;
 
-        const point = lightsP5[id];
-        this.x = point.x * GlobalConfig.scaler;
-        this.y = point.y * GlobalConfig.scaler;
+
+        const { x, y, isFlipped } = lightsP5[id];
+        this.x = x * GlobalConfig.scaler;
+        this.y = y * GlobalConfig.scaler;
+        this.isFlipped = isFlipped;
 
         this.imgs = imgs;
 

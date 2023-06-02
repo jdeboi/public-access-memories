@@ -6,9 +6,12 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: white;
+  color: black;
   font-weight: normal;
   z-index: 1;
+}
+.LoadingPage a {
+  color: darkcyan;
 }
 .LoadingPage .title {
   font-size: 50px;

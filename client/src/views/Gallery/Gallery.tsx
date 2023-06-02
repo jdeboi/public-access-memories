@@ -1,6 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-// import { useParams } from "react-router-dom";
-import Frame from '../../components/Frame/Frame';
 import ReactAudioPlayer from 'react-audio-player';
 import './Gallery.css';
 import { useNavigate } from 'react-router-dom';
@@ -19,8 +17,10 @@ import { IUser, IUsers } from '../../interfaces';
 import { filterUsers, mapVal } from '../../helpers/helpers';
 
 import LoadingPage from '../../components/LoadingPage/LoadingPage';
-import MiniMapAIR from './components/MiniMap/MiniMapAIR';
-import MiniMap from './components/MiniMap/MiniMap';
+// import MiniMapAIR from './components/MiniMap/MiniMapAIR';
+// import MiniMap from './components/MiniMap/MiniMap';
+import MiniMapFOV from './components/MiniMap/MiniMapFOV';
+
 
 // store
 import { useSelector, useDispatch } from 'react-redux';
@@ -178,7 +178,8 @@ const Gallery = (props: IGallery) => {
                 windowUI.loading ?
                     <LoadingPage /> :
                     // <MiniMapAIR users={filterUsers(user, props.users)} x={20} y={20} />
-                <MiniMap users={filterUsers(user, props.users)} x={20} y={20} />
+                // <MiniMap users={filterUsers(user, props.users)} x={20} y={20} />
+                <MiniMapFOV users={filterUsers(user, props.users)} x={20} y={20} />
 
             }
 
