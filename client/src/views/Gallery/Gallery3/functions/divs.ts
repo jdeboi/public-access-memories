@@ -128,7 +128,7 @@ export const addFolderDivs = (divs: any, instaImg: p5Types.Image, txtFile: p5Typ
     let p1 = {x: 22,y: 19.5};
     let p2 = {x: 20, y: 21};
     let labels = [
-        { x: p0.x*sc, y: p0.y*sc, label: "statement", link: "https://publicaccessmemories.com/exhibition" },
+        { x: p0.x*sc, y: p0.y*sc, label: "open call", link: "https://publicaccessmemories.com/statement" },
         { x: p1.x*sc, y: p1.y*sc, label: "about", link: "https://publicaccessmemories.com/about" },
         { x: p2.x*sc, y: p2.y*sc, label: "@public.access.memories", link: "https://www.instagram.com/public.access.memories/" }
     ];
