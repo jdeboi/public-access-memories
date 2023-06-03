@@ -127,7 +127,7 @@ class GallerySketch extends React.Component<Props> {
     // building textures
     // floorTex = p5.loadImage(url + "concrete-512.jpg");
     cubeTex = p5.loadImage("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/fields_of_view/spacepond.png");// url + "concrete-512.jpg");
-    floorTex = p5.loadImage("/online_assets/Transparency500.jpg")
+    floorTex = p5.loadImage("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/gallery/FOV/Transparency500.jpg")
     treeTex = p5.loadImage(url + "grass/tree.png");
     doorImgs[0] = p5.loadImage(url + "door/frame2.png");
     doorImgs[1] = p5.loadImage(url + "door/leftdoor2.png");
