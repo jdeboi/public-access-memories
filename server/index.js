@@ -8,7 +8,7 @@ const server = http.createServer(app);
 const cors = require('cors')
 app.use(cors())
 
-const origin = process.env.NODE_ENV == "development" ? "http://localhost:3000" : "https://www.publicaccessmemories.com/"
+const origin = process.env.NODE_ENV == "development" ? "http://localhost:3002" : "https://www.publicaccessmemories.com/"
 console.log("origin:", origin, process.env.NODE_ENV);
 const io = require("socket.io")(server, {
     cors: {
