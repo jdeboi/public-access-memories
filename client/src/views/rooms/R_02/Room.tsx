@@ -1,18 +1,17 @@
 import React, {useState, useEffect} from 'react';
-import './Cursor.css';
+import './Rosa.css';
 
 const Room = () => {
-    const [isHidden, setIsHidden] = useState(false);
+    // const [isHidden, setIsHidden] = useState(false);
 
-    useEffect(() => {
-        const timer = setTimeout(() => setIsHidden(true), 7000);
-        return () => clearTimeout(timer);
-      }, []);
+    // useEffect(() => {
+    //     const timer = setTimeout(() => setIsHidden(true), 7000);
+    //     return () => clearTimeout(timer);
+    //   }, []);
 
     return (
-        <div className="Room Cursor Sketch">
-            {/* <iframe src="https://cursor-echo.herokuapp.com/" /> */}
-            {/* <div className="roomAlert" style={{display: isHidden?"none":"block"}}>This room works better on desktop.</div> */}
+        <div className="Room Rosa Sketch">
+            <iframe src="https://player.vimeo.com/video/204594808?title=0&amp;byline=0&amp;portrait=0" style={{position: "absolute", top:0, left:0, width:"100%", height:"100%"}} allow="autoplay; fullscreen" allowFullScreen></iframe>
         </div>
     )
 };

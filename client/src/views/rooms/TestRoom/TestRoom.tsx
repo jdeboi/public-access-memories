@@ -20,13 +20,13 @@ import R_13 from '../R_13/Room';
 
 
 import { ShowConfig } from '../../../data/CurrentShow/ShowConfig';
-import { getRoomFromID } from '../../../helpers/helpers';
-const { isClosed } = ShowConfig;
+// import { getRoomFromID } from '../../../helpers/helpers';
+// const { isClosed } = ShowConfig;
 
 const TestRoom = () => {
 
     const { id } = useParams();
-    const room = getRoomFromID(id, rooms);
+    // const room = getRoomFromID(id, rooms);
 
 
 

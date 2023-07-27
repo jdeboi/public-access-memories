@@ -22,6 +22,7 @@ import { artists, roomConfig, rooms } from '../../../../data/FieldsOfView/RoomCo
 import { domCoordsToP5World } from '../../../../helpers/coordinates';
 
 import p5Types from 'p5';
+import { ShowConfig } from '../../../../data/CurrentShow/ShowConfig';
 
 export const addRoomLabelDivs = (divs: any, eyeIcon: p5Types.Image, font: p5Types.Font, p5: p5Types) => {
     divs.roomLabels = [];
@@ -128,10 +129,15 @@ export const addFolderDivs = (divs: any, instaImg: p5Types.Image, txtFile: p5Typ
     let p1 = {x: 22,y: 19.5};
     let p2 = {x: 20, y: 21};
     let labels = [
-        { x: p0.x*sc, y: p0.y*sc, label: "open call", link: "https://publicaccessmemories.com/statement" },
+        { x: p0.x*sc, y: p0.y*sc, label: "statement", link: "https://publicaccessmemories.com/statement" },
         { x: p1.x*sc, y: p1.y*sc, label: "about", link: "https://publicaccessmemories.com/about" },
         { x: p2.x*sc, y: p2.y*sc, label: "@public.access.memories", link: "https://www.instagram.com/public.access.memories/" }
     ];
+
+    if (ShowConfig.isOpenCallOpen) {
+        labels[0].label = "open call";
+        labels[0].link = "https://publicaccessmemories.com/opencall"
+    }
 
     for (let i = 0; i < 3; i++) {
         const { x, y, label, link } = labels[i];

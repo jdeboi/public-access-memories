@@ -20,19 +20,19 @@ const mapUserCoordsToMiniMap = (userX: number, userY: number, miniDim: number) =
 
 const AvatarMiniMap = (props: { isUser: boolean, dim: number, user: IUser }) => {
   const { user, dim } = props;
-  const {x,y} = mapUserCoordsToMiniMap(user.x, user.y, dim);
+  // const {x,y} = mapUserCoordsToMiniMap(user.x, user.y, dim);
 
   // not sure why logic above doesn't work...
-  // const scaler = dim / 200;
-  // const miniScaler = 4 * scaler;
-  // const miniX = 45 * scaler;
-  // const miniY = 40 * scaler;
-  // const bigScaler = GlobalConfig.scaler;
-  // const bigX = GlobalConfig.x;
-  // const bigY = GlobalConfig.y;
+  const scaler = dim / 200;
+  const miniScaler = 4 * scaler;
+  const miniX = 45 * scaler;
+  const miniY = 40 * scaler;
+  const bigScaler = GlobalConfig.scaler;
+  const bigX = GlobalConfig.x;
+  const bigY = GlobalConfig.y;
 
-  // const x = (user.x / bigScaler - bigX) * miniScaler + miniX;
-  // const y = (user.y / bigScaler - bigY) * miniScaler + miniY;
+  const x = (user.x / bigScaler - bigX) * miniScaler + miniX;
+  const y = (user.y / bigScaler - bigY) * miniScaler + miniY;
 
   const sty = { top: y, left: x };
 

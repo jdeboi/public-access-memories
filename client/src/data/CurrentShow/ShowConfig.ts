@@ -4,12 +4,14 @@ const development = (process.env.NODE_ENV === "development");
 
 export const ShowConfig = {
     isClosed: true,
+    isOpenCallOpen: false,
     underConstruction: true,
     isMenuOn: false,
     galleryTitle: "public access memories",
     showTitle: "Fields of View",
     showDescription: "",
-    showOpens: { date: "September 1st 2023", time: "5PM PST (GMT-7)" },
+    showOpens: { date: "November 1st 2023", time: "5PM PST (GMT-7)" },
     showCloses: "",
-    link: "fields-of-view"
+    link: "fields-of-view",
+    awsLink: "fields_of_view"
 }

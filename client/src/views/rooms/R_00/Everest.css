@@ -1,0 +1,61 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap");
+.Everest {
+  background: white;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  width: 100%;
+  font-family: "Crimson Text", sans-serif;
+  font-size: 1.2em;
+}
+.Everest .titleEl {
+  text-align: center;
+}
+.Everest details summary {
+  cursor: pointer;
+}
+.Everest details {
+  padding-left: 1.5vw;
+  display: block;
+  line-height: 2em;
+}
+.Everest details > summary {
+  list-style-type: none;
+}
+.Everest summary::-webkit-details-marker {
+  display: none;
+}
+.Everest summary::after {
+  content: " ►";
+  padding-left: 1em;
+  font-size: 0.7em;
+}
+.Everest details[open] > summary::after {
+  transform: rotate(90deg);
+}
+.Everest details[open] > summary:after {
+  content: " ▼";
+  font-size: 0.7em;
+}
+@keyframes details-show {
+  from {
+    opacity: 0;
+  }
+}
+.Everest details[open] > *:not(summary) {
+  animation: details-show 250ms;
+}
+.Everest .glitchcity {
+  margin-left: -35vw;
+}
+.Everest .indent {
+  width: 20vw;
+  min-width: 200px;
+  padding-left: 3vw;
+}
+.Everest hr {
+  border: 1px dashed black;
+  width: 30vw;
+}/*# sourceMappingURL=Everest.css.map */

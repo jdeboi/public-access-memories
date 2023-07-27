@@ -10,15 +10,15 @@ import GallerySketch3 from './Gallery3/GallerySketch';
 import { GlobalConfig as GC_HB } from '../../data/HomeBody/GlobalConfig';
 import { GlobalConfig as GC_AIR } from '../../data/AsIRecall/GlobalConfig';
 import { GlobalConfig as GC_FV } from '../../data/FieldsOfView/GlobalConfig';
-import { GlobalConfig  } from '../../data/CurrentShow/GlobalConfig';
+import { GlobalConfig } from '../../data/CurrentShow/GlobalConfig';
 
 
 import { IUser, IUsers } from '../../interfaces';
 import { filterUsers, mapVal } from '../../helpers/helpers';
 
 import LoadingPage from '../../components/LoadingPage/LoadingPage';
-// import MiniMapAIR from './components/MiniMap/MiniMapAIR';
-// import MiniMap from './components/MiniMap/MiniMap';
+import MiniMapAIR from './components/MiniMap/MiniMapAIR';
+import MiniMap from './components/MiniMap/MiniMap';
 import MiniMapFOV from './components/MiniMap/MiniMapFOV';
 
 
@@ -51,7 +51,7 @@ const Gallery = (props: IGallery) => {
     const navigate = useNavigate();
     const audioPlayer = useRef(null);
 
-  
+
     const clickedUserChat = (otherUser: IUser) => {
         if (otherUser.id !== user.id) {
             // const { ui, setUserActiveChat, showChat, setOneMenu } = this.props;
@@ -97,7 +97,7 @@ const Gallery = (props: IGallery) => {
     const moveGalleryUser = (x: number, y: number) => {
         const GlobalConfig = getGlobalConfig()
         dispatch(setSketchVolume(getVolume()));
-        dispatch(moveUser({ x, y}));
+        dispatch(moveUser({ x, y }));
         const newUser = { ...user };
         newUser.x = x;
         newUser.y = y;
@@ -170,6 +170,19 @@ const Gallery = (props: IGallery) => {
         }
     }
 
+    const getMap = () => {
+        let gal = props.id ? props.id : 1;
+        switch (gal) {
+            case 1:
+                return (<MiniMap users={filterUsers(user, props.users)} x={20} y={20} />);
+            case 2:
+                return (<MiniMapAIR users={filterUsers(user, props.users)} x={20} y={20} />);
+            case 3:
+                return (<MiniMapFOV users={filterUsers(user, props.users)} x={20} y={20} />)
+            default:
+                return (<MiniMap users={filterUsers(user, props.users)} x={20} y={20} />);
+        }
+    }
     return (
         <div className="Gallery Sketch">
             <div id="p5_loading" className="loadingclass"></div>
@@ -177,10 +190,7 @@ const Gallery = (props: IGallery) => {
             {
                 windowUI.loading ?
                     <LoadingPage /> :
-                    // <MiniMapAIR users={filterUsers(user, props.users)} x={20} y={20} />
-                // <MiniMap users={filterUsers(user, props.users)} x={20} y={20} />
-                <MiniMapFOV users={filterUsers(user, props.users)} x={20} y={20} />
-
+                    getMap()
             }
 
             {!props.showWelcome ?

@@ -52,6 +52,7 @@ import { shouldShowLoggedInComponents } from '../helpers/helpers';
 import SubscribeSendInBlue from '../views/pages/SubscribeForm/SubscribeSendInBlue';
 
 import { artists, rooms } from '../data/CurrentShow/RoomConfig';
+import OpenCall from '../views/pages/OpenCall/OpenCall';
 
 function App() {
     const user = useSelector(selectUser);
@@ -259,7 +260,7 @@ function App() {
                     <Route path="/about" element={<About />} />
                     <Route path="/newsletter" element={<SubscribeSendInBlue />} />
                     <Route path="/statement" element={<Statement />} />
-                    <Route path="/opencall" element={<Statement />} />
+                    <Route path="/opencall" element={<OpenCall />} />
 
                     <Route path="/artists" element={<Artists />} />
                     <Route path="/artist/:name" element={<Artist />} />
@@ -271,8 +272,7 @@ function App() {
 
                     <Route path="/test/rooms/:id" element={<TestRoom />} />
                     <Route path={`/${ShowConfig.link}/rooms/:id`} element={<Room />} />
-                    {/* <Route path={`/${ShowConfig.link}/spaghetti`} element={<Spaghetti />} /> */}
-
+ 
                     <Route path="/pastexhibitions" element={<PastExhibitions />} />
                     <Route path="/pastexhibitions/homebody" element={<HomeBody />} />
                     <Route path="/pastexhibitions/asirecall" element={<AsIRecall />} />
