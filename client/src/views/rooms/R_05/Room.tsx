@@ -1,26 +1,12 @@
 
-import React, { useEffect } from 'react';
-// import P5Sketch from './CiaraSketch';
-import './Ciara.css';
-
-// store
-import { useSelector, useDispatch } from 'react-redux';
-import { selectWindow } from '../../../store/store';
-import { doneLoadingApp } from '../../../store/window';
-
+import React from 'react';
+import './Petra.css';
 
 const Room = () => {
-    const windowUI = useSelector(selectWindow);
-    const dispatch = useDispatch();
 
     return (
-        <div className="Room Ciara Sketch">
-            {/* <div id="p5_loading" className="loadingclass"></div>
-            <P5Sketch
-                hasStarted={windowUI.compositionStarted}
-                isMobile={windowUI.isMobile}
-                loadingDone={() => dispatch(doneLoadingApp())}
-            /> */}
+        <div className="Room Petra Sketch">
+            <iframe src="https://player.vimeo.com/video/437878761?h=d6ed3c4905" style={{position: "absolute", top:0, left:0, width:"100%", height:"100%"}} allow="autoplay; fullscreen" allowFullScreen></iframe>
         </div>
     )
 };

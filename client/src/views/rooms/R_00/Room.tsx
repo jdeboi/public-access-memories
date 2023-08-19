@@ -19,7 +19,7 @@ const Room = () => {
                     <details>
                         <summary>i convinced my friend's older sister to loan me her gameboy color</summary>
                         <details>
-                            <summary><i>with</i> pokemon blue</summary>
+                            <summary><em>with</em> pokemon blue</summary>
                             <details>
                                 <summary>on the one condition</summary>
                                 <details>
@@ -67,7 +67,7 @@ const Room = () => {
                                             </details>
 
                                             <details>
-                                                <summary> i <i>was</i> angling for the elite four, the ostensible win condition of pokemon</summary>
+                                                <summary> i <em>was</em> angling for the elite four, the ostensible win condition of pokemon</summary>
                                                 <details>
                                                     <summary> but i often stopped at cinnabar island</summary>
                                                     <details>
@@ -164,7 +164,7 @@ const Room = () => {
                                                                                     <details>
                                                                                         <summary> spyro is 3d, with simulated physics and barriers</summary>
                                                                                         <details>
-                                                                                            <summary> this means that you can <i>see</i> outside</summary>
+                                                                                            <summary> this means that you can <em>see</em> outside</summary>
                                                                                             <details>
                                                                                                 <summary> it is right there</summary>
                                                                                                 <details>
@@ -277,7 +277,7 @@ const Room = () => {
                                                     <details>
                                                         <summary> my teacher tried to explain that air wasn't the right way to think about it</summary>
                                                         <details>
-                                                            <summary> it wasn't <i>air</i> in atoms, because air was made <i>of</i> atoms</summary>
+                                                            <summary> it wasn't <em>air</em> in atoms, because air was made <em>of</em> atoms</summary>
                                                             <details>
                                                                 <summary> it was just nothing</summary>
                                                                 <details>
@@ -316,7 +316,7 @@ const Room = () => {
                                                                                 <details>
                                                                                     <summary> if we closed our eyes</summary>
                                                                                     <details>
-                                                                                        <summary> if we really <i>focused</i></summary>
+                                                                                        <summary> if we really <em>focused</em></summary>
                                                                                         <details>
                                                                                             <summary> we would phase a little closer</summary><br />
 
@@ -362,7 +362,7 @@ const Room = () => {
                                                                             <details>
                                                                                 <summary> i still remember the caption;</summary>
                                                                                 <details>
-                                                                                    <summary> <i>"A traveller puts his head under the edge of the firmament"</i></summary>
+                                                                                    <summary> <em>"A traveller puts his head under the edge of the firmament"</em></summary>
                                                                                     <details>
                                                                                         <summary> <img src="https://everest-pipkin.com/projects/soft_corruptor/engraving.jpg" className="indent" /><br /></summary>
 
@@ -460,7 +460,7 @@ const Room = () => {
                                                                                                 <summary> like picking up the shell and seeing the hermit crab</summary><br />
 
                                                                                                 <details>
-                                                                                                    <summary> i could <i>read</i> it</summary>
+                                                                                                    <summary> i could <em>read</em> it</summary>
                                                                                                     <details>
                                                                                                         <summary> i could see how it was put together</summary>
 
