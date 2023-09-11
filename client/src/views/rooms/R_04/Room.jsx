@@ -27,12 +27,14 @@ function VideoTex({ windowUI }) {
   useEffect(() => {
     if (windowUI.compositionStarted) {
       video.play();
+      console.log("play");
     }
   }, [windowUI.compositionStarted]);
 
   useEffect(() => {
     return () => {
       video.src = "";
+      console.log("no src");
     }
   }, []);
 

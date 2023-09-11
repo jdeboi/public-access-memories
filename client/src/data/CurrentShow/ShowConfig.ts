@@ -5,7 +5,7 @@ const development = (process.env.NODE_ENV === "development");
 export const ShowConfig = {
     isClosed: true,
     isOpenCallOpen: false,
-    underConstruction: true,
+    underConstruction: false,
     isMenuOn: false,
     galleryTitle: "public access memories",
     showTitle: "Fields of View",

@@ -8,6 +8,7 @@
   margin-bottom: 20px;
   padding: 2px;
   text-align: center;
+  max-width: 200px;
 }
 .Artists .artists-list img.thumb {
   width: 200px;

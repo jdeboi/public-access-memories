@@ -3,14 +3,8 @@ import React from 'react';
 
 const Room = () => {
 
-    // return (
-    //     <div className="Room Sketch">
-    //         <div>Christina</div>
-    //     </div>
-    // )
-
     return (
-        <div className="Room R_03 Sketch">
+        <div className="Room Sketch">
             <iframe
                 src={"https://christinas.world/"}
                 width={"100%"}
