@@ -6,7 +6,7 @@ const Room = () => {
     return (
         <div className="Room Sketch" style={{backgroundColor: "black"}}>
             <iframe 
-            src="https://www.matthisgrunsky.ca/in_progress/small_world/" 
+            src="https://publicaccessmemories.s3.amazonaws.com/index.html" 
             width={"100%"}
             height={"100%"}
             />
