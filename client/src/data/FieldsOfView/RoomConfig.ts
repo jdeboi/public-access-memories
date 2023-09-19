@@ -97,16 +97,16 @@ export const artists: IArtist[] = [
     {
         id: 6,
         roomID: 6,
-        title: "TBD",
+        title: "Sphere Dream",
         name: "Jason Isolini",
         nameLink: "isolini",
         thumb: "isolini-thumb",
         webLink: "https://jisolini.com/",
         instaLink: "https://www.instagram.com/jisolini/",
-        medium: "",
-        description: "TBD",
+        medium: "HTML, sound, 360 video",
+        description: "A petrified office chair spins on a rusty vent. A television burns displaying a lost signal. Automated manufacturing takes place on a conveyor belt in the background.",
         year: 2023,
-        bio: ""
+        bio: "His work uses techniques of 360° collage and network interventions test the increased conflation of corporate, public and private environments. He has been featured in publications such as Vice, Artspace, and Pin-up among others. His writing has been published in Outland Magazine, Zora Zine, MIA Journal, and Berlin University’s conference in Digital Research in the Arts and Humanities."
     },
     {
         id: 7,
