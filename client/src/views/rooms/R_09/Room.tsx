@@ -5,7 +5,7 @@ const Room = () => {
     return (
         <div className="Room Vesper Sketch">
             <iframe
-                src={"https://nonplace.site:5555/folder.html"}
+                src={"https://nonplace.site:5555/"}
                 width={"100%"}
                 height={"100%"}
             />

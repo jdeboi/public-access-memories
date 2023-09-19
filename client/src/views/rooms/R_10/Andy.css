@@ -60,17 +60,17 @@
   transition: transform 3s;
 }
 .Andy .mobileBerries #berries1:hover {
-  transform: translate(0, -200px);
+  transform: translate(0, -180px);
 }
 .Andy .mobileBerries #berries2:hover {
-  transform: translate(0, 200px);
+  transform: translate(0, 180px);
 }
 .Andy .mobileBerries #berries3:hover {
-  transform: translate(0, -200px);
+  transform: translate(0, -180px);
 }
 .Andy .mobileBerries #berries4:hover {
-  transform: translate(0, 200px);
+  transform: translate(0, 180px);
 }
 .Andy .mobileBerries #berries5:hover {
-  transform: translate(0, -200px);
+  transform: translate(0, -180px);
 }/*# sourceMappingURL=Andy.css.map */

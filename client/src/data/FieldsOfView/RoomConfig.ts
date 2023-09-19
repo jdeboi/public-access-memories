@@ -140,15 +140,15 @@ export const artists: IArtist[] = [
         id: 9,
         roomID: 9,
         title: "loose page #12",
-        name: "Yingzi (Vesper) Guo",
+        name: "Vesper Guo",
         nameLink: "guo",
         thumb: "guo-thumb",
         webLink: "https://www.guoyingzi.com/",
         instaLink: "https://www.instagram.com/blinkingcaret/",
         medium: "custom software",
-        description: "TBD",
+        description: "Vesper's work explores the dichotomy between self and others in this hybrid reality. In the form of moving images, installations, and net art, she investigates this dialogical relation in the intangible pixels. Through different approaches to the first person perspective, her work integrates the viewers as strangers themselves to explore the seduction in the eternal stranger-relation we share.",
         year: 2023,
-        bio: "Vesper is a BFA from the department of Film, Video, New Media, and Animation at the School of the Art Institute of Chicago in 2020, and an MPS from the Interactive Telecommunication Program at New York University in 2023. ​ Vesper sees herself as a stranger in life and in art-making, as she is obsessed with the fluidity of identity between self and others in this hybrid reality and the hypermodern era. In the form of moving images and light installations, she investigates this dialogical relation in the intangible pixels. Through different approaches to the first person perspective, her work integrates the viewers as strangers themselves to explore the seduction in the eternal stranger-relation we share."
+        bio: "Vesper Guo is a Chinese-born artist currently based in Brooklyn, New York. She received a BFA in film and video from the School of the Art Institute of Chicago in 2020, and an MPS in the Interactive Telecommunication Program from New York University in 2023."
     },
     {
         id: 10,
