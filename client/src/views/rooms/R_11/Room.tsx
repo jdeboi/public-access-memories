@@ -11,7 +11,7 @@ const Room = () => {
                 <div className="backgroundCover">
                     <div className="LoadingPage">
                         <div className="title" style={{color: "white"}}>
-                            Please visit work on Desktop 
+                            please visit this room on desktop 
                         </div>
                     </div>
                 </div>
