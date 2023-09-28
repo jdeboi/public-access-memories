@@ -35,7 +35,7 @@ export const Statement = () => {
                         <h3>Statement</h3>
                         <div className="twoCol">
                             <div>
-                                <p>As part of the 2023-24 <a href="https://thewrong.org/">wrong biennale</a>, Public Access Memories Gallery invites submissions for Fields of View, an exhibition that aims to reimagine the dimensionality of virtual space. Submissions will be accepted in any digital media format and will be exhibited within the HTML Gallery hosted by Public Access Memories.</p>
+                                <p>As part of the 2023-24 <a href="https://thewrong.org/">wrong biennale</a>, Public Access Memories Gallery invites submissions for Fields of View, an exhibition that aims to reimagine the dimensionality of virtual space.</p>
 
                                 <p>The primary channel for communication in many aspects of our contemporary reality is the flatscreen computer monitor; however, our perceptions of this
                                     technology are often altered by illusions of space that betray

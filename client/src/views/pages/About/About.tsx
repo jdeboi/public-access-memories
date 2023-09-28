@@ -16,11 +16,22 @@ export const About = () => {
                 <br />
                 <div className="">
                     <p>
-                        Public Access Memories is a virtual art gallery that originally began as an MFA thesis exhibition. Created by Jenna deBoisblanc
-                        (<a href="https://instagram.com/jdeboi">@jdeboi</a>), the online space invites collaborative
-                        brainstorming and critical reflection on the the nature of the white cube online. An evolving canvas, the
-                        gallery seeks to host exhibitions (solo and group), artist
-                        talks, and more.
+                        Public Access Memories (PAM) is a virtual net art gallery that
+                        situates digital works within their native environment.
+                        The gallery hosts exhibitions (solo and group), artist talks, and more.
+                        An evolving canvas, PAM invites collaborative
+                        brainstorming and critical reflection on the nature of
+                        the white cube online.
+                    </p>
+                    <br />
+                    <h3>Creators</h3>
+                    <p>
+                        &gt; <a href="https://instagram.com/jdeboi">Jenna deBoisblanc</a> is the founder and chief developer of PAM.
+                        A net artist from New Orleans, she considers how the internet mediates the human experience.
+                        <br />
+                        <br />
+                        &gt; <a href="https://www.matthisgrunsky.ca/">Matthis Grunsky</a> is an artist and educator based out of Winnipeg, Manitoba. He is interested in the aesthetic potential of computation both on the computer screen and in physical media.
+
                     </p>
                     {/* <p>
                     What is the nature of the white cube online? Ostensibly
@@ -32,6 +43,8 @@ export const About = () => {
                     we code facilitate or detract from the process of viewing,
                     analyzing, sharing, and enjoying art?
                 </p> */}
+                    <br />
+                    <h3>Get Involved</h3>
                     <p>
                         To suggest a curatorial project, collaborate on a gallery
                         feature, and/or submit work, please feel free to reach out
