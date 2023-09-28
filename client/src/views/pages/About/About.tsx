@@ -16,8 +16,8 @@ export const About = () => {
                 <br />
                 <div className="">
                     <p>
-                        public access memories gallery originally began as an MFA thesis exhibition. Created by Jenna deBoisblanc
-                        (<a href="https://instagram.com/jdeboi">@jdeboi</a>), the virtual gallery space invites collaborative
+                        Public Access Memories is a virtual art gallery that originally began as an MFA thesis exhibition. Created by Jenna deBoisblanc
+                        (<a href="https://instagram.com/jdeboi">@jdeboi</a>), the online space invites collaborative
                         brainstorming and critical reflection on the the nature of the white cube online. An evolving canvas, the
                         gallery seeks to host exhibitions (solo and group), artist
                         talks, and more.

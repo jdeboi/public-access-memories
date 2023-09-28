@@ -32,6 +32,7 @@ import Welcome from '../components/Welcome/Welcome';
 import SignIn from '../components/SignIn/SignIn';
 import MobileFooter from '../components/Header/components/MobileFooter/MobileFooter';
 import RoomDecal from '../components/RoomDecal/RoomDecal';
+import { pageview } from './Analytics';
 
 // socket
 import { useSockets } from './useSockets';
@@ -65,7 +66,7 @@ function App() {
 
     const { isClosed, isMenuOn } = ShowConfig;
 
-    const { pathname } = useLocation();
+    const location = useLocation();
 
     const [users, setUsers] = useState<IUsers>([])
 
@@ -73,13 +74,18 @@ function App() {
     const [hasAvatar, setHasAvatar] = useState(false);
     const [hasLoadedCookies, setHasLoadedCookies] = useState(false);
     const [hasLoadedRoom, setHasLoadedRoom] = useState(false);
-    const [currentPage, setCurrentPage] = useState(pathname);
+    const [currentPage, setCurrentPage] = useState(location.pathname);
 
 
     // when route changes
     useEffect(() => {
+        pageview(location.pathname + location.search);
+    }, [location]);
+
+    // should this be separate from above?
+    useEffect(() => {
         pageChange();
-    }, [pathname]);
+    }, [location.pathname]);
 
     // Make sure sockets update when user does
     useEffect(() => {
@@ -123,7 +129,7 @@ function App() {
 
     const handleKeyPress = (e: KeyboardEvent) => {
         if (e.key === 'Enter') {
-            if (!hasLoadedRoom && pathname !== "/") {
+            if (!hasLoadedRoom && location.pathname !== "/") {
                 setHasLoadedRoom(true);
                 dispatch(startComposition());
             }
@@ -163,14 +169,14 @@ function App() {
 
     const pageChange = () => {
         dispatch(hideMenus());
-        const nextRoomUrl = pathname;
+        const nextRoomUrl = location.pathname;
         if (nextRoomUrl !== user.roomUrl) {
             dispatch(startComposition());
             dispatch(loadingApp());
             setHasLoadedRoom(false);
 
             const newUser = { ...user }
-            newUser.roomUrl = pathname;
+            newUser.roomUrl = location.pathname;
             socket.emit("leaveRoom", user.roomUrl);
             socket.emit("joinRoom", nextRoomUrl);
             // socket.emit("setUser", newUser);
@@ -181,7 +187,7 @@ function App() {
 
     const startMedia = () => {
         // TODO
-        if (!hasLoadedRoom && pathname !== "/") {
+        if (!hasLoadedRoom && location.pathname !== "/") {
             setHasLoadedRoom(true);
             dispatch(startComposition());
         }
@@ -194,9 +200,9 @@ function App() {
     }
 
     const getRoomDecal = () => {
-        
+
         if (ShowConfig.isClosed || ShowConfig.underConstruction) {
-            if (pathname.substring(1, 5) == "test") {
+            if (location.pathname.substring(1, 5) == "test") {
                 return (
                     <RoomDecal
                         startMedia={startMedia}
@@ -206,7 +212,7 @@ function App() {
                     />
                 )
             }
-            return null; 
+            return null;
         }
         else {
             return (
@@ -272,7 +278,7 @@ function App() {
 
                     <Route path="/test/rooms/:id" element={<TestRoom />} />
                     <Route path={`/${ShowConfig.link}/rooms/:id`} element={<Room />} />
- 
+
                     <Route path="/pastexhibitions" element={<PastExhibitions />} />
                     <Route path="/pastexhibitions/homebody" element={<HomeBody />} />
                     <Route path="/pastexhibitions/asirecall" element={<AsIRecall />} />
