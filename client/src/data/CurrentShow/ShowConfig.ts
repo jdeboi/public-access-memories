@@ -7,7 +7,7 @@ export const ShowConfig = {
     isOpenCallOpen: false,
     underConstruction: false,
     isMenuOn: false,
-    galleryTitle: "public access memories",
+    galleryTitle: "Public Access Memories",
     showTitle: "Fields of View",
     showDescription: "",
     showOpens: { date: "November 1st 2023", time: "5PM PST (GMT-7)" },

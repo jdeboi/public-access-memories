@@ -15,10 +15,10 @@ export default function LoadingPage(props: { progress?: number }) {
             <div className="LoadingPage">
                 <div className="title" style={sty}>
                     <div>{ShowConfig.showTitle}</div>
-                    <p>a <a href="https://thewrong.org/">wrong biennale</a> pavillion</p>
+                    <p>a <a href="https://thewrong.org/">wrong biennale</a> pavilion</p>
                     {/* <img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/tw5_logo_w.png" width={130} /> */}
                     {/* <p><a href="/opencall">open call</a></p> */}
-                    <p>public access memories gallery</p>
+                    <p>Public Access Memories</p>
                     {props.progress ?
                         <p>{props.progress}%</p>
                         : null

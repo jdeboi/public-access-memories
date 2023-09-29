@@ -53,18 +53,22 @@ export const About = () => {
                     </p>
                 </div>
                 <br />
-                <div className="">
-                    <h3>
+                <br />
+                <br />
+                <div className="footer">
+
+                    <div>
+                        <img className="logo" src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/assets/PAM_logos/logo_white_lg.png" />
+                    </div>
+                    <div className="socials">
                         <a href="https://www.instagram.com/public.access.memories/"><FontAwesomeIcon icon={faInstagram} /></a>
                         <span style={{ paddingRight: 10 }}></span>
                         <a href="https://github.com/jdeboi/public-access-memories"><FontAwesomeIcon icon={faGithub} /></a>
-                    </h3>
+                    </div>
+                    <div><Link to="/newsletter">Join the newsletter!</Link></div>
+
                 </div>
-                <div>
-                    <p><Link to="/newsletter">Join the newsletter!</Link></p>
-                </div>
-                {/* <SubscribeForm /> */}
-                {/* <SubscribeSendInBlue /> */}
+
             </div >
         </div>
     )

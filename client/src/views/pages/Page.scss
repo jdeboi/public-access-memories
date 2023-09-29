@@ -54,4 +54,31 @@
         // flex: .5;
         flex: 1;
     }
+    .twoCol div img {
+        width: 100%;  /* Make the image expand to the width of its container */
+        height: auto; /* Maintain the image's aspect ratio */
+        display: block; /* Removes any default margin/padding around the image */
+        max-width: 600px;
+    }
+
+    @media (max-width: 600px) {
+        .twoCol {
+            flex-direction: column; /* Switches layout from row to column */
+        }
+    }
+
+    .footer {
+        width: 100%;
+        // text-align: center;
+        line-height: 30px;
+      
+
+        .socials {
+            font-size: 22pt;
+        }
+        .logo {
+            width: 70px;
+        }
+    }
+
 }

@@ -30,18 +30,18 @@ export default function DetailsStart() {
           <div style={{ fontSize: fonts[0], paddingBottom: "0px" }}>access</div>
           <div style={{ fontSize: fonts[0], paddingBottom: "80px" }}>memories</div>
 
-          <div style={{ fontSize: fonts[3], paddingBottom: "10px" }}>a <a href="https://thewrong.org/">wrong biennale</a> pavillion</div>
+          <div style={{ fontSize: fonts[3], paddingBottom: "10px" }}>a <a href="https://thewrong.org/">wrong biennale</a> pavilion</div>
           <div style={{ fontSize: fonts[3], paddingBottom: "10px" }}>2022</div> */}
 
           <h2 style={{ paddingBottom: "20px" }}>{ShowConfig.showTitle}</h2>
-          {/* <h4 style={{ paddingBottom: "10px" }}><a href="https://thewrong.org/">a wrong biennale pavillion</a></h4> */}
-          <h4 style={{ paddingBottom: "40px" }}>
+          <h4 style={{ paddingBottom: "40px" }}><a href="https://thewrong.org/">a wrong biennale pavilion</a></h4>
+          <h4 style={{ paddingBottom: "10px" }}>
             hosted by
             <br />
-            public access memories gallery
+            Public Access Memories
           </h4>
           {/* <h4><a href="/opencall">open call</a></h4> */}
-          <h4><a href="/newsletter">join newsletter</a></h4>
+          {/* <h4><a href="/newsletter">join newsletter</a></h4> */}
         </div>
       </div>
 

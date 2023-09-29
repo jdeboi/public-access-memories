@@ -45,4 +45,25 @@
   flex-direction: column;
   flex-basis: 100%;
   flex: 1;
+}
+.Page .twoCol div img {
+  width: 100%; /* Make the image expand to the width of its container */
+  height: auto; /* Maintain the image's aspect ratio */
+  display: block; /* Removes any default margin/padding around the image */
+  max-width: 600px;
+}
+@media (max-width: 600px) {
+  .Page .twoCol {
+    flex-direction: column; /* Switches layout from row to column */
+  }
+}
+.Page .footer {
+  width: 100%;
+  line-height: 30px;
+}
+.Page .footer .socials {
+  font-size: 22pt;
+}
+.Page .footer .logo {
+  width: 70px;
 }/*# sourceMappingURL=Page.css.map */
