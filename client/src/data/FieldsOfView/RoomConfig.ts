@@ -111,16 +111,16 @@ export const artists: IArtist[] = [
     {
         id: 7,
         roomID: 7,
-        title: "TBD",
+        title: "Small World",
         name: "Matthis Grunsky",
         nameLink: "grunsky",
         thumb: "grunsky-thumb",
         webLink: "https://www.matthisgrunsky.ca/",
         instaLink: "https://www.instagram.com/grunskm/",
         medium: "Custom Software",
-        description: "TBD",
-        year: 2023,
-        bio: ""
+        description: "Small World is an interactive screen based stereoscopic drawing that can be viewed in 3D through cross-eyed free viewing. Visually, the work consists of two adjacent renderings of the same forms: a series of intertwined, worm-like lines, weaving through space around a common centre. Viewers of the work can toggle between two separate modes of interaction; either rotating the lines in space or propelling them along their chaotic paths.",
+        year: 2021,
+        bio: "Matthis Grunsky is an artist and educator based out of Winnipeg, Manitoba. He is interested in the aesthetic potential of computation both on the screen and in physical media."
     },
     {
         id: 8,
