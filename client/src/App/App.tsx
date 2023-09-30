@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./App.css";
 import { Route, Routes, useLocation } from "react-router-dom";
 
@@ -17,7 +17,7 @@ import NotFound from "../views/pages/NotFound/NotFound";
 import Artists from '../views/pages/Artists/Artists';
 import Artist from '../views/pages/Artists/Artist';
 import ArtistsList from '../views/pages/ArtistsList/ArtistsList';
-// import Spaghetti from '../views/rooms/R_03/Spaghetti';
+
 // past exhibitions
 import PastExhibitions from '../views/pages/PastExhibitions/PastExhibitions';
 import HomeBody from '../views/pages/PastExhibitions/HomeBody/HomeBody';
@@ -79,7 +79,7 @@ function App() {
 
     // when route changes
     useEffect(() => {
-        pageview(location.pathname + location.search);
+        pageview(location.pathname + location.search, location.pathname);
     }, [location]);
 
     // should this be separate from above?
