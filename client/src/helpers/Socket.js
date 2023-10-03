@@ -1,5 +1,5 @@
 import io from "socket.io-client";
-let socket = io(process.env.NODE_ENV === 'development'?"http://localhost:3001/":"");
+let socket = io(process.env.NODE_ENV !== 'production'?"http://localhost:3001/":"");
 export default socket;
 
 // const io = require("socket.io-client");

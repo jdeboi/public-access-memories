@@ -5,6 +5,27 @@ const http = require("http");
 const path = require('path');
 const server = http.createServer(app);
 
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+const { AccessToken } = require('livekit-server-sdk');
+
+const createToken = (identity, roomN) => {
+    // if this room doesn't exist, it'll be automatically created when the first
+    // client joins
+    const roomName = roomN;
+    // identifier to be used for participant.
+    // it's available as LocalParticipant.identity with livekit-client SDK
+    const participantName = identity;
+    const at = new AccessToken(process.env.LIVEKIT_API_KEY, process.env.LIVEKIT_SECRET_KEY, {
+        identity: participantName,
+    });
+    at.addGrant({ roomJoin: true, room: roomName });
+
+    return at.toJwt();
+}
+
+
 const cors = require('cors')
 app.use(cors())
 
@@ -20,9 +41,6 @@ module.exports.io = io;
 const ClientManager = require('./ClientManager');
 io.on('connection', ClientManager);
 
-// app.get("/christina", (req, res) => {
-//     res.sendFile(path.join(__dirname + '/../client/build/iframes/christina.html'));
-// })
 
 app.get("/opencallp5", (req, res) => {
     res.sendFile(path.join(__dirname + '/../client/build/iframes/opencall/opencall.html'));
@@ -30,6 +48,13 @@ app.get("/opencallp5", (req, res) => {
 
 app.get("/api", (req, res) => {
     res.json({ message: "Hello from server!" });
+});
+
+app.get('/gettoken', (req, res) => {
+    const identity = req.query.identity;
+    const roomName = req.query.roomName;
+    const token = createToken(identity, roomName);
+    res.json({token});
 });
 
 

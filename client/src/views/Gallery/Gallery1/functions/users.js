@@ -61,6 +61,11 @@ export function drawUser(user, p5, imgs) {
     p5.translate(p5.windowWidth / 2, p5.windowHeight / 2);
     p5.text(user.avatar, -17, 17);
     p5.translate(0, 16);
+
+    // if (isSpeaking) {
+    //     p5.fill("green");
+    //     p5.ellipse(0, 0, 10);
+    // }
    
     drawUserFoods(p5, user, imgs);
 

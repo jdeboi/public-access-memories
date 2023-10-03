@@ -193,7 +193,7 @@ const Gallery = (props: IGallery) => {
                     getMap()
             }
 
-            {!props.showWelcome ?
+            {/* {!props.showWelcome ?
                 <ReactAudioPlayer
                     src={music.currentSongTitle}
                     autoPlay={true}
@@ -202,7 +202,7 @@ const Gallery = (props: IGallery) => {
                     loop={true}
                     ref={audioPlayer}
                 /> : null
-            }
+            } */}
         </div>
     )
 };

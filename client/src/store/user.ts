@@ -28,7 +28,7 @@ const initialState: IUser = {
     needsCheese: false,
     cocktailTime: null,
     needsCocktail: false,
-    outside: false,
+    outside: false
 }
 
 export const userSlice = createSlice({

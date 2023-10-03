@@ -33,6 +33,9 @@ import SignIn from '../components/SignIn/SignIn';
 import MobileFooter from '../components/Header/components/MobileFooter/MobileFooter';
 import RoomDecal from '../components/RoomDecal/RoomDecal';
 import { pageview } from './Analytics';
+import MyLiveKit from '../components/AudioChat/MyLiveKit';
+// import AudioChat from '../components/AudioChat/AudioChat';
+
 
 // socket
 import { useSockets } from './useSockets';
@@ -54,6 +57,7 @@ import SubscribeSendInBlue from '../views/pages/SubscribeForm/SubscribeSendInBlu
 
 import { artists, rooms } from '../data/CurrentShow/RoomConfig';
 import OpenCall from '../views/pages/OpenCall/OpenCall';
+import { TestPage } from '../views/pages/TestPage/TestPage';
 
 function App() {
     const user = useSelector(selectUser);
@@ -226,27 +230,32 @@ function App() {
         }
     }
     const getSignedInComponents = () => {
-        if (!shouldShowLoggedInComponents(user))
-            return null;
+
         return (
             <React.Fragment>
-                <SignIn
-                    isFrame={true}
-                    hasAvatar={hasAvatar}
-                    hasLoadedCookies={hasLoadedCookies}
-                />
-                <FAQ isFrame={true} />
-                <Chat users={users} />
-                <Welcome
-                    isClosed={isClosed}
-                    hasAvatar={hasAvatar}
-                    hasLoadedCookies={hasLoadedCookies}
-                    showWelcome={showWelcome}
-                    closeWelcome={closeWelcome}
-                />
+                {shouldShowLoggedInComponents(user) ?
+                    <React.Fragment>
+                        <SignIn
+                            isFrame={true}
+                            hasAvatar={hasAvatar}
+                            hasLoadedCookies={hasLoadedCookies}
+                        />
+                        <FAQ isFrame={true} />
+                        <Chat users={users} />
+                        <Welcome
+                            isClosed={isClosed}
+                            hasAvatar={hasAvatar}
+                            hasLoadedCookies={hasLoadedCookies}
+                            showWelcome={showWelcome}
+                            closeWelcome={closeWelcome}
+                        />
 
-                <MobileFooter avatarClicked={avatarClicked} />
-
+                        <MobileFooter avatarClicked={avatarClicked} />
+                        <MyLiveKit user={user} />
+                        {/* <AudioChat user={user} /> */}
+                    </React.Fragment>
+                    :
+                    null}
             </React.Fragment>
         )
     }
@@ -264,6 +273,8 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Gallery id={3} users={users} isClosed={isClosed} showWelcome={showWelcome} />} />
                     <Route path="/about" element={<About />} />
+                    <Route path="/testpage" element={<TestPage />} />
+
                     <Route path="/newsletter" element={<SubscribeSendInBlue />} />
                     <Route path="/statement" element={<Statement />} />
                     <Route path="/opencall" element={<OpenCall />} />

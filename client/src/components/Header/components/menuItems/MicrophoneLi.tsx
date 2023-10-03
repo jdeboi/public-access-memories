@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faVolumeMute, faVolumeUp } from "@fortawesome/free-solid-svg-icons";
+import { faMicrophone, faMicrophoneSlash } from "@fortawesome/free-solid-svg-icons";
 
 // store
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,10 +8,10 @@ import { selectMenu, selectMusic } from '../../../../store/store';
 import { toggleVolume } from '../../../../store/music';
 
 
-const VolumeLi = () => {
+const MicrophoneLi = () => {
     const dispatch = useDispatch();
     const menu = useSelector(selectMenu);
-    const music = useSelector(selectMusic);
+    // const music = useSelector(selectMusic);
     const [classN, setClassN] = useState("expandable icon");
 
     useEffect(() => {
@@ -29,17 +29,18 @@ const VolumeLi = () => {
         dispatch(toggleVolume());
     }
 
-    const getVolumeIcon = () => {
-        if (music.isMuted || music.volume == 0)
-            return <FontAwesomeIcon icon={faVolumeMute} />
-        return <FontAwesomeIcon icon={faVolumeUp} />
+    const getMicrophoneIcon = () => {
+        return <FontAwesomeIcon icon={faMicrophone} />
+        // if (music.isMuted || music.volume == 0)
+        //     return <FontAwesomeIcon icon={faMicrophone} />
+        // return <FontAwesomeIcon icon={faMicrophoneSlash} />
     }
 
     return (
         <li className={classN} onClick={volumeClicked}>
-            {getVolumeIcon()}
+            {getMicrophoneIcon()}
         </li>
     )
 };
 
-export default VolumeLi;
+export default MicrophoneLi;

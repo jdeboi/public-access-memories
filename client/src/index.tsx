@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from "react-dom/client";
 import './index.css';
 import App from './App/App';
+
 import { BrowserRouter as Router } from "react-router-dom";
 
 // store
@@ -13,11 +14,12 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   // <React.StrictMode>
-    <Provider store={store} >
-        <Router>
-          <App />
-        </Router>
-    </Provider>
+  <Provider store={store} >
+
+    <Router>
+      <App />
+    </Router>
+  </Provider>
   // </React.StrictMode>
 );
 

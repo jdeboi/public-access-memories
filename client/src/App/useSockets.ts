@@ -26,8 +26,12 @@ interface ISockets {
 export const useSockets = (props: ISockets) => {
     const user = useSelector(selectUser);
     const dispatch = useDispatch();
+    
+
+
 
     const socketSetup = () => {
+        console.log("dunno")
         socket.on('connect', () => {
             dispatch(setUserID(socket.id))
             socket.emit("joinRoom", user.roomUrl);
@@ -71,6 +75,7 @@ export const useSockets = (props: ISockets) => {
             // props.setUsersChange(true);
         })
 
+      
     }
 
     const getUserNameById = (id: string, users: IUsers) => {
