@@ -39,7 +39,7 @@
     "react-tooltip": "^4.2.21",
     "react-use": "^17.4.0",
     "socket.io-client": "^4.5.1",
-    "three": "^0.143.0",
+    "three": "^0.157.0",
     "typescript": "^4.7.4",
     "use-sound": "^4.0.1",
     "web-vitals": "^2.1.4"
