@@ -258,7 +258,7 @@ class GallerySketch extends React.Component<Props> {
   ////////////////////////////////////////////////////////////////////////
   draw = (p5: p5Types) => {
     const { user, users } = this.props;
-    p5.clear();
+    p5.clear(255, 255, 255, 255);
 
     // NOTE: Do not use setState in the draw function or in functions that are executed
     // in the draw function...

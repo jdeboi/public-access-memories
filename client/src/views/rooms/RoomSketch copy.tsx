@@ -59,7 +59,7 @@ class GallerySketch extends React.Component<Props> {
   ////////////////////////////////////////////////////////////////////////
   draw = (p5: p5Types) => {
     const { user, users } = this.props;
-    p5.clear();
+    p5.clear(255, 255, 255, 255);
 
 
   };

@@ -222,7 +222,8 @@ class AnaglyphEffect {
             this.theShader.setUniform("u_resolution", [this.width, this.height]);
             this.theShader.setUniform("mapLeft", this.imgLeft);
             this.theShader.setUniform("mapRight", this.imgRight);
-            this.output.clear();
+            this.output.clear(255, 255, 255, 255);
+            
             this.output.shader(this.theShader);
             this.output.rect(0, 0, this.width, this.height);
 
@@ -248,7 +249,8 @@ class AnaglyphEffect {
             // for some reason shader flips images?
             // have to reverse them in the y
             pg.push();
-            pg.clear();
+            pg.clear(255, 255, 255, 255);
+
             pg.translate(x, y);
             pg.scale(1, -1);
             pg.image(img, 0, 0);
@@ -259,7 +261,7 @@ class AnaglyphEffect {
 
     drawScene(side: number, pg: p5Types.Graphics, scene: (pg: p5Types.Graphics) => void) {
         pg.push();
-        pg.clear();
+        pg.clear(255, 255, 255, 255);
         this.getCamera(side, pg);
         scene(pg);
         pg.pop();

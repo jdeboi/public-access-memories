@@ -245,7 +245,7 @@ class GallerySketch extends React.Component<Props> {
     anaglyph.draw((pg) => scene(pg, p5, floorTex));
 
     const { user, users } = this.props;
-    p5.clear();
+    p5.clear(255, 255, 255, 255);
     
     p5.push();
     p5.translate(p5.width / 2, p5.height / 2);
