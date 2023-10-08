@@ -6,6 +6,8 @@ import { SpatialAudioController } from "./SpatialAudioController";
 import { RemotePlayersController } from "./RemotePlayersController";
 import { useGameState } from './GameState';
 import { useTrackPositions } from "./useTrackPositions";
+import { JukeBoxProvider } from './JukeBoxProvider';
+import { useDispatch } from 'react-redux';
 
 import {
     useIsSpeaking,
@@ -13,49 +15,36 @@ import {
     useParticipantInfo,
     useSpeakingParticipants,
 } from "@livekit/components-react";
+import { setIsMuted, setIsSpeaking } from '../../store/user';
 
 // import { JukeBox } from "./JukeBox";
 // import { JukeBoxModal } from "./JukeBoxModal";
-import { JukeBoxProvider } from "./JukeBoxProvider";
-import { BottomBar } from './SelectMicrophone/BottomBar';
+// import { JukeBoxProvider } from "./JukeBoxProvider";
+// import { JukeBox } from './JukeBox';
+// import WineBar from '../../views/Gallery/components/p5/Bars/WineBar';
+// import { DJBotUserCoords } from '../../data/FieldsOfView/BotConfig';
+
 
 interface AudioChatProps {
     user: IUser;
 }
 
 const AudioChat: React.FC<AudioChatProps> = ({ user }) => {
-
+    
     const {
-        inputs,
         remotePlayers,
         networkPositions,
         earshotRadius,
-        backgroundZIndex,
-        playerSpeed,
         jukeBoxPosition,
-        setInputs,
         setNetworkPositions,
         setRemotePlayers,
     } = useGameState();
     const trackPositions = useTrackPositions({ remotePlayers, jukeBoxPosition });
-    const { localParticipant } = useLocalParticipant();
-    const { metadata: localMetadata } = useParticipantInfo({
-        participant: localParticipant,
-    });
-
+    const { isMicrophoneEnabled, localParticipant } = useLocalParticipant();
+    const localSpeaking = useIsSpeaking(localParticipant);
+    const dispatch = useDispatch();
+    
     const [myPlayer, setMyPlayer] = useState<Player | null>(null);
-
-    const [pos, setPos] = useState({ x: user.x, y: user.y })
-    // const localSpeaking = useIsSpeaking(localParticipant);
-    // const speakingParticipants = useSpeakingParticipants();
-    // const speakingLookup = useMemo(() => {
-    //     const lookup = new Set<string>();
-    //     for (const p of speakingParticipants) {
-    //         lookup.add(p.identity);
-    //     }
-    //     return lookup;
-    // }, [speakingParticipants]);
-
 
     useEffect(() => {
         if (!user || !user.userName) return;
@@ -67,6 +56,14 @@ const AudioChat: React.FC<AudioChatProps> = ({ user }) => {
         setMyPlayer({ position: newPosition, username: userN });
     }, [user.x, user.y, user.userName])
 
+   
+    useEffect(() => {
+        dispatch(setIsSpeaking({isSpeaking: localSpeaking}))
+    }, [localSpeaking])
+
+    useEffect(() => {
+        dispatch(setIsMuted({isMuted: !isMicrophoneEnabled}))
+    }, [isMicrophoneEnabled])
 
     return (
         <React.Fragment>
@@ -94,8 +91,11 @@ const AudioChat: React.FC<AudioChatProps> = ({ user }) => {
                 setMyPlayer={setMyPlayer}
                 localParticipant={localParticipant}
             /> */}
+                {/* {myPlayer && (<JukeBox
+                    backgroundZIndex={0}
+                    position={DJBotUserCoords}
+                />)} */}
             </JukeBoxProvider>
-            <BottomBar />
         </React.Fragment>
     );
 };

@@ -1,0 +1,34 @@
+.EditUsers {
+  background-color: white;
+  height: 100%;
+}
+.EditUsers .usersTable {
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+}
+.EditUsers .usersTable .usersRow {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  justify-content: space-between;
+}
+.EditUsers .usersTable .usersRow div {
+  width: 200px;
+}
+.EditUsers .usersTable .usersRow.header {
+  background-color: lightgray;
+}
+.EditUsers .usersTable div.isMuted {
+  width: 10px;
+  height: 10px;
+  background-color: red;
+}
+.EditUsers .usersTable div.isLive {
+  width: 10px;
+  height: 10px;
+  background-color: lime;
+}/*# sourceMappingURL=EditUsers.css.map */

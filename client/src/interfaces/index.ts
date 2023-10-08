@@ -16,7 +16,10 @@ export interface IUser {
     needsCheese: boolean;
     cocktailTime: string | null;
     needsCocktail: boolean;
-    outside: boolean
+    outside: boolean;
+    isMuted: boolean;
+    isGlobalMuted: boolean;
+    isSpeaking: boolean;
 }
 
 

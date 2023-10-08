@@ -10,7 +10,7 @@ import { IUser, IUsers } from '../interfaces/index';
 import { IMessage } from '../interfaces';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUser } from '../store/store';
-import { setUserID } from '../store/user';
+import { setUserID, toggleIsGlobalMuted } from '../store/user';
 import { addMessage, incremendNotifications } from '../store/messages';
 
 // socket
@@ -31,7 +31,7 @@ export const useSockets = (props: ISockets) => {
 
 
     const socketSetup = () => {
-        console.log("dunno")
+        
         socket.on('connect', () => {
             dispatch(setUserID(socket.id))
             socket.emit("joinRoom", user.roomUrl);
@@ -75,6 +75,10 @@ export const useSockets = (props: ISockets) => {
             // props.setUsersChange(true);
         })
 
+        socket.on("toggleGlobalUserMute", () => {
+            dispatch(toggleIsGlobalMuted());
+            alert("FYI - you were muted by the admin");
+        })
       
     }
 

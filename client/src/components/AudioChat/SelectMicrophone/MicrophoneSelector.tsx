@@ -3,11 +3,6 @@ import {
   useRoomContext,
 } from "@livekit/components-react";
 
-const wrapperStyle = {
-  width: "20px",
-  display: "inline-block",
-  overflow: "hidden"
-}
 
 
 export function MicrophoneSelector() {
@@ -22,7 +17,7 @@ export function MicrophoneSelector() {
         setActiveMediaDevice(e.currentTarget.value);
       }}
       value={activeDeviceId}
-      style={{ width: "20px" }}
+      
       className="select select-sm w-full sm:max-w-[200px] max-w-[100px] m-2 select-none"
     >
       <option value={-1} disabled>

@@ -17,7 +17,6 @@ var clients = new Map();
 setInterval(() => {
   try {
     const c = Array.from(clients.values());
-    // console.log(c.length, "users");
     io.emit('usersUpdate', c);
   }
   catch (error) {
@@ -26,7 +25,6 @@ setInterval(() => {
 }, 300);
 
 module.exports = function (client) {
-  // console.log('client connected...', client.id)
   io.sockets.emit('userJoined', client.id);
 
 
@@ -51,28 +49,23 @@ module.exports = function (client) {
   })
 
   client.on('setUser', user => {
-    // console.log("client socket set", user)
     user.id = client.id;
     clients.set(client.id, user);
   })
 
   client.on('setBot', bot => {
-    // console.log("SETTING USER", user)
     clients.set(bot.id, bot);
   })
 
   client.on('joinRoom', (room) => {
     client.join(room);
-    // console.log(client.id, "joined room", room);
   })
 
   client.on('leaveRoom', (room) => {
     client.leave(room);
-    // console.log(client.id, "left room", room);
   })
 
   client.on('error', (err) => {
-    // console.log('received error from client:', client.id)
     console.log(err)
   })
 
@@ -83,21 +76,19 @@ module.exports = function (client) {
   })
 
   client.on('messageRoom', (messageObj) => {
-    // console.log("sending room message to", room, message);
-    // io.sockets.in(room).emit('message', getMessageObject(client.id, "room", message))
-    // client.to(room).emit('message', getMessageObject(client.id, room, message));
     client.to(messageObj.roomUrl).emit('messageRoom', getMessageToRoom(messageObj));
   })
 
   client.on('messageAll', (messageObj) => {
-    // includes sender
-    // io.emit('message', getMessageObject(client.id, "all", message));
-
     client.broadcast.emit('messageAll', getMessageToAll(messageObj));
   })
 
   client.on('critique', (crit) => {
     client.broadcast.emit('critique', crit);
+  })
+
+  client.on('toggleGlobalUserMute', (socketId) => {
+    io.to(socketId).emit('toggleGlobalUserMute');
   })
 }
 

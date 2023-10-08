@@ -1,0 +1,44 @@
+.EditUsers {
+
+    background-color: white;
+    height: 100%;
+    
+    .usersTable {
+        padding-top:30px;
+        display: flex;
+        flex-direction: column;
+        width: 600px;
+        
+
+        .usersRow {
+            display: flex;
+            flex-direction: row;
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            justify-content: space-between;
+
+            div {
+                width: 200px;  
+            }
+        }
+
+        .usersRow.header {
+            background-color: lightgray;
+        }
+        
+        div.isMuted {
+            width: 10px;
+            height: 10px;
+            background-color: red;
+        }
+
+        div.isLive {
+            width: 10px;
+            height: 10px;
+            background-color: lime;
+        }
+    }
+
+    
+}

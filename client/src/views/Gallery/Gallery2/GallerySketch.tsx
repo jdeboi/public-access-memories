@@ -150,6 +150,7 @@ class GallerySketch extends React.Component<Props> {
     barEmojis[2] = p5.loadImage(url + "emojis/wine.png");
     barEmojis[3] = p5.loadImage(url + "emojis/cocktail.png");
     barEmojis[4] = p5.loadImage(url + "emojis/chat.png");
+    barEmojis[5] = p5.loadImage(url + "emojis/mic.png");
 
     //////////////
     // plants

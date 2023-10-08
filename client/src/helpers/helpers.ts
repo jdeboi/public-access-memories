@@ -44,7 +44,10 @@ export const getNewUser = (userName: string, avatar: string, room: string, id = 
     needsCheese: false,
     cocktailTime: null,
     needsCocktail: false,
-    outside: false
+    outside: false,
+    isMuted: false,
+    isGlobalMuted: false,
+    isSpeaking: false
   }
   return newUser;
 }
@@ -58,7 +61,21 @@ export const filterUsers = (currentUser: IUser, data: IUsers) => {
 
 export const filterGalleryUsers = (currentUser: IUser, data: IUsers) => {
   var filteredArray = data.filter((usr: IUser) => {
-    return usr.id !== currentUser.id && (usr.userName !== "");
+    return usr.id !== currentUser.id && (usr.userName !== "") && usr.userName !== currentUser.userName;
+  });
+  return filteredArray;
+}
+
+export const filterEditUsers = (currentUser: IUser, data: IUsers) => {
+  const excludedUsernames = ["wineBot", "hostBot", "cocktailBot", "cheeseBot", "DJBot"];
+
+  var filteredArray = data.filter((usr: IUser) => {
+    return (
+      usr.id !== currentUser.id
+      && usr.userName !== ""
+      && usr.userName !== currentUser.userName
+      && !excludedUsernames.includes(usr.userName)
+    )
   });
   return filteredArray;
 }
@@ -75,7 +92,7 @@ export const getUserChatList = (currentUser: IUser, users: IUsers) => {
   return filteredArray;
 }
 
-export const userNearEntrance = (user: IUser, hostBotPoints:any, GlobalConfig: any) => {
+export const userNearEntrance = (user: IUser, hostBotPoints: any, GlobalConfig: any) => {
   let entrance = { ...hostBotPoints[0] };
   let userCoords = domCoordsToP5(user.x, user.y, GlobalConfig);
 
@@ -119,7 +136,7 @@ export const getRoomByPath = (path: string, rooms: IRoom[]): IRoom | null => {
   if (path.indexOf("test") > -1) {
     // let pathPrefix = "/" + ShowConfig.link;
     let p = path.substring(12, path.length);
-    let r = rooms.filter((room) => (room.artistID +'') === p);
+    let r = rooms.filter((room) => (room.artistID + '') === p);
     if (r.length > 0)
       return r[0];
   }
@@ -181,7 +198,7 @@ export const getArtistFromNameLink = (name: string | undefined, artists: IArtist
   return artists[0];
 }
 
-export const getRoomFromArtistRoomID = (id: number, rooms: IRoom[]): IRoom =>{
+export const getRoomFromArtistRoomID = (id: number, rooms: IRoom[]): IRoom => {
   return rooms[id];
 }
 

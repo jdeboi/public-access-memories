@@ -9,7 +9,11 @@ import {
 
 // import { Track } from 'livekit-client';
 import { IUser } from '../../interfaces';
-
+import { audioRoom } from '../../data/CurrentShow/GlobalConfig';
+import MicrophoneBarBottom from './SelectMicrophone/MicrophoneBarBottom';
+import { selectWindow } from '../../store/store';
+import { useSelector } from 'react-redux';
+// import { useIsSpeaking, useLocalParticipant } from '@livekit/components-react';
 const serverUrl = 'wss://pam-lx6e6nu8.livekit.cloud';
 
 interface MyLiveKitProps {
@@ -18,15 +22,17 @@ interface MyLiveKitProps {
 
 const MyLiveKit: React.FC<MyLiveKitProps> = ({ user }) => {
     const [token, setToken] = useState(null);
+    const windowUI = useSelector(selectWindow);
 
     useEffect(() => {
         if (!user || !user.userName) return;
         async function fetchToken() {
             try {
                 const identity = user.userName;  // You can dynamically set this based on your application's context
-                const roomName = 'home';  // user.roomURL
+                const roomName = audioRoom;  // user.roomURL
 
-                const response = await fetch(`http://localhost:3001/gettoken?identity=${identity}&roomName=${roomName}`);
+                let url = process.env.NODE_ENV !== "production" ? "http://localhost:3001" : "";
+                const response = await fetch(`${url}/gettoken?identity=${identity}&roomName=${roomName}`);
                 const data = await response.json();
 
                 setToken(data.token);
@@ -36,7 +42,7 @@ const MyLiveKit: React.FC<MyLiveKitProps> = ({ user }) => {
         }
 
         fetchToken();
-    }, [user]);
+    }, [user.userName]);
 
     const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
 
@@ -50,9 +56,24 @@ const MyLiveKit: React.FC<MyLiveKitProps> = ({ user }) => {
         };
     }, []);
 
+    
+    // const speakingParticipants = useSpeakingParticipants();
+    // const speakingLookup = useMemo(() => {
+    //     const lookup = new Set<string>();
+    //     for (const p of speakingParticipants) {
+    //       lookup.add(p.identity);
+    //     }
+    //     return lookup;
+    //   }, [speakingParticipants]);
+
+    if (windowUI.isMobile || windowUI.hasFooter) {
+        return null;
+    }
     if (!audioContext) {
         return null;
     }
+
+    // dispatch(setUserLogin(
 
     return (
         <div>
@@ -76,9 +97,9 @@ const MyLiveKit: React.FC<MyLiveKitProps> = ({ user }) => {
                         {/* <StartAudio label="Click to allow audio playback" /> */}
 
 
-                        {/* <RoomAudioRenderer />
-                    <TrackToggle source={Track.Source.Microphone} /> */}
+                        {/* <RoomAudioRenderer /> */}
                         <AudioChat user={user} />
+                        <MicrophoneBarBottom isMuted={user.isMuted} />
                     </WebAudioContext.Provider>
                 </LiveKitRoom>
                 :
@@ -88,6 +109,7 @@ const MyLiveKit: React.FC<MyLiveKitProps> = ({ user }) => {
         </div>
     );
 }
+
 
 export default MyLiveKit;
 // function MyVideoConference() {
