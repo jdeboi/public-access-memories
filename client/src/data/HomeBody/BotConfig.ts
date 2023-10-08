@@ -1,6 +1,6 @@
 import { getNewUser } from "../../helpers/helpers"
 import { IUser, IBar } from "../../interfaces"
-import { p5ToDomCoords } from "../../helpers/coordinates";
+import { p5ToDomCoords, p5ToUserCoords } from "../../helpers/coordinates";
 import { GlobalConfig } from "./GlobalConfig";
 
 const danceFloorP5 = {
@@ -23,6 +23,7 @@ const DJBotCoords = {
 }
 
 export const DJBotDomCoords = p5ToDomCoords(DJBotCoords.x, DJBotCoords.y, GlobalConfig);
+export const DJBotUserCoords = p5ToUserCoords(DJBotCoords.x, DJBotCoords.y, GlobalConfig);
 
 //// wine
 const cheeseBotCoords = {

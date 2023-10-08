@@ -1,3 +1,4 @@
+
 export interface IUser {
     id: string;
     avatar: string;
@@ -16,6 +17,9 @@ export interface IUser {
     cocktailTime: string | null;
     needsCocktail: boolean;
     outside: boolean;
+    isMuted: boolean;
+    isGlobalMuted: boolean;
+    isSpeaking: boolean;
 }
 
 
@@ -157,3 +161,29 @@ export interface IDivs {
     trashCans: any[],
     trashFolders: any[]
 }
+
+export type Vector2 = {
+    x: number;
+    y: number;
+};
+
+export type Player = {
+    username: string;
+    position: Vector2;
+};
+
+type JukeBoxState_Off = {
+    type: "off";
+  };
+  
+  type JukeBoxState_On = {
+    type: "on";
+    owner: string;
+  };
+  
+  export type JukeBoxState = JukeBoxState_Off | JukeBoxState_On;
+  
+  export type Inputs = {
+    direction: Vector2;
+  };
+  

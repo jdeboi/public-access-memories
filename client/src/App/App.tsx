@@ -17,6 +17,7 @@ import NotFound from "../views/pages/NotFound/NotFound";
 import Artists from '../views/pages/Artists/Artists';
 import Artist from '../views/pages/Artists/Artist';
 import ArtistsList from '../views/pages/ArtistsList/ArtistsList';
+import EditUsers from '../views/Admin/EditUsers';
 
 // past exhibitions
 import PastExhibitions from '../views/pages/PastExhibitions/PastExhibitions';
@@ -33,6 +34,7 @@ import SignIn from '../components/SignIn/SignIn';
 import MobileFooter from '../components/Header/components/MobileFooter/MobileFooter';
 import RoomDecal from '../components/RoomDecal/RoomDecal';
 import { pageview } from './Analytics';
+import MyLiveKit from '../components/AudioChat/MyLiveKit';
 
 // socket
 import { useSockets } from './useSockets';
@@ -47,13 +49,13 @@ import { selectUser, selectWindow, selectMusic } from '../store/store';
 import { showSignIn, hideMenus } from '../store/menu';
 import { setUser, setUserRoomUrl } from '../store/user';
 import { startComposition, resizeApp, loadingApp } from '../store/window';
-import FAQ from '../components/FAQ/FAQ';
 
 import { shouldShowLoggedInComponents } from '../helpers/helpers';
 import SubscribeSendInBlue from '../views/pages/SubscribeForm/SubscribeSendInBlue';
 
 import { artists, rooms } from '../data/CurrentShow/RoomConfig';
 import OpenCall from '../views/pages/OpenCall/OpenCall';
+import FAQFrame from '../components/FAQ/FAQFrame';
 
 function App() {
     const user = useSelector(selectUser);
@@ -77,9 +79,10 @@ function App() {
     const [currentPage, setCurrentPage] = useState(location.pathname);
 
 
-    // when route changes
+    // Google Analytics - when route changes
     useEffect(() => {
-        pageview(location.pathname + location.search, location.pathname);
+        if (process.env.NODE_ENV == "production")
+            pageview(location.pathname + location.search, location.pathname);
     }, [location]);
 
     // should this be separate from above?
@@ -92,6 +95,7 @@ function App() {
         socket.emit("setUser", user);
     }, [{ ...user }])
 
+   
     // TODO - reason for class components?
     const setUsersData = (data: IUsers) => {
         setUsers(data);
@@ -106,7 +110,6 @@ function App() {
         window.addEventListener("resize", updateDeviceDimensions);
         window.addEventListener("keydown", handleKeyPress);
 
-
         dispatch(loadingApp());
 
         return () => {
@@ -120,7 +123,7 @@ function App() {
         if (hasAvatar && !hasLoadedCookies) {
             setHasLoadedCookies(true);
         }
-    }, [user])
+    }, [hasAvatar, hasLoadedCookies])
 
 
     const updateDeviceDimensions = () => {
@@ -200,7 +203,6 @@ function App() {
     }
 
     const getRoomDecal = () => {
-
         if (ShowConfig.isClosed || ShowConfig.underConstruction) {
             if (location.pathname.substring(1, 5) == "test") {
                 return (
@@ -225,34 +227,46 @@ function App() {
             )
         }
     }
+
     const getSignedInComponents = () => {
-        if (!shouldShowLoggedInComponents(user))
-            return null;
+
         return (
             <React.Fragment>
-                <SignIn
-                    isFrame={true}
-                    hasAvatar={hasAvatar}
-                    hasLoadedCookies={hasLoadedCookies}
-                />
-                <FAQ isFrame={true} />
-                <Chat users={users} />
-                <Welcome
-                    isClosed={isClosed}
-                    hasAvatar={hasAvatar}
-                    hasLoadedCookies={hasLoadedCookies}
-                    showWelcome={showWelcome}
-                    closeWelcome={closeWelcome}
-                />
 
-                <MobileFooter avatarClicked={avatarClicked} />
+                {shouldShowLoggedInComponents(user) ?
+                    <React.Fragment>
+                        <SignIn
+                            isFrame={true}
+                            hasAvatar={hasAvatar}
+                            hasLoadedCookies={hasLoadedCookies}
+                        />
+                        <FAQFrame />
+                        <Chat users={users} />
+                        <Welcome
+                            isClosed={isClosed}
+                            hasAvatar={hasAvatar}
+                            hasLoadedCookies={hasLoadedCookies}
+                            showWelcome={showWelcome}
+                            closeWelcome={closeWelcome}
+                        />
 
+                        <MobileFooter avatarClicked={avatarClicked} />
+                        <MyLiveKit user={user} />
+
+                    </React.Fragment>
+                    :
+                    null}
             </React.Fragment>
         )
     }
 
+    // if (!audioContext) {
+    //     return null;
+    // }
+
     return (
         <div className="App">
+
             <div className={"App-Header" + (windowUI.isMobile || windowUI.hasFooter ? " mobile" : "")}>
                 <Header
                     isClosed={isClosed}
@@ -264,6 +278,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Gallery id={3} users={users} isClosed={isClosed} showWelcome={showWelcome} />} />
                     <Route path="/about" element={<About />} />
+
                     <Route path="/newsletter" element={<SubscribeSendInBlue />} />
                     <Route path="/statement" element={<Statement />} />
                     <Route path="/opencall" element={<OpenCall />} />
@@ -283,6 +298,8 @@ function App() {
                     <Route path="/pastexhibitions/homebody" element={<HomeBody />} />
                     <Route path="/pastexhibitions/asirecall" element={<AsIRecall />} />
 
+                    <Route path="/editusers" element={<EditUsers user={user} users={users} />} />
+
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </div>
@@ -290,7 +307,8 @@ function App() {
             {/* check if user hasn't logged in and on a basic page */}
             {getSignedInComponents()}
             {getRoomDecal()}
-
+            {/* <AudioChat user={user} />
+            <MicrophoneBarBottom /> */}
         </div>
 
     )

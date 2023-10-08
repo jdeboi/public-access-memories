@@ -15,3 +15,4 @@ export const ShowConfig = {
     link: "fields-of-view",
     awsLink: "fields_of_view"
 }
+

@@ -1,0 +1,68 @@
+/**
+ * 98.css
+ * Copyright (c) 2020 Jordan Scales <thatjdanisso.cool>
+ * https://github.com/jdan/98.css/blob/main/LICENSE
+ */
+/* Borders */
+/* Window borders flip button-face and button-highlight */
+/* Field borders (checkbox, input, etc) flip window-frame and button-shadow */
+.MicrophoneBar {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  height: 50px;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #5b43cd), color-stop(100%, rgb(13, 166, 255)));
+  color: white;
+  /* Flexbox to center items */
+  display: flex;
+  justify-content: center;
+  /* Horizontally center children */
+  align-items: center;
+  /* Vertically center children */
+}
+.MicrophoneBar div.barItem {
+  padding-right: 12px;
+}
+.MicrophoneBar select,
+.MicrophoneBar button {
+  color: white;
+  border-radius: 4px;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.MicrophoneBar select {
+  width: 200px;
+  border-radius: 4px;
+  font-family: consoleFont;
+}
+.MicrophoneBar select::after {
+  padding: 5px;
+}
+.MicrophoneBar div.recordingButton {
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  margin-right: -3px;
+  outline-offset: 2px;
+  outline: 3px solid rgba(255, 0, 0, 0.7);
+  width: 10px;
+  height: 10px;
+}
+.MicrophoneBar div.recordingButton.isRecording {
+  background-color: red;
+}
+.MicrophoneBar div.recordingButton.isNotRecording {
+  visibility: hidden;
+}
+.MicrophoneBar button {
+  width: 40px;
+  height: 35px;
+}
+.MicrophoneBar button.muted,
+.MicrophoneBar button.muted:hover,
+.MicrophoneBar button.live,
+.MicrophoneBar button.live:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}/*# sourceMappingURL=MicrophoneBar.css.map */

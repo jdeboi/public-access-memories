@@ -51,8 +51,8 @@ const SignIn = forwardRef<SignInSubmitType, SignInProps>((props, ref) => {
     const windowUI = useSelector(selectWindow);
     const dispatch = useDispatch();
     const { pathname } = useLocation();
-    const [localAvatar, setLocalAvatar] = useState(user.avatar);
-    const [localUserName, setLocalUserName] = useState(user.userName);
+    const [localAvatar, setLocalAvatar] = useState(user?.avatar || '');
+    const [localUserName, setLocalUserName] = useState(user?.userName || '');
     const [shouldClose, setShouldClose] = useState(false);
     const [readyToClose, setReadyToClose] = useState(false);
     const [isHidden, setIsHidden] = useState(true);
@@ -71,21 +71,22 @@ const SignIn = forwardRef<SignInSubmitType, SignInProps>((props, ref) => {
         //     return;
         // }
 
-        if (windowUI.isMobile || windowUI.hasFooter) {
-            setIsHidden(menu.mobile !== "signIn");
+
+        if (windowUI?.isMobile || windowUI?.hasFooter) {
+            setIsHidden(menu?.mobile !== "signIn");
         }
         else {
-            setIsHidden(menu.signIn.isHidden);
+            setIsHidden(menu?.signIn.isHidden);
         }
         
-    }, [user.roomUrl, windowUI.isMobile, windowUI.hasFooter, menu.signIn.isHidden, isHidden, menu.mobile])
+    }, [user?.roomUrl, windowUI?.isMobile, windowUI?.hasFooter, menu?.signIn.isHidden, isHidden, menu?.mobile])
 
     // THIS COMES IN IF THE PAGE LOADS AND THERE AREN'T ANY COOKIES,
     // AND THEN COOKIES LOAD
     useEffect(() => {
         if (props.hasAvatar && props.hasLoadedCookies) {
-            setLocalAvatar(user.avatar);
-            setLocalUserName(user.userName);
+            setLocalAvatar(user?.avatar);
+            setLocalUserName(user?.userName);
         }
     }, [props.hasLoadedCookies])
 
@@ -137,8 +138,8 @@ const SignIn = forwardRef<SignInSubmitType, SignInProps>((props, ref) => {
         // socket.emit("setUser", user);
         // TODO - are we handling in app.tsx?
         // set the local state to this registered state
-        setLocalAvatar(user.avatar);
-        setLocalUserName(user.userName);
+        setLocalAvatar(user?.avatar);
+        setLocalUserName(user?.userName);
 
 
         if (props.nextStep)
@@ -225,7 +226,7 @@ const SignIn = forwardRef<SignInSubmitType, SignInProps>((props, ref) => {
 
     const getForm = () => {
         const emojis = getEmojis();
-        let inputW = windowUI.width < 350 ? 190 : 225;
+        let inputW = windowUI?.width < 350 ? 190 : 225;
         return (
             <React.Fragment>
                 <div className="userBar flexItem flexPad flexRow">

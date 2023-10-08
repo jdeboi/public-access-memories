@@ -11,7 +11,10 @@ import MapLi from '../menuItems/MapLi';
 import FaqLi from '../menuItems/FaqLi';
 import VolumeLi from '../menuItems/VolumeLi';
 import AvatarLi from '../menuItems/AvatarLi';
-import LiveStreamLi from '../menuItems/LiveStreamLi';
+// import LiveStreamLi from '../menuItems/LiveStreamLi';
+// import MicrophoneLi from '../menuItems/MicrophoneLi';
+// import { MicrophoneMuteButton } from '../../../AudioChat/SelectMicrophone/MicrophoneToggleButton';
+// import { MicrophoneSelector } from '../../../AudioChat/SelectMicrophone/MicrophoneSelector';
 import { useLocation } from 'react-router-dom';
 
 interface IDH extends IMainMenu {
@@ -33,6 +36,9 @@ const DesktopHeader = (props: IDH) => {
             </ul>
             <ul className="right">
                 {/* <LiveStreamLi /> */}
+                {/* <MicrophoneLi /> */}
+                {/* <li><MicrophoneMuteButton /></li> */}
+                {/* <li><MicrophoneSelector /></li> */}
                 <ChatLi />
                 {pathname == "/" ? <MapLi /> : null}
                 <FaqLi />

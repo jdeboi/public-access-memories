@@ -1,0 +1,87 @@
+@import "../../../styles/constants.scss";
+
+.MicrophoneBar {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 50px;
+    background: $headerGradient;
+    color: white;
+
+
+
+    /* Flexbox to center items */
+    display: flex;
+    justify-content: center;
+    /* Horizontally center children */
+    align-items: center;
+    /* Vertically center children */
+
+    div.barItem {
+        padding-right: 12px;
+    }
+
+    select,
+    button {
+        color: white;
+
+        border-radius: 4px;
+        padding: 5px;
+        background-color: rgba(255, 255, 255, .2);
+    }
+
+    select {
+        width: 200px;
+        border-radius: 4px;
+        font-family: consoleFont;
+        // height: 25px;
+    }
+
+    select::after {
+        padding: 5px;
+    }
+
+    div.recordingButton {
+        border-radius: 50%;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        margin-right: -3px;
+        outline-offset: 2px;
+        outline: 3px solid rgba(255, 0, 0, .7);
+        width: 10px;
+        height: 10px;
+    }
+
+    div.recordingButton.isRecording {
+
+        background-color: red;
+    }
+
+    div.recordingButton.isNotRecording {
+        // outline: 2px solid black;
+        // background-color: black;
+        visibility: hidden;
+    }
+
+    button {
+        width: 40px;
+        height: 35px;
+    }
+
+    button.muted,
+    button.muted:hover,
+    button.live,
+    button.live:hover {
+        background-color: rgba(255, 255, 255, .2);
+    }
+
+
+    // button.live,
+    // button.live:hover {
+    //     background-color: red;
+    //     border: none;
+    // }
+
+}

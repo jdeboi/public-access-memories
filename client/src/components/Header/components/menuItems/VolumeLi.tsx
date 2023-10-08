@@ -23,7 +23,7 @@ const VolumeLi = () => {
 
         setClassN(classV);
 
-    }, [menu.faq.isHidden])
+    }, [menu.volume.isHidden])
 
     const volumeClicked = () => {
         dispatch(toggleVolume());

@@ -4,11 +4,54 @@ const app = express();
 const http = require("http");
 const path = require('path');
 const server = http.createServer(app);
+const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken'); 
+
+app.use(bodyParser.json());
+
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+const { AccessToken } = require('livekit-server-sdk');
+
+const createToken = (identity, roomN) => {
+    // if this room doesn't exist, it'll be automatically created when the first
+    // client joins
+    const roomName = roomN;
+    // identifier to be used for participant.
+    // it's available as LocalParticipant.identity with livekit-client SDK
+    const participantName = identity;
+    const at = new AccessToken(process.env.LIVEKIT_API_KEY, process.env.LIVEKIT_SECRET_KEY, {
+        identity: participantName,
+    });
+    at.addGrant({ roomJoin: true, room: roomName });
+
+    return at.toJwt();
+}
+
+async function muteUserAudio(participantSID) {
+    const participant = await roomService.getParticipant(participantSID);
+    for (let track of participant.tracks) {
+        if (track.kind === 'audio') {
+            await roomService.muteTrack(track.sid);
+        }
+    }
+}
+
+// Unmute a user's audio track
+async function unmuteUserAudio(participantSID) {
+    const participant = await roomService.getParticipant(participantSID);
+    for (let track of participant.tracks) {
+        if (track.kind === 'audio') {
+            await roomService.unmuteTrack(track.sid);
+        }
+    }
+}
 
 const cors = require('cors')
 app.use(cors())
 
-const origin = process.env.NODE_ENV == "development" ? "http://localhost:3000" : "https://www.publicaccessmemories.com/"
+const origin = process.env.NODE_ENV != "production" ? "http://localhost:3000" : "https://www.publicaccessmemories.com/"
 console.log("origin:", origin, process.env.NODE_ENV);
 const io = require("socket.io")(server, {
     cors: {
@@ -20,9 +63,6 @@ module.exports.io = io;
 const ClientManager = require('./ClientManager');
 io.on('connection', ClientManager);
 
-// app.get("/christina", (req, res) => {
-//     res.sendFile(path.join(__dirname + '/../client/build/iframes/christina.html'));
-// })
 
 app.get("/opencallp5", (req, res) => {
     res.sendFile(path.join(__dirname + '/../client/build/iframes/opencall/opencall.html'));
@@ -30,6 +70,48 @@ app.get("/opencallp5", (req, res) => {
 
 app.get("/api", (req, res) => {
     res.json({ message: "Hello from server!" });
+});
+
+app.post('/api/muteUser', async (req, res) => {
+    const participantSID = req.body.participantSID;
+
+    try {
+        await muteUserAudio(participantSID);
+        res.send({ success: true });
+    } catch (error) {
+        res.status(500).send({ success: false, message: error.message });
+    }
+});
+
+app.post('/api/unmuteUser', async (req, res) => {
+    const participantSID = req.body.participantSID;
+
+    try {
+        await unmuteUserAudio(participantSID);
+        res.send({ success: true });
+    } catch (error) {
+        res.status(500).send({ success: false, message: error.message });
+    }
+});
+
+app.post('/api/verify-password', (req, res) => {
+    // const identity = req.body.identity;
+    if (req.body.password === process.env.ADMIN_PASSWORD) {
+        // do I need username?
+        const token = jwt.sign({ username: "admin" }, process.env.ADMIN_SECRET, { expiresIn: '5d' });
+
+        res.json({ isValid: true, token });
+    } else {
+        res.json({ isValid: false });
+    }
+});
+
+app.get('/gettoken', (req, res) => {
+    const identity = req.query.identity;
+    const roomName = req.query.roomName;
+
+    const token = createToken(identity, roomName);
+    res.json({token});
 });
 
 
