@@ -12,7 +12,7 @@ import { roomBoundary, roomDoorCrossing, wallBoundary } from '../Gallery1/functi
 import { roundToMult2 } from '../Gallery1/functions/round';
 import { drawWalls } from '../Gallery1/functions/building';
 import {initOuterFOVWalls} from './functions/building';
-import { displayDanceFloor, drawAllFloors } from "./functions/floor";
+import { displayDanceFloor, drawTraces, drawAllFloors, drawGoPatches } from "./functions/floor";
 import { displayDancers } from '../Gallery1/functions/emojis';
 
 import { reachedDestination, getNextStep, showMouseLoc, showUserEllipses, showDestination, mouseDidMove } from '../Gallery1/functions/destination';
@@ -190,7 +190,7 @@ class GallerySketch extends React.Component<Props> {
 
     initOuterFOVWalls(p5, walls);
     for (let i = 0; i < globalRooms.length; i++) {
-      rooms.push(new FOVRoom(p5, i));
+      rooms.push(new FOVRoom(p5, i, doorImgs[1]));
     }
 
 
@@ -297,6 +297,8 @@ class GallerySketch extends React.Component<Props> {
     const roomCount = getTotalRoomCount(users, rooms);
     drawRooms(rooms, anaglyph.output);
     drawWalls(walls, p5);
+    drawGoPatches(p5);
+
     if (!isClosed)
       displayRoomLabelDivs(font, roomCount, divs);
 
@@ -649,7 +651,12 @@ function scene(pg: p5Types.Graphics, p5: p5Types, floorTex: p5Types.Image) {
   pg.translate(0, 0, -2);
   pg.image(floorTex, 0, 0, boxW, 1800);
   pg.pop();
+
+  
   pg.rect(0, 0, boxW, 1800);
+
+ 
+  
 
   // ceiling
   pg.translate(0, 0, boxW);

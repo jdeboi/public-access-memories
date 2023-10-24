@@ -21,6 +21,7 @@ const FAQFrame = (props: FAQProps) => {
     const menu = useSelector(selectMenu);
     const windowUI = useSelector(selectWindow);
     const dispatch = useDispatch();
+   
     const [isHidden, setIsHidden] = useState(true);
 
 
@@ -58,4 +59,3 @@ const FAQFrame = (props: FAQProps) => {
 
 export default FAQFrame;
 
-// memoize windowUI.isMobile, windowUI.hasFooter, menu.faq.isHidden, menu.mobile

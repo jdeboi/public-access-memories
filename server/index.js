@@ -3,9 +3,14 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const http = require("http");
 const path = require('path');
+const twilio = require('twilio');
 const server = http.createServer(app);
 const bodyParser = require('body-parser');
-const jwt = require('jsonwebtoken'); 
+const jwt = require('jsonwebtoken');
+
+const clients = new Map();
+module.exports.clients = clients;
+const maxParticipants = 43 + 5; // Set the maximum allowed participants
 
 app.use(bodyParser.json());
 
@@ -106,12 +111,37 @@ app.post('/api/verify-password', (req, res) => {
     }
 });
 
-app.get('/gettoken', (req, res) => {
-    const identity = req.query.identity;
-    const roomName = req.query.roomName;
+app.post('/get-livekit-token', (req, res) => {
+    const identity = req.body.identity;
+    const roomName = req.body.roomName;
 
-    const token = createToken(identity, roomName);
-    res.json({token});
+    try {
+        const token = createToken(identity, roomName);
+        res.json({ isValid: true, token });
+    }
+    catch (err) {
+        res.json({ isValid: false });
+    }
+
+});
+
+app.post('/api/get-twilio-token', (req, res) => {
+    const identity = req.body.identity;
+
+    if (clients.size < maxParticipants) {
+
+        const options = { identity }
+        const token = new twilio.jwt.AccessToken(process.env.TWILIO_SID, process.env.TWILIO_KEY, process.env.TWILIO_SECRET, options);
+
+
+        const grant = new twilio.jwt.AccessToken.VideoGrant();
+        token.addGrant(grant);
+
+
+        res.json({ entered: true, token: token.toJwt() });
+    }
+    else
+        res.json({ entered: false })
 });
 
 

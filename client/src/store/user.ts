@@ -29,9 +29,10 @@ const initialState: IUser = {
     cocktailTime: null,
     needsCocktail: false,
     outside: false,
-    isMuted: false,
+    isMuted: true,
     isGlobalMuted: false,
-    isSpeaking: false
+    isSpeaking: false,
+    speakingId: ''
 }
 
 export const userSlice = createSlice({
@@ -174,6 +175,9 @@ export const userSlice = createSlice({
         },
         setIsSpeaking: (state, action: PayloadAction<{ isSpeaking: boolean}>) => {
             state.isSpeaking = action.payload.isSpeaking;
+        },
+        setSpeakingId: (state, action: PayloadAction<{ speakingId: string}>) => {
+            state.speakingId = action.payload.speakingId;
         }
     }
 })
@@ -198,6 +202,6 @@ export const {
     addCheese, setCheese, resetCheese,
     addWine, setWine, resetWine,
     addCocktail, setCocktail, resetCocktail,
-    setIsGlobalMuted, toggleIsGlobalMuted, setIsMuted, setIsSpeaking,
+    setIsGlobalMuted, toggleIsGlobalMuted, setIsMuted, setIsSpeaking, setSpeakingId, 
     toggleOutside
 } = userSlice.actions;

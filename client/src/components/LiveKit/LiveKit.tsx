@@ -32,7 +32,7 @@ const MyLiveKit: React.FC<MyLiveKitProps> = ({ user }) => {
                 const roomName = audioRoom;  // user.roomURL
 
                 let url = process.env.NODE_ENV !== "production" ? "http://localhost:3001" : "";
-                const response = await fetch(`${url}/gettoken?identity=${identity}&roomName=${roomName}`);
+                const response = await fetch(`${url}/get-livekit-token?identity=${identity}&roomName=${roomName}`);
                 const data = await response.json();
 
                 setToken(data.token);

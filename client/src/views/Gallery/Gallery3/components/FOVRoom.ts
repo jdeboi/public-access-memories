@@ -5,10 +5,14 @@ import { artists, rooms, roomConfig } from '../../../../data/FieldsOfView/RoomCo
 import { displayWall } from '../../Gallery1/functions/ground';
 import { boundaryLineCrossing, doorLineCrossing } from '../../components/p5/Boundaries';
 
-class AIRRoom extends Room {
+class FOVRoom extends Room {
+    doorImg: p5Types.Image;
 
-    constructor(p5: p5Types, i: number) {
+    
+    constructor(p5: p5Types, i: number, door: p5Types.Image) {
         super(p5, null, i, GlobalConfig, artists, rooms, roomConfig);
+
+        this.doorImg = door;
     }
 
 
@@ -120,6 +124,25 @@ class AIRRoom extends Room {
     }
 
 
+    drawDoor() {
+        let sc = this.GlobalConfig.scaler;
+        const {x0, y0} = this.getDoor();
+
+        this.p5.push();
+        this.p5.translate(x0*sc, y0*sc);
+        // this.p5.strokeWeight(5);
+        // let numL = 8;
+        // let sp = 1;
+        // for (let i = 0; i < numL; i++) {
+        //     this.p5.stroke(0, 200, 155, this.p5.map(i, 0, numL-1, 255, 50));
+        //     this.p5.line(i*2, i*10, 50-i*2, i*10);
+        //     sp++;
+        // }
+        if (this.doorImg ) this.p5.image(this.doorImg, -this.w/2*GlobalConfig.scaler+20, -this.doorImg.height);
+        this.p5.pop();
+    }
+
+   
 }
 
-export default AIRRoom;
+export default FOVRoom;

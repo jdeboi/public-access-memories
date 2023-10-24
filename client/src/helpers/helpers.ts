@@ -47,7 +47,8 @@ export const getNewUser = (userName: string, avatar: string, room: string, id = 
     outside: false,
     isMuted: false,
     isGlobalMuted: false,
-    isSpeaking: false
+    isSpeaking: false,
+    speakingId: ""
   }
   return newUser;
 }

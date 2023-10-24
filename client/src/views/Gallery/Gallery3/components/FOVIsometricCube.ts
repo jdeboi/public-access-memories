@@ -39,6 +39,7 @@ export default class FOVIsometricCube {
 
     }
 
+  
     drawBox() {
         const x = this.getX();
         const y = this.getY();

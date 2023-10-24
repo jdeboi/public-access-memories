@@ -149,6 +149,20 @@ const drawTraces = (floppies: Floppy[], p5: p5Types) => {
     displayMultipleTraces(p5, lines);
 }
 
+
+const drawLinePath = (p5: p5Types, lines: any) => {
+    // for (let j = 0; j < lines.length; j++) {
+    //     let points = lines[j];
+    //     for (let i = 0; i < points.length - 1; i++) {
+    //         let dis = points[i+1][1] - points[i][1];
+    //         for (let j = 0; j < dis; j+= 20) {
+    //             p5.line(points[i][0], points[i][1], points[i + 1][0], points[i + 1][1]);
+    //         }
+            
+    //     }
+    // }
+}
+
 const displayMultipleTraces = (p5: p5Types, lines: any) => {
     displayTraceLines(p5, lines);
     // displayTraceLines(p5, lines.map((points: any) => points.map((point: any) => [point[0]-15, point[1]-15])));

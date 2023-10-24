@@ -1,8 +1,8 @@
 // import { IMessage } from '../client/src/interfaces';
 
 const io = require('./index').io;
+const clients = require('./index').clients;
 
-var clients = new Map();
 
 // if you open a new tab while logged in,
 // there is already a cookie with avatar and username

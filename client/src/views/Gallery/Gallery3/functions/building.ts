@@ -45,6 +45,7 @@ export const drawRooms = (rooms: Room[], img: p5Types.Graphics) => {
     if (rooms) {
         for (const room of rooms) {
             room.displayAnaglyph(img);
+            // room.drawDoor();
         }
     }
 

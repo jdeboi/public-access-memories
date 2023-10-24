@@ -20,6 +20,7 @@ export interface IUser {
     isMuted: boolean;
     isGlobalMuted: boolean;
     isSpeaking: boolean;
+    speakingId: string;
 }
 
 

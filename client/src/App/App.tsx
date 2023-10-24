@@ -34,7 +34,7 @@ import SignIn from '../components/SignIn/SignIn';
 import MobileFooter from '../components/Header/components/MobileFooter/MobileFooter';
 import RoomDecal from '../components/RoomDecal/RoomDecal';
 import { pageview } from './Analytics';
-import MyLiveKit from '../components/AudioChat/MyLiveKit';
+// import MyLiveKit from '../components/AudioChat/MyLiveKit';
 
 // socket
 import { useSockets } from './useSockets';
@@ -56,6 +56,7 @@ import SubscribeSendInBlue from '../views/pages/SubscribeForm/SubscribeSendInBlu
 import { artists, rooms } from '../data/CurrentShow/RoomConfig';
 import OpenCall from '../views/pages/OpenCall/OpenCall';
 import FAQFrame from '../components/FAQ/FAQFrame';
+import TwilioChat from '../components/TwilioChat/TwilioChat';
 
 function App() {
     const user = useSelector(selectUser);
@@ -95,7 +96,7 @@ function App() {
         socket.emit("setUser", user);
     }, [{ ...user }])
 
-   
+
     // TODO - reason for class components?
     const setUsersData = (data: IUsers) => {
         setUsers(data);
@@ -251,8 +252,8 @@ function App() {
                         />
 
                         <MobileFooter avatarClicked={avatarClicked} />
-                        <MyLiveKit user={user} />
-
+                        {/* <MyLiveKit user={user} /> */}
+                        <TwilioChat user={user} users={users} />
                     </React.Fragment>
                     :
                     null}
