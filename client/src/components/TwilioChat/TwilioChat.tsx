@@ -58,7 +58,7 @@ const TwilioChat: React.FC<TwilioChatProps> = ({ user, users }) => {
                 }
 
             } catch (error) {
-                console.error("Error getting twilio audio token...");
+                console.error(error, "Error getting twilio audio token...");
             }
         }
 
