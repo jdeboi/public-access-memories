@@ -39,19 +39,21 @@ const Welcome = (props: IWelcome) => {
         setStep(step => step + 1);
     }
 
-    const {showWelcome, closeWelcome, hasAvatar, hasLoadedCookies } = props;
-    const propsW = { 
-        prevStep, nextStep, onHide, title, step, 
-        closeWelcome, showWelcome, hasAvatar, hasLoadedCookies 
+    const { showWelcome, closeWelcome, hasAvatar, hasLoadedCookies } = props;
+    const propsW = {
+        prevStep, nextStep, onHide, title, step,
+        closeWelcome, showWelcome, hasAvatar, hasLoadedCookies
     };
 
-    if (props.isClosed) {
-        return <WelcomeClosed {...propsW} />
-    }
-    else {
-        return <WelcomeOpen {...propsW} />
-    }
-
+    // if (props.isClosed) {
+    //     return <WelcomeClosed {...propsW} />
+    // }
+    // else {
+    //     return <WelcomeOpen {...propsW} />
+    // }
+    return (
+        <WelcomeClosed {...propsW} />
+    )
 }
 
 
