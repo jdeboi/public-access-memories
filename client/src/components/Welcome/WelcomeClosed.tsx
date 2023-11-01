@@ -8,6 +8,7 @@ import CenterModal from '../CenterModal/CenterModal';
 import DetailsStart from './components/DetailsStart';
 import DetailsClosed from './components/DetailsClosed';
 import SignIn from '../SignIn/SignIn';
+import DetailsTour from './components/DetailsTour';
 
 interface IWelcome {
     showWelcome: boolean,
@@ -41,7 +42,8 @@ const WelcomeClosed = (props: IWelcome) => {
         if (props.step === 0)
             return <DetailsStart />
         else if (props.step === 1)
-            return <DetailsClosed />
+            // return <DetailsClosed />
+            return <DetailsTour />
         else
             return (<SignIn
                 hasAvatar={props.hasAvatar}

@@ -3,7 +3,7 @@ const development = (process.env.NODE_ENV === "development");
 // underConstruction: !development,
 
 export const ShowConfig = {
-    isClosed: false,
+    isClosed: true,
     isOpenCallOpen: false,
     underConstruction: false,
     isMenuOn: false,
