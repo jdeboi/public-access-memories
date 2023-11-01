@@ -28,7 +28,7 @@ const MyLiveKit: React.FC<MyLiveKitProps> = ({ user }) => {
         if (!user || !user.userName) return;
         async function fetchToken() {
             try {
-                const identity = user.userName;  // You can dynamically set this based on your application's context
+                const identity = user.id;  // You can dynamically set this based on your application's context
                 const roomName = audioRoom;  // user.roomURL
 
                 let url = process.env.NODE_ENV !== "production" ? "http://localhost:3001" : "";

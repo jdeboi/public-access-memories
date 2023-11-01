@@ -32,6 +32,7 @@ import { setSketchVolume } from '../../store/music';
 import { doneLoadingApp } from '../../store/window';
 
 import { getBar } from '../../data/CurrentShow/BotConfig';
+import { p5ToUserCoords } from '../../helpers/coordinates';
 
 
 interface IGallery {
@@ -66,19 +67,27 @@ const Gallery = (props: IGallery) => {
 
     const getVolume = () => {
         const dj = getBar("DJ");
-        let dx = dj.x - user.x;
-        let dy = dj.y - user.y;
+        const djpos = p5ToUserCoords(dj.x, dj.y, GlobalConfig);
+        let dx = djpos.x - user.x;
+        let dy = djpos.y - user.y;
         let dis = Math.sqrt(dx * dx + dy * dy);
-        if (user.outside) {
-            let minVol = .3;
-            let v = mapVal(dis, 0, 3000, 1, 0);
-            if (v > 1)
-                v = 1;
-            else if (v < minVol)
-                v = minVol;
-            return v;
-        }
-        return .1;
+        
+
+        // if (user.outside) {
+        // const minVol = .2;
+        // let v = mapVal(dis, 0, 3000, 1, 0);
+        // if (v > 1)
+        //     v = 1;
+        // else if (v < minVol)
+        //     v = minVol;
+        // return v;
+        // }
+        // return .1;
+
+        const minVol = .05;
+        if (dis > 1000)
+            return minVol;
+        return mapVal(dis, 0, 1000, 1, minVol);
     }
 
     const getGlobalConfig = () => {
@@ -193,16 +202,16 @@ const Gallery = (props: IGallery) => {
                     getMap()
             }
 
-            {/* {!props.showWelcome ?
+            {!props.showWelcome ?
                 <ReactAudioPlayer
                     src={music.currentSongTitle}
                     autoPlay={true}
-                    volume={music.isMuted ? 0 : music.volume}
+                    volume={music.isMuted ? 0 : getVolume()}
                     controls={false}
                     loop={true}
                     ref={audioPlayer}
                 /> : null
-            } */}
+            }
         </div>
     )
 };

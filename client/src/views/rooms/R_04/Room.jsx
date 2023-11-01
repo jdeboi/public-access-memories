@@ -27,14 +27,14 @@ function VideoTex({ windowUI }) {
   useEffect(() => {
     if (windowUI.compositionStarted) {
       video.play();
-      console.log("play");
+      // console.log("play");
     }
   }, [windowUI.compositionStarted]);
 
   useEffect(() => {
     return () => {
       video.src = "";
-      console.log("no src");
+      // console.log("no src");d
     }
   }, []);
 
@@ -63,28 +63,26 @@ const Room = () => {
   return (
     // zoom: mapVal(windowUI.contentW, 400, 2300, .7, 2),
     <div className="Room Matthew Sketch">
-      <Canvas camera={{
-        near: 1,
-        far: 10000
-      }}>
+      {windowUI.compositionStarted && windowUI.contentW &&
 
-        <Suspense fallback={<VideoTex windowUI={windowUI} />}>
-          <OrbitControls
-            minPolarAngle={Math.PI / 2 - .5}
-            maxPolarAngle={Math.PI / 2 + .5}
-            enablePan={false}
-            minDistance={1.5}
-            maxDistance={3}
-          />
-          <ambientLight color="white" intensity={.1} />
-          <VideoTex windowUI={windowUI} />
-        </Suspense>
-      </Canvas>
-      {/* {
-                windowUI.loading ?
-                    <LoadingPage /> :
-                    null
-            } */}
+        <Canvas camera={{
+          near: 1,
+          far: 10000
+        }}>
+
+          <Suspense fallback={<VideoTex windowUI={windowUI} />}>
+            <OrbitControls
+              minPolarAngle={Math.PI / 2 - .5}
+              maxPolarAngle={Math.PI / 2 + .5}
+              enablePan={false}
+              minDistance={1.5}
+              maxDistance={3}
+            />
+            <ambientLight color="white" intensity={.1} />
+            <VideoTex windowUI={windowUI} />
+          </Suspense>
+        </Canvas>
+      }
     </div>
   )
 };

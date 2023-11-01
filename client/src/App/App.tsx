@@ -56,7 +56,7 @@ import SubscribeSendInBlue from '../views/pages/SubscribeForm/SubscribeSendInBlu
 import { artists, rooms } from '../data/CurrentShow/RoomConfig';
 import OpenCall from '../views/pages/OpenCall/OpenCall';
 import FAQFrame from '../components/FAQ/FAQFrame';
-import TwilioChat from '../components/TwilioChat/TwilioChat';
+// import TwilioChat from '../components/TwilioChat/TwilioChat';
 
 function App() {
     const user = useSelector(selectUser);
@@ -253,7 +253,7 @@ function App() {
 
                         <MobileFooter avatarClicked={avatarClicked} />
                         {/* <MyLiveKit user={user} /> */}
-                        <TwilioChat user={user} users={users} />
+                        {/* <TwilioChat user={user} users={users} /> */}
                     </React.Fragment>
                     :
                     null}
@@ -261,9 +261,7 @@ function App() {
         )
     }
 
-    // if (!audioContext) {
-    //     return null;
-    // }
+  
 
     return (
         <div className="App">

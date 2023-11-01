@@ -14,10 +14,11 @@ export default class FOVRoomLabel extends RoomLabel {
         this.w = roomConfig.w * GlobalConfig.scaler+16;
         this.x -= 53.5;
         this.minButton = new ButtonTog(this.closeButton.x-8, this.closeButton.y-6, 30, 15, p5);
+        this.minButton.toggle();
     }
 
     displayContent(count: number) {
-        
+      
         if (this.minButton.isOn) {
             this.displayContents(count);
         }
@@ -39,7 +40,9 @@ export default class FOVRoomLabel extends RoomLabel {
     }
 
     mouseOver() {
-        return this.p5.dist(this.p5.mouseX, this.p5.mouseY, this.x, this.y) < 20;
+        let r = this.p5.dist(this.p5.mouseX, this.p5.mouseY, this.x, this.y);
+        
+        return r < 220;
     }
 
     displayToolBar(userX: number, userY: number) {
@@ -60,6 +63,7 @@ export default class FOVRoomLabel extends RoomLabel {
     }
 
 
+    
 
     displayContents(count: number) {
         this.p5.push();
@@ -76,10 +80,10 @@ export default class FOVRoomLabel extends RoomLabel {
         this.p5.translate(15, 25);
 
         if (ShowConfig.isClosed || ShowConfig.underConstruction) {
-            this.displayLabel(`Room ${this.id}`, "artist TBA", 1);
+            this.displayLabel(`Room ${this.id}`, "artist TBA", 1, 33);
         }
         else
-            this.displayLabel(this.title, this.artist, 1);
+            this.displayLabel(this.title, this.artist, 1, 33);
 
 
         this.p5.translate(0, 20);
