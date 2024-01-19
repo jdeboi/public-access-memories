@@ -293,7 +293,7 @@ class GallerySketch extends React.Component<Props> {
 
     //////////////
     // draggable
-
+    
     const roomCount = getTotalRoomCount(users, rooms);
     drawRooms(rooms, anaglyph.output);
     drawWalls(walls, p5);

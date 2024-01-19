@@ -47,7 +47,7 @@ export default function DetailsTour() {
     return (
         <>
             {
-                isShowTime ?
+                // isShowTime ?
                     <div className="Welcome-Details">
                         <div className="Details closed" >
                             <div className="Details-txt">
@@ -61,20 +61,20 @@ export default function DetailsTour() {
                         </div>
 
                     </div>
-                    :
-                    <div className="Welcome-Details">
-                        <div className="Details closed" >
-                            <div className="Details-txt">
-                                <div style={{ fontSize: fonts[2], paddingBottom: "30px" }}>Join us for the</div>
-                                <div style={{ fontSize: fonts[0], paddingBottom: "30px" }}>GALLERY TOUR</div>
-                                <div style={{ fontSize: fonts[2], paddingBottom: "10px" }}>Going live in:</div>
-                                <div style={{ fontSize: fonts[1], paddingBottom: "5px", color: "red"}}>{timeTillTour}</div>
-                                {/* <div><a href="/opencall">open call</a></div> */}
-                                {/* {ShowConfig.showOpens.time !== "" ? <div style={{ fontSize: fonts[1], paddingBottom: "10px" }}>{ShowConfig.showOpens.time}</div> : null} */}
-                            </div>
-                        </div>
+                    // :
+                    // <div className="Welcome-Details">
+                    //     <div className="Details closed" >
+                    //         <div className="Details-txt">
+                    //             <div style={{ fontSize: fonts[2], paddingBottom: "30px" }}>Join us for the</div>
+                    //             <div style={{ fontSize: fonts[0], paddingBottom: "30px" }}>GALLERY TOUR</div>
+                    //             <div style={{ fontSize: fonts[2], paddingBottom: "10px" }}>Going live in:</div>
+                    //             <div style={{ fontSize: fonts[1], paddingBottom: "5px", color: "red"}}>{timeTillTour}</div>
+                    //             {/* <div><a href="/opencall">open call</a></div> */}
+                    //             {/* {ShowConfig.showOpens.time !== "" ? <div style={{ fontSize: fonts[1], paddingBottom: "10px" }}>{ShowConfig.showOpens.time}</div> : null} */}
+                    //         </div>
+                    //     </div>
 
-                    </div>
+                    // </div>
             }
         </>
     )
