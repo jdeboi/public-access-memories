@@ -139,7 +139,7 @@ export const artists: IArtist[] = [
     {
         id: 9,
         roomID: 9,
-        title: "loose page #12",
+        title: "shared folder",
         name: "Vesper Guo",
         nameLink: "guo",
         thumb: "guo-thumb",
