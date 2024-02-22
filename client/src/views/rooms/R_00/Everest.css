@@ -2,6 +2,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap");
 .Everest {
   background: white;
+}
+
+.EverestOG {
+  background: white;
   color: black;
   display: flex;
   flex-direction: column;
@@ -10,35 +14,35 @@
   font-family: "Crimson Text", sans-serif;
   font-size: 1.2em;
 }
-.Everest .titleEl {
+.EverestOG .titleEl {
   text-align: center;
 }
-.Everest details summary {
+.EverestOG details summary {
   cursor: pointer;
 }
-.Everest em {
+.EverestOG em {
   font-style: italic;
 }
-.Everest details {
+.EverestOG details {
   padding-left: 1.5vw;
   display: block;
   line-height: 2em;
 }
-.Everest details > summary {
+.EverestOG details > summary {
   list-style-type: none;
 }
-.Everest summary::-webkit-details-marker {
+.EverestOG summary::-webkit-details-marker {
   display: none;
 }
-.Everest summary::after {
+.EverestOG summary::after {
   content: " ►";
   padding-left: 1em;
   font-size: 0.7em;
 }
-.Everest details[open] > summary::after {
+.EverestOG details[open] > summary::after {
   transform: rotate(90deg);
 }
-.Everest details[open] > summary:after {
+.EverestOG details[open] > summary:after {
   content: " ▼";
   font-size: 0.7em;
 }
@@ -47,18 +51,18 @@
     opacity: 0;
   }
 }
-.Everest details[open] > *:not(summary) {
+.EverestOG details[open] > *:not(summary) {
   animation: details-show 250ms;
 }
-.Everest .glitchcity {
+.EverestOG .glitchcity {
   margin-left: -35vw;
 }
-.Everest .indent {
+.EverestOG .indent {
   width: 20vw;
   min-width: 200px;
   padding-left: 3vw;
 }
-.Everest hr {
+.EverestOG hr {
   border: 1px dashed black;
   width: 30vw;
 }/*# sourceMappingURL=Everest.css.map */
