@@ -17,7 +17,7 @@ const Room = () => {
                 </div>
                 :
                 <iframe
-                    src={"https://www.ziyistudio.art/"}
+                    src={"https://www.ziyistudio.art/fpa"}
                     width={"100%"}
                     height={"100%"}
                 />
