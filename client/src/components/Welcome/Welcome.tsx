@@ -1,60 +1,65 @@
-import React, { useState } from 'react';
-import './Welcome.css';
+import React, { useState } from "react";
+import "./Welcome.css";
 
-import WelcomeOpen from './WelcomeOpen';
-import WelcomeClosed from './WelcomeClosed';
+import WelcomeOpen from "./WelcomeOpen";
+import WelcomeClosed from "./WelcomeClosed";
 
 // store
-import { useSelector } from 'react-redux';
-import { selectWindow } from '../../store/store';
-
+import { useSelector } from "react-redux";
+import { selectWindow } from "../../store/store";
 
 interface IWelcome {
-    isClosed: boolean,
-    showWelcome: boolean,
-    hasAvatar: boolean,
-    hasLoadedCookies: boolean,
-    closeWelcome: () => void
+  isClosed: boolean;
+  showWelcome: boolean;
+  hasAvatar: boolean;
+  hasLoadedCookies: boolean;
+  closeWelcome: () => void;
 }
 
-const stepTitles = ["welcome", "avatar", "instructions"]
+const stepTitles = ["welcome", "avatar", "instructions"];
 
 const Welcome = (props: IWelcome) => {
-    // https://codepen.io/JohJakob/pen/YPxgwo
-    const windowUI = useSelector(selectWindow);
-    const [step, setStep] = useState(0);
-    const [title, setTitle] = useState("Welcome")
+  // https://codepen.io/JohJakob/pen/YPxgwo
+  const windowUI = useSelector(selectWindow);
+  const [step, setStep] = useState(0);
+  const [title, setTitle] = useState("Welcome");
 
-    const onHide = () => {
-        alert("Sorry, please click through to the end of this dialog box.");
-    }
+  const onHide = () => {
+    alert("Sorry, please click through to the end of this dialog box.");
+  };
 
-    const prevStep = () => {
-        setTitle(stepTitles[step - 1])
-        setStep(step => step - 1);
-    }
+  const prevStep = () => {
+    setTitle(stepTitles[step - 1]);
+    setStep((step) => step - 1);
+  };
 
-    const nextStep = () => {
-        setTitle(stepTitles[step + 1])
-        setStep(step => step + 1);
-    }
+  const nextStep = () => {
+    setTitle(stepTitles[step + 1]);
+    setStep((step) => step + 1);
+  };
 
-    const { showWelcome, closeWelcome, hasAvatar, hasLoadedCookies } = props;
-    const propsW = {
-        prevStep, nextStep, onHide, title, step,
-        closeWelcome, showWelcome, hasAvatar, hasLoadedCookies
-    };
+  const { showWelcome, closeWelcome, hasAvatar, hasLoadedCookies } = props;
+  const propsW = {
+    prevStep,
+    nextStep,
+    onHide,
+    title,
+    step,
+    closeWelcome,
+    showWelcome,
+    hasAvatar,
+    hasLoadedCookies,
+  };
 
-    // if (props.isClosed) {
-    //     return <WelcomeClosed {...propsW} />
-    // }
-    // else {
-    //     return <WelcomeOpen {...propsW} />
-    // }
-    return (
+  return (
+    <>
+      {props.isClosed ? (
         <WelcomeClosed {...propsW} />
-    )
-}
-
+      ) : (
+        <WelcomeOpen {...propsW} />
+      )}
+    </>
+  );
+};
 
 export default Welcome;
