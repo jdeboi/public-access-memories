@@ -1,190 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="net art gallery" />
-    <link rel="author" href="http://jdeboi.com/">
+    <link rel="author" href="http://jdeboi.com/" />
 
     <!-- open graph -->
-    <meta property="og:description" content="net art gallery">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:title" content="Public Access Memories">
-    <meta property="og:site_name" content="Public Access Memories">
-    <meta property="og:url" content="https://publicaccessmemories.com">
-    <meta property="og:image" content="http://www.publicaccessmemories.com/og.png">
-    <meta property="og:image:secure_url" content="https://www.publicaccessmemories.com/og.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="697">
+    <meta property="og:description" content="net art gallery" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="public access memories" />
+    <meta property="og:site_name" content="public access memories" />
+    <meta property="og:url" content="https://publicaccessmemories.com" />
+    <meta
+      property="og:image"
+      content="http://www.publicaccessmemories.com/og.png"
+    />
+    <meta
+      property="og:image:secure_url"
+      content="https://www.publicaccessmemories.com/og.png"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="697" />
 
-    <title>Public Access Memories</title>
+    <title>public access memories</title>
 
     <style>
-        html,
-        body {
-            margin: 0;
-            padding: 0;
-        }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
 
-        canvas {
-            display: block;
-        }
+      canvas {
+        display: block;
+      }
     </style>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+  </head>
 
-</head>
-
-<body>
+  <body>
     <script>
+      class Field {
+        constructor() {
+          this.x0 = random(width);
+          this.y0 = random(height);
+          this.x = this.x0;
+          this.y = this.y0;
+          this.rot0 = random(2 * PI);
+          this.rot = this.rot0;
+          this.rad0 = random(300, width / 2);
+          this.rad = this.rad0;
+          this.ang0 = random(PI / 5, (2 / 3) * PI);
+          this.ang = this.ang0;
 
-        class Field {
+          this.sW = random(0.5, 2);
+          this.sp = random(this.sW + 2, 12);
+          this.r = random();
 
-            constructor() {
-                this.x0 = random(width);
-                this.y0 = random(height);
-                this.x = this.x0;
-                this.y = this.y0;
-                this.rot0 = random(2 * PI);
-                this.rot = this.rot0;
-                this.rad0 = random(300, width / 2);
-                this.rad = this.rad0;
-                this.ang0 = random(PI / 5, 2 / 3 * PI);
-                this.ang = this.ang0;
-
-                this.sW = random(.5, 2);
-                this.sp = random(this.sW + 2, 12);
-                this.r = random();
-
-                this.col = random(["blue", "darkblue", "lavender"])
-            }
-
-            update() {
-                this.x += -.5 + 1 * noise(millis() / 100000, this.x0);
-                this.y += -.5 + 1 * noise(millis() / 10000, this.y0);
-
-                let d = dist(this.x, this.y, mouseX, mouseY);
-                // this.x += 
-
-                if (this.x < 0) this.x = width;
-                else if (this.x > width) this.x = 0;
-                if (this.y < 0) this.y = height;
-                else if (this.y > height) this.y = 0;
-
-                this.ang = PI + PI / 2 * sin(millis() / 2000 + this.r);
-            }
-
-            display() {
-                push();
-                translate(this.x, this.y);
-                rotate(this.rot);
-                noFill();
-                // stroke(this.col);
-                stroke(100);
-                strokeWeight(this.sW);
-                for (let i = 0; i < this.rad; i += this.sp) {
-                    arc(0, 0, i, i, 0, this.ang);
-                }
-                pop();
-            }
+          this.col = random(["blue", "darkblue", "lavender"]);
         }
 
-        let fields = [];
+        update() {
+          this.x += -0.5 + 1 * noise(millis() / 100000, this.x0);
+          this.y += -0.5 + 1 * noise(millis() / 10000, this.y0);
 
-        let font;
+          let d = dist(this.x, this.y, mouseX, mouseY);
+          // this.x +=
 
-        function preload() {
-            font = loadFont("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/fonts/dogicabold.ttf");
+          if (this.x < 0) this.x = width;
+          else if (this.x > width) this.x = 0;
+          if (this.y < 0) this.y = height;
+          else if (this.y > height) this.y = 0;
+
+          this.ang = PI + (PI / 2) * sin(millis() / 2000 + this.r);
         }
 
-        function setup() {
-            createCanvas(500, 500, WEBGL);
+        display() {
+          push();
+          translate(this.x, this.y);
+          rotate(this.rot);
+          noFill();
+          // stroke(this.col);
+          stroke(100);
+          strokeWeight(this.sW);
+          for (let i = 0; i < this.rad; i += this.sp) {
+            arc(0, 0, i, i, 0, this.ang);
+          }
+          pop();
+        }
+      }
 
-            for (let i = 0; i < 5; i++) {
-                fields.push(new Field());
-                fields.push(new Field());
-                fields.push(new Field());
-            }
+      let fields = [];
 
-            textFont(font);
+      let font;
+
+      function preload() {
+        font = loadFont(
+          "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/fonts/dogicabold.ttf"
+        );
+      }
+
+      function setup() {
+        createCanvas(500, 500, WEBGL);
+
+        for (let i = 0; i < 5; i++) {
+          fields.push(new Field());
+          fields.push(new Field());
+          fields.push(new Field());
         }
 
-        function draw() {
-            background(0);
+        textFont(font);
+      }
 
-            translate(-width / 2, -height / 2);
+      function draw() {
+        background(0);
 
-            for (const field of fields) {
-                field.display();
-                field.update();
-            }
+        translate(-width / 2, -height / 2);
 
-            push();
-            translate(width / 2, height / 2, 10);
-            rotateX(map(mouseX, 0, width, -PI / 3, PI / 3));
-            translate(-width / 2, -height / 2);
-            displayTitle(40, 100);
-            displayOpenCall(185, 420);
-
-            displayOutlineRect(40);
-
-            pop();
+        for (const field of fields) {
+          field.display();
+          field.update();
         }
 
-        function displayOutlineRect(bW) {
-            noFill();
-            stroke(255);
-            strokeWeight(1);
-            rect(bW, bW, width - bW * 2, height - bW * 2);
-        }
+        push();
+        translate(width / 2, height / 2, 10);
+        rotateX(map(mouseX, 0, width, -PI / 3, PI / 3));
+        translate(-width / 2, -height / 2);
+        displayTitle(40, 100);
+        displayOpenCall(185, 420);
 
-        function displayTitle(x, y) {
-            let sp = 90;
-            push();
-            translate(x, y);
+        displayOutlineRect(40);
 
-            let sz = 70;
-            let borderW = 10;
-            let txtC = color(255, 0, 255);
-            let boxC = color(255, 200);
-            displayTextBox("FIELDS", 0, 0, borderW, sz, boxC, txtC);
-            displayTextBox("OF", 0, sp, borderW, sz, boxC, txtC);
-            displayTextBox("VIEW", 0, 2 * sp, borderW, sz, boxC, txtC);
-            pop();
-        }
+        pop();
+      }
 
-        function displayOpenCall(x, y) {
-            push();
-            translate(x, y);
-            let sz = 30;
-            let borderW = 10;
-            let txtC = color(255);
-            let boxC = color(0, 0);
-            displayTextBox("OPEN CALL", 0, 0, borderW, sz, boxC, txtC);
-            pop();
-        }
+      function displayOutlineRect(bW) {
+        noFill();
+        stroke(255);
+        strokeWeight(1);
+        rect(bW, bW, width - bW * 2, height - bW * 2);
+      }
 
-        function displayTextBox(txt, x, y, borderW, sz, boxC, txtC) {
-            push();
-            translate(x, y);
-            textSize(sz);
-            let w = textWidth(txt);
-            noStroke();
-            fill(boxC);
-            rect(0, 0, w - 20 + borderW * 2, sz - 10 + borderW * 2);
-            fill(txtC);
-            translate(0, 0, .1);
-            text(txt, -10 + borderW, sz - 10 + borderW);
-            pop();
-        }
+      function displayTitle(x, y) {
+        let sp = 90;
+        push();
+        translate(x, y);
 
+        let sz = 70;
+        let borderW = 10;
+        let txtC = color(255, 0, 255);
+        let boxC = color(255, 200);
+        displayTextBox("FIELDS", 0, 0, borderW, sz, boxC, txtC);
+        displayTextBox("OF", 0, sp, borderW, sz, boxC, txtC);
+        displayTextBox("VIEW", 0, 2 * sp, borderW, sz, boxC, txtC);
+        pop();
+      }
+
+      function displayOpenCall(x, y) {
+        push();
+        translate(x, y);
+        let sz = 30;
+        let borderW = 10;
+        let txtC = color(255);
+        let boxC = color(0, 0);
+        displayTextBox("OPEN CALL", 0, 0, borderW, sz, boxC, txtC);
+        pop();
+      }
+
+      function displayTextBox(txt, x, y, borderW, sz, boxC, txtC) {
+        push();
+        translate(x, y);
+        textSize(sz);
+        let w = textWidth(txt);
+        noStroke();
+        fill(boxC);
+        rect(0, 0, w - 20 + borderW * 2, sz - 10 + borderW * 2);
+        fill(txtC);
+        translate(0, 0, 0.1);
+        text(txt, -10 + borderW, sz - 10 + borderW);
+        pop();
+      }
     </script>
     <!-- <script src="Field.js"></script>
     <script src="sketch.js"></script> -->
-</body>
-
+  </body>
 </html>

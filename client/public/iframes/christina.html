@@ -1,303 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="digital / net art gallery" />
-    <link rel="author" href="http://jdeboi.com/">
+    <link rel="author" href="http://jdeboi.com/" />
 
     <!-- open graph -->
-    <meta property="og:description" content="digital art gallery">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:title" content="Public Access Memories">
-    <meta property="og:site_name" content="Public Access Memories">
-    <meta property="og:url" content="https://publicaccessmemories.com">
-    <meta property="og:image" content="http://www.publicaccessmemories.com/og.png">
-    <meta property="og:image:secure_url" content="https://www.publicaccessmemories.com/og.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="697">
+    <meta property="og:description" content="digital art gallery" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="public access memories" />
+    <meta property="og:site_name" content="public access memories" />
+    <meta property="og:url" content="https://publicaccessmemories.com" />
+    <meta
+      property="og:image"
+      content="http://www.publicaccessmemories.com/og.png"
+    />
+    <meta
+      property="og:image:secure_url"
+      content="https://www.publicaccessmemories.com/og.png"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="697" />
 
-    <title>Public Access Memories</title>
+    <title>public access memories</title>
 
     <style>
+      body {
+        margin: 0;
+        display: block;
+        width: 100vw;
+      }
+      img {
+        display: block;
+      }
 
-        body {
-            margin: 0;
-            display: block;
-            width: 100vw;
-        }
-        img {
-            display: block;
-        }
+      .above {
+        z-index: 2;
+        position: absolute;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
+      }
 
-        .above {
-            z-index: 2;
-            position: absolute;
-            top: 0;
-            display: flex;
-            flex-direction: column;
-            width: 100vw;
-        }
+      .below {
+        z-index: 1;
+        position: relative;
+        width: 100vw;
+        cursor: s-resize;
+      }
 
-        .below {
-            z-index: 1;
-            position: relative;
-            width: 100vw;
-            cursor: s-resize;
-        }
+      .pageoverlay {
+        position: fixed;
+        top: 0%;
+        left: 0%;
+        right: 0%;
+        bottom: 0%;
+        z-index: 2;
+        cursor: n-resize;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row-reverse;
+      }
 
-        .pageoverlay {
-            position: fixed;
-            top: 0%;
-            left: 0%;
-            right: 0%;
-            bottom: 0%;
-            z-index: 2;
-            cursor: n-resize;
-            overflow: hidden;
-            display: flex;
-            flex-direction: row-reverse;
-        }
+      .scrolling-element-inside {
+        transform: rotate(-180deg);
+      }
 
-        .scrolling-element-inside {
-            transform: rotate(-180deg);
-        }
+      .overlay-content {
+        overflow-y: scroll;
+        height: calc(100% - 20px);
+        font-family: sans-serif;
+        color: white;
+      }
 
-        .overlay-content {
-            overflow-y: scroll;
-            height: calc(100% - 20px);
-            font-family: sans-serif;
-            color: white;
-        }
+      .imgoverlay {
+        overflow-y: visible;
+        width: 100%;
+      }
 
-        .imgoverlay {
-            overflow-y: visible;
-            width: 100%;
-        }
+      .below img {
+        width: 100%;
+      }
 
-        .below img {
-            width: 100%;
-        }
+      .left {
+        align-self: flex-start;
+      }
 
-        .left {
-            align-self: flex-start;
-        }
+      .right {
+        align-self: flex-end;
+      }
 
-        .right {
-            align-self: flex-end;
-        }
+      .blur-effect {
+        transition: filter 2s;
+      }
 
-        .blur-effect {
-            transition: filter 2s;
-        }
+      .blur-effect:hover {
+        filter: blur(10px);
+        -webkit-filter: blur(10px);
+      }
 
-        .blur-effect:hover {
-            filter: blur(10px);
-            -webkit-filter: blur(10px);
-        }
+      .blur-reverse {
+        transition: filter 2s;
+        filter: blur(10px);
+        -webkit-filter: blur(10px);
+      }
 
-        .blur-reverse {
-            transition: filter 2s;
-            filter: blur(10px);
-            -webkit-filter: blur(10px);
-        }
+      .blur-reverse:hover {
+        filter: blur(0px);
+        -webkit-filter: blur(0px);
+      }
 
-        .blur-reverse:hover {
-            filter: blur(0px);
-            -webkit-filter: blur(0px);
-        }
+      .skew-effect {
+        transition: transform 2s;
+      }
 
-        .skew-effect {
-            transition: transform 2s;
-        }
+      .skew-effect:hover {
+        transform: skewX(90deg);
+      }
 
-        .skew-effect:hover {
-            transform: skewX(90deg);
-        }
+      .opacity-effect {
+        opacity: 0.3;
+        transition: opacity 2s;
+      }
 
-        .opacity-effect {
-            opacity: 0.3;
-            transition: opacity 2s;
-        }
+      .opacity-effect:hover {
+        opacity: 1;
+      }
 
-        .opacity-effect:hover {
-            opacity: 1;
-        }
+      .grow-effect {
+        transition: transform 2s;
+      }
 
-        .grow-effect {
-            transition: transform 2s;
-        }
+      .grow-effect:hover {
+        transform: scale(2);
+      }
 
-        .grow-effect:hover {
-            transform: scale(2);
-        }
+      .shrink-effect {
+        transition: transform 2s;
+      }
 
-        .shrink-effect {
-            transition: transform 2s;
-        }
+      .shrink-effect:hover {
+        transform: scale(0.1);
+      }
 
-        .shrink-effect:hover {
-            transform: scale(0.1);
-        }
+      .disappear {
+        transition: opacity 2s;
+      }
 
-        .disappear {
-            transition: opacity 2s;
-        }
+      .disappear:hover {
+        opacity: 0;
+      }
 
-        .disappear:hover {
-            opacity: 0;
-        }
+      .shift {
+        transition: transform 5s;
+      }
 
-        .shift {
-            transition: transform 5s;
-        }
+      .shift:hover {
+        transform: translate(200px, 300%);
+      }
 
-        .shift:hover {
-            transform: translate(200px, 300%);
-        }
+      .shiftdown {
+        transition: transform 5s;
+      }
 
-        .shiftdown {
-            transition: transform 5s;
-        }
+      .shiftdown:hover {
+        transform: translate(200px, -300%);
+      }
 
-        .shiftdown:hover {
-            transform: translate(200px, -300%);
-        }
+      .rotate {
+        transition: transform 2s;
+      }
 
-        .rotate {
-            transition: transform 2s;
-        }
+      .rotate:hover {
+        transform: rotate(-180deg);
+      }
 
-        .rotate:hover {
-            transform: rotate(-180deg);
-        }
+      .turnup {
+        transform: rotate(180deg);
+      }
 
-        .turnup {
-            transform: rotate(180deg);
-        }
+      .style1 {
+        width: 80%;
+        max-width: 600px;
+        height: 95%;
+        margin-left: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-right: auto;
+      }
 
-    
+      .style2 {
+        width: 40%;
+        max-width: 300px;
+        -webkit-margin-start: 50px;
+        margin-inline-start: 50px;
+      }
 
-        .style1 { 
-            width: 80%;
-            max-width: 600px;
-            height: 95%;
-            margin-left: auto;
-            margin-top: auto;
-            margin-bottom: auto;
-            margin-right: auto;
-        }
+      .style3 {
+        width: 40%;
+        max-width: 300px;
+        -webkit-margin-end: 50px;
+        margin-inline-end: 50px;
+        -webkit-margin-before: 800px;
+        margin-block-start: 800px;
+      }
 
-        .style2 {
-            width: 40%;
-            max-width: 300px;
-            -webkit-margin-start: 50px;
-            margin-inline-start: 50px;
-        }
+      .style4 {
+        width: 70%;
+        max-width: 500px;
+        -webkit-margin-start: 50px;
+        margin-inline-start: 50px;
+        -webkit-margin-before: 400px;
+        margin-block-start: 400px;
+      }
 
-        .style3 {
-            width: 40%;
-            max-width: 300px;
-            -webkit-margin-end: 50px;
-            margin-inline-end: 50px;
-            -webkit-margin-before: 800px;
-            margin-block-start: 800px;
-        }
+      .style5 {
+        width: 30%;
+        max-width: 250px;
+        -webkit-margin-end: 100px;
+        margin-inline-end: 100px;
+        -webkit-margin-before: 400px;
+        margin-block-start: 400px;
+      }
 
-        .style4 {
-            width: 70%;
-            max-width: 500px;
-            -webkit-margin-start: 50px;
-            margin-inline-start: 50px;
-            -webkit-margin-before: 400px;
-            margin-block-start: 400px;
-        }
+      .style6 {
+        width: 45%;
+        max-width: 350px;
+        -webkit-margin-start: 100px;
+        margin-inline-start: 100px;
+        -webkit-margin-before: 50px;
+        margin-block-start: 50px;
+      }
 
-        .style5 {
-            width: 30%;
-            max-width: 250px;
-            -webkit-margin-end: 100px;
-            margin-inline-end: 100px;
-            -webkit-margin-before: 400px;
-            margin-block-start: 400px;
-        }
+      .style7 {
+        width: 40%;
+        max-width: 300px;
+        -webkit-margin-end: 50px;
+        margin-inline-end: 50px;
+        -webkit-margin-before: 800px;
+        margin-block-start: 800px;
+      }
 
-        .style6 {
-            width: 45%;
-            max-width: 350px;
-            -webkit-margin-start: 100px;
-            margin-inline-start: 100px;
-            -webkit-margin-before: 50px;
-            margin-block-start: 50px;
-        }
+      .style8 {
+        width: 45%;
+        max-width: 350px;
+        -webkit-margin-end: 200px;
+        margin-inline-end: 200px;
+        -webkit-margin-before: 200px;
+        margin-block-start: 200px;
+      }
 
-        .style7 {
-            width: 40%;
-            max-width: 300px;
-            -webkit-margin-end: 50px;
-            margin-inline-end: 50px;
-            -webkit-margin-before: 800px;
-            margin-block-start: 800px;
-        }
-
-        .style8 {
-            width: 45%;
-            max-width: 350px;
-            -webkit-margin-end: 200px;
-            margin-inline-end: 200px;
-            -webkit-margin-before: 200px;
-            margin-block-start: 200px;
-        }
-
-        .style9 {
-            width: 55%;
-            max-width: 550px;
-            -webkit-margin-start: 50px;
-            margin-inline-start: 50px;
-            -webkit-margin-before: 600px;
-            margin-block-start: 600px;
-        }
+      .style9 {
+        width: 55%;
+        max-width: 550px;
+        -webkit-margin-start: 50px;
+        margin-inline-start: 50px;
+        -webkit-margin-before: 600px;
+        margin-block-start: 600px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="below">
-        <img src="https://live.staticflickr.com/65535/52210892799_f244154d36_k_d.jpg" />
-        <img src="https://live.staticflickr.com/65535/52211109455_9c690c6574_k_d.jpg" />
-        <img src="https://live.staticflickr.com/65535/52211109430_83f8a27fa6_k_d.jpg" />
-        <img src="https://live.staticflickr.com/65535/52210642823_985fabc84d_k_d.jpg" />
-        <img src="https://live.staticflickr.com/65535/52210893084_ec9070db0b_k_d.jpg" />
-        <img src="https://live.staticflickr.com/65535/52210893109_5dde6db6d8_k_d.jpg" />
-        <img src="https://live.staticflickr.com/65535/52210643163_1de927d220_k_d.jpg" />
-        <img src="https://live.staticflickr.com/65535/52210620391_0df01cc1d3_k_d.jpg" />
-        <img src="https://live.staticflickr.com/65535/52211109700_c6a5d028ec_k_d.jpg" />
+      <img
+        src="https://live.staticflickr.com/65535/52210892799_f244154d36_k_d.jpg"
+      />
+      <img
+        src="https://live.staticflickr.com/65535/52211109455_9c690c6574_k_d.jpg"
+      />
+      <img
+        src="https://live.staticflickr.com/65535/52211109430_83f8a27fa6_k_d.jpg"
+      />
+      <img
+        src="https://live.staticflickr.com/65535/52210642823_985fabc84d_k_d.jpg"
+      />
+      <img
+        src="https://live.staticflickr.com/65535/52210893084_ec9070db0b_k_d.jpg"
+      />
+      <img
+        src="https://live.staticflickr.com/65535/52210893109_5dde6db6d8_k_d.jpg"
+      />
+      <img
+        src="https://live.staticflickr.com/65535/52210643163_1de927d220_k_d.jpg"
+      />
+      <img
+        src="https://live.staticflickr.com/65535/52210620391_0df01cc1d3_k_d.jpg"
+      />
+      <img
+        src="https://live.staticflickr.com/65535/52211109700_c6a5d028ec_k_d.jpg"
+      />
     </div>
     <div class="pageoverlay style1">
-        <div class="overlay-content scrolling-element-inside">
-            <img class="left shift turnup style2"
-                src="https://live.staticflickr.com/65535/52210943494_9f5212a485_w_d.jpg" />
+      <div class="overlay-content scrolling-element-inside">
+        <img
+          class="left shift turnup style2"
+          src="https://live.staticflickr.com/65535/52210943494_9f5212a485_w_d.jpg"
+        />
 
-            flatbed___
-            <img class="right shiftdown style3"
-                src="https://live.staticflickr.com/65535/52210670671_c7c7be935a_w_d.jpg" />
-            <img class="left opacity-effect turnup style4"
-                src="https://live.staticflickr.com/65535/52210944174_0298ba10d0_c_d.jpg" />
-            <img class="right blur-effect turnup style5"
-                src="https://live.staticflickr.com/65535/52209667687_45f8ff1021_c_d.jpg" />
-            <img class="left blur-reverse turnup style6"
-                src="https://live.staticflickr.com/65535/52211160880_556d91be6c_w_d.jpg" />
-            <img class="right rotate style7" src="https://live.staticflickr.com/65535/52210694633_3caf1ce6eb_w_d.jpg" />
-            <img class="right shrink-effect turnup style8"
-                src="https://live.staticflickr.com/65535/52210944954_12e6ce1b44_w_d.jpg" />
-            <img class="left disappear turnup style9"
-                src="https://live.staticflickr.com/65535/52209669082_137bf814d7_c_d.jpg" />
-            <div id="lastID" />
-        </div>
+        flatbed___
+        <img
+          class="right shiftdown style3"
+          src="https://live.staticflickr.com/65535/52210670671_c7c7be935a_w_d.jpg"
+        />
+        <img
+          class="left opacity-effect turnup style4"
+          src="https://live.staticflickr.com/65535/52210944174_0298ba10d0_c_d.jpg"
+        />
+        <img
+          class="right blur-effect turnup style5"
+          src="https://live.staticflickr.com/65535/52209667687_45f8ff1021_c_d.jpg"
+        />
+        <img
+          class="left blur-reverse turnup style6"
+          src="https://live.staticflickr.com/65535/52211160880_556d91be6c_w_d.jpg"
+        />
+        <img
+          class="right rotate style7"
+          src="https://live.staticflickr.com/65535/52210694633_3caf1ce6eb_w_d.jpg"
+        />
+        <img
+          class="right shrink-effect turnup style8"
+          src="https://live.staticflickr.com/65535/52210944954_12e6ce1b44_w_d.jpg"
+        />
+        <img
+          class="left disappear turnup style9"
+          src="https://live.staticflickr.com/65535/52209669082_137bf814d7_c_d.jpg"
+        />
+        <div id="lastID" />
+      </div>
     </div>
-</body>
-
+  </body>
 </html>

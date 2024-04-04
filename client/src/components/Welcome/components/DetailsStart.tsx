@@ -20,7 +20,7 @@ export default function DetailsStart() {
             <h4 style={{ paddingBottom: "10px" }}>
               hosted by
               <br />
-              Public Access Memories
+              {ShowConfig.galleryTitle}
             </h4>
           </div>
         </div>
@@ -42,12 +42,17 @@ export default function DetailsStart() {
     <div className="Welcome-Details">
       <div className="Details">
         <div className="Details-txt">
-          <div style={{ fontSize: fonts[0], paddingBottom: "0px" }}>public</div>
-          <div style={{ fontSize: fonts[0], paddingBottom: "0px" }}>access</div>
           <div style={{ fontSize: fonts[0], paddingBottom: "30px" }}>
-            memories
+            {ShowConfig.galleryTitle}
           </div>
+          {/* <div style={{ fontSize: fonts[0], paddingBottom: "0px" }}>Access</div> */}
+          {/* <div style={{ fontSize: fonts[0], paddingBottom: "30px" }}>Memories</div> */}
 
+          <img
+            src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/assets/PAM_logos/logo_black_lg.png"
+            width={70}
+            style={{ paddingBottom: "10px" }}
+          />
           {/* <h4><a href="/opencall">open call</a></h4> */}
           <h4>
             <a href="/newsletter">join newsletter</a>
