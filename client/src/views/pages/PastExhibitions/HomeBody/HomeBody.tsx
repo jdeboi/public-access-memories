@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../Page.css";
+import ArtistsArchiveList from "../ArtistsArchiveList";
+import { artists } from "../../../../data/HomeBody/RoomConfig";
 
 export const HomeBody = () => {
+  const sortedArtists = [...artists];
+
+  useEffect(() => {
+    // Create a copy of the original array
+    sortedArtists.sort((a, b) => a.name.localeCompare(b.name)); // Sort the copy
+  }, []);
+
   return (
     <div className="Statement  Page">
       <div className="container">
@@ -50,10 +59,7 @@ export const HomeBody = () => {
         <hr />
         <h3>Artists</h3>
         <p>
-          Mitchell Craft, Samantha Blumenfeld, Lee Tusman, Kat Zhang, Dan Rule,
-          Daria Ivans, Jenna deBoisblanc, Sidney Astl, Stefani Byrid, Lydia
-          Mattson, Nathan Caldecott, Loraine Wilble, Freya Björg Olafson, Linda
-          Loh
+          <ArtistsArchiveList awsLink="home_body" artists={sortedArtists} />
         </p>
       </div>
     </div>

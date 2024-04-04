@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "../../Page.css";
 import { ShowConfig } from "../../../../data/CurrentShow/ShowConfig";
-import ArtistsList from "../ArtistsList";
+import ArtistsList from "../ArtistsArchiveList";
 import ImageGrid from "../ImageGrid";
 import { artists } from "../../../../data/FieldsOfView/RoomConfig";
 
@@ -99,10 +99,7 @@ export const FieldsOfView = () => {
         <hr />
         <h3>Artists</h3>
         <p>
-          {/* Matthew D. Gantt, Alex Gibson, Matthis Grunsky, Vesper Guo, Christina
-          Humphreys, Jason Isolini, Rosa Menkman, Freya Bjorg Olafson, Everest
-          Pipkin, Petra Szemán, Ziyi Zhang, Andy Zuliani */}
-          <ArtistsList artists={sortedArtists} />
+          <ArtistsList awsLink="fields_of_view" artists={sortedArtists} />
         </p>
       </div>
     </div>

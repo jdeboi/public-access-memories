@@ -3,8 +3,9 @@ import "../Artists/Artists.css";
 
 interface Props {
   artists: IArtist[];
+  awsLink: string;
 }
-const ArtistsList = (props: Props) => {
+const ArtistsArchiveList = (props: Props) => {
   const getThumbs = () => {
     return (
       <div className="artists-list">
@@ -19,7 +20,7 @@ const ArtistsList = (props: Props) => {
         <a href={url}>
           <img
             className="thumb"
-            src={`https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/fields_of_view/thumbs/${artist.thumb}.png`}
+            src={`https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/${props.awsLink}/thumbs/${artist.thumb}.png`}
           />
         </a>
         <div className="artist-name">
@@ -51,4 +52,4 @@ const ArtistsList = (props: Props) => {
   return <div className="Artists">{getThumbs()}</div>;
 };
 
-export default ArtistsList;
+export default ArtistsArchiveList;
