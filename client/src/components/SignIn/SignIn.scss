@@ -1,48 +1,48 @@
 @import "../../styles/constants.scss";
 
 .SignIn {
-    position: absolute;
+  position: absolute;
+  .Frame {
+    .window {
+      background: white;
 
-    .Frame {
-        .window {
-            background: white;
-
-            .content {
-                pointer-events: all;
-            }
-        }
+      .content {
+        pointer-events: all;
+      }
     }
+  }
 }
 
 .SignInForm {
-    .userBar {
-        height: 38px;
-        align-self: flex-start;
+  display: none;
+  .userBar {
+    height: 38px;
+    align-self: flex-start;
 
-        .avatar {
-            font-size: 36px;
-            height: 38px;
-            width: 38px;
-            padding-right: 15px;
-        }
-
-        input {
-            border-bottom: 2px solid black;
-            // font-size: 16px;
-            width: 225px;
-        }
+    .avatar {
+      font-size: 36px;
+      height: 38px;
+      width: 38px;
+      padding-right: 15px;
     }
 
-    .emoji-list {
-        border: 2px solid black;
-        border-radius: $borderRad;
-
-        button {
-            font-size: 18px;
-            width: 24px;
-            height: 24px;
-            padding: 2px;
-            border: none;
-        }
+    input {
+      border-bottom: 2px solid black;
+      // font-size: 16px;
+      width: 225px;
     }
+  }
+
+  .emoji-list {
+    border: 2px solid black;
+    border-radius: $borderRad;
+
+    button {
+      font-size: 18px;
+      width: 24px;
+      height: 24px;
+      padding: 2px;
+      border: none;
+    }
+  }
 }

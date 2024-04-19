@@ -1,21 +1,22 @@
 @import "../../styles/constants.scss";
 
-
 // border rad was 10
-$borderLineW: .14em;
-
+$borderLineW: 0.14em;
 
 .Frame {
-
   color: #000;
-  font-family: consoleFont, HelveticaNeue, 'Helvetica Neue', 'Lucida Grande', Arial, sans-serif;
+  font-family: consoleFont, HelveticaNeue, "Helvetica Neue", "Lucida Grande",
+    Arial, sans-serif;
 
   position: absolute;
   margin-bottom: -33px;
   font-size: $fontSize-desktop-p1;
   pointer-events: none;
 
-  input, button, select, textarea {
+  input,
+  button,
+  select,
+  textarea {
     pointer-events: all;
   }
 
@@ -44,11 +45,10 @@ $borderLineW: .14em;
 
     font-family: consoleFont, sans-serif;
 
-    font-size: .8em;
+    font-size: 0.8em;
     line-height: 20px;
     text-align: center;
     width: 100%;
-
 
     // border-bottom: .15em solid black;
     color: white;
@@ -75,11 +75,10 @@ $borderLineW: .14em;
 
     display: flex;
     justify-content: center;
-    flex-direction: column;  /* <--- I added this */
-    align-items: center;   /* <--- Change here */
+    flex-direction: column; /* <--- I added this */
+    align-items: center; /* <--- Change here */
     width: 100%;
   }
-
 
   .buttons {
     // removing absolute b/c i want title to be an inline div floating on same line
@@ -93,12 +92,12 @@ $borderLineW: .14em;
     line-height: 0px;
     // z-index:200;
     /* made them match titlebar to show up on Stair */
-    font-family: HelveticaNeue, 'Helvetica Neue', 'Lucida Grande', Arial, sans-serif;
+    font-family: HelveticaNeue, "Helvetica Neue", "Lucida Grande", Arial,
+      sans-serif;
 
     height: 26px;
     width: 70px;
     flex-shrink: 0;
-
   }
 
   .circleButton {
@@ -159,8 +158,6 @@ $borderLineW: .14em;
     // }
   }
 
-
-
   .content {
     position: relative;
 
@@ -178,7 +175,6 @@ $borderLineW: .14em;
       border-bottom-right-radius: calc(#{$borderRad}-2);
     }
   }
-
 }
 
 // haven't looked into why this can't be in .Frame
@@ -188,7 +184,6 @@ $borderLineW: .14em;
 }
 
 .minimized {
-
   .content {
     display: none;
   }
@@ -197,7 +192,6 @@ $borderLineW: .14em;
     height: 22px !important;
   }
 }
-
 
 .FrameSimple {
   position: absolute;

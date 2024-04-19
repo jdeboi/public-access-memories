@@ -3,7 +3,7 @@ import "../../Page.css";
 import { ShowConfig } from "../../../../data/CurrentShow/ShowConfig";
 import ArtistsList from "../ArtistsArchiveList";
 import ImageGrid from "../ImageGrid";
-import { artists } from "../../../../data/FieldsOfView/RoomConfig";
+import { artists } from "../../../../data/Shows/FieldsOfView/RoomConfig";
 
 export const FieldsOfView = () => {
   const sortedArtists = [...artists];

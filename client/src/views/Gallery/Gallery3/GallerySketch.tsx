@@ -1,25 +1,62 @@
 import React from "react";
 import Sketch from "react-p5";
-import p5Types from 'p5';
+import p5Types from "p5";
 import { IUser, IUsers } from "../../../interfaces";
 import { connect } from "react-redux";
-import { RootState } from '../../../store/store';
-import { setFollowingHost } from '../../../store/user';
+import { RootState } from "../../../store/store";
+import { setFollowingHost } from "../../../store/user";
 
 //////////////
 // HELPERS
-import { roomBoundary, roomDoorCrossing, wallBoundary } from '../Gallery1/functions/crossing';
-import { roundToMult2 } from '../Gallery1/functions/round';
-import { drawWalls } from '../Gallery1/functions/building';
-import {initOuterFOVWalls} from './functions/building';
-import { displayDanceFloor, drawTraces, drawAllFloors, drawGoPatches } from "./functions/floor";
-import { displayDancers } from '../Gallery1/functions/emojis';
+import {
+  roomBoundary,
+  roomDoorCrossing,
+  wallBoundary,
+} from "../Gallery1/functions/crossing";
+import { roundToMult2 } from "../Gallery1/functions/round";
+import { drawWalls } from "../Gallery1/functions/building";
+import { initOuterFOVWalls } from "./functions/building";
+import {
+  displayDanceFloor,
+  drawTraces,
+  drawAllFloors,
+  drawGoPatches,
+} from "./functions/floor";
+import { displayDancers } from "../Gallery1/functions/emojis";
 
-import { reachedDestination, getNextStep, showMouseLoc, showUserEllipses, showDestination, mouseDidMove } from '../Gallery1/functions/destination';
-import { drawUser, drawUsers, checkUserClicked } from '../Gallery1/functions/users';
-import { displayTrashDivs, checkTrashDivsDouble, addTrashDivs, addLightDivs, displayLightDivs, displayColumnDivs, endDivDrag, updateDivs, checkDivPress, displayFolderDivs, checkFolderDivsDouble, addRoomLabelDivs, displayRoomLabelDivs, addFolderDivs, addBarDivs, displayBarDivs } from './functions/divs';
-import { addColumnDivs } from "./functions/divs";
-import { drawRooms } from './functions/building';
+import {
+  reachedDestination,
+  getNextStep,
+  showMouseLoc,
+  showUserEllipses,
+  showDestination,
+  mouseDidMove,
+} from "../Gallery1/functions/destination";
+import {
+  drawUser,
+  drawUsers,
+  checkUserClicked,
+} from "../Gallery1/functions/users";
+import {
+  displayTrashDivs,
+  checkTrashDivsDouble,
+  addTrashDivs,
+  addLightDivs,
+  displayLightDivs,
+  displayColumnDivs,
+  endDivDrag,
+  updateDivs,
+  checkDivPress,
+  displayFolderDivs,
+  checkFolderDivsDouble,
+  addRoomLabelDivs,
+  displayRoomLabelDivs,
+  addFolderDivs,
+  addBarDivs,
+  displayBarDivs,
+  addColumnDivs,
+} from "./functions/divs";
+import { drawRooms } from "./functions/building";
 
 //////////////
 // COMPONENTS
@@ -29,19 +66,25 @@ import FOVIsometricCube from "./components/FOVIsometricCube";
 
 //////////////
 // CONFIG
-import { GlobalConfig } from "../../../data/FieldsOfView/GlobalConfig";
-import { rooms as globalRooms } from "../../../data/FieldsOfView/RoomConfig";
-import { filterGalleryUsers, getTotalRoomCount } from "../../../helpers/helpers";
+import { GlobalConfig } from "../../../data/Shows/FieldsOfView/GlobalConfig";
+import { rooms as globalRooms } from "../../../data/Shows/FieldsOfView/RoomConfig";
+import {
+  filterGalleryUsers,
+  getTotalRoomCount,
+} from "../../../helpers/helpers";
 import { Dispatch } from "@reduxjs/toolkit";
 import { displayIsometricGrid, initCubes } from "./functions/isometric";
 import Dancer from "../components/p5/Dancer";
-import { barTenders, danceFloor } from "../../../data/FieldsOfView/BotConfig";
+import {
+  barTenders,
+  danceFloor,
+} from "../../../data/Shows/FieldsOfView/BotConfig";
 import { addBots } from "../../../App/useSockets";
 
 // import { p5ToUserCoords, p5ToWorldCoords } from "../../../helpers/coordinates";
 
 //////////////
-// BUILDING 
+// BUILDING
 var walls: any = [];
 var rooms: any = [];
 var eyeIcon: p5Types.Image;
@@ -112,8 +155,7 @@ interface DispatchProps {
   setFollowingHost: (isFollowing: boolean) => void;
 }
 
-interface Props extends ComponentProps, StateProps, DispatchProps { }
-
+interface Props extends ComponentProps, StateProps, DispatchProps {}
 
 class GallerySketch extends React.Component<Props> {
   constructor(props: Props) {
@@ -121,18 +163,22 @@ class GallerySketch extends React.Component<Props> {
   }
 
   preload = (p5: p5Types) => {
-    const url = "https://lmd-bucket.s3.us-east-2.amazonaws.com/sketches/gallery/";
+    const url =
+      "https://lmd-bucket.s3.us-east-2.amazonaws.com/sketches/gallery/";
 
     //////////////
     // building textures
     // floorTex = p5.loadImage(url + "concrete-512.jpg");
-    cubeTex = p5.loadImage("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/fields_of_view/spacepond.png");// url + "concrete-512.jpg");
-    floorTex = p5.loadImage("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/gallery/FOV/Transparency500.jpg")
+    cubeTex = p5.loadImage(
+      "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/fields_of_view/spacepond.png"
+    ); // url + "concrete-512.jpg");
+    floorTex = p5.loadImage(
+      "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/gallery/FOV/Transparency500.jpg"
+    );
     treeTex = p5.loadImage(url + "grass/tree.png");
     doorImgs[0] = p5.loadImage(url + "door/frame2.png");
     doorImgs[1] = p5.loadImage(url + "door/leftdoor2.png");
-    eyeIcon = p5.loadImage(url + "eye.png")
-
+    eyeIcon = p5.loadImage(url + "eye.png");
 
     //////////////
     // emojis
@@ -146,19 +192,20 @@ class GallerySketch extends React.Component<Props> {
     barEmojis[4] = p5.loadImage(url + "emojis/chat.png");
     barEmojis[5] = p5.loadImage(url + "emojis/mic.png");
 
-
-
     //////////////
     // plants
-    const pamURL = "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/";
+    const pamURL =
+      "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/";
     //////////////
     // folder icons
-    txtFile = p5.loadImage("https://lmd-bucket.s3.us-east-2.amazonaws.com/sketches/waveforms/txt.png");
+    txtFile = p5.loadImage(
+      "https://lmd-bucket.s3.us-east-2.amazonaws.com/sketches/waveforms/txt.png"
+    );
     instaImg = p5.loadImage(url + "instagram.png");
-    trashFiles[0] = p5.loadImage(url + "trash/fullrec.png")
-    trashFiles[3] = p5.loadImage(url + "trash/trash0.png")
-    trashFiles[2] = p5.loadImage(url + "trash/trash1.png")
-    trashFiles[1] = p5.loadImage(url + "trash/trash2.png")
+    trashFiles[0] = p5.loadImage(url + "trash/fullrec.png");
+    trashFiles[3] = p5.loadImage(url + "trash/trash0.png");
+    trashFiles[2] = p5.loadImage(url + "trash/trash1.png");
+    trashFiles[1] = p5.loadImage(url + "trash/trash2.png");
 
     //////////////
     // tables
@@ -176,9 +223,10 @@ class GallerySketch extends React.Component<Props> {
     columnGif = p5.loadImage(pamURL + "gallery/column.png"); //not sure why this one has a cors issue
 
     // font
-    font = p5.loadFont("https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/fonts/sysfont.woff");
-
-  }
+    font = p5.loadFont(
+      "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/fonts/sysfont.woff"
+    );
+  };
 
   ////////////////////////////////////////////////////////////////////////
   // INITIALIZE
@@ -192,7 +240,6 @@ class GallerySketch extends React.Component<Props> {
     for (let i = 0; i < globalRooms.length; i++) {
       rooms.push(new FOVRoom(p5, i, doorImgs[1]));
     }
-
 
     this.initEmojis(p5);
     this.initDivs(p5);
@@ -210,8 +257,7 @@ class GallerySketch extends React.Component<Props> {
     cnv.mousePressed(() => this.triggerMove(p5));
 
     anaglyph = new AnaglyphEffect(400, 400, p5);
-    anaglyph.setDivergence(-.3);
-
+    anaglyph.setDivergence(-0.3);
 
     p5.frameRate(20);
     p5.pixelDensity(2);
@@ -225,17 +271,16 @@ class GallerySketch extends React.Component<Props> {
     dancers[0] = new Dancer(p5, dancerImgs[0], 0, 160, false, danceFloor);
     dancers[1] = new Dancer(p5, dancerImgs[1], 100, 380, false, danceFloor);
     dancers[2] = new Dancer(p5, dancerImgs[2], 200, 150, true, danceFloor);
-  }
-
+  };
 
   initDivs = (p5: p5Types) => {
     addLightDivs(divs, lightImgs, p5);
-    addColumnDivs(divs, columnGif, p5, .83);
+    addColumnDivs(divs, columnGif, p5, 0.83);
     addTrashDivs(divs, trashFiles, p5);
     addFolderDivs(divs, instaImg, txtFile, p5);
     addBarDivs(bars, lightImgs[3], p5);
     addRoomLabelDivs(divs, eyeIcon, font, p5);
-  }
+  };
 
   ////////////////////////////////////////////////////////////////////////
   // DRAW
@@ -246,22 +291,23 @@ class GallerySketch extends React.Component<Props> {
 
     const { user, users } = this.props;
     p5.clear(255, 255, 255, 255);
-    
+
     p5.push();
     p5.translate(p5.width / 2, p5.height / 2);
 
     p5.pop();
 
-   
     p5.push();
     p5.translate(p5.windowWidth / 2, p5.windowHeight / 2);
 
     p5.push();
     p5.translate(-userEase.x, -userEase.y);
 
-
     p5.push();
-    p5.translate(GlobalConfig.x * GlobalConfig.scaler, GlobalConfig.y * GlobalConfig.scaler)
+    p5.translate(
+      GlobalConfig.x * GlobalConfig.scaler,
+      GlobalConfig.y * GlobalConfig.scaler
+    );
 
     //////////////
     // floors
@@ -272,15 +318,12 @@ class GallerySketch extends React.Component<Props> {
     displayIsometricGrid(1700, 1750, 1200, 750, p5);
     displayIsometricGrid(700, 1550, 600, 600, p5);
 
-
     p5.push();
-    p5.translate(GlobalConfig.scaler*10, -GlobalConfig.scaler);
+    p5.translate(GlobalConfig.scaler * 10, -GlobalConfig.scaler);
     for (const cube of cubes) {
       cube.display();
     }
     p5.pop();
-
-    
 
     //////////////
     // building
@@ -289,19 +332,23 @@ class GallerySketch extends React.Component<Props> {
     //////////////
     // emojis
     displayDancers(dancers);
-    displayDanceFloor(danceFloor.x, danceFloor.y, danceFloor.w, danceFloor.h, p5);
+    displayDanceFloor(
+      danceFloor.x,
+      danceFloor.y,
+      danceFloor.w,
+      danceFloor.h,
+      p5
+    );
 
     //////////////
     // draggable
-    
+
     const roomCount = getTotalRoomCount(users, rooms);
     drawRooms(rooms, anaglyph.output);
     drawWalls(walls, p5);
     drawGoPatches(p5);
 
-    if (!isClosed)
-      displayRoomLabelDivs(font, roomCount, divs);
-
+    if (!isClosed) displayRoomLabelDivs(font, roomCount, divs);
 
     p5.pop();
     p5.pop();
@@ -321,11 +368,8 @@ class GallerySketch extends React.Component<Props> {
 
     //////////////
     // updating
-    if (users)
-      updateDivs(userEase, users, divs);
+    if (users) updateDivs(userEase, users, divs);
     this.updateUserEase(p5);
-
-
   };
 
   debugMove = (p5: p5Types) => {
@@ -334,37 +378,47 @@ class GallerySketch extends React.Component<Props> {
     // p5.textSize(20);
     // p5.text(updateObj.destX + " " + updateObj.destY, p5.mouseX, p5.mouseY);
     // p5.text(p5.round(userEase.x) + " " + p5.round(userEase.y), p5.width / 2, p5.height / 2)
-  }
+  };
 
   displayFrameRate = (p5: p5Types) => {
     p5.fill(0);
     p5.textSize(30);
     p5.text(p5.frameRate(), 50, 50);
-  }
-
+  };
 
   drawOverTarget = (p5: p5Types) => {
     const { user, users } = this.props;
     p5.push();
     p5.translate(p5.windowWidth / 2, p5.windowHeight / 2);
     p5.translate(-userEase.x, -userEase.y);
-    p5.translate(GlobalConfig.x * GlobalConfig.scaler, GlobalConfig.y * GlobalConfig.scaler)
+    p5.translate(
+      GlobalConfig.x * GlobalConfig.scaler,
+      GlobalConfig.y * GlobalConfig.scaler
+    );
 
     if (users) {
       // p5.textFont(font, 34);
-      drawUsers(userEase, filterGalleryUsers(user, users), font, p5, barEmojis, GlobalConfig);
+      drawUsers(
+        userEase,
+        filterGalleryUsers(user, users),
+        font,
+        p5,
+        barEmojis,
+        GlobalConfig
+      );
     }
 
     p5.pop();
-  }
-
-
+  };
 
   drawOverUser = (p5: p5Types) => {
     p5.push();
     p5.translate(p5.windowWidth / 2, p5.windowHeight / 2);
     p5.translate(-userEase.x, -userEase.y);
-    p5.translate(GlobalConfig.x * GlobalConfig.scaler, GlobalConfig.y * GlobalConfig.scaler);
+    p5.translate(
+      GlobalConfig.x * GlobalConfig.scaler,
+      GlobalConfig.y * GlobalConfig.scaler
+    );
     displayBarDivs(userEase.x, userEase.y, bars);
     displayLightDivs(userEase.x, userEase.y, divs);
     displayColumnDivs(userEase.x, userEase.y, divs);
@@ -373,14 +427,14 @@ class GallerySketch extends React.Component<Props> {
     p5.textFont(font, 12);
     displayFolderDivs(divs);
 
-
-
-
     p5.pop();
 
-    if (p5.windowWidth !== window.innerWidth || p5.windowHeight !== window.innerHeight)
+    if (
+      p5.windowWidth !== window.innerWidth ||
+      p5.windowHeight !== window.innerHeight
+    )
       this.manualResize(p5);
-  }
+  };
 
   ////////////////////////////////////////////////////////////////////////
   // MOVEMENT
@@ -394,50 +448,43 @@ class GallerySketch extends React.Component<Props> {
       lastMouseMove = new Date();
     }
     showMouseLoc(isMobile, lastMouseMove, p5);
-  }
+  };
 
   userTakeStep = (x: number, y: number) => {
     const { isClosed, isMobile, userNewRoom } = this.props;
     var t = new Date();
     let space = GlobalConfig.scaler;
-    const prevStep = { x: stepTo.x, y: stepTo.y }
+    const prevStep = { x: stepTo.x, y: stepTo.y };
     const userStep = { x: stepTo.x + x * space, y: stepTo.y + y * space };
     const roomDoor = roomDoorCrossing(rooms, prevStep, userStep);
-   
-    if (roomDoor) {
 
+    if (roomDoor) {
       if (!isMobile) {
-        if (window.confirm('Leave the main gallery?')) {
+        if (window.confirm("Leave the main gallery?")) {
           userNewRoom(roomDoor);
         }
-      }
-      else {
+      } else {
         userNewRoom(roomDoor);
       }
       isWalking = false;
-    }
-
-    else if (roomBoundary(rooms, prevStep, userStep)) {
+    } else if (roomBoundary(rooms, prevStep, userStep)) {
       this.stopWalking();
-    } 
-    else if (wallBoundary(walls, prevStep, userStep)) {
+    } else if (wallBoundary(walls, prevStep, userStep)) {
       this.stopWalking();
-    }
-    else {
+    } else {
       stepTo.x = userStep.x;
       stepTo.y = userStep.y;
     }
-  }
+  };
 
   stopWalking = () => {
     isWalking = false;
-  }
-
+  };
 
   updateUserEase = (p5: p5Types) => {
     const { userMove } = this.props;
     if (!reachedDestination(userEase, stepTo)) {
-      let amt = .7;
+      let amt = 0.7;
       userEase.x = userEase.x * amt + stepTo.x * (1 - amt);
       userEase.y = userEase.y * amt + stepTo.y * (1 - amt);
       let d = p5.dist(userEase.x, userEase.y, stepTo.x, stepTo.y);
@@ -447,13 +494,12 @@ class GallerySketch extends React.Component<Props> {
         // isStepping = false;
         userMove(userEase.x, userEase.y);
       }
-
     }
-  }
+  };
 
   triggerMove = (p5: p5Types) => {
     const { user } = this.props;
-    const { users, setUserActive, } = this.props;
+    const { users, setUserActive } = this.props;
     let userClicked = null;
 
     if (users)
@@ -461,9 +507,7 @@ class GallerySketch extends React.Component<Props> {
     if (userClicked) {
       setUserActive(userClicked);
       return;
-    }
-    else if (checkDivPress(userEase.x, userEase.y, divs)) {
-
+    } else if (checkDivPress(userEase.x, userEase.y, divs)) {
       return;
     }
 
@@ -474,8 +518,14 @@ class GallerySketch extends React.Component<Props> {
       let steps = GlobalConfig.scaler - 20;
       const dx = p5.mouseX > p5.windowWidth / 2 ? steps : -steps;
       const dy = p5.mouseY > p5.windowHeight / 2 ? steps : -steps;
-      const mx = roundToMult2((p5.mouseX - p5.windowWidth / 2) + dx, GlobalConfig.scaler);
-      const my = roundToMult2((p5.mouseY - p5.windowHeight / 2) + dy, GlobalConfig.scaler);
+      const mx = roundToMult2(
+        p5.mouseX - p5.windowWidth / 2 + dx,
+        GlobalConfig.scaler
+      );
+      const my = roundToMult2(
+        p5.mouseY - p5.windowHeight / 2 + dy,
+        GlobalConfig.scaler
+      );
 
       if (!(mx === 0 && my === 0)) {
         const x = mx + user.x;
@@ -486,9 +536,7 @@ class GallerySketch extends React.Component<Props> {
         isWalking = true;
       }
     }
-
-  }
-
+  };
 
   mouseStep = () => {
     const t = new Date().getTime() - destination.time.getTime();
@@ -496,33 +544,28 @@ class GallerySketch extends React.Component<Props> {
     if (isWalking) {
       if (reachedDestination(stepTo, destination)) {
         isWalking = false;
-      }
-      else if (t > 150) {
+      } else if (t > 150) {
         let step = getNextStep(stepTo, destination);
         this.userTakeStep(step[0], step[1]);
         destination.time = new Date();
       }
     }
-  }
+  };
 
   keyPressed = (p5: p5Types) => {
     if (p5.frameCount > 0) {
       if (p5.keyCode === p5.UP_ARROW) {
         this.userTakeStep(0, -1);
-      }
-      else if (p5.keyCode === p5.RIGHT_ARROW) {
+      } else if (p5.keyCode === p5.RIGHT_ARROW) {
         this.userTakeStep(1, 0);
-      }
-      else if (p5.keyCode === p5.LEFT_ARROW) {
+      } else if (p5.keyCode === p5.LEFT_ARROW) {
         this.userTakeStep(-1, 0);
-      }
-      else if (p5.keyCode === p5.DOWN_ARROW) {
+      } else if (p5.keyCode === p5.DOWN_ARROW) {
         this.userTakeStep(0, 1);
       }
     }
     return;
-
-  }
+  };
 
   mouseReleased = (p5: p5Types) => {
     if (p5.frameCount > 0) {
@@ -536,17 +579,17 @@ class GallerySketch extends React.Component<Props> {
       // }
       // endBarDivDrag(bars);
     }
-  }
+  };
 
   manualResize = (p5: p5Types) => {
     p5.windowWidth = window.innerWidth;
     p5.windowHeight = window.innerHeight;
     this.windowResized(p5);
-  }
+  };
 
   windowResized = (p5: p5Types) => {
     p5.resizeCanvas(p5.windowWidth, p5.windowHeight);
-  }
+  };
 
   doubleClicked = (p5: p5Types) => {
     if (p5.frameCount > 0) {
@@ -555,7 +598,7 @@ class GallerySketch extends React.Component<Props> {
       // checkFloppyDivsDouble(userEase.x, userEase.y, floppies);
     }
     return;
-  }
+  };
 
   render() {
     // TODO - key & mouse listeners called twice (like 2 instances... one always at frame count 0)
@@ -571,20 +614,18 @@ class GallerySketch extends React.Component<Props> {
       />
     );
   }
-};
-
+}
 
 const mapStateToProps = (state: RootState) => ({
   user: state.user,
 });
 
-
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    setFollowingHost: (isFollowing: boolean) => dispatch(setFollowingHost(isFollowing))
-  }
-}
-
+    setFollowingHost: (isFollowing: boolean) =>
+      dispatch(setFollowingHost(isFollowing)),
+  };
+};
 
 function scene(pg: p5Types.Graphics, p5: p5Types, floorTex: p5Types.Image) {
   const boxW = 300;
@@ -627,7 +668,7 @@ function scene(pg: p5Types.Graphics, p5: p5Types, floorTex: p5Types.Image) {
   pg.texture(treeTex);
   pg.noStroke();
   pg.plane(1800, boxW);
-  
+
   // pg.image(cubeTex, 0, 0, 1800, boxW);
   pg.pop();
 
@@ -652,11 +693,7 @@ function scene(pg: p5Types.Graphics, p5: p5Types, floorTex: p5Types.Image) {
   pg.image(floorTex, 0, 0, boxW, 1800);
   pg.pop();
 
-  
   pg.rect(0, 0, boxW, 1800);
-
- 
-  
 
   // ceiling
   pg.translate(0, 0, boxW);
@@ -669,7 +706,6 @@ function scene(pg: p5Types.Graphics, p5: p5Types, floorTex: p5Types.Image) {
   pg.pop();
 }
 
-
 function circleLines(p5: p5Types) {
   // p5.background("black");
   p5.randomSeed(0);
@@ -681,7 +717,7 @@ function circleLines(p5: p5Types) {
     let diam = p5.random(50, 400);
     let r = p5.random(10, 100);
     r = p5.constrain(r, 10, diam);
-    let sW = p5.random(1, 5)
+    let sW = p5.random(1, 5);
     let sp = p5.random(4, 10);
     let spinR = p5.random(6000, 12000);
     let str = p5.random(30, 85);
@@ -692,7 +728,7 @@ function circleLines(p5: p5Types) {
     p5.push();
     p5.translate(c.x, c.y);
     p5.rotate(p5.millis() / c.spinR);
-    for (let i = 0; i < 360; i += c.sp / c.diam * 100) {
+    for (let i = 0; i < 360; i += (c.sp / c.diam) * 100) {
       p5.rotate(p5.radians(c.sp));
       p5.stroke(255, c.str);
       p5.strokeWeight(c.sW);
@@ -701,6 +737,7 @@ function circleLines(p5: p5Types) {
     p5.pop();
   }
 }
-export default connect<StateProps, DispatchProps, ComponentProps, RootState>(mapStateToProps, mapDispatchToProps)(GallerySketch);
-
-
+export default connect<StateProps, DispatchProps, ComponentProps, RootState>(
+  mapStateToProps,
+  mapDispatchToProps
+)(GallerySketch);

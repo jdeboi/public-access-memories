@@ -14,7 +14,10 @@
   font-size: 13pt;
   pointer-events: none;
 }
-.Frame input, .Frame button, .Frame select, .Frame textarea {
+.Frame input,
+.Frame button,
+.Frame select,
+.Frame textarea {
   pointer-events: all;
 }
 .Frame span {

@@ -1,1 +1,1 @@
-export { roomConfig, artists, rooms } from '../FieldsOfView/RoomConfig'
+export { roomConfig, artists, rooms } from "../Shows/DaveGreber/RoomConfig";

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "../../Page.css";
-import { artists } from "../../../../data/AsIRecall/RoomConfig";
+import { artists } from "../../../../data/Shows/AsIRecall/RoomConfig";
 import ArtistsArchiveList from "../ArtistsArchiveList";
 import ImageGrid from "../ImageGrid";
 

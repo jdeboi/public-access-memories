@@ -1,0 +1,94 @@
+.PageGallery {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* index mismatch here... */
+}
+.PageGallery .pagesContainer {
+  display: flex;
+  width: 100%;
+  flex: 1;
+}
+.PageGallery .flipped {
+  transform: rotateY(-180deg);
+}
+.PageGallery .page {
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  backface-visibility: hidden;
+  transition: transform 0.5s;
+  background-color: white;
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+}
+.PageGallery .page:nth-child(odd) {
+  transform-origin: top right;
+}
+.PageGallery .page:nth-child(even) {
+  margin-left: 50%;
+  transform-origin: top left;
+}
+.PageGallery .page.even {
+  left: 0;
+  background-position: center left; /* Adjust as needed */
+}
+.PageGallery .page.odd {
+  right: 0;
+  background-position: center right; /* Adjust as needed */
+}
+.PageGallery .page-corner {
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-top: 25px solid transparent; /* Adjust size as needed */
+  border-bottom: 25px solid black; /* Adjust size as needed */
+}
+.PageGallery .even .page-corner {
+  left: 0;
+  border-right: 25px solid transparent; /* Adjust size as needed */
+  border-left: 25px solid black; /* Adjust size as needed */
+}
+.PageGallery .odd .page-corner {
+  right: 0;
+  border-right: 25px solid black; /* Adjust size as needed */
+  border-left: 25px solid transparent; /* Adjust size as needed */
+}
+.PageGallery .page-corner-up {
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-top: 25px solid rgba(0, 0, 0, 0.2509803922); /* Adjust size as needed */
+  border-bottom: 25px solid transparent; /* Adjust size as needed */
+}
+.PageGallery .even .page-corner-up {
+  left: 0;
+  border-right: 25px solid rgba(0, 0, 0, 0.2509803922); /* Adjust size as needed */
+  border-left: 25px solid transparent; /* Adjust size as needed */
+}
+.PageGallery .odd .page-corner-up {
+  right: 0;
+  border-right: 25px solid transparent; /* Adjust size as needed */
+  border-left: 25px solid rgba(0, 0, 0, 0.2509803922); /* Adjust size as needed */
+}
+.PageGallery .pageButtons {
+  position: absolute;
+  bottom: 50px;
+  width: 100%;
+  z-index: 100;
+}
+.PageGallery .pageButtons button {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+}
+.PageGallery .pageButtons button#backButton {
+  left: 0;
+}
+.PageGallery .pageButtons button#nextButton {
+  right: 0;
+}/*# sourceMappingURL=GalleryPages.css.map */

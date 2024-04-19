@@ -16,6 +16,9 @@
   pointer-events: all;
 }
 
+.SignInForm {
+  display: none;
+}
 .SignInForm .userBar {
   height: 38px;
   align-self: flex-start;

@@ -271,7 +271,7 @@ function App() {
             path="/"
             element={
               <Gallery
-                id={3}
+                id={1}
                 users={users}
                 isClosed={isClosed}
                 showWelcome={showWelcome}
@@ -310,7 +310,28 @@ function App() {
               />
             }
           />
-
+          <Route
+            path="/galleries/fieldsofview"
+            element={
+              <Gallery
+                id={3}
+                users={users}
+                isClosed={isClosed}
+                showWelcome={showWelcome}
+              />
+            }
+          />
+          <Route
+            path="/galleries/homeoffice"
+            element={
+              <Gallery
+                id={4}
+                users={users}
+                isClosed={isClosed}
+                showWelcome={showWelcome}
+              />
+            }
+          />
           <Route path="/test/rooms/:id" element={<TestRoom />} />
           <Route path={`/${ShowConfig.link}/rooms/:id`} element={<Room />} />
 

@@ -1,20 +1,72 @@
-import { GlobalConfig } from "../../../../data/AsIRecall/GlobalConfig";
+import { GlobalConfig } from "../../../../data/Shows/AsIRecall/GlobalConfig";
 import ShadowDraggable from "../../components/p5/Draggable/ShadowDraggable";
-import p5Types from 'p5';
+import p5Types from "p5";
 
-export const addColumnDivs = (divs: any, columnGif: p5Types.Image, p5: p5Types, factor = 1) => {
-    divs.columns = [];
-    let sc = GlobalConfig.scaler;
-    const w = 80 * factor;
-    const h = 280 * factor;
+export const addColumnDivs = (
+  divs: any,
+  columnGif: p5Types.Image,
+  p5: p5Types,
+  factor = 1
+) => {
+  divs.columns = [];
+  let sc = GlobalConfig.scaler;
+  const w = 80 * factor;
+  const h = 280 * factor;
 
-    divs.columns.push(new ShadowDraggable(0, 7.65 * sc, 22 * sc, w, h, p5, columnGif, GlobalConfig))
-    divs.columns.push(new ShadowDraggable(0, 9.65 * sc, 22 * sc, w, h, p5, columnGif, GlobalConfig))
+  divs.columns.push(
+    new ShadowDraggable(
+      0,
+      7.65 * sc,
+      22 * sc,
+      w,
+      h,
+      p5,
+      columnGif,
+      GlobalConfig
+    )
+  );
+  divs.columns.push(
+    new ShadowDraggable(
+      0,
+      9.65 * sc,
+      22 * sc,
+      w,
+      h,
+      p5,
+      columnGif,
+      GlobalConfig
+    )
+  );
 
-    divs.columns.push(new ShadowDraggable(0, 4 * sc, 31.5 * sc, w, h, p5, columnGif, GlobalConfig))
-    divs.columns.push(new ShadowDraggable(0, 6 * sc, 31.5 * sc, w, h, p5, columnGif, GlobalConfig))
+  divs.columns.push(
+    new ShadowDraggable(0, 4 * sc, 31.5 * sc, w, h, p5, columnGif, GlobalConfig)
+  );
+  divs.columns.push(
+    new ShadowDraggable(0, 6 * sc, 31.5 * sc, w, h, p5, columnGif, GlobalConfig)
+  );
 
-    divs.columns.push(new ShadowDraggable(0, 30.7 * sc, 16.5 * sc, w, h, p5, columnGif, GlobalConfig))
-    divs.columns.push(new ShadowDraggable(0, 32.7 * sc, 16.5 * sc, w, h, p5, columnGif, GlobalConfig))
-
-}
+  divs.columns.push(
+    new ShadowDraggable(
+      0,
+      30.7 * sc,
+      16.5 * sc,
+      w,
+      h,
+      p5,
+      columnGif,
+      GlobalConfig
+    )
+  );
+  divs.columns.push(
+    new ShadowDraggable(
+      0,
+      32.7 * sc,
+      16.5 * sc,
+      w,
+      h,
+      p5,
+      columnGif,
+      GlobalConfig
+    )
+  );
+};

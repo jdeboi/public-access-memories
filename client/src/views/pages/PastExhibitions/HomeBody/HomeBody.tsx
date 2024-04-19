@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "../../Page.css";
 import ArtistsArchiveList from "../ArtistsArchiveList";
-import { artists } from "../../../../data/HomeBody/RoomConfig";
+import { artists } from "../../../../data/Shows/HomeBody/RoomConfig";
 
 export const HomeBody = () => {
   const sortedArtists = [...artists];
