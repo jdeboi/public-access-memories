@@ -6,8 +6,7 @@ import { useNavigate } from "react-router-dom";
 import GallerySketch1 from "./Gallery1/GallerySketch";
 import GallerySketch2 from "./Gallery2/GallerySketch";
 import GallerySketch3 from "./Gallery3/GallerySketch";
-import GallerySketch4 from "./GalleryGreber/GallerySketch";
-import GalleryPages from "./GalleryGreber/GalleryPages";
+import GalleryGreber from "./Gallery4HomeOffices/GalleryGreber";
 
 import {
   GlobalConfig,
@@ -172,22 +171,17 @@ const Gallery = (props: IGallery) => {
       case 4:
         GalleryStyle.backgroundImage = "none";
         return (
-          <>
-            <GalleryPages users={props.users} user={user} />
-            <div style={{ zIndex: 30 }}>
-              <GallerySketch4
-                users={props.users}
-                isClosed={props.isClosed}
-                userMove={moveGalleryUser}
-                userNewRoom={userNewRoom}
-                loadingDone={() => dispatch(doneLoadingApp())}
-                toggleOutside={() => dispatch(toggleOutside())}
-                isMobile={windowUI.isMobile}
-                clickedUserChat={clickedUserChat}
-                setUserActive={clickedUserChat}
-              />
-            </div>
-          </>
+          <GalleryGreber
+            users={props.users}
+            isClosed={props.isClosed}
+            userMove={moveGalleryUser}
+            userNewRoom={userNewRoom}
+            loadingDone={() => dispatch(doneLoadingApp())}
+            toggleOutside={() => dispatch(toggleOutside())}
+            clickedUserChat={clickedUserChat}
+            setUserActive={clickedUserChat}
+            moveGalleryUser={moveGalleryUser}
+          />
         );
       default:
         return (

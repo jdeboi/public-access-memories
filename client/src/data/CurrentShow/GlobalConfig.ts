@@ -1,4 +1,4 @@
-import { GlobalConfig as GlobalConfigDave } from "../Shows/DaveGreber/GlobalConfig";
+import { GlobalConfig as GlobalConfigDave } from "../Shows/HomeOffices/GlobalConfig";
 import { GlobalConfig as GlobalConfigHB } from "../Shows/HomeBody/GlobalConfig";
 import { GlobalConfig as GlobalConfigAIR } from "../Shows/AsIRecall/GlobalConfig";
 import { GlobalConfig as GlobalConfigFOV } from "../Shows/FieldsOfView/GlobalConfig";
@@ -7,7 +7,7 @@ export {
   GlobalConfig,
   limits,
   outsideDoors,
-} from "../Shows/DaveGreber/GlobalConfig";
+} from "../Shows/HomeOffices/GlobalConfig";
 
 export const getCurrentPageGlobalConfig = (index: number) => {
   switch (index) {

@@ -164,18 +164,3 @@ export const bars: IBar[] = [
   },
 ];
 
-export const getBar = (type: string): IBar => {
-  let b = bars.filter((bar) => bar.type === type)[0];
-  if (b) {
-    return b;
-  }
-  return bars[0];
-};
-
-export const getBarTender = (type: string): IUser => {
-  let u = bars.filter((bar) => bar.type === type)[0].tender;
-  if (u) {
-    return u;
-  }
-  return barTenders[0];
-};

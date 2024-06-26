@@ -9,10 +9,26 @@ $buttonSize: 50px;
   top: 0;
   left: 0;
 
+  .pagesBg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    -moz-filter: blur(8px);
+    -o-filter: blur(8px);
+    -ms-filter: blur(8px);
+  }
+
   .pagesContainer {
     display: flex;
     width: 100%;
     flex: 1;
+    background-repeat: no-repeat;
   }
 
   .flipped {
@@ -20,15 +36,15 @@ $buttonSize: 50px;
   }
 
   .page {
+    background: transparent;
     position: absolute;
     height: 100%;
     width: 50%;
     backface-visibility: hidden;
     transition: transform 0.5s;
-    background-color: white;
 
     background-repeat: no-repeat;
-    background-size: 200% 100%;
+    // background-size: 200%;
   }
 
   /* index mismatch here... */
@@ -42,11 +58,16 @@ $buttonSize: 50px;
   }
 
   .page.even {
+    background-repeat: no-repeat;
+    background-color: black;
     left: 0;
     background-position: center left; /* Adjust as needed */
   }
 
   .page.odd {
+    background-repeat: no-repeat;
+    background-color: black;
+
     right: 0;
     background-position: center right; /* Adjust as needed */
   }
@@ -137,5 +158,30 @@ $buttonSize: 50px;
     button#nextButton {
       right: 0;
     }
+  }
+}
+
+.GallerySketches {
+  .canvasPage {
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    backface-visibility: hidden;
+    transition: transform 0.5s;
+  }
+  .canvasEven {
+    transform-origin: top left;
+  }
+  .canvasOdd {
+    margin-left: 50%;
+    transform-origin: top right;
+  }
+
+  .canvas0Flipped {
+    transform: rotateY(-180deg);
+  }
+
+  .canvas1Flipped {
+    transform: rotateY(-180deg);
   }
 }

@@ -322,7 +322,7 @@ function App() {
             }
           />
           <Route
-            path="/galleries/homeoffice"
+            path="/galleries/homeoffices"
             element={
               <Gallery
                 id={4}

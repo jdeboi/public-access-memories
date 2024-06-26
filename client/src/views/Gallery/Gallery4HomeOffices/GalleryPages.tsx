@@ -1,26 +1,29 @@
 import { useState, CSSProperties } from "react";
 import Page from "./Page";
-import "./GalleryPages.css";
+import "./css/GalleryPages.css";
 import { IUser, IUsers } from "../../../interfaces";
+// store
+import { useSelector } from "react-redux";
+import { selectWindow } from "../../../store/store";
 
 interface GProps {
   users: IUsers;
   user: IUser;
+  currentPage: number;
+  changePage: (dir: number) => void;
+  numPages: number;
 }
 const GalleryPages = (props: GProps) => {
-  const [startPage, setStartPage] = useState(0);
-
-  const NUM_PAGES = 20;
   // fill array with numbers from 0 to NUM_PAGES
-  const pages = Array.from({ length: NUM_PAGES + 1 }, (_, i) => i);
+  const pages = Array.from({ length: props.numPages + 1 }, (_, i) => i);
+  const windowUI = useSelector(selectWindow);
 
   const back = () => {
-    setStartPage((startPage) => Math.max(startPage - 2, 0));
+    props.changePage(-1);
   };
 
   const next = () => {
-    const endPage = Math.floor(NUM_PAGES / 2) * 2;
-    setStartPage((startPage) => Math.min(startPage + 2, endPage - 2));
+    props.changePage(1);
   };
 
   const usrStyle: CSSProperties = {
@@ -30,15 +33,24 @@ const GalleryPages = (props: GProps) => {
     left: props.user.x,
   };
 
+  const pageNum = Math.floor(props.currentPage / 2);
+
   return (
     <div className="PageGallery">
+      <div
+        className="pagesBg"
+        style={{
+          backgroundImage: `url(https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/pages/Office_${pageNum}/0.jpg)`,
+        }}
+      ></div>
       <div className="pagesContainer">
         {pages.map((page) => (
           <Page
             key={page}
             index={page}
-            startPage={startPage}
-            numPages={NUM_PAGES}
+            startPage={props.currentPage}
+            numPages={props.numPages}
+            windowUI={windowUI}
           >
             <></>
           </Page>

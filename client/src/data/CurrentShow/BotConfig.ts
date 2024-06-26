@@ -1,11 +1,11 @@
 import { bars as barsHB } from "../Shows/HomeBody/BotConfig";
 import { bars as barsAIR } from "../Shows/AsIRecall/BotConfig";
 import { bars as barsFOV } from "../Shows/FieldsOfView/BotConfig";
-import { bars as barsDave } from "../Shows/DaveGreber/BotConfig";
+import { bars as barsDave } from "../Shows/HomeOffices/BotConfig";
 import { barTenders as barTendersHB } from "../Shows/HomeBody/BotConfig";
 import { barTenders as barTendersAIR } from "../Shows/AsIRecall/BotConfig";
 import { barTenders as barTendersFOV } from "../Shows/FieldsOfView/BotConfig";
-import { barTenders as barTendersDave } from "../Shows/DaveGreber/BotConfig";
+import { barTenders as barTendersDave } from "../Shows/HomeOffices/BotConfig";
 import { IBar, IUser } from "../../interfaces";
 
 export {
@@ -14,7 +14,7 @@ export {
   barTenders,
   bars,
   DJBotDomCoords,
-} from "../Shows/DaveGreber/BotConfig";
+} from "../Shows/HomeOffices/BotConfig";
 
 export const getGalleryBars = (galleryId: number) => {
   switch (galleryId) {
