@@ -1,6 +1,6 @@
 import React from "react";
 
-const Page = ({ index, startPage, children, numPages, windowUI }) => {
+const Page = ({ index, startPage, children, numLayouts, windowUI }) => {
   let classN = `page page${index}`;
   classN += index % 2 == 0 ? " even" : " odd";
 
@@ -58,7 +58,7 @@ const Page = ({ index, startPage, children, numPages, windowUI }) => {
   };
   const shouldShowPageFlip = () => {
     if (index == 0) return false;
-    if (index % 2 == 1 && index == numPages - 1) return false;
+    if (index % 2 == 1 && index == numLayouts - 1) return false;
     return true;
   };
 
@@ -77,12 +77,12 @@ const Page = ({ index, startPage, children, numPages, windowUI }) => {
     >
       {children}
 
-      {shouldShowPageFlip() && (
+      {/* {shouldShowPageFlip() && (
         <>
           <div className="page-corner"></div>
           <div className="page-corner-up"></div>
         </>
-      )}
+      )} */}
     </div>
   );
 };

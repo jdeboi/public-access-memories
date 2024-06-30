@@ -31,6 +31,7 @@ import {
   showUserEllipses,
   showDestination,
   mouseDidMove,
+  closeToDestination,
 } from "../Gallery1/functions/destination";
 
 import { checkUserClicked, drawUser, drawUsers } from "./functions/users";
@@ -51,45 +52,40 @@ import {
   addBarDivs,
   displayBarDivs,
   addColumnDivs,
-} from "../Gallery3/functions/divs";
+} from "../Gallery4HomeOffices/functions/divs";
 
 import {
   barTenders,
   danceFloor,
 } from "../../../data/Shows/HomeOffices/BotConfig";
+import {
+  displayPageFlips,
+  isPageBackwardCorner,
+  isPageForwardCorner,
+  pageIsTurning,
+} from "./functions/page";
 
 //////////////
 // EMOJIS
-var dancers: any = [];
-var dancerImgs: p5Types.Image[] = [];
-var barEmojis: p5Types.Image[] = [];
-var lightImgs: p5Types.Image[] = [];
-var trashFiles: p5Types.Image[] = [];
-var columnGif: p5Types.Image;
-var txtFile: p5Types.Image, instaImg: p5Types.Image;
+const dancers: any = [];
+const dancerImgs: p5Types.Image[] = [];
+const barEmojis: p5Types.Image[] = [];
+const lightImgs: p5Types.Image[] = [];
+const trashFiles: p5Types.Image[] = [];
+let columnGif: p5Types.Image;
+let txtFile: p5Types.Image, instaImg: p5Types.Image;
 
-//////////////
-// EMOJIS
-var dancers: any = [];
-var dancerImgs: p5Types.Image[] = [];
-var barEmojis: p5Types.Image[] = [];
-
-var font: p5Types.Font;
+let font: p5Types.Font;
 let previousPage = 0;
-let canvas0Flipped = false;
-let canvas1Flipped = false;
-let flippingTime = 0;
+let pageFlipImg: p5Types.Image;
 
 let officeImgs: p5Types.Image[] = [];
 let currentImgIndex = 1;
-let pgraphics: p5Types.Graphics;
 let frameGraphics: p5Types.Graphics;
 let frames: RectFrame[] = [];
 let timer1 = new Timer(200);
 let timer2 = new Timer(200);
 let frameDim = { w: 100, h: 100 };
-let hasResized = false;
-let currentRoom = 1;
 
 let isLoadingImages = false;
 let pageTurnTime = 0;
@@ -117,13 +113,13 @@ interface ComponentProps {
   userMove: (x: number, y: number) => void;
   userNewRoom: (room: string) => void;
   loadingDone: () => void;
-  toggleOutside: () => void;
+  setOutside: (state: { isOutside: boolean }) => void;
   windowUI: IWindowUI;
   changePage: (page: number) => void;
   setUserActive: (user: IUser) => void;
   clickedUserChat: (user: IUser) => void;
   currentPage: number;
-  numPages: number;
+  numLayouts: number;
 }
 
 // redux props
@@ -184,6 +180,9 @@ class GallerySketch extends React.Component<Props> {
     trashFiles[2] = p5.loadImage(url + "trash/trash1.png");
     trashFiles[1] = p5.loadImage(url + "trash/trash2.png");
 
+    columnGif = p5.loadImage(pamURL + "/gallery/column.png"); //not sure why this one has a cors issue
+
+    pageFlipImg = p5.loadImage(pamURL + "/homeoffices/pagecorner.webp");
     this.loadOfficeImages(p5);
   };
 
@@ -192,41 +191,31 @@ class GallerySketch extends React.Component<Props> {
   ////////////////////////////////////////////////////////////////////////
 
   setup = (p5: p5Types, canvasParentRef: Element) => {
-    const { user, loadingDone, windowUI } = this.props;
+    const { user, loadingDone, setOutside, windowUI, userMove } = this.props;
 
     p5.textFont(font, 14);
 
-    const cnv = p5.createCanvas(p5.windowWidth, p5.windowHeight);
+    const cnv = p5.createCanvas(windowUI.contentW, windowUI.contentH);
     cnv.parent(canvasParentRef);
     cnv.mousePressed(() => this.triggerMove(p5));
 
     //p5.frameRate(20);
     p5.pixelDensity(2);
 
-    pgraphics = p5.createGraphics(p5.windowWidth, p5.windowHeight);
-
-    // // resize images
-    // for (let i = 0; i < officeImgs.length; i++) {
-    //   // var h = p5.windowHeight;
-    //   // var w = (h * officeImgs[i].width) / officeImgs[i].height;
-    //   var w = windowUI.contentW;
-    //   var h = (w * officeImgs[i].height) / officeImgs[i].width;
-    //   officeImgs[i].resize(w, h);
-    // }
-    // hasResized = true;
-
-    frameGraphics = p5.createGraphics(p5.windowWidth, p5.windowHeight);
+    frameGraphics = p5.createGraphics(windowUI.contentW, windowUI.contentH);
     frameGraphics.clear(0, 0, 0, 0);
 
     this.initEmojis(p5);
     this.initDivs(p5);
 
     loadingDone();
+    setOutside({ isOutside: false });
+    this.setUserInitialPosition(p5);
   };
 
   initDivs = (p5: p5Types) => {
     addLightDivs(divs, lightImgs, p5);
-    addColumnDivs(divs, columnGif, p5, 0.83);
+    addColumnDivs(divs, columnGif, p5);
     addTrashDivs(divs, trashFiles, p5);
     addFolderDivs(divs, instaImg, txtFile, p5);
     addBarDivs(bars, lightImgs[3], p5);
@@ -238,10 +227,19 @@ class GallerySketch extends React.Component<Props> {
     dancers[2] = new Dancer(p5, dancerImgs[2], 200, 150, true, danceFloor);
   };
 
+  setUserInitialPosition = (p5: p5Types) => {
+    let dx = Math.floor(p5.random(-20, 20));
+    let dy = Math.floor(p5.random(-20, 20));
+    let x = Math.floor(p5.width / 2 + dx);
+    let y = Math.floor(p5.height / 2 + dy);
+    this.setUserPositionImmediate(x, y);
+  };
+
   draw = (p5: p5Types) => {
     const { user, users } = this.props;
 
     if (isLoadingImages) {
+      frameGraphics.clear(0, 0, 0, 0);
       p5.clear(0, 0, 0, 0);
       p5.push();
       p5.translate(movement.userEase.x, movement.userEase.y);
@@ -250,7 +248,8 @@ class GallerySketch extends React.Component<Props> {
       return;
     }
 
-    if (this.pageIsTurning(p5)) {
+    if (pageIsTurning(pageTurnTime, p5)) {
+      frameGraphics.clear(0, 0, 0, 0);
       p5.clear(0, 0, 0, 0);
       p5.push();
       p5.translate(movement.userEase.x, movement.userEase.y);
@@ -260,28 +259,13 @@ class GallerySketch extends React.Component<Props> {
     }
 
     p5.clear(0, 0, 0, 0);
-    this.displayFrameRate(p5);
+    // this.displayFrameRate(p5);
 
     p5.push();
-    p5.translate(0, this.getBackgroundShift());
 
-    if (this.props.currentPage != 0) {
-      this.displayRandomRects(p5);
-    }
+    this.displayRandomRects(p5);
 
-    switch (this.props.currentPage) {
-      case 0:
-        this.display0(p5);
-        break;
-      case 1:
-        this.display1(p5);
-        break;
-      case 2:
-        this.display2(p5);
-        break;
-      default:
-        break;
-    }
+    this.displayLayoutContent(p5);
     p5.pop();
 
     //////////////
@@ -300,19 +284,42 @@ class GallerySketch extends React.Component<Props> {
 
     this.drawOverUser(p5);
 
+    displayPageFlips(
+      pageFlipImg,
+      this.props.currentPage,
+      this.props.numLayouts,
+      p5
+    );
+
     //////////////
     // updating
-    if (users) updateDivs(movement.userEase, users, divs);
+    if (users) updateDivs(this.getRoomString(), divs);
 
     this.updateUserEase(p5);
     this.checkPageChange(p5);
     if (
-      p5.windowWidth !== window.innerWidth ||
-      p5.windowHeight !== window.innerHeight
+      p5.width !== this.props.windowUI.contentW ||
+      p5.height !== this.props.windowUI.contentH
     )
       this.manualResize(p5);
   };
 
+  displayLayoutContent = (p5: p5Types) => {
+    let layoutNum = this.props.currentPage / 2;
+    switch (layoutNum) {
+      case 0:
+        this.display0(p5);
+        break;
+      case 1:
+        this.display1(p5);
+        break;
+      case 2:
+        this.display2(p5);
+        break;
+      default:
+        break;
+    }
+  };
   display0 = (p5: p5Types) => {};
   display1 = (p5: p5Types) => {};
   display2 = (p5: p5Types) => {};
@@ -337,28 +344,16 @@ class GallerySketch extends React.Component<Props> {
 
     p5.image(frameGraphics, 0, 0);
 
-    if (frames && frames.length > 0)
-      frames[frames.length - 1].displayFrame(p5, 100);
-  }
-
-  getBackgroundShift() {
-    if (
-      officeImgs == null ||
-      officeImgs.length == 0 ||
-      officeImgs[0].height == 0
-    )
-      return 0;
-    return (this.props.windowUI.contentH - officeImgs[0].height) * 0.5;
+    if (frames && frames.length > 0) frames[frames.length - 1].displayFrame(p5);
   }
 
   newRandomFrame(p5: p5Types) {
     if (officeImgs == null || officeImgs.length == 0) return;
-    let dy = this.getBackgroundShift();
-    let _x = this.props.user.x; //+ p5.windowWidth / 2;
-    let _y = this.props.user.y; // + p5.windowHeight / 2 - dy;
+    let _x = this.props.user.x - frameDim.w / 2;
+    let _y = this.props.user.y - frameDim.h / 2;
 
-    let x = p5.constrain(_x - frameDim.w / 2, 0, p5.windowWidth - frameDim.w);
-    let y = p5.constrain(_y - frameDim.h / 2, 0, p5.windowHeight - frameDim.h);
+    let x = p5.constrain(_x, 0, p5.windowWidth - frameDim.w / 2);
+    let y = p5.constrain(_y, 0, p5.windowHeight - frameDim.h / 2);
     let frame = new RectFrame(x, y, frameDim.w, frameDim.h, currentImgIndex);
 
     frames.push(frame);
@@ -383,57 +378,41 @@ class GallerySketch extends React.Component<Props> {
   }
 
   checkPageChange = (p5: p5Types) => {
-    const { currentPage } = this.props;
+    const { currentPage, userMove, user } = this.props;
+    if (previousPage === currentPage) return;
+
+    pageTurnTime = p5.millis();
+    this.loadOfficeImages(p5);
+    this.stopWalking();
     if (currentPage > previousPage) {
-      this.goForwardPage(p5);
+      this.setUserPosition(p5.width - 100, p5.height - 100);
     } else if (currentPage < previousPage) {
-      this.goBackwardPage(p5);
+      this.setUserPosition(100, p5.height - 100);
     }
+
     previousPage = currentPage;
   };
 
-  goForwardPage = (p5: p5Types) => {
-    pageTurnTime = p5.millis();
-    this.loadOfficeImages(p5);
-  };
-
-  goBackwardPage = (p5: p5Types) => {
-    pageTurnTime = p5.millis();
-    this.loadOfficeImages(p5);
-  };
-
-  isPageForwardCorner = (nextStep: { x: number; y: number }, p5: p5Types) => {
-    const { x, y } = nextStep;
-    const cornerDim = GlobalConfig.scaler;
-    return x > p5.width - cornerDim && y > p5.height - cornerDim;
-  };
-
-  isPageBackwardCorner = (nextStep: { x: number; y: number }, p5: p5Types) => {
-    const { x, y } = nextStep;
-    const cornerDim = GlobalConfig.scaler;
-    return x < cornerDim && y > p5.height - cornerDim;
-  };
-
-  pageIsTurning = (p5: p5Types) => {
-    return p5.millis() - pageTurnTime < 500;
-  };
-
-  loadOfficeImages2 = (p5: p5Types) => {
-    const { currentPage, windowUI } = this.props;
-    const currentRoom = currentPage / 2;
-    for (let i = 1; i < 5; i++) {
-      officeImgs[i - 1] = p5.loadImage(
-        `https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/pages/Office_${currentRoom}/${i}.jpg`
-      );
-    }
+  getRoomString = () => {
+    return Math.floor(this.props.currentPage / 2).toString();
   };
 
   loadOfficeImages = (p5: p5Types) => {
-    const { currentPage, windowUI, numPages } = this.props;
+    const {
+      currentPage,
+      windowUI,
+      numLayouts: numPages,
+      setOutside,
+    } = this.props;
     const currentRoom = (currentPage / 2) % numPages;
     const imagePromises = [];
 
-    if (currentRoom == 0) return;
+    setOutside({ isOutside: true });
+
+    // if (currentRoom == 0) {
+    //   setOutside({ isOutside: false });
+    //   return;
+    // }
 
     isLoadingImages = true;
 
@@ -467,6 +446,9 @@ class GallerySketch extends React.Component<Props> {
       .catch((error) => {
         isLoadingImages = false;
         throw error;
+      })
+      .finally(() => {
+        setOutside({ isOutside: false });
       });
   };
 
@@ -474,6 +456,8 @@ class GallerySketch extends React.Component<Props> {
     p5.fill(0);
     p5.noStroke();
     p5.text(p5.round(p5.frameRate()), 20, 20);
+    p5.text(this.props.user.roomUrl, 20, 40);
+    p5.text(this.props.currentPage, 20, 60);
   };
 
   drawOverTarget = (p5: p5Types) => {
@@ -496,25 +480,25 @@ class GallerySketch extends React.Component<Props> {
   };
 
   drawOverUser = (p5: p5Types) => {
+    let room = this.getRoomString();
     p5.push();
     // p5.translate(p5.windowWidth / 2, p5.windowHeight / 2);
 
     const userEase = { x: 0, y: 0 };
-    displayBarDivs(userEase.x, userEase.y, bars);
-    displayLightDivs(userEase.x, userEase.y, divs);
-    displayColumnDivs(userEase.x, userEase.y, divs);
-    displayTrashDivs(userEase.x, userEase.y, divs);
+    displayBarDivs(room, bars);
+    displayLightDivs(room, divs);
+    displayColumnDivs(room, divs);
+    displayTrashDivs(room, divs);
 
     p5.textFont(font, 12);
-    displayFolderDivs(divs);
+    displayFolderDivs(room, divs);
 
     p5.pop();
   };
 
   manualResize = (p5: p5Types) => {
-    console.log("resizing...");
-    p5.windowWidth = window.innerWidth;
-    p5.windowHeight = window.innerHeight;
+    // p5.windowWidth = window.innerWidth;
+    // p5.windowHeight = window.innerHeight;
     this.windowResized(p5);
   };
   ////////////////////////////////////////////////////////////////////////
@@ -539,9 +523,9 @@ class GallerySketch extends React.Component<Props> {
     let space = GlobalConfig.scaler; //40;
     const userStep = { x: stepTo.x + x * space, y: stepTo.y + y * space };
 
-    if (userStep.x > p5.windowWidth) {
+    if (userStep.x > p5.width) {
       this.stopWalking();
-    } else if (userStep.y > p5.windowHeight) {
+    } else if (userStep.y > p5.height) {
       this.stopWalking();
     } else if (userStep.x < 0) {
       this.stopWalking();
@@ -559,26 +543,54 @@ class GallerySketch extends React.Component<Props> {
   };
 
   checkPageCorners = (userStep: { x: number; y: number }, p5: p5Types) => {
-    let changedPage = false;
-    if (this.isPageForwardCorner(userStep, p5)) {
-      changedPage = true;
-
-      if (!justChangedPage) {
-        this.props.changePage(1);
-        justChangedPage = true;
-      }
-    } else if (this.isPageBackwardCorner(userStep, p5)) {
-      changedPage = true;
-
-      if (!justChangedPage) {
-        this.props.changePage(-1);
-        justChangedPage = true;
-      }
+    if (isPageForwardCorner(userStep, p5)) {
+      this.props.changePage(1);
+    } else if (isPageBackwardCorner(userStep, p5)) {
+      this.props.changePage(-1);
     }
+  };
 
-    if (!changedPage) {
-      justChangedPage = false;
-    }
+  // checkPageCorners = (userStep: { x: number; y: number }, p5: p5Types) => {
+  //   let changedPage = false;
+  //   if (isPageForwardCorner(userStep, p5)) {
+  //     changedPage = true;
+
+  //     if (!justChangedPage) {
+  //       this.props.changePage(1);
+  //       justChangedPage = true;
+  //     }
+  //   } else if (isPageBackwardCorner(userStep, p5)) {
+  //     changedPage = true;
+
+  //     if (!justChangedPage) {
+  //       this.props.changePage(-1);
+  //       justChangedPage = true;
+  //     }
+  //   }
+
+  //   if (!changedPage) {
+  //     justChangedPage = false;
+  //   }
+  // };
+
+  setUserPosition = (x: number, y: number) => {
+    this.stopWalking();
+    movement.stepTo.x = x;
+    movement.stepTo.y = y;
+    movement.destination.x = x;
+    movement.destination.y = y;
+    this.props.userMove(x, y);
+  };
+
+  setUserPositionImmediate = (x: number, y: number) => {
+    this.stopWalking();
+    movement.userEase.x = x;
+    movement.userEase.y = y;
+    movement.stepTo.x = x;
+    movement.stepTo.y = y;
+    movement.destination.x = x;
+    movement.destination.y = y;
+    this.props.userMove(x, y);
   };
 
   updateUserEase = (p5: p5Types) => {
@@ -606,7 +618,7 @@ class GallerySketch extends React.Component<Props> {
     if (userClicked) {
       setUserActive(userClicked);
       return;
-    } else if (checkDivPress(movement.userEase.x, movement.userEase.y, divs)) {
+    } else if (checkDivPress(this.getRoomString(), divs)) {
       return;
     } else {
       let steps = GlobalConfig.scaler - 20;
@@ -630,7 +642,11 @@ class GallerySketch extends React.Component<Props> {
     const t = new Date().getTime() - movement.destination.time.getTime();
     const { user } = this.props;
     if (movement.isWalking) {
-      if (reachedDestination(movement.stepTo, movement.destination)) {
+      if (closeToDestination(movement.stepTo, movement.destination)) {
+        this.setUserPositionImmediate(
+          movement.destination.x,
+          movement.destination.y
+        );
         movement.isWalking = false;
       } else if (t > 150) {
         let step = getNextStep(movement.stepTo, movement.destination);
@@ -650,6 +666,10 @@ class GallerySketch extends React.Component<Props> {
         this.userTakeStep(p5, -1, 0);
       } else if (p5.keyCode === p5.DOWN_ARROW) {
         this.userTakeStep(p5, 0, 1);
+      } else if (p5.key == "w") {
+        this.props.changePage(1);
+      } else if (p5.key == "q") {
+        this.props.changePage(-1);
       }
     }
     return;
@@ -664,9 +684,23 @@ class GallerySketch extends React.Component<Props> {
   mouseMoved = (p5: p5Types) => {};
 
   windowResized = (p5: p5Types) => {
-    p5.resizeCanvas(p5.windowWidth, p5.windowHeight);
+    const { windowUI } = this.props;
+    frameGraphics = p5.createGraphics(windowUI.contentW, windowUI.contentH);
+    p5.resizeCanvas(windowUI.contentW, windowUI.contentH);
+    this.setUserBoundaries(p5);
+  };
 
-    const bg = this.getBackgroundSize();
+  setUserBoundaries = (p5: p5Types) => {
+    const { user } = this.props;
+    let x = user.x;
+    let y = user.y;
+    if (x > p5.width - 50) {
+      x = p5.width - 50;
+    }
+    if (y > p5.height - 50) {
+      y = p5.height - 50;
+    }
+    this.setUserPositionImmediate(x, y);
   };
 
   getBackgroundSize = () => {
@@ -689,7 +723,13 @@ class GallerySketch extends React.Component<Props> {
     }
   };
 
-  doubleClicked = (p5: p5Types) => {};
+  doubleClicked = (p5: p5Types) => {
+    if (p5.frameCount > 0) {
+      checkFolderDivsDouble(this.getRoomString(), divs);
+      checkTrashDivsDouble(this.getRoomString(), divs);
+    }
+    return;
+  };
 
   render() {
     // TODO - key & mouse listeners called twice (like 2 instances... one always at frame count 0)

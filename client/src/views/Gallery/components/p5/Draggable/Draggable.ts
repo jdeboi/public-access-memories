@@ -1,13 +1,8 @@
-
-
-
-import Button from './Button';
+import Button from "./Button";
 import { mouseToWorld } from "../../../../../helpers/coordinates";
-// import { GlobalConfig } from '../../../../../../data/HomeBody/GlobalConfig';
-import p5Types from 'p5';
+import p5Types from "p5";
 
 export default class Draggable {
-
   p5: p5Types;
   x: number;
   y: number;
@@ -39,7 +34,18 @@ export default class Draggable {
   GlobalConfig: any;
   mask: any;
 
-  constructor(id: number, x: number, y: number, w: number, h: number, p5: p5Types, content: p5Types.Image | null, GlobalConfig: any) {
+  roomToDisplay: string | null;
+
+  constructor(
+    id: number,
+    x: number,
+    y: number,
+    w: number,
+    h: number,
+    p5: p5Types,
+    content: p5Types.Image | null,
+    GlobalConfig: any
+  ) {
     this.p5 = p5;
     this.x = x;
     this.y = y;
@@ -61,6 +67,8 @@ export default class Draggable {
     this.closed = false;
     this.minimized = false;
 
+    this.roomToDisplay = null;
+
     this.barH = 26;
     this.bRad = 10;
 
@@ -78,15 +86,21 @@ export default class Draggable {
     // this.initMask();
   }
 
+  setNormal(x: number, y: number, room: string | null = null) {
+    this.x = x;
+    this.y = y;
+    this.origX = this.x;
+    this.origY = this.y;
+    this.roomToDisplay = room;
+  }
+
   initMask() {
     this.mask = this.p5.createGraphics(this.w, this.h + this.barH);
     this.mask.background(0);
     this.mask.fill(255);
     this.mask.noStroke();
-    // this.mask.rect(0, 0, this.w, this.h, this.bRad, this.bRad);
     this.mask.ellipse(this.w / 2, this.h / 2, 50, 50);
     if (this.content && this.content.width > 0) {
-
       this.content.mask(this.mask);
     }
   }
@@ -95,8 +109,40 @@ export default class Draggable {
     this.p5.push();
     this.p5.translate(this.x, this.y);
     if (!this.closed) {
-      if (!this.minimized)
-        this.displayContent(userX, userY);
+      if (!this.minimized) this.displayContent(userX, userY);
+    }
+    this.p5.pop();
+  }
+
+  displayInRoom(roomName: string) {
+    if (this.roomToDisplay !== roomName) {
+      return;
+    }
+    this.p5.push();
+    this.p5.translate(this.x, this.y);
+    if (!this.closed) {
+      if (!this.minimized) this.displayContent(0, 0);
+    }
+    this.p5.pop();
+  }
+
+  displayToolBarNormal(room: string = "") {
+    if (room !== "" && room !== this.roomToDisplay) return false;
+    this.p5.push();
+    this.p5.translate(this.x, this.y);
+    if (!this.closed) {
+      this.p5.fill(0);
+      this.p5.noStroke();
+      if (!this.minimized) this.p5.rect(0, 10, this.w, this.barH - 10);
+      this.p5.rect(0, 0, this.w, this.barH, this.bRad);
+
+      let x = this.p5.mouseX;
+      let y = this.p5.mouseY;
+      x -= this.x;
+      y -= this.y;
+      this.closeButton.display(x, y);
+      this.minButton.display(x, y);
+      this.maxButton.display(x, y);
     }
     this.p5.pop();
   }
@@ -107,7 +153,7 @@ export default class Draggable {
     if (!this.closed) {
       this.p5.fill(0);
       this.p5.noStroke();
-      if (!this.minimized) this.p5.rect(0, 10, this.w, (this.barH - 10));
+      if (!this.minimized) this.p5.rect(0, 10, this.w, this.barH - 10);
       this.p5.rect(0, 0, this.w, this.barH, this.bRad);
 
       const { x, y } = this.getMouseCoords(userX, userY);
@@ -124,14 +170,17 @@ export default class Draggable {
     let mx = this.p5.mouseX + userX - gx - this.p5.windowWidth / 2 - this.x;
     let my = this.p5.mouseY + userY - gy - this.p5.windowHeight / 2 - this.y;
     if (!mx || !my) {
-      return {x: 0, y: 0}
-      
+      return { x: 0, y: 0 };
     }
-    return { x: mx, y: my }
+    return { x: mx, y: my };
   }
 
   getMouseButtons(userX: number, userY: number) {
-    let mouse = mouseToWorld({ x: userX, y: userY }, this.p5, this.GlobalConfig);
+    let mouse = mouseToWorld(
+      { x: userX, y: userY },
+      this.p5,
+      this.GlobalConfig
+    );
     mouse.x -= this.x;
     mouse.y -= this.y;
     return mouse;
@@ -151,7 +200,6 @@ export default class Draggable {
     }
     this.p5.pop();
     this.displayFrame();
-
   }
 
   displaySolidBack(col: p5Types.Color) {
@@ -170,19 +218,36 @@ export default class Draggable {
     this.p5.rect(0, 0, this.w, this.h + this.barH, this.bRad);
   }
 
+  checkButtonsNormal(room: string = "") {
+    if (room !== "" && room !== this.roomToDisplay) return false;
+
+    if (this.closed) return false;
+    let mouse = { x: this.p5.mouseX, y: this.p5.mouseY };
+    mouse.x -= this.x;
+    mouse.y -= this.y;
+    if (this.closeButton.mouseOver(mouse.x, mouse.y)) {
+      this.closeWindow();
+      return true;
+    } else if (this.minButton.mouseOver(mouse.x, mouse.y)) {
+      this.toggleMinimze();
+      return true;
+    } else if (this.maxButton.mouseOver(mouse.x, mouse.y)) {
+      this.maximizeWindow();
+      return true;
+    }
+    return false;
+  }
+
   checkButtons(userX: number, userY: number) {
-    if (this.closed)
-      return false;
+    if (this.closed) return false;
     let mouse = this.getMouseButtons(userX, userY);
     if (this.closeButton.mouseOver(mouse.x, mouse.y)) {
       this.closeWindow();
       return true;
-    }
-    else if (this.minButton.mouseOver(mouse.x, mouse.y)) {
+    } else if (this.minButton.mouseOver(mouse.x, mouse.y)) {
       this.toggleMinimze();
       return true;
-    }
-    else if (this.maxButton.mouseOver(mouse.x, mouse.y)) {
+    } else if (this.maxButton.mouseOver(mouse.x, mouse.y)) {
       this.maximizeWindow();
       return true;
     }
@@ -190,8 +255,7 @@ export default class Draggable {
   }
 
   checkDragging(userX: number, userY: number) {
-    if (this.closed)
-      return false;
+    if (this.closed) return false;
     let mouse = this.getMouse(userX, userY);
     if (this.overToolBar(mouse.x, mouse.y)) {
       // this.draggingOn(mx, my);
@@ -205,15 +269,42 @@ export default class Draggable {
     return false;
   }
 
-  overToolBar(mx: number, my: number) {
-    return mx > this.x && mx < this.x + this.w && my > this.y && my < this.y + this.barH;
+  checkDraggingNormal(room: string = "") {
+    if (room !== "" && room !== this.roomToDisplay) {
+      return false;
+    }
+    if (this.closed) return false;
+    let mouse = { x: this.p5.mouseX, y: this.p5.mouseY };
+    if (this.overToolBar(mouse.x, mouse.y)) {
+      // this.draggingOn(mx, my);
+      this.dragging = true;
+      this.startDrag.x = this.p5.mouseX;
+      this.startDrag.y = this.p5.mouseY;
+      this.startDragCoords.x = this.x;
+      this.startDragCoords.y = this.y;
+      return true;
+    }
+    return false;
   }
 
+  overToolBar(mx: number, my: number) {
+    return (
+      mx > this.x &&
+      mx < this.x + this.w &&
+      my > this.y &&
+      my < this.y + this.barH
+    );
+  }
 
   endDrag() {
     this.dragging = false;
   }
 
+  updateInRoom(room: string) {
+    if (room === this.roomToDisplay) {
+      this.update();
+    }
+  }
   update() {
     if (this.dragging) {
       this.offsetX = this.p5.mouseX - this.startDrag.x;
@@ -245,7 +336,6 @@ export default class Draggable {
     this.offsetX = 0;
     this.offsetY = 0;
   }
-
 
   toggleMinimze() {
     this.minimized = !this.minimized;

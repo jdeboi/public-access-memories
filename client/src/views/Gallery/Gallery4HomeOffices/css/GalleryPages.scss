@@ -59,46 +59,19 @@ $buttonSize: 50px;
 
   .page.even {
     background-repeat: no-repeat;
-    background-color: black;
+    background-color: rgb(205, 205, 205);
     left: 0;
     background-position: center left; /* Adjust as needed */
   }
 
   .page.odd {
     background-repeat: no-repeat;
-    background-color: black;
+    background-color: rgb(205, 205, 205);
 
     right: 0;
     background-position: center right; /* Adjust as needed */
   }
 
-  //   .page0 {
-  //     background-image: url("./assets/office_0.jpeg");
-  //   }
-
-  //   .page1 {
-  //     background-image: url("./assets/office_0.jpeg");
-  //   }
-
-  //   .page2 {
-  //     background-image: url("./assets/office_1.jpeg");
-  //   }
-
-  //   .page3 {
-  //     background-image: url("./assets/office_1.jpeg");
-  //   }
-
-  //   .page4 {
-  //     background-image: url("./assets/office_2.jpeg");
-  //   }
-
-  //   .page5 {
-  //     background-image: url("./assets/office_2.jpeg");
-  //   }
-
-  //   .page6 {
-  //     background-image: url("./assets/office_3.jpeg");
-  //   }
 
   .page-corner {
     position: absolute;

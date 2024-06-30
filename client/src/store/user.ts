@@ -229,6 +229,10 @@ export const userSlice = createSlice({
       state.needsCocktail = false;
       state.cocktailTime = null;
     },
+
+    setOutside: (state, action: PayloadAction<{ isOutside: boolean }>) => {
+      state.outside = action.payload.isOutside;
+    },
     toggleOutside: (state) => {
       state.outside = !state.outside;
     },
@@ -293,4 +297,5 @@ export const {
   setIsSpeaking,
   setSpeakingId,
   toggleOutside,
+  setOutside,
 } = userSlice.actions;

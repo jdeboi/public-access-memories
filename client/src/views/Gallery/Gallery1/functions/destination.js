@@ -7,6 +7,13 @@ export const reachedDestination = (stepTo, destination) => {
   return stepTo.x === destination.x && stepTo.y === destination.y;
 };
 
+export const closeToDestination = (stepTo, destination) => {
+  let dx = destination.x - stepTo.x;
+  let dy = destination.y - stepTo.y;
+  let d = Math.sqrt(dx * dx + dy * dy);
+  return d < 40;
+};
+
 // TODO - probably a smarter way to determine best step...
 export const getNextStep = (stepTo, destination) => {
   let steps = [

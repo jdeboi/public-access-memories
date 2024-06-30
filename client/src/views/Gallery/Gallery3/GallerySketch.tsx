@@ -193,10 +193,13 @@ class GallerySketch extends React.Component<Props> {
     barEmojis[5] = p5.loadImage(url + "emojis/mic.png");
 
     //////////////
-    // plants
     const pamURL =
       "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/";
-    //////////////
+    
+      columnGif = p5.loadImage(pamURL + "gallery/column.png"); //not sure why this one has a cors issue
+
+    
+      //////////////
     // folder icons
     txtFile = p5.loadImage(
       "https://lmd-bucket.s3.us-east-2.amazonaws.com/sketches/waveforms/txt.png"
@@ -219,8 +222,6 @@ class GallerySketch extends React.Component<Props> {
     lightImgs[1] = p5.loadImage(url + "tracklights/light_shadow.png");
     lightImgs[2] = p5.loadImage(url + "tracklights/tracklights_dark_vert.jpg");
     lightImgs[3] = p5.loadImage(url + "tracklights/black_shadow.png");
-
-    columnGif = p5.loadImage(pamURL + "gallery/column.png"); //not sure why this one has a cors issue
 
     // font
     font = p5.loadFont(

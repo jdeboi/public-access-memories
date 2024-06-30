@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactAudioPlayer from "react-audio-player";
 import "./Gallery.css";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +17,7 @@ import { IUser, IUsers } from "../../interfaces";
 import { filterUsers, mapVal } from "../../helpers/helpers";
 
 import LoadingPage from "../../components/LoadingPage/LoadingPage";
+import LoadingPageHomeOffices from "../../views/Gallery/Gallery4HomeOffices/components/LoadingPageHomeOffices/LoadingPageHomeOffices";
 import MiniMapAIR from "./components/MiniMap/MiniMapAIR";
 import MiniMap from "./components/MiniMap/MiniMap";
 import MiniMapFOV from "./components/MiniMap/MiniMapFOV";
@@ -29,7 +30,12 @@ import {
   selectUserActive,
   selectWindow,
 } from "../../store/store";
-import { setUserRoomUrl, moveUser, toggleOutside } from "../../store/user";
+import {
+  setUserRoomUrl,
+  moveUser,
+  toggleOutside,
+  setOutside,
+} from "../../store/user";
 import { setUserActiveChat } from "../../store/userActive";
 import { setGalleryId, setOneMenu, showChat } from "../../store/menu";
 import { setSketchVolume } from "../../store/music";
@@ -52,18 +58,33 @@ const Gallery = (props: IGallery) => {
   const dispatch = useDispatch();
   const userActive = useSelector(selectUserActive);
   const navigate = useNavigate();
-  const audioPlayer = useRef(null);
+  const audioPlayer = useRef<ReactAudioPlayer>(null);
+  const [showStart, setShowStart] = useState(true);
 
   useEffect(() => {
     // dispatch to set gallery id
     dispatch(setGalleryId(props.id));
-  }, [props.id]);
+
+    // Try to play audio after component mounts
+    if (audioPlayer.current) {
+      const audioElement = audioPlayer.current.audioEl.current;
+      if (audioElement) {
+        audioElement.play().catch((error) => {
+          console.error("Audio playback failed:", error);
+        });
+      }
+    }
+  }, [props.id, dispatch]);
+
+  useEffect(() => {
+    if (props.showWelcome) {
+      setShowStart(false);
+    }
+  }, [props.showWelcome]);
 
   const clickedUserChat = (otherUser: IUser) => {
     if (otherUser.id !== user.id) {
-      // const { ui, setUserActiveChat, showChat, setOneMenu } = this.props;
       dispatch(setUserActiveChat(otherUser));
-      // if we use both, setOneMenu will have a toggle effect on Desktop
       if (windowUI.isMobile || windowUI.hasFooter) dispatch(setOneMenu("chat"));
       else dispatch(showChat());
     }
@@ -80,17 +101,6 @@ const Gallery = (props: IGallery) => {
     let dy = djpos.y - user.y;
     let dis = Math.sqrt(dx * dx + dy * dy);
 
-    // if (user.outside) {
-    // const minVol = .2;
-    // let v = mapVal(dis, 0, 3000, 1, 0);
-    // if (v > 1)
-    //     v = 1;
-    // else if (v < minVol)
-    //     v = minVol;
-    // return v;
-    // }
-    // return .1;
-
     const minVol = 0.05;
     if (dis > 1000) return minVol;
     return mapVal(dis, 0, 1000, 1, minVol);
@@ -103,8 +113,6 @@ const Gallery = (props: IGallery) => {
     const newUser = { ...user };
     newUser.x = x;
     newUser.y = y;
-    // socket.emit("setUser", newUser);
-    // are we handling this in the app.tsx?
   };
 
   const userNewRoom = (room: string) => {
@@ -173,11 +181,15 @@ const Gallery = (props: IGallery) => {
         return (
           <GalleryGreber
             users={props.users}
+            showStart={showStart}
+            hideStart={() => setShowStart(false)}
             isClosed={props.isClosed}
             userMove={moveGalleryUser}
             userNewRoom={userNewRoom}
             loadingDone={() => dispatch(doneLoadingApp())}
-            toggleOutside={() => dispatch(toggleOutside())}
+            setOutside={(state: { isOutside: boolean }) =>
+              dispatch(setOutside(state))
+            }
             clickedUserChat={clickedUserChat}
             setUserActive={clickedUserChat}
             moveGalleryUser={moveGalleryUser}
@@ -198,6 +210,53 @@ const Gallery = (props: IGallery) => {
           />
         );
     }
+  };
+
+  const getLoading = () => {
+    if (props.id == 4) {
+      return <LoadingPageHomeOffices showTitle={true} />;
+    }
+    return <LoadingPage />;
+  };
+
+  const getHomeOfficesAudio = () => {
+    const pamURL =
+      "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/sounds/";
+
+    if (user.roomUrl == "/") {
+      return pamURL + "0.mp4";
+    }
+    let page = Math.floor(parseInt(user.roomUrl) / 2);
+    return pamURL + page + ".mp4";
+  };
+
+  const getGalleryAudio = () => {
+    if (props.showWelcome || showStart) {
+      return null;
+    }
+    if (props.id == 4) {
+      return (
+        <ReactAudioPlayer
+          src={getHomeOfficesAudio()}
+          autoPlay
+          volume={music.isMuted ? 0 : getVolume()}
+          controls={false}
+          loop
+          ref={audioPlayer}
+        />
+      );
+    }
+
+    return (
+      <ReactAudioPlayer
+        src={music.currentSongTitle}
+        autoPlay
+        volume={music.isMuted ? 0 : getVolume()}
+        controls={false}
+        loop
+        ref={audioPlayer}
+      />
+    );
   };
 
   const getMap = () => {
@@ -222,19 +281,12 @@ const Gallery = (props: IGallery) => {
   return (
     <div className="Gallery Sketch" style={GalleryStyle}>
       <div id="p5_loading" className="loadingclass"></div>
-      {getGallery()}
-      {windowUI.loading ? <LoadingPage /> : getMap()}
 
-      {!props.showWelcome ? (
-        <ReactAudioPlayer
-          src={music.currentSongTitle}
-          autoPlay={true}
-          volume={music.isMuted ? 0 : getVolume()}
-          controls={false}
-          loop={true}
-          ref={audioPlayer}
-        />
-      ) : null}
+      {getGallery()}
+
+      {windowUI.loading ? getLoading() : getMap()}
+
+      {getGalleryAudio()}
     </div>
   );
 };
