@@ -271,7 +271,7 @@ function App() {
             path="/"
             element={
               <Gallery
-                id={1}
+                id={4}
                 users={users}
                 isClosed={isClosed}
                 showWelcome={showWelcome}

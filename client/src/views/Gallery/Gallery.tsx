@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 import GallerySketch1 from "./Gallery1/GallerySketch";
 import GallerySketch2 from "./Gallery2/GallerySketch";
 import GallerySketch3 from "./Gallery3/GallerySketch";
-import GalleryGreber from "./Gallery4HomeOffices/GalleryGreber";
+// import GalleryGreber from "./Gallery4HomeOffices/GalleryGreber";
+import GalleryGreberLanding from "./Gallery4HomeOfficesLanding/GalleryGreber";
 
 import {
   GlobalConfig,
@@ -176,10 +177,29 @@ const Gallery = (props: IGallery) => {
             setUserActive={clickedUserChat}
           />
         );
+      // case 4:
+      //   GalleryStyle.backgroundImage = "none";
+      //   return (
+      //     <GalleryGreber
+      //       users={props.users}
+      //       showStart={showStart}
+      //       hideStart={() => setShowStart(false)}
+      //       isClosed={props.isClosed}
+      //       userMove={moveGalleryUser}
+      //       userNewRoom={userNewRoom}
+      //       loadingDone={() => dispatch(doneLoadingApp())}
+      //       setOutside={(state: { isOutside: boolean }) =>
+      //         dispatch(setOutside(state))
+      //       }
+      //       clickedUserChat={clickedUserChat}
+      //       setUserActive={clickedUserChat}
+      //       moveGalleryUser={moveGalleryUser}
+      //     />
+      //   );
       case 4:
         GalleryStyle.backgroundImage = "none";
         return (
-          <GalleryGreber
+          <GalleryGreberLanding
             users={props.users}
             showStart={showStart}
             hideStart={() => setShowStart(false)}

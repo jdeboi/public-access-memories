@@ -1,13 +1,14 @@
 export const ShowConfig = {
   isClosed: true,
   isOpenCallOpen: false,
-  underConstruction: true,
+  underConstruction: false,
   isMenuOn: false,
   galleryTitle: "public access memories",
-  showTitle: "TBA",
-  showDescription: "",
-  showOpens: { date: "May 1st 2024", time: "5PM PST (GMT-7)" },
+  showTitle: "HomeOffices",
+  showDescription:
+    "Whether you are a freelancer, remote worker, or entrepreneur, we support you. Welcome to HomeOffices, a journey into our domestic workspaces.",
+  showOpens: { date: "July 27th 2024", time: "6PM CST" },
   showCloses: "",
-  link: "fields-of-view",
-  awsLink: "fields_of_view",
+  link: "homeoffices",
+  awsLink: "homeoffices",
 };

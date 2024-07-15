@@ -21,30 +21,13 @@ export const About = () => {
             evolving canvas, PAM invites collaborative brainstorming and
             critical reflection on the nature of the white cube online.
           </p>
-          <br />
-          <h3>Creators</h3>
           <p>
-            &gt; <a href="https://instagram.com/jdeboi">Jenna deBoisblanc</a> is
-            the founder and chief developer of PAM. A net artist from New
-            Orleans, she considers how the internet mediates the human
-            experience.
-            <br />
-            <br />
-            &gt; <a href="https://www.matthisgrunsky.ca/">Matthis Grunsky</a> is
-            an artist and educator based out of Winnipeg, Manitoba. He is
-            interested in the aesthetic potential of computation both on the
-            computer screen and in physical media.
+            <a href="https://instagram.com/jdeboi">Jenna deBoisblanc</a> is the
+            founder and chief developer of PAM. A net artist from New Orleans,
+            she considers how the internet mediates the human experience.
           </p>
-          {/* <p>
-                    What is the nature of the white cube online? Ostensibly
-                    cyberspace creates the opportunity for radical,
-                    limitless reinvention. To what extent are we leveraging
-                    this creative flexibility to deconstruct social and
-                    economic barriers (for example, systemic racism) that
-                    prevent access to the art world? How do the digital spaces
-                    we code facilitate or detract from the process of viewing,
-                    analyzing, sharing, and enjoying art?
-                </p> */}
+
+          <br />
           <br />
           <h3>Get Involved</h3>
           <p>
