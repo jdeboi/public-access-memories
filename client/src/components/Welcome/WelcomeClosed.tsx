@@ -9,6 +9,7 @@ import DetailsStart from "./components/DetailsStart";
 import DetailsClosed from "./components/DetailsClosed";
 import SignIn from "../SignIn/SignIn";
 import DetailsTour from "./components/DetailsTour";
+import WelcomeVideo from "./components/WelcomeVideo/WelcomeVideo";
 
 interface IWelcome {
   showWelcome: boolean;
@@ -40,23 +41,24 @@ const WelcomeClosed = (props: IWelcome) => {
     if (props.step === 0) return <DetailsStart />;
     else if (props.step === 1) return <DetailsClosed />;
     // return <DetailsTour />
-    else
+    else if (props.step == 2)
       return (
         <SignIn
           hasAvatar={props.hasAvatar}
           hasLoadedCookies={props.hasLoadedCookies}
-          nextStep={props.closeWelcome}
+          nextStep={props.nextStep}
           isFrame={false}
           ref={signInRef}
         />
       );
+    else return <WelcomeVideo nextStep={props.closeWelcome} />;
   };
 
   const getButtons = (): JSX.Element => {
     if (props.step === 0) return welcomeButtons(props.nextStep);
     else if (props.step === 1)
       return prevNextButtons(props.prevStep, props.nextStep);
-    else
+    else if (props.step == 2)
       return (
         <div className="center-buttons">
           <button className="standardButton secondary" onClick={props.prevStep}>
@@ -69,9 +71,23 @@ const WelcomeClosed = (props: IWelcome) => {
                 if (signInRef.current) signInRef.current.clicked();
               }}
             >
-              submit
+              next
             </button>
           ) : null}
+        </div>
+      );
+    else
+      return (
+        <div className="center-buttons flexItem">
+          <button className="standardButton secondary" onClick={props.prevStep}>
+            back
+          </button>
+          <button
+            className="standardButton primary"
+            onClick={props.closeWelcome}
+          >
+            submit
+          </button>
         </div>
       );
   };

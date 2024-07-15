@@ -100,7 +100,7 @@ const GalleryGreber = (props: ComponentProps) => {
         title={"Welcome"}
         isHidden={!props.showStart}
         onHide={props.hideStart}
-        z={2500}
+        z={2000}
         isRelative={false}
         classN="Welcome"
         content={
