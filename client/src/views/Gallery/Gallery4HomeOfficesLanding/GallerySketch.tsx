@@ -322,7 +322,7 @@ class GallerySketch extends React.Component<Props> {
 
   displayRandomRects(p5: p5Types) {
     timer1.dt = 100;
-    timer2.dt = 2000;
+    timer2.dt = 4000;
 
     if (p5.millis() - movement.lastStepTime < 200) {
       if (p5.frameCount % 15 == 0) {
@@ -348,14 +348,14 @@ class GallerySketch extends React.Component<Props> {
     let _x = this.props.user.x - frameDim.w / 2;
     let _y = this.props.user.y - frameDim.h / 2;
 
-    let x = p5.constrain(_x, 0, p5.windowWidth - frameDim.w / 2);
-    let y = p5.constrain(_y, 0, p5.windowHeight - frameDim.h / 2);
+    let x = p5.constrain(_x, 0, p5.width - frameDim.w / 2);
+    let y = p5.constrain(_y, 0, p5.height - frameDim.h / 2);
     let frame = new RectFrame(x, y, frameDim.w, frameDim.h, currentImgIndex);
 
     frames.push(frame);
 
-    frameGraphics.erase(50);
-    frameGraphics.rect(0, 0, p5.windowWidth, p5.windowHeight);
+    frameGraphics.erase(30);
+    frameGraphics.rect(0, 0, p5.width, p5.height);
     frameGraphics.noErase();
 
     frame.displayImg(frameGraphics, officeImgs, this.getBackgroundSize());

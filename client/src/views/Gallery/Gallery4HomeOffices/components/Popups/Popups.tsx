@@ -6,9 +6,9 @@ import Frame from "../../../../../components/Frame/Frame";
 
 export default function Popups() {
   const NUM_ADS = 7;
-  const POPUP_LASTS = 5000;
-  const POPUP_MIN_INTERVAL = 8000;
-  const POPUP_MAX_INTERVAL = 20000;
+  const POPUP_LASTS = 8000;
+  const POPUP_MIN_INTERVAL = 14000;
+  const POPUP_MAX_INTERVAL = 22000;
 
   const windowUI = useSelector(selectWindow);
   const [currentImg, setCurrentImg] = useState(0);
@@ -21,7 +21,7 @@ export default function Popups() {
   });
 
   useEffect(() => {
-// play video
+    // play video
   }, [windowUI.compositionStarted]);
 
   useEffect(() => {

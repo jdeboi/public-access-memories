@@ -353,7 +353,7 @@ class GallerySketch extends React.Component<Props> {
 
   displayRandomRects(p5: p5Types) {
     timer1.dt = 100;
-    timer2.dt = 2000;
+    timer2.dt = 4000;
 
     if (p5.millis() - movement.lastStepTime < 200) {
       if (p5.frameCount % 15 == 0) {
@@ -385,7 +385,7 @@ class GallerySketch extends React.Component<Props> {
 
     frames.push(frame);
 
-    frameGraphics.erase(50);
+    frameGraphics.erase(30);
     frameGraphics.rect(0, 0, p5.width, p5.height);
     frameGraphics.noErase();
 
