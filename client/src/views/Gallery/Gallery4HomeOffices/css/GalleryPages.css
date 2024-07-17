@@ -94,20 +94,35 @@
 }
 .PageGallery .pageButtons {
   position: absolute;
-  bottom: 50px;
+  bottom: 55px;
   width: 100%;
   z-index: 100;
 }
 .PageGallery .pageButtons button {
   position: absolute;
-  height: 50px;
-  width: 50px;
 }
 .PageGallery .pageButtons button#backButton {
-  left: 0;
+  left: 10px;
 }
 .PageGallery .pageButtons button#nextButton {
-  right: 0;
+  right: 10px;
+}
+.PageGallery .pageButtons .page-button {
+  margin: 0 5px;
+  padding: 10px 15px;
+  border: none;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 16px;
+  pointer-events: none;
+}
+.PageGallery .pageButtons .page-button:hover {
+  background-color: #007bff;
+  color: white;
+}
+.PageGallery .pageButtons .page-button-over {
+  background-color: #007bff;
+  color: white;
 }
 
 .GallerySketches .canvasPage {

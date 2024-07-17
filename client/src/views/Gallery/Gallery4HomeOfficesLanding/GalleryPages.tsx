@@ -37,12 +37,12 @@ const GalleryPages = (props: GProps) => {
 
   return (
     <div className="PageGallery">
-      {/* <div
+      <div
         className="pagesBg"
         style={{
-          backgroundImage: `url(https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/pages/Office_${layoutNum}/0.jpg)`,
+          backgroundImage: `url(https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/HomePage/0.jpg)`,
         }}
-      ></div> */}
+      ></div>
       <div className="pagesContainer">
         {pages.map((page) => (
           <Page

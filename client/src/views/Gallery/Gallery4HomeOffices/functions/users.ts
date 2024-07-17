@@ -55,14 +55,13 @@ export function drawUsers(
   users: IUsers,
   font1: p5Types.Font,
   p5: p5Types,
-  imgs: any,
-  GlobalConfig: any
+  imgs: any
 ) {
   p5.fill(255);
   p5.noStroke();
   p5.textFont("times", iconSize);
   for (const otherUser of users) {
-    if (otherUser.roomUrl === user.roomUrl && otherUser.userName) {
+    if (otherUser.roomPage === user.roomPage && otherUser.userName) {
       //let coord = domCoordsToP5World(otherUser.x, otherUser.y, GlobalConfig);
       let ava = otherUser.avatar;
 

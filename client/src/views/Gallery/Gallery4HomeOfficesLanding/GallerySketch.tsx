@@ -5,8 +5,8 @@ import { IUser, IUsers, IWindowUI } from "../../../interfaces";
 import { connect } from "react-redux";
 import { RootState } from "../../../store/store";
 import { setFollowingHost } from "../../../store/user";
-import RectFrame from "./components/RectFrame";
-import Timer from "./components/Timer";
+import RectFrame from "../Gallery4HomeOffices/components/RectFrame";
+import Timer from "../Gallery4HomeOffices/components/Timer";
 
 import Dancer from "../components/p5/Dancer";
 
@@ -27,7 +27,11 @@ import {
   closeToDestination,
 } from "../Gallery1/functions/destination";
 
-import { checkUserClicked, drawUser, drawUsers } from "./functions/users";
+import {
+  checkUserClicked,
+  drawUser,
+  drawUsers,
+} from "../Gallery4HomeOffices/functions/users";
 
 import {
   displayTrashDivs,
@@ -45,18 +49,14 @@ import {
   addBarDivs,
   displayBarDivs,
   addColumnDivs,
-} from "./functions/divs";
+} from "../Gallery4HomeOffices/functions/divs";
 
 import {
   barTenders,
   danceFloor,
 } from "../../../data/Shows/HomeOffices/BotConfig";
-import {
-  displayPageFlips,
-  isPageBackwardCorner,
-  isPageForwardCorner,
-  pageIsTurning,
-} from "./functions/page";
+import { pageIsTurning } from "../Gallery4HomeOffices/functions/page";
+import { addBots } from "../../../App/useSockets";
 
 //////////////
 // EMOJIS
@@ -204,6 +204,8 @@ class GallerySketch extends React.Component<Props> {
     loadingDone();
     setOutside({ isOutside: false });
     this.setUserInitialPosition(p5);
+
+    addBots(barTenders);
   };
 
   initDivs = (p5: p5Types) => {
@@ -286,7 +288,7 @@ class GallerySketch extends React.Component<Props> {
 
     //////////////
     // updating
-    if (users) updateDivs(this.getRoomString(), divs);
+    if (users) updateDivs(this.getRoomPage(), divs);
 
     this.updateUserEase(p5);
     // this.checkPageChange(p5);
@@ -387,8 +389,8 @@ class GallerySketch extends React.Component<Props> {
     previousPage = currentPage;
   };
 
-  getRoomString = () => {
-    return Math.floor(this.props.currentPage / 2).toString();
+  getRoomPage = () => {
+    return Math.floor(this.props.currentPage / 2);
   };
 
   loadOfficeImages = (p5: p5Types) => {
@@ -460,21 +462,14 @@ class GallerySketch extends React.Component<Props> {
 
     if (users) {
       p5.textFont(font, 34);
-      drawUsers(
-        user,
-        filterGalleryUsers(user, users),
-        font,
-        p5,
-        barEmojis,
-        GlobalConfig
-      );
+      drawUsers(user, filterGalleryUsers(user, users), font, p5, barEmojis);
     }
 
     p5.pop();
   };
 
   drawOverUser = (p5: p5Types) => {
-    let room = this.getRoomString();
+    let room = this.getRoomPage();
     p5.push();
     // p5.translate(p5.windowWidth / 2, p5.windowHeight / 2);
 
@@ -612,7 +607,7 @@ class GallerySketch extends React.Component<Props> {
     if (userClicked) {
       setUserActive(userClicked);
       return;
-    } else if (checkDivPress(this.getRoomString(), divs)) {
+    } else if (checkDivPress(this.getRoomPage(), divs)) {
       return;
     } else {
       let steps = GlobalConfig.scaler - 20;
@@ -700,7 +695,7 @@ class GallerySketch extends React.Component<Props> {
   getBackgroundSize = () => {
     const { windowUI } = this.props;
     let aspect = 1920 / 1080;
-    let w = windowUI.width;
+    let w = windowUI.contentW;
     let screenAspect = w / windowUI.contentH;
 
     if (screenAspect < aspect) {
@@ -719,8 +714,8 @@ class GallerySketch extends React.Component<Props> {
 
   doubleClicked = (p5: p5Types) => {
     if (p5.frameCount > 0) {
-      checkFolderDivsDouble(this.getRoomString(), divs);
-      checkTrashDivsDouble(this.getRoomString(), divs);
+      checkFolderDivsDouble(this.getRoomPage(), divs);
+      checkTrashDivsDouble(this.getRoomPage(), divs);
     }
     return;
   };

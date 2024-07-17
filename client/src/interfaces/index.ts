@@ -10,6 +10,7 @@ export interface IUser {
   id: string;
   avatar: string;
   userName: string;
+  roomPage: number;
   roomUrl: string;
   comp: number | null;
   roomX: number;
@@ -38,6 +39,7 @@ export interface IBar {
   y: number;
   w: number;
   h: number;
+  roomPage?: number;
   tender: IUser;
   isFlipped: boolean;
 }

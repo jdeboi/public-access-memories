@@ -1,37 +1,42 @@
-import { IUser, IUsers, IRoom, IArtist } from '../interfaces';
+import { IUser, IUsers, IRoom, IArtist } from "../interfaces";
 // import { artists, rooms } from '../data/RoomConfig';
-import { PageConfig } from '../data/CurrentShow/PageConfig';
+import { PageConfig } from "../data/CurrentShow/PageConfig";
 // import { hostBotPoints } from '../data/BotConfig';
-import { domCoordsToP5 } from './coordinates';
+import { domCoordsToP5 } from "./coordinates";
 // import { ShowConfig } from '../data/ShowConfig';
 
 export const getUserByUserName = (users: IUsers, userName: string) => {
-  if (users)
-    return users.find(o => o.userName === userName);
+  if (users) return users.find((o) => o.userName === userName);
   return null;
-}
+};
 
 export const getUserById = (users: IUsers, id: string) => {
-  if (users)
-    return users.find(o => o.id === id);
+  if (users) return users.find((o) => o.id === id);
   return null;
-}
+};
 
 export const getUserNameById = (users: IUsers, id: string) => {
   if (users) {
-    let obj = users.find(o => o.id === id);
-    if (obj)
-      return obj.userName;
+    let obj = users.find((o) => o.id === id);
+    if (obj) return obj.userName;
   }
   return "";
-}
+};
 
-export const getNewUser = (userName: string, avatar: string, room: string, id = "0", x = 0, y = 0): IUser => {
+export const getNewUser = (
+  userName: string,
+  avatar: string,
+  room: string,
+  id = "0",
+  x = 0,
+  y = 0
+): IUser => {
   let newUser = {
     id: id,
     avatar: avatar,
     userName: userName,
     roomUrl: room,
+    roomPage: 0,
     comp: null,
     roomX: 0,
     roomY: 0,
@@ -48,67 +53,89 @@ export const getNewUser = (userName: string, avatar: string, room: string, id = 
     isMuted: false,
     isGlobalMuted: false,
     isSpeaking: false,
-    speakingId: ""
-  }
+    speakingId: "",
+  };
   return newUser;
-}
+};
 
 export const filterUsers = (currentUser: IUser, data: IUsers) => {
   var filteredArray = data.filter((usr: IUser) => {
     return usr.id !== currentUser.id;
   });
   return filteredArray;
-}
+};
 
 export const filterGalleryUsers = (currentUser: IUser, data: IUsers) => {
   var filteredArray = data.filter((usr: IUser) => {
-    return usr.id !== currentUser.id && (usr.userName !== "") && usr.userName !== currentUser.userName;
+    return (
+      usr.id !== currentUser.id &&
+      usr.userName !== "" &&
+      usr.userName !== currentUser.userName
+    );
   });
   return filteredArray;
-}
+};
 
 export const filterEditUsers = (currentUser: IUser, data: IUsers) => {
-  const excludedUsernames = ["wineBot", "hostBot", "cocktailBot", "cheeseBot", "DJBot"];
+  const excludedUsernames = [
+    "wineBot",
+    "hostBot",
+    "cocktailBot",
+    "cheeseBot",
+    "DJBot",
+  ];
 
   var filteredArray = data.filter((usr: IUser) => {
     return (
-      usr.id !== currentUser.id
-      && usr.userName !== ""
-      && usr.userName !== currentUser.userName
-      && !excludedUsernames.includes(usr.userName)
-    )
+      usr.id !== currentUser.id &&
+      usr.userName !== "" &&
+      usr.userName !== currentUser.userName &&
+      !excludedUsernames.includes(usr.userName)
+    );
   });
   return filteredArray;
-}
-
+};
 
 export const getUserChatList = (currentUser: IUser, users: IUsers) => {
   var filteredArray = users.filter((usr: IUser) => {
     return (
-      usr.id !== currentUser.id
-      && usr.roomUrl === currentUser.roomUrl
-      && usr.userName !== "")
-      || usr.roomUrl === "everywhere";
+      (usr.id !== currentUser.id &&
+        usr.roomUrl === currentUser.roomUrl &&
+        usr.userName !== "") ||
+      usr.roomUrl === "everywhere"
+    );
   });
   return filteredArray;
-}
+};
 
-export const userNearEntrance = (user: IUser, hostBotPoints: any, GlobalConfig: any) => {
+export const userNearEntrance = (
+  user: IUser,
+  hostBotPoints: any,
+  GlobalConfig: any
+) => {
   let entrance = { ...hostBotPoints[0] };
   let userCoords = domCoordsToP5(user.x, user.y, GlobalConfig);
 
-  return (userCoords.x >= entrance.x - 8 && userCoords.x <= entrance.x + 8
-    && userCoords.y >= 28 && userCoords.y <= 35);
-}
+  return (
+    userCoords.x >= entrance.x - 8 &&
+    userCoords.x <= entrance.x + 8 &&
+    userCoords.y >= 28 &&
+    userCoords.y <= 35
+  );
+};
 
 export const shouldShowLoggedInComponents = (user: IUser) => {
   if (user.userName === "" && user.roomUrl !== "/") {
     return false;
   }
   return true;
-}
+};
 
-export const getPageName = (link: string, rooms: IRoom[], artists: IArtist[]): string => {
+export const getPageName = (
+  link: string,
+  rooms: IRoom[],
+  artists: IArtist[]
+): string => {
   if (link === "/") {
     return "gallery";
   }
@@ -121,15 +148,15 @@ export const getPageName = (link: string, rooms: IRoom[], artists: IArtist[]): s
     return pages[0].title;
   }
   return "404";
-}
+};
 
 export const getArtistFromRoom = (room: IRoom, artists: IArtist[]): IArtist => {
   return artists[room.artistID];
-}
+};
 
 export const getRoomFromArtist = (artist: IArtist, rooms: IRoom[]): IRoom => {
   return rooms[artist.roomID];
-}
+};
 
 export const getRoomByPath = (path: string, rooms: IRoom[]): IRoom | null => {
   // If this is the test link
@@ -137,25 +164,22 @@ export const getRoomByPath = (path: string, rooms: IRoom[]): IRoom | null => {
   if (path.indexOf("test") > -1) {
     // let pathPrefix = "/" + ShowConfig.link;
     let p = path.substring(12, path.length);
-    let r = rooms.filter((room) => (room.artistID + '') === p);
-    if (r.length > 0)
-      return r[0];
-  }
-  else {
+    let r = rooms.filter((room) => room.artistID + "" === p);
+    if (r.length > 0) return r[0];
+  } else {
     let r = rooms.filter((room) => room.link === path);
-    if (r.length > 0)
-      return r[0];
+    if (r.length > 0) return r[0];
   }
   return null;
-}
+};
 
 export const getRoomCount = (room: string, users: IUsers): number => {
   let r = users.filter((usr) => usr.roomUrl === room);
   return r.length;
-}
+};
 
 export const getTotalRoomCount = (users: IUsers, rooms: IRoom[]) => {
-  let roomLinks = rooms.map(room => room.link);
+  let roomLinks = rooms.map((room) => room.link);
   const roomCount: any = {};
   for (const roomLink of roomLinks) {
     roomCount[roomLink] = 0;
@@ -166,7 +190,7 @@ export const getTotalRoomCount = (users: IUsers, rooms: IRoom[]) => {
     }
   }
   return roomCount;
-}
+};
 
 export const getRoomID = (id: string | undefined, rooms: IRoom[]) => {
   let roomID = 0;
@@ -176,42 +200,45 @@ export const getRoomID = (id: string | undefined, rooms: IRoom[]) => {
     roomID = parseInt(id);
   }
 
-  if (isNaN(roomID))
-    roomID = 0;
-  if (roomID >= rooms.length || roomID < 0)
-    roomID = 0;
+  if (isNaN(roomID)) roomID = 0;
+  if (roomID >= rooms.length || roomID < 0) roomID = 0;
 
   return roomID;
-}
+};
 
 // takes ID and returns room information
 export const getRoomFromID = (id: string | undefined, rooms: IRoom[]) => {
   const room = rooms[getRoomID(id, rooms)];
   return room;
-}
+};
 
-
-export const getArtistFromNameLink = (name: string | undefined, artists: IArtist[]) => {
+export const getArtistFromNameLink = (
+  name: string | undefined,
+  artists: IArtist[]
+) => {
   const artist = artists.find((art) => art.nameLink === name);
   if (artist) {
     return artist;
   }
   return artists[0];
-}
+};
 
 export const getRoomFromArtistRoomID = (id: number, rooms: IRoom[]): IRoom => {
   return rooms[id];
-}
+};
 
 // takes room ID and returns artist associated with roomID
-export const getArtistFromRoomID = (id: string | undefined, artists: IArtist[], rooms: IRoom[]) => {
+export const getArtistFromRoomID = (
+  id: string | undefined,
+  artists: IArtist[],
+  rooms: IRoom[]
+) => {
   return artists[getRoomID(id, rooms)];
-}
+};
 
 export const getArtistRoomLink = (id: string | undefined, rooms: IRoom[]) => {
   return rooms[getRoomID(id, rooms)].link;
-}
-
+};
 
 export function getRandomNum(val: number) {
   var x = Math.sin(val) * 10000;
@@ -234,15 +261,19 @@ export function getNewZIndices(indexToTop: number, array: number[]) {
   return newArr;
 }
 
-export function mapVal(val: number, in_min: number, in_max: number, out_min: number, out_max: number) {
-  return (val - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+export function mapVal(
+  val: number,
+  in_min: number,
+  in_max: number,
+  out_min: number,
+  out_max: number
+) {
+  return ((val - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
 }
 
 export function constrain(val: number, min: number, max: number) {
-  if (val < min)
-    return min;
-  else if (val > max)
-    return max;
+  if (val < min) return min;
+  else if (val > max) return max;
   return val;
 }
 
@@ -255,20 +286,17 @@ export const roundToMult = (num: number, mult: number) => {
   let newNum = num + mult / 2; // to round up if necessary
   let diff = newNum % mult;
   return newNum - diff;
-}
+};
 
 export const roundToMult2 = (num: number, mult: number) => {
   let newNum = num; // to round up if necessary
   let diff = newNum % mult;
   return newNum - diff;
-}
-
+};
 
 export const getParsedJSONDate = (d: string) => {
-  if (!d)
-    return null;
+  if (!d) return null;
   let newD = new Date(JSON.parse(d));
-  if (newD && !isNaN(newD.getTime()))
-    return newD;
+  if (newD && !isNaN(newD.getTime())) return newD;
   return null;
-}
+};

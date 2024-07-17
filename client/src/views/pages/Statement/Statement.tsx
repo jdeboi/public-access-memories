@@ -34,7 +34,7 @@ export const Statement = () => {
             <div className="windows">
               <h2 className="showTitle">Home Offices</h2>
               <h3>
-                A solo show by artist
+                A solo show by artist&nbsp;
                 <a href="https://www.thesculpted.com/">Dave Greber</a>
               </h3>
             </div>
@@ -61,7 +61,7 @@ export const Statement = () => {
                 </p>
               </div>
               <div>
-                <img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/fields_of_view/announce.jpg" />
+                <img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/pages/Office_15/1.jpg" />
               </div>
             </div>
 

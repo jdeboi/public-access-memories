@@ -13,12 +13,14 @@ export default class Folder extends Draggable {
     id: number,
     x: number,
     y: number,
+    w: number,
+    h: number,
     label: string,
     link: string,
     img: p5Types.Image,
     GlobalConfig: any
   ) {
-    super(id, x, y, 80, 80, p5, img, GlobalConfig);
+    super(id, x, y, w, h, p5, img, GlobalConfig);
     // TODO - my coordinate system needs formalization
     // let point = domCoordsToP5World(x, y);
     // this.x = point.x;
@@ -29,8 +31,8 @@ export default class Folder extends Draggable {
     this.tw = 40;
   }
 
-  displayInRoom(room: string) {
-    if (room !== "" && room !== this.roomToDisplay) {
+  displayInRoom(room: number = -1) {
+    if (room !== -1 && room !== this.roomToDisplay) {
       return;
     }
     this.display();
@@ -64,8 +66,8 @@ export default class Folder extends Draggable {
     this.p5.pop();
   }
 
-  checkDraggingNormal(room: string = "") {
-    if (room !== "" && room !== this.roomToDisplay) {
+  checkDraggingNormal(room: number = -1) {
+    if (room !== -1 && room !== this.roomToDisplay) {
       return false;
     }
     let mouse = { x: this.p5.mouseX, y: this.p5.mouseY };
@@ -120,8 +122,8 @@ export default class Folder extends Draggable {
     return false;
   };
 
-  checkDoubleClickedNormal = (room: string = "") => {
-    if (room !== "" && room !== this.roomToDisplay) {
+  checkDoubleClickedNormal = (room: number = -1) => {
+    if (room !== -1 && room !== this.roomToDisplay) {
       return;
     }
     let mouse = { x: this.p5.mouseX, y: this.p5.mouseY };
@@ -130,8 +132,8 @@ export default class Folder extends Draggable {
     }
   };
 
-  checkDoubleClickedAlertNormal = (room: string = "") => {
-    if (room !== "" && room !== this.roomToDisplay) {
+  checkDoubleClickedAlertNormal = (room: number = -1) => {
+    if (room !== -1 && room !== this.roomToDisplay) {
       return;
     }
     let mouse = { x: this.p5.mouseX, y: this.p5.mouseY };

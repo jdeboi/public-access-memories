@@ -9,7 +9,7 @@ import "../Gallery4HomeOffices/css/GalleryPages.css";
 // CONFIG
 import GallerySketch from "./GallerySketch";
 import { setUserRoomUrl } from "../../../store/user";
-import LoadingPageHomeOffices from "./components/LoadingPageHomeOffices/LoadingPageHomeOffices";
+import LoadingPageHomeOffices from "../Gallery4HomeOffices/components/LoadingPageHomeOffices/LoadingPageHomeOffices";
 import CenterModal from "../../../components/CenterModal/CenterModal";
 import GalleryPages from "./GalleryPages";
 

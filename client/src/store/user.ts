@@ -14,6 +14,7 @@ const initialState: IUser = {
   avatar: "😀",
   userName: "",
   roomUrl: "/",
+  roomPage: 0,
   comp: null,
   roomX: 0,
   roomY: 0,
@@ -52,6 +53,9 @@ export const userSlice = createSlice({
       // socket.emit("leaveRoom", prevRoom);
       // socket.emit("joinRoom", nextRoom);
       // socket.emit("setUser", state);
+    },
+    setUserRoomPage: (state, action: PayloadAction<{ roomPage: number }>) => {
+      state.roomPage = action.payload.roomPage;
     },
     setUser: (state, action: PayloadAction<IUser>) => {
       state.avatar = action.payload.avatar;
@@ -133,6 +137,43 @@ export const userSlice = createSlice({
           state,
           getBar("cocktail", action.payload.galleryIndex),
           GlobalConfig
+        ) &&
+        state.needsCocktail
+      ) {
+        state.needsCocktail = false;
+        state.cocktailTime = JSON.stringify(new Date());
+      }
+    },
+    moveUserNormal: (
+      state,
+      action: PayloadAction<{
+        x: number;
+        y: number;
+        galleryIndex: number;
+      }>
+    ) => {
+      state.x = action.payload.x;
+      state.y = action.payload.y;
+
+      if (
+        userNearBarNormal(state, getBar("wine", action.payload.galleryIndex)) &&
+        state.needsWine
+      ) {
+        state.needsWine = false;
+        state.wineTime = JSON.stringify(new Date());
+      } else if (
+        userNearBarNormal(
+          state,
+          getBar("cheese", action.payload.galleryIndex)
+        ) &&
+        state.needsCheese
+      ) {
+        state.needsCheese = false;
+        state.cheeseTime = JSON.stringify(new Date());
+      } else if (
+        userNearBarNormal(
+          state,
+          getBar("cocktail", action.payload.galleryIndex)
         ) &&
         state.needsCocktail
       ) {
@@ -257,6 +298,17 @@ export const userSlice = createSlice({
   },
 });
 
+function userNearBarNormal(user: IUser, location: IBar) {
+  if (user.roomPage != location.roomPage) {
+    return false;
+  }
+
+  var dx = user.x - location.x;
+  var dy = user.y - location.y;
+  var dis = Math.sqrt(dx * dx + dy * dy);
+  return dis < 200;
+}
+
 function userNearBar(
   user: IUser,
   location: IBar,
@@ -280,6 +332,7 @@ export const {
   setUserID,
   setUserLogin,
   moveUser,
+  moveUserNormal,
   moveUserRoom,
   setFollowingHost,
   addCheese,
@@ -298,4 +351,5 @@ export const {
   setSpeakingId,
   toggleOutside,
   setOutside,
+  setUserRoomPage,
 } = userSlice.actions;

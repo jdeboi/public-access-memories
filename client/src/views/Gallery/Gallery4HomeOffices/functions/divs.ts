@@ -20,8 +20,8 @@ export const addLightDivs = (
 ) => {
   divs.lights = [];
   const lightsP5 = [
-    { x: 100, y: 100, isFlipped: false, room: "0" },
-    { x: 120, y: 120, isFlipped: true, room: "8" },
+    { x: p5.width * 0.82, y: 200, isFlipped: false, room: 0 },
+    // { x: 120, y: 120, isFlipped: true, room: "8" },
   ];
   for (let i = 0; i < lightsP5.length; i++) {
     let light = new Light(p5, i, lightImgs, lightsP5, GlobalConfig);
@@ -49,7 +49,7 @@ export const addColumnDivs = (
       columnGif,
       GlobalConfig
     );
-    column.setNormal(300 + i * 20, 200 + i * 20, i + 1 + "");
+    column.setNormal(300 + i * 20, 200 + i * 20, i + 1);
     divs.columns.push(column);
   }
 };
@@ -58,9 +58,9 @@ export const addTrashDivs = (divs: any, trashFiles: any, p5: p5Types) => {
   divs.trashCans = [];
 
   let labels = [
-    { x0: 300, y0: 300, room: "10" },
-    { x0: 300, y0: 300, room: "4" },
-    { x0: 300, y0: 300, room: "5" },
+    { x0: 300, y0: 300, room: 10 },
+    { x0: 300, y0: 300, room: 4 },
+    { x0: 300, y0: 300, room: 5 },
   ];
 
   for (let i = 0; i < labels.length; i++) {
@@ -70,6 +70,8 @@ export const addTrashDivs = (divs: any, trashFiles: any, p5: p5Types) => {
       i,
       x0,
       y0,
+      80,
+      80,
       "recycle bin",
       "/trash",
       trashFiles[0],
@@ -90,25 +92,25 @@ export const addFolderDivs = (
 
   let labels = [
     {
-      x: 400,
-      y: 400,
+      x: 50,
+      y: 150,
       label: "statement",
       link: "https://publicaccessmemories.com/statement",
-      room: "0",
+      room: 0,
     },
     {
-      x: 200,
-      y: 200,
+      x: 150,
+      y: 80,
       label: "about",
       link: "https://publicaccessmemories.com/about",
-      room: "0",
+      room: 0,
     },
     {
-      x: 600,
-      y: 300,
+      x: 190,
+      y: 220,
       label: "@public.access.memories",
       link: "https://www.instagram.com/public.access.memories/",
-      room: "0",
+      room: 0,
     },
   ];
 
@@ -118,18 +120,77 @@ export const addFolderDivs = (
   }
 
   for (let i = 0; i < labels.length; i++) {
+    const sz = p5.constrain(p5.map(p5.width, 0, 1400, 0, 80), 40, 80);
+    const factor = sz / 80;
     const { x, y, label, link, room } = labels[i];
     const folder = new Folder(
       p5,
       i,
-      x,
-      y,
+      x * factor,
+      y * factor,
+      sz,
+      sz,
       label,
       link,
       i === 2 ? instaImg : txtFile,
       GlobalConfig
     );
-    folder.setNormal(x, y, room);
+    folder.setNormal(x * factor, y * factor, room);
+    divs.folders.push(folder);
+  }
+};
+
+export const addGiftShopDivs = (
+  divs: any,
+  imgs: p5Types.Image[],
+  p5: p5Types
+) => {
+  let labels = [
+    {
+      x: 50,
+      y: 150,
+      label: "posterA",
+      link: "https://www.thesculpted.com/shop/p/9sbcy0tktpt6fdfimavw86uc9nta8d",
+      room: 16,
+    },
+    {
+      x: 150,
+      y: 80,
+      label: "posterB",
+      link: "https://www.thesculpted.com/shop/p/9sbcy0tktpt6fdfimavw86uc9nta8d-hl3zg",
+    },
+    {
+      x: 180,
+      y: 230,
+      label: "posterC",
+      link: "https://www.thesculpted.com/shop/p/9sbcy0tktpt6fdfimavw86uc9nta8d-hz2k8",
+    },
+    {
+      x: 180,
+      y: 430,
+      label: "frame",
+      link: "https://www.thesculpted.com/shop/p/aluminum-frame",
+    },
+  ];
+
+  for (let i = 0; i < labels.length; i++) {
+    const { x, y, label, link } = labels[i];
+    const factor = 0.4;
+    const w = imgs[i].width * factor;
+    const h = imgs[i].height * factor;
+    const folder = new Folder(
+      p5,
+      i,
+      x,
+      y,
+      w,
+      h,
+      label,
+      link,
+      imgs[i],
+      GlobalConfig
+    );
+    folder.setNormal(x, y, 16 * 2);
     divs.folders.push(folder);
   }
 };
@@ -152,7 +213,7 @@ export const addBarDivs = (divs: any, lightImg: p5Types.Image, p5: p5Types) => {
           GlobalConfig
         );
         divs.bars.push(wineBar);
-        wineBar.setNormal(200, 200, "4");
+        wineBar.setNormal(bar.x, bar.y, bar.roomPage);
         break;
       case "cocktail":
         let cocktailBar = new CocktailBar(
@@ -163,7 +224,7 @@ export const addBarDivs = (divs: any, lightImg: p5Types.Image, p5: p5Types) => {
           p5,
           GlobalConfig
         );
-        cocktailBar.setNormal(200, 200, "2");
+        cocktailBar.setNormal(bar.x, bar.y, bar.roomPage);
         divs.bars.push(cocktailBar);
         break;
       case "DJ":
@@ -175,7 +236,7 @@ export const addBarDivs = (divs: any, lightImg: p5Types.Image, p5: p5Types) => {
           p5,
           GlobalConfig
         );
-        djBar.setNormal(200, 200, "9");
+        djBar.setNormal(bar.x, bar.y, bar.roomPage);
         divs.bars.push(djBar);
         break;
       case "cheese":
@@ -187,7 +248,7 @@ export const addBarDivs = (divs: any, lightImg: p5Types.Image, p5: p5Types) => {
           p5,
           GlobalConfig
         );
-        cheeseBar.setNormal(200, 200, "2");
+        cheeseBar.setNormal(bar.x, bar.y, bar.roomPage);
         divs.bars.push(cheeseBar);
         break;
     }
@@ -195,7 +256,7 @@ export const addBarDivs = (divs: any, lightImg: p5Types.Image, p5: p5Types) => {
   }
 };
 
-export const displayLightDivs = (room: string, divs: any) => {
+export const displayLightDivs = (room: number, divs: any) => {
   for (const light of divs.lights) {
     if (light.roomToDisplay == room) {
       light.display(0, 0);
@@ -204,19 +265,19 @@ export const displayLightDivs = (room: string, divs: any) => {
   }
 };
 
-export const displayFolderDivs = (room: string, divs: any) => {
+export const displayFolderDivs = (room: number, divs: any) => {
   for (const folder of divs.folders) {
     folder.displayInRoom(room);
   }
 };
 
-export const displayTrashDivs = (room: string, divs: any) => {
+export const displayTrashDivs = (room: number, divs: any) => {
   for (const trash of divs.trashCans) {
     trash.displayInRoom(room);
   }
 };
 
-export const displayColumnDivs = (room: string, divs: any) => {
+export const displayColumnDivs = (room: number, divs: any) => {
   for (const col of divs.columns) {
     if (col.roomToDisplay == room) {
       col.display(0, 0);
@@ -225,7 +286,7 @@ export const displayColumnDivs = (room: string, divs: any) => {
   }
 };
 
-export const displayBarDivs = (room: string, divs: any) => {
+export const displayBarDivs = (room: number, divs: any) => {
   for (const bar of divs.bars) {
     if (bar.roomToDisplay == room) {
       bar.display(0, 0);
@@ -241,14 +302,14 @@ export function endDivDrag(divs: any) {
   }
 }
 
-export function updateDivs(room: string, divs: any) {
+export function updateDivs(room: number, divs: any) {
   let keys = Object.keys(divs);
   for (const key of keys) {
     for (const div of divs[key]) div.updateInRoom(room);
   }
 }
 
-export const checkDivPress = (room: string, divs: any) => {
+export const checkDivPress = (room: number, divs: any) => {
   let keys = Object.keys(divs);
   for (const key of keys) {
     for (const div of divs[key]) if (checkDiv(room, div)) return true;
@@ -256,7 +317,7 @@ export const checkDivPress = (room: string, divs: any) => {
   return false;
 };
 
-const checkDiv = (room: string, div: any) => {
+const checkDiv = (room: number, div: any) => {
   if (div.checkButtonsNormal()) {
     return true;
   } else if (div.checkDraggingNormal(room)) {
@@ -265,13 +326,13 @@ const checkDiv = (room: string, div: any) => {
   return false;
 };
 
-export const checkFolderDivsDouble = (room: string, divs: any) => {
+export const checkFolderDivsDouble = (room: number, divs: any) => {
   for (const folder of divs.folders) {
     folder.checkDoubleClickedNormal(room);
   }
 };
 
-export const checkTrashDivsDouble = (room: string, divs: any) => {
+export const checkTrashDivsDouble = (room: number, divs: any) => {
   for (const trash of divs.trashCans) {
     trash.checkDoubleClickedAlertNormal(room);
   }

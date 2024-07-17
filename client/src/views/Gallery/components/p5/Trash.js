@@ -33,7 +33,10 @@ export default class Trash extends Folder {
     this.p5.pop();
   }
 
-  checkDoubleClickedNormal = () => {
+  checkDoubleClickedNormal = (room = -1) => {
+    if (room !== -1 && room !== this.roomToDisplay) {
+      return;
+    }
     let mouse = { x: this.p5.mouseX, y: this.p5.mouseY };
 
     if (this.checkOver(mouse.x, mouse.y)) {

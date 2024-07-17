@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import GallerySketch1 from "./Gallery1/GallerySketch";
 import GallerySketch2 from "./Gallery2/GallerySketch";
 import GallerySketch3 from "./Gallery3/GallerySketch";
-// import GalleryGreber from "./Gallery4HomeOffices/GalleryGreber";
+import GalleryGreber from "./Gallery4HomeOffices/GalleryGreber";
 import GalleryGreberLanding from "./Gallery4HomeOfficesLanding/GalleryGreber";
 
 import {
@@ -36,6 +36,7 @@ import {
   moveUser,
   toggleOutside,
   setOutside,
+  moveUserNormal,
 } from "../../store/user";
 import { setUserActiveChat } from "../../store/userActive";
 import { setGalleryId, setOneMenu, showChat } from "../../store/menu";
@@ -116,6 +117,14 @@ const Gallery = (props: IGallery) => {
     newUser.y = y;
   };
 
+  const moveGalleryUserNormal = (x: number, y: number) => {
+    dispatch(setSketchVolume(getVolume()));
+    dispatch(moveUserNormal({ x, y, galleryIndex: props.id }));
+    const newUser = { ...user };
+    newUser.x = x;
+    newUser.y = y;
+  };
+
   const userNewRoom = (room: string) => {
     navigate(room);
     dispatch(setUserRoomUrl({ roomUrl: room }));
@@ -177,26 +186,25 @@ const Gallery = (props: IGallery) => {
             setUserActive={clickedUserChat}
           />
         );
-      // case 4:
-      //   GalleryStyle.backgroundImage = "none";
-      //   return (
-      //     <GalleryGreber
-      //       users={props.users}
-      //       showStart={showStart}
-      //       hideStart={() => setShowStart(false)}
-      //       isClosed={props.isClosed}
-      //       userMove={moveGalleryUser}
-      //       userNewRoom={userNewRoom}
-      //       loadingDone={() => dispatch(doneLoadingApp())}
-      //       setOutside={(state: { isOutside: boolean }) =>
-      //         dispatch(setOutside(state))
-      //       }
-      //       clickedUserChat={clickedUserChat}
-      //       setUserActive={clickedUserChat}
-      //       moveGalleryUser={moveGalleryUser}
-      //     />
-      //   );
       case 4:
+        GalleryStyle.backgroundImage = "none";
+        return (
+          <GalleryGreber
+            users={props.users}
+            showStart={showStart}
+            hideStart={() => setShowStart(false)}
+            isClosed={props.isClosed}
+            userMove={moveGalleryUserNormal}
+            userNewRoom={userNewRoom}
+            loadingDone={() => dispatch(doneLoadingApp())}
+            setOutside={(state: { isOutside: boolean }) =>
+              dispatch(setOutside(state))
+            }
+            clickedUserChat={clickedUserChat}
+            setUserActive={clickedUserChat}
+          />
+        );
+      case 5:
         GalleryStyle.backgroundImage = "none";
         return (
           <GalleryGreberLanding
@@ -233,7 +241,7 @@ const Gallery = (props: IGallery) => {
   };
 
   const getLoading = () => {
-    if (props.id == 4) {
+    if (props.id == 4 || props.id == 5) {
       return <LoadingPageHomeOffices showTitle={true} />;
     }
     return <LoadingPage />;
@@ -254,7 +262,7 @@ const Gallery = (props: IGallery) => {
     if (props.showWelcome || showStart) {
       return null;
     }
-    if (props.id == 4) {
+    if (props.id == 4 || props.id == 5) {
       return (
         <ReactAudioPlayer
           src={getHomeOfficesAudio()}
@@ -293,6 +301,8 @@ const Gallery = (props: IGallery) => {
           <MiniMapFOV users={filterUsers(user, props.users)} x={20} y={20} />
         );
       case 4:
+        return <></>;
+      case 5:
         return <></>;
       default:
         return <MiniMap users={filterUsers(user, props.users)} x={20} y={20} />;

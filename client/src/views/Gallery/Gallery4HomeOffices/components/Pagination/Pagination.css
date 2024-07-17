@@ -1,0 +1,24 @@
+.Pagination {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 20px; /* Adjust this value as needed */
+  width: 100%;
+}
+.Pagination .page-button {
+  margin: 0 5px;
+  padding: 10px 15px;
+  border: none;
+  background-color: rgba(240, 240, 240, 0.3);
+  color: #333;
+  font-size: 16px;
+  cursor: not-allowed;
+}
+.Pagination .page-button.current {
+  background-color: #007bff;
+  color: white;
+}
+.Pagination .ellipsis {
+  margin: 0 10px;
+  font-size: 16px;
+}/*# sourceMappingURL=Pagination.css.map */

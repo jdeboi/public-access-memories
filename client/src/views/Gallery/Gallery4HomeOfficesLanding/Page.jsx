@@ -23,7 +23,7 @@ const Page = ({ index, startPage, children, numLayouts, windowUI }) => {
 
   const getBackgroundSize = () => {
     let aspect = 1920 / 1080;
-    let w = windowUI.width;
+    let w = windowUI.contentW;
     let screenAspect = w / windowUI.contentH;
 
     if (screenAspect < aspect) {

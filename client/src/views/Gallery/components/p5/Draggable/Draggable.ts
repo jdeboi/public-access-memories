@@ -34,7 +34,7 @@ export default class Draggable {
   GlobalConfig: any;
   mask: any;
 
-  roomToDisplay: string | null;
+  roomToDisplay: number | null;
 
   constructor(
     id: number,
@@ -67,7 +67,7 @@ export default class Draggable {
     this.closed = false;
     this.minimized = false;
 
-    this.roomToDisplay = null;
+    this.roomToDisplay = 0;
 
     this.barH = 26;
     this.bRad = 10;
@@ -86,12 +86,12 @@ export default class Draggable {
     // this.initMask();
   }
 
-  setNormal(x: number, y: number, room: string | null = null) {
+  setNormal(x: number, y: number, roomPage: number | null = null) {
     this.x = x;
     this.y = y;
     this.origX = this.x;
     this.origY = this.y;
-    this.roomToDisplay = room;
+    this.roomToDisplay = roomPage;
   }
 
   initMask() {
@@ -114,8 +114,8 @@ export default class Draggable {
     this.p5.pop();
   }
 
-  displayInRoom(roomName: string) {
-    if (this.roomToDisplay !== roomName) {
+  displayInRoom(roomPage: number) {
+    if (this.roomToDisplay !== roomPage) {
       return;
     }
     this.p5.push();
@@ -126,8 +126,8 @@ export default class Draggable {
     this.p5.pop();
   }
 
-  displayToolBarNormal(room: string = "") {
-    if (room !== "" && room !== this.roomToDisplay) return false;
+  displayToolBarNormal(room: number = -1) {
+    if (room !== -1 && room !== this.roomToDisplay) return false;
     this.p5.push();
     this.p5.translate(this.x, this.y);
     if (!this.closed) {
@@ -218,8 +218,8 @@ export default class Draggable {
     this.p5.rect(0, 0, this.w, this.h + this.barH, this.bRad);
   }
 
-  checkButtonsNormal(room: string = "") {
-    if (room !== "" && room !== this.roomToDisplay) return false;
+  checkButtonsNormal(room: number = -1) {
+    if (room !== -1 && room !== this.roomToDisplay) return false;
 
     if (this.closed) return false;
     let mouse = { x: this.p5.mouseX, y: this.p5.mouseY };
@@ -269,8 +269,8 @@ export default class Draggable {
     return false;
   }
 
-  checkDraggingNormal(room: string = "") {
-    if (room !== "" && room !== this.roomToDisplay) {
+  checkDraggingNormal(room: number = -1) {
+    if (room !== -1 && room !== this.roomToDisplay) {
       return false;
     }
     if (this.closed) return false;
@@ -300,7 +300,7 @@ export default class Draggable {
     this.dragging = false;
   }
 
-  updateInRoom(room: string) {
+  updateInRoom(room: number) {
     if (room === this.roomToDisplay) {
       this.update();
     }

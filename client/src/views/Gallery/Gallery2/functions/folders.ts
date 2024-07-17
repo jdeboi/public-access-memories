@@ -41,6 +41,8 @@ export const addFolderDivs = (
       i,
       x,
       y,
+      80,
+      80,
       label,
       link,
       i === 2 ? instaImg : txtFile,

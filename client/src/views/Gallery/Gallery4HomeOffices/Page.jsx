@@ -22,25 +22,27 @@ const Page = ({ index, startPage, children, numLayouts, windowUI }) => {
   }
 
   const getBackgroundSize = () => {
-    let aspect = 1920 / 1080;
-    let w = windowUI.width;
-    let screenAspect = w / windowUI.contentH;
+    const aspect = 1920 / 1080;
+    const screenWidth = windowUI.contentW;
+    const screenHeight = windowUI.contentH;
+    const screenAspect = screenWidth / screenHeight;
 
     if (screenAspect < aspect) {
       return "200%";
     } else {
-      let newHeight = windowUI.contentH;
+      const newHeight = screenHeight;
 
-      let newWidth = (1920 * newHeight) / 1080;
-      let percent = (newWidth / windowUI.contentW) * 200;
+      const newWidth = (1920 * newHeight) / 1080;
+      const percent = (newWidth / screenWidth) * 200;
       return `${percent}%`;
     }
   };
 
   const getBackgroundPosition = () => {
-    let aspect = 1920 / 1080;
-    let w = windowUI.width;
-    let screenAspect = w / windowUI.contentH;
+    const aspect = 1920 / 1080;
+    const screenWidth = windowUI.contentW;
+    const screenHeight = windowUI.contentH;
+    const screenAspect = screenWidth / screenHeight;
 
     let dx = 0;
     if (screenAspect < aspect) {
@@ -49,13 +51,14 @@ const Page = ({ index, startPage, children, numLayouts, windowUI }) => {
       }
       return "center right";
     } else {
-      let newHeight = windowUI.contentH;
-      let newWidth = (1920 * newHeight) / 1080;
-      dx = (w - newWidth) / 2;
+      const newHeight = screenHeight;
+      const newWidth = (1920 * newHeight) / 1080;
+      dx = (screenWidth - newWidth) / 2;
       if (index % 2 == 1) dx = -newWidth / 2;
     }
     return `${dx}px center`;
   };
+
   const shouldShowPageFlip = () => {
     if (index == 0) return false;
     if (index % 2 == 1 && index == numLayouts - 1) return false;
@@ -63,7 +66,12 @@ const Page = ({ index, startPage, children, numLayouts, windowUI }) => {
   };
 
   const pageNum = Math.floor(index / 2);
-
+  let url = `url(https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/HomePage/0.jpg)`;
+  if (pageNum > 0) {
+    url = `url(https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/pages/Office_${
+      pageNum - 1
+    }/0.jpg)`;
+  }
   return (
     <div
       className={classN}
@@ -72,7 +80,7 @@ const Page = ({ index, startPage, children, numLayouts, windowUI }) => {
         backgroundRepeat: "no-repeat",
         backgroundSize: getBackgroundSize(),
         backgroundPosition: getBackgroundPosition(),
-        backgroundImage: `url(https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/pages/Office_${pageNum}/0.jpg)`,
+        backgroundImage: url,
       }}
     >
       {children}

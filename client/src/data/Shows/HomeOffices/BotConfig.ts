@@ -11,8 +11,9 @@ export const danceFloor = {
 };
 
 const DJBotCoords = {
-  x: danceFloor.x / GlobalConfig.scaler + 3,
-  y: danceFloor.y / GlobalConfig.scaler,
+  x: 50,
+  y: 100,
+  room: 15 * 2,
 };
 
 export const DJBotDomCoords = p5ToDomCoords(
@@ -27,77 +28,85 @@ export const DJBotUserCoords = p5ToUserCoords(
 );
 
 const cheeseBotCoords = {
-  x: 40,
-  y: 12,
+  x: 170,
+  y: 170,
+  room: 6 * 2,
 }; // cheese
 const wineBotCoords = {
-  x: 40,
-  y: 20,
+  x: 170,
+  y: 170,
+  room: 2,
 };
 const cocktailBotCoords = {
-  x: 40,
-  y: 39.5,
+  x: 170,
+  y: 170,
+  room: 12 * 2,
 };
 const hostBotCoords = {
-  x: 18,
-  y: 16.5,
+  x: 200,
+  y: 400,
+  room: 0,
 };
 
 export const numBarItems = 4;
 const barW = 87;
 const barH = 175; // + 80;
-const botDX = 2.5;
-const botDY = 2;
-const barUsers: IUser[] = [
-  getNewUser(
-    "wineBot",
-    "🤖",
-    "/",
-    "1",
-    wineBotCoords.x + botDX,
-    wineBotCoords.y + botDY
-  ),
-  getNewUser(
-    "cocktailBot",
-    "🤖",
-    "/",
-    "2",
-    cocktailBotCoords.x + botDX,
-    cocktailBotCoords.y + botDY
-  ),
-  // getNewUser("cheeseBot", "🤖", "/", "3", cheeseBotCoords.x - botDX*.6, cheeseBotCoords.y + botDY),
-  getNewUser(
-    "cheeseBot",
-    "🤖",
-    "/",
-    "3",
-    cheeseBotCoords.x + botDX,
-    cheeseBotCoords.y + botDY
-  ),
+const botDX = 60;
+const botDY = 90;
 
-  getNewUser(
-    "DJBot",
-    "🤖",
-    "/",
-    "4",
-    DJBotCoords.x + botDX,
-    DJBotCoords.y - botDX * 0.2
-  ),
-  getNewUser(
-    "hostBot",
-    "🤖",
-    "/",
-    "5",
-    hostBotCoords.x + botDX,
-    hostBotCoords.y
-  ),
-];
+const wineBot = getNewUser(
+  "wineBot",
+  "🤖",
+  "/",
+  "1",
+  wineBotCoords.x - botDX,
+  wineBotCoords.y + botDY
+);
+wineBot.roomPage = wineBotCoords.room;
+const cocktailBot = getNewUser(
+  "cocktailBot",
+  "🤖",
+  "/",
+  "2",
+  cocktailBotCoords.x - botDX,
+  cocktailBotCoords.y + botDY
+);
+cocktailBot.roomPage = cocktailBotCoords.room;
+
+const cheeseBot = getNewUser(
+  "cheeseBot",
+  "🤖",
+  "/",
+  "3",
+  cheeseBotCoords.x - botDX,
+  cheeseBotCoords.y + botDY
+);
+cheeseBot.roomPage = cheeseBotCoords.room;
+
+const djBot = getNewUser(
+  "DJBot",
+  "🤖",
+  "/",
+  "4",
+  DJBotCoords.x + 50,
+  DJBotCoords.y - 50
+);
+djBot.roomPage = DJBotCoords.room;
+
+const hostBot = getNewUser(
+  "hostBot",
+  "🤖",
+  "/",
+  "5",
+  hostBotCoords.x,
+  hostBotCoords.y
+);
+hostBot.roomPage = 0;
+
+const barUsers: IUser[] = [wineBot, cocktailBot, cheeseBot, hostBot];
 
 export const barTenders: IUser[] = barUsers.map((user) => {
   const usr = { ...user };
-  let pt = p5ToDomCoords(usr.x, usr.y, GlobalConfig);
-  usr.x = pt.x;
-  usr.y = pt.y;
   return usr;
 });
 
@@ -110,6 +119,7 @@ export const bars: IBar[] = [
     y: wineBotCoords.y,
     w: barW, // stupid to use pixels here but "whatever" units for x & y
     h: barH,
+    roomPage: wineBot.roomPage,
     tender: barTenders[0],
     isFlipped: false,
   },
@@ -119,6 +129,7 @@ export const bars: IBar[] = [
     y: cocktailBotCoords.y,
     w: barW,
     h: barH,
+    roomPage: cocktailBot.roomPage,
     tender: barTenders[1],
     isFlipped: false,
   },
@@ -128,6 +139,7 @@ export const bars: IBar[] = [
     y: cheeseBotCoords.y,
     w: barW,
     h: barH, // + 80
+    roomPage: cheeseBot.roomPage,
     tender: barTenders[2],
     isFlipped: false,
   },
@@ -137,6 +149,7 @@ export const bars: IBar[] = [
     y: DJBotCoords.y,
     w: 210,
     h: 45,
+    roomPage: djBot.roomPage,
     tender: barTenders[3],
     isFlipped: false,
   },
@@ -146,6 +159,7 @@ export const bars: IBar[] = [
     y: hostBotCoords.y,
     w: barW,
     h: barH,
+    roomPage: hostBot.roomPage,
     tender: barTenders[4],
     isFlipped: false,
   },

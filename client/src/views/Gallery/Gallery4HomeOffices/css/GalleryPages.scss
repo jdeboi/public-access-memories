@@ -115,21 +115,41 @@ $backgroundColor: "black";
 
   .pageButtons {
     position: absolute;
-    bottom: $buttonSize;
+    bottom: 55px;
     width: 100%;
     z-index: 100;
 
     button {
       position: absolute;
-      height: $buttonSize;
-      width: $buttonSize;
+      // height: 35; //$buttonSize;
+      // width: 40; //$buttonSize;
     }
 
     button#backButton {
-      left: 0;
+      left: 10px;
     }
     button#nextButton {
-      right: 0;
+      right: 10px;
+    }
+
+    .page-button {
+      margin: 0 5px;
+      padding: 10px 15px;
+      border: none;
+      background-color: #f0f0f0;
+      color: #333;
+      font-size: 16px;
+      pointer-events: none;
+    }
+
+    .page-button:hover {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .page-button-over {
+      background-color: #007bff;
+      color: white;
     }
   }
 }

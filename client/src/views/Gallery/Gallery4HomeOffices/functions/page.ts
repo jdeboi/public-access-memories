@@ -1,6 +1,6 @@
 import p5Types from "p5";
 
-export const CORNER_DIM = 50;
+export const CORNER_DIM = 70;
 
 export const isPageForwardCorner = (
   nextStep: { x: number; y: number },
@@ -35,6 +35,7 @@ export const displayPageFlips = (
 };
 
 export const displayLeftPageFlip = (img: p5Types.Image, p5: p5Types) => {
+  return;
   //   p5.fill(0, 100);
   //   p5.noStroke();
   //   p5.push();
@@ -42,12 +43,39 @@ export const displayLeftPageFlip = (img: p5Types.Image, p5: p5Types) => {
   //   p5.image(img, 0, 0, CORNER_DIM, CORNER_DIM);
   //   p5.triangle(0, 0, 0, CORNER_DIM, CORNER_DIM, CORNER_DIM);
   //   p5.pop();
-  let dimX = CORNER_DIM * 1.3;
-  let dimY = CORNER_DIM * 1.3;
+
+  // let dimX = CORNER_DIM * 1.3;
+  // let dimY = CORNER_DIM * 1.3;
+  // p5.push();
+  // p5.scale(-1, 1);
+  // p5.translate(0, p5.height - dimY);
+  // p5.image(img, -dimX, 0, dimX, dimY);
+  // p5.pop();
+
+  let dimX = 40;
+  let dimY = 35;
+
+  let space = 20;
   p5.push();
-  p5.scale(-1, 1);
-  p5.translate(0, p5.height - dimY);
-  p5.image(img, -dimX, 0, dimX, dimY);
+  p5.translate(space, p5.height - dimY - space);
+
+  p5.noStroke();
+  p5.strokeWeight(2);
+  p5.fill("#f0f0f0");
+
+  p5.rect(0, 0, dimX, dimY);
+  p5.noStroke();
+  p5.fill("#333");
+  p5.textAlign(p5.CENTER);
+
+  p5.stroke("#333");
+  p5.strokeWeight(2);
+  let lineDX = 15;
+  let lineDY = 10;
+  p5.line(lineDX, dimY / 2, dimX - lineDX, lineDY);
+  p5.line(lineDX, dimY / 2, dimX - lineDX, dimY - lineDY);
+  // p5.text("back", 0, 20, dimX, dimY);
+  // p5.image(img, -dimX, 0, dimX, dimY);
   p5.pop();
 };
 

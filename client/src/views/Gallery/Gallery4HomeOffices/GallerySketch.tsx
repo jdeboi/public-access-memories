@@ -7,6 +7,7 @@ import { RootState } from "../../../store/store";
 import { setFollowingHost } from "../../../store/user";
 import RectFrame from "./components/RectFrame";
 import Timer from "./components/Timer";
+import { addBots } from "../../../App/useSockets";
 
 import Dancer from "../components/p5/Dancer";
 
@@ -49,6 +50,7 @@ import {
   displayFolderDivs,
   checkFolderDivsDouble,
   addFolderDivs,
+  addGiftShopDivs,
   addBarDivs,
   displayBarDivs,
   addColumnDivs,
@@ -80,6 +82,7 @@ let previousPage = 0;
 let pageFlipImg: p5Types.Image;
 
 let officeImgs: p5Types.Image[] = [];
+let giftShopImgs: p5Types.Image[] = [];
 let currentImgIndex = 1;
 let frameGraphics: p5Types.Graphics;
 let frames: RectFrame[] = [];
@@ -111,7 +114,7 @@ interface ComponentProps {
   users: IUsers;
   isClosed: boolean;
   userMove: (x: number, y: number) => void;
-  userNewRoom: (room: string) => void;
+  userNewRoomPage: (roomPage: number) => void;
   loadingDone: () => void;
   setOutside: (state: { isOutside: boolean }) => void;
   windowUI: IWindowUI;
@@ -183,6 +186,15 @@ class GallerySketch extends React.Component<Props> {
     columnGif = p5.loadImage(pamURL + "/gallery/column.png"); //not sure why this one has a cors issue
 
     pageFlipImg = p5.loadImage(pamURL + "/homeoffices/pagecorner.webp");
+
+    for (let i = 0; i < 4; i++) {
+      giftShopImgs[i] = p5.loadImage(
+        `https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/pages/Office_15/${
+          i + 1
+        }.jpg`
+      );
+    }
+
     this.loadOfficeImages(p5);
   };
 
@@ -211,6 +223,8 @@ class GallerySketch extends React.Component<Props> {
     loadingDone();
     setOutside({ isOutside: false });
     this.setUserInitialPosition(p5);
+
+    addBots(barTenders);
   };
 
   initDivs = (p5: p5Types) => {
@@ -218,6 +232,7 @@ class GallerySketch extends React.Component<Props> {
     addColumnDivs(divs, columnGif, p5);
     addTrashDivs(divs, trashFiles, p5);
     addFolderDivs(divs, instaImg, txtFile, p5);
+    addGiftShopDivs(divs, giftShopImgs, p5);
     addBarDivs(bars, lightImgs[3], p5);
   };
 
@@ -236,7 +251,7 @@ class GallerySketch extends React.Component<Props> {
   };
 
   draw = (p5: p5Types) => {
-    const { user, users } = this.props;
+    const { user, users, currentPage } = this.props;
 
     if (isLoadingImages) {
       frameGraphics.clear(0, 0, 0, 0);
@@ -259,13 +274,17 @@ class GallerySketch extends React.Component<Props> {
     }
 
     p5.clear(0, 0, 0, 0);
-    // this.displayFrameRate(p5);
+    //this.displayFrameRate(p5);
 
     p5.push();
 
-    this.displayRandomRects(p5);
+    if (this.isGiftShop()) {
+      this.displayGiftShop(p5);
+    } else {
+      this.displayRandomRects(p5);
+      this.displayLayoutContent(p5);
+    }
 
-    this.displayLayoutContent(p5);
     p5.pop();
 
     //////////////
@@ -284,16 +303,16 @@ class GallerySketch extends React.Component<Props> {
 
     this.drawOverUser(p5);
 
-    displayPageFlips(
-      pageFlipImg,
-      this.props.currentPage,
-      this.props.numLayouts,
-      p5
-    );
+    // displayPageFlips(
+    //   pageFlipImg,
+    //   this.props.currentPage,
+    //   this.props.numLayouts,
+    //   p5
+    // );
 
     //////////////
     // updating
-    if (users) updateDivs(this.getRoomString(), divs);
+    if (users) updateDivs(this.getRoomLayoutNum(), divs);
 
     this.updateUserEase(p5);
     this.checkPageChange(p5);
@@ -316,6 +335,7 @@ class GallerySketch extends React.Component<Props> {
       case 2:
         this.display2(p5);
         break;
+
       default:
         break;
     }
@@ -323,6 +343,13 @@ class GallerySketch extends React.Component<Props> {
   display0 = (p5: p5Types) => {};
   display1 = (p5: p5Types) => {};
   display2 = (p5: p5Types) => {};
+
+  displayGiftShop = (p5: p5Types) => {};
+
+  isGiftShop() {
+    const { currentPage, numLayouts } = this.props;
+    return currentPage == (numLayouts - 1) * 2;
+  }
 
   displayRandomRects(p5: p5Types) {
     timer1.dt = 100;
@@ -352,17 +379,17 @@ class GallerySketch extends React.Component<Props> {
     let _x = this.props.user.x - frameDim.w / 2;
     let _y = this.props.user.y - frameDim.h / 2;
 
-    let x = p5.constrain(_x, 0, p5.windowWidth - frameDim.w / 2);
-    let y = p5.constrain(_y, 0, p5.windowHeight - frameDim.h / 2);
+    let x = p5.constrain(_x, 0, p5.width - frameDim.w / 2);
+    let y = p5.constrain(_y, 0, p5.height - frameDim.h / 2);
     let frame = new RectFrame(x, y, frameDim.w, frameDim.h, currentImgIndex);
 
     frames.push(frame);
 
     frameGraphics.erase(50);
-    frameGraphics.rect(0, 0, p5.windowWidth, p5.windowHeight);
+    frameGraphics.rect(0, 0, p5.width, p5.height);
     frameGraphics.noErase();
 
-    frame.displayImg(frameGraphics, officeImgs, this.getBackgroundSize());
+    frame.displayImg(frameGraphics, officeImgs, this.getBackgroundSize(p5));
   }
 
   nextImage() {
@@ -393,8 +420,8 @@ class GallerySketch extends React.Component<Props> {
     previousPage = currentPage;
   };
 
-  getRoomString = () => {
-    return Math.floor(this.props.currentPage / 2).toString();
+  getRoomLayoutNum = () => {
+    return this.props.currentPage; //Math.floor(this.props.currentPage / 2);
   };
 
   loadOfficeImages = (p5: p5Types) => {
@@ -417,9 +444,16 @@ class GallerySketch extends React.Component<Props> {
     isLoadingImages = true;
 
     for (let i = 1; i < 5; i++) {
+      let imgUrl = `https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/HomePage/${i}.jpg`;
+
+      if (currentRoom > 0) {
+        imgUrl = `https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/pages/Office_${
+          currentRoom - 1
+        }/${i}.jpg`;
+      }
       const imgPromise = new Promise((resolve, reject) => {
         p5.loadImage(
-          `https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/pages/Office_${currentRoom}/${i}.jpg`,
+          imgUrl,
           (img) => {
             // Resize the image
             // const w = windowUI.contentW;
@@ -456,8 +490,9 @@ class GallerySketch extends React.Component<Props> {
     p5.fill(0);
     p5.noStroke();
     p5.text(p5.round(p5.frameRate()), 20, 20);
-    p5.text(this.props.user.roomUrl, 20, 40);
-    p5.text(this.props.currentPage, 20, 60);
+    p5.text("props.user.roomPage " + this.props.user.roomPage, 20, 40);
+    p5.text("layout " + this.getRoomLayoutNum(), 20, 60);
+    p5.text("props.currentPage " + this.props.currentPage, 20, 80);
   };
 
   drawOverTarget = (p5: p5Types) => {
@@ -466,21 +501,14 @@ class GallerySketch extends React.Component<Props> {
 
     if (users) {
       p5.textFont(font, 34);
-      drawUsers(
-        user,
-        filterGalleryUsers(user, users),
-        font,
-        p5,
-        barEmojis,
-        GlobalConfig
-      );
+      drawUsers(user, filterGalleryUsers(user, users), font, p5, barEmojis);
     }
 
     p5.pop();
   };
 
   drawOverUser = (p5: p5Types) => {
-    let room = this.getRoomString();
+    let room = this.getRoomLayoutNum();
     p5.push();
     // p5.translate(p5.windowWidth / 2, p5.windowHeight / 2);
 
@@ -618,7 +646,7 @@ class GallerySketch extends React.Component<Props> {
     if (userClicked) {
       setUserActive(userClicked);
       return;
-    } else if (checkDivPress(this.getRoomString(), divs)) {
+    } else if (checkDivPress(this.getRoomLayoutNum(), divs)) {
       return;
     } else {
       let steps = GlobalConfig.scaler - 20;
@@ -648,6 +676,7 @@ class GallerySketch extends React.Component<Props> {
           movement.destination.y
         );
         movement.isWalking = false;
+        this.checkPageCorners(movement.destination, p5);
       } else if (t > 150) {
         let step = getNextStep(movement.stepTo, movement.destination);
         this.userTakeStep(p5, step[0], step[1]);
@@ -685,7 +714,7 @@ class GallerySketch extends React.Component<Props> {
 
   windowResized = (p5: p5Types) => {
     const { windowUI } = this.props;
-    frameGraphics = p5.createGraphics(windowUI.contentW, windowUI.contentH);
+    //frameGraphics = p5.createGraphics(windowUI.contentW, windowUI.contentH);
     p5.resizeCanvas(windowUI.contentW, windowUI.contentH);
     this.setUserBoundaries(p5);
   };
@@ -703,30 +732,31 @@ class GallerySketch extends React.Component<Props> {
     this.setUserPositionImmediate(x, y);
   };
 
-  getBackgroundSize = () => {
-    const { windowUI } = this.props;
-    let aspect = 1920 / 1080;
-    let w = windowUI.width;
-    let screenAspect = w / windowUI.contentH;
+  getBackgroundSize = (p5: p5Types) => {
+    // const { windowUI } = this.props;
+    const aspect = 1920 / 1080;
+    const screenWidth = this.props.windowUI.contentW;
+    const screenHeight = this.props.windowUI.contentH;
+    const screenAspect = screenWidth / screenHeight;
 
     if (screenAspect < aspect) {
       // width is max
-      let h = w / aspect;
-      let dy = (windowUI.contentH - h) / 2;
-      return { w, h, x: 0, y: dy };
+      let h = screenWidth / aspect;
+      let dy = (screenHeight - h) / 2;
+      return { w: screenWidth, h, x: 0, y: dy };
     } else {
-      let newHeight = windowUI.contentH;
+      let newHeight = screenHeight;
 
       let newWidth = (1920 * newHeight) / 1080;
-      let dx = (w - newWidth) / 2;
+      let dx = (screenWidth - newWidth) / 2;
       return { w: newWidth, h: newHeight, x: dx, y: 0 };
     }
   };
 
   doubleClicked = (p5: p5Types) => {
     if (p5.frameCount > 0) {
-      checkFolderDivsDouble(this.getRoomString(), divs);
-      checkTrashDivsDouble(this.getRoomString(), divs);
+      checkFolderDivsDouble(this.getRoomLayoutNum(), divs);
+      checkTrashDivsDouble(this.getRoomLayoutNum(), divs);
     }
     return;
   };

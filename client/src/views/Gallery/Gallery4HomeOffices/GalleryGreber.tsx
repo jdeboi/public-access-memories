@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import p5Types from "p5";
 import { IUser, IUsers } from "../../../interfaces";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser, selectWindow } from "../../../store/store";
 import "./css/GalleryPages.css";
+import Pagination from "./components/Pagination/Pagination";
 
 //////////////
 // CONFIG
 import GallerySketch from "./GallerySketch";
 import GalleryPages from "./GalleryPages";
-import { setUserRoomUrl } from "../../../store/user";
+import { setUserRoomPage } from "../../../store/user";
 import LoadingPageHomeOffices from "./components/LoadingPageHomeOffices/LoadingPageHomeOffices";
 import CenterModal from "../../../components/CenterModal/CenterModal";
 import Popups from "./components/Popups/Popups";
@@ -24,7 +25,6 @@ interface ComponentProps {
   loadingDone: () => void;
   setUserActive: (user: IUser) => void;
   clickedUserChat: (user: IUser) => void;
-  moveGalleryUser: (x: number, y: number) => void;
   setOutside: (state: { isOutside: boolean }) => void;
   showStart: boolean;
   hideStart: () => void;
@@ -35,8 +35,16 @@ const GalleryGreber = (props: ComponentProps) => {
   const windowUI = useSelector(selectWindow);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(0);
-  const NUM_LAYOUTS = 15;
+  const NUM_LAYOUTS = 17;
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
+  const handlePlayClick = () => {
+    if (videoRef.current) {
+      videoRef.current.play();
+      setIsPlaying(true);
+    }
+  };
   const onSetPageChange = (dir: number) => {
     dir > 0 ? nextPage() : backPage();
   };
@@ -45,11 +53,11 @@ const GalleryGreber = (props: ComponentProps) => {
     if (currentPage === 0) return;
     const newPage = Math.max(currentPage - 2, 0);
     setCurrentPage(newPage);
-    userNewRoom(newPage.toString());
+    userNewRoomPage(newPage);
   };
 
-  const userNewRoom = (room: string) => {
-    dispatch(setUserRoomUrl({ roomUrl: room }));
+  const userNewRoomPage = (roomPage: number) => {
+    dispatch(setUserRoomPage({ roomPage: roomPage }));
   };
 
   const nextPage = () => {
@@ -58,7 +66,7 @@ const GalleryGreber = (props: ComponentProps) => {
 
     const newPage = Math.min(currentPage + 2, endPage - 2);
     setCurrentPage(newPage);
-    userNewRoom(newPage.toString());
+    userNewRoomPage(newPage);
   };
 
   return (
@@ -70,12 +78,19 @@ const GalleryGreber = (props: ComponentProps) => {
         changePage={onSetPageChange}
         numLayouts={NUM_LAYOUTS}
       />
-      <div className="GallerySketches" style={{ zIndex: 30 }}>
+      <div
+        className="GallerySketches"
+        style={{
+          width: windowUI.contentW,
+          height: windowUI.contentH,
+          zIndex: 30,
+        }}
+      >
         <GallerySketch
           users={props.users}
           isClosed={props.isClosed}
-          userMove={props.moveGalleryUser}
-          userNewRoom={props.userNewRoom}
+          userMove={props.userMove}
+          userNewRoomPage={userNewRoomPage}
           loadingDone={props.loadingDone}
           setOutside={props.setOutside}
           windowUI={windowUI}
@@ -92,18 +107,22 @@ const GalleryGreber = (props: ComponentProps) => {
         title={"Welcome"}
         isHidden={!props.showStart}
         onHide={props.hideStart}
-        z={2500}
+        z={2000}
         isRelative={false}
         classN="Welcome"
         content={
-          <div>
-            <h1>HomeOffices</h1>
-            <div>a public access memories show</div>
-            <img
-              src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/assets/PAM_logos/logo_black_lg.png"
-              width={70}
-              style={{ paddingBottom: "10px" }}
+          <div className="welcome-video-container">
+            <video
+              ref={videoRef}
+              src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/HomePage/hello.mp4"
+              poster="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/HomePage/welcome.png" // Add the poster attribute here
+              className={`video ${isPlaying ? "playing" : ""}`}
             />
+            {!isPlaying && (
+              <button className="play-button" onClick={handlePlayClick}>
+                Play
+              </button>
+            )}
           </div>
         }
         buttons={
@@ -118,6 +137,10 @@ const GalleryGreber = (props: ComponentProps) => {
         }
       />
       <Popups />
+      <Pagination
+        currentLayoutNum={Math.floor(currentPage / 2) + 1}
+        numLayouts={NUM_LAYOUTS}
+      />
     </>
   );
 };
