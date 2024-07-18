@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Popups.css";
 import { useSelector } from "react-redux";
 import { selectWindow } from "../../../../../store/store";
 import Frame from "../../../../../components/Frame/Frame";
 
 export default function Popups() {
-  const NUM_ADS = 7;
+  const NUM_ADS = 7; // Updated to 5 videos
   const POPUP_LASTS = 8000;
   const POPUP_MIN_INTERVAL = 14000;
   const POPUP_MAX_INTERVAL = 22000;
@@ -19,21 +19,18 @@ export default function Popups() {
     w: 300,
     h: 300,
   });
-
-  useEffect(() => {
-    // play video
-  }, [windowUI.compositionStarted]);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const showPopup = () => {
       setCurrentImg((prevImg) => (prevImg + 1) % NUM_ADS);
       setIsShowingPopup(true);
 
-      // Hide popup after 5 seconds
+      // Hide popup after POPUP_LASTS milliseconds
       setTimeout(() => {
         setIsShowingPopup(false);
 
-        // Schedule next popup between 8 to 20 seconds
+        // Schedule next popup between POPUP_MIN_INTERVAL to POPUP_MAX_INTERVAL milliseconds
         const nextPopupTime = getRandomTime();
         const w = 200 + Math.random() * 300;
         const h = w;
@@ -48,17 +45,15 @@ export default function Popups() {
       }, POPUP_LASTS);
     };
 
-    // Initial popup after a random time between 8 to 20 seconds
+    // Initial popup after a random time between POPUP_MIN_INTERVAL to POPUP_MAX_INTERVAL milliseconds
     const initialPopupTime = getRandomTime();
     const initialTimeout = setTimeout(showPopup, initialPopupTime);
 
     return () => clearTimeout(initialTimeout); // Cleanup timeout on component unmount
   }, [windowUI.contentW, windowUI.contentH]);
 
-  const getRandomTime = (
-    min: number = POPUP_MIN_INTERVAL,
-    max: number = POPUP_MAX_INTERVAL
-  ) => Math.random() * (max - min) + min;
+  const getRandomTime = (min = POPUP_MIN_INTERVAL, max = POPUP_MAX_INTERVAL) =>
+    Math.random() * (max - min) + min;
 
   return (
     <Frame
@@ -71,6 +66,7 @@ export default function Popups() {
         <div className="Popups">
           <div className="adVideoContainer">
             <video
+              ref={videoRef}
               className="adVideo"
               src={`https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/ads/${currentImg}.mp4`}
               autoPlay
