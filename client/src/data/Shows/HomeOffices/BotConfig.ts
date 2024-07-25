@@ -1,7 +1,5 @@
 import { getNewUser } from "../../../helpers/helpers";
 import { IUser, IBar } from "../../../interfaces";
-import { p5ToDomCoords, p5ToUserCoords } from "../../../helpers/coordinates";
-import { GlobalConfig } from "./GlobalConfig";
 
 export const danceFloor = {
   x: 1300,
@@ -13,19 +11,8 @@ export const danceFloor = {
 const DJBotCoords = {
   x: 50,
   y: 100,
-  room: 15 * 2,
+  room: 14 * 2,
 };
-
-export const DJBotDomCoords = p5ToDomCoords(
-  DJBotCoords.x,
-  DJBotCoords.y,
-  GlobalConfig
-);
-export const DJBotUserCoords = p5ToUserCoords(
-  DJBotCoords.x,
-  DJBotCoords.y,
-  GlobalConfig
-);
 
 const cheeseBotCoords = {
   x: 170,
@@ -88,8 +75,8 @@ const djBot = getNewUser(
   "🤖",
   "/",
   "4",
-  DJBotCoords.x + 50,
-  DJBotCoords.y - 50
+  DJBotCoords.x - botDX,
+  DJBotCoords.y + botDY
 );
 djBot.roomPage = DJBotCoords.room;
 

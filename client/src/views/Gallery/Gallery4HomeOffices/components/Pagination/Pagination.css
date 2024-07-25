@@ -1,9 +1,11 @@
 .Pagination {
   display: flex;
+  z-index: 999;
   justify-content: center;
   position: fixed;
   bottom: 20px; /* Adjust this value as needed */
   width: 100%;
+  pointer-events: none;
 }
 .Pagination .page-button {
   margin: 0 5px;

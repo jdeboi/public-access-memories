@@ -12,6 +12,10 @@ import { numBarItems } from "../../../../data/Shows/HomeOffices/BotConfig";
 
 import p5Types from "p5";
 import { ShowConfig } from "../../../../data/CurrentShow/ShowConfig";
+import Clock from "../components/Clock/Clock";
+import BlindsDraggable from "../components/Blinds/Blinds";
+import ChairDraggable from "../components/Chair/Chair";
+import GifVidDraggable from "../components/GifVid/GifVid";
 
 export const addLightDivs = (
   divs: any,
@@ -37,7 +41,8 @@ export const addColumnDivs = (
   p5: p5Types
 ) => {
   divs.columns = [];
-
+  let factor = p5.width / 1400;
+  let dx = 70;
   for (let i = 0; i < 3; i++) {
     let column = new ShadowDraggable(
       i,
@@ -49,18 +54,114 @@ export const addColumnDivs = (
       columnGif,
       GlobalConfig
     );
-    column.setNormal(300 + i * 20, 200 + i * 20, i + 1);
+
+    column.setNormal(
+      100 * factor + i * dx * factor,
+      200 * factor + i * dx * factor,
+      4 * 2
+    );
     divs.columns.push(column);
   }
+  for (let i = 0; i < 3; i++) {
+    let column = new ShadowDraggable(
+      i,
+      0,
+      0,
+      80,
+      280,
+      p5,
+      columnGif,
+      GlobalConfig
+    );
+
+    column.setNormal(
+      1200 * factor - i * dx * factor,
+      200 * factor + i * dx * factor,
+      4 * 2
+    );
+    divs.columns.push(column);
+  }
+  addClockDiv(divs, p5);
+  addChairDiv(divs, p5);
+  addSnakeDiv(divs, p5);
+  addSmokeDiv(divs, p5);
+  addPopstarDiv(divs, p5);
+};
+
+const addChairDiv = (divs: any, p5: p5Types) => {
+  let chair = new ChairDraggable(0, 0, 0, 120, 120, p5);
+  chair.setNormal(p5.width * 0.1, p5.height * 0.5, 1 * 2);
+
+  let chair2 = new ChairDraggable(0, 0, 0, 120, 120, p5);
+  chair2.setNormal(0, 0, 1 * 2);
+  divs.columns.push(chair);
+  divs.columns.push(chair2);
+};
+
+const addClockDiv = (divs: any, p5: p5Types) => {
+  const w = 180;
+  let clock = new GifVidDraggable("clock", 0, 0, w, w, p5);
+  let factor = p5.width / 1400;
+  let x = p5.width / 2 - w / 2;
+  let y = p5.height / 2 - w / 2;
+  clock.setNormal(x, y, 15 * 2);
+  divs.columns.push(clock);
+};
+
+const addPopstarDiv = (divs: any, p5: p5Types) => {
+  const vFactor = 0.75;
+  let factor = p5.width / 1400;
+  let popstar = new GifVidDraggable(
+    "popstar",
+    0,
+    0,
+    360 * vFactor * factor,
+    640 * vFactor * factor,
+    p5
+  );
+  popstar.id = 10;
+
+  let x = 850 * factor;
+  let y = 100 * factor;
+  popstar.setNormal(x, y, 9 * 2);
+  divs.columns.push(popstar);
+};
+
+const addSnakeDiv = (divs: any, p5: p5Types) => {
+  let snake = new GifVidDraggable("snake", 0, 0, 250, 250, p5);
+  let factor = p5.width / 1400;
+  let x = 1080 * factor;
+  let y = 150 * factor;
+  snake.setNormal(x, y, 7 * 2);
+  divs.columns.push(snake);
+};
+
+const addSmokeDiv = (divs: any, p5: p5Types) => {
+  let smoke = new GifVidDraggable("smoke", 0, 0, 200, 400, p5, false);
+  let factor = p5.width / 1400;
+  let x = 60 * factor;
+  let y = 150 * factor;
+  smoke.setNormal(x, y, 10 * 2);
+  divs.columns.push(smoke);
+};
+
+export const addBlindsDiv = (
+  blindsImg: p5Types.Image,
+  divs: any,
+  p5: p5Types
+) => {
+  let blinds = new BlindsDraggable(0, 0, 0, 200, 200, blindsImg, p5);
+  blinds.setNormal(p5.width * 0.1, 100, 5 * 2);
+  divs.columns.push(blinds);
 };
 
 export const addTrashDivs = (divs: any, trashFiles: any, p5: p5Types) => {
   divs.trashCans = [];
 
   let labels = [
-    { x0: 300, y0: 300, room: 10 },
-    { x0: 300, y0: 300, room: 4 },
-    { x0: 300, y0: 300, room: 5 },
+    // { x0: 300, y0: 300, room: 10 },
+    { x0: p5.width * 0.67, y0: p5.height * 0.65, room: 2 * 2 },
+    // { x0: 300, y0: 300, room: 5 },
   ];
 
   for (let i = 0; i < labels.length; i++) {
@@ -277,10 +378,15 @@ export const displayTrashDivs = (room: number, divs: any) => {
   }
 };
 
-export const displayColumnDivs = (room: number, divs: any) => {
+export const displayColumnDivs = (
+  userX: number,
+  userY: number,
+  room: number,
+  divs: any
+) => {
   for (const col of divs.columns) {
     if (col.roomToDisplay == room) {
-      col.display(0, 0);
+      col.display(userX, userY);
       col.displayToolBarNormal();
     }
   }

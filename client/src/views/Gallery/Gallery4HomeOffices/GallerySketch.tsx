@@ -54,6 +54,7 @@ import {
   addBarDivs,
   displayBarDivs,
   addColumnDivs,
+  addBlindsDiv,
 } from "../Gallery4HomeOffices/functions/divs";
 
 import {
@@ -88,6 +89,7 @@ let frameGraphics: p5Types.Graphics;
 let frames: RectFrame[] = [];
 let timer1 = new Timer(200);
 let timer2 = new Timer(200);
+let blindsImg: p5Types.Image;
 let frameDim = { w: 100, h: 100 };
 
 let isLoadingImages = false;
@@ -151,6 +153,10 @@ class GallerySketch extends React.Component<Props> {
     const pamURL =
       "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories";
     //////////////
+
+    blindsImg = p5.loadImage(
+      "https://lmd-bucket.s3.us-east-2.amazonaws.com/sketches/blinds/blinds_sm.png"
+    );
 
     // font
     font = p5.loadFont(pamURL + "/fonts/sysfont.woff");
@@ -230,6 +236,8 @@ class GallerySketch extends React.Component<Props> {
   initDivs = (p5: p5Types) => {
     addLightDivs(divs, lightImgs, p5);
     addColumnDivs(divs, columnGif, p5);
+    addBlindsDiv(blindsImg, divs, p5);
+
     addTrashDivs(divs, trashFiles, p5);
     addFolderDivs(divs, instaImg, txtFile, p5);
     addGiftShopDivs(divs, giftShopImgs, p5);
@@ -388,7 +396,6 @@ class GallerySketch extends React.Component<Props> {
     frameGraphics.erase(30);
     frameGraphics.rect(0, 0, p5.width, p5.height);
     frameGraphics.noErase();
-
     frame.displayImg(frameGraphics, officeImgs, this.getBackgroundSize(p5));
   }
 
@@ -508,6 +515,7 @@ class GallerySketch extends React.Component<Props> {
   };
 
   drawOverUser = (p5: p5Types) => {
+    const { user } = this.props;
     let room = this.getRoomLayoutNum();
     p5.push();
     // p5.translate(p5.windowWidth / 2, p5.windowHeight / 2);
@@ -515,7 +523,7 @@ class GallerySketch extends React.Component<Props> {
     const userEase = { x: 0, y: 0 };
     displayBarDivs(room, bars);
     displayLightDivs(room, divs);
-    displayColumnDivs(room, divs);
+    displayColumnDivs(user.x, user.y, room, divs);
     displayTrashDivs(room, divs);
 
     p5.textFont(font, 12);

@@ -5,10 +5,10 @@ import { selectWindow } from "../../../../../store/store";
 import Frame from "../../../../../components/Frame/Frame";
 
 export default function Popups() {
-  const NUM_ADS = 7; // Updated to 5 videos
+  const NUM_ADS = 15;
   const POPUP_LASTS = 8000;
-  const POPUP_MIN_INTERVAL = 14000;
-  const POPUP_MAX_INTERVAL = 22000;
+  const POPUP_MIN_INTERVAL = 30000;
+  const POPUP_MAX_INTERVAL = 40000;
 
   const windowUI = useSelector(selectWindow);
   const [currentImg, setCurrentImg] = useState(0);
@@ -22,6 +22,10 @@ export default function Popups() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    if (!windowUI.compositionStarted) {
+      return;
+    }
+
     const showPopup = () => {
       setCurrentImg((prevImg) => (prevImg + 1) % NUM_ADS);
       setIsShowingPopup(true);
@@ -50,10 +54,23 @@ export default function Popups() {
     const initialTimeout = setTimeout(showPopup, initialPopupTime);
 
     return () => clearTimeout(initialTimeout); // Cleanup timeout on component unmount
-  }, [windowUI.contentW, windowUI.contentH]);
+  }, [windowUI.compositionStarted]);
 
   const getRandomTime = (min = POPUP_MIN_INTERVAL, max = POPUP_MAX_INTERVAL) =>
     Math.random() * (max - min) + min;
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.load();
+      if (isShowingPopup) {
+        if (videoRef.current.paused) {
+          videoRef.current.play();
+        }
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  }, [currentImg, isShowingPopup]);
 
   return (
     <Frame
@@ -68,8 +85,7 @@ export default function Popups() {
             <video
               ref={videoRef}
               className="adVideo"
-              src={`https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/ads/${currentImg}.mp4`}
-              autoPlay
+              src={`https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/ads/${currentImg}.webm`}
               loop
               muted
             />

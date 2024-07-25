@@ -13,7 +13,6 @@ export {
   numBarItems,
   barTenders,
   bars,
-  DJBotDomCoords,
 } from "../Shows/HomeOffices/BotConfig";
 
 export const getGalleryBars = (galleryId: number) => {

@@ -173,7 +173,7 @@ class GallerySketch extends React.Component<Props> {
     trashFiles[2] = p5.loadImage(url + "trash/trash1.png");
     trashFiles[1] = p5.loadImage(url + "trash/trash2.png");
 
-    columnGif = p5.loadImage(pamURL + "/gallery/column.png"); //not sure why this one has a cors issue
+    columnGif = p5.loadImage(pamURL + "/gallery/column.png");
 
     pageFlipImg = p5.loadImage(pamURL + "/homeoffices/pagecorner.webp");
     this.loadOfficeImages(p5);
@@ -470,13 +470,14 @@ class GallerySketch extends React.Component<Props> {
 
   drawOverUser = (p5: p5Types) => {
     let room = this.getRoomPage();
+    const { user } = this.props;
     p5.push();
     // p5.translate(p5.windowWidth / 2, p5.windowHeight / 2);
 
     const userEase = { x: 0, y: 0 };
     displayBarDivs(room, bars);
     displayLightDivs(room, divs);
-    displayColumnDivs(room, divs);
+    displayColumnDivs(user.x, user.y, room, divs);
     displayTrashDivs(room, divs);
 
     p5.textFont(font, 12);

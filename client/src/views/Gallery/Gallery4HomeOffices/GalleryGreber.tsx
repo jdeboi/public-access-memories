@@ -14,6 +14,7 @@ import { setUserRoomPage } from "../../../store/user";
 import LoadingPageHomeOffices from "./components/LoadingPageHomeOffices/LoadingPageHomeOffices";
 import CenterModal from "../../../components/CenterModal/CenterModal";
 import Popups from "./components/Popups/Popups";
+import Calendar from "./components/Calendar/Calendar";
 
 var font: p5Types.Font;
 
@@ -137,6 +138,7 @@ const GalleryGreber = (props: ComponentProps) => {
         }
       />
       <Popups />
+      <Calendar />
       <Pagination
         currentLayoutNum={Math.floor(currentPage / 2) + 1}
         numLayouts={NUM_LAYOUTS}

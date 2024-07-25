@@ -20,12 +20,10 @@ export default function LoadingPageHomeOffices(props: { showTitle: boolean }) {
 
         <div className="loadingText">Loading...</div>
         <div className="videoContainer">
-          <video
+          <img
+            alt="loading"
             className="loadingVideo"
-            src="/online_assets/dave/Haiper.mov"
-            autoPlay
-            loop
-            muted
+            src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/gifs/loading_sm.webp"
           />
         </div>
       </div>

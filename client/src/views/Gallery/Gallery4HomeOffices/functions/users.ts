@@ -36,6 +36,7 @@ export function drawUser(user: IUser, p5: p5Types, imgs: p5Types.Image[]) {
 export function checkUserClicked(user: IUser, users: IUsers, p5: p5Types) {
   for (const otherUser of users) {
     if (otherUser.roomUrl === "/") {
+      if (otherUser.roomPage != user.roomPage) continue;
       // let mouse = mouseToWorld(userEase, p5, GlobalConfig);
       let mouse = { x: p5.mouseX, y: p5.mouseY };
 
@@ -50,6 +51,10 @@ export function checkUserClicked(user: IUser, users: IUsers, p5: p5Types) {
   return null;
 }
 
+const isOnGalleryPage = (otherUser: IUser) => {
+  return otherUser.roomUrl === "/";
+};
+
 export function drawUsers(
   user: IUser,
   users: IUsers,
@@ -61,7 +66,11 @@ export function drawUsers(
   p5.noStroke();
   p5.textFont("times", iconSize);
   for (const otherUser of users) {
-    if (otherUser.roomPage === user.roomPage && otherUser.userName) {
+    if (
+      isOnGalleryPage(otherUser) &&
+      otherUser.roomPage === user.roomPage &&
+      otherUser.userName
+    ) {
       //let coord = domCoordsToP5World(otherUser.x, otherUser.y, GlobalConfig);
       let ava = otherUser.avatar;
 

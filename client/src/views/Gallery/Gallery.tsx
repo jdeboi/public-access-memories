@@ -41,7 +41,7 @@ import {
 import { setUserActiveChat } from "../../store/userActive";
 import { setGalleryId, setOneMenu, showChat } from "../../store/menu";
 import { setSketchVolume } from "../../store/music";
-import { doneLoadingApp } from "../../store/window";
+import { doneLoadingApp, startComposition } from "../../store/window";
 
 import { getBar } from "../../data/CurrentShow/BotConfig";
 import { p5ToUserCoords } from "../../helpers/coordinates";
@@ -83,6 +83,13 @@ const Gallery = (props: IGallery) => {
       setShowStart(false);
     }
   }, [props.showWelcome]);
+
+  useEffect(() => {
+    if (!showStart && !props.showWelcome) {
+      console.log("starting");
+      dispatch(startComposition());
+    }
+  }, [props.showWelcome, showStart]);
 
   const clickedUserChat = (otherUser: IUser) => {
     if (otherUser.id !== user.id) {
@@ -251,10 +258,10 @@ const Gallery = (props: IGallery) => {
     const pamURL =
       "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/sounds/";
 
-    if (user.roomUrl == "/") {
+    if (user.roomPage == 0) {
       return pamURL + "0.mp4";
     }
-    let page = Math.floor(parseInt(user.roomUrl) / 2);
+    let page = Math.floor(user.roomPage / 2) - 1;
     return pamURL + page + ".mp4";
   };
 
