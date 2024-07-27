@@ -1,4 +1,9 @@
 import React from "react";
+import {
+  getLayoutSlug,
+  GIFT_PAGE,
+  GUESTBOOK_PAGE,
+} from "../../../data/Shows/HomeOffices/PageConstants";
 
 const Page = ({ index, startPage, children, numLayouts, windowUI }) => {
   let classN = `page page${index}`;
@@ -59,18 +64,50 @@ const Page = ({ index, startPage, children, numLayouts, windowUI }) => {
     return `${dx}px center`;
   };
 
+  const getBackgroundY = () => {
+    const aspect = 1920 / 1080;
+    const screenWidth = windowUI.contentW;
+    const screenHeight = windowUI.contentH;
+    const screenAspect = screenWidth / screenHeight;
+
+    if (screenAspect < aspect) {
+      return 0;
+    } else {
+      return 100;
+    }
+  };
+
+  const getBackgroundHeight = () => {
+    const aspect = 1920 / 1080;
+    const screenWidth = windowUI.contentW;
+    const screenHeight = windowUI.contentH;
+    const screenAspect = screenWidth / screenHeight;
+
+    if (screenAspect < aspect) {
+      return 500;
+    } else {
+      return 300;
+    }
+  };
+
   const shouldShowPageFlip = () => {
     if (index == 0) return false;
     if (index % 2 == 1 && index == numLayouts - 1) return false;
     return true;
   };
 
-  const pageNum = Math.floor(index / 2);
+  const currentLayoutNum = Math.floor(index / 2);
   let url = `url(https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/HomePage/0.jpg)`;
-  if (pageNum > 0) {
-    url = `url(https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/pages/Office_${
-      pageNum - 1
-    }/0.jpg)`;
+  if (currentLayoutNum == GUESTBOOK_PAGE) {
+    let slug = getLayoutSlug(currentLayoutNum);
+    url = `url(https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/pages/${slug}/2.jpg)`;
+  } else if (currentLayoutNum == GIFT_PAGE) {
+    let slug = getLayoutSlug(currentLayoutNum);
+
+    url = `url(https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/pages/guestbook/0.jpg)`;
+  } else if (currentLayoutNum > 0) {
+    let slug = getLayoutSlug(currentLayoutNum);
+    url = `url(https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/pages/${slug}/0.jpg)`;
   }
   return (
     <div
@@ -84,13 +121,6 @@ const Page = ({ index, startPage, children, numLayouts, windowUI }) => {
       }}
     >
       {children}
-
-      {/* {shouldShowPageFlip() && (
-        <>
-          <div className="page-corner"></div>
-          <div className="page-corner-up"></div>
-        </>
-      )} */}
     </div>
   );
 };

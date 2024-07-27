@@ -5,7 +5,7 @@ import { mouseToWorld } from "../../../../helpers/coordinates";
 export default class Folder extends Draggable {
   label: string;
   link: string;
-  img: p5Types.Image;
+  img: p5Types.Image | null;
   tw: number;
 
   constructor(
@@ -17,7 +17,7 @@ export default class Folder extends Draggable {
     h: number,
     label: string,
     link: string,
-    img: p5Types.Image,
+    img: p5Types.Image | null,
     GlobalConfig: any
   ) {
     super(id, x, y, w, h, p5, img, GlobalConfig);
@@ -38,6 +38,9 @@ export default class Folder extends Draggable {
     this.display();
   }
   display() {
+    if (!this.img) {
+      return;
+    }
     this.p5.push();
     this.p5.translate(this.x, this.y);
     this.p5.image(this.img, 0, 0, this.w, this.h);
@@ -54,7 +57,7 @@ export default class Folder extends Draggable {
 
     // back text
     this.p5.stroke(0);
-    this.p5.strokeWeight(1);
+    this.p5.strokeWeight(4);
     this.p5.fill(0);
     this.p5.text(this.label, 0, 0);
 

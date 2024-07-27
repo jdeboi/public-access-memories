@@ -36,7 +36,7 @@ export const getNewUser = (
     avatar: avatar,
     userName: userName,
     roomUrl: room,
-    roomPage: 0,
+    roomLayout: 0,
     comp: null,
     roomX: 0,
     roomY: 0,

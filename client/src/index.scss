@@ -10,6 +10,7 @@ body,
   overflow: hidden;
 }
 
+a.standardButton,
 button.standardButton {
   font-size: $fontSize-desktop-p2;
   padding: 10px;
@@ -44,6 +45,7 @@ button.standardButton {
   }
 }
 
+a.btn,
 button {
   font-size: $fontSize-desktop-p2;
 }
@@ -78,7 +80,6 @@ input.standardInputWhite {
 /* Track */
 ::-webkit-scrollbar-track {
   background: transparent;
-  
 }
 
 /* Handle */
@@ -105,19 +106,19 @@ h1 {
 h2 {
   font-size: $fontSize-h2;
   padding: 10px 0 10px 0;
-  line-height: $fontSize-h2+6;
+  line-height: $fontSize-h2 + 6;
 }
 
 h3 {
   font-size: $fontSize-h3;
   padding: 10px 0 10px 0;
-  line-height: $fontSize-h3+6;
+  line-height: $fontSize-h3 + 6;
 }
 
 h4 {
   font-size: $fontSize-h4;
   padding: 8px 0 8px 0;
-  line-height: $fontSize-h4+4;
+  line-height: $fontSize-h4 + 4;
 }
 
 p {
@@ -142,14 +143,15 @@ p.small {
 }
 
 .windows {
-  box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080;
+  box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a,
+    inset -2px -2px #dfdfdf, inset 2px 2px #808080;
   padding: 20px;
   // padding: 20px;
   background: #5a43cd6b;
-  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey,
+    inset 2px 2px #dfdfdf;
 }
 
 hr {
   border: 1px solid white;
 }
-

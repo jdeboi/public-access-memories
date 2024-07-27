@@ -67,6 +67,13 @@ import {
   isPageForwardCorner,
   pageIsTurning,
 } from "./functions/page";
+import {
+  getLayoutSlug,
+  GIFT_PAGE,
+  GUESTBOOK_PAGE,
+  PURSE_PAGE,
+} from "../../../data/Shows/HomeOffices/PageConstants";
+import { displayDancers } from "../Gallery1/functions/emojis";
 
 //////////////
 // EMOJIS
@@ -195,7 +202,7 @@ class GallerySketch extends React.Component<Props> {
 
     for (let i = 0; i < 4; i++) {
       giftShopImgs[i] = p5.loadImage(
-        `https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/pages/Office_15/${
+        `https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/pages/gift/${
           i + 1
         }.jpg`
       );
@@ -288,7 +295,7 @@ class GallerySketch extends React.Component<Props> {
 
     if (this.isGiftShop()) {
       this.displayGiftShop(p5);
-    } else {
+    } else if (!this.isGuestBook()) {
       this.displayRandomRects(p5);
       this.displayLayoutContent(p5);
     }
@@ -310,6 +317,10 @@ class GallerySketch extends React.Component<Props> {
     this.drawOverTarget(p5);
 
     this.drawOverUser(p5);
+
+    if (this.isPursePage()) {
+      displayDancers(dancers);
+    }
 
     // displayPageFlips(
     //   pageFlipImg,
@@ -355,8 +366,15 @@ class GallerySketch extends React.Component<Props> {
   displayGiftShop = (p5: p5Types) => {};
 
   isGiftShop() {
-    const { currentPage, numLayouts } = this.props;
-    return currentPage == (numLayouts - 1) * 2;
+    return this.getRoomLayoutNum() == GIFT_PAGE;
+  }
+
+  isPursePage() {
+    return this.getRoomLayoutNum() == PURSE_PAGE;
+  }
+
+  isGuestBook() {
+    return this.getRoomLayoutNum() == GUESTBOOK_PAGE;
   }
 
   displayRandomRects(p5: p5Types) {
@@ -393,8 +411,8 @@ class GallerySketch extends React.Component<Props> {
 
     frames.push(frame);
 
-    frameGraphics.erase(30);
-    frameGraphics.rect(0, 0, p5.width, p5.height);
+    //frameGraphics.erase(5);
+    //frameGraphics.rect(0, 0, p5.width, p5.height);
     frameGraphics.noErase();
     frame.displayImg(frameGraphics, officeImgs, this.getBackgroundSize(p5));
   }
@@ -407,8 +425,9 @@ class GallerySketch extends React.Component<Props> {
   }
 
   frameRandomSize(p5: p5Types) {
-    frameDim.w = p5.random(100, 500);
-    frameDim.h = p5.random(50, 500);
+    let factor = p5.map(p5.width, 1400, 300, 1, 0.2);
+    frameDim.w = p5.constrain(p5.random(100, 500) * factor, 40, 500);
+    frameDim.h = p5.constrain(p5.random(50, 500) * factor, 40, 500);
   }
 
   checkPageChange = (p5: p5Types) => {
@@ -428,7 +447,7 @@ class GallerySketch extends React.Component<Props> {
   };
 
   getRoomLayoutNum = () => {
-    return this.props.currentPage; //Math.floor(this.props.currentPage / 2);
+    return Math.floor(this.props.currentPage / 2);
   };
 
   loadOfficeImages = (p5: p5Types) => {
@@ -438,7 +457,7 @@ class GallerySketch extends React.Component<Props> {
       numLayouts: numPages,
       setOutside,
     } = this.props;
-    const currentRoom = (currentPage / 2) % numPages;
+    const currentLayoutNum = Math.floor(currentPage / 2) % numPages;
     const imagePromises = [];
 
     setOutside({ isOutside: true });
@@ -453,25 +472,21 @@ class GallerySketch extends React.Component<Props> {
     for (let i = 1; i < 5; i++) {
       let imgUrl = `https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/HomePage/${i}.jpg`;
 
-      if (currentRoom > 0) {
-        imgUrl = `https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/pages/Office_${
-          currentRoom - 1
-        }/${i}.jpg`;
+      if (currentLayoutNum > 0) {
+        let layoutSlug = getLayoutSlug(currentLayoutNum);
+        imgUrl = `https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/pages/${layoutSlug}/${i}.jpg`;
       }
       const imgPromise = new Promise((resolve, reject) => {
         p5.loadImage(
           imgUrl,
           (img) => {
-            // Resize the image
-            // const w = windowUI.contentW;
-            // const h = (w * img.height) / img.width;
-            // img.resize(w, h);
-
             officeImgs[i - 1] = img;
             resolve(img);
           },
           (err) => {
-            reject(err);
+            // Handle the error here without rejecting the promise
+            console.error(`Failed to load image: ${imgUrl}`, err);
+            resolve(null); // Resolve the promise with null or any default value
           }
         );
       });
@@ -497,7 +512,7 @@ class GallerySketch extends React.Component<Props> {
     p5.fill(0);
     p5.noStroke();
     p5.text(p5.round(p5.frameRate()), 20, 20);
-    p5.text("props.user.roomPage " + this.props.user.roomPage, 20, 40);
+    p5.text("props.user.roomPage " + this.props.user.roomLayout, 20, 40);
     p5.text("layout " + this.getRoomLayoutNum(), 20, 60);
     p5.text("props.currentPage " + this.props.currentPage, 20, 80);
   };

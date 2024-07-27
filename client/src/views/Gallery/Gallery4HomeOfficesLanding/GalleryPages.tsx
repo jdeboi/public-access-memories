@@ -56,10 +56,6 @@ const GalleryPages = (props: GProps) => {
           </Page>
         ))}
       </div>
-      {/* <div className="pageButtons">
-        <button id="backButton" onClick={back}></button>
-        <button id="nextButton" onClick={next}></button>
-      </div> */}
     </div>
   );
 };

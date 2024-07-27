@@ -10,7 +10,7 @@ export interface IUser {
   id: string;
   avatar: string;
   userName: string;
-  roomPage: number;
+  roomLayout: number;
   roomUrl: string;
   comp: number | null;
   roomX: number;

@@ -1,5 +1,9 @@
 import React from "react";
 import "./Pagination.css";
+import {
+  GIFT_PAGE,
+  GUESTBOOK_PAGE,
+} from "../../../../../data/Shows/HomeOffices/PageConstants";
 
 interface PaginationProps {
   currentLayoutNum: number;
@@ -28,6 +32,12 @@ const Pagination: React.FC<PaginationProps> = ({
     return layouts;
   };
 
+  const getNumberText = (layout: number) => {
+    if (layout - 1 == GIFT_PAGE) return "gift shop";
+    else if (layout - 1 == GUESTBOOK_PAGE) return "guestbook";
+    return layout;
+  };
+
   const paginationButtons = getPaginationButtons();
 
   return (
@@ -45,7 +55,7 @@ const Pagination: React.FC<PaginationProps> = ({
           }
           disabled
         >
-          {layout == 17 ? "gift shop" : layout}
+          {getNumberText(layout)}
         </button>
       ))}
       {currentLayoutNum < numLayouts - 2 && numLayouts > 4 && (

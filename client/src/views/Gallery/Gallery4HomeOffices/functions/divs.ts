@@ -12,10 +12,28 @@ import { numBarItems } from "../../../../data/Shows/HomeOffices/BotConfig";
 
 import p5Types from "p5";
 import { ShowConfig } from "../../../../data/CurrentShow/ShowConfig";
-import Clock from "../components/Clock/Clock";
 import BlindsDraggable from "../components/Blinds/Blinds";
 import ChairDraggable from "../components/Chair/Chair";
 import GifVidDraggable from "../components/GifVid/GifVid";
+import JulyFolder from "../components/Calendar/JulyFolder";
+import {
+  ALTAR_PAGE,
+  BLINDS_PAGE,
+  CAL_PAGE,
+  CHAIRS_PAGE,
+  CLOCK_PAGE,
+  RECYCLE_PAGE,
+  GIFT_PAGE,
+  HOME_PAGE,
+  POSTER_PAGE,
+  SMOKE_PAGE,
+  SNAKE_PAGE,
+  GUESTBOOK_PAGE,
+  FLAME_PAGE,
+  FRUIT_PAGE,
+} from "../../../../data/Shows/HomeOffices/PageConstants";
+import Candle from "../components/GifVid/Candle";
+import FruitFolder from "../components/Calendar/FruitFolder";
 
 export const addLightDivs = (
   divs: any,
@@ -24,8 +42,7 @@ export const addLightDivs = (
 ) => {
   divs.lights = [];
   const lightsP5 = [
-    { x: p5.width * 0.82, y: 200, isFlipped: false, room: 0 },
-    // { x: 120, y: 120, isFlipped: true, room: "8" },
+    { x: p5.width * 0.82, y: 200, isFlipped: false, room: HOME_PAGE },
   ];
   for (let i = 0; i < lightsP5.length; i++) {
     let light = new Light(p5, i, lightImgs, lightsP5, GlobalConfig);
@@ -58,7 +75,7 @@ export const addColumnDivs = (
     column.setNormal(
       100 * factor + i * dx * factor,
       200 * factor + i * dx * factor,
-      4 * 2
+      ALTAR_PAGE
     );
     divs.columns.push(column);
   }
@@ -77,7 +94,7 @@ export const addColumnDivs = (
     column.setNormal(
       1200 * factor - i * dx * factor,
       200 * factor + i * dx * factor,
-      4 * 2
+      ALTAR_PAGE
     );
     divs.columns.push(column);
   }
@@ -86,14 +103,15 @@ export const addColumnDivs = (
   addSnakeDiv(divs, p5);
   addSmokeDiv(divs, p5);
   addPopstarDiv(divs, p5);
+  addCandleDivs(divs, p5);
 };
 
 const addChairDiv = (divs: any, p5: p5Types) => {
   let chair = new ChairDraggable(0, 0, 0, 120, 120, p5);
-  chair.setNormal(p5.width * 0.1, p5.height * 0.5, 1 * 2);
+  chair.setNormal(p5.width * 0.1, p5.height * 0.5, CHAIRS_PAGE);
 
   let chair2 = new ChairDraggable(0, 0, 0, 120, 120, p5);
-  chair2.setNormal(0, 0, 1 * 2);
+  chair2.setNormal(0, 0, CHAIRS_PAGE);
   divs.columns.push(chair);
   divs.columns.push(chair2);
 };
@@ -102,10 +120,21 @@ const addClockDiv = (divs: any, p5: p5Types) => {
   const w = 180;
   let clock = new GifVidDraggable("clock", 0, 0, w, w, p5);
   let factor = p5.width / 1400;
-  let x = p5.width / 2 - w / 2;
-  let y = p5.height / 2 - w / 2;
-  clock.setNormal(x, y, 15 * 2);
+  let x = 100;
+  let y = 50;
+  clock.setNormal(x, y, CLOCK_PAGE);
   divs.columns.push(clock);
+};
+
+const addCandleDivs = (divs: any, p5: p5Types) => {
+  for (let i = 0; i < 3; i++) {
+    let candle = new Candle(i, 0, 0, 80, 80, p5);
+    let factor = p5.width / 1400;
+    let x = 100 + i * 100;
+    let y = p5.height * 0.65;
+    candle.setNormal(x, y, FLAME_PAGE);
+    divs.columns.push(candle);
+  }
 };
 
 const addPopstarDiv = (divs: any, p5: p5Types) => {
@@ -123,7 +152,7 @@ const addPopstarDiv = (divs: any, p5: p5Types) => {
 
   let x = 850 * factor;
   let y = 100 * factor;
-  popstar.setNormal(x, y, 9 * 2);
+  popstar.setNormal(x, y, POSTER_PAGE);
   divs.columns.push(popstar);
 };
 
@@ -132,7 +161,7 @@ const addSnakeDiv = (divs: any, p5: p5Types) => {
   let factor = p5.width / 1400;
   let x = 1080 * factor;
   let y = 150 * factor;
-  snake.setNormal(x, y, 7 * 2);
+  snake.setNormal(x, y, SNAKE_PAGE);
   divs.columns.push(snake);
 };
 
@@ -141,7 +170,7 @@ const addSmokeDiv = (divs: any, p5: p5Types) => {
   let factor = p5.width / 1400;
   let x = 60 * factor;
   let y = 150 * factor;
-  smoke.setNormal(x, y, 10 * 2);
+  smoke.setNormal(x, y, SMOKE_PAGE);
   divs.columns.push(smoke);
 };
 
@@ -151,7 +180,7 @@ export const addBlindsDiv = (
   p5: p5Types
 ) => {
   let blinds = new BlindsDraggable(0, 0, 0, 200, 200, blindsImg, p5);
-  blinds.setNormal(p5.width * 0.1, 100, 5 * 2);
+  blinds.setNormal(p5.width * 0.1, 100, BLINDS_PAGE);
   divs.columns.push(blinds);
 };
 
@@ -160,7 +189,7 @@ export const addTrashDivs = (divs: any, trashFiles: any, p5: p5Types) => {
 
   let labels = [
     // { x0: 300, y0: 300, room: 10 },
-    { x0: p5.width * 0.67, y0: p5.height * 0.65, room: 2 * 2 },
+    { x0: p5.width * 0.67, y0: p5.height * 0.65, room: RECYCLE_PAGE },
     // { x0: 300, y0: 300, room: 5 },
   ];
 
@@ -197,21 +226,28 @@ export const addFolderDivs = (
       y: 150,
       label: "statement",
       link: "https://publicaccessmemories.com/statement",
-      room: 0,
+      room: HOME_PAGE,
     },
     {
       x: 150,
       y: 80,
       label: "about",
       link: "https://publicaccessmemories.com/about",
-      room: 0,
+      room: HOME_PAGE,
     },
     {
       x: 190,
       y: 220,
       label: "@public.access.memories",
       link: "https://www.instagram.com/public.access.memories/",
-      room: 0,
+      room: HOME_PAGE,
+    },
+    {
+      x: p5.width * 0.75,
+      y: p5.height / 2,
+      label: "edit guestbook",
+      link: "https://docs.google.com/document/d/1TNl6L3Nw-W-I444Lv-4l1Ko9tqbiRESJ3kfo3CY0zVo/edit?usp=sharing",
+      room: GUESTBOOK_PAGE,
     },
   ];
 
@@ -227,8 +263,8 @@ export const addFolderDivs = (
     const folder = new Folder(
       p5,
       i,
-      x * factor,
-      y * factor,
+      0,
+      0,
       sz,
       sz,
       label,
@@ -236,8 +272,62 @@ export const addFolderDivs = (
       i === 2 ? instaImg : txtFile,
       GlobalConfig
     );
-    folder.setNormal(x * factor, y * factor, room);
+    if (i === 3) {
+      folder.setNormal(x, y, room);
+    } else {
+      folder.setNormal(x * factor, y * factor, room);
+    }
     divs.folders.push(folder);
+  }
+
+  addJulyDivs(divs, p5);
+  addFruitDivs(divs, p5);
+};
+
+const addJulyDivs = (divs: any, p5: p5Types) => {
+  let labels = [
+    {
+      x: 50,
+      y: 50,
+      label: "JulY",
+      link: "https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=MzBzajVnbTVzZmdtaWhvcmU4c3NjdDVsdGggcHVibGljYWNjZXNzbWVtb3JpZXNAbQ&tmsrc=publicaccessmemories%40gmail.com",
+      room: CAL_PAGE,
+    },
+  ];
+  const sz = p5.constrain(p5.map(p5.width, 0, 1400, 0, 250), 80, 300);
+  const factor = sz / 80;
+  const { x, y, label, link, room } = labels[0];
+  const calendar = new JulyFolder(p5, 0, 0, 0, sz, sz, label, link);
+  calendar.setNormal(x, y, room);
+  divs.folders.push(calendar);
+};
+
+const addFruitDivs = (divs: any, p5: p5Types) => {
+  const link =
+    "https://www.google.com/search?q=fruit+plate&oq=fruit+plate&gs_lcrp=EgZjaHJvbWUyCQgAEEUYORiABDIMCAEQIxgnGIAEGIoFMgwIAhAAGAoYsQMYgAQyBwgDEAAYgAQyBwgEEAAYgAQyDwgFEAAYChiDARixAxiABDIHCAYQABiABDIHCAcQABiABDIHCAgQABiABDIHCAkQABiABKgCALACAA&sourceid=chrome&ie=UTF-8";
+  const room = FRUIT_PAGE;
+  let locs = [
+    {
+      w: 100,
+      h: 100,
+    },
+    {
+      w: 140,
+      h: 100,
+    },
+    {
+      w: 140,
+      h: 100,
+    },
+  ];
+
+  for (let i = 0; i < 6; i++) {
+    const { w, h } = locs[i % locs.length];
+    let x = p5.random(0, p5.width - 200);
+    let y = p5.random(0, p5.height - 200);
+    const fruit = new FruitFolder(p5, i % locs.length, 0, 0, w, h, "", link);
+    fruit.setNormal(x, y, room);
+    divs.folders.push(fruit);
   }
 };
 
@@ -248,27 +338,27 @@ export const addGiftShopDivs = (
 ) => {
   let labels = [
     {
-      x: 50,
-      y: 150,
+      x: p5.width * 0.1,
+      y: p5.height * 0.2,
       label: "posterA",
       link: "https://www.thesculpted.com/shop/p/9sbcy0tktpt6fdfimavw86uc9nta8d",
       room: 16,
     },
     {
-      x: 150,
-      y: 80,
+      x: p5.width * 0.5,
+      y: p5.height * 0.1,
       label: "posterB",
       link: "https://www.thesculpted.com/shop/p/9sbcy0tktpt6fdfimavw86uc9nta8d-hl3zg",
     },
     {
-      x: 180,
-      y: 230,
+      x: p5.width * 0.75,
+      y: p5.height * 0.6,
       label: "posterC",
       link: "https://www.thesculpted.com/shop/p/9sbcy0tktpt6fdfimavw86uc9nta8d-hz2k8",
     },
     {
-      x: 180,
-      y: 430,
+      x: p5.width * 0.3,
+      y: p5.height * 0.4,
       label: "frame",
       link: "https://www.thesculpted.com/shop/p/aluminum-frame",
     },
@@ -282,8 +372,8 @@ export const addGiftShopDivs = (
     const folder = new Folder(
       p5,
       i,
-      x,
-      y,
+      0,
+      0,
       w,
       h,
       label,
@@ -291,14 +381,14 @@ export const addGiftShopDivs = (
       imgs[i],
       GlobalConfig
     );
-    folder.setNormal(x, y, 16 * 2);
+    folder.setNormal(x, y, GIFT_PAGE);
     divs.folders.push(folder);
   }
 };
 
 //////////////////////////////////////////////////
 export const addBarDivs = (divs: any, lightImg: p5Types.Image, p5: p5Types) => {
-  const barTypes = ["wine", "cocktail", "DJ", "cheese"];
+  const barTypes = ["wine", "cocktail", "cheese"];
   divs.bars = [];
   let i = 0;
   for (const barType of barTypes) {
@@ -388,6 +478,9 @@ export const displayColumnDivs = (
     if (col.roomToDisplay == room) {
       col.display(userX, userY);
       col.displayToolBarNormal();
+    }
+    if (col.hasVideo) {
+      col.setVideoPlay(room);
     }
   }
 };

@@ -8,6 +8,7 @@ export default class Clock extends ShadowDraggable {
   private radius: number;
   private clockDiameter: number;
   private clockVid: p5Types.MediaElement;
+  public isPlaying: boolean;
 
   constructor(x: number, y: number, radius: number, p5: p5Types) {
     super(0, x, y, radius * 2, radius * 2, p5, null, GlobalConfig);
@@ -18,12 +19,14 @@ export default class Clock extends ShadowDraggable {
     this.cx = x + radius;
     this.cy = y + radius;
 
+    this.isPlaying = false;
+
     this.clockVid = p5.createVideo(
       "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/gifs/clock.webm"
     );
     this.clockVid.size(250, 250);
     this.clockVid.volume(0);
-    this.clockVid.loop();
+    this.hasVideo = true;
     this.clockVid.hide();
   }
 
@@ -81,5 +84,33 @@ export default class Clock extends ShadowDraggable {
     this.p5.image(this.clockVid, 0, 0, this.w, this.h);
     this.p5.pop();
     this.displayFrame();
+  }
+
+  getIsPlaying() {
+    let video = this.clockVid.elt;
+    let isPlaying =
+      video.currentTime > 0 &&
+      !video.paused &&
+      !video.ended &&
+      video.readyState > video.HAVE_CURRENT_DATA;
+
+    return isPlaying;
+  }
+
+  setVideoPlay(userRoom: number) {
+    if (userRoom == this.roomToDisplay) {
+      if (!this.getIsPlaying()) {
+        this.isPlaying = true;
+        this.clockVid.play();
+        this.clockVid.loop();
+        // console.log("playing video");
+      }
+    } else {
+      if (this.getIsPlaying()) {
+        this.isPlaying = false;
+        this.clockVid.pause();
+        // console.log("pausing video");
+      }
+    }
   }
 }

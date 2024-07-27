@@ -14,7 +14,7 @@ const initialState: IUser = {
   avatar: "😀",
   userName: "",
   roomUrl: "/",
-  roomPage: 0,
+  roomLayout: 0,
   comp: null,
   roomX: 0,
   roomY: 0,
@@ -54,8 +54,11 @@ export const userSlice = createSlice({
       // socket.emit("joinRoom", nextRoom);
       // socket.emit("setUser", state);
     },
-    setUserRoomPage: (state, action: PayloadAction<{ roomPage: number }>) => {
-      state.roomPage = action.payload.roomPage;
+    setUserRoomPage: (
+      state,
+      action: PayloadAction<{ roomLayoutNum: number }>
+    ) => {
+      state.roomLayout = action.payload.roomLayoutNum;
     },
     setUser: (state, action: PayloadAction<IUser>) => {
       state.avatar = action.payload.avatar;
@@ -299,7 +302,7 @@ export const userSlice = createSlice({
 });
 
 function userNearBarNormal(user: IUser, location: IBar) {
-  if (user.roomPage != location.roomPage) {
+  if (user.roomLayout != location.roomPage) {
     return false;
   }
 

@@ -14,6 +14,8 @@ export default class Draggable {
   offsetX = 0;
   offsetY = 0;
   toolbarH = 25;
+   hasVideo: boolean;
+
 
   startDrag = { x: 0, y: 0 };
   startDragCoords = { x: 0, y: 0 };
@@ -80,6 +82,8 @@ export default class Draggable {
     this.maxButton = new Button(xp + sp * 2, yp, p5);
 
     this.content = content;
+
+    this.hasVideo = false;
 
     this.GlobalConfig = GlobalConfig;
     // this.mask;

@@ -217,6 +217,7 @@ class GallerySketch extends React.Component<Props> {
   };
 
   initEmojis = (p5: p5Types) => {
+    const danceFloor = {w: p5.width, h:p5.height, x: 0, y: 0};
     dancers[0] = new Dancer(p5, dancerImgs[0], 0, 160, false, danceFloor);
     dancers[1] = new Dancer(p5, dancerImgs[1], 100, 380, false, danceFloor);
     dancers[2] = new Dancer(p5, dancerImgs[2], 200, 150, true, danceFloor);

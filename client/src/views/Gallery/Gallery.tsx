@@ -45,6 +45,7 @@ import { doneLoadingApp, startComposition } from "../../store/window";
 
 import { getBar } from "../../data/CurrentShow/BotConfig";
 import { p5ToUserCoords } from "../../helpers/coordinates";
+import { getLayoutSlug } from "../../data/Shows/HomeOffices/PageConstants";
 
 interface IGallery {
   id: number;
@@ -258,11 +259,9 @@ const Gallery = (props: IGallery) => {
     const pamURL =
       "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/sounds/";
 
-    if (user.roomPage == 0) {
-      return pamURL + "0.mp4";
-    }
-    let page = Math.floor(user.roomPage / 2) - 1;
-    return pamURL + page + ".mp4";
+    let layout = user.roomLayout;
+    let slug = getLayoutSlug(layout);
+    return pamURL + slug + ".mp3";
   };
 
   const getGalleryAudio = () => {
@@ -278,6 +277,7 @@ const Gallery = (props: IGallery) => {
           controls={false}
           loop
           ref={audioPlayer}
+          onError={(e) => console.error("Audio playback error:", e)}
         />
       );
     }

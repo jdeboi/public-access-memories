@@ -36,7 +36,7 @@ export function drawUser(user: IUser, p5: p5Types, imgs: p5Types.Image[]) {
 export function checkUserClicked(user: IUser, users: IUsers, p5: p5Types) {
   for (const otherUser of users) {
     if (otherUser.roomUrl === "/") {
-      if (otherUser.roomPage != user.roomPage) continue;
+      if (otherUser.roomLayout != user.roomLayout) continue;
       // let mouse = mouseToWorld(userEase, p5, GlobalConfig);
       let mouse = { x: p5.mouseX, y: p5.mouseY };
 
@@ -68,7 +68,7 @@ export function drawUsers(
   for (const otherUser of users) {
     if (
       isOnGalleryPage(otherUser) &&
-      otherUser.roomPage === user.roomPage &&
+      otherUser.roomLayout === user.roomLayout &&
       otherUser.userName
     ) {
       //let coord = domCoordsToP5World(otherUser.x, otherUser.y, GlobalConfig);

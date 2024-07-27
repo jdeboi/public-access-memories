@@ -63,21 +63,48 @@ export default function Popups() {
     if (videoRef.current) {
       videoRef.current.load();
       if (isShowingPopup) {
-        if (videoRef.current.paused) {
+        if (!getIsPlaying()) {
           videoRef.current.play();
         }
       } else {
-        videoRef.current.pause();
+        if (getIsPlaying()) {
+          videoRef.current.pause();
+        }
       }
     }
   }, [currentImg, isShowingPopup]);
+
+  const getIsPlaying = () => {
+    let video = videoRef.current;
+    if (!video) {
+      return false;
+    }
+    let isPlaying =
+      video.currentTime > 0 &&
+      !video.paused &&
+      !video.ended &&
+      video.readyState > video.HAVE_CURRENT_DATA;
+
+    return isPlaying;
+  };
+
+  const handleHide = () => {
+    setIsShowingPopup(false);
+    const videoElement = videoRef.current;
+    if (videoElement && getIsPlaying()) {
+      videoElement.pause();
+      videoElement.currentTime = 0; // Reset the video to the start
+    }
+  };
+
+  if (!isShowingPopup) return null;
 
   return (
     <Frame
       title=""
       isHidden={!isShowingPopup}
       unbounded={false}
-      onHide={() => setIsShowingPopup(false)}
+      onHide={handleHide}
       windowStyle={{ background: "black" }}
       content={
         <div className="Popups">

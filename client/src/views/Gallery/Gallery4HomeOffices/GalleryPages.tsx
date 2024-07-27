@@ -5,6 +5,9 @@ import { IUser, IUsers, IWindowUI } from "../../../interfaces";
 // store
 import { useSelector } from "react-redux";
 import { selectWindow } from "../../../store/store";
+import { GUESTBOOK_PAGE } from "../../../data/Shows/HomeOffices/PageConstants";
+import GoogleDocEmbed from "./components/GoogleDocEmbed/GoogleDocEmbed";
+// import GoogleDocLink from "./components/GoogleDocEmbed/GoogleDocLink";
 
 interface GProps {
   users: IUsers;
@@ -18,6 +21,7 @@ const GalleryPages = (props: GProps) => {
   const pages = Array.from({ length: props.numLayouts * 2 }, (_, i) => i);
   const windowUI = useSelector(selectWindow);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const currentLayoutNum = Math.floor(props.currentPage / 2);
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
@@ -75,7 +79,17 @@ const GalleryPages = (props: GProps) => {
     return classN;
   };
 
-  const layoutNum = Math.floor(props.currentPage / 2);
+  const getGoogle = (page: number) => {
+    let pageLayout = Math.floor(page / 2);
+    if (pageLayout != GUESTBOOK_PAGE) {
+      return null;
+    }
+    if (currentLayoutNum != GUESTBOOK_PAGE) {
+      return null;
+    }
+    if (page % 2 == 0) return <GoogleDocEmbed />;
+    return null;
+  };
 
   return (
     <div
@@ -91,7 +105,7 @@ const GalleryPages = (props: GProps) => {
           width: windowUI.contentW,
           height: windowUI.contentH,
           backgroundImage: `url(https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/BackgroundTextures/${
-            layoutNum % 5
+            currentLayoutNum % 5
           }.jpg)`,
           //backgroundImage: `url(https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/pages/Office_${layoutNum}/0.jpg)`,
         }}
@@ -110,12 +124,12 @@ const GalleryPages = (props: GProps) => {
         ))}
       </div>
       <div className="pageButtons">
-        {layoutNum !== 0 && (
+        {currentLayoutNum !== 0 && (
           <button id="backButton" className={getLeftButtonClass()}>
             &lt;
           </button>
         )}
-        {layoutNum !== props.numLayouts - 1 && (
+        {currentLayoutNum !== props.numLayouts - 1 && (
           <button id="nextButton" className={getRightButtonClass()}>
             &gt;
           </button>

@@ -203,6 +203,7 @@ body,
   overflow: hidden;
 }
 
+a.standardButton,
 button.standardButton {
   font-size: 12pt;
   padding: 10px;
@@ -214,19 +215,23 @@ button.standardButton {
   color: white;
   transition: all 0.2s ease-in-out;
 }
+a.standardButton:hover,
 button.standardButton:hover {
   transform: scale(1.05);
 }
+a.standardButton.primary,
 button.standardButton.primary {
   background: black;
   color: white;
 }
+a.standardButton.secondary,
 button.standardButton.secondary {
   background-color: white;
   color: black;
   border: 2px solid black;
 }
 
+a.btn,
 button {
   font-size: 12pt;
 }
