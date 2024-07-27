@@ -310,8 +310,8 @@ const addChatBubbbleDivs = (divs: any, p5: p5Types) => {
   const room = COFFEE_PAGE;
   let locs = [
     {
-      x: p5.width * 0.2,
-      y: p5.height * 0.4,
+      x: p5.width * 0.3,
+      y: p5.height * 0.3,
     },
     {
       x: p5.width * 0.5,

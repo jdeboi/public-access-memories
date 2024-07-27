@@ -152,7 +152,7 @@ const GalleryGreber = (props: ComponentProps) => {
           </div>
         }
       />
-      {/* <Popups /> */}
+      <Popups />
       {/* <Calendar /> */}
       {layoutNum == GUESTBOOK_PAGE && <GoogleDocEmbed />}
 
