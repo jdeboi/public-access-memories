@@ -129,8 +129,8 @@ const GalleryGreber = (props: ComponentProps) => {
             {props.showStart && (
               <video
                 ref={videoRef}
-                src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/HomePage/hello.mp4"
-                poster="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/HomePage/welcome.png" // Add the poster attribute here
+                src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/HomePage/hello.webm"
+                poster="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/HomePage/welcome.jpg" // Add the poster attribute here
                 className={`video ${isPlaying ? "playing" : ""}`}
               />
             )}
@@ -153,9 +153,7 @@ const GalleryGreber = (props: ComponentProps) => {
         }
       />
       <Popups />
-      {/* <Calendar /> */}
       {layoutNum == GUESTBOOK_PAGE && <GoogleDocEmbed />}
-
       <Pagination currentLayoutNum={layoutNum + 1} numLayouts={NUM_LAYOUTS} />
     </>
   );

@@ -151,6 +151,13 @@ export const Statement = () => {
               space.
             </p>
             <br />
+            <p>
+              Written by{" "}
+              <a href="https://villagedisco.substack.com/" target="_blank">
+                Emily Farranto
+              </a>
+            </p>
+            <br />
             <br />
             <h3>About the Artist</h3>
             <p>

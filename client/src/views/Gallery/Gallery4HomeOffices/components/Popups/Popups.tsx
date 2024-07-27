@@ -19,6 +19,7 @@ export default function Popups() {
     w: 300,
     h: 300,
   });
+  const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -63,11 +64,16 @@ export default function Popups() {
     if (videoRef.current) {
       videoRef.current.load();
       if (isShowingPopup) {
-        if (!getIsPlaying()) {
+        if (!getIsPlaying() && !isPlaying) {
+          console.log("play popup video");
+          setIsPlaying(true);
           videoRef.current.play();
         }
       } else {
-        if (getIsPlaying()) {
+        if (getIsPlaying() && isPlaying) {
+          console.log("pause popup video");
+
+          setIsPlaying(false);
           videoRef.current.pause();
         }
       }
@@ -91,7 +97,10 @@ export default function Popups() {
   const handleHide = () => {
     setIsShowingPopup(false);
     const videoElement = videoRef.current;
-    if (videoElement && getIsPlaying()) {
+    if (videoElement && getIsPlaying() && isPlaying) {
+      console.log("pause HANDLE popup video");
+
+      setIsPlaying(false);
       videoElement.pause();
       videoElement.currentTime = 0; // Reset the video to the start
     }

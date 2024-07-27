@@ -6,7 +6,7 @@ let yMin = 0;
 let yMax = 9 * 5;
 
 export const GlobalConfig: IGlobalConfig = {
-  scaler: 50,
+  scaler: 70,
   x: -2 * 5,
   y: -4 * 5,
   worldW: xMax - xMin,

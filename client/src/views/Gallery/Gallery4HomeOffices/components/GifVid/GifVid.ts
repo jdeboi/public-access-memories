@@ -39,7 +39,14 @@ export default class GifVidDraggable extends ShadowDraggable {
     this.hasVideo = true;
   }
 
+  setVolumeOn() {
+    if (this.GifVid) this.GifVid.volume(1);
+  }
+
   displayContent(userX: number, userY: number) {
+    if (this.minimized || this.closed) {
+      return;
+    }
     this.p5.push();
 
     if (this.name == "popstar") {
@@ -63,7 +70,7 @@ export default class GifVidDraggable extends ShadowDraggable {
 
   getIsPlaying() {
     if (this.GifVid == null) {
-      return;
+      return false;
     }
     let video = this.GifVid.elt;
     let isPlaying =
@@ -79,8 +86,16 @@ export default class GifVidDraggable extends ShadowDraggable {
     if (this.GifVid == null) {
       return;
     }
+
     if (userRoom == this.roomToDisplay) {
-      if (!this.getIsPlaying() && !this.isPlaying) {
+      if (this.minimized || this.closed) {
+        if (this.getIsPlaying() && this.isPlaying) {
+          this.isPlaying = false;
+          this.GifVid.pause();
+
+          // console.log("pausing video");
+        }
+      } else if (!this.getIsPlaying() && !this.isPlaying) {
         this.isPlaying = true;
         this.GifVid.play();
         this.GifVid.loop();

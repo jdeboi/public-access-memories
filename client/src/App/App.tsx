@@ -271,7 +271,7 @@ function App() {
             path="/"
             element={
               <Gallery
-                id={5}
+                id={4}
                 users={users}
                 isClosed={isClosed}
                 showWelcome={showWelcome}
@@ -354,7 +354,7 @@ function App() {
 
       {/* check if user hasn't logged in and on a basic page */}
       {getSignedInComponents()}
-      {getRoomDecal()}
+      {/* {getRoomDecal()} */}
       {/* <AudioChat user={user} />
             <MicrophoneBarBottom /> */}
     </div>

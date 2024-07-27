@@ -107,6 +107,7 @@ export const addColumnDivs = (
   addSmokeDiv(divs, p5);
   addPopstarDiv(divs, p5);
   addCandleDivs(divs, p5);
+  addHostDivs(divs, p5);
 };
 
 const addChairDiv = (divs: any, p5: p5Types) => {
@@ -127,6 +128,18 @@ const addClockDiv = (divs: any, p5: p5Types) => {
   let y = 50;
   clock.setNormal(x, y, CLOCK_PAGE);
   divs.columns.push(clock);
+};
+
+const addHostDivs = (divs: any, p5: p5Types) => {
+  let guest = new GifVidDraggable("guestbook_sm", 0, 0, 200, 200, p5);
+  guest.setNormal(p5.width * 0.8, 100, GUESTBOOK_PAGE);
+  guest.setVolumeOn();
+  divs.columns.push(guest);
+
+  let gift = new GifVidDraggable("gift_sm", 0, 0, 200, 200, p5);
+  gift.setNormal(p5.width * 0.8, 100, GIFT_PAGE);
+  gift.setVolumeOn();
+  divs.columns.push(gift);
 };
 
 const addCandleDivs = (divs: any, p5: p5Types) => {
