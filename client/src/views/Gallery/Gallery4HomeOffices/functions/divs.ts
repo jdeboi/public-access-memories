@@ -31,9 +31,12 @@ import {
   GUESTBOOK_PAGE,
   FLAME_PAGE,
   FRUIT_PAGE,
+  REDSOFA_PAGE,
+  COFFEE_PAGE,
 } from "../../../../data/Shows/HomeOffices/PageConstants";
 import Candle from "../components/GifVid/Candle";
 import FruitFolder from "../components/Calendar/FruitFolder";
+import ChatBubble from "../components/ChatBubble/ChatBubble";
 
 export const addLightDivs = (
   divs: any,
@@ -282,6 +285,7 @@ export const addFolderDivs = (
 
   addJulyDivs(divs, p5);
   addFruitDivs(divs, p5);
+  addChatBubbbleDivs(divs, p5);
 };
 
 const addJulyDivs = (divs: any, p5: p5Types) => {
@@ -302,6 +306,33 @@ const addJulyDivs = (divs: any, p5: p5Types) => {
   divs.folders.push(calendar);
 };
 
+const addChatBubbbleDivs = (divs: any, p5: p5Types) => {
+  const room = COFFEE_PAGE;
+  let locs = [
+    {
+      x: p5.width * 0.2,
+      y: p5.height * 0.4,
+    },
+    {
+      x: p5.width * 0.5,
+      y: p5.height * 0.14,
+    },
+    {
+      x: p5.width * 0.8,
+      y: p5.height * 0.3,
+    },
+  ];
+
+  for (let i = 0; i < 3; i++) {
+    const { x, y } = locs[i % locs.length];
+    const w = 140;
+    const h = 50;
+    const bubble = new ChatBubble(p5, i % locs.length, 0, 0, w, h);
+    bubble.setNormal(x, y, room);
+    divs.folders.push(bubble);
+  }
+};
+
 const addFruitDivs = (divs: any, p5: p5Types) => {
   const link =
     "https://www.google.com/search?q=fruit+plate&oq=fruit+plate&gs_lcrp=EgZjaHJvbWUyCQgAEEUYORiABDIMCAEQIxgnGIAEGIoFMgwIAhAAGAoYsQMYgAQyBwgDEAAYgAQyBwgEEAAYgAQyDwgFEAAYChiDARixAxiABDIHCAYQABiABDIHCAcQABiABDIHCAgQABiABDIHCAkQABiABKgCALACAA&sourceid=chrome&ie=UTF-8";
@@ -309,7 +340,7 @@ const addFruitDivs = (divs: any, p5: p5Types) => {
   let locs = [
     {
       w: 100,
-      h: 100,
+      h: 80,
     },
     {
       w: 140,
@@ -328,6 +359,11 @@ const addFruitDivs = (divs: any, p5: p5Types) => {
     const fruit = new FruitFolder(p5, i % locs.length, 0, 0, w, h, "", link);
     fruit.setNormal(x, y, room);
     divs.folders.push(fruit);
+    if (i < 4) {
+      const fruit2 = new FruitFolder(p5, i % 3, 0, 0, w, h, "", link);
+      fruit2.setNormal(x, y, REDSOFA_PAGE);
+      divs.folders.push(fruit2);
+    }
   }
 };
 
