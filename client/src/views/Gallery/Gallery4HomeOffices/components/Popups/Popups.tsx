@@ -7,8 +7,8 @@ import Frame from "../../../../../components/Frame/Frame";
 export default function Popups() {
   const NUM_ADS = 15;
   const POPUP_LASTS = 8000;
-  const POPUP_MIN_INTERVAL = 30000;
-  const POPUP_MAX_INTERVAL = 40000;
+  const POPUP_MIN_INTERVAL = 10000;
+  const POPUP_MAX_INTERVAL = 30000;
 
   const windowUI = useSelector(selectWindow);
   const [currentImg, setCurrentImg] = useState(0);

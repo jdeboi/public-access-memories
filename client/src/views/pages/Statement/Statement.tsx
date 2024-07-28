@@ -150,6 +150,86 @@ export const Statement = () => {
               to connect and belong. PAM provides a welcoming, well-lighted
               space.
             </p>
+            <h3>
+              The Call From Inside the Home Office: Dave Greber’s HomeOffices at
+              Public Access Memories
+            </h3>
+            <p>
+              The 2020 pandemic lockdown left its mark on our collective psyche
+              and changed the shape of certain corners of our lives. While many
+              were suddenly out of work, others were forced to merge work and
+              home lives, blurring temporal and spatial boundaries, turning
+              tables into desks and small rooms into offices. When the lockdown
+              ended, many jobs continued on a work-from- home or hybrid
+              structure. Even those whose work lives were not directly upended
+              by the pandemic, the employer assumption that workers are
+              available outside work hours has been normalized. There is no
+              consensus about whether the shift toward a work-from-home economy
+              has done more harm than good for individuals and families. Dave
+              Greber’s exhibition of interactive digital collages, HomeOffices,
+              suggests there is something grotesque about this grafting of work
+              and home, grotesque but laced with culture-deprecating humor.
+            </p>
+
+            <p>
+              Arriving at the online gallery, Public Access Memories, we find
+              ourselves looking at the desktop of a home computer whose
+              wallpaper is a picture of a desk on which sits a worn, softcover
+              book titled Home Offices. Visitors select an emoji avatar. Other
+              emojis may be floating about; these are other gallery-goers. As we
+              mouse around the screen, images–a daisy, a pen, a yellow, rubber
+              glove–appear and disappear under the cursor. We enter the
+              exhibition at the bottom right corner and move through each
+              image/installation this way like turning pages of a virtual book.
+            </p>
+
+            <p>
+              The works in HomeOffices are based on images from a 1984 look book
+              of office furniture. The originating interiors dense and airless,
+              dated and bizarre. Making the strange stranger, the artist added
+              objects–some human or animal–to the scenes using AI. The image
+              viewers encounter when they click into each space, is the final
+              iteration of the collage. They can explore the images, which
+              flicker and change revealing random-looking objects, which are the
+              AI suggestions the artist dismissed. If you mouse over the globe
+              on the desk, it becomes a basketball, then a cluster of balloons.
+            </p>
+
+            <p>
+              This haunted history of rejected versions is one of many ways the
+              work is deeply layered. Avatars proceed though virtual rooms that
+              can be understand as collages or spatially as virtual
+              installations. An avatar, representing a whole person, moves
+              through the space suggesting they are installations, but a binding
+              seam passes vertically though some images, implying the rooms are
+              two dimensional and we are looking in a book. Occasional objects
+              appear to be placed on top of a page further confusing our
+              viewpoint. Meanwhile, viewers access the exhibition from
+              computers, most likely in their home space, possibly at a desk.
+              This is the reality parfait the work creates, layering the viewer
+              into its gaudy claustrophobia. In the unlikely event that a viewer
+              feels underwhelmed, each installation-collage hosts an AI
+              generated soundtrack related to the objects in the room and
+              occasional pop-ups vie for our attention.
+            </p>
+
+            <p>
+              The pandemic hastened our adoption of communication technologies
+              and drove our work lives into all hours of the day in some
+              Philadelphia Experiment-type, mutated collapse of time and space.
+              Humans hardly have the time to ask essential questions like, what
+              are we working for? And, Can we mute the discomfort by
+              redecorating our offices? The playfulness and humor in
+              HomeOffices, consistent with the artist’s larger body of work, is
+              funny-dark. The nightmare-like deformities, vagueness, and
+              misinterpretations of AI not only generate appropriate imagery,
+              but provide an apt metaphor of the zeitgeist. Is artificial
+              intelligence cool or scary? Will it help or hurt us? Art is the
+              sometimes-uncomfortable mirror of how we are living and what we
+              value. Is working from home working for us? Greber’s HomeOffices
+              does not answer these questions, but it suggests the call is
+              coming from inside the house.
+            </p>
             <br />
             <p>
               Written by{" "}
