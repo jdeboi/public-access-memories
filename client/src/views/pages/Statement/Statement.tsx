@@ -257,6 +257,40 @@ export const Statement = () => {
 
             <br />
             <br />
+            <h3>Credits:</h3>
+            <div>
+              Programmer: Jenna deBoisblanc{" "}
+              <a href="https://www.instagram.com/jdeboi/" target="_blank">
+                @jdeboi
+              </a>
+            </div>
+            <div>
+              Essay: Emily Farranto{" "}
+              <a
+                href="https://www.instagram.com/thevillagedisco/"
+                target="_blank"
+              >
+                @thevillagedisco
+              </a>{" "}
+            </div>
+            <div>
+              Technician: Nathaniel Britton{" "}
+              <a href="https://www.instagram.com/natejbritto/" target="_blank">
+                @natejbritto
+              </a>{" "}
+            </div>
+            <div>
+              Printer: Paper Machine{" "}
+              <a
+                href="https://www.instagram.com/antenna.works/"
+                target="_blank"
+              >
+                @antenna.works
+              </a>{" "}
+            </div>
+
+            <br />
+            <br />
             <p>
               <img
                 className="logo"
