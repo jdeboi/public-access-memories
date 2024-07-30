@@ -1,6 +1,7 @@
 import p5Types from "p5";
+import { GlobalConfig } from "../../../../data/Shows/HomeOffices/GlobalConfig";
 
-export const CORNER_DIM = 70;
+export const CORNER_DIM = GlobalConfig.scaler + 10;
 
 export const isPageForwardCorner = (
   nextStep: { x: number; y: number },

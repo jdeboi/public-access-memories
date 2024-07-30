@@ -436,15 +436,13 @@ class GallerySketch extends React.Component<Props> {
     const { currentPage, userMove, user } = this.props;
     if (previousPage === currentPage) return;
 
-    this.stopWalking();
-    pageTurnTime = p5.millis();
-
     this.loadOfficeImages(p5);
 
+    const dS = GlobalConfig.scaler + 30;
     if (currentPage > previousPage) {
-      this.setUserPosition(p5.width - 100, p5.height - 100);
+      this.setUserPosition(p5.width - dS, p5.height - dS);
     } else if (currentPage < previousPage) {
-      this.setUserPosition(100, p5.height - 100);
+      this.setUserPosition(100, p5.height - dS);
     }
 
     previousPage = currentPage;
@@ -597,21 +595,20 @@ class GallerySketch extends React.Component<Props> {
     movement.isWalking = false;
   };
 
+  changePage = (dir: number, p5: p5Types) => {
+    if (p5.millis() - lastPageChange > 1000) {
+      this.stopWalking();
+      this.props.changePage(dir);
+      lastPageChange = p5.millis();
+    }
+  };
+
   checkPageCorners = (userStep: { x: number; y: number }, p5: p5Types) => {
     if (isPageForwardCorner(userStep, p5)) {
-      if (p5.millis() - lastPageChange > 1000) {
-        this.props.changePage(1);
-        lastPageChange = p5.millis();
-        return true;
-      }
+      this.changePage(1, p5);
     } else if (isPageBackwardCorner(userStep, p5)) {
-      if (p5.millis() - lastPageChange > 1000) {
-        this.props.changePage(-1);
-        lastPageChange = p5.millis();
-        return true;
-      }
+      this.changePage(-1, p5);
     }
-    return false;
   };
 
   // checkPageCorners = (userStep: { x: number; y: number }, p5: p5Types) => {
@@ -707,10 +704,7 @@ class GallerySketch extends React.Component<Props> {
     const { user } = this.props;
     if (movement.isWalking) {
       // if it's in the corner, stop moving
-      if (this.checkPageCorners(movement.stepTo, p5)) {
-        movement.isWalking = false;
-        return;
-      }
+
       if (closeToDestination(movement.stepTo, movement.destination)) {
         this.setUserPositionImmediate(
           movement.destination.x,
