@@ -125,12 +125,12 @@ const GalleryPages = (props: GProps) => {
       </div>
       <div className="pageButtons">
         {currentLayoutNum !== 0 && (
-          <button id="backButton" className={getLeftButtonClass()}>
+          <button onClick={back} id="backButton" className={getLeftButtonClass()}>
             &lt;
           </button>
         )}
         {currentLayoutNum !== props.numLayouts - 1 && (
-          <button id="nextButton" className={getRightButtonClass()}>
+          <button onClick={next} id="nextButton" className={getRightButtonClass()}>
             &gt;
           </button>
         )}

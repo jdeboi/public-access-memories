@@ -89,6 +89,8 @@ let font: p5Types.Font;
 let previousPage = 0;
 let pageFlipImg: p5Types.Image;
 
+let lastPageChange = 0;
+
 let officeImgs: p5Types.Image[] = [];
 let giftShopImgs: p5Types.Image[] = [];
 let currentImgIndex = 1;
@@ -434,9 +436,11 @@ class GallerySketch extends React.Component<Props> {
     const { currentPage, userMove, user } = this.props;
     if (previousPage === currentPage) return;
 
-    pageTurnTime = p5.millis();
-    this.loadOfficeImages(p5);
     this.stopWalking();
+    pageTurnTime = p5.millis();
+
+    this.loadOfficeImages(p5);
+
     if (currentPage > previousPage) {
       this.setUserPosition(p5.width - 100, p5.height - 100);
     } else if (currentPage < previousPage) {
@@ -595,10 +599,19 @@ class GallerySketch extends React.Component<Props> {
 
   checkPageCorners = (userStep: { x: number; y: number }, p5: p5Types) => {
     if (isPageForwardCorner(userStep, p5)) {
-      this.props.changePage(1);
+      if (p5.millis() - lastPageChange > 1000) {
+        this.props.changePage(1);
+        lastPageChange = p5.millis();
+        return true;
+      }
     } else if (isPageBackwardCorner(userStep, p5)) {
-      this.props.changePage(-1);
+      if (p5.millis() - lastPageChange > 1000) {
+        this.props.changePage(-1);
+        lastPageChange = p5.millis();
+        return true;
+      }
     }
+    return false;
   };
 
   // checkPageCorners = (userStep: { x: number; y: number }, p5: p5Types) => {
@@ -693,6 +706,11 @@ class GallerySketch extends React.Component<Props> {
     const t = new Date().getTime() - movement.destination.time.getTime();
     const { user } = this.props;
     if (movement.isWalking) {
+      // if it's in the corner, stop moving
+      if (this.checkPageCorners(movement.stepTo, p5)) {
+        movement.isWalking = false;
+        return;
+      }
       if (closeToDestination(movement.stepTo, movement.destination)) {
         this.setUserPositionImmediate(
           movement.destination.x,
