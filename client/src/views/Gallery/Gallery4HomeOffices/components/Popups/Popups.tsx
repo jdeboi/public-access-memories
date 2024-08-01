@@ -5,7 +5,7 @@ import { selectWindow } from "../../../../../store/store";
 import Frame from "../../../../../components/Frame/Frame";
 
 export default function Popups() {
-  const NUM_ADS = 15;
+  const NUM_ADS = 14;
   const POPUP_LASTS = 8000;
   const POPUP_MIN_INTERVAL = 20000;
   const POPUP_MAX_INTERVAL = 30000;
@@ -58,31 +58,48 @@ export default function Popups() {
 
     if (videoElement) {
       const handleLoadedData = () => {
+        console.log("Video loaded:", videoElement.src);
+
         if (isShowingPopup) {
-          videoElement.play();
+          videoElement.play().catch((error) => {
+            console.error("Error playing video:", error);
+          });
           videoElement.volume = 0.3;
         }
       };
 
       const handlePlay = () => {
+        console.log("Video play triggered");
+
         if (!isShowingPopup) {
           videoElement.pause();
         }
       };
 
+      const handleError = (e: any) => {
+        console.error("Video error:", e);
+      };
+
       videoElement.addEventListener("loadeddata", handleLoadedData);
       videoElement.addEventListener("play", handlePlay);
+      videoElement.addEventListener("error", handleError);
 
       return () => {
         videoElement.removeEventListener("loadeddata", handleLoadedData);
         videoElement.removeEventListener("play", handlePlay);
+        videoElement.removeEventListener("error", handleError);
       };
     }
   }, [isShowingPopup]);
 
   useEffect(() => {
     const videoElement = videoRef.current;
+
     if (videoElement) {
+      console.log(
+        "Loading video:",
+        `https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/ads/${currentImg}.webm`
+      );
       videoElement.load();
     }
   }, [currentImg]);
