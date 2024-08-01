@@ -152,7 +152,7 @@ const GalleryGreber = (props: ComponentProps) => {
           </div>
         }
       />
-      <Popups />
+      {/* <Popups /> */}
       {layoutNum == GUESTBOOK_PAGE && <GoogleDocEmbed />}
       <Pagination currentLayoutNum={layoutNum + 1} numLayouts={NUM_LAYOUTS} />
     </>
