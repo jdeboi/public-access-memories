@@ -18,22 +18,11 @@ import { GlobalConfig } from "../../../data/Shows/HomeOffices/GlobalConfig";
 
 import { filterGalleryUsers } from "../../../helpers/helpers";
 
-import {
-  roomBoundary,
-  roomDoorCrossing,
-  wallBoundary,
-} from "../Gallery1/functions/crossing";
 import { roundToMult2 } from "../Gallery1/functions/round";
 
-import {
-  reachedDestination,
-  getNextStep,
-  showMouseLoc,
-  showUserEllipses,
-  showDestination,
-  mouseDidMove,
-  closeToDestination,
-} from "../Gallery1/functions/destination";
+import { showMouseLoc, mouseDidMove } from "../Gallery1/functions/destination";
+
+import { reachedDestination, getNextStep } from "./functions/destination";
 
 import { checkUserClicked, drawUser, drawUsers } from "./functions/users";
 
@@ -62,7 +51,6 @@ import {
   danceFloor,
 } from "../../../data/Shows/HomeOffices/BotConfig";
 import {
-  displayPageFlips,
   isPageBackwardCorner,
   isPageForwardCorner,
   pageIsTurning,
@@ -74,6 +62,7 @@ import {
   PURSE_PAGE,
 } from "../../../data/Shows/HomeOffices/PageConstants";
 import { displayDancers } from "../Gallery1/functions/emojis";
+import { truncateSync } from "fs";
 
 //////////////
 // EMOJIS
@@ -685,8 +674,10 @@ class GallerySketch extends React.Component<Props> {
       let steps = GlobalConfig.scaler - 20;
       const dx = p5.mouseX > user.x ? steps : -steps;
       const dy = p5.mouseY > user.y ? steps : -steps;
-      const mx = roundToMult2(p5.mouseX + dx, GlobalConfig.scaler);
-      const my = roundToMult2(p5.mouseY + dy, GlobalConfig.scaler);
+      // const mx = roundToMult2(p5.mouseX + dx, GlobalConfig.scaler);
+      // const my = roundToMult2(p5.mouseY + dy, GlobalConfig.scaler);
+      const mx = p5.mouseX;
+      const my = p5.mouseY;
 
       if (!(mx === 0 && my === 0)) {
         const x = mx; // + user.x;
@@ -705,7 +696,7 @@ class GallerySketch extends React.Component<Props> {
     if (movement.isWalking) {
       // if it's in the corner, stop moving
 
-      if (closeToDestination(movement.stepTo, movement.destination)) {
+      if (reachedDestination(movement.stepTo, movement.destination)) {
         this.setUserPositionImmediate(
           movement.destination.x,
           movement.destination.y
@@ -713,7 +704,7 @@ class GallerySketch extends React.Component<Props> {
         movement.isWalking = false;
         this.checkPageCorners(movement.destination, p5);
       } else if (t > 150) {
-        let step = getNextStep(movement.stepTo, movement.destination);
+        let step = getNextStep(movement.stepTo, movement.destination, true);
         this.userTakeStep(p5, step[0], step[1]);
         movement.destination.time = new Date();
       }
