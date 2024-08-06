@@ -9,7 +9,7 @@ export default function Popups() {
   const POPUP_LASTS = 28000;
   const POPUP_MIN_INTERVAL = 2000;
   const POPUP_MAX_INTERVAL = 3000;
-git 
+
   const windowUI = useSelector(selectWindow);
   const [currentImg, setCurrentImg] = useState(0);
   const [isShowingPopup, setIsShowingPopup] = useState(false);
