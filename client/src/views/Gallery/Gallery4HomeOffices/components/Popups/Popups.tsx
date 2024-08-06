@@ -6,7 +6,7 @@ import Frame from "../../../../../components/Frame/Frame";
 
 export default function Popups() {
   const NUM_ADS = 14;
-  const POPUP_LASTS = 8000;
+  const POPUP_LASTS = 18000;
   const POPUP_MIN_INTERVAL = 20000;
   const POPUP_MAX_INTERVAL = 30000;
 
