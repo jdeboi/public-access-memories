@@ -170,10 +170,10 @@ $borderLineW: 0.14em;
     /* making relative b/c video content from react-player was set to absolute and was bubbling right on top of title bar */
     // border-radius: $borderRad;
 
-    video {
-      border-bottom-left-radius: calc(#{$borderRad}-2);
-      border-bottom-right-radius: calc(#{$borderRad}-2);
-    }
+    // video {
+    //   border-bottom-left-radius: calc(#{$borderRad}-2);
+    //   border-bottom-right-radius: calc(#{$borderRad}-2);
+    // }
   }
 }
 

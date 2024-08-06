@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import ReactPlayer from "react-player";
 import "./Popups.css";
 import { useSelector } from "react-redux";
 import { selectWindow } from "../../../../../store/store";
@@ -19,7 +20,6 @@ export default function Popups() {
     w: 300,
     h: 300,
   });
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     if (!windowUI.compositionStarted) {
@@ -53,63 +53,8 @@ export default function Popups() {
     return () => clearTimeout(initialTimeout);
   }, [windowUI.compositionStarted]);
 
-  useEffect(() => {
-    const videoElement = videoRef.current;
-
-    if (videoElement) {
-      const handleLoadedData = () => {
-        console.log("Video loaded:", videoElement.src);
-        if (isShowingPopup) {
-          videoElement.play().catch((error) => {
-            console.error("Error playing video:", error);
-          });
-          videoElement.volume = 0.3;
-        }
-      };
-
-      const handlePlay = () => {
-        console.log("Video play triggered");
-        if (!isShowingPopup) {
-          videoElement.pause();
-        }
-      };
-
-      const handleError = (e: any) => {
-        console.error("Video error:", e);
-      };
-
-      videoElement.addEventListener("loadeddata", handleLoadedData);
-      videoElement.addEventListener("play", handlePlay);
-      videoElement.addEventListener("error", handleError);
-
-      return () => {
-        videoElement.removeEventListener("loadeddata", handleLoadedData);
-        videoElement.removeEventListener("play", handlePlay);
-        videoElement.removeEventListener("error", handleError);
-      };
-    }
-  }, [isShowingPopup]);
-
-  useEffect(() => {
-    const videoElement = videoRef.current;
-
-    if (videoElement) {
-      console.log(
-        "Loading video:",
-        `https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/ads/${currentImg}.webm`
-      );
-      videoElement.src = `https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/ads/${currentImg}.webm`;
-      videoElement.load();
-    }
-  }, [currentImg]);
-
   const handleHide = () => {
     setIsShowingPopup(false);
-    const videoElement = videoRef.current;
-    if (videoElement) {
-      videoElement.pause();
-      videoElement.currentTime = 0;
-    }
   };
 
   const getRandomTime = (
@@ -131,7 +76,14 @@ export default function Popups() {
       content={
         <div className="Popups">
           <div className="adVideoContainer">
-            <video ref={videoRef} className="adVideo" loop />
+            <ReactPlayer
+              url={`https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/ads/${currentImg}.webm`}
+              playing={isShowingPopup}
+              loop={true}
+              volume={0.3}
+              width="100%"
+              height="100%"
+            />
           </div>
         </div>
       }
