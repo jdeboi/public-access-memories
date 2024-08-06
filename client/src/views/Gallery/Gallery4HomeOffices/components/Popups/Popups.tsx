@@ -6,10 +6,10 @@ import Frame from "../../../../../components/Frame/Frame";
 
 export default function Popups() {
   const NUM_ADS = 14;
-  const POPUP_LASTS = 18000;
+  const POPUP_LASTS = 28000;
   const POPUP_MIN_INTERVAL = 2000;
   const POPUP_MAX_INTERVAL = 3000;
-
+git 
   const windowUI = useSelector(selectWindow);
   const [currentImg, setCurrentImg] = useState(0);
   const [isShowingPopup, setIsShowingPopup] = useState(false);
@@ -59,7 +59,6 @@ export default function Popups() {
     if (videoElement) {
       const handleLoadedData = () => {
         console.log("Video loaded:", videoElement.src);
-
         if (isShowingPopup) {
           videoElement.play().catch((error) => {
             console.error("Error playing video:", error);
@@ -70,7 +69,6 @@ export default function Popups() {
 
       const handlePlay = () => {
         console.log("Video play triggered");
-
         if (!isShowingPopup) {
           videoElement.pause();
         }
@@ -100,6 +98,7 @@ export default function Popups() {
         "Loading video:",
         `https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/ads/${currentImg}.webm`
       );
+      videoElement.src = `https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/ads/${currentImg}.webm`;
       videoElement.load();
     }
   }, [currentImg]);
@@ -132,12 +131,7 @@ export default function Popups() {
       content={
         <div className="Popups">
           <div className="adVideoContainer">
-            <video
-              ref={videoRef}
-              className="adVideo"
-              src={`https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/ads/${currentImg}.webm`}
-              loop
-            />
+            <video ref={videoRef} className="adVideo" loop />
           </div>
         </div>
       }
