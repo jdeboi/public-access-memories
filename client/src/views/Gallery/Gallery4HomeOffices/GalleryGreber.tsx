@@ -49,6 +49,7 @@ const GalleryGreber = (props: ComponentProps) => {
       setIsPlaying(true);
     }
   };
+  
   const onSetPageChange = (dir: number) => {
     dir > 0 ? nextPage() : backPage();
   };

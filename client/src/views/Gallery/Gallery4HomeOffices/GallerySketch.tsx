@@ -313,12 +313,6 @@ class GallerySketch extends React.Component<Props> {
       displayDancers(dancers);
     }
 
-    // displayPageFlips(
-    //   pageFlipImg,
-    //   this.props.currentPage,
-    //   this.props.numLayouts,
-    //   p5
-    // );
 
     //////////////
     // updating
@@ -350,6 +344,7 @@ class GallerySketch extends React.Component<Props> {
         break;
     }
   };
+
   display0 = (p5: p5Types) => {};
   display1 = (p5: p5Types) => {};
   display2 = (p5: p5Types) => {};
@@ -599,29 +594,6 @@ class GallerySketch extends React.Component<Props> {
       this.changePage(-1, p5);
     }
   };
-
-  // checkPageCorners = (userStep: { x: number; y: number }, p5: p5Types) => {
-  //   let changedPage = false;
-  //   if (isPageForwardCorner(userStep, p5)) {
-  //     changedPage = true;
-
-  //     if (!justChangedPage) {
-  //       this.props.changePage(1);
-  //       justChangedPage = true;
-  //     }
-  //   } else if (isPageBackwardCorner(userStep, p5)) {
-  //     changedPage = true;
-
-  //     if (!justChangedPage) {
-  //       this.props.changePage(-1);
-  //       justChangedPage = true;
-  //     }
-  //   }
-
-  //   if (!changedPage) {
-  //     justChangedPage = false;
-  //   }
-  // };
 
   setUserPosition = (x: number, y: number) => {
     this.stopWalking();
