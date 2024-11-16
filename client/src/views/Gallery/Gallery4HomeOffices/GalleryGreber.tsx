@@ -49,7 +49,7 @@ const GalleryGreber = (props: ComponentProps) => {
       setIsPlaying(true);
     }
   };
-  
+
   const onSetPageChange = (dir: number) => {
     dir > 0 ? nextPage() : backPage();
   };
@@ -153,7 +153,7 @@ const GalleryGreber = (props: ComponentProps) => {
           </div>
         }
       />
-      <Popups />
+      {/* <Popups /> */}
       {layoutNum == GUESTBOOK_PAGE && <GoogleDocEmbed />}
       <Pagination currentLayoutNum={layoutNum + 1} numLayouts={NUM_LAYOUTS} />
     </>
