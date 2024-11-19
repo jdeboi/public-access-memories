@@ -41,17 +41,18 @@ const WelcomeClosed = (props: IWelcome) => {
     if (props.step === 0) return <DetailsStart />;
     else if (props.step === 1) return <DetailsClosed />;
     // return <DetailsTour />
-    else if (props.step == 2)
-      return (
-        <SignIn
-          hasAvatar={props.hasAvatar}
-          hasLoadedCookies={props.hasLoadedCookies}
-          nextStep={props.nextStep}
-          isFrame={false}
-          ref={signInRef}
-        />
-      );
-    else return <WelcomeVideo nextStep={props.closeWelcome} />;
+    // else if (props.step == 2)
+    return (
+      <SignIn
+        hasAvatar={props.hasAvatar}
+        hasLoadedCookies={props.hasLoadedCookies}
+        // nextStep={props.nextStep}
+        nextStep={props.closeWelcome}
+        isFrame={false}
+        ref={signInRef}
+      />
+    );
+    // else return <WelcomeVideo nextStep={props.closeWelcome} />;
   };
 
   const getButtons = (): JSX.Element => {
@@ -71,7 +72,7 @@ const WelcomeClosed = (props: IWelcome) => {
                 if (signInRef.current) signInRef.current.clicked();
               }}
             >
-              next
+              submit
             </button>
           ) : null}
         </div>

@@ -20,6 +20,7 @@ export const FieldsOfView = () => {
       "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/fields_of_view/screenshots/" +
       imgNames[i];
   }
+  
 
   useEffect(() => {
     // Create a copy of the original array

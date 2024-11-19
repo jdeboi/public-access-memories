@@ -24,6 +24,8 @@ import PastExhibitions from "../views/pages/PastExhibitions/PastExhibitions";
 import HomeBody from "../views/pages/PastExhibitions/HomeBody/HomeBody";
 import AsIRecall from "../views/pages/PastExhibitions/AsIRecall/AsIRecall";
 import FieldsOfView from "../views/pages/PastExhibitions/FieldsOfView/FieldsOfView";
+import HomeOffices from "../views/pages/PastExhibitions/HomeOffices/HomeOffices";
+
 ///////////////////////////////
 // COMPONENTS
 // import ReactAudioPlayer from 'react-audio-player';
@@ -271,7 +273,7 @@ function App() {
             path="/"
             element={
               <Gallery
-                id={4}
+                id={1}
                 users={users}
                 isClosed={isClosed}
                 showWelcome={showWelcome}
@@ -342,7 +344,10 @@ function App() {
             path="/pastexhibitions/fieldsofview"
             element={<FieldsOfView />}
           />
-
+          <Route
+            path="/pastexhibitions/homeoffices"
+            element={<HomeOffices />}
+          />
           <Route
             path="/editusers"
             element={<EditUsers user={user} users={users} />}
