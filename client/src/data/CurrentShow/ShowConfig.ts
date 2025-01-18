@@ -4,10 +4,10 @@ export const ShowConfig = {
   underConstruction: true,
   isMenuOn: false,
   galleryTitle: "public access memories",
-  showTitle: "TBD",
+  showTitle: "digital residency",
   showDescription: "TBD",
   showOpens: { date: "March 2025", time: "6PM CST" },
   showCloses: "",
-  link: "homeoffices",
-  awsLink: "homeoffices",
+  link: "residency",
+  awsLink: "residency",
 };
