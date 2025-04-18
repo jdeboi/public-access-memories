@@ -113,7 +113,8 @@ export function drawUsers(userEase, users, font1, p5, imgs, GlobalConfig) {
           drawMic(p5, imgs[5]);
       }
 
-      drawUserFoods(p5, otherUser, imgs);
+      if (GlobalConfig.isResidency) drawUserFoods(p5, otherUser, imgs, true);
+      else drawUserFoods(p5, otherUser, imgs);
 
       p5.pop();
     }

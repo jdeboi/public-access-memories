@@ -29,6 +29,7 @@ import { getEmojis } from "../../helpers/emojis";
 import { IUser } from "../../interfaces";
 
 import Cookies from "js-cookie";
+import { reservedArtists } from "../../data/CurrentShow/RoomConfig";
 
 interface SignInProps {
   isFrame: boolean;
@@ -102,7 +103,6 @@ const SignIn = forwardRef<SignInSubmitType, SignInProps>((props, ref) => {
       setShouldClose(false);
       setReadyToClose(false);
       dispatch(hideSignIn());
-      console.log("hiding");
     }
   }, [shouldClose, readyToClose]);
 
@@ -123,16 +123,67 @@ const SignIn = forwardRef<SignInSubmitType, SignInProps>((props, ref) => {
     handleSubmit();
   };
 
-  const userRegister = (response: { isUser: boolean; user: IUser }) => {
+  const userRegister = async (response: {
+    isUser: boolean;
+    isArtist: boolean;
+    user: IUser;
+  }) => {
     if (response.isUser) {
       setShouldClose(false);
-      alert("username already exists. Please enter a new username.");
+      alert("Username already exists. Please enter a new username.");
+      return;
+    }
+
+    if (response.isArtist) {
+      const password = prompt("Enter password to register as artist:");
+      if (!password) {
+        alert("Password is required.");
+        setShouldClose(false);
+        return;
+      }
+
+      try {
+        const res = await fetch("/api/check-artist-password", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ password }),
+        });
+
+        const data = await res.json();
+
+        if (!data.success) {
+          alert("Incorrect password.");
+          setShouldClose(false);
+          return;
+        }
+
+        // Password is correct, continue
+        submitSuccess(response.user);
+      } catch (err) {
+        console.error("Error verifying password:", err);
+        alert("Something went wrong. Please try again.");
+        setShouldClose(false);
+      }
     } else {
       submitSuccess(response.user);
     }
   };
 
+  const setArtistAvatar = (user: IUser) => {
+    const reservedArtistsObjs = reservedArtists;
+    const artistAvatar =
+      reservedArtistsObjs[user.userName as keyof typeof reservedArtistsObjs];
+    if (artistAvatar) {
+      user.avatar = artistAvatar;
+      setLocalAvatar(artistAvatar);
+    }
+  };
+
   const submitSuccess = (user: IUser) => {
+    setArtistAvatar(user);
+
     dispatch(setUserLogin({ userName: user.userName, avatar: user.avatar }));
     // socket.emit("setUser", user);
     // TODO - are we handling in app.tsx?

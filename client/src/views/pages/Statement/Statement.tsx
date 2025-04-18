@@ -48,7 +48,7 @@ export const Statement = () => {
             <h3>Statement</h3>
             <div className="twoCol">
               <div>
-                <h4>A Well-Lighted Place: Public Access Memories (PAM)</h4>
+                <h4>A Well-Lighted Place: public access memories (PAM)</h4>
                 <div className="quote">
                   “…Each night I am reluctant to close up because there may be
                   some one who needs the café.”
@@ -152,7 +152,7 @@ export const Statement = () => {
             </p>
             <h3>
               The Call From Inside the Home Office: Dave Greber’s HomeOffices at
-              Public Access Memories
+              public access memories
             </h3>
             <p>
               The 2020 pandemic lockdown left its mark on our collective psyche
@@ -172,7 +172,7 @@ export const Statement = () => {
             </p>
 
             <p>
-              Arriving at the online gallery, Public Access Memories, we find
+              Arriving at the online gallery, public access memories, we find
               ourselves looking at the desktop of a home computer whose
               wallpaper is a picture of a desk on which sits a worn, softcover
               book titled Home Offices. Visitors select an emoji avatar. Other

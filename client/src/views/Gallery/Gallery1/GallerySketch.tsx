@@ -205,10 +205,10 @@ class GallerySketch extends React.Component<Props> {
     dancerImgs[1] = p5.loadImage(url + "dancers/dancer1.png");
     dancerImgs[2] = p5.loadImage(url + "dancers/dancer2.png");
     baby = p5.loadImage(url + "swing/baby.png");
-    barEmojis[0] = p5.loadImage(url + "emojis/bread.png");
-    barEmojis[1] = p5.loadImage(url + "emojis/cheese.png");
-    barEmojis[2] = p5.loadImage(url + "emojis/wine.png");
-    barEmojis[3] = p5.loadImage(url + "emojis/cocktail.png");
+    barEmojis[0] = p5.loadImage(url + "emojis/cookies.png");
+    barEmojis[1] = p5.loadImage(url + "emojis/popcorn.png");
+    barEmojis[2] = p5.loadImage(url + "emojis/coffee.png");
+    barEmojis[3] = p5.loadImage(url + "emojis/beer.png");
     barEmojis[4] = p5.loadImage(url + "emojis/chat.png");
     barEmojis[5] = p5.loadImage(url + "emojis/mic.png");
 

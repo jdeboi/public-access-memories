@@ -16,7 +16,7 @@ export const OpenCallOpen = () => {
       <br />
       <br />
       <p>
-        Public Access Memories is excited to offer an online residency program
+        public access memories is excited to offer an online residency program
         from March - June, 2025. Net artists are invited to apply for dedicated
         time and virtual space to develop works in progress, participate in
         studio visits and critiques, and optionally present an artist talk.

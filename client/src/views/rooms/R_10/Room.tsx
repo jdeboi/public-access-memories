@@ -1,27 +1,20 @@
-import './Andy.css';
-import { useSelector } from 'react-redux';
-import { selectWindow } from '../../../store/store';
+import React from "react";
 
 const Room = () => {
-    const windowUI = useSelector(selectWindow);
-    const classN = (windowUI.orientation == "portrait" && (windowUI.isMobile || windowUI.hasFooter)) ? "mobileBerries" : "";
-
-    return (
-        <div className="Room Andy Sketch">
-            {/* <iframe
-                src={"https://andyzuliani.com/transparens2"}
-                width={"100%"}
-                height={"100%"}
-            /> */}
-            <div className={classN}>
-                <div id="berries1" className="berries"></div>
-                <div id="berries2" className="berries"></div>
-                <div id="berries3" className="berries"></div>
-                <div id="berries4" className="berries"></div>
-                <div id="berries5" className="berries"></div>
-            </div>
-        </div>
-    )
+  return (
+    <div
+      className="Room Sketch"
+      style={{ position: "relative", width: "100%", height: "100%" }}
+    >
+      <iframe
+        src="https://editor.p5js.org/jdeboi/full/tYhuUGAUz"
+        width="100%"
+        height="calc(100% + 50px)"
+        style={{ marginTop: "-50px", border: "none" }}
+        title="Babylon.js Scene"
+      ></iframe>
+    </div>
+  );
 };
 
 export default Room;

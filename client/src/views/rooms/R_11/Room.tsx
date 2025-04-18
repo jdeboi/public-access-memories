@@ -1,29 +1,20 @@
-import './Ziyi.css'
-import { useSelector } from 'react-redux';
-import { selectWindow } from '../../../store/store';
+import React from "react";
 
 const Room = () => {
-    const windowUI = useSelector(selectWindow);
-    //(windowUI.isMobile || windowUI.hasFooter)
-    return (
-        <div className="Room Ziyi Sketch">
-            { (windowUI.isMobile || windowUI.hasFooter) ?
-                <div className="backgroundCover">
-                    <div className="LoadingPage">
-                        <div className="title" style={{color: "white"}}>
-                            please visit this room on desktop 
-                        </div>
-                    </div>
-                </div>
-                :
-                <iframe
-                    src={"https://www.ziyistudio.art/fpa"}
-                    width={"100%"}
-                    height={"100%"}
-                />
-            }
-        </div>
-    )
+  return (
+    <div
+      className="Room Sketch"
+      style={{ position: "relative", width: "100%", height: "100%" }}
+    >
+      <iframe
+        src="https://editor.p5js.org/jdeboi/full/tYhuUGAUz"
+        width="100%"
+        height="calc(100% + 50px)"
+        style={{ marginTop: "-50px", border: "none" }}
+        title="Babylon.js Scene"
+      ></iframe>
+    </div>
+  );
 };
 
 export default Room;

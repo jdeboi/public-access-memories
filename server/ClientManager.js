@@ -19,7 +19,7 @@ setInterval(() => {
     const c = Array.from(clients.values());
     io.emit("usersUpdate", c);
   } catch (error) {
-    console.log("nope", error);
+    console.log("error updating users", error);
   }
 }, USER_UPDATE_INTERVAL);
 
@@ -27,10 +27,10 @@ module.exports = function (client) {
   io.sockets.emit("userJoined", client.id);
 
   client.on("registerUser", (user, callback) => {
-    // console.log("REGISTER USER", user)
     if (isUser(user.userName)) {
-      // console.log("isuser...")
-      callback({ isUser: true, user: user });
+      callback({ isUser: true, isArtist: false, user: user });
+    } else if (isArtist(user.userName)) {
+      callback({ isUser: false, isArtist: true, user: user });
     } else {
       user.id = client.id;
       clients.set(client.id, user);
@@ -51,6 +51,7 @@ module.exports = function (client) {
   });
 
   client.on("setBot", (bot) => {
+    console.log(bot);
     clients.set(bot.id, bot);
   });
 
@@ -124,8 +125,11 @@ function isUser(userName) {
     "everyone",
     "host",
     "room",
-    // "jenna",
     "winebot",
+    "coffeebot",
+    "cheesebot",
+    "beerbot",
+    "cocktailbot",
     "hostbot",
     "helpbot",
     "dj",
@@ -143,6 +147,17 @@ function isUser(userName) {
     return false;
   } catch (error) {
     console.log("issues");
+    return false;
+  }
+}
+
+function isArtist(userName) {
+  const reservedArtists = ["moneymachine69", "aem", "seliciayxy"];
+
+  try {
+    return reservedArtists.includes(userName.toLowerCase());
+  } catch (error) {
+    console.log("issues with artist check");
     return false;
   }
 }

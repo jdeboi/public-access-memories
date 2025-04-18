@@ -2,28 +2,40 @@ import { bars as barsHB } from "../Shows/HomeBody/BotConfig";
 import { bars as barsAIR } from "../Shows/AsIRecall/BotConfig";
 import { bars as barsFOV } from "../Shows/FieldsOfView/BotConfig";
 import { bars as barsDave } from "../Shows/HomeOffices/BotConfig";
+import { bars as barsResidency } from "../Shows/Residency/BotConfig";
+
 import { barTenders as barTendersHB } from "../Shows/HomeBody/BotConfig";
 import { barTenders as barTendersAIR } from "../Shows/AsIRecall/BotConfig";
 import { barTenders as barTendersFOV } from "../Shows/FieldsOfView/BotConfig";
 import { barTenders as barTendersDave } from "../Shows/HomeOffices/BotConfig";
+import { barTenders as barTendersResidency } from "../Shows/Residency/BotConfig";
 import { IBar, IUser } from "../../interfaces";
+import {
+  ASIRECALL_ID,
+  FIELDSOFVIEW_ID,
+  HOMEBODY_ID,
+  HOMEOFFICES_ID,
+  RESIDENCY_ID,
+} from "./GalleryConfig";
 
 export {
   danceFloor,
   numBarItems,
   barTenders,
   bars,
-} from "../Shows/HomeOffices/BotConfig";
+} from "../Shows/Residency/BotConfig";
 
 export const getGalleryBars = (galleryId: number) => {
   switch (galleryId) {
-    case 1:
+    case RESIDENCY_ID:
+      return barsResidency;
+    case HOMEBODY_ID:
       return barsHB;
-    case 2:
+    case ASIRECALL_ID:
       return barsAIR;
-    case 3:
+    case FIELDSOFVIEW_ID:
       return barsFOV;
-    case 4:
+    case HOMEOFFICES_ID:
       return barsDave;
     default:
       return barsHB;
@@ -32,13 +44,15 @@ export const getGalleryBars = (galleryId: number) => {
 
 export const getGalleryBarTenders = (galleryId: number) => {
   switch (galleryId) {
-    case 1:
+    case RESIDENCY_ID:
+      return barTendersResidency;
+    case HOMEBODY_ID:
       return barTendersHB;
-    case 2:
+    case ASIRECALL_ID:
       return barTendersAIR;
-    case 3:
+    case FIELDSOFVIEW_ID:
       return barTendersFOV;
-    case 4:
+    case HOMEOFFICES_ID:
       return barTendersDave;
     default:
       return barTendersHB;

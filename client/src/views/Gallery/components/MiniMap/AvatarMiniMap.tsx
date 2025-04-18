@@ -47,6 +47,9 @@ const AvatarMiniMap = (props: {
   else if (user.userName === "DJ") avatar = "🎧";
   else if (user.userName === "cheeseBot") avatar = "🧀";
   else if (user.userName === "cocktailBot") avatar = "🍸";
+  else if (user.userName === "coffeeBot") avatar = "☕";
+  else if (user.userName === "beerBot") avatar = "🍺";
+  else if (user.userName === "snackBot") avatar = "🍪";
   else if (!props.isUser) avatar = user.avatar;
 
   // const hidden = (user.roomUrl !== "/");

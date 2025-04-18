@@ -1,1 +1,6 @@
-export { roomConfig, artists, rooms } from "../Shows/HomeOffices/RoomConfig";
+export {
+  roomConfig,
+  artists,
+  rooms,
+  reservedArtists,
+} from "../Shows/Residency/RoomConfig";

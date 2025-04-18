@@ -34,7 +34,7 @@ export const HomeOffices = () => {
         <br />
         <br />
 
-        <h2>Essay: A Well-Lighted Place: Public Access Memories (PAM)</h2>
+        <h2>Essay: A Well-Lighted Place: public access memories (PAM)</h2>
         <div>
           Written by{" "}
           <a href="https://villagedisco.substack.com/" target="_blank">
@@ -63,7 +63,7 @@ export const HomeOffices = () => {
             <p>
               Artwork that engages with the internet potentially loses something
               significant when it is contextualized in traditional art spaces.
-              Artist Jenna deBoisblanc created Public Access Memories (PAM) to
+              Artist Jenna deBoisblanc created public access memories (PAM) to
               provide a place where digital art and internet art can be seen as
               intended, mostly from home, while enjoying contextualizing and
               community-building aspects of a physical gallery. PAM, like the
@@ -125,7 +125,7 @@ export const HomeOffices = () => {
         </p>
         <h3>
           The Call From Inside the Home Office: Dave Greber’s HomeOffices at
-          Public Access Memories
+          public access memories
         </h3>
         <p>
           The 2020 pandemic lockdown left its mark on our collective psyche and
@@ -145,7 +145,7 @@ export const HomeOffices = () => {
         </p>
 
         <p>
-          Arriving at the online gallery, Public Access Memories, we find
+          Arriving at the online gallery, public access memories, we find
           ourselves looking at the desktop of a home computer whose wallpaper is
           a picture of a desk on which sits a worn, softcover book titled Home
           Offices. Visitors select an emoji avatar. Other emojis may be floating

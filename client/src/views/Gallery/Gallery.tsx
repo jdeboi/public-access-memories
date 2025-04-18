@@ -3,16 +3,13 @@ import ReactAudioPlayer from "react-audio-player";
 import "./Gallery.css";
 import { useNavigate } from "react-router-dom";
 
+import GalleryResidency from "./Gallery0Residency/GallerySketch";
 import GallerySketch1 from "./Gallery1/GallerySketch";
 import GallerySketch2 from "./Gallery2/GallerySketch";
 import GallerySketch3 from "./Gallery3/GallerySketch";
 import GalleryGreber from "./Gallery4HomeOffices/GalleryGreber";
-import GalleryGreberLanding from "./Gallery4HomeOfficesLanding/GalleryGreber";
 
-import {
-  GlobalConfig,
-  getCurrentPageGlobalConfig,
-} from "../../data/CurrentShow/GlobalConfig";
+import { getCurrentPageGlobalConfig } from "../../data/CurrentShow/GlobalConfig";
 
 import { IUser, IUsers } from "../../interfaces";
 import { filterUsers, mapVal } from "../../helpers/helpers";
@@ -46,6 +43,13 @@ import { doneLoadingApp, startComposition } from "../../store/window";
 import { getBar } from "../../data/CurrentShow/BotConfig";
 import { p5ToUserCoords } from "../../helpers/coordinates";
 import { getLayoutSlug } from "../../data/Shows/HomeOffices/PageConstants";
+import {
+  ASIRECALL_ID,
+  FIELDSOFVIEW_ID,
+  HOMEBODY_ID,
+  HOMEOFFICES_ID,
+  RESIDENCY_ID,
+} from "../../data/CurrentShow/GalleryConfig";
 
 interface IGallery {
   id: number;
@@ -87,7 +91,6 @@ const Gallery = (props: IGallery) => {
 
   useEffect(() => {
     if (!showStart && !props.showWelcome) {
-      console.log("starting");
       dispatch(startComposition());
     }
   }, [props.showWelcome, showStart]);
@@ -145,9 +148,24 @@ const Gallery = (props: IGallery) => {
   };
 
   const getGallery = () => {
-    let gal = props.id ? props.id : 1;
-    switch (gal) {
-      case 1:
+    switch (props.id) {
+      case RESIDENCY_ID:
+        GalleryStyle.backgroundImage = "none";
+        return (
+          <GalleryResidency
+            users={props.users}
+            isClosed={props.isClosed}
+            userMove={moveGalleryUser}
+            userNewRoom={userNewRoom}
+            loadingDone={() => dispatch(doneLoadingApp())}
+            toggleOutside={() => dispatch(toggleOutside())}
+            isMobile={windowUI.isMobile}
+            clickedUserChat={clickedUserChat}
+            setUserActive={clickedUserChat}
+          />
+        );
+
+      case HOMEBODY_ID:
         return (
           <GallerySketch1
             users={props.users}
@@ -161,7 +179,7 @@ const Gallery = (props: IGallery) => {
             setUserActive={clickedUserChat}
           />
         );
-      case 2:
+      case ASIRECALL_ID:
         GalleryStyle.backgroundImage = "url(/backgroundImgs/asirecall_bg.png)";
         GalleryStyle.backgroundSize = "500px 500px";
         return (
@@ -177,7 +195,7 @@ const Gallery = (props: IGallery) => {
             setUserActive={clickedUserChat}
           />
         );
-      case 3:
+      case FIELDSOFVIEW_ID:
         GalleryStyle.backgroundImage = "url(/backgroundImgs/bg.png)";
         GalleryStyle.backgroundRepeat = "repeat";
         GalleryStyle.backgroundSize = "700px 700px";
@@ -194,7 +212,7 @@ const Gallery = (props: IGallery) => {
             setUserActive={clickedUserChat}
           />
         );
-      case 4:
+      case HOMEOFFICES_ID:
         GalleryStyle.backgroundImage = "none";
         return (
           <GalleryGreber
@@ -212,25 +230,7 @@ const Gallery = (props: IGallery) => {
             setUserActive={clickedUserChat}
           />
         );
-      case 5:
-        GalleryStyle.backgroundImage = "none";
-        return (
-          <GalleryGreberLanding
-            users={props.users}
-            showStart={showStart}
-            hideStart={() => setShowStart(false)}
-            isClosed={props.isClosed}
-            userMove={moveGalleryUser}
-            userNewRoom={userNewRoom}
-            loadingDone={() => dispatch(doneLoadingApp())}
-            setOutside={(state: { isOutside: boolean }) =>
-              dispatch(setOutside(state))
-            }
-            clickedUserChat={clickedUserChat}
-            setUserActive={clickedUserChat}
-            moveGalleryUser={moveGalleryUser}
-          />
-        );
+
       default:
         return (
           <GallerySketch1
@@ -295,8 +295,9 @@ const Gallery = (props: IGallery) => {
   };
 
   const getMap = () => {
-    let gal = props.id ? props.id : 1;
-    switch (gal) {
+    switch (props.id) {
+      case RESIDENCY_ID:
+        return null;
       case 1:
         return <MiniMap users={filterUsers(user, props.users)} x={20} y={20} />;
       case 2:

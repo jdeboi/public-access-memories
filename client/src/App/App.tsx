@@ -58,6 +58,16 @@ import SubscribeSendInBlue from "../views/pages/SubscribeForm/SubscribeSendInBlu
 import { artists, rooms } from "../data/CurrentShow/RoomConfig";
 import OpenCall from "../views/pages/OpenCall/OpenCall";
 import FAQFrame from "../components/FAQ/FAQFrame";
+import {
+  ASIRECALL_ID,
+  FIELDSOFVIEW_ID,
+  HOMEBODY_ID,
+  HOMEOFFICES_ID,
+  RESIDENCY_ID,
+} from "../data/CurrentShow/GalleryConfig";
+import Residency from "../views/pages/Residency/Residency";
+import EmrysGalleryRoom from "../views/rooms/R_02/EmrysGalleryRoom";
+import HostBotRoom from "../views/Gallery/Gallery0Residency/rooms/HostBotRoom";
 // import TwilioChat from '../components/TwilioChat/TwilioChat';
 
 function App() {
@@ -273,7 +283,7 @@ function App() {
             path="/"
             element={
               <Gallery
-                id={1}
+                id={RESIDENCY_ID}
                 users={users}
                 isClosed={isClosed}
                 showWelcome={showWelcome}
@@ -285,6 +295,7 @@ function App() {
           <Route path="/newsletter" element={<SubscribeSendInBlue />} />
           <Route path="/statement" element={<Statement />} />
           <Route path="/opencall" element={<OpenCall />} />
+          <Route path="/residency" element={<Residency />} />
 
           <Route path="/artists" element={<Artists />} />
           <Route path="/artist/:name" element={<Artist />} />
@@ -294,7 +305,7 @@ function App() {
             path="/galleries/homebody"
             element={
               <Gallery
-                id={1}
+                id={HOMEBODY_ID}
                 users={users}
                 isClosed={isClosed}
                 showWelcome={showWelcome}
@@ -305,7 +316,7 @@ function App() {
             path="/galleries/asirecall"
             element={
               <Gallery
-                id={2}
+                id={ASIRECALL_ID}
                 users={users}
                 isClosed={isClosed}
                 showWelcome={showWelcome}
@@ -316,7 +327,7 @@ function App() {
             path="/galleries/fieldsofview"
             element={
               <Gallery
-                id={3}
+                id={FIELDSOFVIEW_ID}
                 users={users}
                 isClosed={isClosed}
                 showWelcome={showWelcome}
@@ -327,7 +338,7 @@ function App() {
             path="/galleries/homeoffices"
             element={
               <Gallery
-                id={4}
+                id={HOMEOFFICES_ID}
                 users={users}
                 isClosed={isClosed}
                 showWelcome={showWelcome}
@@ -336,6 +347,36 @@ function App() {
           />
           <Route path="/test/rooms/:id" element={<TestRoom />} />
           <Route path={`/${ShowConfig.link}/rooms/:id`} element={<Room />} />
+          <Route
+            path="/emrys"
+            element={
+              !ShowConfig.isClosed ? (
+                <EmrysGalleryRoom
+                  id={0}
+                  users={users}
+                  isClosed={isClosed}
+                  showWelcome={showWelcome}
+                />
+              ) : (
+                <Room />
+              )
+            }
+          />
+          <Route
+            path="/lounge"
+            element={
+              !ShowConfig.isClosed ? (
+                <HostBotRoom
+                  id={0}
+                  users={users}
+                  isClosed={isClosed}
+                  showWelcome={showWelcome}
+                />
+              ) : (
+                <Room />
+              )
+            }
+          />
 
           <Route path="/pastexhibitions" element={<PastExhibitions />} />
           <Route path="/pastexhibitions/homebody" element={<HomeBody />} />

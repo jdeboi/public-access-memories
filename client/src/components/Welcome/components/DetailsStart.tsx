@@ -53,12 +53,12 @@ export default function DetailsStart() {
             width={70}
             style={{ paddingBottom: "10px" }}
           />
-          <h4>
-            <a href="/opencall">residency open call</a>
-          </h4>
           {/* <h4>
-            <a href="/newsletter">join newsletter</a>
+            <a href="/opencall">residency open call</a>
           </h4> */}
+          <h4>
+            <a href="/newsletter">join newsletter</a>
+          </h4>
         </div>
       </div>
     </div>

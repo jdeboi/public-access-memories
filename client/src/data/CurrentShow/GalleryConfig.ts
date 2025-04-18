@@ -1,0 +1,5 @@
+export const RESIDENCY_ID = 0,
+  HOMEBODY_ID = 1,
+  ASIRECALL_ID = 2,
+  FIELDSOFVIEW_ID = 3,
+  HOMEOFFICES_ID = 4;

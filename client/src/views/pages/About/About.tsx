@@ -21,10 +21,19 @@ export const About = () => {
             evolving canvas, PAM invites collaborative brainstorming and
             critical reflection on the nature of the white cube online.
           </p>
+          <br />
+          <h3>Creators</h3>
           <p>
-            <a href="https://instagram.com/jdeboi">Jenna deBoisblanc</a> is the
-            founder and chief developer of PAM. A net artist from New Orleans,
-            she considers how the internet mediates the human experience.
+            &gt;<a href="https://instagram.com/jdeboi">Jenna deBoisblanc</a> is
+            the founder and chief developer of PAM. A net artist from New
+            Orleans, she considers how the internet mediates the human
+            experience.
+            <br />
+            <br />
+            &gt; <a href="https://www.matthisgrunsky.ca/">Matthis Grunsky</a> is
+            an artist and educator based out of Winnipeg, Manitoba. He is
+            interested in the aesthetic potential of computation both on the
+            computer screen and in physical media.
           </p>
 
           <br />

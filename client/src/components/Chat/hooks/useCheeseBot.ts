@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 // store
 import { useSelector, useDispatch } from "react-redux";
@@ -6,11 +6,11 @@ import { selectMenu, selectUser, selectUserActive } from "../../../store/store";
 import { addCheese } from "../../../store/user";
 import { addMessage } from "../../../store/messages";
 
-import { IGlobalConfig, IMessage } from "../../../interfaces";
+import { IMessage } from "../../../interfaces";
 
 import { getBar } from "../../../data/CurrentShow/BotConfig";
 
-export const useCheeseBot = () => {
+export const useCheeseBot = ({ isSnack = false }) => {
   const [cheeseBotJustAsked, setCheeseBotJustAsked] = useState(false);
 
   const user = useSelector(selectUser);
@@ -28,7 +28,7 @@ export const useCheeseBot = () => {
 
   const sendToCheeseBot = (txt: string) => {
     const message: IMessage = {
-      to: "cheeseBot",
+      to: isSnack ? "snackBot" : "cheeseBot",
       from: "me",
       fromUser: "me",
       message: txt,
@@ -42,12 +42,14 @@ export const useCheeseBot = () => {
 
   const cheeseBotRespond = (txt: string) => {
     if (!cheeseBotJustAsked) {
-      const phrase = "hi, would you like some cheese? Y/N.";
+      const phrase = `hi, would you like some ${
+        isSnack ? "snacks" : "cheese"
+      }? Y/N.`;
       dispatch(
         addMessage({
           to: "me",
-          from: "cheeseBot",
-          fromUser: "cheeseBot",
+          from: isSnack ? "snackBot" : "cheeseBot",
+          fromUser: isSnack ? "snackBot" : "cheeseBot",
           message: phrase,
           time: JSON.stringify(new Date()),
           roomUrl: user.roomUrl,
@@ -72,7 +74,7 @@ export const useCheeseBot = () => {
       dispatch(
         addMessage({
           to: "me",
-          from: "cheeseBot",
+          from: isSnack ? "snackBot" : "cheeseBot",
           message: phrase,
           time: JSON.stringify(new Date()),
           roomUrl: user.roomUrl,

@@ -4,6 +4,10 @@ export interface IGlobalConfig {
   y: number;
   worldW: number;
   worldH: number;
+  isSnack?: boolean;
+  isBeer?: boolean;
+  isCoffee?: boolean;
+  isResidency?: boolean;
 }
 
 export interface IUser {
@@ -130,6 +134,7 @@ export interface IRoom {
   shortcut?: string;
   classN?: string;
   link: string;
+  userName?: string;
   // title: string,
   // artist: string,
   // artistLink: string,
@@ -151,6 +156,8 @@ export interface IArtist {
   instaLink?: string;
   webLink?: string;
   medium?: string;
+  userName?: string;
+  customLink?: string;
   description: string;
   bio: string;
   title: string;

@@ -28,9 +28,16 @@ export default function DetailsClosed() {
           <div style={{ fontSize: fonts[0], paddingBottom: "30px" }}>
             CLOSED
           </div>
-          <div style={{ fontSize: fonts[2], paddingBottom: "10px" }}>
-            Please join us for the opening on:
-          </div>
+          {!ShowConfig.isResidency && (
+            <div style={{ fontSize: fonts[2], paddingBottom: "10px" }}>
+              Please join us for the opening on:
+            </div>
+          )}
+          {ShowConfig.isResidency && (
+            <div style={{ fontSize: fonts[2], paddingBottom: "10px" }}>
+              Please join us for residency open studios on:
+            </div>
+          )}
           <div style={{ fontSize: fonts[1], paddingBottom: "5px" }}>
             {ShowConfig.showOpens.date}
           </div>

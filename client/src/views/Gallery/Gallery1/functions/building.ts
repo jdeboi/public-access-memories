@@ -92,10 +92,10 @@ export const drawDoors = (doors: Door[], p5: p5Types) => {
     for (const door of doors) {
       door.display(p5);
     }
-  }
+  } 
 };
 
-export const drawRooms = (rooms: Room[], roomTextures: p5Types.Image[]) => {
+export const  drawRooms = (rooms: Room[], roomTextures: p5Types.Image[]) => {
   if (rooms) {
     for (const room of rooms) {
       room.display(roomTextures);
@@ -105,4 +105,4 @@ export const drawRooms = (rooms: Room[], roomTextures: p5Types.Image[]) => {
       // drawRoom(p5, room.x*wallConfig.scaler, room.y*wallConfig.scaler, w, h, room.rot, room.title);
     }
   }
-};
+};  

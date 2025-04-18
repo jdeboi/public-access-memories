@@ -10,7 +10,7 @@ import { IGlobalConfig, IMessage } from "../../../interfaces";
 
 import { getBar } from "../../../data/CurrentShow/BotConfig";
 
-export const useWineBot = () => {
+export const useWineBot = ({ isCoffee = false }) => {
   const [wineBotJustAsked, setWineBotJustAsked] = useState(false);
 
   const user = useSelector(selectUser);
@@ -28,7 +28,7 @@ export const useWineBot = () => {
 
   const sendToWineBot = (txt: string) => {
     const message: IMessage = {
-      to: "wineBot",
+      to: isCoffee ? "coffeeBot" : "wineBot",
       from: "me",
       fromUser: "me",
       message: txt,
@@ -43,12 +43,14 @@ export const useWineBot = () => {
 
   const wineBotRespond = (txt: string) => {
     if (!wineBotJustAsked) {
-      const phrase = "hi, would you like some wine? Y/N.";
+      const phrase = `hi, would you like some ${
+        isCoffee ? "coffee" : "wine"
+      }? Y/N.`;
       dispatch(
         addMessage({
           to: "me",
-          from: "wineBot",
-          fromUser: "wineBot",
+          from: isCoffee ? "coffeeBot" : "wineBot",
+          fromUser: isCoffee ? "coffeeBot" : "wineBot",
           message: phrase,
           time: JSON.stringify(new Date()),
           roomUrl: user.roomUrl,
@@ -60,7 +62,9 @@ export const useWineBot = () => {
       const lc = txt.toLowerCase();
       let phrase = "";
       if (lc === "y" || lc.indexOf("yes") > -1) {
-        phrase = "Stop by the bar to pick up your glass.";
+        phrase = `Stop by the bar to pick up your ${
+          isCoffee ? "mug" : "glass"
+        }.`;
         dispatch(
           addWine({
             location: wineLocation,
@@ -73,8 +77,8 @@ export const useWineBot = () => {
       dispatch(
         addMessage({
           to: "me",
-          from: "wineBot",
-          fromUser: "wineBot",
+          from: isCoffee ? "coffeeBot" : "wineBot",
+          fromUser: isCoffee ? "coffeeBot" : "wineBot",
           message: phrase,
           time: JSON.stringify(new Date()),
           roomUrl: user.roomUrl,

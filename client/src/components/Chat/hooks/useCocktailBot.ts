@@ -10,7 +10,7 @@ import { IGlobalConfig, IMessage } from "../../../interfaces";
 
 import { getBar } from "../../../data/CurrentShow/BotConfig";
 
-export const useCocktailBot = () => {
+export const useCocktailBot = ({ isBeer = false }) => {
   const [cocktailBotJustAsked, setCocktailBotJustAsked] = useState(false);
 
   const user = useSelector(selectUser);
@@ -21,7 +21,7 @@ export const useCocktailBot = () => {
   const cocktailLocation = getBar("cocktail", menu.currentGalleryId);
   const sendToCocktailBot = (txt: string) => {
     const message: IMessage = {
-      to: "cocktailBot",
+      to: isBeer ? "beerBot" : "cocktailBot",
       from: "me",
       fromUser: "me",
       roomUrl: user.roomUrl,
@@ -36,12 +36,14 @@ export const useCocktailBot = () => {
 
   const cocktailBotRespond = (txt: string) => {
     if (!cocktailBotJustAsked) {
-      const phrase = "hi, would you like a martini? Y/N.";
+      const phrase = `hi, would you like a ${
+        isBeer ? "beer" : "martini"
+      }? Y/N.`;
       dispatch(
         addMessage({
           to: "me",
-          from: "cocktailBot",
-          fromUser: "cocktailBot",
+          from: isBeer ? "beerBot" : "cocktailBot",
+          fromUser: isBeer ? "beerBot" : "cocktailBot",
           message: phrase,
           time: JSON.stringify(new Date()),
           roomUrl: user.roomUrl,
@@ -53,7 +55,7 @@ export const useCocktailBot = () => {
       const lc = txt.toLowerCase();
       let phrase = "";
       if (lc === "y" || lc.indexOf("yes") > -1) {
-        phrase = "Stop by the bar to pick up your glass.";
+        phrase = `Stop by the bar to pick up your drink.`;
         dispatch(
           addCocktail({
             location: cocktailLocation,
@@ -66,7 +68,7 @@ export const useCocktailBot = () => {
       dispatch(
         addMessage({
           to: "me",
-          from: "cocktailBot",
+          from: isBeer ? "beerBot" : "cocktailBot",
           message: phrase,
           time: JSON.stringify(new Date()),
           roomUrl: user.roomUrl,

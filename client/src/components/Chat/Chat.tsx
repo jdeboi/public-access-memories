@@ -40,9 +40,9 @@ const Chat = (props: ChatProps) => {
   const dispatch = useDispatch();
 
   const GlobalConfig = getCurrentPageGlobalConfig(menu.currentGalleryId);
-  const sendToWineBot = useWineBot();
-  const sendToCocktailBot = useCocktailBot();
-  const sendToCheeseBot = useCheeseBot();
+  const sendToWineBot = useWineBot({ isCoffee: GlobalConfig.isCoffee });
+  const sendToCocktailBot = useCocktailBot({ isBeer: GlobalConfig.isBeer });
+  const sendToCheeseBot = useCheeseBot({ isSnack: GlobalConfig.isSnack });
   const sendToHostBot = useHostBot();
   const sendToDJBot = useDJBot();
 
@@ -142,11 +142,20 @@ const Chat = (props: ChatProps) => {
         sendToAll(txt);
       } else if (userActive.active.userName === "Room") {
         sendToRoom(txt);
-      } else if (userActive.active.userName === "wineBot") {
+      } else if (
+        userActive.active.userName === "wineBot" ||
+        userActive.active.userName === "coffeeBot"
+      ) {
         sendToWineBot(txt);
-      } else if (userActive.active.userName === "cocktailBot") {
+      } else if (
+        userActive.active.userName === "cocktailBot" ||
+        userActive.active.userName === "beerBot"
+      ) {
         sendToCocktailBot(txt);
-      } else if (userActive.active.userName === "cheeseBot") {
+      } else if (
+        userActive.active.userName === "cheeseBot" ||
+        userActive.active.userName === "snackBot"
+      ) {
         sendToCheeseBot(txt);
       } else if (userActive.active.userName === "DJBot") {
         sendToDJBot(txt);
