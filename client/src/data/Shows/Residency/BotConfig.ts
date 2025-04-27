@@ -21,13 +21,10 @@ const coffeeBotCoords = {
   x: 23,
   y: 0.5,
 };
-const beerBotCoords = {
-  x: 32,
-  y: 0,
-};
+
 const hostBotCoords = {
-  x: 10,
-  y: 30,
+  x: 100,
+  y: 300,
 };
 
 export const hostBotFirstRoom = 0;
@@ -46,30 +43,18 @@ const barUsers: IUser[] = [
     coffeeBotCoords.x + botDX,
     coffeeBotCoords.y + botDY
   ),
-  // getNewUser(
-  //   "beerBot",
-  //   "🤖",
-  //   "/",
-  //   "2",
-  //   beerBotCoords.x + botDX,
-  //   beerBotCoords.y + botDY
-  // ),
 
-  getNewUser(
-    "hostBot",
-    "🤖",
-    "/lounge",
-    "5",
-    hostBotCoords.x + botDX,
-    hostBotCoords.y
-  ),
+  getNewUser("hostBot", "🤖", "/lounge", "5", hostBotCoords.x, hostBotCoords.y),
 ];
 
 export const barTenders: IUser[] = barUsers.map((user) => {
   const usr = { ...user };
+  usr.roomX = usr.x;
+  usr.roomY = usr.y;
   let pt = p5ToDomCoords(usr.x, usr.y, GlobalConfig);
   usr.x = pt.x;
   usr.y = pt.y;
+
   return usr;
 });
 

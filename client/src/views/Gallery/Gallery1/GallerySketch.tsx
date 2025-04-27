@@ -528,9 +528,6 @@ class GallerySketch extends React.Component<Props> {
 
   stopWalking = () => {
     isWalking = false;
-    // destination.x = stepTo.x;
-    // destination.y = stepTo.y;
-    // console.log("stop walking");
   };
 
   checkFollowHost = () => {
@@ -556,7 +553,6 @@ class GallerySketch extends React.Component<Props> {
       return;
     }
     currentHostStep++;
-    console.log("next", currentHostStep);
     if (currentHostStep < hostBotPoints.length) {
       isWalking = true;
       const pt = p5ToUserCoords(

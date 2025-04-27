@@ -92,7 +92,6 @@ export const menuSlice = createSlice({
       state.map.isHidden = false;
     },
     hideMap: (state) => {
-      console.log("go");
       state.map.isHidden = true;
       state.mobile = "";
     },

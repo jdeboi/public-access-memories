@@ -4,10 +4,6 @@ import p5Types from "p5";
 import { IUser, IUsers, IWindowUI } from "../../../../interfaces";
 import { connect } from "react-redux";
 import { RootState } from "../../../../store/store";
-import { setFollowingHost } from "../../../../store/user";
-import Timer from "../../Gallery4HomeOffices/components/Timer";
-import { addBots } from "../../../../App/useSockets";
-
 import Dancer from "../../components/p5/Dancer";
 
 //////////////
@@ -27,42 +23,29 @@ import {
   getNextStep,
 } from "../../Gallery4HomeOffices/functions/destination";
 
-import {
-  checkUserClicked,
-  drawUser,
-  drawUsers,
-} from "../../Gallery4HomeOffices/functions/users";
+import { drawUser } from "../../Gallery4HomeOffices/functions/users";
 
 import {
-  displayTrashDivs,
-  checkTrashDivsDouble,
-  addTrashDivs,
-  addLightDivs,
-  displayLightDivs,
-  displayColumnDivs,
   endDivDrag,
   updateDivs,
   checkDivPress,
-  displayFolderDivs,
-  checkFolderDivsDouble,
-  addFolderDivs,
-  addGiftShopDivs,
-  addBarDivs,
-  displayBarDivs,
-  addColumnDivs,
-  addBlindsDiv,
 } from "../../Gallery4HomeOffices/functions/divs";
 
+import { danceFloor } from "../../../../data/Shows/HomeOffices/BotConfig";
+import { LMD_URL, loadEmojis, PAM_URL } from "../../functions/loadImages";
 import {
-  barTenders,
-  danceFloor,
-} from "../../../../data/Shows/HomeOffices/BotConfig";
+  checkUserClickedNormalRoom,
+  drawUsersRoomCoords,
+} from "../../Gallery1/functions/users";
 import {
-  LMD_BASE_URL,
-  LMD_URL,
-  loadEmojis,
-  PAM_URL,
-} from "../../functions/loadImages";
+  addFurnitureDivs,
+  addWaterCoolerDivs,
+  displayAllDivsHostRoom,
+} from "../functions/divs";
+
+var watercoolerImg: p5Types.Image;
+var pipesImg: p5Types.Image;
+var furnitureImgs: p5Types.Image[] = [];
 
 //////////////
 // EMOJIS
@@ -71,14 +54,8 @@ const dancerImgs: p5Types.Image[] = [];
 const barEmojis: p5Types.Image[] = [];
 const lightImgs: p5Types.Image[] = [];
 const trashFiles: p5Types.Image[] = [];
-let columnGif: p5Types.Image;
-let txtFile: p5Types.Image, instaImg: p5Types.Image;
 
 let font: p5Types.Font;
-let currentImgIndex = 1;
-let timer1 = new Timer(200);
-let timer2 = new Timer(200);
-let blindsImg: p5Types.Image;
 
 //////////////
 // DRAGGABLE DIVS
@@ -99,9 +76,7 @@ interface ComponentProps {
   users: IUsers;
   isClosed: boolean;
   userMove: (x: number, y: number) => void;
-  // userNewRoomPage: (roomPage: number) => void;
   loadingDone: () => void;
-  // setOutside: (state: { isOutside: boolean }) => void;
   windowUI: IWindowUI;
   setUserActive: (user: IUser) => void;
   clickedUserChat: (user: IUser) => void;
@@ -112,9 +87,7 @@ interface StateProps {
   user: IUser;
 }
 // dispatch props = functions to execute
-interface DispatchProps {
-  setFollowingHost: (isFollowing: boolean) => void;
-}
+interface DispatchProps {}
 
 interface Props extends ComponentProps, StateProps, DispatchProps {}
 
@@ -128,12 +101,15 @@ class HostBotRoomSketch extends React.Component<Props> {
     barEmojis[0] = p5.loadImage(LMD_URL + "emojis/popcorn.png");
     barEmojis[1] = p5.loadImage(LMD_URL + "emojis/beer.png");
     barEmojis[2] = p5.loadImage(LMD_URL + "emojis/coffee.png");
+    barEmojis[3] = p5.loadImage(LMD_URL + "emojis/cocktail.png");
+    barEmojis[4] = p5.loadImage(LMD_URL + "emojis/chat.png");
 
-    // folder icons
-    txtFile = p5.loadImage(LMD_BASE_URL + "sketches/waveforms/txt.png");
-    instaImg = p5.loadImage(LMD_URL + "instagram.png");
-    columnGif = p5.loadImage(PAM_URL + "gallery/column.png");
+    watercoolerImg = p5.loadImage(PAM_URL + "residency/assets/watercooler.png");
+    furnitureImgs[0] = p5.loadImage(PAM_URL + "residency/assets/plants.png");
 
+    furnitureImgs[1] = p5.loadImage(PAM_URL + "residency/assets/sofa.png");
+    furnitureImgs[2] = p5.loadImage(PAM_URL + "residency/assets/chair.png");
+    pipesImg = p5.loadImage(PAM_URL + "residency/assets/pipes.png");
     // font
     font = p5.loadFont(PAM_URL + "fonts/sysfont.woff");
   };
@@ -165,13 +141,8 @@ class HostBotRoomSketch extends React.Component<Props> {
   };
 
   initDivs = (p5: p5Types) => {
-    // addLightDivs(divs, lightImgs, p5);
-    // addColumnDivs(divs, columnGif, p5);
-    // addBlindsDiv(blindsImg, divs, p5);
-    // addTrashDivs(divs, trashFiles, p5);
-    // addFolderDivs(divs, instaImg, txtFile, p5);
-    // addGiftShopDivs(divs, giftShopImgs, p5);
-    // addBarDivs(bars, lightImgs[3], p5);
+    addWaterCoolerDivs(divs, watercoolerImg, p5);
+    addFurnitureDivs(divs, furnitureImgs, p5);
   };
 
   initEmojis = (p5: p5Types) => {
@@ -193,7 +164,16 @@ class HostBotRoomSketch extends React.Component<Props> {
 
     p5.clear(0, 0, 0, 0);
     //this.displayFrameRate(p5);
-
+    const pipesFactor = 0.6;
+    for (let i = 0; i < p5.width; i += pipesImg.width * pipesFactor) {
+      p5.image(
+        pipesImg,
+        i,
+        20,
+        pipesImg.width * pipesFactor,
+        pipesImg.height * pipesFactor
+      );
+    }
     //////////////
     // step visualization
     this.mouseStep(p5);
@@ -202,6 +182,9 @@ class HostBotRoomSketch extends React.Component<Props> {
     //////////////
     // drawing
     p5.push();
+    const userEase = { x: 0, y: 0 };
+    displayAllDivsHostRoom(userEase.x, userEase.y, divs);
+
     p5.translate(movement.userEase.x, movement.userEase.y);
     drawUser(user, p5, barEmojis);
     p5.pop();
@@ -211,7 +194,7 @@ class HostBotRoomSketch extends React.Component<Props> {
 
     //////////////
     // updating
-    // if (users) updateDivs(this.getRoomLayoutNum(), divs);
+    if (users) updateDivs(0, divs);
 
     this.updateUserEase(p5);
     if (
@@ -235,7 +218,14 @@ class HostBotRoomSketch extends React.Component<Props> {
 
     if (users) {
       p5.textFont(font, 34);
-      drawUsers(user, filterGalleryUsers(user, users), font, p5, barEmojis);
+      drawUsersRoomCoords(
+        user,
+        filterGalleryUsers(user, users),
+        "/lounge",
+        font,
+        p5,
+        barEmojis
+      );
     }
 
     p5.pop();
@@ -245,14 +235,7 @@ class HostBotRoomSketch extends React.Component<Props> {
     const { user } = this.props;
     p5.push();
 
-    const userEase = { x: 0, y: 0 };
-    // displayBarDivs(room, bars);
-    // displayLightDivs(room, divs);
-    // displayColumnDivs(user.x, user.y, room, divs);
-    // displayTrashDivs(room, divs);
-
     p5.textFont(font, 12);
-    // displayFolderDivs(room, divs);
 
     p5.pop();
   };
@@ -338,7 +321,8 @@ class HostBotRoomSketch extends React.Component<Props> {
     const { user, users, setUserActive } = this.props;
     let userClicked = null;
 
-    if (users) userClicked = checkUserClicked(user, users, p5);
+    if (users)
+      userClicked = checkUserClickedNormalRoom(user, users, p5, "/lounge");
     if (userClicked) {
       setUserActive(userClicked);
       return;
@@ -454,10 +438,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
-  return {
-    setFollowingHost: (isFollowing: boolean) =>
-      dispatch(setFollowingHost(isFollowing)),
-  };
+  return {};
 };
 
 export default connect<StateProps, DispatchProps, ComponentProps, RootState>(

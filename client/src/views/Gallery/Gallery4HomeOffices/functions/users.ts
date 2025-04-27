@@ -33,9 +33,15 @@ export function drawUser(user: IUser, p5: p5Types, imgs: p5Types.Image[]) {
   p5.pop();
 }
 
-export function checkUserClicked(user: IUser, users: IUsers, p5: p5Types) {
+
+export function checkUserClicked(
+  user: IUser,
+  users: IUsers,
+  p5: p5Types,
+  roomUrl = "/"
+) {
   for (const otherUser of users) {
-    if (otherUser.roomUrl === "/") {
+    if (otherUser.roomUrl === roomUrl) {
       if (otherUser.roomLayout != user.roomLayout) continue;
       // let mouse = mouseToWorld(userEase, p5, GlobalConfig);
       let mouse = { x: p5.mouseX, y: p5.mouseY };

@@ -1,10 +1,13 @@
 import { IRoom, IArtist } from "../../../interfaces";
+import { alwaysReservedArtists } from "../../CurrentShow/ArtistConfig";
 import { ShowConfig } from "../../CurrentShow/ShowConfig";
 
 export const reservedArtists = {
+  ...alwaysReservedArtists,
   moneymachine69: "👀",
   aem: "🗄️",
   seliciayxy: "🔮",
+  yeli: "🌱",
 };
 
 export const roomConfig = {

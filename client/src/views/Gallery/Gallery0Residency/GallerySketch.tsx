@@ -386,6 +386,7 @@ class GallerySketch extends React.Component<Props> {
       if (!isMobile) {
         if (window.confirm("Enter this artist studio?")) {
           userNewRoom(roomDoor);
+          console.log("entering", roomDoor);
         }
       } else {
         userNewRoom(roomDoor);

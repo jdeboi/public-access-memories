@@ -53,9 +53,12 @@ const HostBotRoom = (props: IGallery) => {
   const [showStart, setShowStart] = useState(true);
 
   useEffect(() => {
-    // dispatch to set gallery id
-    // dispatch(setGalleryId(props.id));
+    if (user.roomUrl !== "/lounge") {
+      dispatch(setUserRoomUrl({ roomUrl: "/lounge" }));
+    }
+  }, [user.roomUrl, dispatch]);
 
+  useEffect(() => {
     // Try to play audio after component mounts
     if (audioPlayer.current) {
       const audioElement = audioPlayer.current.audioEl.current;
@@ -111,15 +114,11 @@ const HostBotRoom = (props: IGallery) => {
     newUser.roomY = y;
   };
 
-  const userNewRoom = (room: string) => {
-    navigate(room);
-    dispatch(setUserRoomUrl({ roomUrl: room }));
-  };
-
   const GalleryStyle = {
     backgroundRepeat: "repeat",
     backgroundSize: "600px 350px",
-    backgroundImage: "url(/backgroundImgs/wallpaper3.jpg)",
+    backgroundColor: "blue",
+    // backgroundImage: "url(/backgroundImgs/wallpaper3.jpg)",
   };
 
   const getGalleryAudio = () => {
@@ -143,16 +142,71 @@ const HostBotRoom = (props: IGallery) => {
     <div className="Gallery Sketch" style={GalleryStyle}>
       <div id="p5_loading" className="loadingclass"></div>
 
-      <HostBotRoomSketch
-        users={props.users}
-        isClosed={props.isClosed}
-        userMove={moveGalleryUserRoom}
-        loadingDone={() => dispatch(doneLoadingApp())}
-        windowUI={windowUI}
-        clickedUserChat={clickedUserChat}
-        setUserActive={clickedUserChat}
-      />
+      <div
+        className="windows"
+        style={{
+          position: "absolute",
+          top: 150,
+          left: 50,
+          //   display: "flex",
+          //   justifyContent: "center",
+          //   marginTop: "20px",
+          width: "500px",
+          height: "300px",
+          zIndex: 0,
+          backgroundColor: "#000",
+        }}
+      >
+        {/* iframe container */}
+        <iframe
+          src="https://docs.google.com/document/d/e/2PACX-1vSmgRHDz3oT4mPxZpnmYtkCH_XgzIYvsNlChFRTwgGHxjAlqYqyW94Wf-Srf9_wDoqSFZLIxK99sP08/pub?embedded=true"
+          width="100%"
+          height="100%"
+          allowFullScreen
+          title="Collaborative Doc"
+        ></iframe>
 
+        {/* Edit button */}
+      </div>
+      <a
+        href="https://docs.google.com/document/d/14PKbUZ-v3uWBDff6tNxQGrG9aCq6MpaiNmktWlOf4lE/edit?usp=sharing"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          position: "absolute",
+          top: 125,
+          left: 35,
+          backgroundColor: "#ffffffcc",
+          border: "1px solid #ccc",
+          borderRadius: "50%",
+          width: "40px",
+          height: "40px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          textDecoration: "none",
+          fontSize: "20px",
+          color: "#333",
+          cursor: "pointer",
+          boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
+          zIndex: 5,
+        }}
+        title="Edit Document"
+      >
+        ✏️
+      </a>
+
+      <div style={{ zIndex: 1 }}>
+        <HostBotRoomSketch
+          users={props.users}
+          isClosed={props.isClosed}
+          userMove={moveGalleryUserRoom}
+          loadingDone={() => dispatch(doneLoadingApp())}
+          windowUI={windowUI}
+          clickedUserChat={clickedUserChat}
+          setUserActive={clickedUserChat}
+        />
+      </div>
       {windowUI.loading && <LoadingPage />}
     </div>
   );

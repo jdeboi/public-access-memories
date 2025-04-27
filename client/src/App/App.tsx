@@ -66,7 +66,7 @@ import {
   RESIDENCY_ID,
 } from "../data/CurrentShow/GalleryConfig";
 import Residency from "../views/pages/Residency/Residency";
-import EmrysGalleryRoom from "../views/rooms/R_02/EmrysGalleryRoom";
+import EmrysGalleryRoom from "../views/rooms/R_01/EmrysGalleryRoom";
 import HostBotRoom from "../views/Gallery/Gallery0Residency/rooms/HostBotRoom";
 // import TwilioChat from '../components/TwilioChat/TwilioChat';
 

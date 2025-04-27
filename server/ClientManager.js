@@ -1,5 +1,7 @@
 // import { IMessage } from '../client/src/interfaces';
 
+const { reservedArtists, reservedUserNames } = require("./reservedArtists");
+
 const io = require("./index").io;
 const clients = require("./index").clients;
 const USER_UPDATE_INTERVAL = 100;
@@ -51,7 +53,6 @@ module.exports = function (client) {
   });
 
   client.on("setBot", (bot) => {
-    console.log(bot);
     clients.set(bot.id, bot);
   });
 
@@ -121,21 +122,6 @@ function getMessageToAll(messageObj) {
 }
 
 function isUser(userName) {
-  var reservedUserNames = [
-    "everyone",
-    "host",
-    "room",
-    "winebot",
-    "coffeebot",
-    "cheesebot",
-    "beerbot",
-    "cocktailbot",
-    "hostbot",
-    "helpbot",
-    "dj",
-    "djbot",
-  ];
-
   try {
     let values = Array.from(clients.values());
     // console.log("VAL", values);
@@ -152,10 +138,11 @@ function isUser(userName) {
 }
 
 function isArtist(userName) {
-  const reservedArtists = ["moneymachine69", "aem", "seliciayxy"];
-
   try {
-    return reservedArtists.includes(userName.toLowerCase());
+    const found = reservedArtists.some(
+      (el) => el.toLowerCase() === userName.toLowerCase()
+    );
+    return found;
   } catch (error) {
     console.log("issues with artist check");
     return false;

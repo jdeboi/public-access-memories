@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { RootState } from "../../../store/store";
 import { setFollowingHost } from "../../../store/user";
 import Timer from "../../Gallery/Gallery4HomeOffices/components/Timer";
-import { addBots } from "../../../App/useSockets";
 
 import Dancer from "../../Gallery/components/p5/Dancer";
 
@@ -34,23 +33,9 @@ import {
 } from "../../Gallery/Gallery4HomeOffices/functions/users";
 
 import {
-  displayTrashDivs,
-  checkTrashDivsDouble,
-  addTrashDivs,
-  addLightDivs,
-  displayLightDivs,
-  displayColumnDivs,
   endDivDrag,
   updateDivs,
   checkDivPress,
-  displayFolderDivs,
-  checkFolderDivsDouble,
-  addFolderDivs,
-  addGiftShopDivs,
-  addBarDivs,
-  displayBarDivs,
-  addColumnDivs,
-  addBlindsDiv,
 } from "../../Gallery/Gallery4HomeOffices/functions/divs";
 
 import {
@@ -63,6 +48,10 @@ import {
   loadEmojis,
   PAM_URL,
 } from "../../Gallery/functions/loadImages";
+import {
+  checkUserClickedNormalRoom,
+  drawUsersRoomCoords,
+} from "../../Gallery/Gallery1/functions/users";
 
 //////////////
 // EMOJIS
@@ -128,6 +117,8 @@ class GallerySketchEmrys extends React.Component<Props> {
     barEmojis[0] = p5.loadImage(LMD_URL + "emojis/popcorn.png");
     barEmojis[1] = p5.loadImage(LMD_URL + "emojis/beer.png");
     barEmojis[2] = p5.loadImage(LMD_URL + "emojis/coffee.png");
+    barEmojis[3] = p5.loadImage(LMD_URL + "emojis/cocktail.png");
+    barEmojis[4] = p5.loadImage(LMD_URL + "emojis/chat.png");
 
     // folder icons
     txtFile = p5.loadImage(LMD_BASE_URL + "sketches/waveforms/txt.png");
@@ -209,6 +200,11 @@ class GallerySketchEmrys extends React.Component<Props> {
     this.drawOverTarget(p5);
     this.drawOverUser(p5);
 
+    p5.noStroke();
+    p5.fill(255);
+    p5.textFont(font, 30);
+    p5.text("UNDER CONSTRUCTION", 50, 80);
+
     //////////////
     // updating
     // if (users) updateDivs(this.getRoomLayoutNum(), divs);
@@ -235,7 +231,14 @@ class GallerySketchEmrys extends React.Component<Props> {
 
     if (users) {
       p5.textFont(font, 34);
-      drawUsers(user, filterGalleryUsers(user, users), font, p5, barEmojis);
+      drawUsersRoomCoords(
+        user,
+        filterGalleryUsers(user, users),
+        "/emrys",
+        font,
+        p5,
+        barEmojis
+      );
     }
 
     p5.pop();
@@ -246,10 +249,6 @@ class GallerySketchEmrys extends React.Component<Props> {
     p5.push();
 
     const userEase = { x: 0, y: 0 };
-    // displayBarDivs(room, bars);
-    // displayLightDivs(room, divs);
-    // displayColumnDivs(user.x, user.y, room, divs);
-    // displayTrashDivs(room, divs);
 
     p5.textFont(font, 12);
     // displayFolderDivs(room, divs);
@@ -338,7 +337,8 @@ class GallerySketchEmrys extends React.Component<Props> {
     const { user, users, setUserActive } = this.props;
     let userClicked = null;
 
-    if (users) userClicked = checkUserClicked(user, users, p5);
+    if (users)
+      userClicked = checkUserClickedNormalRoom(user, users, p5, "/emrys");
     if (userClicked) {
       setUserActive(userClicked);
       return;

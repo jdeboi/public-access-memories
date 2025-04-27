@@ -12,23 +12,10 @@ import LoadingPage from "../../../components/LoadingPage/LoadingPage";
 
 // store
 import { useSelector, useDispatch } from "react-redux";
-import {
-  selectMusic,
-  selectUser,
-  selectUserActive,
-  selectWindow,
-} from "../../../store/store";
-import {
-  setUserRoomUrl,
-  moveUser,
-  toggleOutside,
-  setOutside,
-  moveUserNormal,
-  moveUserRoom,
-} from "../../../store/user";
+import { selectMusic, selectUser, selectWindow } from "../../../store/store";
+import { setUserRoomUrl, moveUserRoom } from "../../../store/user";
 import { setUserActiveChat } from "../../../store/userActive";
 import { setOneMenu, showChat } from "../../../store/menu";
-import { setSketchVolume } from "../../../store/music";
 import { doneLoadingApp, startComposition } from "../../../store/window";
 
 import { getBar } from "../../../data/CurrentShow/BotConfig";
@@ -43,19 +30,23 @@ interface IGallery {
 }
 
 const EmrysGalleryRoom = (props: IGallery) => {
+  const [adultConfirmed, setAdultConfirmed] = useState(false);
+
   const user = useSelector(selectUser);
   const windowUI = useSelector(selectWindow);
   const music = useSelector(selectMusic);
   const dispatch = useDispatch();
-  const userActive = useSelector(selectUserActive);
   const navigate = useNavigate();
   const audioPlayer = useRef<ReactAudioPlayer>(null);
   const [showStart, setShowStart] = useState(true);
 
   useEffect(() => {
-    // dispatch to set gallery id
-    // dispatch(setGalleryId(props.id));
+    if (user.roomUrl !== "/emrys") {
+      dispatch(setUserRoomUrl({ roomUrl: "/emrys" }));
+    }
+  }, [user.roomUrl, dispatch]);
 
+  useEffect(() => {
     // Try to play audio after component mounts
     if (audioPlayer.current) {
       const audioElement = audioPlayer.current.audioEl.current;
@@ -103,25 +94,7 @@ const EmrysGalleryRoom = (props: IGallery) => {
     return mapVal(dis, 0, 1000, 1, minVol);
   };
 
-  const moveGalleryUser = (x: number, y: number) => {
-    const GlobalConfig = getCurrentPageGlobalConfig(props.id);
-    dispatch(setSketchVolume(getVolume()));
-    dispatch(moveUser({ x, y, galleryIndex: props.id }));
-    const newUser = { ...user };
-    newUser.x = x;
-    newUser.y = y;
-  };
-
-  const moveGalleryUserNormal = (x: number, y: number) => {
-    dispatch(setSketchVolume(getVolume()));
-    dispatch(moveUserNormal({ x, y, galleryIndex: props.id }));
-    const newUser = { ...user };
-    newUser.x = x;
-    newUser.y = y;
-  };
-
   const moveGalleryUserRoom = (x: number, y: number) => {
-    // dispatch(setSketchVolume(getVolume()));
     dispatch(moveUserRoom({ x, y }));
     const newUser = { ...user };
     newUser.roomX = x;
@@ -157,20 +130,54 @@ const EmrysGalleryRoom = (props: IGallery) => {
   };
 
   return (
-    <div className="Gallery Sketch" style={GalleryStyle}>
-      <div id="p5_loading" className="loadingclass"></div>
+    <div className="Gallery Sketch" style={adultConfirmed ? GalleryStyle : {}}>
+      {!adultConfirmed ? (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "black",
+            color: "white",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 1500,
+          }}
+        >
+          <h1>Adult Content Warning</h1>
+          <p>
+            This studio room contains material intended for adults. Please
+            confirm you are 18 or older to proceed.
+          </p>
+          <button
+            className="standardButton secondary"
+            onClick={() => setAdultConfirmed(true)}
+          >
+            I am 18 or older
+          </button>
+        </div>
+      ) : (
+        <>
+          <div id="p5_loading" className="loadingclass"></div>
 
-      <GallerySketchEmrys
-        users={props.users}
-        isClosed={props.isClosed}
-        userMove={moveGalleryUserRoom}
-        loadingDone={() => dispatch(doneLoadingApp())}
-        windowUI={windowUI}
-        clickedUserChat={clickedUserChat}
-        setUserActive={clickedUserChat}
-      />
+          <GallerySketchEmrys
+            users={props.users}
+            isClosed={props.isClosed}
+            userMove={moveGalleryUserRoom}
+            loadingDone={() => dispatch(doneLoadingApp())}
+            windowUI={windowUI}
+            clickedUserChat={clickedUserChat}
+            setUserActive={clickedUserChat}
+          />
 
-      {windowUI.loading && <LoadingPage />}
+          {windowUI.loading && <LoadingPage />}
+          {getGalleryAudio()}
+        </>
+      )}
     </div>
   );
 };

@@ -543,6 +543,14 @@ export const displayBarDivs = (room: number, divs: any) => {
   }
 };
 
+export const displayDivs = (room: number, divs: any) => {
+  displayLightDivs(room, divs);
+  displayFolderDivs(room, divs);
+  displayTrashDivs(room, divs);
+  displayColumnDivs(0, 0, room, divs);
+  displayBarDivs(room, divs);
+};
+
 export function endDivDrag(divs: any) {
   let keys = Object.keys(divs);
   for (const key of keys) {
@@ -565,7 +573,7 @@ export const checkDivPress = (room: number, divs: any) => {
   return false;
 };
 
-const checkDiv = (room: number, div: any) => {
+const   checkDiv = (room: number, div: any) => {
   if (div.checkButtonsNormal()) {
     return true;
   } else if (div.checkDraggingNormal(room)) {

@@ -6,9 +6,15 @@ import { getParsedJSONDate } from "../../../../helpers/helpers";
 
 export const iconSize = 34;
 
-export function checkUserClicked(userEase, users, p5, GlobalConfig) {
+export function checkUserClicked(
+  userEase,
+  users,
+  p5,
+  GlobalConfig,
+  roomUrl = "/"
+) {
   for (const otherUser of users) {
-    if (otherUser.roomUrl === "/") {
+    if (otherUser.roomUrl === roomUrl) {
       let mouse = mouseToWorld(userEase, p5, GlobalConfig);
       let userWorld = domCoordsToP5World(
         otherUser.x + 17,
@@ -20,6 +26,27 @@ export function checkUserClicked(userEase, users, p5, GlobalConfig) {
       userChat.y = userWorld.y - 16;
       let d = p5.dist(mouse.x, mouse.y, userWorld.x, userWorld.y);
       let dChat = p5.dist(mouse.x, mouse.y, userChat.x, userChat.y);
+
+      if (d < 20 || dChat < 20) {
+        return otherUser;
+      }
+    }
+  }
+  return null;
+}
+
+export function checkUserClickedNormalRoom(user, users, p5, roomUrl = "/") {
+  for (const otherUser of users) {
+    if (otherUser.roomUrl === roomUrl) {
+      let mouse = { x: p5.mouseX, y: p5.mouseY };
+
+      let d = p5.dist(mouse.x, mouse.y, otherUser.roomX, otherUser.roomY);
+      let dChat = p5.dist(
+        mouse.x,
+        mouse.y,
+        otherUser.roomX + 23,
+        otherUser.roomY - 16
+      );
 
       if (d < 20 || dChat < 20) {
         return otherUser;
@@ -115,6 +142,43 @@ export function drawUsers(userEase, users, font1, p5, imgs, GlobalConfig) {
 
       if (GlobalConfig.isResidency) drawUserFoods(p5, otherUser, imgs, true);
       else drawUserFoods(p5, otherUser, imgs);
+
+      p5.pop();
+    }
+  }
+}
+
+export function drawUsersRoomCoords(user, users, roomUrl, font1, p5, imgs) {
+  p5.fill(255);
+  p5.noStroke();
+  p5.textFont("times", iconSize);
+  for (const otherUser of users) {
+    if (
+      otherUser.roomUrl === roomUrl &&
+      otherUser.userName &&
+      otherUser.userName !== user.userName
+    ) {
+      let ava = otherUser.avatar;
+
+      p5.push();
+      p5.translate(otherUser.roomX, otherUser.roomY);
+      p5.text(ava, 0, 0);
+
+      if (font1) drawLabel(p5, otherUser.userName, font1);
+
+      p5.textFont("times", iconSize);
+      if (
+        p5.dist(otherUser.roomX, otherUser.roomY, user.roomX, user.roomY) < 150
+      ) {
+        drawChat(p5, imgs[4]);
+      }
+
+      if (otherUser.isSpeaking) {
+        if (!otherUser.isMuted && !otherUser.isGlobalMuted)
+          drawMic(p5, imgs[5]);
+      }
+
+      drawUserFoods(p5, otherUser, imgs);
 
       p5.pop();
     }

@@ -166,22 +166,36 @@ export const addFolderDivs = (
   }
 };
 
-export const addSofaDivs = (divs: any, sofaImg: p5Types.Image, p5: p5Types) => {
+export const addFurnitureDivs = (
+  divs: any,
+  imgs: p5Types.Image[],
+  p5: p5Types
+) => {
   let sc = GlobalConfig.scaler;
-  divs.sofas = [];
+  divs.furniture = [];
 
-  for (let i = 0; i < 1; i++) {
-    let sofa = new Draggable(
+  const furniturePositions = [
+    { x: 420 - 250, y: 0, w: 100, h: 50 },
+    { x: 550 - 250, y: 250 - 130, w: 100, h: 50 },
+    { x: 0, y: 220 - 130, w: 100, h: 50 },
+  ];
+
+  if (p5.width < 800) {
+    return;
+  }
+  for (let i = 0; i < furniturePositions.length; i++) {
+    const { x, y, w, h } = furniturePositions[i];
+    let draggableFurniture = new Draggable(
       i,
-      sc * -7.5,
-      sc * 34,
-      500,
-      400,
+      x + p5.width - 730,
+      y + p5.height - 500,
+      imgs[i].width * 0.5,
+      imgs[i].height * 0.5,
       p5,
-      sofaImg,
+      imgs[i],
       GlobalConfig
     );
-    divs.sofas.push(sofa);
+    divs.furniture.push(draggableFurniture);
   }
 };
 
@@ -193,7 +207,7 @@ export const addWaterCoolerDivs = (
   let sc = GlobalConfig.scaler;
   divs.waterCooler = [];
 
-  let cooler = new WaterCooler(0, 23.3, -2, p5, img, GlobalConfig);
+  let cooler = new WaterCooler(0, 1, 5.5, p5, img, GlobalConfig);
   divs.waterCooler.push(cooler);
 };
 
@@ -262,6 +276,20 @@ export const displayAllDivs = (userX: number, userY: number, divs: any) => {
   // for (const waterCooler of divs.waterCooler) {
   //   waterCooler.display(userX, userY);
   // }
+};
+
+export const displayAllDivsHostRoom = (
+  userX: number,
+  userY: number,
+  divs: any
+) => {
+  for (const waterCooler of divs.waterCooler) {
+    waterCooler.display(userX, userY);
+  }
+  for (const furniture of divs.furniture) {
+    furniture.display(userX, userY);
+    furniture.displayToolBarNormal(userX, userY);
+  }
 };
 
 export function endDivDrag(divs: any) {
