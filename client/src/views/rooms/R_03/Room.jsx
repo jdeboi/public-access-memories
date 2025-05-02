@@ -12,7 +12,7 @@ const Room = () => {
       }}
     >
       <iframe
-        src="https://editor.p5js.org/jdeboi/full/wVLYOi-Gf"
+        src="https://jdeboi.com/SeliciaSpace/"
         width="100%"
         height="calc(100% + 50px)"
         style={{ marginTop: "-50px", border: "none" }}

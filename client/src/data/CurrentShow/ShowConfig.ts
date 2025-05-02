@@ -1,5 +1,5 @@
 export const ShowConfig = {
-  isClosed: true,
+  isClosed: false,
   isOpenCallOpen: true,
   underConstruction: true,
   isResidency: true,
