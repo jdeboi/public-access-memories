@@ -222,7 +222,7 @@ class GallerySketch extends React.Component<Props> {
 
     p5.pixelDensity(2);
 
-    p5.textFont(font, 14);
+      p5.textFont(font, 14);
     p5.frameRate(20);
     loadingDone();
     addBots(barTenders);

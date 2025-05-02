@@ -107,9 +107,8 @@ const EmrysGalleryRoom = (props: IGallery) => {
   };
 
   const GalleryStyle = {
-    backgroundRepeat: "repeat",
-    backgroundSize: "600px 350px",
-    backgroundImage: "url(/backgroundImgs/wallpaper3.jpg)",
+    background:
+      "radial-gradient(circle, rgba(167, 255, 89, 0.41) 0%, rgba(83, 163, 115, 1) 50%, rgba(24, 61, 10, 1) 100%)",
   };
 
   const getGalleryAudio = () => {
@@ -139,7 +138,8 @@ const EmrysGalleryRoom = (props: IGallery) => {
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: "black",
+            background:
+              "radial-gradient(circle, rgba(167, 255, 89, 0.41) 0%, rgba(83, 163, 115, 1) 50%, rgba(24, 61, 10, 1) 100%)",
             color: "white",
             display: "flex",
             flexDirection: "column",
@@ -154,7 +154,7 @@ const EmrysGalleryRoom = (props: IGallery) => {
             confirm you are 18 or older to proceed.
           </p>
           <button
-            className="standardButton secondary"
+            className="standardButton primary"
             onClick={() => setAdultConfirmed(true)}
           >
             I am 18 or older

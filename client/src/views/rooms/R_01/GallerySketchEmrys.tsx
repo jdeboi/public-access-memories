@@ -38,41 +38,21 @@ import {
   checkDivPress,
 } from "../../Gallery/Gallery4HomeOffices/functions/divs";
 
-import {
-  barTenders,
-  danceFloor,
-} from "../../../data/Shows/HomeOffices/BotConfig";
-import {
-  LMD_BASE_URL,
-  LMD_URL,
-  loadEmojis,
-  PAM_URL,
-} from "../../Gallery/functions/loadImages";
+import { PAM_URL } from "../../Gallery/functions/loadImages";
 import {
   checkUserClickedNormalRoom,
   drawUsersRoomCoords,
 } from "../../Gallery/Gallery1/functions/users";
 
+const S3_URL =
+  "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/residency/emrys/";
 //////////////
-// EMOJIS
-const dancers: any = [];
-const dancerImgs: p5Types.Image[] = [];
-const barEmojis: p5Types.Image[] = [];
-const lightImgs: p5Types.Image[] = [];
-const trashFiles: p5Types.Image[] = [];
-let columnGif: p5Types.Image;
-let txtFile: p5Types.Image, instaImg: p5Types.Image;
 
 let font: p5Types.Font;
-let currentImgIndex = 1;
-let timer1 = new Timer(200);
-let timer2 = new Timer(200);
-let blindsImg: p5Types.Image;
 
 //////////////
 // DRAGGABLE DIVS
 var divs = {};
-let bars: any = [];
 
 // MOVEMENT
 const movement = {
@@ -107,24 +87,40 @@ interface DispatchProps {
 
 interface Props extends ComponentProps, StateProps, DispatchProps {}
 
+let textVisible = false;
+let qtextVisible = false;
+
+interface Images {
+  branch1: p5Types.Image;
+  branch2: p5Types.Image;
+  goldenrod: p5Types.Image;
+  bush2: p5Types.Image;
+  bush3: p5Types.Image;
+  txticon: p5Types.Image;
+  qicon: p5Types.Image;
+}
+
+const images = {} as Images;
+
+const txtBoundary = 315;
+const txtIconPos = { x: 0, y: 0 };
+const qIconPos = { x: 0, y: 0 };
+
+let blurredBg: p5Types.Graphics | null = null;
+
 class GallerySketchEmrys extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
   }
 
   preload = (p5: p5Types) => {
-    loadEmojis(p5, lightImgs, dancerImgs, barEmojis, trashFiles, false);
-    barEmojis[0] = p5.loadImage(LMD_URL + "emojis/popcorn.png");
-    barEmojis[1] = p5.loadImage(LMD_URL + "emojis/beer.png");
-    barEmojis[2] = p5.loadImage(LMD_URL + "emojis/coffee.png");
-    barEmojis[3] = p5.loadImage(LMD_URL + "emojis/cocktail.png");
-    barEmojis[4] = p5.loadImage(LMD_URL + "emojis/chat.png");
-
-    // folder icons
-    txtFile = p5.loadImage(LMD_BASE_URL + "sketches/waveforms/txt.png");
-    instaImg = p5.loadImage(LMD_URL + "instagram.png");
-    columnGif = p5.loadImage(PAM_URL + "gallery/column.png");
-
+    images.branch1 = p5.loadImage(S3_URL + "branch1.png");
+    images.branch2 = p5.loadImage(S3_URL + "branch2.png");
+    images.goldenrod = p5.loadImage(S3_URL + "goldenrod.png");
+    images.bush2 = p5.loadImage(S3_URL + "bush2.png");
+    images.bush3 = p5.loadImage(S3_URL + "bush3.png");
+    images.txticon = p5.loadImage(S3_URL + "txticon_sm.png");
+    images.qicon = p5.loadImage(S3_URL + "qicon_sm.png");
     // font
     font = p5.loadFont(PAM_URL + "fonts/sysfont.woff");
   };
@@ -145,31 +141,15 @@ class GallerySketchEmrys extends React.Component<Props> {
     //p5.frameRate(20);
     p5.pixelDensity(2);
 
-    this.initEmojis(p5);
     this.initDivs(p5);
 
+    blurredBg = p5.createGraphics(p5.width, p5.height);
+    this.generateBlurredBackground(p5);
     loadingDone();
-    // setOutside({ isOutside: false });
     this.setUserInitialPosition(p5);
-
-    // addBots(barTenders);
   };
 
-  initDivs = (p5: p5Types) => {
-    // addLightDivs(divs, lightImgs, p5);
-    // addColumnDivs(divs, columnGif, p5);
-    // addBlindsDiv(blindsImg, divs, p5);
-    // addTrashDivs(divs, trashFiles, p5);
-    // addFolderDivs(divs, instaImg, txtFile, p5);
-    // addGiftShopDivs(divs, giftShopImgs, p5);
-    // addBarDivs(bars, lightImgs[3], p5);
-  };
-
-  initEmojis = (p5: p5Types) => {
-    dancers[0] = new Dancer(p5, dancerImgs[0], 0, 160, false, danceFloor);
-    dancers[1] = new Dancer(p5, dancerImgs[1], 100, 380, false, danceFloor);
-    dancers[2] = new Dancer(p5, dancerImgs[2], 200, 150, true, danceFloor);
-  };
+  initDivs = (p5: p5Types) => {};
 
   setUserInitialPosition = (p5: p5Types) => {
     let dx = Math.floor(p5.random(-20, 20));
@@ -183,8 +163,7 @@ class GallerySketchEmrys extends React.Component<Props> {
     const { user, users } = this.props;
 
     p5.clear(0, 0, 0, 0);
-    //this.displayFrameRate(p5);
-
+    if (blurredBg) p5.image(blurredBg, 0, 0);
     //////////////
     // step visualization
     this.mouseStep(p5);
@@ -194,7 +173,7 @@ class GallerySketchEmrys extends React.Component<Props> {
     // drawing
     p5.push();
     p5.translate(movement.userEase.x, movement.userEase.y);
-    drawUser(user, p5, barEmojis);
+    drawUser(user, p5, []);
     p5.pop();
 
     this.drawOverTarget(p5);
@@ -203,7 +182,7 @@ class GallerySketchEmrys extends React.Component<Props> {
     p5.noStroke();
     p5.fill(255);
     p5.textFont(font, 30);
-    p5.text("UNDER CONSTRUCTION", 50, 80);
+    // p5.text("UNDER CONSTRUCTION", 50, 80);
 
     //////////////
     // updating
@@ -217,7 +196,121 @@ class GallerySketchEmrys extends React.Component<Props> {
       this.manualResize(p5);
   };
 
-  displayLayoutContent = (p5: p5Types) => {};
+  ////////////////////////////////////////////////////////////////////////
+  // EMRYS
+
+  generateBlurredBackground = (p: p5Types) => {
+    if (!blurredBg) return;
+    if (this.overImage(p, txtIconPos, images.txticon)) {
+      this.drawBackground();
+      if (textVisible) {
+        // blurredBg.filter(p.BLUR, 2);
+        this.showMainText(blurredBg);
+      }
+    } else if (textVisible && this.overImage(p, qIconPos, images.qicon)) {
+      this.drawBackground();
+      this.showMainText(blurredBg);
+      if (qtextVisible) {
+        // blurredBg.filter(p.BLUR, 2);
+        this.showQText(blurredBg);
+      }
+    }
+    // blurredBg.filter(p.BLUR, 2);
+  };
+
+  drawBackground = () => {
+    if (!blurredBg) return;
+    blurredBg.textFont(font, 20);
+    blurredBg.noStroke();
+    blurredBg.fill(255);
+
+    txtIconPos.x = blurredBg.width / 12;
+    txtIconPos.y = blurredBg.height / 12;
+    qIconPos.x = blurredBg.width - txtIconPos.x - images.qicon.width;
+    qIconPos.y = txtIconPos.y;
+
+    blurredBg.image(images.bush3, images.bush3.width / 2, -100);
+    blurredBg.image(
+      images.branch1,
+      blurredBg.width - images.branch1.width / 2,
+      100
+    );
+    blurredBg.image(images.branch1, blurredBg.width - images.branch1.width, 0);
+    blurredBg.image(
+      images.goldenrod,
+      0,
+      blurredBg.height - images.goldenrod.height
+    );
+    blurredBg.image(
+      images.branch2,
+      -50,
+      blurredBg.height - images.branch2.height * 1.5
+    );
+
+    blurredBg.image(images.txticon, txtIconPos.x, txtIconPos.y);
+    if (textVisible) blurredBg.image(images.qicon, qIconPos.x, qIconPos.y);
+  };
+
+  showMainText = (p: p5Types) => {
+    const lines = [
+      "Imagine a forest. Is it thick? Are you warm? Do you feel the humidity of late summer, the trees and plants pressing into you (and the noise)?",
+      "Or is it early spring - the new shots, green and fragile, pushing through last season's death?",
+      "What do you hear? Do you hear the bird song, along the top of the trees? Sounds of cars passing in the distance, insulated in the thick grove?",
+      "And the bugs?",
+      "Maybe if you are lucky you can hear soft whispers, footsteps.",
+      "If you turn a corner will you see them? The glint of a ringed finger, well worn jeans against a tree, the shape of a knee on flattened grass.",
+      "Ghosts of those who have come to the forest before – leaning against a sappy tree, settled into the soft earth, still, alert, and waiting.",
+    ];
+
+    const positions = [
+      [txtIconPos.x * 2, txtIconPos.y],
+      [txtIconPos.x * 2, txtIconPos.y * 3],
+      [txtIconPos.x * 2, txtIconPos.y * 5],
+      [txtIconPos.x * 2, txtIconPos.y * 7],
+      [txtIconPos.x * 6, txtIconPos.y * 7],
+      [txtIconPos.x * 6, p.windowHeight * (3 / 4)],
+      [p.windowWidth * (3 / 4), p.windowHeight * (3 / 4)],
+    ];
+
+    lines.forEach((line, idx) =>
+      p.text(line, positions[idx][0], positions[idx][1], txtBoundary)
+    );
+  };
+
+  showQText = (p: p5Types) => {
+    const qText =
+      "Desiring community, connection, sex, or some combination, public parks emerged as centers for cruising folk. A frenzy of moral panic, which gained momentum during the AIDS epidemic, allowed for heightened scrutiny and policing of public zones. Often trees were knocked down, stalls cleared. Open park plans no longer offered crevices to hold these clandestine acts. And alongside this disaster, the Internet began to grow.";
+    p.text(qText, p.windowWidth / 2, txtIconPos.y, txtBoundary);
+  };
+
+  emrysMousePressed = (p5: p5Types) => {
+    if (this.overImage(p5, txtIconPos, images.txticon)) {
+      textVisible = !textVisible;
+      qtextVisible = false;
+
+      return true;
+    } else if (textVisible && this.overImage(p5, qIconPos, images.qicon)) {
+      qtextVisible = !qtextVisible;
+
+      return true;
+    }
+    return false;
+  };
+
+  overImage = (
+    p: p5Types,
+    iconPos: { x: number; y: number },
+    icon: p5Types.Image
+  ) => {
+    return (
+      p.mouseX >= iconPos.x &&
+      p.mouseX <= iconPos.x + icon.width &&
+      p.mouseY >= iconPos.y &&
+      p.mouseY <= iconPos.y + icon.height
+    );
+  };
+
+  ///////////////////////////////////////////////////////////////////////
 
   displayFrameRate = (p5: p5Types) => {
     p5.fill(0);
@@ -237,7 +330,7 @@ class GallerySketchEmrys extends React.Component<Props> {
         "/emrys",
         font,
         p5,
-        barEmojis
+        []
       );
     }
 
@@ -334,6 +427,10 @@ class GallerySketchEmrys extends React.Component<Props> {
   };
 
   triggerMove = (p5: p5Types) => {
+    if (this.emrysMousePressed(p5)) {
+      this.generateBlurredBackground(p5);
+      return;
+    }
     const { user, users, setUserActive } = this.props;
     let userClicked = null;
 
@@ -407,6 +504,8 @@ class GallerySketchEmrys extends React.Component<Props> {
     const { windowUI } = this.props;
     p5.resizeCanvas(windowUI.contentW, windowUI.contentH);
     this.setUserBoundaries(p5);
+    this.generateBlurredBackground(p5);
+    blurredBg = p5.createGraphics(p5.width, p5.height);
   };
 
   setUserBoundaries = (p5: p5Types) => {
