@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface IGlobalConfig {
   scaler: number;
   x: number;
@@ -155,11 +157,11 @@ export interface IArtist {
   nameLink: string;
   instaLink?: string;
   webLink?: string;
-  medium?: string;
+  medium?: string | ReactNode;
   userName?: string;
   customLink?: string;
-  description: string;
-  bio: string;
+  description: string | ReactNode;
+  bio: string | ReactNode;
   title: string;
   year: number;
 }

@@ -27,6 +27,11 @@ const hostBotCoords = {
   y: 300,
 };
 
+const hiddenBarCoords = {
+  x: 1000000000,
+  y: 1000000000,
+};
+
 export const hostBotFirstRoom = 0;
 
 export const numBarItems = 4;
@@ -43,7 +48,30 @@ const barUsers: IUser[] = [
     coffeeBotCoords.x + botDX,
     coffeeBotCoords.y + botDY
   ),
-
+  getNewUser(
+    "beerBot",
+    "🤖",
+    "/hidden",
+    "2",
+    hiddenBarCoords.x + botDX,
+    hiddenBarCoords.y + botDY
+  ),
+  getNewUser(
+    "snackBot",
+    "🤖",
+    "/hidden",
+    "3",
+    hiddenBarCoords.x - 1,
+    hiddenBarCoords.y + botDY
+  ),
+  getNewUser(
+    "DJBot",
+    "🤖",
+    "/hidden",
+    "4",
+    hiddenBarCoords.x + botDX,
+    hiddenBarCoords.y - 0.1
+  ),
   getNewUser("hostBot", "🤖", "/lounge", "5", hostBotCoords.x, hostBotCoords.y),
 ];
 
@@ -78,6 +106,33 @@ export const bars: IBar[] = [
     w: barW,
     h: barH,
     tender: barTenders[4],
+    isFlipped: false,
+  },
+  {
+    type: "cocktail",
+    x: hiddenBarCoords.x,
+    y: hiddenBarCoords.y,
+    w: barW,
+    h: barH,
+    tender: barTenders[1],
+    isFlipped: false,
+  },
+  {
+    type: "cheese",
+    x: hiddenBarCoords.x,
+    y: hiddenBarCoords.y,
+    w: barW,
+    h: barH, // + 80
+    tender: barTenders[2],
+    isFlipped: false,
+  },
+  {
+    type: "DJ",
+    x: hiddenBarCoords.x,
+    y: hiddenBarCoords.y,
+    w: 210,
+    h: 45,
+    tender: barTenders[3],
     isFlipped: false,
   },
 ];

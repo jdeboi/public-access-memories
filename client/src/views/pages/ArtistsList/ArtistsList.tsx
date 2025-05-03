@@ -20,7 +20,7 @@ export const ArtistsList = () => {
         <h1 className="">Artists</h1>
         <br />
         <ul>
-          {artists.map((artist, i) => {
+          {artists.map((artist: IArtist, i: number) => {
             return getArtistListing(artist, i);
           })}
         </ul>
