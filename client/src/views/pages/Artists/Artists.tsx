@@ -40,7 +40,7 @@ export const Artists = () => {
   return (
     <div className="Artists Page">
       <div className="container">
-        <h1>Artists</h1>
+        <h1>{ShowConfig.isResidency ? "Artists in Residenc" : "Artists"}</h1>
         <br />
         <br />
         <br />
