@@ -154,7 +154,7 @@ class GallerySketchEmrys extends React.Component {
     )
       this.manualResize(p5);
 
-    this.displayFrameRate(p5);
+    // this.displayFrameRate(p5);
   };
 
   ////////////////////////////////////////////////////////////////////////
@@ -228,7 +228,7 @@ class GallerySketchEmrys extends React.Component {
   showQText = (p) => {
     const qText =
       "Desiring community, connection, sex, or some combination, public parks emerged as centers for cruising folk. A frenzy of moral panic, which gained momentum during the AIDS epidemic, allowed for heightened scrutiny and policing of public zones. Often trees were knocked down, stalls cleared. Open park plans no longer offered crevices to hold these clandestine acts. And alongside this disaster, the Internet began to grow.";
-    p.text(qText, p.windowWidth / 2, txtIconPos.y, txtBoundary);
+    p.text(qText, p.windowWidth / 1.5, txtIconPos.y, txtBoundary);
   };
 
   emrysMousePressed = (p5) => {
