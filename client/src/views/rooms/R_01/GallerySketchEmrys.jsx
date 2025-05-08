@@ -1,6 +1,7 @@
 import React from "react";
 import Sketch from "react-p5";
 import p5Types from "p5";
+import HitBox from "./HitBox";
 import { IUser, IUsers, IWindowUI } from "../../../interfaces";
 import { connect } from "react-redux";
 import { RootState } from "../../../store/store";
@@ -70,6 +71,7 @@ const txtBoundary = 315;
 const txtIconPos = { x: 0, y: 0 };
 const qIconPos = { x: 0, y: 0 };
 
+const hitBoxes = [];
 let blurredBg = null;
 
 class GallerySketchEmrys extends React.Component {
@@ -86,7 +88,10 @@ class GallerySketchEmrys extends React.Component {
     images.txticon = p5.loadImage(S3_URL + "txticon_sm.png");
     images.qicon = p5.loadImage(S3_URL + "qicon_sm.png");
     // font
-    font = p5.loadFont(PAM_URL + "fonts/sysfont.woff");
+    // font = p5.loadFont(PAM_URL + "fonts/sysfont.woff");
+
+    hitBoxes.push(new HitBox(300, 100, 100, 100));
+    hitBoxes.push(new HitBox(200, 200, 200, 200));
   };
 
   ////////////////////////////////////////////////////////////////////////
@@ -96,7 +101,7 @@ class GallerySketchEmrys extends React.Component {
   setup = (p5, canvasParentRef) => {
     const { user, loadingDone, windowUI, userMove } = this.props;
 
-    p5.textFont(font, 14);
+    // p5.textFont(font, 14);
 
     const cnv = p5.createCanvas(windowUI.contentW, windowUI.contentH);
     cnv.parent(canvasParentRef);
@@ -140,12 +145,16 @@ class GallerySketchEmrys extends React.Component {
     drawUser(user, p5, []);
     p5.pop();
 
+    for (const hitBox of hitBoxes) {
+      hitBox.draw(p5, user.roomX, user.roomY);
+    }
+
     this.drawOverTarget(p5);
     this.drawOverUser(p5);
 
     p5.noStroke();
     p5.fill(255);
-    p5.textFont(font, 30);
+    // p5.textFont(font, 30);
 
     this.updateUserEase(p5);
     if (
@@ -183,7 +192,7 @@ class GallerySketchEmrys extends React.Component {
 
   drawUnblurredBackground = (pg) => {
     if (!pg) return;
-    pg.textFont(font, 20);
+    // pg.textFont(font, 20);
     pg.noStroke();
     pg.fill(255);
 
@@ -260,7 +269,7 @@ class GallerySketchEmrys extends React.Component {
   displayFrameRate = (p5) => {
     p5.fill(0);
     p5.noStroke();
-    p5.textFont(font, 12);
+    // p5.textFont(font, 12);
     p5.text(p5.round(p5.frameRate()), 30, 30);
   };
 
@@ -269,7 +278,7 @@ class GallerySketchEmrys extends React.Component {
     p5.push();
 
     if (users) {
-      p5.textFont(font, 34);
+      // p5.textFont(font, 34);
       drawUsersRoomCoords(
         user,
         filterGalleryUsers(user, users),
@@ -289,7 +298,7 @@ class GallerySketchEmrys extends React.Component {
 
     const userEase = { x: 0, y: 0 };
 
-    p5.textFont(font, 12);
+    // p5.textFont(font, 12);
     // displayFolderDivs(room, divs);
 
     p5.pop();

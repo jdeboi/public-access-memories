@@ -1,6 +1,6 @@
 import React from "react";
 
-import './Yeli.css';
+import "./Yeli.css";
 
 const Room = () => {
   return (
@@ -8,8 +8,12 @@ const Room = () => {
       className="Room Yeli Sketch"
       style={{ position: "relative", width: "100%", height: "100%" }}
     >
-      <p> at every point in the trail people are walking ahead of me deeper inside and walking in the opposite direction
-		  towards the city, towards the exit, towards the familiar </p>
+      <p>
+        {" "}
+        at every point in the trail people are walking ahead of me deeper inside
+        and walking in the opposite direction towards the city, towards the
+        exit, towards the familiar{" "}
+      </p>
       <p> I cannot always see them all at once </p>
       <p> The people ahead of me</p>
       <p> And </p>
@@ -36,7 +40,10 @@ const Room = () => {
       <p> He couldn’t tell me </p>
       <p> I kept going when I could </p>
       <p> And turned back when I couldn’t </p>
-      <p> Tried to be okay missing whatever people were still walking towards</p>
+      <p>
+        {" "}
+        Tried to be okay missing whatever people were still walking towards
+      </p>
       <p> I saw the sunset </p>
       <p> Over the city </p>
       <p> It was beautiful </p>
@@ -51,6 +58,5 @@ const Room = () => {
     </div>
   );
 };
-
 
 export default Room;

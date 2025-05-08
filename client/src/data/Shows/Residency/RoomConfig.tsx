@@ -206,7 +206,7 @@ export const artists: IArtist[] = [
     roomID: 3,
     title: "Studio",
     userName: "seliciayxy",
-    name: "Xuyi Yao",
+    name: "Selicia",
     thumb: "xuyi-thumb.jpg",
     nameLink: "seliciaxy",
     instaLink: "https://www.instagram.com/seliciayxy/",
