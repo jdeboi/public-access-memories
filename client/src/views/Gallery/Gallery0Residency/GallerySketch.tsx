@@ -174,6 +174,12 @@ class GallerySketch extends React.Component<Props> {
       PAM_URL + "residency/assets/lightsOffDoorClosed.jpg"
     );
     roomTextures[4] = p5.loadImage(PAM_URL + "residency/assets/lounge.jpg");
+    roomTextures[5] = p5.loadImage(
+      "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/residency/emrys/openLightStudioDoorLeaves.jpeg"
+    );
+    roomTextures[6] = p5.loadImage(
+      "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/residency/emrys/closedLightStudioDoorLeaves.jpeg"
+    );
 
     eyeIcon = p5.loadImage(LMD_URL + "eye.png");
     floorTex = p5.loadImage(LMD_URL + "concrete-512.jpg");
@@ -222,7 +228,7 @@ class GallerySketch extends React.Component<Props> {
 
     p5.pixelDensity(2);
 
-      p5.textFont(font, 14);
+    p5.textFont(font, 14);
     p5.frameRate(20);
     loadingDone();
     addBots(barTenders);
