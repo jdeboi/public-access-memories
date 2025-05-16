@@ -112,7 +112,7 @@ export const drawRooms = (
 
       const artist = users.find((user) => user.userName === room.userName);
       if (artist) {
-        room.displayArtistInRoom(user, roomTextures, otherImgs[1]);
+        room.displayArtistInRoom(user, roomTextures, otherImgs[1], room.userName);
       } else {
         room.displayArtistNotInRoom(user, roomTextures, otherImgs[0]);
       }

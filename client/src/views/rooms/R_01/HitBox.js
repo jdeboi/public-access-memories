@@ -1,18 +1,16 @@
 export default class HitBox {
-  constructor(x, y, width, height) {
+  constructor(x, y, width, height, img) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
+    this.img = img;
   }
 
-  draw(p5, x, y) {
+  draw(p, x, y, img) {
     if (this.isUserOver(x, y)) {
-      p5.fill(255, 0, 0, 100); // Red with transparency
-    } else {
-      p5.fill(0, 255, 0, 100); // Green with transparency
+      p.image(this.img, this.x, this.y, this.width, this.height); // txt img drawn
     }
-    p5.rect(this.x, this.y, this.width, this.height);
   }
 
   isUserOver(x, y) {
@@ -24,12 +22,12 @@ export default class HitBox {
     );
   }
 
-  isMouseOver(p5) {
+  isMouseOver(p) {
     return (
-      p5.mouseX > this.x &&
-      p5.mouseX < this.x + this.width &&
-      p5.mouseY > this.y &&
-      p5.mouseY < this.y + this.height
+      p.mouseX > this.x &&
+      p.mouseX < this.x + this.width &&
+      p.mouseY > this.y &&
+      p.mouseY < this.y + this.height
     );
   }
 }

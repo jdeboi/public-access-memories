@@ -85,9 +85,9 @@ export default class ResidencyRoom extends Room {
     this.displayRoomToolbarFrame(true, onIcon);
   }
 
-  displayArtistInRoom(user, roomTextures, onIcon) {
+  displayArtistInRoom(user, roomTextures, onIcon, roomUserName = "") {
     const isDoorOpen = this.getIsDoorOpen(user);
-    if (user.userName === "moneymachine69") {
+    if (roomUserName === "moneymachine69") {
       this.displayEmrysRoom(roomTextures, isDoorOpen);
     } else if (isDoorOpen) {
       this.displayRoomTexture(roomTextures[0]);

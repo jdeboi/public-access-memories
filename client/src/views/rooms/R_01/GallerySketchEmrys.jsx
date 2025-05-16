@@ -1,15 +1,7 @@
-import React from "react";
-import Sketch from "react-p5";
-import p5Types from "p5";
 import HitBox from "./HitBox";
-import { IUser, IUsers, IWindowUI } from "../../../interfaces";
-import { connect } from "react-redux";
-import { RootState } from "../../../store/store";
-import { setFollowingHost } from "../../../store/user";
 
 //////////////
 // CONFIG
-import { Dispatch } from "@reduxjs/toolkit";
 import { GlobalConfig } from "../../../data/Shows/HomeOffices/GlobalConfig";
 
 import { filterGalleryUsers } from "../../../helpers/helpers";
@@ -42,44 +34,45 @@ import {
   drawUsersRoomCoords,
 } from "../../Gallery/Gallery1/functions/users";
 
-const S3_URL =
-  "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/residency/emrys/";
-//////////////
+export const GallerySketchEmrys = (p5) => {
+  const S3_URL =
+    "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/residency/emrys/";
+  //////////////
 
-let font;
+  let font;
 
-//////////////
-// DRAGGABLE DIVS
-var divs = {};
+  //////////////
+  // DRAGGABLE DIVS
+  var divs = {};
 
-// MOVEMENT
-const movement = {
-  isWalking: false,
-  stepTo: { x: 0, y: 0 },
-  userEase: { x: 0, y: 0 },
-  destination: { x: 0, y: 0, time: new Date() },
-  lastMouseMove: new Date(),
-  lastStepTime: 0,
-};
+  // MOVEMENT
+  const movement = {
+    isWalking: false,
+    stepTo: { x: 0, y: 0 },
+    userEase: { x: 0, y: 0 },
+    destination: { x: 0, y: 0, time: new Date() },
+    lastMouseMove: new Date(),
+    lastStepTime: 0,
+  };
 
-let textVisible = false;
-let qtextVisible = false;
+  let textVisible = false;
+  let qtextVisible = false;
 
-const images = {};
+  const images = {};
 
-const txtBoundary = 315;
-const txtIconPos = { x: 0, y: 0 };
-const qIconPos = { x: 0, y: 0 };
+  const txtBoundary = 315;
+  const txtIconPos = { x: 0, y: 0 };
+  const qIconPos = { x: 0, y: 0 };
 
-const hitBoxes = [];
-let blurredBg = null;
+  const hitBoxes = [];
 
-class GallerySketchEmrys extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  let props = {}; // Accessible everywhere inside your sketch
 
-  preload = (p5) => {
+  p5.updateWithProps = (newProps) => {
+    props = newProps;
+  };
+
+  p5.preload = () => {
     images.branch1 = p5.loadImage(S3_URL + "branch1.png");
     images.branch2 = p5.loadImage(S3_URL + "branch2.png");
     images.goldenrod = p5.loadImage(S3_URL + "goldenrod.png");
@@ -87,198 +80,72 @@ class GallerySketchEmrys extends React.Component {
     images.bush3 = p5.loadImage(S3_URL + "bush3.png");
     images.txticon = p5.loadImage(S3_URL + "txticon_sm.png");
     images.qicon = p5.loadImage(S3_URL + "qicon_sm.png");
-    // font
-    // font = p5.loadFont(PAM_URL + "fonts/sysfont.woff");
+    images.txt1 = p5.loadImage(S3_URL + "textTest0.png");
+    images.txt2 = p5.loadImage(S3_URL + "textTest4.png");
+    images.txt3 = p5.loadImage(S3_URL + "textTest5.png");
+    images.bench = p5.loadImage(S3_URL + "bench.png");
+    images.stick1 = p5.loadImage(S3_URL + "stick1.png");
+    images.stick2 = p5.loadImage(S3_URL + "stick2.png");
+    font = p5.loadFont(PAM_URL + "fonts/sysfont.woff");
 
-    hitBoxes.push(new HitBox(300, 100, 100, 100));
-    hitBoxes.push(new HitBox(200, 200, 200, 200));
+    hitBoxes.push(new HitBox(p5.windowWidth / 4, 100, 175, 175, images.txt2));
+    hitBoxes.push(new HitBox(200, p5.windowHeight / 2, 175, 175, images.txt1));
+    hitBoxes.push(
+      new HitBox(
+        p5.windowWidth / 2,
+        p5.windowHeight - 300,
+        215,
+        215,
+        images.txt3
+      )
+    );
   };
 
   ////////////////////////////////////////////////////////////////////////
   // INITIALIZE
   ////////////////////////////////////////////////////////////////////////
 
-  setup = (p5, canvasParentRef) => {
-    const { user, loadingDone, windowUI, userMove } = this.props;
+  p5.setup = () => {
+    const { user, loadingDone, windowUI, userMove } = props || {};
 
     // p5.textFont(font, 14);
 
-    const cnv = p5.createCanvas(windowUI.contentW, windowUI.contentH);
-    cnv.parent(canvasParentRef);
-    cnv.mousePressed(() => this.triggerMove(p5));
+    const cnv = p5.createCanvas(window.innerWidth, window.innerHeight);
+    cnv.mousePressed(() => triggerMove(p5));
 
     //p5.frameRate(20);
     p5.pixelDensity(2);
 
-    this.initDivs(p5);
+    initDivs(p5);
 
-    blurredBg = p5.createGraphics(p5.width, p5.height);
-    this.generateBlurredBackground(p5);
+    txtIconPos.x = p5.windowWidth / 12;
+    txtIconPos.y = p5.windowHeight / 12;
+    images.qiconX = p5.windowWidth - txtIconPos.x - 50;
+    images.qiconY = p5.windowHeight / 2;
+
     loadingDone();
-    this.setUserInitialPosition(p5);
+    setUserInitialPosition(p5);
   };
 
-  initDivs = (p5) => {};
+  const initDivs = (p5) => {};
 
-  setUserInitialPosition = (p5) => {
+  const setUserInitialPosition = (p5) => {
     let dx = Math.floor(p5.random(-20, 20));
     let dy = Math.floor(p5.random(-20, 20));
     let x = Math.floor(p5.width / 2 + dx);
     let y = Math.floor(p5.height / 2 + dy);
-    this.setUserPositionImmediate(x, y);
+    setUserPositionImmediate(x, y);
   };
 
-  draw = (p5) => {
-    const { user, users } = this.props;
+  p5.draw = () => {
+    const { user, users } = props;
 
     p5.clear(0, 0, 0, 0);
-    if (blurredBg) p5.image(blurredBg, 0, 0);
-    //////////////
-    // step visualization
-    this.mouseStep(p5);
-    this.showTarget(p5);
 
-    //////////////
-    // drawing
-    p5.push();
-    p5.translate(movement.userEase.x, movement.userEase.y);
-    drawUser(user, p5, []);
-    p5.pop();
-
-    for (const hitBox of hitBoxes) {
-      hitBox.draw(p5, user.roomX, user.roomY);
-    }
-
-    this.drawOverTarget(p5);
-    this.drawOverUser(p5);
-
-    p5.noStroke();
-    p5.fill(255);
-    // p5.textFont(font, 30);
-
-    this.updateUserEase(p5);
-    if (
-      p5.width !== this.props.windowUI.contentW ||
-      p5.height !== this.props.windowUI.contentH
-    )
-      this.manualResize(p5);
-
-    // this.displayFrameRate(p5);
-  };
-
-  ////////////////////////////////////////////////////////////////////////
-  // EMRYS
-
-  generateBlurredBackground = (p) => {
-    if (!blurredBg) return;
-    blurredBg.clear();
-    this.drawUnblurredBackground(blurredBg);
-    if (qtextVisible) {
-      this.showMainText(blurredBg);
-      blurredBg.filter(p.BLUR, 2);
-      this.showQText(blurredBg);
-      blurredBg.image(images.qicon, qIconPos.x, qIconPos.y);
-    } else if (textVisible) {
-      blurredBg.image(images.txticon, txtIconPos.x, txtIconPos.y);
-      blurredBg.filter(p.BLUR, 2);
-      this.showMainText(blurredBg);
-      blurredBg.image(images.qicon, qIconPos.x, qIconPos.y);
-    } else {
-      blurredBg.image(images.txticon, txtIconPos.x, txtIconPos.y);
-    }
-
-    console.log("blurring");
-  };
-
-  drawUnblurredBackground = (pg) => {
-    if (!pg) return;
-    // pg.textFont(font, 20);
-    pg.noStroke();
-    pg.fill(255);
-
-    txtIconPos.x = pg.width / 12;
-    txtIconPos.y = pg.height / 12;
-    qIconPos.x = pg.width - txtIconPos.x - images.qicon.width;
-    qIconPos.y = txtIconPos.y;
-
-    pg.image(images.bush3, images.bush3.width / 2, -100);
-    pg.image(images.branch1, pg.width - images.branch1.width / 2, 100);
-    pg.image(images.branch1, pg.width - images.branch1.width, 0);
-    pg.image(images.goldenrod, 0, pg.height - images.goldenrod.height);
-    pg.image(images.branch2, -50, pg.height - images.branch2.height * 1.5);
-  };
-
-  showMainText = (p) => {
-    const lines = [
-      "Imagine a forest. Is it thick? Are you warm? Do you feel the humidity of late summer, the trees and plants pressing into you (and the noise)?",
-      "Or is it early spring - the new shots, green and fragile, pushing through last season's death?",
-      "What do you hear? Do you hear the bird song, along the top of the trees? Sounds of cars passing in the distance, insulated in the thick grove?",
-      "And the bugs?",
-      "Maybe if you are lucky you can hear soft whispers, footsteps.",
-      "If you turn a corner will you see them? The glint of a ringed finger, well worn jeans against a tree, the shape of a knee on flattened grass.",
-      "Ghosts of those who have come to the forest before – leaning against a sappy tree, settled into the soft earth, still, alert, and waiting.",
-    ];
-
-    const positions = [
-      [txtIconPos.x * 2, txtIconPos.y],
-      [txtIconPos.x * 2, txtIconPos.y * 3],
-      [txtIconPos.x * 2, txtIconPos.y * 5],
-      [txtIconPos.x * 2, txtIconPos.y * 7],
-      [txtIconPos.x * 6, txtIconPos.y * 7],
-      [txtIconPos.x * 6, p.windowHeight * (3 / 4)],
-      [p.windowWidth * (3 / 4), p.windowHeight * (3 / 4)],
-    ];
-
-    lines.forEach((line, idx) =>
-      p.text(line, positions[idx][0], positions[idx][1], txtBoundary)
-    );
-  };
-
-  showQText = (p) => {
-    const qText =
-      "Desiring community, connection, sex, or some combination, public parks emerged as centers for cruising folk. A frenzy of moral panic, which gained momentum during the AIDS epidemic, allowed for heightened scrutiny and policing of public zones. Often trees were knocked down, stalls cleared. Open park plans no longer offered crevices to hold these clandestine acts. And alongside this disaster, the Internet began to grow.";
-    p.text(qText, p.windowWidth / 1.5, txtIconPos.y, txtBoundary);
-  };
-
-  emrysMousePressed = (p5) => {
-    if (this.overImage(p5, txtIconPos, images.txticon)) {
-      textVisible = !textVisible;
-      qtextVisible = false;
-
-      return true;
-    }
-    if (textVisible && this.overImage(p5, qIconPos, images.qicon)) {
-      qtextVisible = !qtextVisible;
-
-      return true;
-    }
-    return false;
-  };
-
-  overImage = (p, iconPos, icon) => {
-    return (
-      p.mouseX >= iconPos.x &&
-      p.mouseX <= iconPos.x + icon.width &&
-      p.mouseY >= iconPos.y &&
-      p.mouseY <= iconPos.y + icon.height
-    );
-  };
-
-  ///////////////////////////////////////////////////////////////////////
-
-  displayFrameRate = (p5) => {
-    p5.fill(0);
-    p5.noStroke();
-    // p5.textFont(font, 12);
-    p5.text(p5.round(p5.frameRate()), 30, 30);
-  };
-
-  drawOverTarget = (p5) => {
-    const { user, users } = this.props;
-    p5.push();
+    drawScene(p5);
 
     if (users) {
-      // p5.textFont(font, 34);
+      p5.textFont(font, 34);
       drawUsersRoomCoords(
         user,
         filterGalleryUsers(user, users),
@@ -289,11 +156,179 @@ class GallerySketchEmrys extends React.Component {
       );
     }
 
+    p5.image(images.txticon, txtIconPos.x, txtIconPos.y);
+
+    if (textVisible) showText(p5);
+    if (qtextVisible) showQText(p5);
+
+    p5.push();
+    p5.translate(movement.userEase.x, movement.userEase.y);
+    drawUser(user, p5, []);
+    p5.pop();
+
+    //////////////
+    // step visualization
+    mouseStep(p5);
+    showTarget(p5);
+
+    //////////////
+    // drawing
+
+    // drawOverTarget(p5);
+    // drawOverUser(p5);
+
+    updateUserEase(p5);
+    if (
+      p5.width !== props.windowUI.contentW ||
+      p5.height !== props.windowUI.contentH
+    )
+      manualResize(p5);
+
+    // displayFrameRate(p5);
+  };
+
+  ////////////////////////////////////////////////////////////////////////
+  // EMRYS
+
+  const drawScene = (p) => {
+    p.image(images.bench, p.windowWidth / 2, p.windowHeight / 2, 200, 120);
+
+    p.image(images.bush3, images.bush3.width / 2, -100);
+    p.image(
+      images.bush2,
+      p.windowWidth - images.bush2.width * 0.9,
+      p.windowHeight - images.bush2.height * 0.75
+    );
+    p.image(images.goldenrod, 0, p.windowHeight - images.goldenrod.height);
+    p.image(
+      images.goldenrod,
+      p.windowWidth / 2,
+      p.windowHeight - images.goldenrod.width,
+      images.goldenrod.height / 2
+    );
+    p.image(images.branch2, -50, p.windowHeight - images.branch2.height * 1.5);
+
+    p.noFill();
+    p.stroke(255);
+    p.textSize(18);
+
+    displayHitBoxes(p);
+
+    // in front of text:
+    p.image(images.branch1, p.windowWidth - images.branch1.width, 0);
+    p.image(images.branch1, p.windowWidth - images.branch1.width / 2, 100);
+    p.image(
+      images.stick1,
+      p.windowWidth / 2 + 100,
+      p.windowHeight - images.stick1.height * 0.75,
+      images.stick1.width * 0.75,
+      images.stick1.height * 0.75
+    );
+    p.image(images.stick2, p.windowWidth / 3, p.windowHeight - 100, 200, 200);
+    p.image(images.branch2, -210, p.windowHeight / 3 - 20);
+  };
+
+  const displayHitBoxes = (p) => {
+    for (const hitBox of hitBoxes) {
+      hitBox.draw(p, props.user.roomX, props.user.roomY);
+    }
+  };
+
+  const showText = (p) => {
+    p.filter(p.BLUR, 2);
+    const tx = images.txticonX * 2;
+    const ty = images.txticonY;
+
+    const texts = [
+      "Imagine a forest. Is it thick? Are you warm? Do you feel the humidity of late summer, the trees and plants pressing into you (and the noise)?",
+      "Or is it early spring - the new shots, green and fragile, pushing through last season's death?",
+      "What do you hear? Do you hear the bird song, along the top of the trees? Sounds of cars passing in the distance, insulated in the thick grove?",
+      "And the bugs?",
+      "Maybe if you are lucky you can hear soft whispers, footsteps.",
+      "If you turn a corner will you see them? The glint of a ringed finger, well worn jeans against a tree, the shape of a knee on flattened grass.",
+      "Ghosts of those who have come to the forest before – leaning against a sappy tree, settled into the soft earth, still, alert, and waiting.",
+    ];
+
+    const positions = [
+      [tx, ty],
+      [tx, ty * 3],
+      [tx, ty * 5],
+      [tx, ty * 7],
+      [tx * 3, ty * 7],
+      [tx * 3, p.windowHeight * 0.75],
+      [p.windowWidth * 0.75, p.windowHeight * 0.75],
+    ];
+
+    p.noFill();
+    p.stroke(255);
+    p.strokeWeight(1);
+    p.textSize(18);
+    texts.forEach((text, i) => {
+      const [x, y] = positions[i];
+      p.text(text, x, y, txtBoundary);
+    });
+
+    if (textVisible) p.image(images.qicon, images.qiconX, images.qiconY);
+  };
+
+  const showQText = (p) => {
+    p.filter(p.BLUR, 2);
+    p.noFill();
+    p.stroke(255);
+    p.strokeWeight(1);
+    p.textSize(18);
+    const text =
+      "Desiring community, connection, sex, or some combination, public parks emerged as centers for cruising folk. A frenzy of moral panic, which gained momentum during the AIDS epidemic, allowed for heightened scrutiny and policing of public zones. Often trees were knocked down, stalls cleared. Open park plans no longer offered crevices to hold these clandestine acts. And alongside this disaster, the Internet began to grow.";
+    p.text(text, p.windowWidth / 1.5, images.txticonY, txtBoundary);
+  };
+
+  const emrysMousePressed = (p5) => {
+    if (overImage(p5, txtIconPos, images.txticon)) {
+      textVisible = !textVisible;
+      qtextVisible = false;
+
+      return true;
+    }
+    if (textVisible && overImage(p5, qIconPos, images.qicon)) {
+      qtextVisible = !qtextVisible;
+
+      return true;
+    }
+    return false;
+  };
+
+  const overImage = (p, iconPos, icon) => {
+    return (
+      p.mouseX >= iconPos.x &&
+      p.mouseX <= iconPos.x + icon.width &&
+      p.mouseY >= iconPos.y &&
+      p.mouseY <= iconPos.y + icon.height
+    );
+  };
+
+  ///////////////////////////////////////////////////////////////////////
+
+  const displayFrameRate = (p5) => {
+    p5.fill(0);
+    p5.noStroke();
+    // p5.textFont(font, 12);
+    p5.text(p5.round(p5.frameRate()), 30, 30);
+  };
+
+  const drawOverTarget = (p5) => {
+    const { user, users } = props;
+    p5.push();
+
+    if (users) {
+      // p5.textFont(font, 34);
+      drawUsers(user, filterGalleryUsers(user, users), "/emrys", font, p5, []);
+    }
+
     p5.pop();
   };
 
-  drawOverUser = (p5) => {
-    const { user } = this.props;
+  const drawOverUser = (p5) => {
+    const { user } = props;
     p5.push();
 
     const userEase = { x: 0, y: 0 };
@@ -304,14 +339,16 @@ class GallerySketchEmrys extends React.Component {
     p5.pop();
   };
 
-  manualResize = (p5) => {
-    this.windowResized(p5);
+  const manualResize = (p5) => {
+    const { windowUI } = props;
+    p5.resizeCanvas(windowUI.contentW, windowUI.contentH);
+    setUserBoundaries(p5);
   };
   ////////////////////////////////////////////////////////////////////////
   // MOVEMENT
   ////////////////////////////////////////////////////////////////////////
-  showTarget = (p5) => {
-    const { windowUI } = this.props;
+  const showTarget = (p5) => {
+    const { windowUI } = props;
     const { userEase, destination, isWalking } = movement;
 
     if (mouseDidMove(p5)) {
@@ -320,7 +357,7 @@ class GallerySketchEmrys extends React.Component {
     showMouseLoc(windowUI.isMobile, movement.lastMouseMove, p5);
   };
 
-  userTakeStep = (p5, x, y) => {
+  const userTakeStep = (p5, x, y) => {
     const { stepTo } = movement;
     movement.lastStepTime = p5.millis();
 
@@ -328,45 +365,45 @@ class GallerySketchEmrys extends React.Component {
     const userStep = { x: stepTo.x + x * space, y: stepTo.y + y * space };
 
     if (userStep.x > p5.width) {
-      this.stopWalking();
+      stopWalking();
     } else if (userStep.y > p5.height) {
-      this.stopWalking();
+      stopWalking();
     } else if (userStep.x < 0) {
-      this.stopWalking();
+      stopWalking();
     } else if (userStep.y < 0) {
-      this.stopWalking();
+      stopWalking();
     } else {
       stepTo.x = userStep.x;
       stepTo.y = userStep.y;
     }
   };
 
-  stopWalking = () => {
+  const stopWalking = () => {
     movement.isWalking = false;
   };
 
-  setUserPosition = (x, y) => {
-    this.stopWalking();
+  const setUserPosition = (x, y) => {
+    stopWalking();
     movement.stepTo.x = x;
     movement.stepTo.y = y;
     movement.destination.x = x;
     movement.destination.y = y;
-    this.props.userMove(x, y);
+    props.userMove(x, y);
   };
 
-  setUserPositionImmediate = (x, y) => {
-    this.stopWalking();
+  const setUserPositionImmediate = (x, y) => {
+    stopWalking();
     movement.userEase.x = x;
     movement.userEase.y = y;
     movement.stepTo.x = x;
     movement.stepTo.y = y;
     movement.destination.x = x;
     movement.destination.y = y;
-    this.props.userMove(x, y);
+    props.userMove(x, y);
   };
 
-  updateUserEase = (p5) => {
-    const { userMove } = this.props;
+  const updateUserEase = (p5) => {
+    const { userMove } = props;
     const { userEase, stepTo } = movement;
     if (!reachedDestination(userEase, stepTo)) {
       let amt = 0.7;
@@ -381,12 +418,11 @@ class GallerySketchEmrys extends React.Component {
     }
   };
 
-  triggerMove = (p5) => {
-    if (this.emrysMousePressed(p5)) {
-      this.generateBlurredBackground(p5);
+  const triggerMove = (p5) => {
+    if (emrysMousePressed(p5)) {
       return;
     }
-    const { user, users, setUserActive } = this.props;
+    const { user, users, setUserActive } = props;
     let userClicked = null;
 
     if (users)
@@ -414,59 +450,49 @@ class GallerySketchEmrys extends React.Component {
     }
   };
 
-  mouseStep = (p5) => {
+  const mouseStep = (p5) => {
     const t = new Date().getTime() - movement.destination.time.getTime();
-    const { user } = this.props;
+    const { user } = props;
     if (movement.isWalking) {
       if (reachedDestination(movement.stepTo, movement.destination)) {
-        this.setUserPositionImmediate(
+        setUserPositionImmediate(
           movement.destination.x,
           movement.destination.y
         );
         movement.isWalking = false;
       } else if (t > 150) {
         let step = getNextStep(movement.stepTo, movement.destination, true);
-        this.userTakeStep(p5, step[0], step[1]);
+        userTakeStep(p5, step[0], step[1]);
         movement.destination.time = new Date();
       }
     }
   };
 
-  keyPressed = (p5) => {
+  p5.keyPressed = () => {
     if (p5.frameCount > 0) {
       if (p5.keyCode === p5.UP_ARROW) {
-        this.userTakeStep(p5, 0, -1);
+        userTakeStep(p5, 0, -1);
       } else if (p5.keyCode === p5.RIGHT_ARROW) {
-        this.userTakeStep(p5, 1, 0);
+        userTakeStep(p5, 1, 0);
       } else if (p5.keyCode === p5.LEFT_ARROW) {
-        this.userTakeStep(p5, -1, 0);
+        userTakeStep(p5, -1, 0);
       } else if (p5.keyCode === p5.DOWN_ARROW) {
-        this.userTakeStep(p5, 0, 1);
+        userTakeStep(p5, 0, 1);
       }
     }
     return;
   };
 
-  mouseReleased = (p5) => {
+  p5.mouseReleased = () => {
     if (p5.frameCount > 0) {
       endDivDrag(divs);
     }
   };
 
-  mouseMoved = (p5) => {};
+  p5.mouseMoved = () => {};
 
-  windowResized = (p5) => {
-    const { windowUI } = this.props;
-    p5.resizeCanvas(windowUI.contentW, windowUI.contentH);
-    this.setUserBoundaries(p5);
-    textVisible = false;
-    qtextVisible = false;
-    blurredBg = p5.createGraphics(p5.width, p5.height);
-    this.generateBlurredBackground(p5);
-  };
-
-  setUserBoundaries = (p5) => {
-    const { user } = this.props;
+  const setUserBoundaries = (p5) => {
+    const { user } = props;
     let x = user.roomX;
     let y = user.roomY;
     if (x > p5.width - 50) {
@@ -475,42 +501,16 @@ class GallerySketchEmrys extends React.Component {
     if (y > p5.height - 50) {
       y = p5.height - 50;
     }
-    this.setUserPositionImmediate(x, y);
+    setUserPositionImmediate(x, y);
   };
 
-  doubleClicked = (p5) => {
+  p5.doubleClicked = () => {
     if (p5.frameCount > 0) {
-      // checkFolderDivsDouble(this.getRoomLayoutNum(), divs);
-      // checkTrashDivsDouble(this.getRoomLayoutNum(), divs);
+      // checkFolderDivsDouble(getRoomLayoutNum(), divs);
+      // checkTrashDivsDouble(getRoomLayoutNum(), divs);
     }
     return;
   };
-
-  render() {
-    // TODO - key & mouse listeners called twice (like 2 instances... one always at frame count 0)
-    return (
-      <>
-        <Sketch
-          preload={this.preload}
-          setup={this.setup}
-          draw={this.draw}
-          windowResized={this.windowResized}
-          mouseMoved={this.mouseMoved}
-          keyPressed={this.keyPressed}
-          mouseReleased={this.mouseReleased}
-          doubleClicked={this.doubleClicked}
-        />
-      </>
-    );
-  }
-}
-
-const mapStateToProps = (state) => ({
-  user: state.user,
-});
-
-const mapDispatchToProps = (dispatch) => {
-  return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GallerySketchEmrys);
+export default GallerySketchEmrys;
