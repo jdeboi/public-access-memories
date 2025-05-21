@@ -21,7 +21,6 @@ import { doneLoadingApp, startComposition } from "../../../store/window";
 import { getBar } from "../../../data/CurrentShow/BotConfig";
 import { p5ToUserCoords } from "../../../helpers/coordinates";
 import GallerySketchEmrys from "./GallerySketchEmrys";
-import GallerySketchWrapper from "./GallerySketchWrapper";
 
 interface IGallery {
   id: number;
@@ -150,7 +149,7 @@ const EmrysGalleryRoom = (props: IGallery) => {
           }}
         >
           <h1>Adult Content Warning</h1>
-          <p style={{ textAlign: "center", padding: "20px" }}>
+          <p>
             This studio room contains material intended for adults. Please
             confirm you are 18 or older to proceed.
           </p>
@@ -165,7 +164,7 @@ const EmrysGalleryRoom = (props: IGallery) => {
         <>
           <div id="p5_loading" className="loadingclass"></div>
 
-          <GallerySketchWrapper
+          <GallerySketchEmrys
             users={props.users}
             isClosed={props.isClosed}
             userMove={moveGalleryUserRoom}

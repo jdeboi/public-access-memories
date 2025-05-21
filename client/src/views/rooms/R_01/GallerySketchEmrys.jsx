@@ -1,7 +1,15 @@
+import React from "react";
+import Sketch from "react-p5";
+import p5Types from "p5";
 import HitBox from "./HitBox";
+import { IUser, IUsers, IWindowUI } from "../../../interfaces";
+import { connect } from "react-redux";
+import { RootState } from "../../../store/store";
+import { setFollowingHost } from "../../../store/user";
 
 //////////////
 // CONFIG
+import { Dispatch } from "@reduxjs/toolkit";
 import { GlobalConfig } from "../../../data/Shows/HomeOffices/GlobalConfig";
 
 import { filterGalleryUsers } from "../../../helpers/helpers";
@@ -34,45 +42,43 @@ import {
   drawUsersRoomCoords,
 } from "../../Gallery/Gallery1/functions/users";
 
-export const GallerySketchEmrys = (p5) => {
-  const S3_URL =
-    "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/residency/emrys/";
-  //////////////
+const S3_URL =
+  "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/residency/emrys/";
+//////////////
 
-  let font;
+let font;
 
-  //////////////
-  // DRAGGABLE DIVS
-  var divs = {};
+//////////////
+// DRAGGABLE DIVS
+var divs = {};
 
-  // MOVEMENT
-  const movement = {
-    isWalking: false,
-    stepTo: { x: 0, y: 0 },
-    userEase: { x: 0, y: 0 },
-    destination: { x: 0, y: 0, time: new Date() },
-    lastMouseMove: new Date(),
-    lastStepTime: 0,
-  };
+// MOVEMENT
+const movement = {
+  isWalking: false,
+  stepTo: { x: 0, y: 0 },
+  userEase: { x: 0, y: 0 },
+  destination: { x: 0, y: 0, time: new Date() },
+  lastMouseMove: new Date(),
+  lastStepTime: 0,
+};
 
-  let textVisible = false;
-  let qtextVisible = false;
+let textVisible = false;
+let qtextVisible = false;
 
-  const images = {};
+const images = {};
 
-  const txtBoundary = 315;
-  const txtIconPos = { x: 0, y: 0 };
-  const qIconPos = { x: 0, y: 0 };
+const txtBoundary = 315;
+const txtIconPos = { x: 0, y: 0 };
+const qIconPos = { x: 0, y: 0 };
 
-  const hitBoxes = [];
+const hitBoxes = [];
 
-  let props = {}; // Accessible everywhere inside your sketch
+class GallerySketchEmrys extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-  p5.updateWithProps = (newProps) => {
-    props = newProps;
-  };
-
-  p5.preload = () => {
+  preload = (p5) => {
     images.branch1 = p5.loadImage(S3_URL + "branch1.png");
     images.branch2 = p5.loadImage(S3_URL + "branch2.png");
     images.goldenrod = p5.loadImage(S3_URL + "goldenrod.png");
@@ -105,44 +111,41 @@ export const GallerySketchEmrys = (p5) => {
   // INITIALIZE
   ////////////////////////////////////////////////////////////////////////
 
-  p5.setup = () => {
-    const { user, loadingDone, windowUI, userMove } = props || {};
+  setup = (p5, canvasParentRef) => {
+    const { user, loadingDone, windowUI, userMove } = this.props;
 
-    // p5.textFont(font, 14);
-
-    const cnv = p5.createCanvas(window.innerWidth, window.innerHeight);
-    cnv.mousePressed(() => triggerMove(p5));
-
-    //p5.frameRate(20);
+    p5.textFont(font, 14);
+    const cnv = p5.createCanvas(windowUI.contentW, windowUI.contentH);
+    cnv.parent(canvasParentRef);
+    cnv.mousePressed(() => this.triggerMove(p5));
     p5.pixelDensity(2);
-
-    initDivs(p5);
+    this.initDivs(p5);
 
     txtIconPos.x = p5.windowWidth / 12;
     txtIconPos.y = p5.windowHeight / 12;
-    images.qiconX = p5.windowWidth - txtIconPos.x - 50;
-    images.qiconY = p5.windowHeight / 2;
+    qIconPos.x = p5.windowWidth - txtIconPos.x - 50;
+    qIconPos.y = p5.windowHeight / 2;
 
     loadingDone();
-    setUserInitialPosition(p5);
+    this.setUserInitialPosition(p5);
   };
 
-  const initDivs = (p5) => {};
+  initDivs = (p5) => {};
 
-  const setUserInitialPosition = (p5) => {
+  setUserInitialPosition = (p5) => {
     let dx = Math.floor(p5.random(-20, 20));
     let dy = Math.floor(p5.random(-20, 20));
     let x = Math.floor(p5.width / 2 + dx);
     let y = Math.floor(p5.height / 2 + dy);
-    setUserPositionImmediate(x, y);
+    this.setUserPositionImmediate(x, y);
   };
 
-  p5.draw = () => {
-    const { user, users } = props;
+  draw = (p5) => {
+    const { user, users } = this.props;
 
     p5.clear(0, 0, 0, 0);
 
-    drawScene(p5);
+    this.drawScene(p5);
 
     if (users) {
       p5.textFont(font, 34);
@@ -158,8 +161,8 @@ export const GallerySketchEmrys = (p5) => {
 
     p5.image(images.txticon, txtIconPos.x, txtIconPos.y);
 
-    if (textVisible) showText(p5);
-    if (qtextVisible) showQText(p5);
+    if (textVisible) this.showText(p5);
+    if (qtextVisible) this.showQText(p5);
 
     p5.push();
     p5.translate(movement.userEase.x, movement.userEase.y);
@@ -168,74 +171,86 @@ export const GallerySketchEmrys = (p5) => {
 
     //////////////
     // step visualization
-    mouseStep(p5);
-    showTarget(p5);
+    this.mouseStep(p5);
+    this.showTarget(p5);
 
-    //////////////
-    // drawing
+    this.drawOverTarget(p5);
+    this.drawOverUser(p5);
 
-    // drawOverTarget(p5);
-    // drawOverUser(p5);
+    p5.noStroke();
+    p5.fill(255);
+    // p5.textFont(font, 30);
 
-    updateUserEase(p5);
+    this.updateUserEase(p5);
     if (
-      p5.width !== props.windowUI.contentW ||
-      p5.height !== props.windowUI.contentH
+      p5.width !== this.props.windowUI.contentW ||
+      p5.height !== this.props.windowUI.contentH
     )
-      manualResize(p5);
+      this.manualResize(p5);
 
-    // displayFrameRate(p5);
+    // this.displayFrameRate(p5);
   };
 
   ////////////////////////////////////////////////////////////////////////
   // EMRYS
 
-  const drawScene = (p) => {
-    p.image(images.bench, p.windowWidth / 2, p.windowHeight / 2, 200, 120);
+  drawScene = (p5) => {
+    p5.image(images.bench, p5.windowWidth / 2, p5.windowHeight / 2, 200, 120);
 
-    p.image(images.bush3, images.bush3.width / 2, -100);
-    p.image(
+    p5.image(images.bush3, images.bush3.width / 2, -100);
+    p5.image(
       images.bush2,
-      p.windowWidth - images.bush2.width * 0.9,
-      p.windowHeight - images.bush2.height * 0.75
+      p5.windowWidth - images.bush2.width * 0.9,
+      p5.windowHeight - images.bush2.height * 0.75
     );
-    p.image(images.goldenrod, 0, p.windowHeight - images.goldenrod.height);
-    p.image(
+    p5.image(images.goldenrod, 0, p5.windowHeight - images.goldenrod.height);
+    p5.image(
       images.goldenrod,
-      p.windowWidth / 2,
-      p.windowHeight - images.goldenrod.width,
+      p5.windowWidth / 2,
+      p5.windowHeight - images.goldenrod.width,
       images.goldenrod.height / 2
     );
-    p.image(images.branch2, -50, p.windowHeight - images.branch2.height * 1.5);
+    p5.image(
+      images.branch2,
+      -50,
+      p5.windowHeight - images.branch2.height * 1.5
+    );
 
-    p.noFill();
-    p.stroke(255);
-    p.textSize(18);
+    p5.noFill();
+    p5.stroke(255);
+    p5.textSize(18);
 
-    displayHitBoxes(p);
+    this.displayHitBoxes(p5);
 
     // in front of text:
-    p.image(images.branch1, p.windowWidth - images.branch1.width, 0);
-    p.image(images.branch1, p.windowWidth - images.branch1.width / 2, 100);
-    p.image(
+    p5.image(images.branch1, p5.windowWidth - images.branch1.width, 0);
+    p5.image(images.branch1, p5.windowWidth - images.branch1.width / 2, 100);
+    p5.image(
       images.stick1,
-      p.windowWidth / 2 + 100,
-      p.windowHeight - images.stick1.height * 0.75,
+      p5.windowWidth / 2 + 100,
+      p5.windowHeight - images.stick1.height * 0.75,
       images.stick1.width * 0.75,
       images.stick1.height * 0.75
     );
-    p.image(images.stick2, p.windowWidth / 3, p.windowHeight - 100, 200, 200);
-    p.image(images.branch2, -210, p.windowHeight / 3 - 20);
+    p5.image(
+      images.stick2,
+      p5.windowWidth / 3,
+      p5.windowHeight - 100,
+      200,
+      200
+    );
+    p5.image(images.branch2, -210, p5.windowHeight / 3 - 20);
   };
 
-  const displayHitBoxes = (p) => {
+  displayHitBoxes = (p5) => {
+    const { user } = this.props;
     for (const hitBox of hitBoxes) {
-      hitBox.draw(p, props.user.roomX, props.user.roomY);
+      hitBox.draw(p5, user.roomX, user.roomY);
     }
   };
 
-  const showText = (p) => {
-    p.filter(p.BLUR, 2);
+  showText = (p5) => {
+    // p5.filter(p5.BLUR, 2);
     const tx = images.txticonX * 2;
     const ty = images.txticonY;
 
@@ -255,49 +270,48 @@ export const GallerySketchEmrys = (p5) => {
       [tx, ty * 5],
       [tx, ty * 7],
       [tx * 3, ty * 7],
-      [tx * 3, p.windowHeight * 0.75],
-      [p.windowWidth * 0.75, p.windowHeight * 0.75],
+      [tx * 3, p5.windowHeight * 0.75],
+      [p5.windowWidth * 0.75, p5.windowHeight * 0.75],
     ];
 
-    p.noFill();
-    p.stroke(255);
-    p.strokeWeight(1);
-    p.textSize(18);
+    p5.noFill();
+    p5.stroke(255);
+    p5.strokeWeight(1);
+    p5.textSize(18);
     texts.forEach((text, i) => {
       const [x, y] = positions[i];
-      p.text(text, x, y, txtBoundary);
+      p5.text(text, x, y, txtBoundary);
     });
 
-    if (textVisible) p.image(images.qicon, images.qiconX, images.qiconY);
+    if (textVisible) p5.image(images.qicon, qIconPos.x, qIconPos.y);
   };
 
-  const showQText = (p) => {
-    p.filter(p.BLUR, 2);
-    p.noFill();
-    p.stroke(255);
-    p.strokeWeight(1);
-    p.textSize(18);
+  showQText = (p5) => {
+    // p5.filter(p5.BLUR, 2);
+    p5.noFill();
+    p5.stroke(255);
+    p5.strokeWeight(1);
+    p5.textSize(18);
     const text =
       "Desiring community, connection, sex, or some combination, public parks emerged as centers for cruising folk. A frenzy of moral panic, which gained momentum during the AIDS epidemic, allowed for heightened scrutiny and policing of public zones. Often trees were knocked down, stalls cleared. Open park plans no longer offered crevices to hold these clandestine acts. And alongside this disaster, the Internet began to grow.";
-    p.text(text, p.windowWidth / 1.5, images.txticonY, txtBoundary);
+    p5.text(text, p5.windowWidth / 1.5, txtIconPos.y, txtBoundary);
   };
 
-  const emrysMousePressed = (p5) => {
-    if (overImage(p5, txtIconPos, images.txticon)) {
+  emrysMousePressed = (p5) => {
+    if (this.overImage(p5, txtIconPos, images.txticon)) {
       textVisible = !textVisible;
       qtextVisible = false;
 
       return true;
     }
-    if (textVisible && overImage(p5, qIconPos, images.qicon)) {
+    if (textVisible && this.overImage(p5, qIconPos, images.qicon)) {
       qtextVisible = !qtextVisible;
-
       return true;
     }
     return false;
   };
 
-  const overImage = (p, iconPos, icon) => {
+  overImage = (p, iconPos, icon) => {
     return (
       p.mouseX >= iconPos.x &&
       p.mouseX <= iconPos.x + icon.width &&
@@ -308,27 +322,34 @@ export const GallerySketchEmrys = (p5) => {
 
   ///////////////////////////////////////////////////////////////////////
 
-  const displayFrameRate = (p5) => {
+  displayFrameRate = (p5) => {
     p5.fill(0);
     p5.noStroke();
     // p5.textFont(font, 12);
     p5.text(p5.round(p5.frameRate()), 30, 30);
   };
 
-  const drawOverTarget = (p5) => {
-    const { user, users } = props;
+  drawOverTarget = (p5) => {
+    const { user, users } = this.props;
     p5.push();
 
     if (users) {
       // p5.textFont(font, 34);
-      drawUsers(user, filterGalleryUsers(user, users), "/emrys", font, p5, []);
+      drawUsersRoomCoords(
+        user,
+        filterGalleryUsers(user, users),
+        "/emrys",
+        font,
+        p5,
+        []
+      );
     }
 
     p5.pop();
   };
 
-  const drawOverUser = (p5) => {
-    const { user } = props;
+  drawOverUser = (p5) => {
+    const { user } = this.props;
     p5.push();
 
     const userEase = { x: 0, y: 0 };
@@ -339,16 +360,19 @@ export const GallerySketchEmrys = (p5) => {
     p5.pop();
   };
 
-  const manualResize = (p5) => {
-    const { windowUI } = props;
-    p5.resizeCanvas(windowUI.contentW, windowUI.contentH);
-    setUserBoundaries(p5);
+  manualResize = (p5) => {
+    this.windowResized(p5);
+
+    txtIconPos.x = p5.windowWidth / 12;
+    txtIconPos.y = p5.windowHeight / 12;
+    qIconPos.x = p5.windowWidth - txtIconPos.x - 50;
+    qIconPos.y = p5.windowHeight / 2;
   };
   ////////////////////////////////////////////////////////////////////////
   // MOVEMENT
   ////////////////////////////////////////////////////////////////////////
-  const showTarget = (p5) => {
-    const { windowUI } = props;
+  showTarget = (p5) => {
+    const { windowUI } = this.props;
     const { userEase, destination, isWalking } = movement;
 
     if (mouseDidMove(p5)) {
@@ -357,7 +381,7 @@ export const GallerySketchEmrys = (p5) => {
     showMouseLoc(windowUI.isMobile, movement.lastMouseMove, p5);
   };
 
-  const userTakeStep = (p5, x, y) => {
+  userTakeStep = (p5, x, y) => {
     const { stepTo } = movement;
     movement.lastStepTime = p5.millis();
 
@@ -365,45 +389,45 @@ export const GallerySketchEmrys = (p5) => {
     const userStep = { x: stepTo.x + x * space, y: stepTo.y + y * space };
 
     if (userStep.x > p5.width) {
-      stopWalking();
+      this.stopWalking();
     } else if (userStep.y > p5.height) {
-      stopWalking();
+      this.stopWalking();
     } else if (userStep.x < 0) {
-      stopWalking();
+      this.stopWalking();
     } else if (userStep.y < 0) {
-      stopWalking();
+      this.stopWalking();
     } else {
       stepTo.x = userStep.x;
       stepTo.y = userStep.y;
     }
   };
 
-  const stopWalking = () => {
+  stopWalking = () => {
     movement.isWalking = false;
   };
 
-  const setUserPosition = (x, y) => {
-    stopWalking();
+  setUserPosition = (x, y) => {
+    this.stopWalking();
     movement.stepTo.x = x;
     movement.stepTo.y = y;
     movement.destination.x = x;
     movement.destination.y = y;
-    props.userMove(x, y);
+    this.props.userMove(x, y);
   };
 
-  const setUserPositionImmediate = (x, y) => {
-    stopWalking();
+  setUserPositionImmediate = (x, y) => {
+    this.stopWalking();
     movement.userEase.x = x;
     movement.userEase.y = y;
     movement.stepTo.x = x;
     movement.stepTo.y = y;
     movement.destination.x = x;
     movement.destination.y = y;
-    props.userMove(x, y);
+    this.props.userMove(x, y);
   };
 
-  const updateUserEase = (p5) => {
-    const { userMove } = props;
+  updateUserEase = (p5) => {
+    const { userMove } = this.props;
     const { userEase, stepTo } = movement;
     if (!reachedDestination(userEase, stepTo)) {
       let amt = 0.7;
@@ -418,11 +442,11 @@ export const GallerySketchEmrys = (p5) => {
     }
   };
 
-  const triggerMove = (p5) => {
-    if (emrysMousePressed(p5)) {
+  triggerMove = (p5) => {
+    if (this.emrysMousePressed(p5)) {
       return;
     }
-    const { user, users, setUserActive } = props;
+    const { user, users, setUserActive } = this.props;
     let userClicked = null;
 
     if (users)
@@ -450,49 +474,55 @@ export const GallerySketchEmrys = (p5) => {
     }
   };
 
-  const mouseStep = (p5) => {
+  mouseStep = (p5) => {
     const t = new Date().getTime() - movement.destination.time.getTime();
-    const { user } = props;
+    const { user } = this.props;
     if (movement.isWalking) {
       if (reachedDestination(movement.stepTo, movement.destination)) {
-        setUserPositionImmediate(
+        this.setUserPositionImmediate(
           movement.destination.x,
           movement.destination.y
         );
         movement.isWalking = false;
       } else if (t > 150) {
         let step = getNextStep(movement.stepTo, movement.destination, true);
-        userTakeStep(p5, step[0], step[1]);
+        this.userTakeStep(p5, step[0], step[1]);
         movement.destination.time = new Date();
       }
     }
   };
 
-  p5.keyPressed = () => {
+  keyPressed = (p5) => {
     if (p5.frameCount > 0) {
       if (p5.keyCode === p5.UP_ARROW) {
-        userTakeStep(p5, 0, -1);
+        this.userTakeStep(p5, 0, -1);
       } else if (p5.keyCode === p5.RIGHT_ARROW) {
-        userTakeStep(p5, 1, 0);
+        this.userTakeStep(p5, 1, 0);
       } else if (p5.keyCode === p5.LEFT_ARROW) {
-        userTakeStep(p5, -1, 0);
+        this.userTakeStep(p5, -1, 0);
       } else if (p5.keyCode === p5.DOWN_ARROW) {
-        userTakeStep(p5, 0, 1);
+        this.userTakeStep(p5, 0, 1);
       }
     }
     return;
   };
 
-  p5.mouseReleased = () => {
+  mouseReleased = (p5) => {
     if (p5.frameCount > 0) {
       endDivDrag(divs);
     }
   };
 
-  p5.mouseMoved = () => {};
+  mouseMoved = (p5) => {};
 
-  const setUserBoundaries = (p5) => {
-    const { user } = props;
+  windowResized = (p5) => {
+    const { windowUI } = this.props;
+    p5.resizeCanvas(windowUI.contentW, windowUI.contentH);
+    this.setUserBoundaries(p5);
+  };
+
+  setUserBoundaries = (p5) => {
+    const { user } = this.props;
     let x = user.roomX;
     let y = user.roomY;
     if (x > p5.width - 50) {
@@ -501,16 +531,42 @@ export const GallerySketchEmrys = (p5) => {
     if (y > p5.height - 50) {
       y = p5.height - 50;
     }
-    setUserPositionImmediate(x, y);
+    this.setUserPositionImmediate(x, y);
   };
 
-  p5.doubleClicked = () => {
+  doubleClicked = (p5) => {
     if (p5.frameCount > 0) {
-      // checkFolderDivsDouble(getRoomLayoutNum(), divs);
-      // checkTrashDivsDouble(getRoomLayoutNum(), divs);
+      // checkFolderDivsDouble(this.getRoomLayoutNum(), divs);
+      // checkTrashDivsDouble(this.getRoomLayoutNum(), divs);
     }
     return;
   };
+
+  render() {
+    // TODO - key & mouse listeners called twice (like 2 instances... one always at frame count 0)
+    return (
+      <>
+        <Sketch
+          preload={this.preload}
+          setup={this.setup}
+          draw={this.draw}
+          windowResized={this.windowResized}
+          mouseMoved={this.mouseMoved}
+          keyPressed={this.keyPressed}
+          mouseReleased={this.mouseReleased}
+          doubleClicked={this.doubleClicked}
+        />
+      </>
+    );
+  }
+}
+
+const mapStateToProps = (state) => ({
+  user: state.user,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
 };
 
-export default GallerySketchEmrys;
+export default connect(mapStateToProps, mapDispatchToProps)(GallerySketchEmrys);
