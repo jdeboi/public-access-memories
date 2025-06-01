@@ -62,16 +62,24 @@ const movement = {
   lastStepTime: 0,
 };
 
-let textVisible = false;
-let qtextVisible = false;
+let branch1,
+  branch2,
+  goldenrod,
+  bush2,
+  bush3,
+  bush4,
+  goldenrod2,
+  bush5,
+  honey,
+  bush6;
+let bench, stick1, stick2, ivy;
 
-const images = {};
+let textBoxes = [];
+let frontPlants = [];
+let backPlants = [];
 
-const txtBoundary = 315;
-const txtIconPos = { x: 0, y: 0 };
-const qIconPos = { x: 0, y: 0 };
-
-const hitBoxes = [];
+let textBox;
+let plantImage;
 
 class GallerySketchEmrys extends React.Component {
   constructor(props) {
@@ -79,32 +87,22 @@ class GallerySketchEmrys extends React.Component {
   }
 
   preload = (p5) => {
-    images.branch1 = p5.loadImage(S3_URL + "branch1.png");
-    images.branch2 = p5.loadImage(S3_URL + "branch2.png");
-    images.goldenrod = p5.loadImage(S3_URL + "goldenrod.png");
-    images.bush2 = p5.loadImage(S3_URL + "bush2.png");
-    images.bush3 = p5.loadImage(S3_URL + "bush3.png");
-    images.txticon = p5.loadImage(S3_URL + "txticon_sm.png");
-    images.qicon = p5.loadImage(S3_URL + "qicon_sm.png");
-    images.txt1 = p5.loadImage(S3_URL + "textTest0.png");
-    images.txt2 = p5.loadImage(S3_URL + "textTest4.png");
-    images.txt3 = p5.loadImage(S3_URL + "textTest5.png");
-    images.bench = p5.loadImage(S3_URL + "bench.png");
-    images.stick1 = p5.loadImage(S3_URL + "stick1.png");
-    images.stick2 = p5.loadImage(S3_URL + "stick2.png");
-    font = p5.loadFont(PAM_URL + "fonts/sysfont.woff");
+    branch1 = p5.loadImage(S3_URL + "branch1.png");
+    branch2 = p5.loadImage(S3_URL + "branch2.png");
+    goldenrod = p5.loadImage(S3_URL + "goldenrod.png");
+    bush2 = p5.loadImage(S3_URL + "bush2.png");
+    bush3 = p5.loadImage(S3_URL + "bush3.png");
 
-    hitBoxes.push(new HitBox(p5.windowWidth / 4, 100, 175, 175, images.txt2));
-    hitBoxes.push(new HitBox(200, p5.windowHeight / 2, 175, 175, images.txt1));
-    hitBoxes.push(
-      new HitBox(
-        p5.windowWidth / 2,
-        p5.windowHeight - 300,
-        215,
-        215,
-        images.txt3
-      )
-    );
+    bench = p5.loadImage(S3_URL + "bench.png");
+    stick1 = p5.loadImage(S3_URL + "stick1.png");
+    stick2 = p5.loadImage(S3_URL + "stick2.png");
+    ivy = p5.loadImage(S3_URL + "ivy.png");
+    bush4 = p5.loadImage(S3_URL + "bush4.png");
+    goldenrod2 = p5.loadImage(S3_URL + "goldenrod2.png");
+    bush5 = p5.loadImage(S3_URL + "bush5.png");
+    honey = p5.loadImage(S3_URL + "honeysuckle.png");
+    bush6 = p5.loadImage(S3_URL + "bush6.png");
+    font = p5.loadFont(PAM_URL + "fonts/sysfont.woff");
   };
 
   ////////////////////////////////////////////////////////////////////////
@@ -121,10 +119,8 @@ class GallerySketchEmrys extends React.Component {
     p5.pixelDensity(2);
     this.initDivs(p5);
 
-    txtIconPos.x = p5.windowWidth / 12;
-    txtIconPos.y = p5.windowHeight / 12;
-    qIconPos.x = p5.windowWidth - txtIconPos.x - 50;
-    qIconPos.y = p5.windowHeight / 2;
+    this.createPlants(p5);
+    this.createTextBoxes(p5);
 
     loadingDone();
     this.setUserInitialPosition(p5);
@@ -143,9 +139,7 @@ class GallerySketchEmrys extends React.Component {
   draw = (p5) => {
     const { user, users } = this.props;
 
-    p5.clear(0, 0, 0, 0);
-
-    this.drawScene(p5);
+    this.drawSceneBack(p5);
 
     if (users) {
       p5.textFont(font, 34);
@@ -159,15 +153,15 @@ class GallerySketchEmrys extends React.Component {
       );
     }
 
-    p5.image(images.txticon, txtIconPos.x, txtIconPos.y);
-
-    if (textVisible) this.showText(p5);
-    if (qtextVisible) this.showQText(p5);
+    this.updateTextBoxes(p5);
+    this.updatePlantImgs(p5);
 
     p5.push();
     p5.translate(movement.userEase.x, movement.userEase.y);
     drawUser(user, p5, []);
     p5.pop();
+
+    this.drawSceneFront(p5);
 
     //////////////
     // step visualization
@@ -194,133 +188,402 @@ class GallerySketchEmrys extends React.Component {
   ////////////////////////////////////////////////////////////////////////
   // EMRYS
 
-  drawScene = (p5) => {
-    p5.image(images.bench, p5.windowWidth / 2, p5.windowHeight / 2, 200, 120);
+  drawSceneBack(p) {
+    p.textFont("Courier New");
+    p.clear(0, 0, 0, 0);
 
-    p5.image(images.bush3, images.bush3.width / 2, -100);
-    p5.image(
-      images.bush2,
-      p5.windowWidth - images.bush2.width * 0.9,
-      p5.windowHeight - images.bush2.height * 0.75
-    );
-    p5.image(images.goldenrod, 0, p5.windowHeight - images.goldenrod.height);
-    p5.image(
-      images.goldenrod,
-      p5.windowWidth / 2,
-      p5.windowHeight - images.goldenrod.width,
-      images.goldenrod.height / 2
-    );
-    p5.image(
-      images.branch2,
-      -50,
-      p5.windowHeight - images.branch2.height * 1.5
-    );
+    p.image(bench, p.width / 2, p.height / 2, 200, 120);
 
-    p5.noFill();
-    p5.stroke(255);
-    p5.textSize(18);
+    p.noFill();
+    p.stroke(255);
+    p.textSize(18);
+    this.displayBackPlantImgs(p);
+    this.displayTextBoxes(p);
+  }
 
-    this.displayHitBoxes(p5);
+  drawSceneFront(p) {
+    this.displayFrontPlantImgs(p);
+  }
 
-    // in front of text:
-    p5.image(images.branch1, p5.windowWidth - images.branch1.width, 0);
-    p5.image(images.branch1, p5.windowWidth - images.branch1.width / 2, 100);
-    p5.image(
-      images.stick1,
-      p5.windowWidth / 2 + 100,
-      p5.windowHeight - images.stick1.height * 0.75,
-      images.stick1.width * 0.75,
-      images.stick1.height * 0.75
-    );
-    p5.image(
-      images.stick2,
-      p5.windowWidth / 3,
-      p5.windowHeight - 100,
-      200,
-      200
-    );
-    p5.image(images.branch2, -210, p5.windowHeight / 3 - 20);
-  };
-
-  displayHitBoxes = (p5) => {
-    const { user } = this.props;
-    for (const hitBox of hitBoxes) {
-      hitBox.draw(p5, user.roomX, user.roomY);
+  displayTextBoxes(p) {
+    for (const textBox of textBoxes) {
+      textBox.draw(p);
     }
-  };
+  }
 
-  showText = (p5) => {
-    // p5.filter(p5.BLUR, 2);
-    const tx = images.txticonX * 2;
-    const ty = images.txticonY;
-
-    const texts = [
-      "Imagine a forest. Is it thick? Are you warm? Do you feel the humidity of late summer, the trees and plants pressing into you (and the noise)?",
-      "Or is it early spring - the new shots, green and fragile, pushing through last season's death?",
-      "What do you hear? Do you hear the bird song, along the top of the trees? Sounds of cars passing in the distance, insulated in the thick grove?",
-      "And the bugs?",
-      "Maybe if you are lucky you can hear soft whispers, footsteps.",
-      "If you turn a corner will you see them? The glint of a ringed finger, well worn jeans against a tree, the shape of a knee on flattened grass.",
-      "Ghosts of those who have come to the forest before – leaning against a sappy tree, settled into the soft earth, still, alert, and waiting.",
-    ];
-
-    const positions = [
-      [tx, ty],
-      [tx, ty * 3],
-      [tx, ty * 5],
-      [tx, ty * 7],
-      [tx * 3, ty * 7],
-      [tx * 3, p5.windowHeight * 0.75],
-      [p5.windowWidth * 0.75, p5.windowHeight * 0.75],
-    ];
-
-    p5.noFill();
-    p5.stroke(255);
-    p5.strokeWeight(1);
-    p5.textSize(18);
-    texts.forEach((text, i) => {
-      const [x, y] = positions[i];
-      p5.text(text, x, y, txtBoundary);
-    });
-
-    if (textVisible) p5.image(images.qicon, qIconPos.x, qIconPos.y);
-  };
-
-  showQText = (p5) => {
-    // p5.filter(p5.BLUR, 2);
-    p5.noFill();
-    p5.stroke(255);
-    p5.strokeWeight(1);
-    p5.textSize(18);
-    const text =
-      "Desiring community, connection, sex, or some combination, public parks emerged as centers for cruising folk. A frenzy of moral panic, which gained momentum during the AIDS epidemic, allowed for heightened scrutiny and policing of public zones. Often trees were knocked down, stalls cleared. Open park plans no longer offered crevices to hold these clandestine acts. And alongside this disaster, the Internet began to grow.";
-    p5.text(text, p5.windowWidth / 1.5, txtIconPos.y, txtBoundary);
-  };
-
-  emrysMousePressed = (p5) => {
-    if (this.overImage(p5, txtIconPos, images.txticon)) {
-      textVisible = !textVisible;
-      qtextVisible = false;
-
-      return true;
+  displayBackPlantImgs(p) {
+    for (const plantImg of backPlants) {
+      plantImg.draw(p);
     }
-    if (textVisible && this.overImage(p5, qIconPos, images.qicon)) {
-      qtextVisible = !qtextVisible;
-      return true;
-    }
-    return false;
-  };
+  }
 
-  overImage = (p, iconPos, icon) => {
-    return (
-      p.mouseX >= iconPos.x &&
-      p.mouseX <= iconPos.x + icon.width &&
-      p.mouseY >= iconPos.y &&
-      p.mouseY <= iconPos.y + icon.height
+  displayFrontPlantImgs(p) {
+    for (const plantImg of frontPlants) {
+      plantImg.draw(p);
+    }
+  }
+
+  // HERE U CAN PUT USER X, Y
+  updateTextBoxes(p) {
+    for (const textBox of textBoxes) {
+      textBox.update(movement.userEase.x, movement.userEase.y, p);
+    }
+  }
+
+  updatePlantImgs(p) {
+    const { x, y } = movement.userEase;
+    for (const plantImg of backPlants) {
+      plantImg.update(x, y, p);
+    }
+    for (const plantImg of frontPlants) {
+      plantImg.update(x, y, p);
+    }
+  }
+
+  createPlants(p) {
+    backPlants.push(
+      new PlantImg(
+        p.width / 3,
+        0,
+        bush5,
+        bush5.width * 0.75,
+        bush5.height * 0.75,
+        0,
+        0.5,
+        0.05,
+        30
+      )
     );
-  };
 
-  ///////////////////////////////////////////////////////////////////////
+    backPlants.push(
+      new PlantImg(
+        p.width / 2,
+        0,
+        bush3,
+        646 * 0.75,
+        412 * 0.75,
+        0,
+        0.5,
+        0.05,
+        30
+      )
+    );
+
+    backPlants.push(
+      new PlantImg(
+        p.width - p.width / 3,
+        50,
+        goldenrod2,
+        goldenrod2.width * 0.75,
+        goldenrod2.height * 0.75,
+        0,
+        0.5,
+        0.05,
+        30
+      )
+    );
+
+    backPlants.push(
+      new PlantImg(
+        50,
+        p.height,
+        bush4,
+        646 * 0.75,
+        412 * 0.75,
+        0,
+        0.5,
+        0.05,
+        30
+      )
+    );
+
+    backPlants.push(
+      new PlantImg(
+        p.width / 2,
+        p.height - 50,
+        bush4,
+        646 * 0.75,
+        412 * 0.75,
+        0,
+        0.5,
+        0.05,
+        30
+      )
+    );
+
+    backPlants.push(
+      new PlantImg(
+        p.width - 200,
+        p.height - 70,
+        bush2,
+        752,
+        336,
+        30,
+        0.5,
+        0.05,
+        30
+      )
+    );
+
+    backPlants.push(
+      new PlantImg(0, p.height - 600 / 2, goldenrod, 406, 614, 0, 0.5, 0.05, 30)
+    );
+
+    backPlants.push(
+      new PlantImg(
+        p.width / 3,
+        p.height - 600 / 4,
+        goldenrod,
+        406,
+        614,
+        30,
+        0.5,
+        0.05,
+        30
+      )
+    );
+
+    backPlants.push(
+      new PlantImg(
+        506 / 3,
+        p.height - 300,
+        branch2,
+        506,
+        360,
+        50,
+        0.5,
+        0.05,
+        30
+      )
+    );
+
+    frontPlants.push(
+      new PlantImg(
+        p.width - 200,
+        50,
+        bush5,
+        646 * 0.75,
+        412 * 0.75,
+        0,
+        0.5,
+        0.05,
+        30
+      )
+    );
+
+    //FRONT
+
+    frontPlants.push(
+      new PlantImg(
+        p.width + 30,
+        p.height / 2,
+        bush6,
+        bush6.width * 0.75,
+        bush6.height * 0.75
+      )
+    );
+
+    frontPlants.push(
+      new PlantImg(p.width - 50, 50, branch1, 450, 450, 30, 0.5, 0.05, 30)
+    );
+
+    frontPlants.push(
+      new PlantImg(p.width - 100, 200, branch1, 400, 400, 100, 0.5, 0.05, 30)
+    );
+
+    frontPlants.push(
+      new PlantImg(
+        p.width / 2 - 100,
+        p.height - 100,
+        stick1,
+        stick1.width * 0.75,
+        stick1.height * 0.75,
+        50,
+        0.5,
+        0.05,
+        30
+      )
+    );
+
+    frontPlants.push(
+      new PlantImg(
+        250,
+        p.height - 100,
+        stick2,
+        stick2.width * 0.5,
+        stick2.height * 0.5,
+        50,
+        0.5,
+        0.05,
+        30
+      )
+    );
+
+    frontPlants.push(
+      new PlantImg(
+        0,
+        p.height / 3 - 20,
+        branch2,
+        branch2.width,
+        branch2.height,
+        100,
+        0.5,
+        0.05,
+        30
+      )
+    );
+
+    frontPlants.push(
+      new PlantImg(
+        p.width / 2 + 200,
+        100,
+        ivy,
+        394 * 0.75,
+        634 * 0.75,
+        100,
+        0.5,
+        0.05,
+        30
+      )
+    );
+
+    frontPlants.push(
+      new PlantImg(
+        p.width - 50,
+        p.height - 200,
+        stick1,
+        stick1.width / 2,
+        stick1.height / 2,
+        30,
+        0.5,
+        0.05,
+        30
+      )
+    );
+
+    frontPlants.push(
+      new PlantImg(
+        p.width - 100,
+        p.height - 100,
+        honey,
+        honey.width / 2,
+        honey.height / 2,
+        50,
+        0.5,
+        0.05,
+        30
+      )
+    );
+  }
+
+  createTextBoxes(p) {
+    // TEXT BOXES
+
+    textBoxes.push(
+      new TextBox(
+        p.width / 2 + 200,
+        50,
+        350,
+        "I love to put on trashy or innocent lingerie and fantasize about being with another crossdresser. I'd love to rub my lace and garters against another wearing the same!!",
+        p
+      )
+    );
+
+    textBoxes.push(
+      new TextBox(
+        p.width / 2,
+        p.height - 200,
+        300,
+        "I, too, am a TV and I am dressed in some sexy lingerie as I write this to you.  What city and area are you from. Please write and tell me about yourself and matbe we can meet.",
+        p
+      )
+    );
+
+    textBoxes.push(
+      new TextBox(
+        200,
+        p.height / 2,
+        300,
+        "If you would like to meet and do the kinds of things we men are known to do behind closed doors, f-me a message, and then come over and F-me!  P.S.  Or I can F-you, or we can F-each other.",
+        p
+      )
+    );
+
+    textBoxes.push(
+      new TextBox(
+        p.width - 200,
+        p.height / 3,
+        300,
+        "Local and State Police Vice Squads are beginning to harass Bulletin Boards in some states. The definition of pornographic material is very vague and probably will take some court cases to fully define. The definition of reasonable proof of age is also vague. This situation may force some changes on BBS's including this one… ",
+        p
+      )
+    );
+
+    textBoxes.push(
+      new TextBox(
+        250,
+        75,
+        450,
+        "The gardens have been reduced to a manicured, undulating public green. It’s pleasant enough. There’s a basketball court. Joggers circulate. At lunchtime, office workers stroll the paths. A man might hold my eye contact briefly—very different from the carnivorous stares inside the club.",
+        p
+      )
+    );
+
+    textBoxes.push(
+      new TextBox(
+        p.width / 2 + 300,
+        p.height / 2 + 100,
+        150,
+        "Come one, come all.  I'll be waiting.",
+        p
+      )
+    );
+
+    textBoxes.push(
+      new TextBox(
+        200,
+        p.height - 100,
+        300,
+        "Verbal abuse and public and private humiliation readily accepted and beg for more.",
+        p
+      )
+    );
+
+    textBoxes.push(
+      new TextBox(
+        p.width - 250,
+        p.height - 100,
+        500,
+        "be careful in that area.  There were many bashings along that stretch of beach last year.  Also the cops generally roust out everybody around 10 so go early.",
+        p
+      )
+    );
+
+    textBoxes.push(
+      new TextBox(
+        p.width - 300,
+        100,
+        330,
+        "and I'll remember him for a long long time.....oh, and as I drive past/thru the forest preserves, I'll look for his pickup truck again!",
+        p
+      )
+    );
+
+    textBoxes.push(
+      new TextBox(
+        p.width / 3,
+        p.height - 150,
+        350,
+        "let me know you need your meat serviced.  That's all it takes - we'll go into a booth and you can push me to my knees and take advantage of me",
+        p
+      )
+    );
+
+    textBoxes.push(
+      new TextBox(p.width - 200, p.height - 150, 300, "from midnight on", p)
+    );
+  }
+  ////////////////////////////////////////////////////////////////////
 
   displayFrameRate = (p5) => {
     p5.fill(0);
@@ -362,11 +625,6 @@ class GallerySketchEmrys extends React.Component {
 
   manualResize = (p5) => {
     this.windowResized(p5);
-
-    txtIconPos.x = p5.windowWidth / 12;
-    txtIconPos.y = p5.windowHeight / 12;
-    qIconPos.x = p5.windowWidth - txtIconPos.x - 50;
-    qIconPos.y = p5.windowHeight / 2;
   };
   ////////////////////////////////////////////////////////////////////////
   // MOVEMENT
@@ -558,6 +816,86 @@ class GallerySketchEmrys extends React.Component {
         />
       </>
     );
+  }
+}
+
+class TextBox {
+  constructor(x, y, w, txt, p) {
+    this.pos = p.createVector(x, y);
+    this.width = w;
+    this.text = txt;
+    this.opacity = 0;
+    this.textSize = 18;
+  }
+
+  update(x, y, p) {
+    const mousePos = p.createVector(x, y);
+    const distance = mousePos.dist(this.pos);
+    const distThreshold = 200;
+    if (distance < distThreshold) {
+      this.opacity = p.map(distance, distThreshold, 40, 0, 255, true);
+    }
+  }
+
+  draw(p) {
+    p.textSize(this.textSize);
+    p.rectMode(p.CENTER);
+    p.fill(255, this.opacity);
+    //p.strokeWeight(2)
+    p.noStroke();
+    p.text(this.text, this.pos.x, this.pos.y, this.width);
+    //p.rect(this.pos.x, this.pos.y, this.width, this.height, 10)
+  }
+}
+
+class PlantImg {
+  constructor(
+    x,
+    y,
+    img,
+    imgW,
+    imgH,
+    avoidDist,
+    avoidSpeed,
+    returnSpeed,
+    maxAway
+  ) {
+    this.x = x;
+    this.y = y;
+    this.image = img;
+    this.imageWidth = imgW;
+    this.imageHeight = imgH;
+    this.avoidDistance = avoidDist;
+    this.avoidSpeed = avoidSpeed;
+    this.returnSpeed = returnSpeed;
+    this.maxAway = maxAway;
+
+    this.startX = this.x;
+    this.startY = this.y;
+  }
+
+  update(x, y, p) {
+    // Calculate distance from mouse
+    let d = p.dist(x, y, this.x, this.y);
+
+    if (d < this.avoidDistance) {
+      // Move away from mouse
+      let angle = p.atan2(this.y - y, this.x - x);
+      this.x += p.cos(angle) * this.avoidSpeed;
+      this.y += p.sin(angle) * this.avoidSpeed;
+    }
+    if (d > this.avoidDistance + this.maxAway) {
+      // Return to starting position smoothly (easing)
+      this.x += (this.startX - this.x) * this.returnSpeed;
+      this.y += (this.startY - this.y) * this.returnSpeed;
+    }
+  }
+
+  draw(p) {
+    p.push();
+    p.imageMode(p.CENTER);
+    p.image(this.image, this.x, this.y, this.imageWidth, this.imageHeight);
+    p.pop();
   }
 }
 

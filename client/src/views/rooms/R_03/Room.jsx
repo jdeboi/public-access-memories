@@ -12,11 +12,12 @@ const Room = () => {
       }}
     >
       <iframe
-        src="https://jdeboi.com/SeliciaSpace/"
+        src="https://selixiayxy.github.io/Praying/"
         width="100%"
-        height="calc(100% + 50px)"
-        style={{ marginTop: "-50px", border: "none" }}
-        title="under construction"
+        height="100%"
+        // height="calc(100% + 50px)"
+        // style={{ marginTop: "-50px", border: "none" }}
+        title="Selicia's Studio"
       ></iframe>
     </div>
   );

@@ -10,9 +10,10 @@ const Room = () => {
       <iframe
         src="https://memory.metzger.love"
         width="100%"
-        height="calc(100% + 50px)"
-        style={{ marginTop: "-50px", border: "none" }}
-        title="under construction"
+        height="100%"
+        // height="calc(100% + 50px)"
+        // style={{ marginTop: "-50px", border: "none" }}
+        title="Amanda's Studio"
       ></iframe>
     </div>
   );
