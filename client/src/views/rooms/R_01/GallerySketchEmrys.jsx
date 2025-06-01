@@ -241,6 +241,8 @@ class GallerySketchEmrys extends React.Component {
   }
 
   createPlants(p) {
+    backPlants = [];
+    frontPlants = [];
     backPlants.push(
       new PlantImg(
         p.width / 3,
@@ -777,6 +779,7 @@ class GallerySketchEmrys extends React.Component {
     const { windowUI } = this.props;
     p5.resizeCanvas(windowUI.contentW, windowUI.contentH);
     this.setUserBoundaries(p5);
+    this.createPlants(p5);
   };
 
   setUserBoundaries = (p5) => {

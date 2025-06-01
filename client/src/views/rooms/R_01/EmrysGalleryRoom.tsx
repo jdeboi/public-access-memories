@@ -21,6 +21,7 @@ import { doneLoadingApp, startComposition } from "../../../store/window";
 import { getBar } from "../../../data/CurrentShow/BotConfig";
 import { p5ToUserCoords } from "../../../helpers/coordinates";
 import GallerySketchEmrys from "./GallerySketchEmrys";
+import RoomNote from "../../../components/Residency/RoomNote/RoomNote";
 
 interface IGallery {
   id: number;
@@ -39,6 +40,18 @@ const EmrysGalleryRoom = (props: IGallery) => {
   const navigate = useNavigate();
   const audioPlayer = useRef<ReactAudioPlayer>(null);
   const [showStart, setShowStart] = useState(true);
+
+  const isMobile = windowUI.isMobile || windowUI.hasFooter;
+
+  const [showOverlay, setShowOverlay] = useState(false);
+
+  const handleDoubleClick = () => {
+    setShowOverlay(true);
+  };
+
+  const closeOverlay = () => {
+    setShowOverlay(false);
+  };
 
   useEffect(() => {
     if (user.roomUrl !== "/emrys") {
@@ -175,6 +188,82 @@ const EmrysGalleryRoom = (props: IGallery) => {
           />
 
           {windowUI.loading && <LoadingPage />}
+          {isMobile && (
+            <div
+              id="mobile-warning"
+              style={{
+                position: "fixed",
+                top: "120px",
+                left: "50%",
+                transform: "translateX(-50%)",
+                backgroundColor: "#000000",
+                color: "#FF5722",
+                border: "solid red",
+                padding: "1em 2em",
+                borderRadius: "8px",
+                fontFamily: "monospace",
+                zIndex: 9999,
+              }}
+            >
+              Best viewed non-mobile
+            </div>
+          )}
+          <RoomNote handleDoubleClick={handleDoubleClick} />
+          {showOverlay && (
+            <div
+              style={{
+                position: "absolute",
+                background: "rgba(0, 0, 0, .8)",
+                height: "100%",
+                overflow: "hidden",
+                top: 0,
+                left: 0,
+                zIndex: 1000,
+                padding: "40px",
+                color: "white",
+              }}
+              onClick={closeOverlay}
+            >
+              <div className="">
+                <div
+                  style={{ position: "absolute", top: "30px", right: "30px" }}
+                >
+                  <button
+                    className="standardButton secondary"
+                    style={{}}
+                    onClick={closeOverlay}
+                  >
+                    close
+                  </button>
+                </div>
+                <br />
+                <h2>Statement</h2>
+
+                <p>
+                  The AIDS epidemic existed parallel to the Internet boom. A
+                  frenzy of moral panic allowed for heightened scrutiny and
+                  policing of public zones, which historically held centers for
+                  cruising folk. Often trees were knocked down, stalls cleared.
+                  Open park plans no longer offered crevices to hold these
+                  clandestine acts. As physical cruising locations were shut
+                  down and disrupted, the digital world became a location for
+                  connection.
+                </p>
+                <p>
+                  This forest is a specific forest. It is patchworked together,
+                  where sexy wishes lay in the knot of a tree, between two
+                  sprouting leaves, or in a pocket of mud. Hidden in the binary
+                  foliage are anonymized “personals” left on a Chicago-based
+                  Bulletin Board System (BBS) from 1990. BBS’ were hugely
+                  popular throughout the 1980s and 1990s as a proto-Internet
+                  social communication platform. The BBS, which is intended for
+                  gay men, is a remnant of online gay culture during the AIDS
+                  epidemic.
+                </p>
+                <h4>- Emrys Brandt</h4>
+              </div>
+            </div>
+          )}
           {getGalleryAudio()}
         </>
       )}
