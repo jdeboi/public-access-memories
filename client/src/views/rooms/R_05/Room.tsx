@@ -7,11 +7,10 @@ const Room = () => {
       style={{ position: "relative", width: "100%", height: "100%" }}
     >
       <iframe
-        src="https://editor.p5js.org/jdeboi/full/tYhuUGAUz"
+        src="https://cthompto.github.io/a-walk-in-the-dark/"
         width="100%"
-        height="calc(100% + 50px)"
-        style={{ marginTop: "-50px", border: "none" }}
-        title="Babylon.js Scene"
+        height="100%"
+        title="Chelsea Thompto's Studio"
       ></iframe>
     </div>
   );

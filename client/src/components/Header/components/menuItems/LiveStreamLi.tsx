@@ -8,7 +8,7 @@ import { selectMenu, selectUser } from "../../../../store/store";
 import { ShowConfig } from "../../../../data/CurrentShow/ShowConfig";
 
 const LiveStreamURL = "https://meet.google.com/eob-ijfy-cxa";
-const LiveStreamStartTime = new Date("2025-06-01T10:30:00-05:00"); // 10:30am PM CDT (no daylight savings)
+const LiveStreamStartTime = new Date("2025-06-01T09:30:00-05:00"); // 10:30am PM CDT (no daylight savings)
 const LiveStreamEndTime = new Date("2025-06-01T21:13:00-05:00"); // 9:00 PM CDT
 
 const LiveStreamLi = () => {

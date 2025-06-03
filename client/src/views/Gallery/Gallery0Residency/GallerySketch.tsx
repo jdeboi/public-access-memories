@@ -175,10 +175,22 @@ class GallerySketch extends React.Component<Props> {
     );
     roomTextures[4] = p5.loadImage(PAM_URL + "residency/assets/lounge.jpg");
     roomTextures[5] = p5.loadImage(
-      "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/residency/emrys/openLightStudioDoorLeaves.jpeg"
+      PAM_URL + "residency/emrys/openLightStudioDoorLeaves.jpeg"
     );
     roomTextures[6] = p5.loadImage(
-      "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/residency/emrys/closedLightStudioDoorLeaves.jpeg"
+      PAM_URL + "residency/emrys/closedLightStudioDoorLeaves.jpeg"
+    );
+    roomTextures[7] = p5.loadImage(
+      PAM_URL + "residency/chelsea/openLightStudioDoor_CT.jpg"
+    );
+    roomTextures[8] = p5.loadImage(
+      PAM_URL + "residency/chelsea/closedLightStudioDoor_CT.jpg"
+    );
+    roomTextures[9] = p5.loadImage(
+      PAM_URL + "residency/chelsea/lightsOffDoorOpen_CT.jpg"
+    );
+    roomTextures[10] = p5.loadImage(
+      PAM_URL + "residency/chelsea/lightsOffDoorClosed_CT.jpg"
     );
 
     eyeIcon = p5.loadImage(LMD_URL + "eye.png");

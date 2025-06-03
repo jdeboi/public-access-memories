@@ -89,6 +89,8 @@ export default class ResidencyRoom extends Room {
     const isDoorOpen = this.getIsDoorOpen(user);
     if (roomUserName === "moneymachine69") {
       this.displayEmrysRoom(roomTextures, isDoorOpen);
+    } else if (roomUserName === "chelsea") {
+      this.displayChelseasRoom(roomTextures, isDoorOpen, true);
     } else if (isDoorOpen) {
       this.displayRoomTexture(roomTextures[0]);
     } else {
@@ -105,9 +107,27 @@ export default class ResidencyRoom extends Room {
     }
   }
 
-  displayArtistNotInRoom(user, roomTextures, offIcon) {
+  displayChelseasRoom(roomTextures, isDoorOpen, isArtistHere) {
+    if (isArtistHere) {
+      if (isDoorOpen) {
+        this.displayRoomTexture(roomTextures[7]);
+      } else {
+        this.displayRoomTexture(roomTextures[8]);
+      }
+    } else {
+      if (isDoorOpen) {
+        this.displayRoomTexture(roomTextures[9]);
+      } else {
+        this.displayRoomTexture(roomTextures[10]);
+      }
+    }
+  }
+
+  displayArtistNotInRoom(user, roomTextures, offIcon, roomUserName = "") {
     const isDoorOpen = this.getIsDoorOpen(user);
-    if (isDoorOpen) {
+    if (roomUserName === "chelsea") {
+      this.displayChelseasRoom(roomTextures, isDoorOpen, false);
+    } else if (isDoorOpen) {
       this.displayRoomTexture(roomTextures[2]);
     } else {
       this.displayRoomTexture(roomTextures[3]);
