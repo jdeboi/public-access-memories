@@ -52,10 +52,18 @@ export const Artist = () => {
         </div>
         <hr />
         <div className="info">
-          <h3>Statement</h3>
-          <p>{artist.description}</p>
-          <h3>Bio</h3>
-          <p>{artist.bio}</p>
+          {artist.description && (
+            <>
+              <h3>Statement</h3>
+              <p>{artist.description}</p>
+            </>
+          )}
+          {artist.bio && (
+            <>
+              <h3>Bio</h3>
+              <p>{artist.bio}</p>
+            </>
+          )}
         </div>
         <br />
         <hr />

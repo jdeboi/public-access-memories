@@ -277,13 +277,30 @@ export const artists: IArtist[] = [
     title: "Studio",
     userName: "Chelsea",
     name: "Chelsea Thompto",
-    thumb: "chelsea-thumb.jpg",
+    thumb: "chelsea-thompto-thumb.jpg",
     nameLink: "thompto",
-    instaLink: "",
-    webLink: "",
+    instaLink: "https://www.instagram.com/cthompto",
+    webLink: "https://chelsea.technology/?",
     medium: "custom code",
-    description: <div></div>,
-    bio: <div></div>,
+    description: null,
+    bio: (
+      <div>
+        Chelsea Thompto (she/her) is a transdisciplinary artist and educator
+        working at the intersections of art, trans studies, and technology. Her
+        work is focused on the trans body as a site of political violence and
+        potential. Born and raised in Iowa, she lived and worked between
+        California and the Midwest until 2023 when she moved to Virginia to
+        begin her current role as an assistant professor of creative
+        technologies at Virginia Tech. Working across both artistic and academic
+        production, she has shown and published her work nationally and
+        internationally. Recently, she completed her first museum commission,
+        for the San José Museum of Art, published new net artwork with e-flux
+        journal, and was included in group exhibitions in Toronto and San
+        Francisco. She is currently the Executive Editor of the Media-N: Journal
+        of the New Media Caucus and received an MFA and MA in 4D Art and an MA
+        in Gender and Women's Studies from the University of Wisconsin Madison.
+      </div>
+    ),
     year: 2025,
   },
   {
@@ -292,13 +309,26 @@ export const artists: IArtist[] = [
     title: "Studio",
     userName: "eddie_lohmeyer",
     name: "Eddie Lohmeyer",
-    thumb: "eddie-thumb.jpg",
+    thumb: "eddie-lohmeyer-thumb.jpg",
     nameLink: "lohmeyer",
-    instaLink: "",
-    webLink: "",
+    instaLink: "https://www.instagram.com/eddie_lohmeyer_/",
+    webLink: "https://www.eddielohmeyer.com/",
     medium: "custom code",
-    description: <div></div>,
-    bio: <div></div>,
+    description: null,
+    bio: (
+      <div>
+        Eddie Lohmeyer is an Assistant Professor of Visual Rhetoric and
+        Information Design at Clemson University. He received his PhD in
+        Communication, Rhetoric, and Digital Media from North Carolina State
+        University. His research and creative practice explore aesthetic and
+        technical developments within histories of digital media. Using
+        deconstructive approaches such as glitch and collage, his animations and
+        video installations have been exhibited both nationally and
+        internationally, most recently at Bucknell University Art Galleries,
+        Milan Machinima Festival, Platform 101 Gallery (Tehran, Iran), and the
+        Fotografisk Center (Copenhagen, DK).
+      </div>
+    ),
     year: 2025,
   },
   {
@@ -307,13 +337,48 @@ export const artists: IArtist[] = [
     title: "Studio",
     userName: "nate",
     name: "Nathaniel Britton",
-    thumb: "nate-thumb.jpg",
+    thumb: "britton-thumb.jpg",
     nameLink: "britton",
-    instaLink: "",
+    instaLink: "https://www.instagram.com/natejbritto/",
     webLink: "",
     medium: "custom code",
-    description: <div></div>,
-    bio: <div></div>,
+    description: null,
+    bio: (
+      <div>
+        <p>
+          Nathaniel Britton is a digital artist, animator, and projection
+          designer based in New Orleans. His work explores the intersections of
+          time, loss, and human connection through the use of light, motion, and
+          immersive digital environments. By visualizing the unseen forces that
+          shape our lives—such as memory, energy, and communication—Britton
+          creates works that blur the boundaries between the tangible and the
+          intangible.
+        </p>
+        <p>
+          With a background in theatre design and digital art, Britton holds a
+          B.A. in Art with a concentration in Digital Art and Theatre Design
+          from Southeastern Louisiana University and is currently pursuing an
+          M.F.A. in Fine Arts at the University of New Orleans. His
+          multidisciplinary approach combines animation, projection, and
+          installation, transforming spaces and making the viewer question what
+          it means to be present.
+        </p>
+        <p>
+          Britton has exhibited work at venues such as the Glassell Gallery and
+          the Degas House Art Festival. His projection design has been featured
+          in theatrical productions at The Nims Theatre, The Pottle Auditorium,
+          and Buck’s Rock Creative and Performing Arts Camp. In addition to his
+          artistic practice, Britton is an educator, having taught courses in
+          digital art, animation, and video from middle school to the university
+          level.
+        </p>
+        <p>
+          Through his work, Britton seeks to challenge conventional perceptions
+          of space and time, offering viewers immersive encounters with the
+          unseen forces that connect us all and make us fundamentally human.
+        </p>
+      </div>
+    ),
     year: 2025,
   },
   {
@@ -322,13 +387,26 @@ export const artists: IArtist[] = [
     title: "Studio",
     userName: "Z.YuTube",
     name: "Zhuoyu Zhang",
-    thumb: "zhang-thumb.jpg",
+    thumb: "zhuoyu-zhang-thumb.jpg",
     nameLink: "zhang",
-    instaLink: "",
+    instaLink: "https://www.instagram.com/z.xyz.y",
     webLink: "",
     medium: "custom code",
-    description: <div></div>,
-    bio: <div></div>,
+    description: null,
+    bio: (
+      <div>
+        Zhuoyu Zhang (she/they) is a new media artist whose work spans video
+        installations, documentaries, and visual novel games, focusing on the
+        intersections of digital culture, identity, and trauma. She holds a BFA
+        in Visual Communication from the School of the Art Institute of Chicago
+        and is currently pursuing an MFA in Design & Technology at Parsons
+        School of Design. Recent screenings and exhibitions include Far About
+        the Starry Sky (Golden Rooster and Hundred Flowers Film Festival, 2022);
+        Grand Rising: On Feeling and Interbeing (SAIC Lakeview Gallery, 2022);
+        Quivering Bodies (SAIC Galleries, 2022); and Quantum Abacus (German
+        Aerospace Center, 2024);
+      </div>
+    ),
     year: 2025,
   },
 ];
