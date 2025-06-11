@@ -8,6 +8,10 @@ export const reservedArtists = {
   aem: "🗄️",
   seliciayxy: "🔮",
   yeli: "🌱",
+  Chelsea: "☁️",
+  chelsea: "☁️",
+  ["Z.YuTube"]: "🐟",
+  ["eddie_lohmeyer"]: "🐺",
 };
 
 export const roomConfig = {
@@ -271,7 +275,7 @@ export const artists: IArtist[] = [
     id: 5,
     roomID: 5,
     title: "Studio",
-    userName: "chelsea",
+    userName: "Chelsea",
     name: "Chelsea Thompto",
     thumb: "chelsea-thumb.jpg",
     nameLink: "thompto",
@@ -286,7 +290,7 @@ export const artists: IArtist[] = [
     id: 6,
     roomID: 6,
     title: "Studio",
-    userName: "eddie",
+    userName: "eddie_lohmeyer",
     name: "Eddie Lohmeyer",
     thumb: "eddie-thumb.jpg",
     nameLink: "lohmeyer",
@@ -316,7 +320,7 @@ export const artists: IArtist[] = [
     id: 8,
     roomID: 8,
     title: "Studio",
-    userName: "zhuoyu",
+    userName: "Z.YuTube",
     name: "Zhuoyu Zhang",
     thumb: "zhang-thumb.jpg",
     nameLink: "zhang",
