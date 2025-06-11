@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import RoomNote from "../../../components/Residency/RoomNote/RoomNote";
+import ReadMeViewer from "../../../components/Residency/ReadMeViewer";
 
 const Room = () => {
   const [showOverlay, setShowOverlay] = useState(false);
@@ -27,12 +28,13 @@ const Room = () => {
       style={{ position: "relative", width: "100%", height: "100%" }}
     >
       <iframe
-        src="https://cthompto.github.io/a-walk-in-the-dark/"
+        // src="https://cthompto.github.io/a-walk-in-the-dark/"
+        src="https://cthompto.github.io/iframe-github-demo/"
         width="100%"
         height="100%"
         title="Chelsea Thompto's Studio"
       ></iframe>
-      <RoomNote handleDoubleClick={handleDoubleClick} />
+      {/* <RoomNote handleDoubleClick={handleDoubleClick} /> */}
       {showOverlay && (
         <div
           style={{
@@ -62,7 +64,7 @@ const Room = () => {
               >
                 close
               </button>
-              <div>{markdown}</div>
+              <ReadMeViewer url="https://raw.githubusercontent.com/cthompto/a-walk-in-the-dark/main/README.md" />
             </div>
             <br />
           </div>
