@@ -80,7 +80,7 @@ export const Residency = () => {
             className="logo"
             src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/assets/PAM_logos/logo_black_lg.png"
             height={80}
-            alt="public access memories logo"
+            alt="Public Access Memories logo"
           />
         </p>
       </div>

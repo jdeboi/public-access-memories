@@ -83,7 +83,7 @@ export const useHostBot = () => {
   //             "Wikipedia says net art refers to a group of artists who have worked in the medium of Internet art since 1994.",
   //             "Artsy says Post-Internet refers to a current trend in art and criticism concerned with the impact of the Internet on art and culture.",
   //             "10000110100101111101",
-  //             "public access memories was created in 2022",
+  //             "Public Access Memories was created in 2022",
   //             "I hope you enjoy the show!"
   //         ];
   //         let r = Math.floor(Math.random()*phrases.length);
@@ -133,7 +133,7 @@ export const useHostBot = () => {
         "Wikipedia says net art refers to a group of artists who have worked in the medium of Internet art since 1994.",
         "Artsy says Post-Internet refers to a current trend in art and criticism concerned with the impact of the Internet on art and culture.",
         "10000110100101111101",
-        "public access memories was created in 2021",
+        "Public Access Memories was created in 2021",
         "I hope you enjoy the show!",
       ];
       let r = Math.floor(Math.random() * phrases.length);

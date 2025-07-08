@@ -15,7 +15,7 @@ export const About = () => {
         <br />
         <div className="">
           <p>
-            public access memories (PAM) is a virtual net art gallery that
+            Public Access Memories (PAM) is a virtual net art gallery that
             situates digital works within their native environment. The gallery
             hosts exhibitions (solo and group), artist talks, and more. An
             evolving canvas, PAM invites collaborative brainstorming and

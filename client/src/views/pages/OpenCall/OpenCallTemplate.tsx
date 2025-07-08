@@ -44,7 +44,7 @@ export const OpenCallTemplate = () => {
             expansion further, but rarely deviate from conventional systems of
             linear perspective. Within such conventions exist assumptions about
             the relationship between ourselves and the environments we inhabit
-            that limit our potential scope of experience. public access memories
+            that limit our potential scope of experience. Public Access Memories
             encourages submissions that break these conventions of virtual
             space, exploring fresh, inventive, and critical perspectives that
             open divergent fields of view.
