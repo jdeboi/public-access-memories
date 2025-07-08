@@ -11,7 +11,7 @@ const Room = () => {
         width="100%"
         height="calc(100% + 50px)"
         style={{ marginTop: "-50px", border: "none" }}
-        title="under construction"
+        title="Nate Britton's Studio"
       ></iframe>
     </div>
   );
