@@ -1,21 +1,19 @@
 const aws_url =
   "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/residency/eddie/";
 // const testurl = "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/fields_of_view/Music+in+the+Shape+of+a+Sphere.mp4"
-
 window.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("renderCanvas");
   const engine = new BABYLON.Engine(canvas, true);
 
-  const createScene = () => {
+  const createScene = (videoElement) => {
     const scene = new BABYLON.Scene(engine);
 
-    // ✅ Only change: rotate camera right with alpha = Math.PI / 2
     const camera = new BABYLON.ArcRotateCamera(
       "Camera",
-      Math.PI / -3.5, // alpha (horizontal rotation)
-      Math.PI / 2, // beta (vertical tilt)
-      200, // distance to target
-      BABYLON.Vector3.Zero(), // target
+      Math.PI / -3.5,
+      Math.PI / 2,
+      200,
+      BABYLON.Vector3.Zero(),
       scene
     );
     camera.fov = BABYLON.Tools.ToRadians(75);
@@ -29,7 +27,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const videoDome = new BABYLON.VideoDome(
       "videoDome",
-      aws_url + "PAMhd.mp4",
+      videoElement,
       {
         resolution: 32,
         size: 1000,
@@ -54,12 +52,26 @@ window.addEventListener("DOMContentLoaded", () => {
     return scene;
   };
 
-  const scene = createScene();
+  // ✅ Create hidden video element
+  const video = document.createElement("video");
+  video.src = aws_url + "PAMhd.mp4";
+  video.crossOrigin = "anonymous";
+  video.preload = "auto";
+  video.muted = true; // Needed to autoplay without user gesture
+  video.setAttribute("playsinline", "");
+  video.style.display = "none";
+  document.body.appendChild(video);
 
-  engine.runRenderLoop(() => {
-    scene.render();
+  // ✅ Wait for enough buffering
+  video.addEventListener("canplaythrough", () => {
+    video.play(); // Safe to start
+    const scene = createScene(video);
+    engine.runRenderLoop(() => {
+      scene.render();
+    });
   });
 
+  // Resize
   window.addEventListener("resize", () => {
     engine.resize();
   });

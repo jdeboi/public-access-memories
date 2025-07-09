@@ -6,7 +6,7 @@ const Room = () => {
       className="Room Sketch"
       style={{ position: "relative", width: "100%", height: "100%" }}
     >
-      <iframe
+      {/* <iframe
         // src="https://editor.p5js.org/lohmeyer5077/full/SLcLMXxUy"
         src="/iframes/eddie/index.html"
         width="100%"
@@ -14,7 +14,19 @@ const Room = () => {
         height="100%"
         // style={{ marginTop: "-50px", border: "none" }}
         title="Eddie's Studio"
+      ></iframe> */}
+      {/* <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;"> */}
+      <iframe
+        src="https://www.youtube.com/embed/aPwxdgwGwbI?si=tPirpo3y3esqI5CJ"
+        // style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+        // frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; vr"
+        allowFullScreen
+        height="100%"
+        width="100%"
+        title="360° YouTube Video"
       ></iframe>
+      {/* </div> */}
     </div>
   );
 };
