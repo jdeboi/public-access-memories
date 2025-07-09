@@ -28,13 +28,13 @@ const Room = () => {
       style={{ position: "relative", width: "100%", height: "100%" }}
     >
       <iframe
-        // src="https://cthompto.github.io/a-walk-in-the-dark/"
-        src="https://cthompto.github.io/iframe-github-demo/"
+        src="https://cthompto.github.io/a-walk-in-the-dark/"
+        // src="https://cthompto.github.io/iframe-github-demo/"
         width="100%"
         height="100%"
         title="Chelsea Thompto's Studio"
       ></iframe>
-      {/* <RoomNote handleDoubleClick={handleDoubleClick} /> */}
+      <RoomNote handleDoubleClick={handleDoubleClick} />
       {showOverlay && (
         <div
           style={{
@@ -64,7 +64,7 @@ const Room = () => {
               >
                 close
               </button>
-              <ReadMeViewer url="https://raw.githubusercontent.com/cthompto/a-walk-in-the-dark/main/README.md" />
+              <ReadMeViewer url="https://raw.githubusercontent.com/cthompto/a-walk-in-the-dark/refs/heads/main/log.txt" />
             </div>
             <br />
           </div>
