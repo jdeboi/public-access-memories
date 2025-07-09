@@ -7,9 +7,11 @@ import { useSelector } from "react-redux";
 import { selectMenu, selectUser } from "../../../../store/store";
 import { ShowConfig } from "../../../../data/CurrentShow/ShowConfig";
 
-const LiveStreamURL = "https://meet.google.com/eob-ijfy-cxa";
-const LiveStreamStartTime = new Date("2025-06-01T09:30:00-05:00"); // 10:30am PM CDT (no daylight savings)
-const LiveStreamEndTime = new Date("2025-06-01T21:13:00-05:00"); // 9:00 PM CDT
+const LiveStreamURL = "https://meet.google.com/pdz-duak-fjt";
+const LiveStreamStartTime = new Date("2025-07-09T23:30:00Z"); // 6:30 PM CDT in UTC
+const LiveStreamEndTime = new Date(
+  LiveStreamStartTime.getTime() + 3 * 60 * 60 * 1000
+);
 
 const LiveStreamLi = () => {
   const menu = useSelector(selectMenu);
