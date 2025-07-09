@@ -10,8 +10,9 @@ const Room = () => {
         // src="https://editor.p5js.org/lohmeyer5077/full/SLcLMXxUy"
         src="/iframes/eddie/index.html"
         width="100%"
-        height="calc(100% + 50px)"
-        style={{ marginTop: "-50px", border: "none" }}
+        // height="calc(100% + 50px)"
+        height="100%"
+        // style={{ marginTop: "-50px", border: "none" }}
         title="Eddie's Studio"
       ></iframe>
     </div>
