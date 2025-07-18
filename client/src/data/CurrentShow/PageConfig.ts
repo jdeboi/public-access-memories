@@ -12,17 +12,17 @@ export const PageConfig: IPageConfig[] = [
   //   link: "/statement",
   //   title: "statement",
   // },
-  { link: "/residency", title: "residency" },
-  // {
-  //   link: "/opencall",
-  //   title: "open call",
-  // },
+  // { link: "/residency", title: "residency" },
+  {
+    link: "/opencall",
+    title: "open call",
+  },
   {
     link: "/pastexhibitions",
     title: "past exhibitions",
   },
-  {
-    link: "/artists",
-    title: "artists",
-  },
+  // {
+  //   link: "/artists",
+  //   title: "artists",
+  // },
 ];

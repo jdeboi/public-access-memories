@@ -70,6 +70,13 @@ export const PastExhibitions: React.FC = () => {
       title: "home </body>",
       subtitle: "wrong 2022",
     },
+    {
+      link: "/pastexhibitions/residency2025",
+      imgSrc:
+        "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/residency/thumbs/residency_studios.jpg",
+      title: "Residency Exhibition",
+      subtitle: "summer 2025",
+    },
   ];
 
   return (

@@ -56,7 +56,7 @@ import { shouldShowLoggedInComponents } from "../helpers/helpers";
 import SubscribeSendInBlue from "../views/pages/SubscribeForm/SubscribeSendInBlue";
 
 import { artists, rooms } from "../data/CurrentShow/RoomConfig";
-import OpenCall from "../views/pages/OpenCall/OpenCall";
+// import OpenCall from "../views/pages/OpenCall/OpenCall";
 import FAQFrame from "../components/FAQ/FAQFrame";
 import {
   ASIRECALL_ID,
@@ -68,6 +68,8 @@ import {
 import Residency from "../views/pages/Residency/Residency";
 import EmrysGalleryRoom from "../views/rooms/R_01/EmrysGalleryRoom";
 import HostBotRoom from "../views/Gallery/Gallery0Residency/rooms/HostBotRoom";
+import OpenCallBlackBox from "../views/pages/OpenCall/OpenCallBlackBox/OpenCallBlackBox";
+import Residency2025 from "../views/pages/PastExhibitions/Residency/Residency2025";
 // import TwilioChat from '../components/TwilioChat/TwilioChat';
 
 function App() {
@@ -283,7 +285,7 @@ function App() {
             path="/"
             element={
               <Gallery
-                id={RESIDENCY_ID}
+                id={HOMEBODY_ID}
                 users={users}
                 isClosed={isClosed}
                 showWelcome={showWelcome}
@@ -294,7 +296,7 @@ function App() {
 
           <Route path="/newsletter" element={<SubscribeSendInBlue />} />
           <Route path="/statement" element={<Statement />} />
-          <Route path="/opencall" element={<OpenCall />} />
+          <Route path="/opencall" element={<OpenCallBlackBox />} />
           <Route path="/residency" element={<Residency />} />
 
           <Route path="/artists" element={<Artists />} />
@@ -388,6 +390,10 @@ function App() {
           <Route
             path="/pastexhibitions/homeoffices"
             element={<HomeOffices />}
+          />
+          <Route
+            path="/pastexhibitions/residency2025"
+            element={<Residency2025 />}
           />
           <Route
             path="/editusers"
