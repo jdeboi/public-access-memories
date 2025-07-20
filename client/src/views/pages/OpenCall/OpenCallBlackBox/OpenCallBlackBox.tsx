@@ -161,7 +161,7 @@ export default function OpenCallBlackBox() {
                 <h3 className="text-xl font-semibold text-gray-100 mb-6">
                   Black Box // White Cube
                 </h3>
-                <div className="flex flex-col items-start md:flex-row md:items-center gap-4">
+                <div className="flex flex-row items-center gap-4">
                   <div className="rounded-md bg-slate-100 w-25 text-center py-0.5 px-2.5 border border-transparent text-sm text-slate-600 transition-all shadow-sm">
                     Version {version.id}
                   </div>
