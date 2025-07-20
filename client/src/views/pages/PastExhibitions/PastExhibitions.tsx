@@ -80,11 +80,9 @@ export const PastExhibitions: React.FC = () => {
   ];
 
   return (
-    <div className="Artists Statement Page">
-      <div className="container">
-        <h1>Past Exhibitions</h1>
-        <br />
-        <br />
+    <div className="Artists bg-gradient-to-b text-white from-[#5b43cd] to-[#0da6ff] min-h-screen overflow-y-auto flex flex-col items-center px-4 py-12">
+      <div className="max-w-4xl w-full mb-10">
+        <h1 className="mb-10">Past Exhibitions</h1>
         <div className="artists-list">
           {exhibitions.map((exhibition, index) => (
             <ArtistBox

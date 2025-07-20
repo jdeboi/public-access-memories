@@ -9,7 +9,7 @@ export const OpenCallTemplate = () => {
         <h3>
           A <a href="https://thewrong.org/">wrong biennale</a> pavilion
         </h3>
-        <h4>Deadline July 1st, 2023</h4>
+        <h4>Deadline July 1st,œ 2023</h4>
         <h5>
           <a href="mailto:publicaccessmemories@gmail.com">
             publicaccessmemories@gmail.com

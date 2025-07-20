@@ -69,6 +69,9 @@
     align-items: stretch;
 
     overflow: hidden;
+    &.scroll-enabled {
+      overflow-y: auto;
+    }
   }
 
   // .Frame-box {
@@ -244,7 +247,6 @@
 //   }
 // }
 
-
 @font-face {
   font-family: consoleFont;
   // src: url(./assets/fonts/dogica.ttf);
@@ -257,10 +259,28 @@
 
 @font-face {
   font-family: consoleFontBold;
-    src: url(./assets/fonts/sysfont/sysfont.otf);
-
-  // src: url(./assets/fonts/ms_sans_serif_bold.woff) format("woff");
-  // src: url(./assets/fonts/ms_sans_serif_bold.woff2) format("woff2");
+  src: url(./assets/fonts/sysfont/sysfont.otf);
   font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: manoloFont;
+  src: url(./assets/fonts/manolo-mono.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: dogicaFont;
+  src: url(./assets/fonts/dogica.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: geoFont;
+  src: url(./assets/fonts/Geo-Regular.ttf);
+  font-weight: normal;
   font-style: normal;
 }

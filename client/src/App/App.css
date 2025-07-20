@@ -62,6 +62,9 @@
   align-items: stretch;
   overflow: hidden;
 }
+.App .App-Content.scroll-enabled {
+  overflow-y: auto;
+}
 .App .inner-outline { /* Safari/Chrome, other WebKit */ /* Firefox, other Gecko */
   box-sizing: border-box; /* Opera/IE 8+ */
 }
@@ -146,5 +149,23 @@
   font-family: consoleFontBold;
   src: url(./assets/fonts/sysfont/sysfont.otf);
   font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: manoloFont;
+  src: url(./assets/fonts/manolo-mono.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: dogicaFont;
+  src: url(./assets/fonts/dogica.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: geoFont;
+  src: url(./assets/fonts/Geo-Regular.ttf);
+  font-weight: normal;
   font-style: normal;
 }/*# sourceMappingURL=App.css.map */

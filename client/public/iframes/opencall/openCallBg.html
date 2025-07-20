@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="net art gallery" />
+    <link rel="author" href="http://jdeboi.com/" />
+
+    <!-- open graph -->
+    <meta property="og:description" content="net art gallery" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Public Access Memories" />
+    <meta property="og:site_name" content="Public Access Memories" />
+    <meta property="og:url" content="https://publicaccessmemories.com" />
+    <meta
+      property="og:image"
+      content="http://www.publicaccessmemories.com/og.png"
+    />
+    <meta
+      property="og:image:secure_url"
+      content="https://www.publicaccessmemories.com/og.png"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="697" />
+
+    <title>Public Access Memories</title>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      canvas {
+        display: block;
+      }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+  </head>
+
+  <body>
+    <script>
+      function setup() {
+        createCanvas(windowWidth, windowHeight);
+        noStroke();
+      }
+
+      function draw() {
+        background(0);
+        stroke(255, 80);
+        // create grid of white lines
+        const minSize = 15; // minimum grid size
+        const maxSize = 50; // maximum grid size
+        const dSize = maxSize - minSize;
+        const gridSize =
+          minSize + dSize / 2 + (dSize / 2) * sin(frameCount * 0.01); // dynamic grid size
+        for (let i = 0; i < width; i += gridSize) {
+          line(i, 0, i, height);
+        }
+        for (let j = 0; j < height; j += gridSize) {
+          line(0, j, width, j);
+        }
+      }
+
+      function windowResized() {
+        resizeCanvas(windowWidth, windowHeight);
+      }
+    </script>
+  </body>
+</html>
