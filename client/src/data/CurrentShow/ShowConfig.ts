@@ -9,6 +9,6 @@ export const ShowConfig = {
   showDescription: "a virtual net art exhibition",
   showOpens: { date: "November 1st, 2025", time: "" },
   showCloses: "",
-  link: "residency",
-  awsLink: "blackbox",
+  link: "debox",
+  awsLink: "debox",
 };

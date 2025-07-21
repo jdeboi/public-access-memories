@@ -11,11 +11,14 @@ type OpenCallVersion = {
   staticContent?: React.ReactNode;
 };
 
+const SHOW_TITLE = "Debox";
+
 const promptClass =
   "flex flex-row gap-4 bg-gray-800 text-white p-4 rounded mb-4";
 const responsePromptClass =
   "bg-gray-700 text-white p-4 rounded mb-4 flex flex-row gap-4";
 const textNotesClass = "";
+const highlightColor = "text-cyan-500"; //"text-[cyan]";
 
 const chatGPTLogo = (
   <div className="w-4 h-4 flex-shrink-0">
@@ -248,6 +251,7 @@ const openCallVersionsOG: OpenCallVersion[] = [
           <li>
             <a
               target="_blank"
+              style={{ textDecoration: "underline", color: "blue" }}
               href="https://www.technologyreview.com/2024/03/04/1089403/large-language-models-amazing-but-nobody-knows-why/?truid=&utm_source=the_algorithm&utm_medium=email&utm_campaign=the_algorithm.unpaid.engagement&utm_content=03-04-2024"
             >
               Large language models can do jaw-dropping things. But nobody knows
@@ -257,6 +261,7 @@ const openCallVersionsOG: OpenCallVersion[] = [
           <li>
             <a
               target="_blank"
+              style={{ textDecoration: "underline", color: "blue" }}
               href="https://www.nytimes.com/2024/11/04/technology/meta-ai-military.html"
             >
               Meta Permits Its A.I. Models to Be Used for U.S. Military Purposes
@@ -265,6 +270,7 @@ const openCallVersionsOG: OpenCallVersion[] = [
           <li>
             <a
               target="_blank"
+              style={{ textDecoration: "underline", color: "blue" }}
               href="https://www.theverge.com/news/688041/openai-us-defense-department-200-million-contract"
             >
               OpenAI awarded $200 million US defense contract
@@ -273,6 +279,7 @@ const openCallVersionsOG: OpenCallVersion[] = [
           <li>
             <a
               target="_blank"
+              style={{ textDecoration: "underline", color: "blue" }}
               href="https://www.politico.com/news/2023/10/31/new-orleans-police-facial-recognition-00121427"
             >
               Inside New Orleans’ struggle with facial-recognition policing
@@ -464,19 +471,23 @@ const openCallVersionsOG: OpenCallVersion[] = [
     staticContent: (
       <div>
         <div className="mb-4 text-md">
-          Artificial intelligence systems are often described as “black
-          boxes”—highly complex models that receive inputs and produce outputs,
-          yet whose inner workings remain largely inaccessible, even to their
-          creators. The data used to train these systems is rarely open or
-          traceable, especially in corporate models, creating layers of opacity
-          that raise critical questions around power, bias, authorship, and
-          consent. This is particularly troubling as AI is increasingly deployed
-          in policing, surveillance, and military operations.
+          Artificial intelligence systems are often described as{" "}
+          <span className={highlightColor}>“black boxes”</span>—highly complex
+          models that receive inputs and produce outputs, yet whose inner
+          workings remain largely inaccessible, even to their creators. The data
+          used to train these systems is rarely open or traceable, especially in
+          corporate models, creating layers of opacity that raise critical
+          questions around{" "}
+          <span className={highlightColor}>
+            power, bias, authorship, and consent
+          </span>
+          . This is particularly troubling as AI is increasingly deployed in
+          policing, surveillance, and military operations.
         </div>
         <div className="mb-4 text-md">
           In contrast,{" "}
-          <span className="text-[cyan]">
-            Black Box // White Cube foregrounds transparency
+          <span className={highlightColor}>
+            {SHOW_TITLE} foregrounds transparency
           </span>
           —of process, memory, intention, and data. This exhibition invites
           artists to reveal the thinking behind their work: the inputs,
@@ -487,10 +498,13 @@ const openCallVersionsOG: OpenCallVersion[] = [
         <div className="mb-4 text-md">
           Transparency isn’t just about the visible process of making—it’s also
           about showing the foundations: the values embedded in the data, and
-          the politics of what is remembered or forgotten.
+          the{" "}
+          <span className={highlightColor}>politics of what is remembered</span>{" "}
+          or forgotten.
         </div>
         <div className="mb-4 text-md">
-          We welcome projects that engage with dataset creation, especially
+          We welcome projects that engage with{" "}
+          <span className={highlightColor}>dataset creation</span>, especially
           those that center personal archives, underrepresented communities, or
           alternative knowledge systems. This includes works of memory work—acts
           of documenting, preserving, or resisting erasure through data.
@@ -506,22 +520,23 @@ const openCallVersionsOG: OpenCallVersion[] = [
         <ul className="list-disc list-outside ml-6 space-y-2 mb-8 text-md">
           <li>
             Open-source or{" "}
-            <span className="text-[cyan]">personal datasets</span>, especially
-            from marginalized or underrepresented perspectives
+            <span className={highlightColor}>personal datasets</span>,
+            especially from marginalized or underrepresented perspectives
           </li>
           <li>
-            Works of <span className="text-[cyan]">memory work—projects</span>{" "}
-            that document, preserve, or call attention to lost or missing data
+            Works of{" "}
+            <span className={highlightColor}>memory work—projects</span> that
+            document, preserve, or call attention to lost or missing data
           </li>
           <li>
-            Visual <span className="text-[cyan]">traces of process</span>:
+            Visual <span className={highlightColor}>traces of process</span>:
             sketches, notes, mind maps, code, failed experiments
           </li>
 
           <li>
             Projects that interrogate or{" "}
-            <span className="text-[cyan]">subvert the black-box</span> logic of
-            AI
+            <span className={highlightColor}>subvert the black-box</span> logic
+            of AI
           </li>
         </ul>
 

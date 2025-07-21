@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { openCallVersions } from "./versions";
 
+const SHOW_TITLE = "Debox";
+
 /**
  * Recursively extracts word-wrapped JSX fragments up to a target word count.
  */
@@ -120,13 +122,18 @@ export default function OpenCallBlackBox() {
                 OPEN CALL
               </div>
 
-              <div className="text-gray-500 mb-4">
+              {/* <div className="text-gray-500 mb-4">
                 a{" "}
-                <a href="" target="_blank" className="text-blue-600">
+                <a
+                  href=""
+                  style={{ textDecoration: "underline", color: "blue" }}
+                  target="_blank"
+                  className="text-blue-600"
+                >
                   Wrong Biennale
                 </a>{" "}
                 pavilion and Public Access Memories exhibition
-              </div>
+              </div> */}
               <div className="text-white text-xl mb-8">
                 DEADLINE: August 20, 2025
               </div>
@@ -157,10 +164,21 @@ export default function OpenCallBlackBox() {
 
             {/* Statement */}
             <div className="bg-black w-full min-h-[800px] windowsBlack p-4 mb-4 text-gray-200">
-              <div className="mb-10">
-                <h3 className="text-xl font-semibold text-gray-100 mb-6">
-                  Black Box // White Cube
-                </h3>
+              <div className="mb-6">
+                <div className="text-4xl font-semibold text-gray-100 mb-4">
+                  {SHOW_TITLE}
+                </div>
+                <div className="text-gray-500 mb-6">
+                  a{" "}
+                  <a
+                    href=""
+                    style={{ textDecoration: "underline" }}
+                    target="_blank"
+                  >
+                    Wrong Biennale
+                  </a>{" "}
+                  pavilion and Public Access Memories exhibition
+                </div>
                 <div className="flex flex-row items-center gap-4">
                   <div className="rounded-md bg-slate-100 w-25 text-center py-0.5 px-2.5 border border-transparent text-sm text-slate-600 transition-all shadow-sm">
                     Version {version.id}
