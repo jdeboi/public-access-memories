@@ -16,7 +16,7 @@ export const ArtistsList = () => {
 
   return (
     <div className="Artists Page">
-      <div className="container">
+      <div className="containerOG">
         <h1 className="">Artists</h1>
         <br />
         <ul>

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export const Residency = () => {
   return (
     <div className="Statement Page">
-      <div className="container">
+      <div className="containerOG">
         <h1>Residency</h1>
 
         <div className="windows">

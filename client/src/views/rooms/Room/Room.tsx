@@ -41,7 +41,7 @@ const Room = () => {
   const roomUnderConstruction = () => {
     return (
       <div className="Room Sketch">
-        <div className="container">
+        <div className="containerOG">
           <h1>Room under construction</h1>
           <h3>Please check back later.</h3>
         </div>
@@ -52,7 +52,7 @@ const Room = () => {
   const roomClosed = () => {
     return (
       <div className="Room Sketch">
-        <div className="container" style={{ flex: "unset" }}>
+        <div className="containerOG" style={{ flex: "unset" }}>
           <h1>Gallery Closed</h1>
           {!ShowConfig.isResidency && <h2>Please join us for the opening!</h2>}
           {ShowConfig.isResidency && (

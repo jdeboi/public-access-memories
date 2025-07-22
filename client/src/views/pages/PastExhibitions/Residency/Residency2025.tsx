@@ -18,7 +18,7 @@ export const Residency2025 = () => {
 
   return (
     <div className="Statement  Page">
-      <div className="container">
+      <div className="containerOG">
         <h1>Residency 2025</h1>
 
         <br />

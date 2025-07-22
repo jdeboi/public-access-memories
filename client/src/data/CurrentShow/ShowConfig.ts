@@ -5,7 +5,7 @@ export const ShowConfig = {
   isResidency: false,
   isMenuOn: false,
   galleryTitle: "Public Access Memories",
-  showTitle: "a Wrong Biennale pavilion",
+  showTitle: "Debox",
   showDescription: "a virtual net art exhibition",
   showOpens: { date: "November 1st, 2025", time: "" },
   showCloses: "",

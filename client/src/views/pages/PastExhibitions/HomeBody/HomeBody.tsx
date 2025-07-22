@@ -13,7 +13,7 @@ export const HomeBody = () => {
 
   return (
     <div className="Statement  Page">
-      <div className="container">
+      <div className="containerOG">
         <h1>home &lt;/body&gt;</h1>
         <h3>
           A <a href="https://thewrong.org/">wrong biennale</a> pavilion

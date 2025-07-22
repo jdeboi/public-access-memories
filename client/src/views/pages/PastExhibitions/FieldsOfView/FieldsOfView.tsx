@@ -20,7 +20,6 @@ export const FieldsOfView = () => {
       "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/fields_of_view/screenshots/" +
       imgNames[i];
   }
-  
 
   useEffect(() => {
     // Create a copy of the original array
@@ -29,7 +28,7 @@ export const FieldsOfView = () => {
 
   return (
     <div className="Statement  Page">
-      <div className="container">
+      <div className="containerOG">
         <h1>Fields of View</h1>
         <h3>
           A <a href="https://thewrong.org/">wrong biennale</a> pavilion

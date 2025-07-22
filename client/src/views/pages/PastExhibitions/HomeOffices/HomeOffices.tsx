@@ -12,7 +12,7 @@ export const HomeOffices = () => {
 
   return (
     <div className="Statement  Page">
-      <div className="container">
+      <div className="containerOG">
         <h1>HomeOffices</h1>
         <h4>
           A solo show by <a href="https://www.thesculpted.com/">Dave Greber</a>

@@ -10,7 +10,7 @@ import {
 export const Statement = () => {
   return (
     <div className="Statement  Page">
-      <div className="container">
+      <div className="containerOG">
         <h1>Statement</h1>
 
         <br />

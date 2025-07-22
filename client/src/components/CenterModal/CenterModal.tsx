@@ -92,8 +92,8 @@ export default function CenterModal({
               className="CenterModal-Container"
               style={{
                 padding: 20,
-                width: dimensions.w - 40,
-                height: dimensions.h - 40,
+                width: dimensions.w,
+                height: dimensions.h,
               }}
             >
               {content}

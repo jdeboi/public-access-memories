@@ -1,7 +1,7 @@
 const SubscribeSendInBlue = () => {
   return (
     <div className="About Page">
-      <div className="container">
+      <div className="containerOG">
         <h1 className=""></h1>
         <br />
         <div>

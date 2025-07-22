@@ -12,7 +12,7 @@ export const AsIRecall = () => {
   }, []);
   return (
     <div className="Statement  Page">
-      <div className="container">
+      <div className="containerOG">
         <h1>As I Recall</h1>
         {/* <img src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/as_i_recall.png" width="500px" /> */}
 

@@ -7,7 +7,7 @@ import OpenCallOpen from "./OpenCallOpen";
 export const OpenCall = () => {
   return (
     <div className="Statement  Page">
-      <div className="container">
+      <div className="containerOG">
         <h1>OPEN CALL</h1>
         <br />
         <br />

@@ -50,7 +50,7 @@ const EditUsers: React.FC<EditProps> = ({ user, users }) => {
 
   return (
     <div className="EditUsers">
-      <div className="container">
+      <div className="containerOG">
         <h1>Edit Users</h1>
         <br />
         <br />

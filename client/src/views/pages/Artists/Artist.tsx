@@ -42,7 +42,7 @@ export const Artist = () => {
 
   return (
     <div className="Artist Page">
-      <div className="container">
+      <div className="containerOG">
         <h1 className="">{artist.name}</h1>
         <br />
         <div className="door">

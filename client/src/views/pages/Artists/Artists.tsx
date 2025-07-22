@@ -39,11 +39,11 @@ export const Artists = () => {
 
   return (
     <div className="Artists Page">
-      <div className="container">
+      <div className="containerOG">
         <h1>{ShowConfig.isResidency ? "Artists in Residence" : "Artists"}</h1>
         <br />
         <br />
-        <br />  
+        <br />
         <br />
 
         {ShowConfig.underConstruction ? (
