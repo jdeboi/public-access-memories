@@ -18,7 +18,7 @@ const promptClass =
 const responsePromptClass =
   "bg-gray-700 text-white p-4 rounded mb-4 flex flex-row gap-4";
 const textNotesClass = "";
-const highlightColor = "text-cyan-500"; //"text-[cyan]";
+const highlightColor = "text-[cyan]";
 
 const chatGPTLogo = (
   <div className="w-4 h-4 flex-shrink-0">
@@ -251,7 +251,7 @@ const openCallVersionsOG: OpenCallVersion[] = [
           <li>
             <a
               target="_blank"
-              style={{ textDecoration: "underline", color: "blue" }}
+              style={{ textDecoration: "underline" }}
               href="https://www.technologyreview.com/2024/03/04/1089403/large-language-models-amazing-but-nobody-knows-why/?truid=&utm_source=the_algorithm&utm_medium=email&utm_campaign=the_algorithm.unpaid.engagement&utm_content=03-04-2024"
             >
               Large language models can do jaw-dropping things. But nobody knows
@@ -261,7 +261,7 @@ const openCallVersionsOG: OpenCallVersion[] = [
           <li>
             <a
               target="_blank"
-              style={{ textDecoration: "underline", color: "blue" }}
+              style={{ textDecoration: "underline" }}
               href="https://www.nytimes.com/2024/11/04/technology/meta-ai-military.html"
             >
               Meta Permits Its A.I. Models to Be Used for U.S. Military Purposes
@@ -270,7 +270,7 @@ const openCallVersionsOG: OpenCallVersion[] = [
           <li>
             <a
               target="_blank"
-              style={{ textDecoration: "underline", color: "blue" }}
+              style={{ textDecoration: "underline" }}
               href="https://www.theverge.com/news/688041/openai-us-defense-department-200-million-contract"
             >
               OpenAI awarded $200 million US defense contract
@@ -279,7 +279,7 @@ const openCallVersionsOG: OpenCallVersion[] = [
           <li>
             <a
               target="_blank"
-              style={{ textDecoration: "underline", color: "blue" }}
+              style={{ textDecoration: "underline" }}
               href="https://www.politico.com/news/2023/10/31/new-orleans-police-facial-recognition-00121427"
             >
               Inside New Orleans’ struggle with facial-recognition policing

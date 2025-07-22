@@ -108,7 +108,7 @@ export default function OpenCallBlackBox() {
     <>
       <iframe
         src="/iframes/opencall/openCallBg.html"
-        className="absolute inset-0 w-full h-full z-0 pointer-none"
+        className="absolute inset-0 w-full h-full z-0"
       />
       <div
         className="w-full h-full flex flex-col z-1 items-center bg-transparent overflow-y-auto"
@@ -165,7 +165,7 @@ export default function OpenCallBlackBox() {
             {/* Statement */}
             <div className="bg-black w-full min-h-[800px] windowsBlack p-4 mb-4 text-gray-200">
               <div className="mb-6">
-                <div className="text-4xl font-semibold text-gray-100 mb-4">
+                <div className="text-5xl font-semibold text-gray-100 mb-4">
                   {SHOW_TITLE}
                 </div>
                 <div className="text-gray-500 mb-6">
