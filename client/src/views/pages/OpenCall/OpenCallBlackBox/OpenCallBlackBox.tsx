@@ -135,7 +135,7 @@ export default function OpenCallBlackBox() {
                 pavilion and Public Access Memories exhibition
               </div> */}
               <div className="text-white text-xl mb-8">
-                DEADLINE: August 20, 2025
+                DEADLINE: September 1st, 2025
               </div>
               <div className="">
                 <a
