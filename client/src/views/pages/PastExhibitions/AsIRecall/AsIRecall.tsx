@@ -26,7 +26,9 @@ export const AsIRecall = () => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
+        <br />
         <hr />
+
         <h3>Statement</h3>
 
         <blockquote
