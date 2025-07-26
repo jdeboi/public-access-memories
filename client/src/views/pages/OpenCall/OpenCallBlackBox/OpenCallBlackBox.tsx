@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { openCallVersions } from "./versions";
 
 const SHOW_TITLE = "Debox";
@@ -98,6 +98,15 @@ export default function OpenCallBlackBox() {
   const localPercent = (clampedSlider - localStart) / blockSize;
   const easedPercent = Math.min(localPercent * 1.2, 1); // finishes slightly early
 
+  const whichIframe = useMemo(() => {
+    const randomVal = Math.random();
+    return randomVal < 0.25
+      ? "openCallBg"
+      : randomVal < 0.5
+      ? "openCallBg2"
+      : "openCallBgThree";
+  }, []);
+
   const { newContent: partialContent } = getPartialVersionNode(
     version,
     localPercent || 0
@@ -107,17 +116,17 @@ export default function OpenCallBlackBox() {
     // add iframe as background
     <>
       <iframe
-        src="/iframes/opencall/openCallBg.html"
+        src={`/iframes/opencall/${whichIframe}.html`}
         className="absolute inset-0 w-full h-full z-0"
       />
       <div
-        className="w-full h-full flex flex-col z-1 items-center bg-transparent overflow-y-auto"
+        className="w-full pointer-events-none h-full flex flex-col z-1 items-center bg-transparent overflow-y-auto"
         style={{ scrollbarGutter: "stable" }}
       >
         <div className=" mx-auto px-6 py-12  flex flex-1 flex-col items-start">
-          <div className="w-[800px] max-w-[calc(100vw_-_100px)]">
+          <div className=" w-[800px] max-w-[calc(100vw_-_100px)]">
             {/* Header */}
-            <div className="p-6 windowsBlack  mb-8 bg-black">
+            <div className="pointer-events-auto p-6 windowsBlack  mb-8 bg-black">
               <div className="font-['geoFont'] text-7xl font-bold text-gray-100 mb-6">
                 OPEN CALL
               </div>
@@ -158,12 +167,12 @@ export default function OpenCallBlackBox() {
                 step={0.001}
                 value={sliderPercent}
                 onChange={(e) => setSliderPercent(parseFloat(e.target.value))}
-                className="w-full accent-white"
+                className="pointer-events-auto w-full accent-white"
               />
             </div>
 
             {/* Statement */}
-            <div className="bg-black w-full min-h-[800px] windowsBlack p-4 mb-4 text-gray-200">
+            <div className="pointer-events-auto bg-black w-full min-h-[800px] windowsBlack p-4 mb-4 text-gray-200">
               <div className="mb-6">
                 <div className="text-5xl font-semibold text-gray-100 mb-4">
                   {SHOW_TITLE}

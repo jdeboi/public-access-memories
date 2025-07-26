@@ -48,46 +48,54 @@
   <body>
     <script>
       let layers = [];
-      let numLayers = 7;
-      let imagesPerLayer = [1, 5, 9, 16, 9, 5, 1];
+      let numLayers = 5;
+      let imagesPerLayer = [1, 5, 9, 16, 9, 5, 1]; // Suggest squares or near-squares for grid
       let connections = [];
       let angleX = 0;
       let angleY = 0;
       let isDragging = false;
       let lastMouseX, lastMouseY;
+      let boxColor;
       let font;
-      let currentRefreshLayer = 0;
+      let dmouseX = 0;
+      let dmouseY = 0;
 
-      function preload() {
-        font = loadFont("/fonts/manolo-mono.ttf");
-      }
       function setup() {
+        font = loadFont("/fonts/manolo-mono.ttf");
+
         createCanvas(windowWidth, windowHeight, WEBGL);
-        textFont(font, 12);
-        // Create nodes and textures
+
         for (let l = 0; l < numLayers; l++) {
           let layer = [];
           for (let i = 0; i < imagesPerLayer[l]; i++) {
-            let g = createGraphics(16, 16); // smaller = faster
-            let label = randomLabel();
-            drawLabel(g, label);
-            layer.push({ gfx: g, label, pos: createVector() });
+            let g = createGraphics(28, 28);
+            g.background(0);
+            g.noStroke();
+            g.fill(255);
+            g.textAlign(CENTER, CENTER);
+            // g.textSize(18);
+            g.textFont(font, 12);
+            g.text(ceil(random(100)), 14, 14);
+            layer.push({ gfx: g });
           }
           layers.push(layer);
         }
 
-        // Assign 3D grid positions
+        // Assign 3D grid positions (X: layer, Y and Z: 2D grid)
         let spacingX = 300;
         let spacingGrid = 150;
+
         for (let l = 0; l < layers.length; l++) {
           let nodes = layers[l];
-          let cols = ceil(sqrt(nodes.length));
-          let rows = ceil(nodes.length / cols);
+          let cols = Math.ceil(Math.sqrt(nodes.length));
+          let rows = Math.ceil(nodes.length / cols);
           for (let i = 0; i < nodes.length; i++) {
             let col = i % cols;
-            let row = floor(i / cols);
-            let yOffset = -((rows - 1) * spacingGrid) / 2;
-            let zOffset = -((cols - 1) * spacingGrid) / 2;
+            let row = Math.floor(i / cols);
+
+            let yOffset = (-(rows - 1) * spacingGrid) / 2;
+            let zOffset = (-(cols - 1) * spacingGrid) / 2;
+
             nodes[i].pos = createVector(
               l * spacingX - 400,
               yOffset + row * spacingGrid,
@@ -96,13 +104,11 @@
           }
         }
 
-        // Connect every node in each layer to the next
+        // Create connections between nodes
         for (let l = 0; l < layers.length - 1; l++) {
           for (let a of layers[l]) {
             for (let b of layers[l + 1]) {
-              isLine = random() > 0.2;
-
-              connections.push([a.pos, b.pos, isLine]);
+              connections.push([a.pos, b.pos]);
             }
           }
         }
@@ -110,103 +116,71 @@
 
       function draw() {
         background(10);
+
         ambientLight(50);
         directionalLight(255, 255, 255, -1, -1, -1);
-        translate(-300, 0, 0);
-        rotateX(angleX + 200);
-        rotateY(angleY + 100);
+
+        dmouseX = mouseX ? mouseX : dmouseX;
+        dmouseY = mouseY ? mouseY : dmouseY;
+        rotateX(angleX + dmouseX / 1000);
+        rotateY(angleY);
+        // translate(-100, 0, 0);
+        strokeWeight(2);
+        // const dx = mouseX - dmouseX;
+        // const dy = mouseY - dmouseY;
         angleX += 0.001;
         angleY += 0.001;
 
-        // Curvy subset of connections for speed
-        // randomSeed(0);
-        let maxCurves = floor(connections.length * 0.25);
-        for (let i = 0; i < connections.length; i++) {
-          let [a, b, isLine] = connections[i];
-          const alphaVal = 200 * noise(frameCount / 30, a.x, a.y);
-          stroke(255, 255, 255, 200);
-          noFill();
-          if (!isLine) {
-            beginShape();
-            let cp1 = p5.Vector.lerp(a, b, 0.33);
-            let cp2 = p5.Vector.lerp(a, b, 0.66);
-            let t = frameCount / 60;
-            cp1.y += 40 * sin(t + a.x * 0.01);
-            cp2.y -= 40 * sin(t + b.x * 0.01);
-            cp1.z += 40 * cos(t + a.y * 0.01);
-            cp2.z -= 40 * cos(t + b.y * 0.01);
-            curveVertex(a.x, a.y, a.z);
-            curveVertex(a.x, a.y, a.z);
-            curveVertex(cp1.x, cp1.y, cp1.z);
-            curveVertex(cp2.x, cp2.y, cp2.z);
-            curveVertex(b.x, b.y, b.z);
-            curveVertex(b.x, b.y, b.z);
-            endShape();
-          } else {
-            line(a.x, a.y, b.x, b.y);
+        // dmouseX = mouseX;
+        // dmouseY = mouseY;
+
+        for (let [a, b] of connections) {
+          const alphaVal = 50 + 30 * sin(frameCount / 30 + a.x + a.y + b.x);
+          stroke(255, 255, 255, alphaVal);
+          if (alphaVal > 30) {
+            line(a.x, a.y, a.z, b.x, b.y, b.z);
           }
         }
 
-        // Draw subset of textured boxes
         noStroke();
         for (let layer of layers) {
           for (let node of layer) {
-            // if (random() > 0.8) continue;
             push();
             translate(node.pos.x, node.pos.y, node.pos.z);
             texture(node.gfx);
-            let pulse = 5 * sin(frameCount / 40 + node.pos.x);
-            let sz = 28 + pulse;
-            stroke(255);
-            // noFill();
+            const alphaVal =
+              50 + 30 * sin(frameCount / 30 + node.pos.x + node.pos.y);
+            stroke(0);
+            if (random() > 0.6) {
+              noFill();
+            }
+            // else {
+            //   fill(0, 50);
+            // }
+
+            const dx = 5 * sin(frameCount / 40 + node.pos.x);
+            const sz = 30 + dx;
             box(sz, sz, sz);
             pop();
           }
         }
 
-        // Refresh one layer's labels per frame
-        refreshNodeGraphics(currentRefreshLayer);
-        currentRefreshLayer = (currentRefreshLayer + 1) % layers.length;
-      }
-
-      function refreshNodeGraphics(layerIndex) {
-        let layer = layers[layerIndex];
-        for (let node of layer) {
-          node.label = randomLabel();
-          drawLabel(node.gfx, node.label);
+        if (frameCount % 20 === 0) {
+          refreshNodeGraphics(); // every ~2 seconds at 60 FPS
         }
       }
 
-      function drawLabel(g, label) {
-        g.background(0);
-        g.push();
-        g.fill(255);
-        g.textFont(font, 8);
-        g.noStroke();
-        g.textAlign(CENTER, CENTER);
-        // g.textSize(8);
-        g.translate(g.width / 2, g.height / 2);
-        g.rotate(random([0, PI, PI / 2, (3 / 2) * PI]));
-        g.text(label, 0, 0);
-        g.pop();
-      }
-
-      function randomLabel() {
-        return random() < 0.5
-          ? String.fromCharCode(floor(random(65, 91))) // A–Z
-          : String(floor(random(100))); // 0–99
-      }
-
-      // Mouse camera
+      // Mouse control
       function mousePressed() {
         isDragging = true;
         lastMouseX = mouseX;
         lastMouseY = mouseY;
-        console.log(frameRate());
       }
+
       function mouseReleased() {
         isDragging = false;
       }
+
       function mouseDragged() {
         if (isDragging) {
           let dx = mouseX - lastMouseX;
@@ -217,6 +191,33 @@
           lastMouseY = mouseY;
         }
       }
+
+      function refreshNodeGraphics() {
+        for (let layer of layers) {
+          for (let node of layer) {
+            let isLetter = random() < 0.5; // 50% chance letter or number
+
+            if (isLetter) {
+              // Random uppercase letter A–Z
+              node.label = String.fromCharCode(floor(random(65, 91)));
+            } else {
+              // Random number 0–99
+              node.label = String(floor(random(100)));
+            }
+            node.gfx.push();
+            node.gfx.background(0);
+            node.gfx.fill(255, 255, 255);
+            node.gfx.noStroke();
+            node.gfx.translate(node.gfx.width / 2, node.gfx.height / 2);
+            node.gfx.textAlign(CENTER, CENTER);
+            // node.gfx.textSize(18);
+            node.gfx.rotate(random([0, PI / 2, PI, (3 / 2) * PI]));
+            node.gfx.text(node.label, 0, 0);
+            node.gfx.pop();
+          }
+        }
+      }
+
       function windowResized() {
         resizeCanvas(windowWidth, windowHeight);
       }

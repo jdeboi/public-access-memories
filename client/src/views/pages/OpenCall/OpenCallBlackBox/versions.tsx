@@ -37,10 +37,10 @@ const openCallVersionsOG: OpenCallVersion[] = [
     isAddition: false,
     newContent: (
       <div>
-        <div className="mb-4 text-md">
+        <div className="mb-4 text-lg">
           A show about the black box nature of AI.{" "}
         </div>
-        <div className="mb-4 text-md">
+        <div className="mb-4 text-lg">
           Black Box // White Cube - a play on words with the white cube gallery
           space and the black box of AI? Too on the nose?
         </div>
@@ -55,13 +55,13 @@ const openCallVersionsOG: OpenCallVersion[] = [
     addPosition: "bottom",
     newContent: (
       <div>
-        <div className="mb-4 text-md">
+        <div className="mb-4 text-lg">
           The phrase "AI is a black box" refers to the difficulty of
           understanding how complex AI systems arrive at their decisions. This
           lack of transparency raises concerns about trust, accountability, and
           the potential for bias or errors.
         </div>
-        <div className="mb-4 text-md">
+        <div className="mb-4 text-lg">
           Public Access Memories invites submissions of digital works that
           prioritize exposing the artistic process; novel approaches that
           artfully lay bare the conceptual, theoretical, aesthetic, formal
@@ -79,7 +79,7 @@ const openCallVersionsOG: OpenCallVersion[] = [
     addPosition: "bottom",
     newContent: (
       <div>
-        <ul className="list-disc list-outside ml-6 space-y-2 text-md">
+        <ul className="list-disc list-outside ml-6 space-y-2 text-lg">
           <li>
             Foreground the <strong>artistic process</strong>- make process the
             art object in a manner that emphasizes intentionality and
@@ -147,7 +147,7 @@ const openCallVersionsOG: OpenCallVersion[] = [
       <div className={responsePromptClass}>
         {chatGPTLogo}
         <div>
-          <div className="mb-4 text-md">
+          <div className="mb-4 text-lg">
             The phrase “AI is a black box” describes the profound opacity of
             artificial intelligence systems. Complex models receive inputs and
             produce outputs, but the internal workings remain largely
@@ -163,7 +163,7 @@ const openCallVersionsOG: OpenCallVersion[] = [
             concept maps, version histories, generative pathways, inspirations,
             and failures are surfaced rather than concealed. We encourage:
           </div>
-          <ul className="list-disc list-outside ml-6 space-y-2 mb-4 text-md">
+          <ul className="list-disc list-outside ml-6 space-y-2 mb-4 text-lg">
             <li>
               Works that reveal the conceptual and technical underpinnings of
               their creation, such as code, sketches, or prompts.
@@ -174,14 +174,14 @@ const openCallVersionsOG: OpenCallVersion[] = [
             </li>
             <li>Works that subvert or play with the black box nature of AI.</li>
           </ul>
-          <div className="mb-4 text-md">
+          <div className="mb-4 text-lg">
             Show us your work process - sticky notes, journal entries, pinterest
             boards, poems, UI design proposals that can be implemented on Public
             Access Memories to give current or future artists the ability to
             visualize artistic thinking, relationships, and influences across
             artists and artworks.
           </div>
-          <div className="mb-4 text-md">
+          <div className="mb-4 text-lg">
             While art often emerges through intuition and accident, Black Box //
             White Cube asks: What happens when we choose to make our methods
             visible? In an era of computational opacity, transparency itself
@@ -201,7 +201,7 @@ const openCallVersionsOG: OpenCallVersion[] = [
       <div className={responsePromptClass}>
         {chatGPTLogo}
         <div>
-          <div className="mb-4 text-md">
+          <div className="mb-4 text-lg">
             The phrase “AI is a black box” describes the profound opacity of
             artificial intelligence systems. Complex models receive inputs and
             produce outputs, but the internal workings remain largely
@@ -217,7 +217,7 @@ const openCallVersionsOG: OpenCallVersion[] = [
             concept maps, version histories, generative pathways, inspirations,
             and failures are surfaced rather than concealed. We encourage:
           </div>
-          <ul className="list-disc list-outside ml-6 space-y-2 mb-4 text-md">
+          <ul className="list-disc list-outside ml-6 space-y-2 mb-4 text-lg">
             <li>
               Works that reveal the conceptual and technical underpinnings of
               their creation, such as code, sketches, or prompts.
@@ -228,14 +228,14 @@ const openCallVersionsOG: OpenCallVersion[] = [
             </li>
             <li>Works that subvert or play with the black box nature of AI.</li>
           </ul>
-          <div className="mb-4 text-md">
+          <div className="mb-4 text-lg">
             Show us your work process - sticky notes, journal entries, pinterest
             boards, poems, UI design proposals that can be implemented on Public
             Access Memories to give current or future artists the ability to
             visualize artistic thinking, relationships, and influences across
             artists and artworks.
           </div>
-          <div className="mb-4 text-md">
+          <div className="mb-4 text-lg">
             While art often emerges through intuition and accident, Black Box //
             White Cube asks: What happens when we choose to make our methods
             visible? In an era of computational opacity, transparency itself
@@ -246,8 +246,8 @@ const openCallVersionsOG: OpenCallVersion[] = [
     ),
     newContent: (
       <div className={textNotesClass}>
-        <div className="mb-4 text-md">References:</div>
-        <ul className="list-disc list-outside ml-6 space-y-2 mb-4 text-md">
+        <div className="mb-4 text-lg">References:</div>
+        <ul className="list-disc list-outside ml-6 space-y-2 mb-4 text-lg">
           <li>
             <a
               target="_blank"
@@ -297,16 +297,16 @@ const openCallVersionsOG: OpenCallVersion[] = [
     addPosition: "top",
     newContent: (
       <div className={textNotesClass}>
-        <div className="mb-4 text-md">
+        <div className="mb-4 text-lg">
           Politics of AI in contrast with human identity and bodies?{" "}
         </div>
-        <div className="mb-4 text-md">
+        <div className="mb-4 text-lg">
           Human decision making, feelings, reflections,{" "}
         </div>
-        <div className="mb-4 text-md">
+        <div className="mb-4 text-lg">
           Human Scale, human connection, different modes and models of thinking
         </div>
-        <div className="mb-4 text-md">
+        <div className="mb-4 text-lg">
           Transparency of thinking and process{" "}
         </div>
       </div>
@@ -320,7 +320,7 @@ const openCallVersionsOG: OpenCallVersion[] = [
     addPosition: "top",
     newContent: (
       <div className={textNotesClass}>
-        <ol className="list-decimal list-outside ml-6 space-y-2 text-md">
+        <ol className="list-decimal list-outside ml-6 space-y-2 text-lg">
           <li>
             AI systems are “black boxes” in that the data being used to train
             them is opaque, leading to questions around power, bias, consent
@@ -345,13 +345,13 @@ const openCallVersionsOG: OpenCallVersion[] = [
     addPosition: "top",
     newContent: (
       <div className={textNotesClass}>
-        <div className="mb-4 text-md">
+        <div className="mb-4 text-lg">
           <strong>Proposed other names:</strong>
         </div>
-        <div className="mb-4 text-md">Black Box // White Cube </div>
-        <div className="mb-4 text-md">Transparency of the Black Box </div>
-        <div className="mb-4 text-md">Transparent Black Boxes and Myths </div>
-        <div className="mb-4 text-md">Black Box Systems </div>
+        <div className="mb-4 text-lg">Black Box // White Cube </div>
+        <div className="mb-4 text-lg">Transparency of the Black Box </div>
+        <div className="mb-4 text-lg">Transparent Black Boxes and Myths </div>
+        <div className="mb-4 text-lg">Black Box Systems </div>
       </div>
     ),
   },
@@ -394,7 +394,7 @@ const openCallVersionsOG: OpenCallVersion[] = [
       <div className={responsePromptClass}>
         {chatGPTLogo}
         <div>
-          <div className="mb-4 text-md">
+          <div className="mb-4 text-lg">
             Artificial intelligence systems are often described as “black
             boxes”—highly complex models that receive inputs and produce
             outputs, yet whose inner workings remain largely inaccessible, even
@@ -405,14 +405,14 @@ const openCallVersionsOG: OpenCallVersion[] = [
             increasingly deployed in policing, surveillance, and military
             operations.
           </div>
-          <div className="mb-4 text-md">
+          <div className="mb-4 text-lg">
             In contrast, Black Box // White Cube foregrounds transparency—of
             process, memory, intention, and data. This exhibition invites
             artists to reveal the thinking behind their work: the inputs,
             revisions, training sets, workflows, and mistakes. Transparency
             becomes a radical aesthetic gesture.
           </div>
-          <div className="mb-4 text-md">
+          <div className="mb-4 text-lg">
             We’re especially interested in how data itself—what is collected,
             excluded, or reimagined—shapes creative practice. We welcome
             projects that engage with dataset creation or curation as a form of
@@ -421,12 +421,12 @@ const openCallVersionsOG: OpenCallVersion[] = [
             includes works of memory work—acts of documenting, preserving, or
             resisting erasure through data.
           </div>
-          <div className="mb-4 text-md">
+          <div className="mb-4 text-lg">
             Transparency isn’t just about the visible process of making—it’s
             also about showing the foundations: the values embedded in the data,
             and the politics of what is remembered or forgotten.
           </div>
-          <div className="mb-4 text-md">
+          <div className="mb-4 text-lg">
             This exhibition values intentionality, not as a rigid blueprint, but
             as an act of disclosure. What happens when we choose to reveal the
             process? When we surface the labor behind a work—the data, diagrams,
@@ -434,7 +434,7 @@ const openCallVersionsOG: OpenCallVersion[] = [
             computational opacity, transparency itself becomes a form of
             resistance. We encourage submissions that include:
           </div>
-          <ul className="list-disc list-outside ml-6 space-y-2 mb-4 text-md">
+          <ul className="list-disc list-outside ml-6 space-y-2 mb-4 text-lg">
             <li>
               Open-source or personal datasets, especially from marginalized or
               underrepresented perspectives
@@ -455,7 +455,7 @@ const openCallVersionsOG: OpenCallVersion[] = [
             <li>Artifacts of reflection, memory, and intentional making</li>
           </ul>
 
-          <div className="mb-4 text-md">
+          <div className="mb-4 text-lg">
             Turn the black box inside out. Make the invisible visible.{" "}
           </div>
         </div>
@@ -470,7 +470,7 @@ const openCallVersionsOG: OpenCallVersion[] = [
     addPosition: "top",
     staticContent: (
       <div>
-        <div className="mb-4 text-md">
+        <div className="mb-4 text-lg">
           Artificial intelligence systems are often described as{" "}
           <span className={highlightColor}>“black boxes”</span>—highly complex
           models that receive inputs and produce outputs, yet whose inner
@@ -484,7 +484,7 @@ const openCallVersionsOG: OpenCallVersion[] = [
           . This is particularly troubling as AI is increasingly deployed in
           policing, surveillance, and military operations.
         </div>
-        <div className="mb-4 text-md">
+        <div className="mb-4 text-lg">
           In contrast,{" "}
           <span className={highlightColor}>
             {SHOW_TITLE} foregrounds transparency
@@ -495,21 +495,21 @@ const openCallVersionsOG: OpenCallVersion[] = [
           becomes a radical aesthetic gesture.
         </div>
 
-        <div className="mb-4 text-md">
+        <div className="mb-4 text-lg">
           Transparency isn’t just about the visible process of making—it’s also
           about showing the foundations: the values embedded in the data, and
           the{" "}
           <span className={highlightColor}>politics of what is remembered</span>{" "}
           or forgotten.
         </div>
-        <div className="mb-4 text-md">
+        <div className="mb-4 text-lg">
           We welcome projects that engage with{" "}
           <span className={highlightColor}>dataset creation</span>, especially
           those that center personal archives, underrepresented communities, or
           alternative knowledge systems. This includes works of memory work—acts
           of documenting, preserving, or resisting erasure through data.
         </div>
-        <div className="mb-4 text-md">
+        <div className="mb-4 text-lg">
           This exhibition values intentionality, not as a rigid blueprint, but
           as an act of disclosure. What happens when we choose to reveal the
           process? When we surface the labor behind a work—the data, diagrams,
@@ -517,7 +517,7 @@ const openCallVersionsOG: OpenCallVersion[] = [
           opacity, transparency itself becomes a form of resistance. We
           encourage submissions that include:
         </div>
-        <ul className="list-disc list-outside ml-6 space-y-2 mb-8 text-md">
+        <ul className="list-disc list-outside ml-6 space-y-2 mb-8 text-lg">
           <li>
             Open-source or{" "}
             <span className={highlightColor}>personal datasets</span>,
@@ -540,9 +540,7 @@ const openCallVersionsOG: OpenCallVersion[] = [
           </li>
         </ul>
 
-        <div className="mb-8 text-xl">
-          Turn the black box inside out. Make the invisible visible.{" "}
-        </div>
+        <div className="mb-8 text-xl">We look forward to your submission! </div>
         <div>
           <a
             href="https://forms.gle/Zx8gsSxT5Ynf5dmS7"

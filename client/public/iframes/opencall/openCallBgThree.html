@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="net art gallery" />
+    <link rel="author" href="http://jdeboi.com/" />
+
+    <!-- open graph -->
+    <meta property="og:description" content="net art gallery" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Public Access Memories" />
+    <meta property="og:site_name" content="Public Access Memories" />
+    <meta property="og:url" content="https://publicaccessmemories.com" />
+    <meta
+      property="og:image"
+      content="http://www.publicaccessmemories.com/og.png"
+    />
+    <meta
+      property="og:image:secure_url"
+      content="https://www.publicaccessmemories.com/og.png"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="697" />
+
+    <title>Public Access Memories</title>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      /* canvas {
+        display: block;
+      } */
+    </style>
+  </head>
+
+  <body>
+    <script type="module">
+      import * as THREE from "https://unpkg.com/three@0.126.1/build/three.module.js";
+      import { AnaglyphEffect } from "https://unpkg.com/three@0.126.1/examples/jsm/effects/AnaglyphEffect.js";
+
+      let container, camera, scene, renderer, effect;
+      let cubes = [];
+
+      let mouseX = 0;
+      let mouseY = 0;
+
+      let windowHalfX = window.innerWidth / 2;
+      let windowHalfY = window.innerHeight / 2;
+
+      document.addEventListener("mousemove", onDocumentMouseMove);
+
+      init();
+
+      function init() {
+        container = document.createElement("div");
+        document.body.appendChild(container);
+
+        camera = new THREE.PerspectiveCamera(
+          60,
+          window.innerWidth / window.innerHeight,
+          0.01,
+          100
+        );
+        camera.position.z = 10;
+
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x000000);
+
+        const geometry = new THREE.BoxGeometry(1, 1, 1);
+        const material = new THREE.LineBasicMaterial({ color: 0xffffff });
+
+        const spacing = 4;
+        const gridSize = 3;
+
+        for (let x = -gridSize; x <= gridSize; x++) {
+          for (let y = -gridSize; y <= gridSize; y++) {
+            for (let z = -gridSize; z <= gridSize; z++) {
+              const edges = new THREE.EdgesGeometry(geometry);
+              const cube = new THREE.LineSegments(edges, material);
+
+              cube.position.set(
+                x * spacing + (Math.random() * spacing) / 2,
+                y * spacing + (Math.random() * spacing) / 2,
+                z * spacing + (Math.random() * spacing) / 2
+              );
+              cube.rotationSpeed = {
+                x: Math.random() * 0.01,
+                y: Math.random() * 0.01,
+              };
+
+              scene.add(cube);
+              cubes.push(cube);
+            }
+          }
+        }
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setAnimationLoop(animate);
+        container.appendChild(renderer.domElement);
+
+        effect = new AnaglyphEffect(renderer);
+        effect.setSize(window.innerWidth, window.innerHeight);
+
+        window.addEventListener("resize", onWindowResize);
+      }
+
+      function onWindowResize() {
+        windowHalfX = window.innerWidth / 2;
+        windowHalfY = window.innerHeight / 2;
+
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        effect.setSize(window.innerWidth, window.innerHeight);
+      }
+
+      function onDocumentMouseMove(event) {
+        mouseX = (event.clientX - windowHalfX) / 100;
+        mouseY = (event.clientY - windowHalfY) / 100;
+      }
+
+      function animate() {
+        render();
+      }
+
+      function render() {
+        camera.position.x += (mouseX - camera.position.x) * 0.05;
+        camera.position.y += (-mouseY - camera.position.y) * 0.05;
+        camera.lookAt(scene.position);
+
+        for (let cube of cubes) {
+          cube.rotation.x += cube.rotationSpeed.x;
+          cube.rotation.y += cube.rotationSpeed.y;
+        }
+
+        effect.render(scene, camera);
+      }
+    </script>
+  </body>
+</html>
