@@ -120,7 +120,7 @@ export default function OpenCallBlackBox() {
         className="absolute inset-0 w-full h-full z-0"
       />
       <div
-        className="w-full pointer-events-none h-full flex flex-col z-1 items-center bg-transparent overflow-y-auto"
+        className="w-full pointer-events-none max-h-screen overflow-y-auto z-1 flex flex-col justify-center bg-transparent"
         style={{ scrollbarGutter: "stable" }}
       >
         <div className="pointer-events-auto mx-auto px-6 py-12  flex flex-1 flex-col items-start">
