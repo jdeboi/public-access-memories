@@ -117,7 +117,7 @@ export default function OpenCallBlackBox() {
     <>
       <iframe
         src={`/iframes/opencall/${whichIframe}.html`}
-        className="absolute inset-0 w-full h-full z-0"
+        className="absolute pointer-events-none inset-0 w-full h-full z-0"
       />
       <div
         className="w-full pointer-events-auto h-screen max-h-screen overflow-y-auto z-1 flex flex-col bg-transparent"
