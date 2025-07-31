@@ -481,8 +481,8 @@ const openCallVersionsOG: OpenCallVersion[] = [
           <span className={highlightColor}>
             power, bias, authorship, and consent
           </span>
-          . This is particularly troubling as AI is increasingly deployed in
-          policing, surveillance, and military operations.
+          . This is increasingly alarming as AI continues to be deployed in
+          policing, surveillance, and military contexts.
         </div>
         <div className="mb-4 text-lg">
           In contrast,{" "}
@@ -499,15 +499,17 @@ const openCallVersionsOG: OpenCallVersion[] = [
           Transparency isn’t just about the visible process of making—it’s also
           about showing the foundations: the values embedded in the data, and
           the{" "}
-          <span className={highlightColor}>politics of what is remembered</span>{" "}
-          or forgotten.
+          <span className={highlightColor}>
+            politics of what is remembered or forgotten
+          </span>
+          .
         </div>
         <div className="mb-4 text-lg">
           We welcome projects that engage with{" "}
           <span className={highlightColor}>dataset creation</span>, especially
           those that center personal archives, underrepresented communities, or
-          alternative knowledge systems. This includes works of memory work—acts
-          of documenting, preserving, or resisting erasure through data.
+          alternative knowledge systems. This includes memory work—acts of
+          documenting, preserving, or resisting erasure through data.
         </div>
         <div className="mb-4 text-lg">
           This exhibition values intentionality, not as a rigid blueprint, but

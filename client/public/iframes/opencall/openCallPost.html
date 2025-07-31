@@ -51,21 +51,30 @@
       let numLayers = 7;
       let imagesPerLayer = [1, 5, 9, 16, 9, 5, 1];
       let connections = [];
+      let randoms = [];
       let angleX = 0;
       let angleY = 0;
       let isDragging = false;
       let lastMouseX, lastMouseY;
       let font;
       let currentRefreshLayer = 0;
-      let randoms = [];
+      let pamLogo;
+      let wrongLogo;
+      let openCallX = 0;
+      let font2;
       const yellowC = "#96FF00";
       const orangeC = "#F72C25";
 
       function preload() {
-        font = loadFont("/fonts/manolo-mono.ttf");
+        font = loadFont("/fonts/Geo-Regular.ttf");
+        font2 = loadFont("/fonts/manolo-mono.ttf");
+
+        pamLogo = loadImage("/iframes/opencall/assets/logo_white_sm.png");
+        wrongLogo = loadImage("/iframes/opencall/assets/wrong_white.png");
       }
       function setup() {
-        createCanvas(windowWidth, windowHeight, WEBGL);
+        createCanvas(800, 800, WEBGL);
+        // createCanvas(windowWidth, windowHeight, WEBGL)
         textFont(font, 12);
         // Create nodes and textures
         for (let l = 0; l < numLayers; l++) {
@@ -113,73 +122,98 @@
       }
 
       function draw() {
-        // background(10);
-        // ambientLight(50);
-        // directionalLight(255, 255, 255, -1, -1, -1);
-        // translate(-300, 0, 0);
-        // rotateX(angleX + 200);
-        // rotateY(angleY + 100);
-        // angleX += 0.001;
-        // angleY += 0.001;
-
-        // // Curvy subset of connections for speed
-        // // randomSeed(0);
-        // let maxCurves = floor(connections.length * 0.25);
-        // for (let i = 0; i < connections.length; i++) {
-        //   let [a, b, isLine] = connections[i];
-        //   const alphaVal = 200 * noise(frameCount / 30, a.x, a.y);
-        //   stroke(255, 255, 255, 200);
-        //   noFill();
-        //   if (!isLine) {
-        //     beginShape();
-        //     let cp1 = p5.Vector.lerp(a, b, 0.33);
-        //     let cp2 = p5.Vector.lerp(a, b, 0.66);
-        //     let t = frameCount / 60;
-        //     cp1.y += 40 * sin(t + a.x * 0.01);
-        //     cp2.y -= 40 * sin(t + b.x * 0.01);
-        //     cp1.z += 40 * cos(t + a.y * 0.01);
-        //     cp2.z -= 40 * cos(t + b.y * 0.01);
-        //     curveVertex(a.x, a.y, a.z);
-        //     curveVertex(a.x, a.y, a.z);
-        //     curveVertex(cp1.x, cp1.y, cp1.z);
-        //     curveVertex(cp2.x, cp2.y, cp2.z);
-        //     curveVertex(b.x, b.y, b.z);
-        //     curveVertex(b.x, b.y, b.z);
-        //     endShape();
-        //   } else {
-        //     line(a.x, a.y, b.x, b.y);
-        //   }
-        // }
-
-        // // Draw subset of textured boxes
-        // noStroke();
-        // for (let layer of layers) {
-        //   for (let node of layer) {
-        //     // if (random() > 0.8) continue;
-        //     push();
-        //     translate(node.pos.x, node.pos.y, node.pos.z);
-        //     texture(node.gfx);
-        //     let pulse = 5 * sin(frameCount / 40 + node.pos.x);
-        //     let sz = 28 + pulse;
-        //     stroke(255);
-        //     // noFill();
-        //     box(sz, sz, sz);
-        //     pop();
-        //   }
-        // }
-
-        // // Refresh one layer's labels per frame
-        // refreshNodeGraphics(currentRefreshLayer);
-        // currentRefreshLayer = (currentRefreshLayer + 1) % layers.length;
         drawNeuralNet(255);
+        push();
+        noStroke();
+
+        translate(-width / 2, -height / 2);
+
+        // openCallX+= 2;
+
+        //  for (let y = 0; y <= height; y+= h) {
+        //    const op = "OPEN CALL";
+        //    const tw = textWidth(op);
+        //     fill(200, 255, 0, 50);
+        //    const x = 100 * sin(frameCount/20 +y)
+        //    text(op, x, y);
+        //        text(op, x+tw + 50, y);
+        // text(op, x+tw*2 + 50*2, y);
+        //  }
+        displayOpenCall(100, 250);
+        displayDebox(100, 470);
+
+        const sz = 60;
+        displayLogos(470, height - sz - 40, sz);
+        pop();
       }
 
-      function refreshNodeGraphics(layerIndex) {
-        let layer = layers[layerIndex];
-        for (let node of layer) {
-          node.label = randomLabel();
-          drawLabel(node.gfx, node.label);
+      function displayOpenCall(x, y) {
+        push();
+        const h = 350;
+        textFont(font, h * 0.75);
+
+        translate(x, y);
+        for (let i = 0; i < 4; i++) {
+          push();
+
+          const dz = -300 + i * (30 + 10 * sin(frameCount / 30));
+          translate(dz / 2, dz / 2, dz);
+          const alphaVal = 40 + i * 50;
+          // fill(255 - (10 - i) * 10, alphaVal);
+          fill(getYellowC(alphaVal));
+          // noFill();
+          // stroke(255);
+          // stroke(255);
+          // strokeWeight(20)
+          text("OPEN", 0, 0);
+          text("CALL", 0, h * 0.75);
+
+          pop();
         }
+        pop();
+      }
+
+      function displayDebox(x, y) {
+        push();
+        translate(x, y);
+        textFont(font2, 100);
+        stroke(255);
+        noFill();
+        strokeWeight(2);
+        rect(0, 0, 330, 100);
+        line(0, 0, 20, 20);
+        line(330, 0, 350, 20);
+        line(0, 100, 20, 120);
+        translate(20, 20, 0);
+        fill(255);
+        // translate(0, 280, 0);
+        rect(0, 0, 330, 100);
+        fill(0);
+        translate(0, 0, 1);
+        text("Debox", 15, 90);
+        pop();
+      }
+
+      function displayLogos(x, y, logoW) {
+        push();
+        translate(x, y);
+        const pamW = logoW;
+        const wrongH = pamW * 1.5;
+        const spacing = pamW / 2;
+        const wrongW = (wrongH / wrongLogo.height) * wrongLogo.width;
+        image(pamLogo, 0, 0, pamW, pamW);
+        textFont(font, pamW);
+        fill(255);
+        const plusW = textWidth("+");
+        text("+", pamW + spacing, pamW * 0.7);
+        image(
+          wrongLogo,
+          pamW + spacing + plusW + spacing * 0.4,
+          -pamW * 0.204,
+          wrongW,
+          wrongH
+        );
+        pop();
       }
 
       function drawNeuralNet(opacity) {
@@ -259,10 +293,18 @@
         currentRefreshLayer = (currentRefreshLayer + 1) % layers.length;
       }
 
+      function refreshNodeGraphics(layerIndex) {
+        let layer = layers[layerIndex];
+        for (let node of layer) {
+          node.label = randomLabel();
+          drawLabel(node.gfx, node.label);
+        }
+      }
+
       function drawLabel(g, label) {
         g.background(0);
         g.push();
-        g.fill(255);
+        g.fill(getYellowC(255));
         g.textFont(font, 8);
         g.noStroke();
         g.textAlign(CENTER, CENTER);
@@ -308,6 +350,14 @@
         const r = red(c);
         const g = green(c);
         const b = blue(c) * rand;
+        return color(r, g, b, opacity);
+      }
+
+      function getOrangeC(opacity, rand = 1) {
+        const c = color(orangeC);
+        const r = red(c) * rand;
+        const g = green(c) * rand;
+        const b = blue(c);
         return color(r, g, b, opacity);
       }
     </script>

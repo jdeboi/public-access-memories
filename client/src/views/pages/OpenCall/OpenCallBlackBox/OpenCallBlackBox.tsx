@@ -100,10 +100,10 @@ export default function OpenCallBlackBox() {
 
   const whichIframe = useMemo(() => {
     const randomVal = Math.random();
-    return randomVal < 0.25
-      ? "openCallBg"
-      : randomVal < 0.5
-      ? "openCallBg2"
+    return randomVal < 0.5
+      ? // ? "openCallBg"
+        // : randomVal < 0.5
+        "openCallBg"
       : "openCallBgThree";
   }, []);
 
@@ -123,8 +123,11 @@ export default function OpenCallBlackBox() {
         className="w-full pointer-events-none h-full flex flex-col z-1 items-center bg-transparent overflow-y-auto"
         style={{ scrollbarGutter: "stable" }}
       >
-        <div className=" mx-auto px-6 py-12  flex flex-1 flex-col items-start">
-          <div className=" w-[800px] max-w-[calc(100vw_-_100px)]">
+        <div className="pointer-events-auto mx-auto px-6 py-12  flex flex-1 flex-col items-start">
+          <div
+            className=" w-[800px] max-w-[calc(100vw_-_100px)]"
+            style={{ scrollbarGutter: "stable" }}
+          >
             {/* Header */}
             <div className="pointer-events-auto p-6 windowsBlack  mb-8 bg-black">
               <div className="font-['geoFont'] text-7xl font-bold text-gray-100 mb-6">
@@ -180,7 +183,7 @@ export default function OpenCallBlackBox() {
                 <div className="text-gray-500 mb-6">
                   a{" "}
                   <a
-                    href=""
+                    href="https://thewrong.org/"
                     style={{ textDecoration: "underline" }}
                     target="_blank"
                   >
