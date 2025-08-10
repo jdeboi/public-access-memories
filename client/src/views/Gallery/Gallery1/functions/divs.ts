@@ -53,7 +53,7 @@ export const addRoomLabelDivs = (
 };
 
 export const displayRoomLabelDivs = (
-  font: p5Types.Font,
+  font: p5Types.Font | null,
   roomCount: any,
   divs: any
 ) => {
@@ -398,7 +398,7 @@ export const displayDoorDivs = (
   userY: number,
   divs: any,
   isClosed: boolean,
-  closedSign: p5Types.Image
+  closedSign: p5Types.Image | null
 ) => {
   for (const door of divs.doors) {
     door.display(userX, userY, isClosed, closedSign);

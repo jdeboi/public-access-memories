@@ -526,8 +526,7 @@ const openCallVersionsOG: OpenCallVersion[] = [
             especially from marginalized or underrepresented perspectives
           </li>
           <li>
-            Works of{" "}
-            <span className={highlightColor}>memory work—projects</span> that
+            <span className={highlightColor}>Memory work—projects</span> that
             document, preserve, or call attention to lost or missing data
           </li>
           <li>

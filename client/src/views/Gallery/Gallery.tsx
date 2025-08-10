@@ -8,6 +8,7 @@ import GallerySketch1 from "./Gallery1/GallerySketch";
 import GallerySketch2 from "./Gallery2/GallerySketch";
 import GallerySketch3 from "./Gallery3/GallerySketch";
 import GalleryGreber from "./Gallery4HomeOffices/GalleryGreber";
+import Gallery5DeboxSketch from "./Gallery5Debox/Gallery5DeboxSketch";
 
 import { getCurrentPageGlobalConfig } from "../../data/CurrentShow/GlobalConfig";
 
@@ -45,6 +46,7 @@ import { p5ToUserCoords } from "../../helpers/coordinates";
 import { getLayoutSlug } from "../../data/Shows/HomeOffices/PageConstants";
 import {
   ASIRECALL_ID,
+  DEBOX_ID,
   FIELDSOFVIEW_ID,
   HOMEBODY_ID,
   HOMEOFFICES_ID,
@@ -230,7 +232,22 @@ const Gallery = (props: IGallery) => {
             setUserActive={clickedUserChat}
           />
         );
-
+      case DEBOX_ID:
+        GalleryStyle.backgroundImage = "none";
+        return (
+          <Gallery5DeboxSketch
+            user={user}
+            users={props.users}
+            isClosed={props.isClosed}
+            userMove={moveGalleryUser}
+            userNewRoom={userNewRoom}
+            loadingDone={() => dispatch(doneLoadingApp())}
+            toggleOutside={() => dispatch(toggleOutside())}
+            isMobile={windowUI.isMobile}
+            clickedUserChat={clickedUserChat}
+            setUserActive={clickedUserChat}
+          />
+        );
       default:
         return (
           <GallerySketch1
@@ -249,7 +266,7 @@ const Gallery = (props: IGallery) => {
   };
 
   const getLoading = () => {
-    if (props.id == 4 || props.id == 5) {
+    if (props.id == HOMEOFFICES_ID) {
       return <LoadingPageHomeOffices showTitle={true} />;
     }
     return <LoadingPage />;
@@ -268,7 +285,7 @@ const Gallery = (props: IGallery) => {
     if (props.showWelcome || showStart) {
       return null;
     }
-    if (props.id == 4 || props.id == 5) {
+    if (props.id == HOMEOFFICES_ID || props.id == DEBOX_ID) {
       return (
         <ReactAudioPlayer
           src={getHomeOfficesAudio()}
@@ -298,19 +315,19 @@ const Gallery = (props: IGallery) => {
     switch (props.id) {
       case RESIDENCY_ID:
         return null;
-      case 1:
+      case HOMEBODY_ID:
         return <MiniMap users={filterUsers(user, props.users)} x={20} y={20} />;
-      case 2:
+      case ASIRECALL_ID:
         return (
           <MiniMapAIR users={filterUsers(user, props.users)} x={20} y={20} />
         );
-      case 3:
+      case FIELDSOFVIEW_ID:
         return (
           <MiniMapFOV users={filterUsers(user, props.users)} x={20} y={20} />
         );
-      case 4:
+      case HOMEOFFICES_ID:
         return <></>;
-      case 5:
+      case DEBOX_ID:
         return <></>;
       default:
         return <MiniMap users={filterUsers(user, props.users)} x={20} y={20} />;

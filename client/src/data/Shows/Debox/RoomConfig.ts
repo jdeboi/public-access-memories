@@ -2,25 +2,11 @@ import { IRoom, IArtist } from "../../../interfaces";
 import { ShowConfig } from "../../CurrentShow/ShowConfig";
 
 export const roomConfig = {
-  w: 5,
-  h: 5,
+  w: 3,
+  h: 3,
   start: 0,
   end: 1,
 };
-
-// port const rooms = [
-//   { id: 11, short: "home", link: "home-page", title: "home page", x: 27, y: 10, rot: 90, dir: "left", about: "thinking about digital privacy, digital/analog movement", shortcut: "&#x2318;F2", year: 2020 },
-//     { id: 12, short: "yose", link: "yosemite", title: "yosemite", x: -5, y: 12, rot: -90, dir: "right", about: "How do digital representations of ", shortcut: "&#x2318;F3", year: 2021 },
-//     { id: 13, short: "click", link: "click-me-baby", title: "click me, baby", x: 10, y: 0, rot: 0, dir: "bottom", about: "buy something!", shortcut: "&#x2318;F4", year: 2021 },
-// ];
-const titles = [
-  "memory motel",
-  "dotcommmunion",
-  "flash-ephemera",
-  "interstitial states",
-  "good host",
-  "cachebox",
-];
 
 export const artists: IArtist[] = [
   {

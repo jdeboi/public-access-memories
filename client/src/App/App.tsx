@@ -60,6 +60,7 @@ import { artists, rooms } from "../data/CurrentShow/RoomConfig";
 import FAQFrame from "../components/FAQ/FAQFrame";
 import {
   ASIRECALL_ID,
+  DEBOX_ID,
   FIELDSOFVIEW_ID,
   HOMEBODY_ID,
   HOMEOFFICES_ID,
@@ -285,7 +286,7 @@ function App() {
             path="/"
             element={
               <Gallery
-                id={HOMEBODY_ID}
+                id={0}
                 users={users}
                 isClosed={isClosed}
                 showWelcome={showWelcome}
