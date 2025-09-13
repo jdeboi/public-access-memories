@@ -4,8 +4,8 @@ import { p5ToDomCoords, p5ToUserCoords } from "../../../helpers/coordinates";
 import { GlobalConfig } from "./GlobalConfig";
 
 const danceFloorP5 = {
-  x: 24 - 3,
-  y: -1,
+  x: 26,
+  y: 35,
   w: 10,
   h: 5,
 };
@@ -35,19 +35,19 @@ export const DJBotUserCoords = p5ToUserCoords(
 
 //// wine
 const cheeseBotCoords = {
-  x: -8,
-  y: 5,
+  x: 3,
+  y: 2,
 }; // cheese
 const wineBotCoords = {
-  x: 30,
-  y: 19,
+  x: 3,
+  y: 34,
 };
 const cocktailBotCoords = {
   x: 32,
-  y: 0,
+  y: 3,
 };
 const hostBotCoords = {
-  x: 10,
+  x: 20,
   y: 30,
 };
 
@@ -163,4 +163,3 @@ export const bars: IBar[] = [
     isFlipped: false,
   },
 ];
-

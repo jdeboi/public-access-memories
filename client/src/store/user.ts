@@ -112,6 +112,7 @@ export const userSlice = createSlice({
     ) => {
       state.x = action.payload.x;
       state.y = action.payload.y;
+      console.log("move normal", action.payload.galleryIndex);
       const GlobalConfig = getCurrentPageGlobalConfig(
         action.payload.galleryIndex
       );
@@ -157,7 +158,6 @@ export const userSlice = createSlice({
     ) => {
       state.x = action.payload.x;
       state.y = action.payload.y;
-
       if (
         userNearBarNormal(state, getBar("wine", action.payload.galleryIndex)) &&
         state.needsWine

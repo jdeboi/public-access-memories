@@ -285,7 +285,7 @@ const Gallery = (props: IGallery) => {
     if (props.showWelcome || showStart) {
       return null;
     }
-    if (props.id == HOMEOFFICES_ID || props.id == DEBOX_ID) {
+    if (props.id == HOMEOFFICES_ID) {
       return (
         <ReactAudioPlayer
           src={getHomeOfficesAudio()}
@@ -297,6 +297,9 @@ const Gallery = (props: IGallery) => {
           onError={(e) => console.error("Audio playback error:", e)}
         />
       );
+    }
+    if (props.id == DEBOX_ID) {
+      return null;
     }
 
     return (

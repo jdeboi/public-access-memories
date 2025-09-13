@@ -12,8 +12,13 @@ export const initHomeBodyWalls = (p5: p5Types, walls: Wall[]) => {
   walls.push(new Wall(p5, wall14, GlobalConfig));
 };
 
-export const initOuterWalls = (p5: p5Types, walls: Wall[]) => {
-  walls.push(new Wall(p5, limits, GlobalConfig));
+export const initOuterWalls = (
+  p5: p5Types,
+  walls: Wall[],
+  wLimits: any = limits,
+  gconfig: any = GlobalConfig
+) => {
+  walls.push(new Wall(p5, wLimits, gconfig));
 };
 
 ///////////////////////////////////////////////////
@@ -92,10 +97,10 @@ export const drawDoors = (doors: Door[], p5: p5Types) => {
     for (const door of doors) {
       door.display(p5);
     }
-  } 
+  }
 };
 
-export const  drawRooms = (rooms: Room[], roomTextures: p5Types.Image[]) => {
+export const drawRooms = (rooms: Room[], roomTextures: p5Types.Image[]) => {
   if (rooms) {
     for (const room of rooms) {
       room.display(roomTextures);
@@ -105,4 +110,4 @@ export const  drawRooms = (rooms: Room[], roomTextures: p5Types.Image[]) => {
       // drawRoom(p5, room.x*wallConfig.scaler, room.y*wallConfig.scaler, w, h, room.rot, room.title);
     }
   }
-};  
+};

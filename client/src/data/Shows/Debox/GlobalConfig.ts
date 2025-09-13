@@ -1,14 +1,14 @@
 import { IGlobalConfig } from "../../../interfaces";
 
-let xMin = -10;
-let xMax = 35;
-let yMin = -3;
-let yMax = 42;
+let xMin = 0;
+let xMax = 40;
+let yMin = 0;
+let yMax = 40;
 
 export const GlobalConfig: IGlobalConfig = {
   scaler: 70,
-  x: -15,
-  y: -35,
+  x: -20,
+  y: -20,
   worldW: xMax - xMin,
   worldH: yMax - yMin,
 };
@@ -27,13 +27,3 @@ export const outsideDoors = [
   { x0: 14, y0: 27.2, x1: 16, y1: 27.2, to: "outside" }, // bottom
   { x0: 22.5, y0: 15.2, x1: 24, y1: 15.2, to: "outside" }, // right
 ];
-
-// pools
-let startX = limits[0].x;
-let startY = 22;
-export const pools = [
-  { x: startX, y: startY },
-  { x: startX + 5, y: startY + 5 },
-  { x: startX + 10, y: startY + 10 },
-];
-export const poolSpace = 1; //.5;

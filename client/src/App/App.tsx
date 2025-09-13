@@ -286,7 +286,7 @@ function App() {
             path="/"
             element={
               <Gallery
-                id={0}
+                id={DEBOX_ID}
                 users={users}
                 isClosed={isClosed}
                 showWelcome={showWelcome}

@@ -285,12 +285,15 @@ const SignIn = forwardRef<SignInSubmitType, SignInProps>((props, ref) => {
     return (
       <React.Fragment>
         <div className="userBar flexItem flexPad flexRow">
-          <div className="avatar">{localAvatar}</div>
+          <div className="avatar mx-3">{localAvatar}</div>
           {/* inputprops={{ 'aria-label': 'user name field' }} */}
           <input
+            name="userName"
+            autoComplete="off"
             style={{ width: inputW }}
             onChange={setUserName}
             value={localUserName}
+            className="ml-3"
             placeholder="username"
           />
         </div>

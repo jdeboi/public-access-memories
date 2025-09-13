@@ -3,25 +3,36 @@ import { GlobalConfig as GlobalConfigHB } from "../Shows/HomeBody/GlobalConfig";
 import { GlobalConfig as GlobalConfigAIR } from "../Shows/AsIRecall/GlobalConfig";
 import { GlobalConfig as GlobalConfigFOV } from "../Shows/FieldsOfView/GlobalConfig";
 import { GlobalConfig as GlobalConfigResidency } from "../Shows/Residency/GlobalConfig";
+import { GlobalConfig as GlobalConfigDebox } from "../Shows/Debox/GlobalConfig";
+import {
+  ASIRECALL_ID,
+  DEBOX_ID,
+  FIELDSOFVIEW_ID,
+  HOMEBODY_ID,
+  HOMEOFFICES_ID,
+  RESIDENCY_ID,
+} from "./GalleryConfig";
 
 export {
   GlobalConfig,
   limits,
   outsideDoors,
-} from "../Shows/Residency/GlobalConfig";
+} from "../Shows/Debox/GlobalConfig";
 
 export const getCurrentPageGlobalConfig = (index: number) => {
   switch (index) {
-    case 0:
+    case RESIDENCY_ID:
       return GlobalConfigResidency;
-    case 1:
+    case HOMEBODY_ID:
       return GlobalConfigHB;
-    case 2:
+    case ASIRECALL_ID:
       return GlobalConfigAIR;
-    case 3:
+    case FIELDSOFVIEW_ID:
       return GlobalConfigFOV;
-    case 4:
+    case HOMEOFFICES_ID:
       return GlobalConfigDave;
+    case DEBOX_ID:
+      return GlobalConfigDebox;
     default:
       return GlobalConfigHB;
   }

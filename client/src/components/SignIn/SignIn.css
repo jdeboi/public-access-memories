@@ -22,6 +22,7 @@
 .SignInForm .userBar {
   height: 38px;
   align-self: flex-start;
+  gap: 10px;
 }
 .SignInForm .userBar .avatar {
   font-size: 36px;

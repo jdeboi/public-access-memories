@@ -68,12 +68,13 @@ export const addDoorDivs = (
   divs: any,
   doors: any,
   doorImgs: p5Types.Image[],
-  p5: p5Types
+  p5: p5Types,
+  gconfig: any = GlobalConfig
 ) => {
   divs.doors = [];
   let numDoors = 4;
   for (let i = 0; i < numDoors; i++) {
-    let door = new Door(p5, i, doorImgs, outsideDoors, GlobalConfig);
+    let door = new Door(p5, i, doorImgs, outsideDoors, gconfig);
     doors.push(door);
     divs.doors.push(door);
   }
@@ -82,7 +83,8 @@ export const addDoorDivs = (
 export const addLightDivs = (
   divs: any,
   lightImgs: p5Types.Image[],
-  p5: p5Types
+  p5: p5Types,
+  gconfig: any = GlobalConfig
 ) => {
   divs.lights = [];
   let numLights = 3;
@@ -93,7 +95,7 @@ export const addLightDivs = (
   ];
 
   for (let i = 0; i < numLights; i++) {
-    let light = new Light(p5, i, lightImgs, lightsP5, GlobalConfig);
+    let light = new Light(p5, i, lightImgs, lightsP5, gconfig);
     // lights.push(light);
     divs.lights.push(light);
   }
@@ -103,10 +105,11 @@ export const addColumnDivs = (
   divs: any,
   columnGif: p5Types.Image,
   p5: p5Types,
-  factor = 1
+  factor = 1,
+  gconfig: any = GlobalConfig
 ) => {
   divs.columns = [];
-  let sc = GlobalConfig.scaler;
+  let sc = gconfig.scaler;
   let numCols = 4;
   const dy = 140;
   const dx = 140;
@@ -121,7 +124,7 @@ export const addColumnDivs = (
       280 * factor,
       p5,
       columnGif,
-      GlobalConfig
+      gconfig
     );
     // columns.push(column)
     // column.initMask();
@@ -139,7 +142,7 @@ export const addColumnDivs = (
       280 * factor,
       p5,
       columnGif,
-      GlobalConfig
+      gconfig
     )
   );
   divs.columns.push(
@@ -151,7 +154,7 @@ export const addColumnDivs = (
       280 * factor,
       p5,
       columnGif,
-      GlobalConfig
+      gconfig
     )
   );
 
@@ -166,7 +169,7 @@ export const addColumnDivs = (
       280 * factor,
       p5,
       columnGif,
-      GlobalConfig
+      gconfig
     )
   );
   divs.columns.push(
@@ -178,7 +181,7 @@ export const addColumnDivs = (
       280 * factor,
       p5,
       columnGif,
-      GlobalConfig
+      gconfig
     )
   );
 };
@@ -321,38 +324,37 @@ export const addTableDivs = (
 };
 
 //////////////////////////////////////////////////
-export const addBarDivs = (divs: any, lightImg: p5Types.Image, p5: p5Types) => {
+export const addBarDivs = (
+  divs: any,
+  lightImg: p5Types.Image,
+  p5: p5Types,
+  gconfig: any = GlobalConfig,
+  galleryId: number = 1
+) => {
   const barTypes = ["wine", "cocktail", "DJ", "cheese"];
   divs.bars = [];
   let i = 0;
   for (const barType of barTypes) {
-    const bar = getBar(barType, 1);
+    const bar = getBar(barType, galleryId);
     switch (barType) {
       case "wine":
         divs.bars.push(
-          new WineBar(i, { ...bar }, lightImg, numBarItems, p5, GlobalConfig)
+          new WineBar(i, { ...bar }, lightImg, numBarItems, p5, gconfig)
         );
         break;
       case "cocktail":
         divs.bars.push(
-          new CocktailBar(
-            i,
-            { ...bar },
-            lightImg,
-            numBarItems,
-            p5,
-            GlobalConfig
-          )
+          new CocktailBar(i, { ...bar }, lightImg, numBarItems, p5, gconfig)
         );
         break;
       case "DJ":
         divs.bars.push(
-          new DJBar(i, { ...bar }, lightImg, numBarItems, p5, GlobalConfig)
+          new DJBar(i, { ...bar }, lightImg, numBarItems, p5, gconfig)
         );
         break;
       case "cheese":
         divs.bars.push(
-          new CheeseBar(i, { ...bar }, lightImg, numBarItems, p5, GlobalConfig)
+          new CheeseBar(i, { ...bar }, lightImg, numBarItems, p5, gconfig)
         );
         break;
     }

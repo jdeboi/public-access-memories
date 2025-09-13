@@ -96,6 +96,8 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
 
   public isWalking = false;
 
+  public galleryId: number = 1;
+
   public stepTo = { x: 0, y: 0 };
   public userEase = { x: 0, y: 0 };
   public destination = { x: 0, y: 0, time: new Date() };
@@ -114,6 +116,8 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
   public columnGif: p5Types.Image | null = null;
   public closedSign: p5Types.Image | null = null;
   public font: p5Types.Font | null = null;
+  public fontGeo: p5Types.Font | null = null;
+  public fontManolo: p5Types.Font | null = null;
   public isClosed: boolean = false;
 
   //////////////
@@ -168,10 +172,10 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
   };
 
   preloadBarEmojis = (p5: p5Types) => {
-    this.barEmojis[0] = p5.loadImage(this.lmdURL + "emojis/popcorn.png");
-    this.barEmojis[1] = p5.loadImage(this.lmdURL + "emojis/popcorn.png");
-    this.barEmojis[2] = p5.loadImage(this.lmdURL + "emojis/coffee.png");
-    this.barEmojis[3] = p5.loadImage(this.lmdURL + "emojis/beer.png");
+    this.barEmojis[0] = p5.loadImage(this.lmdURL + "emojis/cheese.png");
+    this.barEmojis[1] = p5.loadImage(this.lmdURL + "emojis/bread.png");
+    this.barEmojis[2] = p5.loadImage(this.lmdURL + "emojis/wine.png");
+    this.barEmojis[3] = p5.loadImage(this.lmdURL + "emojis/cocktail.png");
     this.barEmojis[4] = p5.loadImage(this.lmdURL + "emojis/chat.png");
     this.barEmojis[5] = p5.loadImage(this.lmdURL + "emojis/mic.png");
   };
@@ -207,9 +211,9 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
     this.columnGif = p5.loadImage(this.pamURL + "gallery/column.png"); //not sure why this one has a cors issue
 
     // font
-    this.font = p5.loadFont(
-      "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/fonts/sysfont.woff"
-    );
+    this.font = p5.loadFont(this.pamURL + "fonts/sysfont.woff");
+    this.fontGeo = p5.loadFont(this.pamURL + "fonts/Geo-Regular.ttf");
+    this.fontManolo = p5.loadFont(this.pamURL + "fonts/manolo-mono.ttf");
   };
 
   ////////////////////////////////////////////////////////////////////////
@@ -222,7 +226,7 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
 
     this.initBuilding(p5);
     this.initEmojis(p5);
-    this.initDivs(p5);
+    this.initDivs(p5, this.GlobalConfig, this.galleryId);
     this.stepTo.x = user.x;
     this.stepTo.y = user.y;
     this.destination.x = this.stepTo.x;
@@ -275,7 +279,11 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
     }
   };
 
-  initDivs = (p5: p5Types) => {
+  initDivs = (
+    p5: p5Types,
+    gconfig: any = this.GlobalConfig,
+    galleryId: number = this.galleryId
+  ) => {
     if (
       this.columnGif &&
       this.instaImg &&
@@ -287,7 +295,7 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
       addLightDivs(this.divs, this.lightImgs, p5);
       addColumnDivs(this.divs, this.columnGif, p5);
       addTableDivs(this.divs, this.tableImgs, p5);
-      addBarDivs(this.divs, this.lightImgs[3], p5);
+      addBarDivs(this.divs, this.lightImgs[3], p5, gconfig, galleryId);
       addTrashDivs(this.divs, this.trashFiles, p5);
       addFolderDivs(this.divs, this.instaImg, this.txtFile, p5);
       addRoomLabelDivs(this.divs, this.eyeIcon, this.font, p5);
@@ -338,6 +346,7 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
     // updating
     if (users) updateDivs(this.userEase, users, this.divs);
     this.updateUserEase(p5);
+    this.checkResize(p5);
   };
 
   displayBackground = (p5: p5Types) => {
@@ -395,6 +404,21 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
     p5.push();
     p5.translate(p5.windowWidth / 2, p5.windowHeight / 2);
     p5.translate(-this.userEase.x, -this.userEase.y);
+
+    this.displayDivs(p5);
+    p5.pop();
+  };
+
+  checkResize = (p5: p5Types) => {
+    if (
+      p5.windowWidth !== window.innerWidth ||
+      p5.windowHeight !== window.innerHeight
+    )
+      this.manualResize(p5);
+  };
+
+  displayDivs = (p5: p5Types) => {
+    p5.push();
     p5.translate(
       this.GlobalConfig.x * this.GlobalConfig.scaler,
       this.GlobalConfig.y * this.GlobalConfig.scaler
@@ -416,14 +440,7 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
     }
     displayFolderDivs(this.divs);
     displayTrashDivs(this.userEase.x, this.userEase.y, this.divs);
-
     p5.pop();
-
-    if (
-      p5.windowWidth !== window.innerWidth ||
-      p5.windowHeight !== window.innerHeight
-    )
-      this.manualResize(p5);
   };
 
   ////////////////////////////////////////////////////////////////////////
@@ -554,6 +571,13 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
         this.isWalking = true;
       }
     }
+  };
+
+  displayFrameRate = (p5: p5Types) => {
+    p5.fill(255);
+    p5.noStroke();
+    p5.textSize(20);
+    p5.text(p5.round(p5.frameRate()), 60 - p5.width / 2, 60 - p5.height / 2);
   };
 
   mouseStep = () => {

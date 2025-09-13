@@ -3,15 +3,18 @@ import { bars as barsAIR } from "../Shows/AsIRecall/BotConfig";
 import { bars as barsFOV } from "../Shows/FieldsOfView/BotConfig";
 import { bars as barsDave } from "../Shows/HomeOffices/BotConfig";
 import { bars as barsResidency } from "../Shows/Residency/BotConfig";
+import { bars as barsDebox } from "../Shows/Debox/BotConfig";
 
 import { barTenders as barTendersHB } from "../Shows/HomeBody/BotConfig";
 import { barTenders as barTendersAIR } from "../Shows/AsIRecall/BotConfig";
 import { barTenders as barTendersFOV } from "../Shows/FieldsOfView/BotConfig";
 import { barTenders as barTendersDave } from "../Shows/HomeOffices/BotConfig";
 import { barTenders as barTendersResidency } from "../Shows/Residency/BotConfig";
+import { barTenders as barTendersDebox } from "../Shows/Debox/BotConfig";
 import { IBar, IUser } from "../../interfaces";
 import {
   ASIRECALL_ID,
+  DEBOX_ID,
   FIELDSOFVIEW_ID,
   HOMEBODY_ID,
   HOMEOFFICES_ID,
@@ -23,7 +26,7 @@ export {
   numBarItems,
   barTenders,
   bars,
-} from "../Shows/Residency/BotConfig";
+} from "../Shows/Debox/BotConfig";
 
 export const getGalleryBars = (galleryId: number) => {
   switch (galleryId) {
@@ -37,6 +40,8 @@ export const getGalleryBars = (galleryId: number) => {
       return barsFOV;
     case HOMEOFFICES_ID:
       return barsDave;
+    case DEBOX_ID:
+      return barsDebox;
     default:
       return barsHB;
   }
@@ -54,6 +59,8 @@ export const getGalleryBarTenders = (galleryId: number) => {
       return barTendersFOV;
     case HOMEOFFICES_ID:
       return barTendersDave;
+    case DEBOX_ID:
+      return barTendersDebox;
     default:
       return barTendersHB;
   }

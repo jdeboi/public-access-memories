@@ -211,7 +211,7 @@ export const drawSpaceFloor = (x0, y0, w, h, p5) => {
   // p5.rect(-12*sc, -10*sc, (38+12)*sc, (40+10)*sc);
 };
 
-const drawFloor = (x0, y0, w, h, isDark, isFilled, spacing, p5) => {
+export const drawFloor = (x0, y0, w, h, isDark, isFilled, spacing, p5) => {
   // let spacing = GlobalConfig.scaler;
   let yOffset = new Date() / 2000;
   // let bound = 5000;
@@ -387,7 +387,6 @@ const drawGalleryRects = (p5) => {
   p5.stroke(255, 150);
   let sc = GlobalConfig.scaler;
   let step = 1;
-
 
   for (let x = 0; x < 27; x += step) {
     for (let y = 5; y < 15; y += step) {

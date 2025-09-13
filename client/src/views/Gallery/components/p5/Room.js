@@ -1,6 +1,7 @@
 // Room.js
 // A refactored and cleaned up version of the Room class for better readability and modularity
 
+import { p5ToUserCoords } from "../../../../helpers/coordinates";
 import { doorLineCrossing, boundaryLineCrossing } from "./Boundaries";
 
 export default class Room {
@@ -10,15 +11,17 @@ export default class Room {
     this.id = i;
 
     const room = rooms[i];
+    this.room = rooms[i];
     this.x = room.x;
     this.y = room.y;
     this.dir = room.dir;
     this.link = room.link;
     this.userName = room.userName;
-    this.title = artists[room.artistID];
+    this.artist = artists[room.artistID];
 
     this.w = roomConfig.w;
     this.h = roomConfig.w;
+
     this.start = 0;
     this.end = 1;
     this.door = door;
@@ -28,6 +31,13 @@ export default class Room {
     const sc = this.GlobalConfig.scaler;
     const x = (this.x + this.w / 2) * sc;
     const y = (this.y + this.h / 2) * sc;
+    this.p5.translate(x, y);
+  }
+
+  translateToRoomCorner() {
+    const sc = this.GlobalConfig.scaler;
+    const x = this.x * sc;
+    const y = this.y * sc;
     this.p5.translate(x, y);
   }
 
@@ -60,7 +70,7 @@ export default class Room {
   displayTxt() {
     this.p5.fill("#e3a587");
     this.p5.noStroke();
-    this.p5.rect(0, 0, this.p5.textWidth(this.title) / 2, -30);
+    this.p5.rect(0, 0, this.p5.textWidth(this.artist) / 2, -30);
     this.p5.fill(255);
   }
 
@@ -175,7 +185,7 @@ export default class Room {
       userStep,
       {
         ...this.computeLineCoords("doorBoundary"),
-        to: this.title,
+        to: this.artist,
       },
       this.GlobalConfig
     );
@@ -187,7 +197,7 @@ export default class Room {
       userStep,
       {
         ...this.computeLineCoords("doorEntry"),
-        to: this.title,
+        to: this.artist,
       },
       this.GlobalConfig
     );
@@ -206,6 +216,27 @@ export default class Room {
       userStep,
       roomWalls,
       this.GlobalConfig
+    );
+  }
+
+  getIsDoorOpen(user) {
+    const sc = this.GlobalConfig.scaler;
+    const doorW = 2 * sc;
+    const doorH = 2 * sc;
+
+    if (!user || !user.x) {
+      return false;
+    }
+    const pt = p5ToUserCoords(
+      this.x + this.w / 2,
+      this.y + this.h,
+      this.GlobalConfig
+    );
+    return (
+      user.x >= pt.x - doorW / 2 &&
+      user.x <= pt.x + doorW / 2 &&
+      user.y >= pt.y - doorH / 2 &&
+      user.y <= pt.y + doorH / 2
     );
   }
 }

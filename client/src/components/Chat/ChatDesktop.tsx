@@ -48,9 +48,10 @@ const ChatDesktop = (props: IChat) => {
           <div
             className="Chat-messages"
             style={{
-              display: "flex min-h-0",
+              display: "flex",
               flexDirection: "column",
               height: dimensions.h,
+              minHeight: 0,
             }}
           >
             <MessagesDesktop />
