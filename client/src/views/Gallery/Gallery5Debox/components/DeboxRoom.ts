@@ -130,7 +130,7 @@ class DeboxRoom extends Room {
     const shellAlpha = this.p5.map(distance, 180, 230, 255, 0, true);
 
     // background
-    this.p5.fill(0, shellAlpha / 2, 0, 200);
+    this.p5.fill(0, shellAlpha / 2, shellAlpha / 4, 200);
     this.p5.noStroke();
     this.p5.push();
     this.p5.rect(0, 10, this.actualW, this.actualH - 15);
@@ -167,8 +167,8 @@ class DeboxRoom extends Room {
       // this.p5.stroke(255, 255, 255, alphaVal * 3);
       // this.p5.strokeWeight(1);
       const col = this.p5.lerpColor(
-        this.p5.color(255),
-        this.p5.color(0),
+        this.p5.color(180, 200, 255),
+        this.p5.color(0, 10, 25),
         shellAlpha / 255
       );
       col.setAlpha(alphaVal);

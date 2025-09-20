@@ -324,7 +324,7 @@ class GallerySketch extends React.Component<Props> {
 
     //////////////
     // emojis
-    displayDancers(dancers);
+    displayDancers(dancers, danceFloor, p5);
 
     //////////////
     // draggable

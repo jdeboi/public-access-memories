@@ -465,7 +465,7 @@ const openCallVersionsOG: OpenCallVersion[] = [
   {
     id: 11,
     timestamp: new Date("July 20, 2025 13:03:00"),
-    user: "",
+    user: "Jenna",
     isAddition: false,
     addPosition: "top",
     staticContent: (
@@ -552,6 +552,69 @@ const openCallVersionsOG: OpenCallVersion[] = [
           >
             APPLY
           </a>
+        </div>
+      </div>
+    ),
+    newContent: <></>,
+  },
+  {
+    id: 12,
+    timestamp: new Date("September 20, 2025 14:20:00"),
+    user: "Jenna",
+    isAddition: false,
+    addPosition: "top",
+    staticContent: (
+      <div>
+        <div className="mb-4 text-lg">
+          Artificial intelligence systems are often described as{" "}
+          <span className={highlightColor}>“black boxes”</span>—highly complex
+          models that receive inputs and produce outputs, yet whose inner
+          workings remain largely inaccessible, even to their creators. The data
+          used to train these systems is rarely open or traceable, especially in
+          corporate models, creating layers of opacity that raise critical
+          questions around{" "}
+          <span className={highlightColor}>
+            power, bias, authorship, and consent
+          </span>
+          . This is increasingly alarming as AI continues to be deployed in
+          policing, surveillance, and military contexts.
+        </div>
+        <div className="mb-4 text-lg">
+          In contrast,{" "}
+          <span className={highlightColor}>
+            {SHOW_TITLE} foregrounds transparency
+          </span>
+          —of process, memory, intention, and data. This exhibition invites
+          artists to reveal the thinking behind their work: the inputs,
+          revisions, training sets, workflows, and mistakes. Transparency
+          becomes a radical aesthetic gesture.
+        </div>
+
+        <div className="mb-4 text-lg">
+          Transparency isn’t just about the visible process of making—it’s also
+          about showing the foundations: the values embedded in the data, and
+          the{" "}
+          <span className={highlightColor}>
+            politics of what is remembered or forgotten
+          </span>
+          .
+        </div>
+        <div className="mb-4 text-lg">
+          This show features projects that engage with{" "}
+          <span className={highlightColor}>dataset creation</span>, especially
+          those that center personal archives, underrepresented communities, or
+          alternative knowledge systems. This includes memory work—acts of
+          documenting, preserving, or resisting erasure through data.
+        </div>
+        <div className="mb-4 text-lg">
+          This exhibition values intentionality, not as a rigid blueprint, but
+          as an act of disclosure. What happens when we choose to reveal the
+          process? When we surface the labor behind a work—the data, diagrams,
+          voice memos, glitches, discarded fragments? In an age of computational
+          opacity, transparency itself becomes a form of resistance.
+        </div>
+        <div className="mb-4 text-lg">
+          We appreciate your interest, and hope you enjoy the exhibition!
         </div>
       </div>
     ),

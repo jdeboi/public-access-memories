@@ -57,10 +57,12 @@ import { filterGalleryUsers } from "../../../helpers/helpers";
 //////////////
 // CONFIG
 import { GlobalConfig } from "../../../data/Shows/HomeBody/GlobalConfig";
-import { barTenders } from "../../../data/Shows/HomeBody/BotConfig";
+import { barTenders, danceFloor } from "../../../data/Shows/HomeBody/BotConfig";
 import { addBots } from "../../../App/useSockets";
 import { rooms as globalRooms } from "../../../data/Shows/HomeBody/RoomConfig";
 import HBRoom from "./components/HBRoom";
+import Dancer from "../components/p5/Dancer";
+import { displayDancers } from "./functions/emojis";
 
 //////////////
 // MOVEMENT
@@ -110,6 +112,7 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
   public doors: any = [];
   public doorImgs: p5Types.Image[] = [];
   public floorTex: p5Types.Image | null = null;
+  public flowerRow: p5Types.Image | null = null;
   public lightImgs: p5Types.Image[] = [];
   public tableImgs: p5Types.Image[] = [];
   public trashFiles: p5Types.Image[] = [];
@@ -140,10 +143,14 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
 
   public globalRooms = globalRooms;
 
+  public danceFloor: { x: number; y: number; w: number; h: number };
+  public dancers: Dancer[] = [new Dancer(), new Dancer(), new Dancer()];
+
   constructor(props: GallerySketch1Props) {
     super(props);
     this.GlobalConfig = GlobalConfig;
     this.barTenders = barTenders;
+    this.danceFloor = danceFloor;
   }
 
   preload = (p5: p5Types) => {
@@ -214,6 +221,8 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
     this.font = p5.loadFont(this.pamURL + "fonts/sysfont.woff");
     this.fontGeo = p5.loadFont(this.pamURL + "fonts/Geo-Regular.ttf");
     this.fontManolo = p5.loadFont(this.pamURL + "fonts/manolo-mono.ttf");
+
+    this.flowerRow = p5.loadImage(this.lmdURL + "grass/cac3.png");
   };
 
   ////////////////////////////////////////////////////////////////////////
@@ -245,30 +254,30 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
   };
 
   initEmojis = (p5: p5Types) => {
-    // this.dancers[0] = new Dancer(
-    //   p5,
-    //   this.dancerImgs[0],
-    //   10,
-    //   160,
-    //   false,
-    //   danceFloor
-    // );
-    // this.dancers[1] = new Dancer(
-    //   p5,
-    //   this.dancerImgs[1],
-    //   200,
-    //   380,
-    //   false,
-    //   danceFloor
-    // );
-    // this.dancers[2] = new Dancer(
-    //   p5,
-    //   this.dancerImgs[2],
-    //   300,
-    //   150,
-    //   true,
-    //   danceFloor
-    // );
+    this.dancers[0] = new Dancer(
+      p5,
+      this.dancerImgs[0],
+      10,
+      160,
+      false,
+      this.danceFloor
+    );
+    this.dancers[1] = new Dancer(
+      p5,
+      this.dancerImgs[1],
+      200,
+      380,
+      false,
+      this.danceFloor
+    );
+    this.dancers[2] = new Dancer(
+      p5,
+      this.dancerImgs[2],
+      300,
+      150,
+      true,
+      this.danceFloor
+    );
   };
 
   initBuilding = (p5: p5Types) => {
@@ -297,7 +306,7 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
       addTableDivs(this.divs, this.tableImgs, p5);
       addBarDivs(this.divs, this.lightImgs[3], p5, gconfig, galleryId);
       addTrashDivs(this.divs, this.trashFiles, p5);
-      addFolderDivs(this.divs, this.instaImg, this.txtFile, p5);
+      addFolderDivs(this.divs, this.instaImg, this.txtFile, p5, gconfig);
       addRoomLabelDivs(this.divs, this.eyeIcon, this.font, p5);
     }
   };
@@ -357,10 +366,7 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
     drawRooms(this.rooms, this.roomTextures);
     drawWalls(this.walls, p5);
     if (!this.isClosed) displayRoomLabelDivs(this.font, 0, this.divs);
-
-    //////////////
-    // emojis
-    // displayDancers(dancers);
+    displayDancers(this.dancers, this.danceFloor, p5);
   };
 
   debugMove = (p5: p5Types) => {
@@ -447,14 +453,30 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
   // MOVEMENT
   ////////////////////////////////////////////////////////////////////////
   showTarget = (p5: p5Types) => {
+    this.displayTarget(p5, null);
+  };
+
+  displayTarget = (p5: p5Types, strokeCol: p5Types.Color | null) => {
     const { isMobile } = this.props;
-    showDestination(this.userEase, this.destination, this.isWalking, p5);
-    showUserEllipses(this.userEase, this.destination, this.isWalking, p5);
+    showDestination(
+      this.userEase,
+      this.destination,
+      this.isWalking,
+      p5,
+      strokeCol
+    );
+    showUserEllipses(
+      this.userEase,
+      this.destination,
+      this.isWalking,
+      p5,
+      strokeCol
+    );
 
     if (mouseDidMove(p5)) {
       this.lastMouseMove = new Date();
     }
-    showMouseLoc(isMobile, this.lastMouseMove, p5);
+    showMouseLoc(isMobile, this.lastMouseMove, p5, strokeCol);
   };
 
   userTakeStep = (x: number, y: number) => {
@@ -530,6 +552,10 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
     // if (this.props.user.isFollowingHost)
     //   return;
 
+    console.log(
+      "??",
+      checkDivPress(this.userEase.x, this.userEase.y, this.divs)
+    );
     const { users, setUserActive } = this.props;
     let userClicked = null;
     if (users)
@@ -542,9 +568,9 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
     if (userClicked) {
       setUserActive(userClicked);
       return;
-    } else if (checkDivPress(this.userEase.x, this.userEase.y, this.divs))
+    } else if (checkDivPress(this.userEase.x, this.userEase.y, this.divs)) {
       return;
-    else {
+    } else {
       let steps = this.GlobalConfig.scaler - 20;
       const dx = p5.mouseX > p5.windowWidth / 2 ? steps : -steps;
       const dy = p5.mouseY > p5.windowHeight / 2 ? steps : -steps;

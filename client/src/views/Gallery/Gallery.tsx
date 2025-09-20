@@ -233,7 +233,9 @@ const Gallery = (props: IGallery) => {
           />
         );
       case DEBOX_ID:
-        GalleryStyle.backgroundImage = "none";
+        GalleryStyle.backgroundImage = "url(/backgroundImgs/debox_tex.webp)";
+        GalleryStyle.backgroundSize = "400px 400px";
+        // GalleryStyle.backgroundRepeat = "no-repeat";
         return (
           <Gallery5DeboxSketch
             user={user}
@@ -298,9 +300,6 @@ const Gallery = (props: IGallery) => {
         />
       );
     }
-    if (props.id == DEBOX_ID) {
-      return null;
-    }
 
     return (
       <ReactAudioPlayer
@@ -331,7 +330,19 @@ const Gallery = (props: IGallery) => {
       case HOMEOFFICES_ID:
         return <></>;
       case DEBOX_ID:
-        return <></>;
+        return (
+          <MiniMap
+            users={filterUsers(user, props.users).filter(
+              (u) => u.roomUrl === "/" || u.roomUrl === "/debox"
+            )}
+            x={20}
+            y={20}
+            img="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/gallery/map_debox.png"
+            backgroundStr="rgba(22, 30, 45, .9)"
+            gConfig={getCurrentPageGlobalConfig(DEBOX_ID)}
+            galleryId={DEBOX_ID}
+          />
+        );
       default:
         return <MiniMap users={filterUsers(user, props.users)} x={20} y={20} />;
     }

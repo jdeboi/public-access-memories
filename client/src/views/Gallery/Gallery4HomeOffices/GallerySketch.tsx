@@ -310,9 +310,8 @@ class GallerySketch extends React.Component<Props> {
     this.drawOverUser(p5);
 
     if (this.isPursePage()) {
-      displayDancers(dancers);
+      displayDancers(dancers, danceFloor, p5);
     }
-
 
     //////////////
     // updating

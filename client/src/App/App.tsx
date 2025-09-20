@@ -71,6 +71,7 @@ import EmrysGalleryRoom from "../views/rooms/R_01/EmrysGalleryRoom";
 import HostBotRoom from "../views/Gallery/Gallery0Residency/rooms/HostBotRoom";
 import OpenCallBlackBox from "../views/pages/OpenCall/OpenCallBlackBox/OpenCallBlackBox";
 import Residency2025 from "../views/pages/PastExhibitions/Residency/Residency2025";
+import OpenCall from "../views/pages/OpenCall/OpenCall";
 // import TwilioChat from '../components/TwilioChat/TwilioChat';
 
 function App() {
@@ -297,7 +298,7 @@ function App() {
 
           <Route path="/newsletter" element={<SubscribeSendInBlue />} />
           <Route path="/statement" element={<Statement />} />
-          <Route path="/opencall" element={<OpenCallBlackBox />} />
+          <Route path="/opencall" element={<OpenCall />} />
           <Route path="/residency" element={<Residency />} />
 
           <Route path="/artists" element={<Artists />} />

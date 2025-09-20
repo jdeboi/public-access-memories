@@ -5,7 +5,7 @@ import {
 } from "../../../../data/Shows/HomeBody/GlobalConfig";
 import { p5ToWorldCoords } from "../../../../helpers/coordinates";
 
-export function drawPlantRow(x, y, w, h, img, p5) {
+export function drawPlantRow(x, y, w, h, img, p5, strokeColor = p5.color(255)) {
   let sc = GlobalConfig.scaler;
   let pt = p5ToWorldCoords(x, y, GlobalConfig);
 
@@ -13,7 +13,7 @@ export function drawPlantRow(x, y, w, h, img, p5) {
     p5.image(img, pt.x + sc * 5 * i, pt.y, 5 * sc, sc);
   }
   p5.noFill();
-  p5.stroke(255);
+  p5.stroke(strokeColor);
   p5.strokeWeight(2);
   for (let r = 0; r < h; r++) {
     for (let c = 0; c < w * 5; c++) {

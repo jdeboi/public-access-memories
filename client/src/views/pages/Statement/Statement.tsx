@@ -6,8 +6,10 @@ import {
   getLayoutSlug,
   GIFT_PAGE,
 } from "../../../data/Shows/HomeOffices/PageConstants";
+import DeboxStatement from "./DeboxStatement";
 
 export const Statement = () => {
+  return <DeboxStatement />;
   return (
     <div className="Statement  Page">
       <div className="containerOG">

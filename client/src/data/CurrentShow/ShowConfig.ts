@@ -1,6 +1,6 @@
 export const ShowConfig = {
   isClosed: true,
-  isOpenCallOpen: true,
+  isOpenCallOpen: false,
   underConstruction: true,
   isResidency: false,
   isMenuOn: false,

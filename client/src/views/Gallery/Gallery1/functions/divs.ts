@@ -101,88 +101,45 @@ export const addLightDivs = (
   }
 };
 
+const makePoints = () => {
+  const pts = [];
+  const gx = 16.5,
+    gy = 34.5,
+    dx = 140,
+    dy = 140;
+  for (let i = 0; i < 4; i++) pts.push({ x: gx + dx * i, y: gy - dy * i });
+  pts.push({ x: 1.5, y: 22.5 });
+  pts.push({ x: 3.5, y: 22.5 });
+  pts.push({ x: -3.5, y: 17.5 });
+  pts.push({ x: -1.5, y: 17.5 });
+  return pts;
+};
+
 export const addColumnDivs = (
   divs: any,
   columnGif: p5Types.Image,
   p5: p5Types,
+  points: { x: number; y: number }[] = [],
   factor = 1,
   gconfig: any = GlobalConfig
 ) => {
-  divs.columns = [];
-  let sc = gconfig.scaler;
-  let numCols = 4;
-  const dy = 140;
-  const dx = 140;
-  let gx = 16.5 * sc;
-  let gy = 34.5 * sc;
-  for (let i = 0; i < numCols; i++) {
-    let column = new ShadowDraggable(
-      i,
-      gx + dx * i,
-      gy - dy * i,
-      80 * factor,
-      280 * factor,
-      p5,
-      columnGif,
-      gconfig
-    );
-    // columns.push(column)
-    // column.initMask();
-    divs.columns.push(column);
-  }
+  const w = 80 * factor;
+  const h = 280 * factor;
 
-  let x = 1.5 * sc;
-  let y = 22.5 * sc;
-  divs.columns.push(
-    new ShadowDraggable(
-      numCols,
-      x,
-      y,
-      80 * factor,
-      280 * factor,
-      p5,
-      columnGif,
-      gconfig
-    )
-  );
-  divs.columns.push(
-    new ShadowDraggable(
-      numCols + 1,
-      x + sc * 2,
-      y,
-      80 * factor,
-      280 * factor,
-      p5,
-      columnGif,
-      gconfig
-    )
-  );
+  if (!points.length) points = makePoints();
 
-  x = -3.5 * sc;
-  y = 17.5 * sc;
-  divs.columns.push(
-    new ShadowDraggable(
-      numCols + 2,
-      x,
-      y,
-      80 * factor,
-      280 * factor,
-      p5,
-      columnGif,
-      gconfig
-    )
-  );
-  divs.columns.push(
-    new ShadowDraggable(
-      numCols + 3,
-      x + sc * 2,
-      y,
-      80 * factor,
-      280 * factor,
-      p5,
-      columnGif,
-      gconfig
-    )
+  divs.columns = points.map(
+    ({ x, y }, i) =>
+      new ShadowDraggable(
+        i,
+        x * gconfig.scaler,
+        y * gconfig.scaler,
+        w,
+        h,
+        p5,
+        columnGif,
+        gconfig
+      )
   );
 };
 
@@ -227,13 +184,21 @@ export const addFolderDivs = (
   divs: any,
   instaImg: p5Types.Image,
   txtFile: p5Types.Image,
-  p5: p5Types
+  p5: p5Types,
+  gconfig: any = GlobalConfig,
+  points: { x: number; y: number }[] = []
 ) => {
   divs.folders = [];
   // yeah, why are these in dom coords...
-  let p0 = domCoordsToP5World(560, 0, GlobalConfig);
-  let p1 = domCoordsToP5World(620, 130, GlobalConfig);
-  let p2 = domCoordsToP5World(510, 230, GlobalConfig);
+  let p0 = domCoordsToP5World(560, 0, gconfig);
+  let p1 = domCoordsToP5World(620, 130, gconfig);
+  let p2 = domCoordsToP5World(510, 230, gconfig);
+  if (points.length === 3) {
+    p0 = points[0];
+    p1 = points[1];
+    p2 = points[2];
+  }
+
   let labels = [
     { x: p0.x, y: p0.y, label: "statement", link: "/statement" },
     { x: p1.x, y: p1.y, label: "about", link: "/about" },
@@ -257,7 +222,7 @@ export const addFolderDivs = (
       label,
       link,
       i === 2 ? instaImg : txtFile,
-      GlobalConfig
+      gconfig
     );
     divs.folders.push(folder);
   }
@@ -536,8 +501,10 @@ export const checkFolderDivsDouble = (
   userY: number,
   divs: any
 ) => {
-  for (const folder of divs.folders) {
-    folder.checkDoubleClicked(userX, userY);
+  if (divs.folders) {
+    for (const folder of divs.folders) {
+      folder.checkDoubleClicked(userX, userY);
+    }
   }
 };
 
@@ -546,7 +513,9 @@ export const checkTrashDivsDouble = (
   userY: number,
   divs: any
 ) => {
-  for (const trash of divs.trashCans) {
-    trash.checkDoubleClickedAlert(userX, userY);
+  if (divs.trashCans) {
+    for (const trash of divs.trashCans) {
+      trash.checkDoubleClickedAlert(userX, userY);
+    }
   }
 };

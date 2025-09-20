@@ -43,6 +43,23 @@ export const About = () => {
           computer screen and in physical media.
         </p>
 
+        <h3 className="text-2xl font-semibold mt-10 mb-2">Guest Curators</h3>
+        <p className="mb-6 leading-relaxed">
+          &gt;{" "}
+          <a
+            href="https://instagram.com/jon.cham.bers"
+            className="text-blue-400 hover:underline"
+          >
+            Jon Chambers
+          </a>{" "}
+          is an artist and educator based in New Orleans, teaching interactive
+          media and games at Tulane University. His work spans digital
+          interfaces, games, code, and installation, exploring themes of
+          consumerism, surveillance, play, and speculative futures, often using
+          imperfect 3D body scans as metaphors for fractured life in a
+          technological world.
+        </p>
+
         <h3 className="text-2xl font-semibold mt-10 mb-2">Get Involved</h3>
         <p className="mb-10 leading-relaxed">
           To suggest a curatorial project, collaborate on a gallery feature,

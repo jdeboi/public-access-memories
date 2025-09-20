@@ -360,7 +360,7 @@ class GallerySketch extends React.Component<Props> {
 
     //////////////
     // emojis
-    displayDancers(dancers);
+    displayDancers(dancers, danceFloor, p5);
     // updateDucks(user.hasCheese, userEase.x, userEase.y, ducks);
 
     //////////////

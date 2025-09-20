@@ -192,34 +192,42 @@ export const drawSpaceFloorLine = (x0, y0, x1, y1, w, p5) => {
 // p5.fill(255, 50);
 // p5.rect(-12*sc, -10*sc, (38+12)*sc, (40+10)*sc);
 
-export const drawSpaceFloor = (x0, y0, w, h, p5) => {
-  let spacing = GlobalConfig.scaler;
+export const drawSpaceFloor = (
+  x0,
+  y0,
+  w,
+  h,
+  p5,
+  gConfig = GlobalConfig,
+  col = p5.color(255)
+) => {
+  let spacing = gConfig.scaler;
   let yOffset = new Date() / 2000;
   // let bound = 5000;
 
-  let sc = GlobalConfig.scaler;
+  let sc = gConfig.scaler;
   for (let x = x0 * sc; x < (x0 + w) * sc; x += spacing) {
     for (let y = y0 * sc; y < (y0 + h) * sc; y += spacing) {
       let n = p5.noise(x * 0.005, y * 0.005 + yOffset);
       let alpha = p5.map(n, 0, 1, 0, 150);
-      p5.fill(255, alpha);
+
+      p5.fill(p5.red(col), p5.green(col), p5.blue(col), alpha);
       p5.rect(x, y, spacing, spacing);
     }
   }
-
-  // p5.fill(255, 50);
-  // p5.rect(-12*sc, -10*sc, (38+12)*sc, (40+10)*sc);
 };
 
-export const drawFloor = (x0, y0, w, h, isDark, isFilled, spacing, p5) => {
+export const drawFloor = (x0, y0, w, h, isDark, isFilled, spacing, p5, col) => {
+  p5.push();
   // let spacing = GlobalConfig.scaler;
   let yOffset = new Date() / 2000;
   // let bound = 5000;
   if (isFilled) p5.fill(255, 150);
-  else p5.fill(0, 100);
+  else p5.fill(50, 50, 100, 100);
   // p5.stroke(255, 200);
   // if (isDark) p5.stroke(0, 255);
   if (isDark) p5.fill(255, 30);
+  if (col) p5.fill(col);
   let sc = GlobalConfig.scaler;
   let xInd = 0;
   let yInd = 0;
@@ -235,7 +243,9 @@ export const drawFloor = (x0, y0, w, h, isDark, isFilled, spacing, p5) => {
           0,
           110
         );
+
         p5.fill(255, alpha);
+        if (col) p5.fill(col);
       } else {
         // alpha = p5.map(Math.sin(new Date()/1000 + x/100 + y/200), -1, 1, 0, 180);
         // p5.stroke(255, alpha);
@@ -248,6 +258,7 @@ export const drawFloor = (x0, y0, w, h, isDark, isFilled, spacing, p5) => {
     }
     xInd++;
   }
+  p5.pop();
 
   // p5.fill(255, 50);
   // p5.rect(-12*sc, -10*sc, (38+12)*sc, (40+10)*sc);

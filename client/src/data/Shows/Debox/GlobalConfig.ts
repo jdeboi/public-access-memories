@@ -7,8 +7,8 @@ let yMax = 40;
 
 export const GlobalConfig: IGlobalConfig = {
   scaler: 70,
-  x: -20,
-  y: -20,
+  x: -19,
+  y: -26,
   worldW: xMax - xMin,
   worldH: yMax - yMin,
 };

@@ -68,10 +68,14 @@ export const mouseDidMove = (p5) => {
   return p5.pmouseX !== p5.mouseX || p5.pmouseY !== p5.mouseY;
 };
 
-export const showMouseLoc = (isMobile, lastMouseMove, p5) => {
+export const showMouseLoc = (
+  isMobile,
+  lastMouseMove,
+  p5,
+  strokeColor = p5.color(20, 0, 50, 25)
+) => {
   if (!isMobile && new Date() - lastMouseMove < 800) {
     if (!p5.mouseIsPressed) {
-      //!isWalking&&
       let sc = GlobalConfig.scaler;
       let sw = 10;
       const dx2 = p5.mouseX > p5.windowWidth / 2 ? 50 : -50;
@@ -81,7 +85,7 @@ export const showMouseLoc = (isMobile, lastMouseMove, p5) => {
       p5.noStroke();
       p5.noFill();
       p5.strokeWeight(sw / 2);
-      p5.stroke(20, 0, 50, 25);
+      p5.stroke(strokeColor);
       // p5.rect(mx+window.innerWidth/2-50+sw, my+window.innerHeight/2-50+sw, sc-sw*2, sc-sw*2, 10);
       p5.ellipse(
         mx + p5.windowWidth / 2,
@@ -102,13 +106,19 @@ export const showMouseLoc = (isMobile, lastMouseMove, p5) => {
   }
 };
 
-export const showUserEllipses = (userEase, destination, isWalking, p5) => {
+export const showUserEllipses = (
+  userEase,
+  destination,
+  isWalking,
+  p5,
+  strokeColor = p5.color(20, 0, 50, 55)
+) => {
   // let sc = GlobalConfig.scaler;
   let sw = 10;
   p5.noStroke();
   p5.noFill();
   p5.strokeWeight(sw / 2);
-  p5.stroke(20, 0, 50, 55);
+  p5.stroke(strokeColor);
   // p5.rect(mx+window.innerWidth/2-50+sw, my+window.innerHeight/2-50+sw, sc-sw*2, sc-sw*2, 10);
   // p5.ellipse(window.innerWidth/2, window.innerHeight/2, sc-sw*2);
   // p5.ellipse(window.innerWidth/2, window.innerHeight/2, sc-sw*4);
@@ -126,7 +136,13 @@ export const showUserEllipses = (userEase, destination, isWalking, p5) => {
   }
 };
 
-export const showDestination = (userEase, destination, isWalking, p5) => {
+export const showDestination = (
+  userEase,
+  destination,
+  isWalking,
+  p5,
+  strokeColor = p5.color(20, 0, 50, 55)
+) => {
   if (isWalking) {
     // lastMouseMove = new Date();
     const sc = GlobalConfig.scaler;
@@ -136,7 +152,7 @@ export const showDestination = (userEase, destination, isWalking, p5) => {
     p5.noStroke();
     p5.noFill();
     p5.strokeWeight(5);
-    p5.stroke(20, 0, 50, 55);
+    p5.stroke(strokeColor);
     // const x = destination.x + p5.windowWidth / 2 - user.x;
     // const y = destination.y + p5.windowHeight / 2 - user.y;
     const x = destination.x + p5.windowWidth / 2 - userEase.x;

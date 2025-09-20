@@ -273,7 +273,7 @@ class GallerySketchClean extends React.Component<Props> {
 
     //////////////
     // emojis
-    displayDancers(dancers);
+    // displayDancers(dancers, danceFloor, p5);
     // updateDucks(user.hasCheese, userEase.x, userEase.y, ducks);
 
     p5.textFont(font, 10);

@@ -1,5 +1,5 @@
 // import { GlobalConfig } from '../../../../../../data/HomeBody/GlobalConfig';
-import { Global } from "@emotion/react";
+import { draw3D2DBox } from "../../../Gallery5Debox/functions/building";
 import Draggable from "../Draggable/Draggable";
 // import { numBarItems } from '../../../../../data/HomeBody/BotConfig';
 
@@ -96,5 +96,28 @@ export default class Bar extends Draggable {
         }
       }
     }
+  }
+
+  displayDebox(userX, userY) {
+    this.p5.push();
+    this.p5.translate(this.x, this.y + 27);
+    if (!this.closed) {
+      if (!this.minimized) {
+        draw3D2DBox(
+          this.p5,
+          this.w,
+          this.h,
+          this.p5.color(180 / 2, 200 / 2, 255 / 2, 80),
+          this.p5.color(this.p5.color(180, 200, 255)),
+          8,
+          5,
+          2
+        );
+        this.p5.translate(5, 40);
+        this.displayBarContents();
+      }
+    }
+    this.p5.pop();
+    this.displayToolBar(userX, userY);
   }
 }

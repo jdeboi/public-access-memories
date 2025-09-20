@@ -121,7 +121,7 @@ export const artists: IArtist[] = [
     name: "Thanos Tsiousis",
     nameLink: "tsiousis",
     thumb: "thanos-thumb",
-    webLink: "https://thanostsiousis.tumblr.com/",
+    webLink: "http://thanostsiousis.com/",
     instaLink: "https://www.instagram.com/t____tsiou/",
     medium: "1920x1080 video",
     description:
