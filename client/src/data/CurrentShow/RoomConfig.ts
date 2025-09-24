@@ -1,7 +1,6 @@
-
 export {
   roomConfig,
   artists,
   rooms,
   reservedArtists,
-} from "../Shows/Residency/RoomConfig";
+} from "../Shows/Debox/RoomConfig";

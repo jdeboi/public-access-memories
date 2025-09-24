@@ -503,7 +503,7 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
       } else {
         userNewRoom(roomDoor);
       }
-      this.isWalking = false;
+      this.stopWalking();
     } else if (outsideDoor) {
       this.stepTo.x = userStep.x;
       this.stepTo.y = userStep.y;
@@ -548,14 +548,11 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
   };
 
   triggerMove = (p5: p5Types) => {
+    if (!(p5.frameCount > 0)) return;
     const { user } = this.props;
     // if (this.props.user.isFollowingHost)
     //   return;
 
-    console.log(
-      "??",
-      checkDivPress(this.userEase.x, this.userEase.y, this.divs)
-    );
     const { users, setUserActive } = this.props;
     let userClicked = null;
     if (users)
@@ -638,6 +635,7 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
   };
 
   mouseReleased = (p5: p5Types) => {
+    if (!(p5.frameCount > 0)) return;
     endDivDrag(this.divs);
   };
 
@@ -652,6 +650,7 @@ export class GallerySketchTemplate1 extends React.Component<GallerySketch1Props>
   };
 
   doubleClicked = (p5: p5Types) => {
+    if (!(p5.frameCount > 0)) return;
     checkFolderDivsDouble(this.userEase.x, this.userEase.y, this.divs);
     checkTrashDivsDouble(this.userEase.x, this.userEase.y, this.divs);
   };

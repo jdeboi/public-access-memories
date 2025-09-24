@@ -156,11 +156,13 @@ export interface IArtist {
   thumb: string;
   nameLink: string;
   instaLink?: string;
+  blueSkyLink?: string;
   webLink?: string;
   medium?: string | ReactNode;
   userName?: string;
   customLink?: string;
   description: string | ReactNode;
+  statement?: string | ReactNode;
   bio: string | ReactNode;
   title: string;
   year: number;

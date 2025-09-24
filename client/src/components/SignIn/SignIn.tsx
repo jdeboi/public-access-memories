@@ -176,8 +176,8 @@ const SignIn = forwardRef<SignInSubmitType, SignInProps>((props, ref) => {
     const artistAvatar =
       reservedArtistsObjs[user.userName as keyof typeof reservedArtistsObjs];
     if (artistAvatar) {
-      user.avatar = artistAvatar;
-      setLocalAvatar(artistAvatar);
+      user.avatar = String(artistAvatar);
+      setLocalAvatar(String(artistAvatar));
     }
   };
 

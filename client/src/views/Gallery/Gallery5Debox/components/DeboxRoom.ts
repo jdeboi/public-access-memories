@@ -108,7 +108,9 @@ class DeboxRoom extends Room {
 
     this.p5.fill(255);
     this.p5.noStroke();
-    const idNum = this.id < 10 ? `0${this.id + 1}` : this.id + 1;
+    // a hack to reverse the room order appearance
+    const roomId = 10 - this.id;
+    const idNum = roomId < 10 ? `0${roomId}` : roomId;
     const idStr = `R${idNum}.`;
     this.p5.text(idStr, 4, 14);
 
@@ -144,15 +146,6 @@ class DeboxRoom extends Room {
     this.p5.shearX(0.66);
     this.p5.rect(0, 0, this.actualW, this.actualH / 3);
     this.p5.pop();
-    // bottom
-    // this.p5.push();
-    // this.p5.stroke(255);
-    // this.p5.noFill();
-    // this.p5.strokeWeight(5);
-    // this.p5.translate(0, this.actualH - 17);
-    // this.p5.shearX(0.66);
-    // this.p5.rect(0, 0, this.actualW, this.actualH / 3);
-    // this.p5.pop();
 
     this.p5.push();
     this.p5.translate(-35, -35);

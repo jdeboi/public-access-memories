@@ -14,8 +14,7 @@ export default class Draggable {
   offsetX = 0;
   offsetY = 0;
   toolbarH = 25;
-   hasVideo: boolean;
-
+  hasVideo: boolean;
 
   startDrag = { x: 0, y: 0 };
   startDragCoords = { x: 0, y: 0 };
@@ -233,7 +232,7 @@ export default class Draggable {
       this.closeWindow();
       return true;
     } else if (this.minButton.mouseOver(mouse.x, mouse.y)) {
-      this.toggleMinimze();
+      this.toggleMinimize();
       return true;
     } else if (this.maxButton.mouseOver(mouse.x, mouse.y)) {
       this.maximizeWindow();
@@ -249,7 +248,7 @@ export default class Draggable {
       this.closeWindow();
       return true;
     } else if (this.minButton.mouseOver(mouse.x, mouse.y)) {
-      this.toggleMinimze();
+      this.toggleMinimize();
       return true;
     } else if (this.maxButton.mouseOver(mouse.x, mouse.y)) {
       this.maximizeWindow();
@@ -341,7 +340,7 @@ export default class Draggable {
     this.offsetY = 0;
   }
 
-  toggleMinimze() {
+  toggleMinimize() {
     this.minimized = !this.minimized;
   }
 }

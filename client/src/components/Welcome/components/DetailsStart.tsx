@@ -31,11 +31,11 @@ export default function DetailsStart() {
 
       <div className="text-black text-base mb-1">
         <Link
-          to="/opencall"
+          to="/statement"
           style={{ color: "blue" }}
           className="underline transition-colors duration-150"
         >
-          Open Call
+          DEBOX
         </Link>
       </div>
 

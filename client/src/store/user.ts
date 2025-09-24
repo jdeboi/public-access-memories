@@ -112,7 +112,6 @@ export const userSlice = createSlice({
     ) => {
       state.x = action.payload.x;
       state.y = action.payload.y;
-      console.log("move normal", action.payload.galleryIndex);
       const GlobalConfig = getCurrentPageGlobalConfig(
         action.payload.galleryIndex
       );

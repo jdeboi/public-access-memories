@@ -226,8 +226,11 @@ export default class Gallery5DeboxSketch extends GallerySketchTemplate1 {
     if (roomEntry) {
       if (window.confirm("Leave the main gallery?")) {
         userNewRoom(roomEntry.link);
-        this.isWalking = false;
+      } else {
+        this.stepTo.x = prevStep.x;
+        this.stepTo.y = prevStep.y;
       }
+      this.stopWalking();
     } else if (wallBoundary(this.walls, prevStep, userStep)) {
       this.stopWalking();
     } else {

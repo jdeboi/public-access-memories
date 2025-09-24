@@ -101,8 +101,7 @@
 .ChatMobile .Chat-messages .Chat-form {
   display: flex;
   flex-direction: column;
-  padding-bottom: 10px;
-  height: 90px;
+  margin-bottom: 10px;
 }
 .ChatMobile .Chat-messages .Chat-form .to-form {
   width: 220px;
