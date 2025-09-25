@@ -109,7 +109,7 @@ class DeboxRoom extends Room {
     this.p5.fill(255);
     this.p5.noStroke();
     // a hack to reverse the room order appearance
-    const roomId = 10 - this.id;
+    const roomId = this.id + 1;
     const idNum = roomId < 10 ? `0${roomId}` : roomId;
     const idStr = `R${idNum}.`;
     this.p5.text(idStr, 4, 14);

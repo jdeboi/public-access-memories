@@ -38,7 +38,7 @@ function getDefaultArtist(id: number): IArtist {
 export const artists: IArtist[] = [
   {
     id: 0,
-    roomID: 9,
+    roomID: 0,
     title: "Khazar Archeological Confabulations",
     name: "Nimrod Astarhan",
     thumb: "temp-thumb",
@@ -88,7 +88,7 @@ export const artists: IArtist[] = [
   },
   {
     id: 1,
-    roomID: 8,
+    roomID: 1,
     name: "Nick Briz",
     title: "How To Glitch AI",
     thumb: "temp-thumb",
@@ -136,7 +136,7 @@ export const artists: IArtist[] = [
   },
   {
     id: 2,
-    roomID: 7,
+    roomID: 2,
     name: "Mou Peijing",
     title: "(Un)Natural Language",
     thumb: "temp-thumb",
@@ -197,7 +197,7 @@ export const artists: IArtist[] = [
   },
   {
     id: 3,
-    roomID: 6,
+    roomID: 3,
     name: "Everest Pipkin",
     title: "On Lacework: watching an entire machine-learning dataset",
     thumb: "temp-thumb",
@@ -231,8 +231,8 @@ export const artists: IArtist[] = [
   },
   {
     id: 4,
-    roomID: 5,
-    title: TBA,
+    roomID: 4,
+    title: "Flowers Blooming Backward Into Noise",
     name: "Eryk Salvaggio",
     thumb: "temp-thumb",
     nameLink: "salvaggio",
@@ -292,7 +292,7 @@ export const artists: IArtist[] = [
   },
   {
     id: 5,
-    roomID: 4,
+    roomID: 5,
     title: "Humans of AI",
     name: "Philipp Schmitt",
     thumb: "temp-thumb",
@@ -337,7 +337,7 @@ export const artists: IArtist[] = [
 
   {
     id: 6,
-    roomID: 3,
+    roomID: 6,
     title: "Feminist Data Set",
     name: "Caroline Sinders",
     thumb: "temp-thumb",
@@ -432,7 +432,7 @@ export const artists: IArtist[] = [
   },
   {
     id: 7,
-    roomID: 2,
+    roomID: 7,
     title: "Consensus Sensing",
     name: "Chelsea Thompto",
     thumb: "temp-thumb",
@@ -532,7 +532,7 @@ export const artists: IArtist[] = [
   },
   {
     id: 8,
-    roomID: 1,
+    roomID: 8,
     title: "Artificial Archive: SCRYING INTIMACIES",
     name: "Rodell Warner",
     thumb: "temp-thumb",
@@ -570,7 +570,7 @@ export const artists: IArtist[] = [
   },
   {
     id: 9,
-    roomID: 0,
+    roomID: 9,
     title: "AMA y NO OLVIDA",
     name: "Emilia Yang",
     thumb: "temp-thumb",

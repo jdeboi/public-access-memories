@@ -31,7 +31,7 @@ import { displayDancers } from "../Gallery1/functions/emojis";
 import Dancer from "../components/p5/Dancer";
 
 export default class Gallery5DeboxSketch extends GallerySketchTemplate1 {
-  roomsPerLayer: number[] = [1, 3, 5, 4, 1];
+  roomsPerLayer: number[] = [1, 3, 5, 1];
   // strongly type this so we remember it’s 2D, of DeboxRoom instances
   neuralNetRooms: DeboxRoom[][] = [];
   limits: any;
@@ -54,18 +54,20 @@ export default class Gallery5DeboxSketch extends GallerySketchTemplate1 {
     const startX = 19;
     const startY = 5;
     this.neuralNetRooms = [];
-    let idx = 0;
-
+    let idx = 10;
+    let n = 0;
     for (let y = 0; y < this.roomsPerLayer.length; y++) {
-      const n = this.roomsPerLayer[y];
+      n = this.roomsPerLayer[y];
       const layer: DeboxRoom[] = [];
-      for (let x = 0; x < n && idx < this.rooms.length; x++, idx++) {
-        const room = this.rooms[idx] as DeboxRoom;
+      for (let x = 0; x < n; x++) {
+        const id = idx - n + x;
+        const room = this.rooms[id] as DeboxRoom;
         room.connections = []; // reset!
         room.x = -((n - 1) * spacingX) / 2 + x * spacingX + startX;
         room.y = y * spacingY + startY;
         layer.push(room);
       }
+      idx -= n;
       this.neuralNetRooms.push(layer);
     }
 
@@ -160,10 +162,8 @@ export default class Gallery5DeboxSketch extends GallerySketchTemplate1 {
   initBuilding = (p5: p5Types) => {
     // create all room instances first so we know size for spacing
     initOuterWalls(p5, this.walls, this.limits, this.GlobalConfig);
-    const needed = this.roomsPerLayer.reduce((a, b) => a + b, 0);
-    const count = Math.min(needed, this.globalRooms.length);
     this.rooms = [];
-    for (let i = 0; i < count; i++) this.rooms.push(new DeboxRoom(p5, i));
+    for (let i = 0; i < 10; i++) this.rooms.push(new DeboxRoom(p5, i));
     this.initNodes(p5);
   };
 
