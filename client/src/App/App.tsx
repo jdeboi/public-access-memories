@@ -20,10 +20,12 @@ import EditUsers from "../views/Admin/EditUsers";
 
 // past exhibitions
 import PastExhibitions from "../views/pages/PastExhibitions/PastExhibitions";
-import HomeBody from "../views/pages/PastExhibitions/HomeBody/HomeBody";
-import AsIRecall from "../views/pages/PastExhibitions/AsIRecall/AsIRecall";
-import FieldsOfView from "../views/pages/PastExhibitions/FieldsOfView/FieldsOfView";
-import HomeOffices from "../views/pages/PastExhibitions/HomeOffices/HomeOffices";
+import ExhibitionPageTemplate from "../views/pages/templates/ExhibitionPageTemplate";
+import { HomeBodyData } from "../views/pages/PastExhibitions/Data/HomeBodyData";
+import { AsIRecallData } from "../views/pages/PastExhibitions/Data/AsIRecallData";
+import { HomeOfficesData } from "../views/pages/PastExhibitions/Data/HomeOfficesData";
+import { residency2025Data } from "../views/pages/PastExhibitions/Data/Residency2025Data";
+import { fieldsOfViewData } from "../views/pages/PastExhibitions/Data/FieldsOfViewData";
 
 ///////////////////////////////
 // COMPONENTS
@@ -35,7 +37,6 @@ import SignIn from "../components/SignIn/SignIn";
 import MobileFooter from "../components/Header/components/MobileFooter/MobileFooter";
 import RoomDecal from "../components/RoomDecal/RoomDecal";
 import { pageview } from "./Analytics";
-// import MyLiveKit from '../components/AudioChat/MyLiveKit';
 
 // socket
 import { useSockets } from "./useSockets";
@@ -46,7 +47,7 @@ import Cookies from "js-cookie";
 ///////////////////////////////
 // STORE
 import { useSelector, useDispatch } from "react-redux";
-import { selectUser, selectWindow, selectMusic } from "../store/store";
+import { selectUser, selectWindow } from "../store/store";
 import { showSignIn, hideMenus } from "../store/menu";
 import { setUser, setUserRoomUrl } from "../store/user";
 import { startComposition, resizeApp, loadingApp } from "../store/window";
@@ -62,15 +63,11 @@ import {
   FIELDSOFVIEW_ID,
   HOMEBODY_ID,
   HOMEOFFICES_ID,
-  RESIDENCY_ID,
 } from "../data/CurrentShow/GalleryConfig";
 import Residency from "../views/pages/Residency/Residency";
 import EmrysGalleryRoom from "../views/rooms/R_01/EmrysGalleryRoom";
 import HostBotRoom from "../views/Gallery/Gallery0Residency/rooms/HostBotRoom";
-import OpenCallBlackBox from "../views/pages/OpenCall/OpenCallBlackBox/OpenCallBlackBox";
-import Residency2025 from "../views/pages/PastExhibitions/Residency/Residency2025";
 import OpenCall from "../views/pages/OpenCall/OpenCall";
-// import TwilioChat from '../components/TwilioChat/TwilioChat';
 
 function App() {
   const user = useSelector(selectUser);
@@ -213,7 +210,7 @@ function App() {
 
   const getRoomDecal = () => {
     if (ShowConfig.isClosed || ShowConfig.underConstruction) {
-      if (location.pathname.substring(1, 5) == "test") {
+      if (location.pathname.substring(1, 5) === "test") {
         return (
           <RoomDecal
             startMedia={startMedia}
@@ -379,19 +376,25 @@ function App() {
           />
 
           <Route path="/pastexhibitions" element={<PastExhibitions />} />
-          <Route path="/pastexhibitions/homebody" element={<HomeBody />} />
-          <Route path="/pastexhibitions/asirecall" element={<AsIRecall />} />
+          <Route
+            path="/pastexhibitions/homebody"
+            element={<ExhibitionPageTemplate {...HomeBodyData} />}
+          />
+          <Route
+            path="/pastexhibitions/asirecall"
+            element={<ExhibitionPageTemplate {...AsIRecallData} />}
+          />
           <Route
             path="/pastexhibitions/fieldsofview"
-            element={<FieldsOfView />}
+            element={<ExhibitionPageTemplate {...fieldsOfViewData} />}
           />
           <Route
             path="/pastexhibitions/homeoffices"
-            element={<HomeOffices />}
+            element={<ExhibitionPageTemplate {...HomeOfficesData} />}
           />
           <Route
             path="/pastexhibitions/residency2025"
-            element={<Residency2025 />}
+            element={<ExhibitionPageTemplate {...residency2025Data} />}
           />
           <Route
             path="/editusers"

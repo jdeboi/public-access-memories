@@ -1,26 +1,7 @@
-import { is } from "@react-three/fiber/dist/declarations/src/core/utils";
-import { IArtist } from "../../../interfaces";
 import ArtistsArchiveList from "../PastExhibitions/ArtistsArchiveList";
+import { PastExhibitionDataInterface } from "../PastExhibitions/Data/_PastExhibitionDataType";
 import ImageGrid from "../PastExhibitions/ImageGrid";
 import PageTemplate from "./PageTemplate";
-
-interface ExhibitionPageTemplateProps {
-  title: string;
-  year: string;
-  shortDescription?: string;
-  exhibitionType:
-    | "Solo Show"
-    | "Group Show"
-    | "Residency"
-    | "Wrong Biennale Pavilion";
-  awsLink: string;
-  statement?: React.ReactNode;
-  intro?: React.ReactNode;
-  videoLink?: string;
-  imgs?: string[];
-  artists?: IArtist[];
-  children?: React.ReactNode;
-}
 
 const ExhibitionPageTemplate = ({
   title,
@@ -31,10 +12,11 @@ const ExhibitionPageTemplate = ({
   statement,
   intro,
   videoLink,
+  link,
   imgs,
   artists,
   children,
-}: ExhibitionPageTemplateProps) => {
+}: PastExhibitionDataInterface) => {
   const sortedArtists = artists
     ? [...artists].sort((a, b) => a.name.localeCompare(b.name))
     : [];
@@ -57,21 +39,21 @@ const ExhibitionPageTemplate = ({
     </div>
   );
 
-  const WrongBiennaleLogos: React.FC = () => (
-    <div className="flex flex-row gap-4">
-      <img
-        src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/assets/PAM_logos/logo_black_lg.png"
-        className="h-20 w-auto object-contain"
-        alt="PAM logo"
-      />
-      <img
-        src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/assets/LOGO-BLACK_small.png"
-        height={80}
-        className="h-20 w-auto object-contain"
-        alt="Wrong logo"
-      />
-    </div>
-  );
+  // const WrongBiennaleLogos: React.FC = () => (
+  //   <div className="flex flex-row gap-4">
+  //     <img
+  //       src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/assets/PAM_logos/logo_black_lg.png"
+  //       className="h-20 w-auto object-contain"
+  //       alt="PAM logo"
+  //     />
+  //     <img
+  //       src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/assets/LOGO-BLACK_small.png"
+  //       height={80}
+  //       className="h-20 w-auto object-contain"
+  //       alt="Wrong logo"
+  //     />
+  //   </div>
+  // );
 
   const SectionHeader: React.FC<{ text: string }> = ({ text }) => (
     <>
@@ -138,6 +120,15 @@ const ExhibitionPageTemplate = ({
             </dd>
           </>
         )}
+
+        {link && (
+          <>
+            <dt className="uppercase text-sm text-slate-300 md:self-start">
+              Link
+            </dt>
+            <dd className="md:col-start-2">{link}</dd>
+          </>
+        )}
       </dl>
 
       {intro && <>{intro}</>}
@@ -163,12 +154,18 @@ const ExhibitionPageTemplate = ({
         </>
       )}
 
-      {sortedArtists.length > 0 && (
+      {sortedArtists.length > 1 && (
         <>
           <SectionHeader text="ARTISTS" />
           <p>
             <ArtistsArchiveList awsLink={awsLink} artists={sortedArtists} />
           </p>
+        </>
+      )}
+      {sortedArtists.length === 1 && (
+        <>
+          <SectionHeader text="ARTIST" />
+          <p>{sortedArtists[0].bio}</p>
         </>
       )}
       {children && <div className="content">{children}</div>}
