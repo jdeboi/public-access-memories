@@ -1,84 +1,82 @@
 @import "../../styles/constants.scss";
 
 .Page {
-    color: white;
-    background: $headerGradient;
-    color: white;
-    width: 100%;
+  color: white;
+  background: $headerGradient;
+  color: white;
+  width: 100%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  line-height: 140%;
+  overflow: auto;
+
+  .showTitle {
+    font-style: italic;
+    font-family: monospace;
+  }
+
+  blockquote {
+    padding-left: 50px;
+    // color: rgb(240, 240, 240);
+    // letter-spacing: normal;
+    // font-family: monospace;
+  }
+
+  .galleryImg img {
+    max-width: 500px;
+    padding-right: 10px;
+  }
+
+  #p5Frame {
+    // max-width: 500px;
+    // width: 100%;
+    // height: auto;
+    // max-width: 100%;
+    width: 500px;
+    height: 500px;
+    // margin-left: auto;
+  }
+
+  .twoCol {
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 50px;
     flex: 1;
+  }
+
+  .twoCol div {
+    display: flex;
     flex-direction: column;
-    line-height: 140%;
-    overflow: auto;
+    flex-basis: 100%;
+    // flex: .5;
+    flex: 1;
+  }
+  .twoCol div img {
+    width: 100%; /* Make the image expand to the width of its container */
+    height: auto; /* Maintain the image's aspect ratio */
+    display: block; /* Removes any default margin/padding around the image */
+    max-width: 600px;
+  }
 
-    .showTitle {
-        font-style: italic;
-        font-family: monospace;
-    }
-
-    blockquote {
-        padding-left: 50px;
-        // color: rgb(240, 240, 240);
-        // letter-spacing: normal;
-        // font-family: monospace;
-    }
-
-    .galleryImg img {
-        max-width: 500px;
-        padding-right: 10px;
-    }
-
-    #p5Frame {
-        // max-width: 500px;
-        // width: 100%;
-        // height: auto;
-        // max-width: 100%;
-        width: 500px;
-        height: 500px;
-        // margin-left: auto;
-    }
-
+  @media (max-width: 600px) {
     .twoCol {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        width: 100%;
-        gap: 50px;
-        flex: 1;
+      flex-direction: column; /* Switches layout from row to column */
     }
+  }
 
-    .twoCol div {
-        display: flex;
-        flex-direction: column;
-        flex-basis: 100%;
-        // flex: .5;
-        flex: 1;
+  .footer {
+    width: 100%;
+    // text-align: center;
+    line-height: 30px;
+
+    .socials {
+      font-size: 22pt;
     }
-    .twoCol div img {
-        width: 100%;  /* Make the image expand to the width of its container */
-        height: auto; /* Maintain the image's aspect ratio */
-        display: block; /* Removes any default margin/padding around the image */
-        max-width: 600px;
+    .logo {
+      width: 70px;
     }
-
-    @media (max-width: 600px) {
-        .twoCol {
-            flex-direction: column; /* Switches layout from row to column */
-        }
-    }
-
-    .footer {
-        width: 100%;
-        // text-align: center;
-        line-height: 30px;
-      
-
-        .socials {
-            font-size: 22pt;
-        }
-        .logo {
-            width: 70px;
-        }
-    }
-
+  }
 }

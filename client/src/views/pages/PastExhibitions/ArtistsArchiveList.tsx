@@ -39,23 +39,6 @@ const ArtistsArchiveList = (props: Props) => {
     );
   };
 
-  const basicList = () => {
-    return (
-      <>
-        {props.artists.map((artist, i) => {
-          const url = artist.instaLink ? artist.instaLink : artist.webLink;
-
-          return (
-            <span key={i}>
-              <a href={url}>{artist.name}</a>
-              {i != props.artists.length - 1 && <span>{", "}</span>}
-            </span>
-          );
-        })}
-      </>
-    );
-  };
-
   return <div className="Artists">{getThumbs()}</div>;
 };
 
