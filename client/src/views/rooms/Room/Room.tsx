@@ -1,5 +1,3 @@
-import React from "react";
-import { rooms } from "../../../data/CurrentShow/RoomConfig";
 import { useParams } from "react-router-dom";
 import "./Room.css";
 
@@ -19,57 +17,14 @@ import R_12 from "../R_12/Room";
 import R_13 from "../R_13/Room";
 
 import { ShowConfig } from "../../../data/CurrentShow/ShowConfig";
-const { isClosed } = ShowConfig;
+import ClosedPage from "../../pages/ClosedPage/ClosedPage";
+const { isClosed, underConstruction } = ShowConfig;
 
 const Room = () => {
-  const getRoom = (id: string | undefined) => {
-    let roomID = 0;
-    if (id) {
-      let rid = id.substring(4, id.length);
-      roomID = parseInt(rid);
-    }
-
-    if (isNaN(roomID)) roomID = 0;
-    if (roomID >= rooms.length || roomID < 0) roomID = 0;
-    const room = rooms[roomID];
-    return room;
-  };
-
   const { id } = useParams();
-  const room = getRoom(id);
 
-  const roomUnderConstruction = () => {
-    return (
-      <div className="Room Sketch">
-        <div className="containerOG">
-          <h1>Room under construction</h1>
-          <h3>Please check back later.</h3>
-        </div>
-      </div>
-    );
-  };
-
-  const roomClosed = () => {
-    return (
-      <div className="Room Sketch">
-        <div className="containerOG" style={{ flex: "unset" }}>
-          <h1>Gallery Closed</h1>
-          {!ShowConfig.isResidency && <h2>Please join us for the opening!</h2>}
-          {ShowConfig.isResidency && (
-            <h2>Please join us for residency open studios!</h2>
-          )}
-
-          <h3>{ShowConfig.showOpens.date}</h3>
-          {ShowConfig.showOpens.time !== "" ? (
-            <h4>{ShowConfig.showOpens.time}</h4>
-          ) : null}
-        </div>
-      </div>
-    );
-  };
-
-  if (isClosed) {
-    return roomClosed();
+  if (isClosed || underConstruction) {
+    return <ClosedPage />;
   }
 
   switch (id) {
@@ -104,8 +59,6 @@ const Room = () => {
     default:
       return <R_00 />;
   }
-
-  // return roomClosed()
 };
 
 export default Room;

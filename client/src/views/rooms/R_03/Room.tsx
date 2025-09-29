@@ -1,5 +1,3 @@
-import React from "react";
-
 const Room = () => {
   return (
     <div
@@ -8,14 +6,14 @@ const Room = () => {
         position: "relative",
         width: "100%",
         height: "100%",
-        backgroundColor: "black",
+        backgroundColor: "white",
       }}
     >
       <iframe
-        src="https://selixiayxy.github.io/Praying/"
+        src="https://shell-song.neocities.org/"
         width="100%"
         height="100%"
-        title="Selicia's Studio"
+        title="Shell Song by Everest Pipkin"
       ></iframe>
     </div>
   );

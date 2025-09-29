@@ -37,7 +37,7 @@ export const Statement = () => {
           </>
         ) : (
           <React.Fragment>
-            <div className="windows">
+            <div className="windows p-5">
               <h2 className="showTitle">Home Offices</h2>
               <h3>
                 A solo show by artist&nbsp;

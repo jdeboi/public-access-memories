@@ -161,7 +161,7 @@ export interface IArtist {
   medium?: string | ReactNode;
   userName?: string;
   customLink?: string;
-  description: string | ReactNode;
+  description?: string | ReactNode;
   statement?: string | ReactNode;
   bio: string | ReactNode;
   title: string;

@@ -5,15 +5,18 @@ const Room = () => {
   return (
     <div
       className="Room Sketch"
-      style={{ position: "relative", width: "100%", height: "100%" }}
+      style={{
+        position: "relative",
+        width: "100%",
+        height: "100%",
+        background: "white",
+      }}
     >
       <iframe
-        src="https://memory.metzger.love"
+        src="https://driftinglab.github.io/unnatural-language/"
         width="100%"
         height="100%"
-        // height="calc(100% + 50px)"
-        // style={{ marginTop: "-50px", border: "none" }}
-        title="Amanda's Studio"
+        title="(Un)natural Language"
       ></iframe>
     </div>
   );

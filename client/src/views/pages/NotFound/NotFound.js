@@ -1,14 +1,10 @@
-import React from "react";
-import "../Page.css";
+import PageTemplate from "../templates/PageTemplate";
 
 const NotFound = () => {
   return (
-    <div className="NotFound Page">
-      <div className="containerOG">
-        <h1>404</h1>
-        <div>Sorry, page not found.</div>
-      </div>
-    </div>
+    <PageTemplate title="404">
+      <div>Sorry, page not found.</div>
+    </PageTemplate>
   );
 };
 

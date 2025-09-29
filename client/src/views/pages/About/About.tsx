@@ -1,29 +1,29 @@
+// About.jsx
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInstagram, faGithub } from "@fortawesome/free-brands-svg-icons";
-import { Link } from "react-router-dom";
-import SubscribeSendInBlue from "../SubscribeForm/SubscribeSendInBlue";
+import PageTemplate from "../templates/PageTemplate";
 
-export const About = () => {
+const About = () => {
   return (
-    <div className="bg-gradient-to-b text-white from-[#5b43cd] to-[#0da6ff] min-h-screen overflow-y-auto flex flex-col items-center px-4 py-12">
-      <div className="max-w-4xl w-full mb-10">
-        <h1 className="text-4xl font-bold mb-6">About</h1>
-
-        <p className="mb-6 leading-relaxed">
+    <PageTemplate
+      title="About"
+      intro={
+        <>
           Public Access Memories (PAM) is a virtual net art gallery that
           situates digital works within their native environment. The gallery
           hosts exhibitions (solo and group), artist talks, and more. An
           evolving canvas, PAM invites collaborative brainstorming and critical
           reflection on the nature of the white cube online.
-        </p>
-
-        <h3 className="text-2xl font-semibold mt-10 mb-2">Creators</h3>
-        <p className="mb-6 leading-relaxed">
+        </>
+      }
+    >
+      {/* Child content slots into the template here */}
+      <section>
+        <h3 className="text-2xl font-semibold mt-2 mb-2">Creators</h3>
+        <p className="leading-relaxed">
           &gt;{" "}
           <a
             href="https://instagram.com/jdeboi"
-            className="text-blue-400 hover:underline"
+            className="text-blue-200 hover:underline"
           >
             Jenna deBoisblanc
           </a>{" "}
@@ -34,7 +34,7 @@ export const About = () => {
           &gt;{" "}
           <a
             href="https://www.matthisgrunsky.ca/"
-            className="text-blue-400 hover:underline"
+            className="text-blue-200 hover:underline"
           >
             Matthis Grunsky
           </a>{" "}
@@ -42,13 +42,15 @@ export const About = () => {
           interested in the aesthetic potential of computation both on the
           computer screen and in physical media.
         </p>
+      </section>
 
-        <h3 className="text-2xl font-semibold mt-10 mb-2">Guest Curators</h3>
-        <p className="mb-6 leading-relaxed">
+      <section>
+        <h3 className="text-2xl font-semibold mt-6 mb-2">Guest Curators</h3>
+        <p className="leading-relaxed">
           &gt;{" "}
           <a
             href="https://instagram.com/jon.cham.bers"
-            className="text-blue-400 hover:underline"
+            className="text-blue-200 hover:underline"
           >
             Jon Chambers
           </a>{" "}
@@ -59,58 +61,30 @@ export const About = () => {
           imperfect 3D body scans as metaphors for fractured life in a
           technological world.
         </p>
+      </section>
 
-        <h3 className="text-2xl font-semibold mt-10 mb-2">Get Involved</h3>
-        <p className="mb-10 leading-relaxed">
+      <section>
+        <h3 className="text-2xl font-semibold mt-6 mb-2">Get Involved</h3>
+        <p className="leading-relaxed">
           To suggest a curatorial project, collaborate on a gallery feature,
-          and/or submit work, please feel free to reach out to{" "}
+          and/or submit work, please reach out to{" "}
           <a
             href="mailto:publicaccessmemories@gmail.com"
-            className="text-blue-400 hover:underline"
+            className="text-blue-200 hover:underline"
           >
             publicaccessmemories@gmail.com
           </a>
           . For developers, you can check out the{" "}
           <a
             href="https://github.com/jdeboi/public-access-memories"
-            className="text-blue-400 hover:underline"
+            className="text-blue-200 hover:underline"
           >
             github repo
           </a>
           .
         </p>
-
-        <div className="border-t border-white/20 pt-10 mt-10 flex flex-col items-center gap-6">
-          <img
-            className="h-16"
-            src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/assets/PAM_logos/logo_white_lg.png"
-            alt="PAM Logo"
-          />
-
-          <div className="flex items-center gap-4 text-2xl">
-            <a
-              href="https://www.instagram.com/public.access.memories/"
-              className="hover:text-blue-400"
-            >
-              <FontAwesomeIcon icon={faInstagram} />
-            </a>
-            <a
-              href="https://github.com/jdeboi/public-access-memories"
-              className="hover:text-blue-400"
-            >
-              <FontAwesomeIcon icon={faGithub} />
-            </a>
-          </div>
-
-          <Link
-            to="/newsletter"
-            className="text-blue-400 hover:underline text-sm"
-          >
-            Join the newsletter!
-          </Link>
-        </div>
-      </div>
-    </div>
+      </section>
+    </PageTemplate>
   );
 };
 

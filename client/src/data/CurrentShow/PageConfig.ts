@@ -21,8 +21,8 @@ export const PageConfig: IPageConfig[] = [
     link: "/pastexhibitions",
     title: "past exhibitions",
   },
-  // {
-  //   link: "/artists",
-  //   title: "artists",
-  // },
+  {
+    link: "/artists",
+    title: "artists",
+  },
 ];

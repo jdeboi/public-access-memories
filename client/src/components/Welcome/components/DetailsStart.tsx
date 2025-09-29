@@ -42,7 +42,7 @@ export default function DetailsStart() {
       {/* Optional: Uncomment if you want to bring these back */}
       {/* 
       <h4 className="text-white text-base mb-1">
-        <a href="/newsletter" className="underline hover:text-blue-200">
+        <a href="/https://publicaccessmemories.substack.com/welcome" className="underline hover:text-blue-200" aria-label="Join Newsletter" target="_blank" rel="noopener noreferrer">
           Join Newsletter
         </a>
       </h4>

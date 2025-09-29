@@ -48,6 +48,41 @@ export const artists: IArtist[] = [
     medium: "PC, AI algorithm, speculative archeology object database",
     description: (
       <>
+        <p>
+          In 2019, an archeologist from the University of Astarkhan, a city on
+          the Russian steppe with a name identical to the artist’s last name,
+          unearthed a benchmark finding - the legendary Khazar city of Atil – a
+          modern Atlantis. The Khazars were Judeo-Turkic tribes converted from
+          Tenegri Shamanism - a belief in the titular sky god and the eternal
+          blue sky - into monotheistic religions. The story of their conversion
+          to Judaism, “The Kuzari”, is a core text in Jewish Philosophy.
+          However, all three Abrahamic religions were practiced freely and
+          harmoniously within the Khazar kingdom.
+        </p>
+        <p>
+          Astarhan’s long-term research of the ancient kingdom utilizes
+          technology to re-figure Khazar myths, depict alter-zionist histories
+          of the Jewish diaspora and his own ancestry, and reach back to a time
+          and place where religious divides were not obstacles to a flourishing
+          community and culture. They gather videos and images of objects from
+          the archeological dig and model them in 3D, creating an object
+          database to imagine Khazar pasts and futures.
+        </p>
+        <p>
+          Khazar Archeological Confabulations uses line-drawing object
+          renderings from the archive to generate a synthetic image database. It
+          then employs machine learning to craft speculative archeological
+          object drawings. The AI process is home-brewed, subverting hi-fi and
+          photorealistic AI imagery. The results are abstract membrane,
+          cell-like images, calling for a projection of what such a past and
+          future might entail. The images are then turned into Cyanotypes
+          exposed to natural light, reflecting Khazar Tenegrist myths of the
+          titular sky god and the eternal blue sky.
+        </p>
+      </>
+    ),
+    statement: (
+      <>
         My works are thought experiments in sculpture, installation, and media
         art, often incorporating digital technology and electronic mechanisms to
         create reactive systems and interactive experiences. Through
@@ -199,20 +234,27 @@ export const artists: IArtist[] = [
     id: 3,
     roomID: 3,
     name: "Everest Pipkin",
-    title: "On Lacework: watching an entire machine-learning dataset",
+    title: "Shell Song",
     thumb: "temp-thumb",
     nameLink: "pipkin",
     description: (
-      <p>
-        Lacework is a new work by Everest Pipkin that uses artificial neural
-        networks to reinscribe the videos of MIT’s Moments in Time Dataset.
-        Using algorithms that stretch time and add details to images, Pipkin
-        creates a series of hallucinatory slow-motion vignettes from the videos
-        of everyday actions that form the collection. By manipulating the source
-        videos of the MIT dataset, Lacework presents a river of these moments,
-        as captured in amber; flowing from one to another into a cascade of
-        gradual, unfolding details. Part of the 'Data / Set / Match' programme.
-      </p>
+      <>
+        <p>
+          Shell Song is an interactive audio-narrative game which explores
+          deep-fake voice technologies and the datasets that go into their
+          construction. By considering physical and digital bodies and voices,
+          it asks what a voice is worth, who can own a human sound, and how it
+          feels to come face to face with a ghost of your body that may yet come
+          to outlive you. The piece reminds us that data is people, both in
+          representations of data that is collected but also tools built by
+          people to collect this data.
+        </p>
+        <p>
+          Commissioned by ODI Data as Culture for the Rules of Engagement online
+          exhibition and produced as part of the ODI’s R&D programme exploring
+          sustainable ethical practice around data, funded by Innovate UK.
+        </p>
+      </>
     ),
     bio: (
       <p>
@@ -226,8 +268,8 @@ export const artists: IArtist[] = [
     ),
     instaLink: "https://www.instagram.com/everestpipkin/",
     webLink: "https://everest-pipkin.com/",
-    medium: "Essay",
-    year: 200,
+    medium: "AI, Custom Software",
+    year: 2020,
   },
   {
     id: 4,

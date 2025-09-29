@@ -1,8 +1,7 @@
 import React from "react";
-import "../Page.css";
-import "../Artists/Artists.css";
+import "../Page.css"; // keep if you still need global styles
+import PageTemplate from "../templates/PageTemplate";
 
-// Define the type for an exhibition
 interface Exhibition {
   link: string;
   imgSrc: string;
@@ -10,7 +9,6 @@ interface Exhibition {
   subtitle: string;
 }
 
-// Reusable component for an artist's exhibition box
 interface ArtistBoxProps {
   link: string;
   imgSrc: string;
@@ -25,22 +23,27 @@ const ArtistBox: React.FC<ArtistBoxProps> = ({
   subtitle,
 }) => {
   return (
-    <div className="artist-box windows">
+    <div className="windows p-0.5 text-center max-w-[200px]">
       <a href={link}>
-        <img className="thumb" src={imgSrc} alt={title} />
+        <img
+          className="block w-[200px] h-[200px] object-cover"
+          src={imgSrc}
+          alt={title}
+        />
       </a>
-      <div className="artist-name">
-        <div style={{ fontSize: "1.1em" }}>
-          <a href={link}>{title}</a>
+      <div className="mt-2">
+        <div className="text-[1.1em]">
+          <a className="underline hover:no-underline" href={link}>
+            {title}
+          </a>
         </div>
-        <div style={{ fontSize: "0.8em" }}>{subtitle}</div>
+        <div className="text-[0.8em] opacity-80">{subtitle}</div>
       </div>
     </div>
   );
 };
 
 export const PastExhibitions: React.FC = () => {
-  // Array of exhibitions with typed structure
   const exhibitions: Exhibition[] = [
     {
       link: "/pastexhibitions/homeoffices",
@@ -80,22 +83,13 @@ export const PastExhibitions: React.FC = () => {
   ];
 
   return (
-    <div className="Artists bg-gradient-to-b text-white from-[#5b43cd] to-[#0da6ff] min-h-screen overflow-y-auto flex flex-col items-center px-4 py-12">
-      <div className="max-w-4xl w-full mb-10">
-        <h1 className="mb-10">Past Exhibitions</h1>
-        <div className="artists-list">
-          {exhibitions.map((exhibition, index) => (
-            <ArtistBox
-              key={index}
-              link={exhibition.link}
-              imgSrc={exhibition.imgSrc}
-              title={exhibition.title}
-              subtitle={exhibition.subtitle}
-            />
-          ))}
-        </div>
+    <PageTemplate title="Past Exhibitions" className="Artists">
+      <div className="flex flex-row flex-wrap gap-5">
+        {exhibitions.map((exhibition, index) => (
+          <ArtistBox key={index} {...exhibition} />
+        ))}
       </div>
-    </div>
+    </PageTemplate>
   );
 };
 

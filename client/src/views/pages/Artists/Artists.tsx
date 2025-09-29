@@ -1,63 +1,63 @@
+// pages/Artists/Artists.tsx
 import React from "react";
-import "../Page.css";
-import "./Artists.css";
+import { Link } from "react-router-dom";
 
+import PageTemplate from "../templates/PageTemplate";
 import { ShowConfig } from "../../../data/CurrentShow/ShowConfig";
 import { artists } from "../../../data/CurrentShow/RoomConfig";
-import { IArtist } from "../../../interfaces";
+import ClosedPage from "../ClosedPage/ClosedPage";
 
-export const Artists = () => {
+export const Artists: React.FC = () => {
   const getFileName = (thumb: string): string =>
-    thumb.match(/\.[^/.]+$/) ? thumb : `${thumb}.png`;
+    /\.[^/.]+$/.test(thumb) ? thumb : `${thumb}.png`;
 
-  const getArtistListing = (artist: IArtist, index: number) => (
-    <div key={index} className="artist-box windows">
-      <a href={`/artist/${artist.nameLink}`}>
-        <img
-          className="thumb"
-          src={`https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/${
-            ShowConfig.awsLink
-          }/thumbs/${getFileName(artist.thumb)}`}
-        />
-      </a>
-      <div className="artist-name">
-        <div>
-          <a href={`/artist/${artist.nameLink}`}>{artist.name}</a>
-        </div>
-      </div>
-    </div>
-  );
+  const getThumbSrc = (thumb: string): string =>
+    `https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/${
+      ShowConfig.awsLink
+    }/thumbs/${getFileName(thumb)}`;
 
-  const underConstruction = () => (
-    <div className="artist-box windows">
-      <h2>Gallery Closed</h2>
-      <p>Please join us for the opening!</p>
-      <h3>{ShowConfig.showOpens.date}</h3>
-      {ShowConfig.showOpens.time && <h5>{ShowConfig.showOpens.time}</h5>}
-    </div>
-  );
+  const title = ShowConfig.isResidency ? "Artists in Residence" : "Artists";
+  const list = ShowConfig.isResidency
+    ? artists.filter((a) => a.userName !== "hostBot")
+    : artists;
 
   return (
-    <div className="Artists Page">
-      <div className="containerOG">
-        <h1>{ShowConfig.isResidency ? "Artists in Residence" : "Artists"}</h1>
-        <br />
-        <br />
-        <br />
-        <br />
-
-        {ShowConfig.underConstruction ? (
-          underConstruction()
-        ) : (
-          <div className="artists-list">
-            {(ShowConfig.isResidency
-              ? artists.filter((artist) => artist.userName !== "hostBot")
-              : artists
-            ).map(getArtistListing)}
+    <>
+      {ShowConfig.isClosed || ShowConfig.underConstruction ? (
+        <ClosedPage />
+      ) : (
+        <PageTemplate title={title}>
+          <div
+            // replaces .artists-list (flex row, wrap, 20px gaps)
+            className="flex flex-row flex-wrap gap-[20px]"
+          >
+            {list.map((artist) => (
+              <div
+                key={artist.nameLink}
+                className="windows max-w-[200px] p-2 text-center"
+              >
+                <Link
+                  to={`/artist/${artist.nameLink}`}
+                  aria-label={artist.name}
+                  className="group block"
+                >
+                  <img
+                    // src={getThumbSrc(artist.thumb)}
+                    src={`https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/thumbs/lizz-thumb.png`}
+                    alt={`${artist.name} thumbnail`}
+                    loading="lazy"
+                    className="w-[200px] h-[200px] object-cover"
+                  />
+                  <div className="mt-2 text-base font-medium group-hover:underline">
+                    {artist.name}
+                  </div>
+                </Link>
+              </div>
+            ))}
           </div>
-        )}
-      </div>
-    </div>
+        </PageTemplate>
+      )}
+    </>
   );
 };
 

@@ -157,7 +157,6 @@ p.small {
 
 .windows {
   box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080;
-  padding: 20px;
   background: rgba(90, 67, 205, 0.4196078431);
   box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
 }

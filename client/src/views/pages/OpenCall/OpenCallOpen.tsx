@@ -4,7 +4,7 @@ import "../Page.css";
 export const OpenCallOpen = () => {
   return (
     <React.Fragment>
-      <div className="windows">
+      <div className="windows p-5">
         <h2 className="showTitle">Online Residency</h2>
         <h4>Deadline to apply - Tuesday, February 18th 2025</h4>
         <h3>

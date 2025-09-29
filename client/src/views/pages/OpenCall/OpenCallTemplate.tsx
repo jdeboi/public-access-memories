@@ -4,7 +4,7 @@ import "../Page.css";
 export const OpenCallTemplate = () => {
   return (
     <React.Fragment>
-      <div className="windows">
+      <div className="windows p-5">
         <h2 className="showTitle">Fields of View</h2>
         <h3>
           A <a href="https://thewrong.org/">wrong biennale</a> pavilion

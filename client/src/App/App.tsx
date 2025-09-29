@@ -15,8 +15,7 @@ import Room from "../views/rooms/Room/Room";
 import TestRoom from "../views/rooms/TestRoom/TestRoom";
 import NotFound from "../views/pages/NotFound/NotFound";
 import Artists from "../views/pages/Artists/Artists";
-import Artist from "../views/pages/Artists/Artist";
-import ArtistsList from "../views/pages/ArtistsList/ArtistsList";
+import ArtistProfilePage from "../views/pages/Artists/ArtistProfilePage";
 import EditUsers from "../views/Admin/EditUsers";
 
 // past exhibitions
@@ -53,7 +52,6 @@ import { setUser, setUserRoomUrl } from "../store/user";
 import { startComposition, resizeApp, loadingApp } from "../store/window";
 
 import { shouldShowLoggedInComponents } from "../helpers/helpers";
-import SubscribeSendInBlue from "../views/pages/SubscribeForm/SubscribeSendInBlue";
 
 import { artists, rooms } from "../data/CurrentShow/RoomConfig";
 // import OpenCall from "../views/pages/OpenCall/OpenCall";
@@ -296,14 +294,12 @@ function App() {
           />
           <Route path="/about" element={<About />} />
 
-          <Route path="/newsletter" element={<SubscribeSendInBlue />} />
           <Route path="/statement" element={<Statement />} />
           <Route path="/opencall" element={<OpenCall />} />
           <Route path="/residency" element={<Residency />} />
 
           <Route path="/artists" element={<Artists />} />
-          <Route path="/artist/:name" element={<Artist />} />
-          <Route path="/artistslist" element={<ArtistsList />} />
+          <Route path="/artist/:name" element={<ArtistProfilePage />} />
 
           <Route
             path="/galleries/homebody"
@@ -408,7 +404,7 @@ function App() {
 
       {/* check if user hasn't logged in and on a basic page */}
       {getSignedInComponents()}
-      {/* {getRoomDecal()} */}
+      {getRoomDecal()}
       {/* <AudioChat user={user} />
             <MicrophoneBarBottom /> */}
     </div>
