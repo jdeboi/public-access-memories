@@ -1,26 +1,9 @@
-import { is } from "@react-three/fiber/dist/declarations/src/core/utils";
-import { IArtist } from "../../../interfaces";
+import { normalizeInsta } from "../../../helpers/helpers";
 import ArtistsArchiveList from "../PastExhibitions/ArtistsArchiveList";
+import { PastExhibitionDataInterface } from "../PastExhibitions/Data/_PastExhibitionDataType";
 import ImageGrid from "../PastExhibitions/ImageGrid";
 import PageTemplate from "./PageTemplate";
-
-interface ExhibitionPageTemplateProps {
-  title: string;
-  year: string;
-  shortDescription?: string;
-  exhibitionType:
-    | "Solo Show"
-    | "Group Show"
-    | "Residency"
-    | "Wrong Biennale Pavilion";
-  awsLink: string;
-  statement?: React.ReactNode;
-  intro?: React.ReactNode;
-  videoLink?: string;
-  imgs?: string[];
-  artists?: IArtist[];
-  children?: React.ReactNode;
-}
+import SectionHeader from "./SectionHeader";
 
 const ExhibitionPageTemplate = ({
   title,
@@ -31,15 +14,15 @@ const ExhibitionPageTemplate = ({
   statement,
   intro,
   videoLink,
+  thumbnail,
+  link,
   imgs,
   artists,
   children,
-}: ExhibitionPageTemplateProps) => {
+}: PastExhibitionDataInterface) => {
   const sortedArtists = artists
     ? [...artists].sort((a, b) => a.name.localeCompare(b.name))
     : [];
-
-  const isWrongBiennale = exhibitionType === "Wrong Biennale Pavilion";
 
   const ResponsiveVideo: React.FC<{ src: string; title: string }> = ({
     src,
@@ -57,88 +40,75 @@ const ExhibitionPageTemplate = ({
     </div>
   );
 
-  const WrongBiennaleLogos: React.FC = () => (
-    <div className="flex flex-row gap-4">
-      <img
-        src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/assets/PAM_logos/logo_black_lg.png"
-        className="h-20 w-auto object-contain"
-        alt="PAM logo"
-      />
-      <img
-        src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/assets/LOGO-BLACK_small.png"
-        height={80}
-        className="h-20 w-auto object-contain"
-        alt="Wrong logo"
-      />
-    </div>
-  );
-
-  const SectionHeader: React.FC<{ text: string }> = ({ text }) => (
-    <>
-      <h3>{text}</h3>
-      <div className="mt-[-34px]">---</div>
-    </>
-  );
+  // const WrongBiennaleLogos: React.FC = () => (
+  //   <div className="flex flex-row gap-4">
+  //     <img
+  //       src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/assets/PAM_logos/logo_black_lg.png"
+  //       className="h-20 w-auto object-contain"
+  //       alt="PAM logo"
+  //     />
+  //     <img
+  //       src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/assets/LOGO-BLACK_small.png"
+  //       height={80}
+  //       className="h-20 w-auto object-contain"
+  //       alt="Wrong logo"
+  //     />
+  //   </div>
+  // );
 
   return (
     <PageTemplate title={title}>
-      <dl
-        className="windows p-5 text-lg grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6 items-start"
-        style={{ gridTemplateColumns: "8rem 1fr" }} // ← adjust to taste
-      >
-        {/* Exhibition Type */}
-        <dt className="uppercase text-sm text-slate-300 md:self-start">
-          Exhibition Type
-        </dt>
-        <dd className="md:col-start-2">
-          {isWrongBiennale ? (
-            <a
-              href="https://thewrong.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline hover:no-underline"
-            >
-              Wrong Biennale Pavilion
-            </a>
-          ) : (
-            exhibitionType
-          )}
-        </dd>
+      <div className="windows transition-shadow hover:shadow-lg mb-6">
+        <div className="flex gap-5 p-5 items-start bg-slate-900/30  focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400">
+          {/* LEFT: fixed thumbnail column */}
+          <div className="shrink-0 w-[250px] min-w-[250px]">
+            <div className="w-[250px] h-[250px] overflow-hidden rounded">
+              <img
+                src={thumbnail ?? imgs?.[0] ?? ""}
+                alt={title}
+                loading="lazy"
+                className="block w-full h-full object-cover" // fills the box, no stretching
+                sizes="250px"
+              />
+            </div>
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-3">
+              <span className="text-sm uppercase tracking-wide leading-none rounded-lg border border-slate-700 bg-black text-white px-2 py-0.5">
+                {exhibitionType}
+              </span>
 
-        {/* Year */}
-        <dt className="uppercase text-sm text-slate-300 md:self-start">Year</dt>
-        <dd className="md:col-start-2">{year}</dd>
+              <span className="inline-flex h-6 items-center text-slate-300">
+                {year}
+              </span>
+            </div>
 
-        {/* Overview */}
-        <dt className="uppercase text-sm text-slate-300 md:self-start">
-          Overview
-        </dt>
-        <dd className="md:col-start-2 break-words">{shortDescription}</dd>
-
-        {/* Artists */}
-        {sortedArtists.length > 0 && (
-          <>
-            <dt className="uppercase text-sm text-slate-300 md:self-start">
-              {sortedArtists.length < 2 ? "Artist" : "Artists"}
-            </dt>
-            <dd className="md:col-start-2 flex flex-wrap gap-x-2">
-              {sortedArtists.map((artist, i) => (
-                <span key={artist.id}>
-                  <a
-                    href={artist.webLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline hover:no-underline"
-                  >
-                    {artist.name}
-                  </a>
-                  {i < sortedArtists.length - 1 ? ", " : ""}
-                </span>
-              ))}
-            </dd>
-          </>
-        )}
-      </dl>
+            <p className="mt-2 text-slate-200">{shortDescription}</p>
+            {sortedArtists && (
+              <div className="mt-2">
+                <span className="mr-2">🎨:</span>
+                {sortedArtists.map((artist, i) => (
+                  <span key={artist.id}>
+                    <a
+                      href={
+                        artist.webLink ||
+                        normalizeInsta(artist.instaLink) ||
+                        "#"
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-mono"
+                    >
+                      {artist.name}
+                    </a>
+                    {i < (sortedArtists?.length ?? 0) - 1 && ", "}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
 
       {intro && <>{intro}</>}
 
@@ -158,17 +128,23 @@ const ExhibitionPageTemplate = ({
 
       {statement && (
         <>
-          <SectionHeader text="STATEMENT" />
-          {statement}
+          <SectionHeader title="STATEMENT" />
+          <div className="font-mono mt-[-30px]">{statement}</div>
         </>
       )}
 
-      {sortedArtists.length > 0 && (
+      {sortedArtists.length > 1 && (
         <>
-          <SectionHeader text="ARTISTS" />
-          <p>
+          <SectionHeader title="ARTISTS" />
+          <p className="font-mono mt-[-30px]">
             <ArtistsArchiveList awsLink={awsLink} artists={sortedArtists} />
           </p>
+        </>
+      )}
+      {sortedArtists.length === 1 && (
+        <>
+          <SectionHeader title="ARTIST" />
+          <p className="font-mono mt-[-30px]">{sortedArtists[0].bio}</p>
         </>
       )}
       {children && <div className="content">{children}</div>}

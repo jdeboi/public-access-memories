@@ -5,10 +5,6 @@ interface IPageConfig {
 
 export const PageConfig: IPageConfig[] = [
   {
-    link: "/about",
-    title: "about",
-  },
-  {
     link: "/statement",
     title: "statement",
   },
@@ -18,11 +14,19 @@ export const PageConfig: IPageConfig[] = [
   //   title: "open call",
   // },
   {
-    link: "/pastexhibitions",
-    title: "past exhibitions",
-  },
-  {
     link: "/artists",
     title: "artists",
+  },
+  {
+    link: "/about",
+    title: "about",
+  },
+  {
+    link: "https://publicaccessmemories.substack.com/welcome",
+    title: "newsletter",
+  },
+  {
+    link: "/pastexhibitions",
+    title: "past exhibitions",
   },
 ];

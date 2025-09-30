@@ -300,3 +300,24 @@ export const getParsedJSONDate = (d: string) => {
   if (newD && !isNaN(newD.getTime())) return newD;
   return null;
 };
+
+// --- helpers (pure, non-mutating) ---
+export const normalizeInsta = (val: string | null | undefined) => {
+  if (!val) return null;
+  let s = val.trim();
+  if (!s.startsWith("http")) {
+    s = s.replace(/^@|^\//, "");
+    s = `https://www.instagram.com/${s}`;
+  }
+  return s;
+};
+
+export const normalizeBlueSky = (val: string | null | undefined) => {
+  if (!val) return null;
+  let s = val.trim();
+  if (!s.startsWith("http")) {
+    s = s.replace(/^@|^\//, "");
+    s = `https://bsky.app/profile/${s}`;
+  }
+  return s;
+};

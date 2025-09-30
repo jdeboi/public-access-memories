@@ -117,6 +117,7 @@ export default function DeboxStatement() {
     // add iframe as background
     <>
       <iframe
+        title={"Debox Background"}
         src={`/iframes/opencall/${whichIframe}.html`}
         className="absolute pointer-events-none inset-0 w-full h-full z-0"
       />
@@ -140,6 +141,7 @@ export default function DeboxStatement() {
                   href="https://thewrong.org/"
                   style={{ textDecoration: "underline" }}
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Wrong Biennale
                 </a>{" "}
@@ -172,10 +174,10 @@ export default function DeboxStatement() {
             </div>
 
             {/* Statement */}
-            <div className="pointer-events-auto bg-black w-full min-h-[800px] windowsBlack p-4 mb-4 text-gray-200">
+            <div className="pointer-events-auto bg-black w-full min-h-[800px] windowsBlack p-4 mb-4 text-gray-200 font-mono">
               <div className="mb-6">
                 {/* Version Info */}
-                <div className="flex flex-row items-center gap-4">
+                <div className="flex flex-row items-center gap-4 font-[consoleFont]">
                   <div className="rounded-md bg-slate-100 w-25 text-center py-0.5 px-2.5 border border-transparent text-sm text-slate-600 transition-all shadow-sm">
                     Version {version.id}
                   </div>

@@ -1,24 +1,36 @@
 // About.jsx
 import React from "react";
 import PageTemplate from "../templates/PageTemplate";
+import SectionHeader from "../templates/SectionHeader";
 
 const About = () => {
   return (
-    <PageTemplate
-      title="About"
-      intro={
-        <>
+    <PageTemplate title="About">
+      <div className="windows p-8">
+        <div className="mb-4">
           Public Access Memories (PAM) is a virtual net art gallery that
           situates digital works within their native environment. The gallery
           hosts exhibitions (solo and group), artist talks, and more. An
           evolving canvas, PAM invites collaborative brainstorming and critical
           reflection on the nature of the white cube online.
-        </>
-      }
-    >
+        </div>
+        <div className="flex flex-row gap-4">
+          <img
+            src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/assets/PAM_logos/logo_black_lg.png"
+            className="h-20 w-auto object-contain"
+            alt="PAM logo"
+          />
+          <img
+            src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/assets/LOGO-BLACK_small.png"
+            height={80}
+            className="h-20 w-auto object-contain"
+            alt="Wrong logo"
+          />
+        </div>
+      </div>
       {/* Child content slots into the template here */}
-      <section>
-        <h3 className="text-2xl font-semibold mt-2 mb-2">Creators</h3>
+      <section className="font-mono">
+        <SectionHeader title="Creators" />
         <p className="leading-relaxed">
           &gt;{" "}
           <a
@@ -44,8 +56,8 @@ const About = () => {
         </p>
       </section>
 
-      <section>
-        <h3 className="text-2xl font-semibold mt-6 mb-2">Guest Curators</h3>
+      <section className="font-mono">
+        <SectionHeader title="Guest Curators" />
         <p className="leading-relaxed">
           &gt;{" "}
           <a
@@ -63,8 +75,8 @@ const About = () => {
         </p>
       </section>
 
-      <section>
-        <h3 className="text-2xl font-semibold mt-6 mb-2">Get Involved</h3>
+      <section className="font-mono">
+        <SectionHeader title="Get Involved" />
         <p className="leading-relaxed">
           To suggest a curatorial project, collaborate on a gallery feature,
           and/or submit work, please reach out to{" "}

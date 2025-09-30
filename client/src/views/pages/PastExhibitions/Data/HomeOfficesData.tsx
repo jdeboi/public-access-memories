@@ -1,38 +1,46 @@
+import { Link } from "react-router-dom";
 import { artists } from "../../../../data/Shows/HomeOffices/RoomConfig";
-import ExhibitionPageTemplate from "../../templates/ExhibitionPageTemplate";
+import { PastExhibitionDataInterface } from "./_PastExhibitionDataType";
+import SectionHeader from "../../templates/SectionHeader";
 
-export const HomeOffices = () => {
-  const imgNames = [];
-  for (let i = 1; i <= 6; i++) {
-    imgNames.push(
-      `https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/recap/${i}.jpeg`
-    );
-  }
+const imgNames = [];
+for (let i = 1; i <= 6; i++) {
+  imgNames.push(
+    `https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/recap/${i}.jpeg`
+  );
+}
 
-  return (
-    <ExhibitionPageTemplate
-      title="Home Offices"
-      year="2024"
-      awsLink="homeoffices"
-      shortDescription="“HomeOffices” is a solo exhibition by Dave Greber that uses generative AI to satirically reimagine the corporate dream within the context of modern home offices, offering insightful commentary on today's work culture."
-      videoLink="https://www.youtube.com/embed/_x-5oXsitvs"
-      imgs={imgNames}
-      exhibitionType="Solo Show"
-      artists={artists}
-      intro={
-        <>
-          <div className="door">
-            <a className="" href={"/galleries/homeoffices"}>
-              🚪 archived work
-            </a>
-          </div>
-        </>
-      }
-    >
-      <h2>Essay: A Well-Lighted Place: Public Access Memories (PAM)</h2>
+export const HomeOfficesData: PastExhibitionDataInterface = {
+  pageLink: "/pastexhibitions/homeoffices",
+  title: "Home Offices",
+  year: 2024,
+  exhibitionType: "Solo Show",
+  shortDescription:
+    "“HomeOffices” is a solo exhibition by Dave Greber that uses generative AI to satirically reimagine the corporate dream within the context of modern home offices, offering insightful commentary on today's work culture.",
+  awsLink: "homeoffices",
+  imgs: imgNames,
+  artists: [artists[0]],
+  videoLink: "https://www.youtube.com/embed/_x-5oXsitvs",
+  thumbnail:
+    "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/homeoffices.jpg",
+  link: (
+    <Link className="underline hover:no-underline" to="/galleries/homeoffices">
+      🚪 archived work
+    </Link>
+  ),
+  children: (
+    <div className="font-mono">
+      {/* <h3 className="font-[consoleFont]">ESSAY</h3>
+      <div>---</div> */}
+      <SectionHeader title="Essay" />
+      <h4>A Well-Lighted Place: Public Access Memories (PAM)</h4>
       <div>
         Written by{" "}
-        <a href="https://villagedisco.substack.com/" target="_blank">
+        <a
+          href="https://villagedisco.substack.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Emily Farranto
         </a>
       </div>
@@ -176,48 +184,49 @@ export const HomeOffices = () => {
         the house.
       </p>
 
-      <h2>About the Artist</h2>
-      <p>
-        Dave Greber is a contemporary artist and educator based in Baltimore,
-        MD, known for his innovative installations and multimedia projects that
-        explore the intersection of technology, art, and everyday life. His
-        work, exhibited extensively nationally and internationally, blends
-        traditional and digital media to create immersive experiences that
-        subvert everyday expectations. Recents projects include a large-scale
-        public art commission with the MTA Arts and Design and a solo show at
-        the Ogden Museum of Art. Greber's latest project, "HomeOffices," uses
-        generative AI to satirically reimagine the corporate dream within the
-        context of modern home offices, offering insightful commentary on
-        today's work culture.
-      </p>
-
-      <h2>Credits</h2>
+      {/* <h3 className="font-[consoleFont] mt-4">CREDITS</h3>
+      <div>---</div> */}
+      <SectionHeader title="CREDITS" />
       <div>
         Programmer: Jenna deBoisblanc{" "}
-        <a href="https://www.instagram.com/jdeboi/" target="_blank">
+        <a
+          href="https://www.instagram.com/jdeboi/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           @jdeboi
         </a>
       </div>
       <div>
         Essay: Emily Farranto{" "}
-        <a href="https://www.instagram.com/thevillagedisco/" target="_blank">
+        <a
+          href="https://www.instagram.com/thevillagedisco/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           @thevillagedisco
         </a>{" "}
       </div>
       <div>
         Technician: Nathaniel Britton{" "}
-        <a href="https://www.instagram.com/natejbritto/" target="_blank">
+        <a
+          href="https://www.instagram.com/natejbritto/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           @natejbritto
         </a>{" "}
       </div>
       <div>
         Printer: Paper Machine{" "}
-        <a href="https://www.instagram.com/antenna.works/" target="_blank">
+        <a
+          href="https://www.instagram.com/antenna.works/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           @antenna.works
         </a>{" "}
       </div>
-    </ExhibitionPageTemplate>
-  );
+    </div>
+  ),
 };
-
-export default HomeOffices;

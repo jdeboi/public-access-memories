@@ -1,93 +1,89 @@
 import React from "react";
 import "../Page.css"; // keep if you still need global styles
 import PageTemplate from "../templates/PageTemplate";
-
-interface Exhibition {
-  link: string;
-  imgSrc: string;
-  title: string;
-  subtitle: string;
-}
-
-interface ArtistBoxProps {
-  link: string;
-  imgSrc: string;
-  title: string;
-  subtitle: string;
-}
-
-const ArtistBox: React.FC<ArtistBoxProps> = ({
-  link,
-  imgSrc,
-  title,
-  subtitle,
-}) => {
-  return (
-    <div className="windows p-0.5 text-center max-w-[200px]">
-      <a href={link}>
-        <img
-          className="block w-[200px] h-[200px] object-cover"
-          src={imgSrc}
-          alt={title}
-        />
-      </a>
-      <div className="mt-2">
-        <div className="text-[1.1em]">
-          <a className="underline hover:no-underline" href={link}>
-            {title}
-          </a>
-        </div>
-        <div className="text-[0.8em] opacity-80">{subtitle}</div>
-      </div>
-    </div>
-  );
-};
+import { AllPastExhibitionsData } from "./Data/AllPastExhibitionsData";
+import { normalizeInsta } from "../../../helpers/helpers";
+import { Link } from "react-router-dom";
 
 export const PastExhibitions: React.FC = () => {
-  const exhibitions: Exhibition[] = [
-    {
-      link: "/pastexhibitions/homeoffices",
-      imgSrc:
-        "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/homeoffices.jpg",
-      title: "HomeOffices",
-      subtitle: "solo show",
-    },
-    {
-      link: "/pastexhibitions/fieldsofview",
-      imgSrc:
-        "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/fields_of_view/fieldsofview.jpg",
-      title: "Fields of View",
-      subtitle: "wrong 2023",
-    },
-    {
-      link: "/pastexhibitions/asirecall",
-      imgSrc:
-        "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/thumbs/gallery_thumb.jpg",
-      title: "As I Recall",
-      subtitle: "group show",
-    },
-    {
-      link: "/pastexhibitions/homebody",
-      imgSrc:
-        "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/home_body/gallery_HB_thumb.png",
-      title: "home </body>",
-      subtitle: "wrong 2022",
-    },
-    {
-      link: "/pastexhibitions/residency2025",
-      imgSrc:
-        "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/residency/thumbs/residency_studios.jpg",
-      title: "Residency Exhibition",
-      subtitle: "summer 2025",
-    },
-  ];
-
   return (
+    // 1) Clamp overall width
     <PageTemplate title="Past Exhibitions" className="Artists">
-      <div className="flex flex-row flex-wrap gap-5">
-        {exhibitions.map((exhibition, index) => (
-          <ArtistBox key={index} {...exhibition} />
-        ))}
+      <div className="my-10 text-sm text-slate-400">
+        {AllPastExhibitionsData.map((exhibition, index) => {
+          const sortedArtists = exhibition.artists?.sort((a, b) =>
+            a.name.localeCompare(b.name)
+          );
+          return (
+            <article
+              key={`${exhibition.year}-${index}`}
+              className="windows transition-shadow hover:shadow-lg mb-6"
+            >
+              <div className="flex gap-5 p-5 items-start bg-slate-900/30  focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400">
+                {/* LEFT: fixed thumbnail column */}
+                <div className="shrink-0 w-[250px] min-w-[250px]">
+                  <Link to={exhibition.pageLink} className="">
+                    <div className="w-[250px] h-[250px] overflow-hidden rounded">
+                      <img
+                        src={exhibition.thumbnail ?? exhibition.imgs?.[0] ?? ""}
+                        alt={exhibition.title}
+                        loading="lazy"
+                        className="block w-full h-full object-cover" // fills the box, no stretching
+                        sizes="250px"
+                      />
+                    </div>
+                  </Link>
+                </div>
+
+                {/* RIGHT: Body (flexes to fill) */}
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm uppercase tracking-wide leading-none rounded-lg border border-slate-700 bg-black text-white px-2 py-0.5">
+                      {exhibition.exhibitionType}
+                    </span>
+
+                    <span className="inline-flex h-6 items-center text-slate-300">
+                      {exhibition.year}
+                    </span>
+                  </div>
+
+                  <Link to={exhibition.pageLink} className="hover:underline">
+                    <h3 className="text-xl  leading-snug">
+                      <span className="underline-offset-4 group-hover:underline">
+                        {exhibition.title}
+                      </span>
+                    </h3>
+                  </Link>
+                  <p className="mt-2 text-slate-200">
+                    {exhibition.shortDescription}
+                  </p>
+                  {sortedArtists && (
+                    <div className="mt-2">
+                      <span className="mr-2">🎨:</span>
+                      {sortedArtists.map((artist, i) => (
+                        <React.Fragment key={artist.id}>
+                          <a
+                            href={
+                              artist.webLink ||
+                              normalizeInsta(artist.instaLink) ||
+                              "#"
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-mono"
+                          >
+                            {artist.name}
+                          </a>
+                          {i < (sortedArtists?.length ?? 0) - 1 && ", "}
+                        </React.Fragment>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </PageTemplate>
   );

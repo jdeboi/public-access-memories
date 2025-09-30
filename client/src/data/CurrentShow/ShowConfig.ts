@@ -1,7 +1,7 @@
 export const ShowConfig = {
-  isClosed: false,
+  isClosed: true,
   isOpenCallOpen: false,
-  underConstruction: false,
+  underConstruction: true,
   isResidency: false,
   isMenuOn: false,
   galleryTitle: "Public Access Memories",
