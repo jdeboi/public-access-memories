@@ -543,6 +543,12 @@
   .w-64 {
     width: calc(var(--spacing) * 64);
   }
+  .w-\[50px\] {
+    width: 50px;
+  }
+  .w-\[60px\] {
+    width: 60px;
+  }
   .w-\[80\%\] {
     width: 80%;
   }

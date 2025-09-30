@@ -18,8 +18,10 @@ import R_13 from "../R_13/Room";
 
 import { ShowConfig } from "../../../data/CurrentShow/ShowConfig";
 import ClosedPage from "../../pages/ClosedPage/ClosedPage";
-import { useState } from "react";
-import Frame from "../../../components/Frame/Frame";
+
+import { rooms, artists } from "../../../data/CurrentShow/RoomConfig";
+import ArtistMenu from "../../../components/ArtistMenu/ArtistMenu";
+
 const { isClosed, underConstruction } = ShowConfig;
 
 const ROOMS: Record<string, React.ComponentType> = {
@@ -41,6 +43,8 @@ const ROOMS: Record<string, React.ComponentType> = {
 
 const Room = () => {
   const { id = "0" } = useParams();
+  const artistID = rooms[parseInt(id)]?.artistID || null;
+  const artist = artistID !== null ? artists[artistID] : null;
 
   if (isClosed || underConstruction) return <ClosedPage />;
 
@@ -49,6 +53,7 @@ const Room = () => {
   return (
     <>
       <RoomComp />
+      <ArtistMenu artist={artist} />
     </>
   );
 };

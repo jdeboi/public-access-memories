@@ -3,7 +3,6 @@ import React, { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import PageTemplate from "../templates/PageTemplate"; // <- your existing template
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faInstagram,
   faBluesky,
@@ -22,23 +21,7 @@ import SectionHeader from "../templates/SectionHeader";
 import WindowsHeaderBox from "../templates/WindowsHeaderBox";
 import { ShowConfig } from "../../../data/CurrentShow/ShowConfig";
 import CustomPill from "../templates/CustomPill";
-
-type IconLinkProps = { href?: string | null; icon: any; label: string };
-const IconLink = React.memo(({ href, icon, label }: IconLinkProps) => {
-  if (!href) return null;
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={label}
-      title={label}
-      className="transition-opacity hover:opacity-80 text-[200%]"
-    >
-      <FontAwesomeIcon icon={icon} />
-    </a>
-  );
-});
+import IconLink from "./IconLink";
 
 export const ArtistProfilePage: React.FC = React.memo(function Artist() {
   const { name } = useParams();
