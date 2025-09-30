@@ -13,10 +13,15 @@ import {
 import {
   getArtistFromNameLink,
   getRoomFromArtistRoomID,
+  getThumbSrc,
   normalizeBlueSky,
   normalizeInsta,
 } from "../../../helpers/helpers";
 import { artists, rooms } from "../../../data/CurrentShow/RoomConfig";
+import SectionHeader from "../templates/SectionHeader";
+import WindowsHeaderBox from "../templates/WindowsHeaderBox";
+import { ShowConfig } from "../../../data/CurrentShow/ShowConfig";
+import SlatePill from "../templates/SlatePill";
 
 type IconLinkProps = { href?: string | null; icon: any; label: string };
 const IconLink = React.memo(({ href, icon, label }: IconLinkProps) => {
@@ -58,60 +63,67 @@ export const ArtistProfilePage: React.FC = React.memo(function Artist() {
   };
 
   return (
-    <PageTemplate
-      title={artist.name}
-      intro={
-        <>
-          {room?.link && (
-            <div className="windows text-[150%] p-5 door">
-              <a className="" href={room.link}>
-                🚪 {artist.title ?? "Enter"}
-              </a>
-            </div>
-          )}
-        </>
-      }
-    >
+    <PageTemplate title={artist.name}>
+      <WindowsHeaderBox
+        title={artist.name}
+        thumbnail={getThumbSrc(artist.thumb, ShowConfig.awsLink)}
+        link={room?.link || undefined}
+      >
+        {room?.link && (
+          <a
+            className="text-2xl underline transition-opacity hover:opacity-80"
+            href={room.link}
+          >
+            {artist.title ?? "Enter"}
+          </a>
+        )}
+
+        <div className="mt-4">
+          <SlatePill text={artist.year.toString() || "N/A"} />
+        </div>
+        <div className="mt-4">medium:</div>
+        <div className="font-mono">{artist.medium}</div>
+
+        <div className="mt-6 flex items-center gap-2">
+          <IconLink
+            href={socials.instagram ?? undefined}
+            icon={faInstagram}
+            label="Instagram"
+          />
+          <IconLink
+            href={socials.bluesky ?? undefined}
+            icon={faBluesky}
+            label="Bluesky"
+          />
+          <IconLink
+            href={socials.website ?? undefined}
+            icon={faInternetExplorer}
+            label="Website"
+          />
+        </div>
+      </WindowsHeaderBox>
+
       {/* Main content (was .info) */}
-      <section className="prose prose-invert max-w-none prose-p:leading-relaxed">
+      <section className="prose prose-invert max-w-none prose-p:leading-relaxed font-mono">
         {artist.description && (
           <>
-            <h3>About the Work</h3>
+            <SectionHeader title="About the work" />
             <p>{artist.description}</p>
           </>
         )}
         {artist.statement && (
           <>
-            <h3>Statement</h3>
+            <SectionHeader title="Statement" />
             <p>{artist.statement}</p>
           </>
         )}
         {artist.bio && (
           <>
-            <h3>Bio</h3>
+            <SectionHeader title="Bio" />
             <p>{artist.bio}</p>
           </>
         )}
       </section>
-
-      {/* Divider + Socials */}
-      <p className="mt-2 flex items-center gap-2">
-        <IconLink
-          href={socials.instagram ?? undefined}
-          icon={faInstagram}
-          label="Instagram"
-        />
-        <IconLink
-          href={socials.bluesky ?? undefined}
-          icon={faBluesky}
-          label="Bluesky"
-        />
-        <IconLink
-          href={socials.website ?? undefined}
-          icon={faInternetExplorer}
-          label="Website"
-        />
-      </p>
     </PageTemplate>
   );
 });

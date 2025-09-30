@@ -41,7 +41,7 @@ export const artists: IArtist[] = [
     roomID: 0,
     title: "Khazar Archeological Confabulations",
     name: "Nimrod Astarhan",
-    thumb: "temp-thumb",
+    thumb: "nimrod-astarhan-thumb.jpg",
     nameLink: "astarhan",
     instaLink: "nimrodastarhan",
     webLink: "https://www.nimrodastarhan.com",
@@ -126,7 +126,7 @@ export const artists: IArtist[] = [
     roomID: 1,
     name: "Nick Briz",
     title: "How To Glitch AI",
-    thumb: "temp-thumb",
+    thumb: "nick-briz-thumb.jpg",
     nameLink: "briz",
     instaLink: "nbriz",
     webLink: "https://nickbriz.com/",
@@ -173,9 +173,9 @@ export const artists: IArtist[] = [
   {
     id: 2,
     roomID: 2,
-    name: "Mou Peijing",
+    name: "Melody Mou Peijing",
     title: "(Un)Natural Language",
-    thumb: "temp-thumb",
+    thumb: "melody-mou-peijing-thumb.jpg",
     nameLink: "peijing",
     instaLink: "melodrama_yu",
     webLink: "https://www.melodymou.com/",
@@ -236,7 +236,7 @@ export const artists: IArtist[] = [
     roomID: 3,
     name: "Everest Pipkin",
     title: "Shell Song",
-    thumb: "temp-thumb",
+    thumb: "everest-pipkin-thumb.jpg",
     nameLink: "pipkin",
     description: (
       <>
@@ -277,7 +277,7 @@ export const artists: IArtist[] = [
     roomID: 4,
     title: "Flowers Blooming Backward Into Noise",
     name: "Eryk Salvaggio",
-    thumb: "temp-thumb",
+    thumb: "eryk-salvaggio-thumb.jpg",
     nameLink: "salvaggio",
     instaLink: "https://www.instagram.com/cyberneticforests/",
     webLink: "https://www.cyberneticforests.com/",
@@ -338,12 +338,12 @@ export const artists: IArtist[] = [
     roomID: 5,
     title: "Humans of AI",
     name: "Philipp Schmitt",
-    thumb: "temp-thumb",
+    thumb: "philip-schmitt-thumb.jpg",
     nameLink: "schmitt",
     instaLink: "https://www.instagram.com/phlpschmt/",
     webLink: "https://philippschmitt.com/",
     medium: TBA,
-    description: (
+    statement: (
       <>
         <p>
           Philipp Schmitt is an artist and designer based in Brooklyn, USA. His
@@ -383,7 +383,7 @@ export const artists: IArtist[] = [
     roomID: 6,
     title: "Feminist Data Set",
     name: "Caroline Sinders",
-    thumb: "temp-thumb",
+    thumb: "caroline-sinders-thumb.jpg",
     nameLink: "sinders",
     instaLink: "https://www.instagram.com/carolinesinders/",
     webLink: "https://carolinesinders.com/",
@@ -478,7 +478,7 @@ export const artists: IArtist[] = [
     roomID: 7,
     title: "Consensus Sensing",
     name: "Chelsea Thompto",
-    thumb: "temp-thumb",
+    thumb: "chelsea-thompto-thumb.jpg",
     userName: "Chelsea",
     nameLink: "thompto",
     // instaLink: "https://www.instagram.com/cthompto",
@@ -578,12 +578,12 @@ export const artists: IArtist[] = [
     roomID: 8,
     title: "Artificial Archive: SCRYING INTIMACIES",
     name: "Rodell Warner",
-    thumb: "temp-thumb",
+    thumb: "rodell-warner-thumb.jpg",
     nameLink: "warner",
     instaLink: "https://www.instagram.com/rodellwarner/",
     webLink: "https://cargocollective.com/rodellwarner",
     medium: "AI, GIFs, Custom Code",
-    description: TBA,
+    // description: TBA,
     bio: (
       <>
         <p>
@@ -616,7 +616,7 @@ export const artists: IArtist[] = [
     roomID: 9,
     title: "AMA y NO OLVIDA",
     name: "Emilia Yang",
-    thumb: "temp-thumb",
+    thumb: "emilia-yang-thumb.jpg",
     nameLink: "emiliayang",
     instaLink: "https://www.instagram.com/rojapordentro",
     webLink: "https://www.emiliayang.org/",

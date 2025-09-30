@@ -321,3 +321,11 @@ export const normalizeBlueSky = (val: string | null | undefined) => {
   }
   return s;
 };
+
+const getFileName = (thumb: string): string =>
+  /\.[^/.]+$/.test(thumb) ? thumb : `${thumb}.png`;
+
+export const getThumbSrc = (thumb: string, awsLink: string): string =>
+  `https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/${awsLink}/thumbs/${getFileName(
+    thumb
+  )}`;

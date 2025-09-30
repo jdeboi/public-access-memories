@@ -6,16 +6,9 @@ import PageTemplate from "../templates/PageTemplate";
 import { ShowConfig } from "../../../data/CurrentShow/ShowConfig";
 import { artists } from "../../../data/CurrentShow/RoomConfig";
 import ClosedPage from "../ClosedPage/ClosedPage";
+import { getThumbSrc } from "../../../helpers/helpers";
 
 export const Artists: React.FC = () => {
-  const getFileName = (thumb: string): string =>
-    /\.[^/.]+$/.test(thumb) ? thumb : `${thumb}.png`;
-
-  const getThumbSrc = (thumb: string): string =>
-    `https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/${
-      ShowConfig.awsLink
-    }/thumbs/${getFileName(thumb)}`;
-
   const title = ShowConfig.isResidency ? "Artists in Residence" : "Artists";
   const list = ShowConfig.isResidency
     ? artists.filter((a) => a.userName !== "hostBot")
@@ -34,7 +27,7 @@ export const Artists: React.FC = () => {
             {list.map((artist) => (
               <div
                 key={artist.nameLink}
-                className="windows max-w-[200px] p-2 text-center"
+                className="windows max-w-[200px] p-0.5 text-center"
               >
                 <Link
                   to={`/artist/${artist.nameLink}`}
@@ -42,8 +35,8 @@ export const Artists: React.FC = () => {
                   className="group block"
                 >
                   <img
-                    // src={getThumbSrc(artist.thumb)}
-                    src={`https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/thumbs/lizz-thumb.png`}
+                    src={getThumbSrc(artist.thumb, ShowConfig.awsLink)}
+                    // src={`https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/thumbs/lizz-thumb.png`}
                     alt={`${artist.name} thumbnail`}
                     loading="lazy"
                     className="w-[200px] h-[200px] object-cover"

@@ -1,9 +1,8 @@
-const Room = () => {
+import UnderConstructionRoom from "../Templates/UnderConstructionRoom";
 
-    return (
-        <div className="Room Sketch">
-        </div>
-    )
+// This component isn't being used in place of the Gallery Sketch
+const Room = () => {
+  return <UnderConstructionRoom />;
 };
 
 export default Room;

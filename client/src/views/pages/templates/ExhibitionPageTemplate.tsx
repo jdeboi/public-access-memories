@@ -4,6 +4,8 @@ import { PastExhibitionDataInterface } from "../PastExhibitions/Data/_PastExhibi
 import ImageGrid from "../PastExhibitions/ImageGrid";
 import PageTemplate from "./PageTemplate";
 import SectionHeader from "./SectionHeader";
+import SlatePill from "./SlatePill";
+import WindowsHeaderBox from "./WindowsHeaderBox";
 
 const ExhibitionPageTemplate = ({
   title,
@@ -58,57 +60,37 @@ const ExhibitionPageTemplate = ({
 
   return (
     <PageTemplate title={title}>
-      <div className="windows transition-shadow hover:shadow-lg mb-6">
-        <div className="flex gap-5 p-5 items-start bg-slate-900/30  focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400">
-          {/* LEFT: fixed thumbnail column */}
-          <div className="shrink-0 w-[250px] min-w-[250px]">
-            <div className="w-[250px] h-[250px] overflow-hidden rounded">
-              <img
-                src={thumbnail ?? imgs?.[0] ?? ""}
-                alt={title}
-                loading="lazy"
-                className="block w-full h-full object-cover" // fills the box, no stretching
-                sizes="250px"
-              />
-            </div>
-          </div>
-          <div className="min-w-0 flex-1">
-            <div className="flex items-center gap-3">
-              <span className="text-sm uppercase tracking-wide leading-none rounded-lg border border-slate-700 bg-black text-white px-2 py-0.5">
-                {exhibitionType}
-              </span>
+      <WindowsHeaderBox title={title} thumbnail={thumbnail}>
+        {" "}
+        <div className="flex items-center gap-3">
+          <SlatePill text={exhibitionType} />
 
-              <span className="inline-flex h-6 items-center text-slate-300">
-                {year}
-              </span>
-            </div>
-
-            <p className="mt-2 text-slate-200">{shortDescription}</p>
-            {sortedArtists && (
-              <div className="mt-2">
-                <span className="mr-2">🎨:</span>
-                {sortedArtists.map((artist, i) => (
-                  <span key={artist.id}>
-                    <a
-                      href={
-                        artist.webLink ||
-                        normalizeInsta(artist.instaLink) ||
-                        "#"
-                      }
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-mono"
-                    >
-                      {artist.name}
-                    </a>
-                    {i < (sortedArtists?.length ?? 0) - 1 && ", "}
-                  </span>
-                ))}
-              </div>
-            )}
-          </div>
+          <span className="inline-flex h-6 items-center text-slate-300">
+            {year}
+          </span>
         </div>
-      </div>
+        <p className="mt-2 text-slate-200">{shortDescription}</p>
+        {sortedArtists && (
+          <div className="mt-2">
+            <span className="mr-2">🎨:</span>
+            {sortedArtists.map((artist, i) => (
+              <span key={artist.id}>
+                <a
+                  href={
+                    artist.webLink || normalizeInsta(artist.instaLink) || "#"
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono"
+                >
+                  {artist.name}
+                </a>
+                {i < (sortedArtists?.length ?? 0) - 1 && ", "}
+              </span>
+            ))}
+          </div>
+        )}
+      </WindowsHeaderBox>
 
       {intro && <>{intro}</>}
 

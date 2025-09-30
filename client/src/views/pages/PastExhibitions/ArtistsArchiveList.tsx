@@ -19,11 +19,12 @@ const ArtistsArchiveList = (props: Props) => {
 
   const getArtistArchiveListing = (artist: IArtist, index: number) => {
     const url = artist.webLink ? artist.webLink : artist.instaLink;
-    
+
     return (
       <div key={index} className="artist-box windows">
         <a href={url}>
           <img
+            alt={artist.name}
             className="thumb"
             src={`https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/${
               props.awsLink
