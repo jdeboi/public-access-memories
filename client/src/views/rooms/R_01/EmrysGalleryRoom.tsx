@@ -20,8 +20,9 @@ import { doneLoadingApp, startComposition } from "../../../store/window";
 
 import { getBar } from "../../../data/CurrentShow/BotConfig";
 import { p5ToUserCoords } from "../../../helpers/coordinates";
-import GallerySketchEmrys from "./GallerySketchEmrys";
+// import GallerySketchEmrys from "./GallerySketchEmrys";
 import RoomNote from "../../../components/Residency/RoomNote/RoomNote";
+import { GallerySketchTemplate2 } from "../../Gallery/Gallery1/GallerySketchTemplate2";
 
 interface IGallery {
   id: number;
@@ -177,9 +178,13 @@ const EmrysGalleryRoom = (props: IGallery) => {
         <>
           <div id="p5_loading" className="loadingclass"></div>
 
-          <GallerySketchEmrys
+          <GallerySketchTemplate2
             users={props.users}
             isClosed={props.isClosed}
+            userNewRoom={() => console.log("going to a new room...")}
+            isMobile={isMobile}
+            user={user}
+            toggleOutside={() => console.log("toggle outside")}
             userMove={moveGalleryUserRoom}
             loadingDone={() => dispatch(doneLoadingApp())}
             windowUI={windowUI}

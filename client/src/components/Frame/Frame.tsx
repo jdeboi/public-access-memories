@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import "./Frame.css";
 
 //https://github.com/STRML/react-draggable
 import Draggable, { DraggableEvent, DraggableData } from "react-draggable";
 import Toolbar from "./Toolbar";
-
-import { usePrevious } from "../../hooks/usePrevious";
 
 interface PointProps {
   x: number;
@@ -53,10 +51,9 @@ const Frame = (props: FrameProps) => {
   const [frameClassName, setFrameClassName] = useState("");
   const [frameTitle, setFrameTitle] = useState("");
   const [frameStyle, setFrameStyle] = useState<React.CSSProperties>({});
-  // const [activeDrags, setActiveDrags] = useState(0);
   const [isHidden, setIsHidden] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-  // const [isMaximized, setIsMaximized] = useState(false);
+
   const [controlledPosition, setControlledPosition] = useState<PointProps>({
     x,
     y,
@@ -66,48 +63,45 @@ const Frame = (props: FrameProps) => {
     y: props.y,
   });
 
+  const [pos, setPos] = useState<{ x: number; y: number }>({
+    x: props.x,
+    y: props.y,
+  });
+
+  // ✅ stable ref — do NOT recreate per render
+  const nodeRef = useRef<HTMLDivElement>(null);
+
   const contentVisibility = {
     display: isMinimized ? "none" : "block",
     height: props.height,
     width: props.width,
   };
-  const wrapper = React.createRef<HTMLInputElement>();
 
   useEffect(() => {
-    const setTitle = () => {
-      const { title } = props;
-      const parser = new DOMParser();
-      if (title && title !== "") {
-        setFrameTitle(title);
-      } else if (title === "" && props.icon) {
-        const parsedString = parser.parseFromString(props.icon, "text/html");
-        setFrameTitle(parsedString.body.innerHTML);
-      }
-    };
+    const { title } = props;
+    const parser = new DOMParser();
+    if (title && title !== "") {
+      setFrameTitle(title);
+    } else if (title === "" && props.icon) {
+      const parsedString = parser.parseFromString(props.icon, "text/html");
+      setFrameTitle(parsedString.body.innerHTML);
+    }
 
-    const setClass = () => {
-      let classn = "Frame";
-      if (props.isHidden === undefined && isHidden) {
-        classn += " hidden";
-      } else if (props.isHidden) {
-        classn += " hidden";
-      } else if (props.isMinimized || isMinimized) {
-        classn += " minimized";
-      }
-
-      // if (isMaximized) {
-      //     classn += " maximized";
-      // }
-      if (props.className) {
-        classn += " " + props.className;
-      }
-
-      setFrameClassName(classn);
-    };
-
-    setTitle();
-    setClass();
-  }, [props.isHidden, isHidden, isMinimized]);
+    let classn = "Frame";
+    if (props.isHidden === undefined && isHidden) classn += " hidden";
+    else if (props.isHidden) classn += " hidden";
+    else if (props.isMinimized || isMinimized) classn += " minimized";
+    if (props.className) classn += " " + props.className;
+    setFrameClassName(classn);
+  }, [
+    props.isHidden,
+    props.isMinimized,
+    props.className,
+    props.icon,
+    props.title,
+    isHidden,
+    isMinimized,
+  ]);
 
   useEffect(() => {
     const frameH = toolBarH + (isMinimized ? 0 : props.height);
@@ -116,72 +110,49 @@ const Frame = (props: FrameProps) => {
       zIndex: props.z ? props.z : 0,
       height: Math.floor(frameH),
     });
-  }, [props.z, props.width, props.height]);
+  }, [props.z, props.width, props.height, isMinimized]);
 
+  // keep controlledPosition in sync if parent changes x/y
   useEffect(() => {
-    // TODO - is this the right way to get prev props?
     const dx = props.x - propsPosition.x;
     const dy = props.y - propsPosition.y;
-    setPropsPosition({ x: props.x, y: props.y });
-    setControlledPosition((cp) => {
-      return { x: cp.x + dx, y: cp.y + dy };
-    });
-  }, [props.x, props.y]);
-
-  const onControlledDrag = (
-    e: DraggableEvent,
-    data: DraggableData
-  ): void | false => {
-    const { x, y } = data;
-    setControlledPosition({ x, y });
-    if (props.onDrag) {
-      props.onDrag({ x, y });
+    if (dx !== 0 || dy !== 0) {
+      setPropsPosition({ x: props.x, y: props.y });
+      setControlledPosition((cp) => ({ x: cp.x + dx, y: cp.y + dy }));
     }
-  };
+  }, [props.x, props.y, propsPosition.x, propsPosition.y]);
 
-  // const onControlledDragStop = (e: DraggableEvent, data: DraggableData) => {
-  //     onControlledDrag(e, data);
-  //     onStop();
-  // };
+  const onControlledDrag = useCallback(
+    (e: DraggableEvent, data: DraggableData) => {
+      const { x, y } = data;
+      setControlledPosition({ x, y });
+      props.onDrag?.({ x, y });
+    },
+    [props]
+  );
 
   const toggleClosed = (e: MouseEvent) => {
     setIsHidden(true);
-    if (props.onHide) props.onHide();
+    props.onHide?.();
     e.stopPropagation();
   };
 
   const toggleMinimized = (e: MouseEvent) => {
     setIsMinimized((isM) => !isM);
-    if (props.onMinimized) props.onMinimized();
+    props.onMinimized?.();
     e.stopPropagation();
   };
 
   const toggleMaximized = (e: MouseEvent) => {
     setControlledPosition({ x: origCoords.x, y: origCoords.y });
-    if (props.onMaximized) props.onMaximized();
+    props.onMaximized?.();
     e.stopPropagation();
   };
 
-  // const onStart = () => {
-  //     // setActiveDrags(active => active + 1);
-  //     if (props.onStart)
-  //         props.onStart();
-  // };
-
-  // const onStop = () => {
-  //     // setActiveDrags(active => active - 1);
-  //     if (props.onStop)
-  //         props.onStop();
-  // };
-
-  const handleStart = () => {
-    if (props.newFrameToTop) props.newFrameToTop();
-  };
-
+  const handleStart = () => props.newFrameToTop?.();
   const handleStop = () => {};
-
   const handleClick = (e: MouseEvent) => {
-    if (props.newFrameToTop) props.newFrameToTop();
+    props.newFrameToTop?.();
     e.stopPropagation();
   };
 
@@ -189,20 +160,20 @@ const Frame = (props: FrameProps) => {
     <Draggable
       axis="both"
       handle={props.handle ? ".handle, " + props.handle : ".handle"}
-      defaultPosition={{ x: props.x, y: props.y }}
+      defaultPosition={pos}
       position={controlledPosition}
       grid={[1, 1]}
       scale={1}
-      bounds={bounds}
+      bounds={props.unbounded ? undefined : ".App-Content"}
+      onStop={(_, data) => setPos({ x: data.x, y: data.y })} // persist final
       cancel=".close, .minimize, .zoom"
       onStart={handleStart}
       onDrag={onControlledDrag}
-      onStop={handleStop}
-      nodeRef={wrapper}
+      nodeRef={nodeRef} // ✅ stable ref passed here
     >
       <div
-        ref={wrapper}
-        onClick={() => handleClick}
+        ref={nodeRef} // ✅ same stable ref here
+        onClick={handleClick as any} // ✅ actually call the handler
         className={frameClassName}
         style={frameStyle}
       >
@@ -210,11 +181,13 @@ const Frame = (props: FrameProps) => {
           className={props.window ? "window " + props.window : "window"}
           style={props.windowStyle}
         >
+          {/* Ensure Toolbar root has className="handle" */}
           <Toolbar
             title={frameTitle}
             toggleClosed={toggleClosed}
             toggleMinimized={toggleMinimized}
             toggleMaximized={toggleMaximized}
+            // e.g., <div className="handle"> inside Toolbar for drag grip
           />
           <div className="content" style={contentVisibility}>
             {props.content}

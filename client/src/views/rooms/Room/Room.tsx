@@ -18,47 +18,39 @@ import R_13 from "../R_13/Room";
 
 import { ShowConfig } from "../../../data/CurrentShow/ShowConfig";
 import ClosedPage from "../../pages/ClosedPage/ClosedPage";
+import { useState } from "react";
+import Frame from "../../../components/Frame/Frame";
 const { isClosed, underConstruction } = ShowConfig;
 
+const ROOMS: Record<string, React.ComponentType> = {
+  "0": R_00,
+  "1": R_01,
+  "2": R_02,
+  "3": R_03,
+  "4": R_04,
+  "5": R_05,
+  "6": R_06,
+  "7": R_07,
+  "8": R_08,
+  "9": R_09,
+  "10": R_10,
+  "11": R_11,
+  "12": R_12,
+  "13": R_13,
+};
+
 const Room = () => {
-  const { id } = useParams();
+  const { id = "0" } = useParams();
 
-  if (isClosed || underConstruction) {
-    return <ClosedPage />;
-  }
+  if (isClosed || underConstruction) return <ClosedPage />;
 
-  switch (id) {
-    case "0":
-      return <R_00 />;
-    case "1":
-      return <R_01 />;
-    case "2":
-      return <R_02 />;
-    case "3":
-      return <R_03 />;
-    case "4":
-      return <R_04 />;
-    case "5":
-      return <R_05 />;
-    case "6":
-      return <R_06 />;
-    case "7":
-      return <R_07 />;
-    case "8":
-      return <R_08 />;
-    case "9":
-      return <R_09 />;
-    case "10":
-      return <R_10 />;
-    case "11":
-      return <R_11 />;
-    case "12":
-      return <R_12 />;
-    case "13":
-      return <R_13 />;
-    default:
-      return <R_00 />;
-  }
+  const RoomComp = ROOMS[id] ?? R_00;
+
+  return (
+    <>
+      <RoomComp />
+    </>
+  );
 };
 
 export default Room;

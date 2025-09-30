@@ -33,36 +33,6 @@ export const drawAllFloors = (p5: p5Types) => {
   // big floor
   const isFilled = false;
   p5.strokeWeight(2);
-  // p5.stroke(10);
-  // drawFloor(
-  //   limits[0].x,
-  //   limits[0].y,
-  //   limits[2].x - limits[0].x,
-  //   limits[2].y - limits[0].y,
-  //   false,
-  //   isFilled,
-  //   GlobalConfig.scaler * 5,
-  //   p5,
-  //   p5.color(0, 10, 20, 100)
-  // ); // big floor
-  // // drawDanceFloor(p5);
-
-  // // top row
-  // p5.strokeWeight(2);
-  // // p5.stroke(255, 100);
-  // drawFloor(
-  //   limits[0].x + 10,
-  //   limits[0].y,
-  //   20,
-  //   3,
-  //   false,
-  //   isFilled,
-  //   GlobalConfig.scaler,
-  //   p5,
-  //   p5.color(0, 10, 20, 100)
-  // );
-  // // right alley
-  // drawFloor(32, 5, 3, 14, false, isFilled, GlobalConfig.scaler, p5);
 
   // // stairsOG
   // const col = p5.color(90, 90, 280, 70);

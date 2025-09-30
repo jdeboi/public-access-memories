@@ -141,25 +141,4 @@ export default class ResidencyRoom extends Room {
     this.drawRoomDoorEntryCrossing();
     this.drawRoomDoorCrossing();
   }
-
-  getIsDoorOpen(user) {
-    const sc = this.GlobalConfig.scaler;
-    const doorW = 2 * sc;
-    const doorH = 2 * sc;
-
-    if (!user || !user.x) {
-      return false;
-    }
-    const pt = p5ToUserCoords(
-      this.x + this.w / 2,
-      this.y + this.h,
-      this.GlobalConfig
-    );
-    return (
-      user.x >= pt.x - doorW / 2 &&
-      user.x <= pt.x + doorW / 2 &&
-      user.y >= pt.y - doorH / 2 &&
-      user.y <= pt.y + doorH / 2
-    );
-  }
 }

@@ -82,7 +82,7 @@ export const artists: IArtist[] = [
       </>
     ),
     statement: (
-      <>
+      <p>
         My works are thought experiments in sculpture, installation, and media
         art, often incorporating digital technology and electronic mechanisms to
         create reactive systems and interactive experiences. Through
@@ -101,10 +101,10 @@ export const artists: IArtist[] = [
         futures, my operational and responsive works invite viewers to question
         conventional notions of ownership, labor, and our relationship to both
         ancestral and emerging technologies.
-      </>
+      </p>
     ),
     bio: (
-      <>
+      <p>
         Nimrod Astarhan is an artist, technologist, and scholar. Their
         research-creation in sculpture and media art was exhibited worldwide and
         on the International Space Station. Recent showings include ISEA, the
@@ -117,7 +117,7 @@ export const artists: IArtist[] = [
         digital art, code, hardware, and critical theory at the School of the
         Art Institute of Chicago, China Academy of Art, and Shenkar College of
         Engineering, Art, and Design.
-      </>
+      </p>
     ),
     year: 2023,
   },
@@ -131,15 +131,16 @@ export const artists: IArtist[] = [
     instaLink: "nbriz",
     webLink: "https://nickbriz.com/",
     medium: "AI, Code, Video",
-    description: (
-      <>
+    description: <p></p>,
+    statement: (
+      <p>
         my artistic practice has always been a pedagogical one. whether acting
         as an artist, educator or organizer, my goal is always the same: to help
         others better understand the digitally mediated world we live in, so
         that we can establish the skills + perspectives required to take
         advantage of these developing technologies rather than be exploited by
         them.
-      </>
+      </p>
     ),
     bio: (
       <>
