@@ -8,7 +8,7 @@ export const HomeBodyData: PastExhibitionDataInterface = {
   awsLink: "home_body",
   exhibitionType: "Solo Show",
   shortDescription:
-    "“HomeOffices” is a solo exhibition by Dave Greber that uses generative AI to satirically reimagine the corporate dream within the context of modern home offices, offering insightful commentary on today's work culture.",
+    "home </body> considers the spaces, experiences, and ephemera of digital homemaking.",
   artists: HBartists,
   videoLink: "https://www.youtube.com/embed/o-Zw43PhvR8",
   thumbnail:

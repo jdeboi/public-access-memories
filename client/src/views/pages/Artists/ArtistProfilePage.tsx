@@ -13,29 +13,10 @@ import {
 import {
   getArtistFromNameLink,
   getRoomFromArtistRoomID,
+  normalizeBlueSky,
+  normalizeInsta,
 } from "../../../helpers/helpers";
 import { artists, rooms } from "../../../data/CurrentShow/RoomConfig";
-
-// --- helpers (pure, non-mutating) ---
-const normalizeInsta = (val: string | null | undefined) => {
-  if (!val) return null;
-  let s = val.trim();
-  if (!s.startsWith("http")) {
-    s = s.replace(/^@|^\//, "");
-    s = `https://www.instagram.com/${s}`;
-  }
-  return s;
-};
-
-const normalizeBlueSky = (val: string | null | undefined) => {
-  if (!val) return null;
-  let s = val.trim();
-  if (!s.startsWith("http")) {
-    s = s.replace(/^@|^\//, "");
-    s = `https://bsky.app/profile/${s}`;
-  }
-  return s;
-};
 
 type IconLinkProps = { href?: string | null; icon: any; label: string };
 const IconLink = React.memo(({ href, icon, label }: IconLinkProps) => {

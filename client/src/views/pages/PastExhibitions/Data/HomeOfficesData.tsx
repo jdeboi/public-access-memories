@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { artists } from "../../../../data/Shows/HomeOffices/RoomConfig";
 import { PastExhibitionDataInterface } from "./_PastExhibitionDataType";
+import SectionHeader from "../../templates/SectionHeader";
 
 const imgNames = [];
 for (let i = 1; i <= 6; i++) {
@@ -28,9 +29,10 @@ export const HomeOfficesData: PastExhibitionDataInterface = {
     </Link>
   ),
   children: (
-    <>
-      <h3>ESSAY</h3>
-      <div>---</div>
+    <div className="font-mono">
+      {/* <h3 className="font-[consoleFont]">ESSAY</h3>
+      <div>---</div> */}
+      <SectionHeader title="Essay" />
       <h4>A Well-Lighted Place: Public Access Memories (PAM)</h4>
       <div>
         Written by{" "}
@@ -182,8 +184,9 @@ export const HomeOfficesData: PastExhibitionDataInterface = {
         the house.
       </p>
 
-      <h3>CREDITS</h3>
-      <div>---</div>
+      {/* <h3 className="font-[consoleFont] mt-4">CREDITS</h3>
+      <div>---</div> */}
+      <SectionHeader title="CREDITS" />
       <div>
         Programmer: Jenna deBoisblanc{" "}
         <a
@@ -224,6 +227,6 @@ export const HomeOfficesData: PastExhibitionDataInterface = {
           @antenna.works
         </a>{" "}
       </div>
-    </>
+    </div>
   ),
 };
