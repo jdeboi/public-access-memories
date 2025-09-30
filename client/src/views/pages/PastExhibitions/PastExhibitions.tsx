@@ -9,7 +9,7 @@ export const PastExhibitions: React.FC = () => {
   return (
     // 1) Clamp overall width
     <PageTemplate title="Past Exhibitions" className="Artists">
-      <div className="mx-auto max-w-3xl px-4 my-10 text-sm text-slate-400">
+      <div className="my-10 text-sm text-slate-400">
         {AllPastExhibitionsData.map((exhibition, index) => {
           const sortedArtists = exhibition.artists?.sort((a, b) =>
             a.name.localeCompare(b.name)
@@ -19,7 +19,7 @@ export const PastExhibitions: React.FC = () => {
               key={`${exhibition.year}-${index}`}
               className="windows transition-shadow hover:shadow-lg mb-6"
             >
-              <div className="flex gap-5 p-5 items-start bg-slate-900/40  focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400">
+              <div className="flex gap-5 p-5 items-start bg-slate-900/30  focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400">
                 {/* LEFT: fixed thumbnail column */}
                 <div className="shrink-0 w-[250px] min-w-[250px]">
                   <Link to={exhibition.pageLink} className="">
@@ -42,7 +42,7 @@ export const PastExhibitions: React.FC = () => {
                       {exhibition.exhibitionType}
                     </span>
 
-                    <span className="inline-flex h-6 items-center ">
+                    <span className="inline-flex h-6 items-center text-slate-300">
                       {exhibition.year}
                     </span>
                   </div>
@@ -54,7 +54,7 @@ export const PastExhibitions: React.FC = () => {
                       </span>
                     </h3>
                   </Link>
-                  <p className="mt-2 text-slate-300">
+                  <p className="mt-2 text-slate-200">
                     {exhibition.shortDescription}
                   </p>
                   {sortedArtists && (

@@ -59,7 +59,7 @@ const ExhibitionPageTemplate = ({
   return (
     <PageTemplate title={title}>
       <div className="windows transition-shadow hover:shadow-lg mb-6">
-        <div className="flex gap-5 p-5 items-start bg-slate-900/40  focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400">
+        <div className="flex gap-5 p-5 items-start bg-slate-900/30  focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400">
           {/* LEFT: fixed thumbnail column */}
           <div className="shrink-0 w-[250px] min-w-[250px]">
             <div className="w-[250px] h-[250px] overflow-hidden rounded">
@@ -78,10 +78,12 @@ const ExhibitionPageTemplate = ({
                 {exhibitionType}
               </span>
 
-              <span className="inline-flex h-6 items-center ">{year}</span>
+              <span className="inline-flex h-6 items-center text-slate-300">
+                {year}
+              </span>
             </div>
 
-            <p className="mt-2 text-slate-300">{shortDescription}</p>
+            <p className="mt-2 text-slate-200">{shortDescription}</p>
             {sortedArtists && (
               <div className="mt-2">
                 <span className="mr-2">🎨:</span>
