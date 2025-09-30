@@ -4,7 +4,7 @@ import { PastExhibitionDataInterface } from "../PastExhibitions/Data/_PastExhibi
 import ImageGrid from "../PastExhibitions/ImageGrid";
 import PageTemplate from "./PageTemplate";
 import SectionHeader from "./SectionHeader";
-import SlatePill from "./SlatePill";
+import CustomPill from "./CustomPill";
 import WindowsHeaderBox from "./WindowsHeaderBox";
 
 const ExhibitionPageTemplate = ({
@@ -63,13 +63,15 @@ const ExhibitionPageTemplate = ({
       <WindowsHeaderBox title={title} thumbnail={thumbnail}>
         {" "}
         <div className="flex items-center gap-3">
-          <SlatePill text={exhibitionType} />
+          <CustomPill text={exhibitionType} />
 
-          <span className="inline-flex h-6 items-center text-slate-300">
+          <span className="inline-flex h-6 items-center text-slate-300 font-mono">
             {year}
           </span>
         </div>
-        <p className="mt-2 text-slate-200">{shortDescription}</p>
+        <p className="mt-2 text-slate-200 font-mono text-2xl">
+          {shortDescription}
+        </p>
         {sortedArtists && (
           <div className="mt-2">
             <span className="mr-2">🎨:</span>
@@ -81,7 +83,7 @@ const ExhibitionPageTemplate = ({
                   }
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono"
+                  className=""
                 >
                   {artist.name}
                 </a>

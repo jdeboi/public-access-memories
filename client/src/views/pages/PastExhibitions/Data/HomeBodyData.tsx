@@ -6,7 +6,7 @@ export const HomeBodyData: PastExhibitionDataInterface = {
   title: "home </body>",
   year: 2022,
   awsLink: "home_body",
-  exhibitionType: "Wrong Biennale Pavilion",
+  exhibitionType: "Wrong Biennale",
   shortDescription:
     "home </body> considers the spaces, experiences, and ephemera of digital homemaking.",
   artists: HBartists,

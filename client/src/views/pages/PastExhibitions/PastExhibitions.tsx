@@ -5,7 +5,7 @@ import { AllPastExhibitionsData } from "./Data/AllPastExhibitionsData";
 import { normalizeInsta } from "../../../helpers/helpers";
 import { Link } from "react-router-dom";
 import WindowsHeaderBox from "../templates/WindowsHeaderBox";
-import SlatePill from "../templates/SlatePill";
+import CustomPill from "../templates/CustomPill";
 
 export const PastExhibitions: React.FC = () => {
   return (
@@ -23,26 +23,25 @@ export const PastExhibitions: React.FC = () => {
             >
               <WindowsHeaderBox
                 title={exhibition.title}
-                subtitle={exhibition.shortDescription}
                 thumbnail={exhibition.thumbnail ?? exhibition.imgs?.[0] ?? ""}
                 link={exhibition.pageLink}
               >
                 <div className="flex items-center gap-3">
-                  <SlatePill text={exhibition.exhibitionType} />
+                  <CustomPill text={exhibition.exhibitionType} />
 
-                  <span className="inline-flex h-6 items-center text-slate-300">
+                  <span className="inline-flex h-6 items-center text-slate-300 font-mono">
                     {exhibition.year}
                   </span>
                 </div>
 
                 <Link to={exhibition.pageLink} className="hover:underline">
-                  <h3 className="text-xl  leading-snug">
-                    <span className="underline-offset-4 group-hover:underline">
+                  <div className="text-3xl leading-snug mt-4">
+                    <span className="underline-offset-4 group-hover:underline font-[manoloFont]">
                       {exhibition.title}
                     </span>
-                  </h3>
+                  </div>
                 </Link>
-                <p className="mt-2 text-slate-200">
+                <p className="mt-2 text-slate-200 font-mono">
                   {exhibition.shortDescription}
                 </p>
                 {sortedArtists && (
@@ -58,7 +57,7 @@ export const PastExhibitions: React.FC = () => {
                           }
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="font-mono"
+                          className=""
                         >
                           {artist.name}
                         </a>

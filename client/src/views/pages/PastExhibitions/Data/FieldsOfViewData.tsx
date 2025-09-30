@@ -19,7 +19,7 @@ export const fieldsOfViewData: PastExhibitionDataInterface = {
   awsLink: "fields_of_view",
   title: "Fields of View",
   year: 2023,
-  exhibitionType: "Wrong Biennale Pavilion",
+  exhibitionType: "Wrong Biennale",
   shortDescription:
     "“Fields of View” explores spatial perception on the flat plane of the screen, where scrolling, links, and 3D renderings stretch a two-dimensional surface into many dimensions.",
   videoLink: "https://www.youtube.com/embed/g5Fpi5lwxmI?si=q77WCLqZnSIB28wK",

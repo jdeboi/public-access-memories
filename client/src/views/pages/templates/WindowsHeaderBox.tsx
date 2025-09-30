@@ -9,35 +9,23 @@ export default function WindowsHeaderBox({
 }: {
   title: string;
   className?: string;
-  subtitle?: string;
   thumbnail?: string;
   link?: string;
   children?: React.ReactNode;
 }) {
-  const ThumbNailImg = () => {
-    return (
-      <div className="w-[250px] h-[250px] overflow-hidden">
-        <img
-          src={thumbnail ?? ""}
-          alt={title}
-          loading="lazy"
-          className="block w-full h-full object-cover" // fills the box, no stretching
-          sizes="250px"
-        />
-      </div>
-    );
-  };
-
   return (
     <div
-      className={`windows transition-shadow hover:shadow-lg mb-6 ${className}`}
+      className={`windows transition-shadow hover:shadow-lg mb-6 ${
+        className || ""
+      }`}
     >
-      <div className="flex gap-5 p-5 items-start  bg-slate-900/20  focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400">
-        {/* LEFT: Thumbnail */}
+      {/* 1 col on xs/sm → 2 cols at md+ */}
+      <div className="grid gap-5 p-5 items-start bg-slate-900/20 sm:grid-cols-[250px_1fr]">
+        {/* Thumbnail (stacks on top on small, fixed column at md+) */}
         {thumbnail && (
-          <div className="shrink-0 w-[250px] min-w-[250px]">
+          <div className="w-full sm:w-[250px] sm:min-w-[250px]">
             {link ? (
-              <Link to={link}>
+              <Link to={link} className="block">
                 <Thumbnail src={thumbnail} alt={title} />
               </Link>
             ) : (
@@ -46,8 +34,8 @@ export default function WindowsHeaderBox({
           </div>
         )}
 
-        {/* RIGHT: Body (flexes to fill) */}
-        <div className="min-w-0 flex-1">{children}</div>
+        {/* Body */}
+        <div className="min-w-0">{children}</div>
       </div>
     </div>
   );
@@ -55,14 +43,14 @@ export default function WindowsHeaderBox({
 
 function Thumbnail({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="w-[250px] h-[250px] overflow-hidden">
+    <div className="w-full sm:w-[250px] sm:h-[250px] aspect-square overflow-hidden rounded">
       <img
         src={src}
         alt={alt}
         loading="lazy"
         decoding="async"
-        className="block w-full h-full object-cover"
-        sizes="250px"
+        className="h-full w-full object-cover block"
+        sizes="(min-width: 768px) 250px, 100vw"
         draggable={false}
       />
     </div>

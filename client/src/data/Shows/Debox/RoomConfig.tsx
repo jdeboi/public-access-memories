@@ -131,7 +131,7 @@ export const artists: IArtist[] = [
     instaLink: "nbriz",
     webLink: "https://nickbriz.com/",
     medium: "AI, Code, Video",
-    description: <p></p>,
+    // description: <p></p>,
     statement: (
       <p>
         my artistic practice has always been a pedagogical one. whether acting
@@ -181,29 +181,39 @@ export const artists: IArtist[] = [
     webLink: "https://www.melodymou.com/",
     medium: "Interactive online archive, API",
     description: (
-      <>
-        <p>
-          I am a media artist whose work addresses issues of ecology and
-          experimental narrative through computational technologies. My research
-          explores threatened ecologies in the context of social conflicts,
-          indigenous knowledges, and the ways language reproduces ideological
-          assumptions. I work with the local environmental intelligence of
-          rivers and oceans, studying the complex interactions between
-          narrative, culture, and nature, as well as the interconnections
-          between water and other organisms. What roles can art and technology
-          play in addressing ecological crises? How can we extend empathy to
-          nature? My goals revolve around investigating alternative uses of
-          technology, especially machine learning and electronics, for
-          ecological purposes, and demonstrating how digital media can nurture
-          our coexistence with non-human agencies. Through my exploration, I
-          contribute to interpretable AI and experimental storytelling
-          strategies. I also investigate how culture—through social narrative,
-          language, and communication—shapes our relationship with nature. I
-          create transformative art projects that advocate for fairness and
-          inclusion across all species, treating non-human subjects as
-          independent agencies.
-        </p>
-      </>
+      <p>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/2Zbv3kZOP7w?si=h5drF8wzhfIeluEV"
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+        ></iframe>
+      </p>
+    ),
+    statement: (
+      <p>
+        I am a media artist whose work addresses issues of ecology and
+        experimental narrative through computational technologies. My research
+        explores threatened ecologies in the context of social conflicts,
+        indigenous knowledges, and the ways language reproduces ideological
+        assumptions. I work with the local environmental intelligence of rivers
+        and oceans, studying the complex interactions between narrative,
+        culture, and nature, as well as the interconnections between water and
+        other organisms. What roles can art and technology play in addressing
+        ecological crises? How can we extend empathy to nature? My goals revolve
+        around investigating alternative uses of technology, especially machine
+        learning and electronics, for ecological purposes, and demonstrating how
+        digital media can nurture our coexistence with non-human agencies.
+        Through my exploration, I contribute to interpretable AI and
+        experimental storytelling strategies. I also investigate how
+        culture—through social narrative, language, and communication—shapes our
+        relationship with nature. I create transformative art projects that
+        advocate for fairness and inclusion across all species, treating
+        non-human subjects as independent agencies.
+      </p>
     ),
     bio: (
       <>

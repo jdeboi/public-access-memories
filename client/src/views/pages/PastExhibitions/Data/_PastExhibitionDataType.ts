@@ -6,11 +6,7 @@ export interface PastExhibitionDataInterface {
   title: string;
   year: number;
   shortDescription?: string;
-  exhibitionType:
-    | "Solo Show"
-    | "Group Show"
-    | "Residency"
-    | "Wrong Biennale Pavilion";
+  exhibitionType: "Solo Show" | "Group Show" | "Residency" | "Wrong Biennale";
   imgs?: string[];
   artists?: IArtist[];
   thumbnail?: string;

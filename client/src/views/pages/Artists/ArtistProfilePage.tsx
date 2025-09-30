@@ -21,7 +21,7 @@ import { artists, rooms } from "../../../data/CurrentShow/RoomConfig";
 import SectionHeader from "../templates/SectionHeader";
 import WindowsHeaderBox from "../templates/WindowsHeaderBox";
 import { ShowConfig } from "../../../data/CurrentShow/ShowConfig";
-import SlatePill from "../templates/SlatePill";
+import CustomPill from "../templates/CustomPill";
 
 type IconLinkProps = { href?: string | null; icon: any; label: string };
 const IconLink = React.memo(({ href, icon, label }: IconLinkProps) => {
@@ -71,7 +71,7 @@ export const ArtistProfilePage: React.FC = React.memo(function Artist() {
       >
         {room?.link && (
           <a
-            className="text-2xl underline transition-opacity hover:opacity-80"
+            className="text-4xl underline transition-opacity hover:opacity-80"
             href={room.link}
           >
             {artist.title ?? "Enter"}
@@ -79,7 +79,7 @@ export const ArtistProfilePage: React.FC = React.memo(function Artist() {
         )}
 
         <div className="mt-4">
-          <SlatePill text={artist.year.toString() || "N/A"} />
+          <CustomPill text={artist.year.toString() || "N/A"} size="md" />
         </div>
         <div className="mt-4">medium:</div>
         <div className="font-mono">{artist.medium}</div>
