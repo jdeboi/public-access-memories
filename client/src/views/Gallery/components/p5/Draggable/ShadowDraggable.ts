@@ -22,7 +22,6 @@ export default class ShadowDraggable extends Draggable {
         "https://lmd-bucket.s3.us-east-2.amazonaws.com/sketches/gallery/tracklights/black_shadow.png"
       );
     }
-
   }
 
   displayContent(userX: number, userY: number) {

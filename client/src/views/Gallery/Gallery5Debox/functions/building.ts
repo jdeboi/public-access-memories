@@ -2,19 +2,9 @@ import p5 from "p5";
 import Room from "../components/DeboxRoom";
 import p5Types from "p5";
 import { IUser } from "../../../../interfaces";
-import {
-  drawFloor,
-  drawSpaceFloor,
-  drawSpaceFloorLine,
-} from "../../Gallery1/functions/floor";
-import {
-  limits,
-  GlobalConfig,
-} from "../../../../data/Shows/Debox/GlobalConfig";
+import { drawFloor, drawSpaceFloor } from "../../Gallery1/functions/floor";
+import { GlobalConfig } from "../../../../data/Shows/Debox/GlobalConfig";
 import DeboxRoom from "../components/DeboxRoom";
-import Light from "../../components/p5/Light";
-import { blue } from "@mui/material/colors";
-
 export const roomDoorEntry = (
   rooms: DeboxRoom[],
   userStep: { x: number; y: number }
@@ -180,26 +170,6 @@ export const draw3D2DBox = (
   p5.rect(0, 0, w, h);
 
   p5.pop();
-};
-
-export const addLightDivs = (
-  divs: any,
-  lightImgs: p5Types.Image[],
-  p5: p5Types,
-  gconfig: any = GlobalConfig
-) => {
-  divs.lights = [];
-  let numLights = 3;
-  const lightsP5 = [
-    { x: 24.5, y: 4, isFlipped: false },
-    { x: 9, y: 13, isFlipped: true },
-    { x: 14, y: 24.5, isFlipped: false },
-  ];
-
-  for (let i = 0; i < numLights; i++) {
-    let light = new Light(p5, i, lightImgs, lightsP5, gconfig);
-    divs.lights.push(light);
-  }
 };
 
 export const displayBarDivs = (userX: number, userY: number, divs: any) => {

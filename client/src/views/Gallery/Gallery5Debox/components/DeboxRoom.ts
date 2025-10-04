@@ -1,5 +1,5 @@
 import p5Types from "p5";
-import Room from "../../components/p5/Room";
+import p5Room from "../../components/p5/p5Room";
 import { GlobalConfig } from "../../../../data/Shows/Debox/GlobalConfig";
 import {
   artists,
@@ -11,7 +11,7 @@ import { draw3D2DBox } from "../functions/building";
 import { IUser } from "../../../../interfaces";
 import { p5ToUserCoordsNoMiddleSquare } from "../../../../helpers/coordinates";
 
-class DeboxRoom extends Room {
+class DeboxRoom extends p5Room {
   connections: Array<{ x: number; y: number }> = [];
   actualW: number = 0;
   actualH: number = 0;

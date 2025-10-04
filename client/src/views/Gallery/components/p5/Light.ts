@@ -1,20 +1,36 @@
+import p5Types from "p5";
 import Draggable from "./Draggable/Draggable";
 import { mouseToWorld } from "../../../../helpers/coordinates";
 // import { lightsP5, GlobalConfig } from '../../../../../data/HomeBody/GlobalConfig';
 
 import ButtonSq from "./Draggable/ButtonSq";
+import { IGlobalConfig } from "../../../../interfaces";
 
 export default class Light extends Draggable {
-  constructor(p5, id, imgs, lightsP5, GlobalConfig) {
-    super(id, 0, 0, 80, 300, p5, null, GlobalConfig);
+  imgs: p5Types.Image[] | null = null;
+  isFlipped: boolean = false;
+  isOn: boolean;
+  scaler: number;
+  button: ButtonSq;
+
+  constructor(
+    id: number,
+    x: number,
+    y: number,
+    isFlipped: boolean,
+    imgs: p5Types.Image[],
+    p5: p5Types,
+    GlobalConfig: IGlobalConfig,
+    w: number = 80,
+    h: number = 300
+  ) {
+    super(id, 0, 0, w, h, p5, null, GlobalConfig);
 
     this.scaler = GlobalConfig.scaler / 100;
 
     if (this.scaler < 0.84) this.scaler = 0.84;
     this.w *= this.scaler;
     this.h *= this.scaler;
-
-    const { x, y, isFlipped } = lightsP5[id];
     this.x = x * GlobalConfig.scaler;
     this.y = y * GlobalConfig.scaler;
     this.origX = this.x;
@@ -35,15 +51,13 @@ export default class Light extends Draggable {
     );
   }
 
-  
-
   checkButtonsNormal() {
     if (super.checkButtonsNormal()) return true;
     else if (this.checkButtonNormal()) return true;
     return false;
   }
 
-  checkButtons(userX, userY) {
+  checkButtons(userX: number, userY: number) {
     if (super.checkButtons(userX, userY)) return true;
     else if (this.checkButton(userX, userY)) return true;
     return false;
@@ -60,7 +74,7 @@ export default class Light extends Draggable {
     return false;
   }
 
-  checkButton(userX, userY) {
+  checkButton(userX: number, userY: number) {
     let mouse = mouseToWorld(
       { x: userX, y: userY },
       this.p5,
@@ -82,7 +96,7 @@ export default class Light extends Draggable {
     this.button.display(this.isOn, mouse.x, mouse.y);
   }
 
-  displayButton(userX, userY) {
+  displayButton(userX: number, userY: number) {
     let mouse = mouseToWorld(
       { x: userX, y: userY },
       this.p5,
@@ -97,7 +111,9 @@ export default class Light extends Draggable {
     this.isOn = !this.isOn;
   }
 
-  displayContent(userX, userY) {
+  displayContent(userX: number, userY: number) {
+    if (!this.imgs) return;
+
     this.p5.push();
 
     var img, imgBack, backW, backH, backY;

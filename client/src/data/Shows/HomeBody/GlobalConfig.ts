@@ -1,3 +1,4 @@
+import { getLimits } from "../../../helpers/helpers";
 import { IGlobalConfig } from "../../../interfaces";
 
 let xMin = -10;
@@ -13,13 +14,7 @@ export const GlobalConfig: IGlobalConfig = {
   worldH: yMax - yMin,
 };
 
-export const limits = [
-  { x: xMin, y: yMin }, // outer limit
-  { x: xMax, y: yMin },
-  { x: xMax, y: yMax },
-  { x: xMin, y: yMax },
-  { x: xMin, y: yMin },
-];
+export const limits = getLimits(xMin, xMax, yMin, yMax);
 
 export const outsideDoors = [
   { x0: 22.5, y0: 5.2, x1: 24, y1: 5.2, to: "outside" }, // top

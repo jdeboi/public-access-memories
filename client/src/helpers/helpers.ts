@@ -76,6 +76,18 @@ export const filterGalleryUsers = (currentUser: IUser, data: IUsers) => {
   return filteredArray;
 };
 
+export const filterGalleryUsersPage = (
+  currentUser: IUser,
+  data: IUsers,
+  page: string
+) => {
+  var filteredUsers = filterGalleryUsers(currentUser, data);
+  var filteredArray = filteredUsers.filter((usr: IUser) => {
+    return usr.roomUrl === page;
+  });
+  return filteredArray;
+};
+
 export const filterEditUsers = (currentUser: IUser, data: IUsers) => {
   const excludedUsernames = [
     "wineBot",
@@ -329,3 +341,18 @@ export const getThumbSrc = (thumb: string, awsLink: string): string =>
   `https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/${awsLink}/thumbs/${getFileName(
     thumb
   )}`;
+
+export const getLimits = (
+  xMin: number,
+  xMax: number,
+  yMin: number,
+  yMax: number
+) => {
+  return [
+    { x: xMin, y: yMin }, // outer limit
+    { x: xMax, y: yMin },
+    { x: xMax, y: yMax },
+    { x: xMin, y: yMax },
+    { x: xMin, y: yMin },
+  ];
+};

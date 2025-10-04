@@ -1,11 +1,37 @@
 // Room.js
 // A refactored and cleaned up version of the Room class for better readability and modularity
-
+import p5Types from "p5";
 import { p5ToUserCoords } from "../../../../helpers/coordinates";
+import { IArtist, IRoom, IUser } from "../../../../interfaces";
 import { doorLineCrossing, boundaryLineCrossing } from "./Boundaries";
 
-export default class Room {
-  constructor(p5, door, i, GlobalConfig, artists, rooms, roomConfig) {
+export default class p5Room {
+  public p5: p5Types;
+  public GlobalConfig: any;
+  public id: number;
+  public room: IRoom;
+  public x: number;
+  public y: number;
+  public dir: string;
+  public link: string;
+  // public customLink?: string ;
+  public userName: string | undefined | null;
+  public artist: IArtist;
+  public w: number;
+  public h: number;
+  public start: number;
+  public end: number;
+  public door: any;
+
+  constructor(
+    p5: p5Types,
+    door: any,
+    i: number,
+    GlobalConfig: any,
+    artists: IArtist[],
+    rooms: IRoom[],
+    roomConfig: any
+  ) {
     this.p5 = p5;
     this.GlobalConfig = GlobalConfig;
     this.id = i;
@@ -20,7 +46,7 @@ export default class Room {
     this.artist = artists[room.artistID];
 
     this.w = roomConfig.w;
-    this.h = roomConfig.w;
+    this.h = roomConfig.h;
 
     this.start = 0;
     this.end = 1;
@@ -41,7 +67,7 @@ export default class Room {
     this.p5.translate(x, y);
   }
 
-  drawRoomTexture(roomTextures) {
+  drawRoomTexture(roomTextures: p5Types.Image[]) {
     const sc = this.GlobalConfig.scaler;
     const x = (-this.w / 2) * sc;
     const y = (-this.h / 2) * sc;
@@ -58,7 +84,7 @@ export default class Room {
     else if (roomTextures[2]) this.p5.image(roomTextures[2], x, y, w, h);
   }
 
-  display(roomTextures) {
+  display(roomTextures: p5Types.Image[]) {
     this.p5.push();
     this.translateToRoomCenter();
     this.p5.push();
@@ -70,7 +96,7 @@ export default class Room {
   displayTxt() {
     this.p5.fill("#e3a587");
     this.p5.noStroke();
-    this.p5.rect(0, 0, this.p5.textWidth(this.artist) / 2, -30);
+    this.p5.rect(0, 0, this.p5.textWidth(this.artist.name) / 2, -30);
     this.p5.fill(255);
   }
 
@@ -86,13 +112,18 @@ export default class Room {
     p5.pop();
   }
 
-  drawLine(p5, sc, coords, strokeColor) {
+  drawLine(
+    p5: p5Types,
+    sc: number,
+    coords: any,
+    strokeColor: [number, number, number] = [255, 0, 0]
+  ) {
     p5.stroke(...strokeColor);
     p5.strokeWeight(10);
     p5.line(coords.x0 * sc, coords.y0 * sc, coords.x1 * sc, coords.y1 * sc);
   }
 
-  computeLineCoords(type) {
+  computeLineCoords(type: string) {
     let { x, y, w, h, dir, start, end } = this;
     if (type === "doorCrossing") {
       if (dir === "bottom")
@@ -167,7 +198,7 @@ export default class Room {
     );
   }
 
-  roomDoorCrossing(prevStep, userStep) {
+  roomDoorCrossing(prevStep: any, userStep: any) {
     return doorLineCrossing(
       prevStep,
       userStep,
@@ -179,7 +210,7 @@ export default class Room {
     );
   }
 
-  roomDoorBoundary(prevStep, userStep) {
+  roomDoorBoundary(prevStep: any, userStep: any) {
     return doorLineCrossing(
       prevStep,
       userStep,
@@ -191,7 +222,7 @@ export default class Room {
     );
   }
 
-  roomDoorEntryCrossing(prevStep, userStep) {
+  roomDoorEntryCrossing(prevStep: any, userStep: any) {
     return doorLineCrossing(
       prevStep,
       userStep,
@@ -203,7 +234,7 @@ export default class Room {
     );
   }
 
-  roomBoundaryCrossing(prevStep, userStep) {
+  roomBoundaryCrossing(prevStep: any, userStep: any) {
     const roomWalls = [
       { x: this.x, y: this.y },
       { x: this.x + this.w, y: this.y },
@@ -219,7 +250,7 @@ export default class Room {
     );
   }
 
-  getIsDoorOpen(user) {
+  getIsDoorOpen(user: IUser | null): boolean {
     const sc = this.GlobalConfig.scaler;
     const doorW = 2 * sc;
     const doorH = 2 * sc;

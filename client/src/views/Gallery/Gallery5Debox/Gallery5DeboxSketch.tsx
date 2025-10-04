@@ -8,7 +8,6 @@ import { limits, GlobalConfig } from "../../../data/Shows/Debox/GlobalConfig";
 import { rooms as globalRooms } from "../../../data/Shows/Debox/RoomConfig";
 import { barTenders, danceFloor } from "../../../data/Shows/Debox/BotConfig";
 import {
-  addLightDivs,
   display2D3DGridPlanes,
   displayBarDivs,
   drawAllFloors,
@@ -22,6 +21,7 @@ import {
   addBarDivs,
   addColumnDivs,
   addFolderDivs,
+  addLightDivs,
   displayColumnDivs,
   displayFolderDivs,
   displayLightDivs,
@@ -34,7 +34,6 @@ export default class Gallery5DeboxSketch extends GallerySketchTemplate1 {
   roomsPerLayer: number[] = [1, 3, 5, 1];
   // strongly type this so we remember it’s 2D, of DeboxRoom instances
   neuralNetRooms: DeboxRoom[][] = [];
-  limits: any;
 
   constructor(props: GallerySketch1Props) {
     super(props);
@@ -86,11 +85,7 @@ export default class Gallery5DeboxSketch extends GallerySketchTemplate1 {
     }
   };
 
-  initDivs = (
-    p5: p5Types,
-    gconfig: any = this.GlobalConfig,
-    galleryId: number = this.galleryId
-  ) => {
+  initDivs = (p5: p5Types) => {
     if (
       this.columnGif &&
       this.instaImg &&
@@ -98,7 +93,11 @@ export default class Gallery5DeboxSketch extends GallerySketchTemplate1 {
       this.txtFile &&
       this.font
     ) {
-      addLightDivs(this.divs, this.lightImgs, p5);
+      addLightDivs(this.divs, this.lightImgs, p5, this.GlobalConfig, [
+        { x: 24.5, y: 4, isFlipped: false },
+        { x: 9, y: 13, isFlipped: true },
+        { x: 14, y: 24.5, isFlipped: true },
+      ]);
       addColumnDivs(
         this.divs,
         this.columnGif,
@@ -122,11 +121,17 @@ export default class Gallery5DeboxSketch extends GallerySketchTemplate1 {
           { x: 34.5, y: 25 },
         ],
         1,
-        gconfig
+        this.GlobalConfig
       );
-      addBarDivs(this.divs, this.lightImgs[3], p5, gconfig, galleryId);
+      addBarDivs(
+        this.divs,
+        this.lightImgs[3],
+        p5,
+        this.GlobalConfig,
+        this.galleryId
+      );
 
-      const sc = this.GlobalConfig.scaler;
+      const sc = this.getGlobalScaler();
       const folderPoints = [
         { x: 25.5 * sc, y: 26.5 * sc },
         { x: 27.5 * sc, y: 27 * sc },
@@ -171,7 +176,7 @@ export default class Gallery5DeboxSketch extends GallerySketchTemplate1 {
     this.displayTarget(p5, p5.color(0, 255, 0, 50));
   };
 
-  displayBackground = (p5: p5Types) => {
+  displayBuilding = (p5: p5Types) => {
     const renderRooms = this.neuralNetRooms.flat(); // <- only these
     if (this.fontManolo) p5.textFont(this.fontManolo, 14);
     drawAllFloors(p5);
@@ -179,12 +184,11 @@ export default class Gallery5DeboxSketch extends GallerySketchTemplate1 {
     drawWalls(this.walls, p5);
     const { user } = this.props;
     drawRooms(renderRooms, user, this.userEase);
+  };
 
+  displayScene = (p5: p5Types) => {
     p5.push();
-    p5.translate(
-      26.25 * this.GlobalConfig.scaler,
-      32.5 * this.GlobalConfig.scaler
-    );
+    p5.translate(26.25 * this.getGlobalScaler(), 32.5 * this.getGlobalScaler());
     display2D3DGridPlanes(p5, 54, 10, 5, 5);
     p5.pop();
 
@@ -194,10 +198,7 @@ export default class Gallery5DeboxSketch extends GallerySketchTemplate1 {
   displayDivs = (p5: p5Types) => {
     // return;
     p5.push();
-    p5.translate(
-      this.GlobalConfig.x * this.GlobalConfig.scaler,
-      this.GlobalConfig.y * this.GlobalConfig.scaler
-    );
+    // this.worldTranslate(p5);
     displayBarDivs(this.userEase.x, this.userEase.y, this.divs);
 
     displayLightDivs(this.userEase.x, this.userEase.y, this.divs);
@@ -215,7 +216,7 @@ export default class Gallery5DeboxSketch extends GallerySketchTemplate1 {
   userTakeStep = (x: number, y: number) => {
     const { isClosed, isMobile, userNewRoom, toggleOutside } = this.props;
     var t = new Date();
-    let space = this.GlobalConfig.scaler;
+    let space = this.getGlobalScaler();
     const prevStep = { x: this.stepTo.x, y: this.stepTo.y };
     const userStep = {
       x: this.stepTo.x + x * space,

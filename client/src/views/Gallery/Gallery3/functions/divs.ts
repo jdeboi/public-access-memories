@@ -89,7 +89,8 @@ export const addLightDivs = (
     // { x: 25, y: 25, isFlipped: false }
   ];
   for (let i = 0; i < lightsP5.length; i++) {
-    let light = new Light(p5, i, lightImgs, lightsP5, GlobalConfig);
+    const { x, y, isFlipped } = lightsP5[i];
+    let light = new Light(i, x, y, isFlipped, lightImgs, p5, GlobalConfig);
     // lights.push(light);
     divs.lights.push(light);
   }

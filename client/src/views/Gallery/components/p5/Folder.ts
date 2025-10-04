@@ -7,6 +7,7 @@ export default class Folder extends Draggable {
   link: string;
   img: p5Types.Image | null;
   tw: number;
+  callback: (() => void) | undefined;
 
   constructor(
     p5: p5Types,
@@ -18,7 +19,8 @@ export default class Folder extends Draggable {
     label: string,
     link: string,
     img: p5Types.Image | null,
-    GlobalConfig: any
+    GlobalConfig: any,
+    callback?: () => void
   ) {
     super(id, x, y, w, h, p5, img, GlobalConfig);
     // TODO - my coordinate system needs formalization
@@ -29,6 +31,7 @@ export default class Folder extends Draggable {
     this.link = link;
     this.img = img;
     this.tw = 40;
+    this.callback = callback;
   }
 
   displayInRoom(room: number = -1) {
@@ -44,11 +47,17 @@ export default class Folder extends Draggable {
     this.p5.push();
     this.p5.translate(this.x, this.y);
     this.p5.image(this.img, 0, 0, this.w, this.h);
+    this.displayOverImage();
     this.drawLabel();
     this.p5.pop();
   }
 
+  displayOverImage() {}
+
   drawLabel() {
+    if (!this.label || this.label === "") {
+      return;
+    }
     this.p5.textSize(16);
     this.p5.push();
 
@@ -130,8 +139,10 @@ export default class Folder extends Draggable {
       return;
     }
     let mouse = { x: this.p5.mouseX, y: this.p5.mouseY };
-    if (this.checkOver(mouse.x, mouse.y)) {
+    if (this.link && this.checkOver(mouse.x, mouse.y)) {
       this.openInNewTab(this.link);
+    } else if (this.callback && this.checkOver(mouse.x, mouse.y)) {
+      this.callback();
     }
   };
 
@@ -151,8 +162,10 @@ export default class Folder extends Draggable {
       this.p5,
       this.GlobalConfig
     );
-    if (this.checkOver(mouse.x, mouse.y)) {
+    if (this.link && this.checkOver(mouse.x, mouse.y)) {
       this.openInNewTab(this.link);
+    } else if (this.callback && this.checkOver(mouse.x, mouse.y)) {
+      this.callback();
     }
   };
 

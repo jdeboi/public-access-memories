@@ -84,18 +84,18 @@ export const addLightDivs = (
   divs: any,
   lightImgs: p5Types.Image[],
   p5: p5Types,
-  gconfig: any = GlobalConfig
-) => {
-  divs.lights = [];
-  let numLights = 3;
-  const lightsP5 = [
+  gconfig: any = GlobalConfig,
+  lightsPos: { x: number; y: number; isFlipped: boolean }[] = [
     { x: 22.5, y: 7, isFlipped: false },
     { x: 8, y: 15, isFlipped: true },
     { x: 13, y: 20, isFlipped: false },
-  ];
+  ]
+) => {
+  divs.lights = [];
 
-  for (let i = 0; i < numLights; i++) {
-    let light = new Light(p5, i, lightImgs, lightsP5, gconfig);
+  for (let i = 0; i < lightsPos.length; i++) {
+    const { x, y, isFlipped } = lightsPos[i];
+    let light = new Light(i, x, y, isFlipped, lightImgs, p5, gconfig);
     // lights.push(light);
     divs.lights.push(light);
   }
@@ -515,7 +515,8 @@ export const checkTrashDivsDouble = (
 ) => {
   if (divs.trashCans) {
     for (const trash of divs.trashCans) {
-      trash.checkDoubleClickedAlert(userX, userY);
+      // trash.checkDoubleClickedAlert(userX, userY);
+      trash.checkDoubleClicked(userX, userY);
     }
   }
 };

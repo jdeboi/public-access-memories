@@ -18,6 +18,7 @@ interface CenterModalProps {
   z: number;
   isRelative: boolean;
   onHide(): any;
+  windowStyle?: React.CSSProperties;
 }
 
 export default function CenterModal({
@@ -31,6 +32,7 @@ export default function CenterModal({
   buttons,
   isRelative,
   onHide,
+  windowStyle = { background: "white" },
 }: CenterModalProps) {
   const windowUI = useSelector(selectWindow);
   const [dimensions, setDimensions] = useState(
@@ -78,7 +80,7 @@ export default function CenterModal({
         isHidden={isHidden}
         unbounded={false}
         onHide={onHide}
-        windowStyle={{ background: "white" }}
+        windowStyle={windowStyle}
         content={
           <div
             className={`${classN} CenterModal SignInForm`}

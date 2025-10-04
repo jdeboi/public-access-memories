@@ -221,6 +221,7 @@ export const drawLabel = (p5, name, font) => {
   p5.textSize(10);
   p5.noStroke();
   p5.fill(255);
+
   p5.rect(0, 0, p5.textWidth(name) + 6, 12, 3, 3);
   p5.fill(0);
   p5.text(name, 3, 10);

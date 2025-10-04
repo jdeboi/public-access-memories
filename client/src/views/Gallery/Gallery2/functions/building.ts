@@ -5,7 +5,7 @@ import {
 import Wall from "../../components/p5/Wall";
 import p5Types from "p5";
 // import { wall14 } from '../../../../data/AsIRecall/WallConfig';
-import Room from "../../components/p5/Room";
+import p5Room from "../../components/p5/p5Room";
 import Door from "../../components/p5/Door";
 
 // export const initHomeBodyWalls = (p5: p5Types, walls: Wall[]) => {
@@ -95,7 +95,7 @@ export const drawDoors = (doors: Door[], p5: p5Types) => {
   }
 };
 
-export const drawRooms = (rooms: Room[], roomTextures: p5Types.Image[]) => {
+export const drawRooms = (rooms: p5Room[], roomTextures: p5Types.Image[]) => {
   if (rooms) {
     for (const room of rooms) {
       room.display(roomTextures);

@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+  useCallback,
+} from "react";
 import ReactAudioPlayer from "react-audio-player";
 import "./Gallery.css";
 import { useNavigate } from "react-router-dom";
@@ -61,102 +67,126 @@ interface IGallery {
 }
 
 const Gallery = (props: IGallery) => {
+  const { id, users, isClosed, showWelcome } = props;
+
   const user = useSelector(selectUser);
   const windowUI = useSelector(selectWindow);
   const music = useSelector(selectMusic);
+  const userActive = useSelector(selectUserActive); // (kept if used elsewhere)
   const dispatch = useDispatch();
-  const userActive = useSelector(selectUserActive);
   const navigate = useNavigate();
+
   const audioPlayer = useRef<ReactAudioPlayer>(null);
   const [showStart, setShowStart] = useState(true);
 
+  // set gallery id + attempt autoplay once mounted / id changes
   useEffect(() => {
-    // dispatch to set gallery id
-    dispatch(setGalleryId(props.id));
+    dispatch(setGalleryId(id));
+    audioPlayer.current?.audioEl?.current
+      ?.play()
+      .catch((err) => console.error("Audio playback failed:", err));
+  }, [id, dispatch]);
 
-    // Try to play audio after component mounts
-    if (audioPlayer.current) {
-      const audioElement = audioPlayer.current.audioEl.current;
-      if (audioElement) {
-        audioElement.play().catch((error) => {
-          console.error("Audio playback failed:", error);
-        });
+  // external welcome hides start screen
+  useEffect(() => {
+    if (showWelcome) setShowStart(false);
+  }, [showWelcome]);
+
+  // kick off composition when ready
+  useEffect(() => {
+    if (!showStart && !showWelcome) dispatch(startComposition());
+  }, [showWelcome, showStart, dispatch]);
+
+  const clickedUserChat = useCallback(
+    (otherUser: IUser) => {
+      if (otherUser.id !== user.id) {
+        dispatch(setUserActiveChat(otherUser));
+        if (windowUI.isMobile || windowUI.hasFooter)
+          dispatch(setOneMenu("chat"));
+        else dispatch(showChat());
       }
-    }
-  }, [props.id, dispatch]);
+    },
+    [dispatch, user.id, windowUI.isMobile, windowUI.hasFooter]
+  );
 
-  useEffect(() => {
-    if (props.showWelcome) {
-      setShowStart(false);
-    }
-  }, [props.showWelcome]);
-
-  useEffect(() => {
-    if (!showStart && !props.showWelcome) {
-      dispatch(startComposition());
-    }
-  }, [props.showWelcome, showStart]);
-
-  const clickedUserChat = (otherUser: IUser) => {
-    if (otherUser.id !== user.id) {
-      dispatch(setUserActiveChat(otherUser));
-      if (windowUI.isMobile || windowUI.hasFooter) dispatch(setOneMenu("chat"));
-      else dispatch(showChat());
-    }
-  };
-
-  const getVolume = () => {
-    const dj = getBar("DJ", props.id);
-    const djpos = p5ToUserCoords(
-      dj.x,
-      dj.y,
-      getCurrentPageGlobalConfig(props.id)
-    );
-    let dx = djpos.x - user.x;
-    let dy = djpos.y - user.y;
-    let dis = Math.sqrt(dx * dx + dy * dy);
-
+  const getVolume = useCallback(() => {
+    const dj = getBar("DJ", id);
+    const djpos = p5ToUserCoords(dj.x, dj.y, getCurrentPageGlobalConfig(id));
+    const dx = djpos.x - user.x;
+    const dy = djpos.y - user.y;
+    const dis = Math.sqrt(dx * dx + dy * dy);
     const minVol = 0.05;
     if (dis > 1000) return minVol;
     return mapVal(dis, 0, 1000, 1, minVol);
-  };
+  }, [id, user.x, user.y]);
 
-  const moveGalleryUser = (x: number, y: number) => {
-    const GlobalConfig = getCurrentPageGlobalConfig(props.id);
-    dispatch(setSketchVolume(getVolume()));
-    dispatch(moveUser({ x, y, galleryIndex: props.id }));
-    const newUser = { ...user };
-    newUser.x = x;
-    newUser.y = y;
-  };
+  const moveGalleryUser = useCallback(
+    (x: number, y: number) => {
+      dispatch(setSketchVolume(getVolume()));
+      dispatch(moveUser({ x, y, galleryIndex: id }));
+    },
+    [dispatch, getVolume, id]
+  );
 
-  const moveGalleryUserNormal = (x: number, y: number) => {
-    dispatch(setSketchVolume(getVolume()));
-    dispatch(moveUserNormal({ x, y, galleryIndex: props.id }));
-    const newUser = { ...user };
-    newUser.x = x;
-    newUser.y = y;
-  };
+  const moveGalleryUserNormal = useCallback(
+    (x: number, y: number) => {
+      dispatch(setSketchVolume(getVolume()));
+      dispatch(moveUserNormal({ x, y, galleryIndex: id }));
+    },
+    [dispatch, getVolume, id]
+  );
 
-  const userNewRoom = (room: string) => {
-    navigate(room);
-    dispatch(setUserRoomUrl({ roomUrl: room }));
-  };
+  const userNewRoom = useCallback(
+    (room: string) => {
+      navigate(room);
+      dispatch(setUserRoomUrl({ roomUrl: room }));
+    },
+    [dispatch, navigate]
+  );
 
-  const GalleryStyle = {
-    backgroundRepeat: "repeat",
-    backgroundSize: "600px 350px",
-    backgroundImage: "url(/backgroundImgs/wallpaper3.jpg)",
-  };
+  // style: compute once per gallery id (no mutation in switch)
+  const galleryStyle = useMemo<React.CSSProperties>(() => {
+    const base = {
+      backgroundRepeat: "repeat",
+      backgroundSize: "600px 350px",
+      backgroundImage: "url(/backgroundImgs/wallpaper3.jpg)",
+    } as React.CSSProperties;
+
+    switch (id) {
+      case RESIDENCY_ID:
+        return { ...base, backgroundImage: "none" };
+      case ASIRECALL_ID:
+        return {
+          ...base,
+          backgroundImage: "url(/backgroundImgs/asirecall_bg.png)",
+          backgroundSize: "500px 500px",
+        };
+      case FIELDSOFVIEW_ID:
+        return {
+          ...base,
+          backgroundImage: "url(/backgroundImgs/bg.png)",
+          backgroundSize: "700px 700px",
+        };
+      case HOMEOFFICES_ID:
+        return { ...base, backgroundImage: "none" };
+      case DEBOX_ID:
+        return {
+          ...base,
+          backgroundImage: "url(/backgroundImgs/debox_tex.webp)",
+          backgroundSize: "400px 400px",
+        };
+      default:
+        return base;
+    }
+  }, [id]);
 
   const getGallery = () => {
-    switch (props.id) {
+    switch (id) {
       case RESIDENCY_ID:
-        GalleryStyle.backgroundImage = "none";
         return (
           <GalleryResidency
-            users={props.users}
-            isClosed={props.isClosed}
+            users={users}
+            isClosed={isClosed}
             userMove={moveGalleryUser}
             userNewRoom={userNewRoom}
             loadingDone={() => dispatch(doneLoadingApp())}
@@ -166,12 +196,11 @@ const Gallery = (props: IGallery) => {
             setUserActive={clickedUserChat}
           />
         );
-
       case HOMEBODY_ID:
         return (
           <GallerySketch1
-            users={props.users}
-            isClosed={props.isClosed}
+            users={users}
+            isClosed={isClosed}
             userMove={moveGalleryUser}
             userNewRoom={userNewRoom}
             loadingDone={() => dispatch(doneLoadingApp())}
@@ -182,12 +211,10 @@ const Gallery = (props: IGallery) => {
           />
         );
       case ASIRECALL_ID:
-        GalleryStyle.backgroundImage = "url(/backgroundImgs/asirecall_bg.png)";
-        GalleryStyle.backgroundSize = "500px 500px";
         return (
           <GallerySketch2
-            users={props.users}
-            isClosed={props.isClosed}
+            users={users}
+            isClosed={isClosed}
             userMove={moveGalleryUser}
             userNewRoom={userNewRoom}
             loadingDone={() => dispatch(doneLoadingApp())}
@@ -198,13 +225,10 @@ const Gallery = (props: IGallery) => {
           />
         );
       case FIELDSOFVIEW_ID:
-        GalleryStyle.backgroundImage = "url(/backgroundImgs/bg.png)";
-        GalleryStyle.backgroundRepeat = "repeat";
-        GalleryStyle.backgroundSize = "700px 700px";
         return (
           <GallerySketch3
-            users={props.users}
-            isClosed={props.isClosed}
+            users={users}
+            isClosed={isClosed}
             userMove={moveGalleryUser}
             userNewRoom={userNewRoom}
             loadingDone={() => dispatch(doneLoadingApp())}
@@ -215,13 +239,12 @@ const Gallery = (props: IGallery) => {
           />
         );
       case HOMEOFFICES_ID:
-        GalleryStyle.backgroundImage = "none";
         return (
           <GalleryGreber
-            users={props.users}
+            users={users}
             showStart={showStart}
             hideStart={() => setShowStart(false)}
-            isClosed={props.isClosed}
+            isClosed={isClosed}
             userMove={moveGalleryUserNormal}
             userNewRoom={userNewRoom}
             loadingDone={() => dispatch(doneLoadingApp())}
@@ -233,14 +256,12 @@ const Gallery = (props: IGallery) => {
           />
         );
       case DEBOX_ID:
-        GalleryStyle.backgroundImage = "url(/backgroundImgs/debox_tex.webp)";
-        GalleryStyle.backgroundSize = "400px 400px";
-        // GalleryStyle.backgroundRepeat = "no-repeat";
         return (
           <Gallery5DeboxSketch
+            useRoomCoords={false}
             user={user}
-            users={props.users}
-            isClosed={props.isClosed}
+            users={users}
+            isClosed={isClosed}
             userMove={moveGalleryUser}
             userNewRoom={userNewRoom}
             loadingDone={() => dispatch(doneLoadingApp())}
@@ -248,13 +269,14 @@ const Gallery = (props: IGallery) => {
             isMobile={windowUI.isMobile}
             clickedUserChat={clickedUserChat}
             setUserActive={clickedUserChat}
+            roomPath={"/"}
           />
         );
       default:
         return (
           <GallerySketch1
-            users={props.users}
-            isClosed={props.isClosed}
+            users={users}
+            isClosed={isClosed}
             userMove={moveGalleryUser}
             userNewRoom={userNewRoom}
             loadingDone={() => dispatch(doneLoadingApp())}
@@ -267,32 +289,31 @@ const Gallery = (props: IGallery) => {
     }
   };
 
-  const getLoading = () => {
-    if (props.id == HOMEOFFICES_ID) {
-      return <LoadingPageHomeOffices showTitle={true} />;
-    }
-    return <LoadingPage />;
-  };
+  const getLoading = () =>
+    id === HOMEOFFICES_ID ? (
+      <LoadingPageHomeOffices showTitle />
+    ) : (
+      <LoadingPage />
+    );
 
   const getHomeOfficesAudio = () => {
     const pamURL =
       "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/homeoffices/sounds/";
-
-    let layout = user.roomLayout;
-    let slug = getLayoutSlug(layout);
-    return pamURL + slug + ".mp3";
+    const slug = getLayoutSlug(user.roomLayout);
+    return `${pamURL}${slug}.mp3`;
   };
 
   const getGalleryAudio = () => {
-    if (props.showWelcome || showStart) {
-      return null;
-    }
-    if (props.id == HOMEOFFICES_ID) {
+    if (showWelcome || showStart) return null;
+
+    const volume = music.isMuted ? 0 : getVolume();
+
+    if (id === HOMEOFFICES_ID) {
       return (
         <ReactAudioPlayer
           src={getHomeOfficesAudio()}
           autoPlay
-          volume={music.isMuted ? 0 : getVolume()}
+          volume={volume}
           controls={false}
           loop
           ref={audioPlayer}
@@ -305,7 +326,7 @@ const Gallery = (props: IGallery) => {
       <ReactAudioPlayer
         src={music.currentSongTitle}
         autoPlay
-        volume={music.isMuted ? 0 : getVolume()}
+        volume={volume}
         controls={false}
         loop
         ref={audioPlayer}
@@ -314,25 +335,21 @@ const Gallery = (props: IGallery) => {
   };
 
   const getMap = () => {
-    switch (props.id) {
+    switch (id) {
       case RESIDENCY_ID:
         return null;
       case HOMEBODY_ID:
-        return <MiniMap users={filterUsers(user, props.users)} x={20} y={20} />;
+        return <MiniMap users={filterUsers(user, users)} x={20} y={20} />;
       case ASIRECALL_ID:
-        return (
-          <MiniMapAIR users={filterUsers(user, props.users)} x={20} y={20} />
-        );
+        return <MiniMapAIR users={filterUsers(user, users)} x={20} y={20} />;
       case FIELDSOFVIEW_ID:
-        return (
-          <MiniMapFOV users={filterUsers(user, props.users)} x={20} y={20} />
-        );
+        return <MiniMapFOV users={filterUsers(user, users)} x={20} y={20} />;
       case HOMEOFFICES_ID:
         return <></>;
       case DEBOX_ID:
         return (
           <MiniMap
-            users={filterUsers(user, props.users).filter(
+            users={filterUsers(user, users).filter(
               (u) => u.roomUrl === "/" || u.roomUrl === "/debox"
             )}
             x={20}
@@ -344,17 +361,15 @@ const Gallery = (props: IGallery) => {
           />
         );
       default:
-        return <MiniMap users={filterUsers(user, props.users)} x={20} y={20} />;
+        return <MiniMap users={filterUsers(user, users)} x={20} y={20} />;
     }
   };
+
   return (
-    <div className="Gallery Sketch" style={GalleryStyle}>
-      <div id="p5_loading" className="loadingclass"></div>
-
+    <div className="Gallery Sketch" style={galleryStyle}>
+      <div id="p5_loading" className="loadingclass" />
       {getGallery()}
-
       {windowUI.loading ? getLoading() : getMap()}
-
       {getGalleryAudio()}
     </div>
   );

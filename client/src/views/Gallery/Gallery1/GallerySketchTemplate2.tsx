@@ -1,7 +1,13 @@
 import React from "react";
 import Sketch from "react-p5";
 import p5Types from "p5";
-import { IUser, IUsers, IWindowUI } from "../../../interfaces";
+import {
+  IGlobalConfig,
+  IRoom,
+  IUser,
+  IUsers,
+  IWindowUI,
+} from "../../../interfaces";
 
 //////////////
 // HELPERS
@@ -40,22 +46,26 @@ import {
   addBlindsDiv,
 } from "../Gallery4HomeOffices/functions/divs";
 
-import { filterGalleryUsers } from "../../../helpers/helpers";
+import {
+  filterGalleryUsers,
+  filterGalleryUsersPage,
+} from "../../../helpers/helpers";
 
 //////////////
 // CONFIG
-import { GlobalConfig } from "../../../data/Shows/HomeBody/GlobalConfig";
-import { barTenders, danceFloor } from "../../../data/Shows/HomeBody/BotConfig";
+import { GlobalConfig } from "../../../data/Shows/HomeOffices/GlobalConfig";
+// import { barTenders, danceFloor } from "../../../data/Shows/HomeBody/BotConfig";
 import { addBots } from "../../../App/useSockets";
-import { rooms as globalRooms } from "../../../data/Shows/HomeBody/RoomConfig";
+// import { rooms as globalRooms } from "../../../data/Shows/HomeBody/RoomConfig";
 import Dancer from "../components/p5/Dancer";
-import { displayDancers } from "./functions/emojis";
+// import { displayDancers } from "./functions/emojis";
 import { getNextStep } from "../Gallery4HomeOffices/functions/destination";
 
 //////////////
 // MOVEMENT
 
 interface ComponentProps {
+  useRoomCoords: boolean;
   users: IUsers;
   isClosed: boolean;
   userMove: (x: number, y: number) => void;
@@ -66,6 +76,7 @@ interface ComponentProps {
   isMobile: boolean;
   setUserActive: (user: IUser) => void;
   clickedUserChat: (user: IUser) => void;
+  roomPath: string;
 }
 
 // redux props
@@ -127,12 +138,13 @@ export class GallerySketchTemplate2 extends React.Component<GallerySketch2Props>
   // DRAGGABLE DIVS
   public divs = {};
 
-  public GlobalConfig: typeof GlobalConfig;
-  public barTenders: any = [];
+  public GlobalConfig: IGlobalConfig | null = null;
+  public barTenders: any = null;
 
-  public globalRooms = globalRooms;
+  public globalRooms: IRoom[] = [];
 
-  public danceFloor: { x: number; y: number; w: number; h: number };
+  public danceFloor: { x: number; y: number; w: number; h: number } | null =
+    null;
   public dancers: Dancer[] = [new Dancer(), new Dancer(), new Dancer()];
 
   public movement = {
@@ -144,11 +156,10 @@ export class GallerySketchTemplate2 extends React.Component<GallerySketch2Props>
     lastStepTime: 0,
   };
 
+  private otherEase = new Map<string, { x: number; y: number }>();
+
   constructor(props: GallerySketch2Props) {
     super(props);
-    this.GlobalConfig = GlobalConfig;
-    this.barTenders = barTenders;
-    this.danceFloor = danceFloor;
   }
 
   preload = (p5: p5Types) => {
@@ -225,15 +236,16 @@ export class GallerySketchTemplate2 extends React.Component<GallerySketch2Props>
   // INITIALIZE
   ////////////////////////////////////////////////////////////////////////
   setup = (p5: p5Types, canvasParentRef: Element) => {
-    const { user, userMove, loadingDone } = this.props;
+    const { loadingDone } = this.props;
+    const userPos = this.getUserStoreCoords();
     // use parent to render the canvas in this ref
     // (without that p5 will render the canvas outside of your component)
 
     this.initBuilding(p5);
     this.initEmojis(p5);
     this.initDivs(p5, this.GlobalConfig, this.galleryId);
-    this.stepTo.x = user.x;
-    this.stepTo.y = user.y;
+    this.stepTo.x = userPos.x;
+    this.stepTo.y = userPos.y;
     this.destination.x = this.stepTo.x;
     this.destination.y = this.stepTo.y;
 
@@ -246,7 +258,7 @@ export class GallerySketchTemplate2 extends React.Component<GallerySketch2Props>
     }
     p5.frameRate(20);
 
-    addBots(this.barTenders);
+    if (this.barTenders) addBots(this.barTenders);
 
     p5.pixelDensity(2);
 
@@ -260,6 +272,15 @@ export class GallerySketchTemplate2 extends React.Component<GallerySketch2Props>
     let x = Math.floor(p5.width / 2 + dx);
     let y = Math.floor(p5.height / 2 + dy);
     this.setUserPositionImmediate(x, y);
+  };
+
+  getUserStoreCoords = () => {
+    const { useRoomCoords, user } = this.props;
+    const pos = {
+      x: useRoomCoords ? user.roomX : user.x,
+      y: useRoomCoords ? user.roomY : user.y,
+    };
+    return pos;
   };
 
   initEmojis = (p5: p5Types) => {
@@ -319,24 +340,21 @@ export class GallerySketchTemplate2 extends React.Component<GallerySketch2Props>
 
   draw = (p5: p5Types) => {
     p5.push();
-    p5.translate(-p5.width / 2, -p5.height / 2);
-    const { user, users } = this.props;
+
+    const { user, roomPath } = this.props;
+
     p5.clear(0, 0, 0, 0);
     this.drawSceneBack(p5);
 
-    if (users && this.font) {
+    const usersRaw = this.getRoomUsers();
+    const usersEased = usersRaw ? this.getEasedUsers(usersRaw) : null;
+    if (usersEased && this.font) {
       p5.textFont(this.font, 34);
-      drawUsersRoomCoords(
-        user,
-        filterGalleryUsers(user, users),
-        "/emrys",
-        this.font,
-        p5,
-        []
-      );
+      drawUsersRoomCoords(user, usersEased, roomPath, this.font, p5, []);
     }
 
     p5.push();
+    p5.translate(-p5.width / 2, -p5.height / 2);
     p5.translate(this.movement.userEase.x, this.movement.userEase.y);
     drawUser(user, p5, []);
     p5.pop();
@@ -381,35 +399,27 @@ export class GallerySketchTemplate2 extends React.Component<GallerySketch2Props>
     p5.text(p5.round(p5.frameRate()), 30, 30);
   };
 
-  drawOverTarget = (p5: p5Types) => {
-    const { user, users } = this.props;
-    p5.push();
-
-    if (users) {
-      // p5.textFont(font, 34);
-      drawUsersRoomCoords(
-        user,
-        filterGalleryUsers(user, users),
-        "/emrys",
-        this.font,
-        p5,
-        []
-      );
-    }
-
-    p5.pop();
+  getRoomUsers = () => {
+    const { user, users, roomPath } = this.props;
+    const filteredUsers = filterGalleryUsersPage(user, users, roomPath);
+    // console.log(users, filteredUsers, this.props.roomPath);
+    return filteredUsers;
   };
 
-  drawOverUser = (p5: p5Types) => {
-    const { user } = this.props;
-    p5.push();
+  drawOverTarget = (p5: p5Types) => {};
 
-    const userEase = { x: 0, y: 0 };
+  drawOverUser = (p5: p5Types) => {
+    p5.push();
 
     // p5.textFont(font, 12);
     // displayFolderDivs(room, divs);
 
     p5.pop();
+  };
+
+  distanceToUser = (x: number, y: number) => {
+    const { userEase, destination, isWalking } = this.movement;
+    return p5Types.prototype.dist(userEase.x, userEase.y, x, y);
   };
 
   checkResize = (p5: p5Types) => {
@@ -501,11 +511,18 @@ export class GallerySketchTemplate2 extends React.Component<GallerySketch2Props>
   };
 
   triggerMove = (p5: p5Types) => {
-    const { user, users, setUserActive } = this.props;
+    const { user, setUserActive } = this.props;
+    const users = this.getRoomUsers();
+
     let userClicked = null;
 
     if (users)
-      userClicked = checkUserClickedNormalRoom(user, users, p5, "/emrys");
+      userClicked = checkUserClickedNormalRoom(
+        user,
+        users,
+        p5,
+        this.props.roomPath
+      );
     if (userClicked) {
       setUserActive(userClicked);
       return;
@@ -591,6 +608,64 @@ export class GallerySketchTemplate2 extends React.Component<GallerySketch2Props>
       y = p5.height - 50;
     }
     this.setUserPositionImmediate(x, y);
+  };
+
+  // key selector you already have on IUser; fall back to userName if needed
+  private getUserKey = (u: IUser) => u.id ?? u.userName ?? String(u);
+  private getEasedUsers = (users: IUsers): IUsers => {
+    const mode: "room" | "screen" = this.props.useRoomCoords
+      ? "room"
+      : "screen";
+
+    const easedUsers: IUsers = [];
+    const alpha = 0.15; // smoothing factor (0..1)
+    const snapIfDistGt = 300; // px
+
+    const liveKeys = new Set<string>();
+    const suffix = mode === "room" ? ":r" : ":s";
+
+    for (const u of users) {
+      const key = this.getUserKey(u) + suffix;
+      liveKeys.add(key);
+
+      // read target based on current mode, with safe fallbacks
+      const tx = mode === "room" ? u.roomX ?? u.x ?? 0 : u.x ?? u.roomX ?? 0;
+      const ty = mode === "room" ? u.roomY ?? u.y ?? 0 : u.y ?? u.roomY ?? 0;
+
+      // seed or update eased position
+      let s = this.otherEase.get(key);
+      if (!s) {
+        s = { x: tx, y: ty };
+        this.otherEase.set(key, s);
+      } else {
+        const dx = tx - s.x;
+        const dy = ty - s.y;
+        const d2 = dx * dx + dy * dy;
+        if (d2 > snapIfDistGt * snapIfDistGt) {
+          s.x = tx;
+          s.y = ty; // big teleport: snap
+        } else {
+          s.x += dx * alpha; // ease
+          s.y += dy * alpha;
+        }
+      }
+
+      // For rendering only: set the active coord pair AND mirror into the other pair
+      // so both draw paths (room coords vs screen coords) see eased values.
+      const eased =
+        mode === "room"
+          ? { ...u, roomX: s.x, roomY: s.y, x: s.x, y: s.y }
+          : { ...u, x: s.x, y: s.y, roomX: s.x, roomY: s.y };
+
+      easedUsers.push(eased);
+    }
+
+    // cleanup stale cache entries
+    for (const k of Array.from(this.otherEase.keys())) {
+      if (!liveKeys.has(k)) this.otherEase.delete(k);
+    }
+
+    return easedUsers;
   };
 
   doubleClicked = (p5: p5Types) => {

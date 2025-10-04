@@ -116,14 +116,14 @@ export const drawRooms = (
           user,
           roomTextures,
           otherImgs[1],
-          room.userName
+          room.userName || undefined
         );
       } else {
         room.displayArtistNotInRoom(
           user,
           roomTextures,
           otherImgs[0],
-          room.userName
+          room.userName || undefined
         );
       }
     }

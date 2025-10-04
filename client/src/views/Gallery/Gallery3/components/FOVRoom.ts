@@ -1,5 +1,5 @@
 import p5Types from "p5";
-import Room from "../../components/p5/Room";
+import p5Room from "../../components/p5/p5Room";
 import { GlobalConfig } from "../../../../data/Shows/FieldsOfView/GlobalConfig";
 import {
   artists,
@@ -12,7 +12,7 @@ import {
   doorLineCrossing,
 } from "../../components/p5/Boundaries";
 
-class FOVRoom extends Room {
+class FOVRoom extends p5Room {
   doorImg: p5Types.Image;
 
   constructor(p5: p5Types, i: number, door: p5Types.Image) {

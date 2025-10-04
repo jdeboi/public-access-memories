@@ -1,6 +1,5 @@
 import { IRoom, IArtist } from "../../../interfaces";
 import { ShowConfig } from "../../CurrentShow/ShowConfig";
-import { artist } from "../HomeOffices/RoomConfig";
 
 export const reservedArtists: IArtist[] = [];
 
@@ -398,6 +397,7 @@ export const artists: IArtist[] = [
     instaLink: "https://www.instagram.com/carolinesinders/",
     webLink: "https://carolinesinders.com/",
     medium: "AI, Data, Workshop",
+    customLink: "/sinders",
     description: (
       <>
         <p>
@@ -630,6 +630,7 @@ export const artists: IArtist[] = [
     nameLink: "emiliayang",
     instaLink: "https://www.instagram.com/rojapordentro",
     webLink: "https://www.emiliayang.org/",
+    customLink: "/yang",
     medium:
       "Community Based Practice, Digital, Documentary, Installation, Memory, Political, Public art",
     statement: (
@@ -770,7 +771,8 @@ for (let i = 0; i < artists.length; i++) {
     y: 0,
     dir: "bottom",
     artistID: getArtistID(i),
-    link: `/${ShowConfig.link}/rooms/${getArtistID(i)}`,
+    link:
+      artists[i].customLink ?? `/${ShowConfig.link}/rooms/${getArtistID(i)}`,
   };
   roomsArray.push(roomDeets);
 }

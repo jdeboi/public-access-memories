@@ -5,9 +5,9 @@ import {
   roomConfig,
 } from "../../../../data/Shows/Residency/RoomConfig";
 import { p5ToUserCoords } from "../../../../helpers/coordinates";
-import Room from "../../components/p5/Room";
+import p5Room from "../../components/p5/p5Room";
 
-export default class ResidencyRoom extends Room {
+export default class ResidencyRoom extends p5Room {
   constructor(p5, door, i) {
     super(p5, door, i, GlobalConfig, artists, rooms, roomConfig);
     this.room = rooms[i];

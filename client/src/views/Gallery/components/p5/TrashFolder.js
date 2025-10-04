@@ -1,5 +1,5 @@
+import { mouseToWorld } from "../../../../helpers/coordinates";
 import ShadowDraggable from "./Draggable/ShadowDraggable";
-import { mouseToWorld } from "../../../../../helpers/coordinates";
 
 export default class TrashFolder extends ShadowDraggable {
   // constructor(id, x, y, w, h, p5, content, shadow) {
@@ -9,10 +9,11 @@ export default class TrashFolder extends ShadowDraggable {
   displayContent(userX, userY) {
     this.displayShadow();
     this.displaySolidBack(this.p5.color(255));
+
     this.p5.push();
 
     this.p5.translate(0, this.barH);
-    this.p5.image(this.content, 0, 0, this.w, this.h);
+    // this.p5.image(this.content, 0, 0, this.w, this.h);
     this.displayLabels();
     this.p5.pop();
     this.displayFrame();
@@ -23,15 +24,15 @@ export default class TrashFolder extends ShadowDraggable {
     this.p5.noStroke();
     this.p5.push();
     this.p5.translate(54, 38);
-    let dy = 40;
-    let labels = ["2020.pdf", "120K.banana", "thirsty.txt"];
-    if (this.id == 1) labels = ["getcrunk.exe", "oldnews.pdf", "rona.dmg"];
-    else if (this.id == 0) labels = ["rona.dmg", "grad_pdfs", "dump"];
+    // let dy = 40;
+    // let labels = ["2020.pdf", "120K.banana", "thirsty.txt"];
+    // if (this.id == 1) labels = ["getcrunk.exe", "oldnews.pdf", "rona.dmg"];
+    // else if (this.id == 0) labels = ["rona.dmg", "grad_pdfs", "dump"];
 
-    let index = 0;
-    for (const lab of labels) {
-      this.p5.text(lab, 0, dy * index++);
-    }
+    // let index = 0;
+    // for (const lab of labels) {
+    //   this.p5.text(lab, 0, dy * index++);
+    // }
     this.p5.pop();
   }
 

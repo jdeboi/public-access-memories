@@ -48,8 +48,9 @@ export const addLightDivs = (
     { x: p5.width * 0.82, y: 200, isFlipped: false, room: HOME_PAGE },
   ];
   for (let i = 0; i < lightsP5.length; i++) {
-    let light = new Light(p5, i, lightImgs, lightsP5, GlobalConfig);
-    const { x, y, room } = lightsP5[i];
+    const { x, y, isFlipped, room } = lightsP5[i];
+    let light = new Light(i, x, y, isFlipped, lightImgs, p5, GlobalConfig);
+
     light.setNormal(x, y, room);
     divs.lights.push(light);
   }
@@ -573,7 +574,7 @@ export const checkDivPress = (room: number, divs: any) => {
   return false;
 };
 
-const   checkDiv = (room: number, div: any) => {
+const checkDiv = (room: number, div: any) => {
   if (div.checkButtonsNormal()) {
     return true;
   } else if (div.checkDraggingNormal(room)) {

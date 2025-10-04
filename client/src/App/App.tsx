@@ -65,9 +65,10 @@ import {
   HOMEOFFICES_ID,
 } from "../data/CurrentShow/GalleryConfig";
 import Residency from "../views/pages/Residency/Residency";
-import EmrysGalleryRoom from "../views/rooms/R_01/EmrysGalleryRoom";
 import HostBotRoom from "../views/Gallery/Gallery0Residency/rooms/HostBotRoom";
 import OpenCall from "../views/pages/OpenCall/OpenCall";
+import GalleryRoom from "../views/rooms/GalleryRoom";
+import ApproveSindersSubmissions from "../views/rooms/R_06/ApproveSindersSubmissions";
 
 function App() {
   const user = useSelector(selectUser);
@@ -88,6 +89,14 @@ function App() {
   const [hasLoadedRoom, setHasLoadedRoom] = useState(false);
   const [currentPage, setCurrentPage] = useState(location.pathname);
 
+  useEffect(() => {
+    // initialize roomUrl from the URL on first mount
+    if (user.roomUrl !== location.pathname) {
+      dispatch(setUserRoomUrl({ roomUrl: location.pathname }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Google Analytics - when route changes
   useEffect(() => {
     if (process.env.NODE_ENV == "production")
@@ -102,7 +111,7 @@ function App() {
   // Make sure sockets update when user does
   useEffect(() => {
     socket.emit("setUser", user);
-  }, [{ ...user }]);
+  }, [user]);
 
   // TODO - reason for class components?
   const setUsersData = (data: IUsers) => {
@@ -157,13 +166,11 @@ function App() {
     const hasAv = Cookies.get("hasAvatar");
 
     if (hasAv) {
-      const newUser = { ...user };
-      let userName = Cookies.get("userName");
-      let avatar = Cookies.get("avatar");
+      const userName = Cookies.get("userName");
+      const avatar = Cookies.get("avatar");
       if (userName && avatar) {
-        newUser.userName = userName;
-        newUser.avatar = avatar;
-        dispatch(setUser(newUser));
+        const roomUrl = location.pathname;
+        dispatch(setUser({ ...user, userName, avatar, roomUrl }));
         setHasAvatar(true);
         setShowWelcome(false);
       } else {
@@ -345,11 +352,28 @@ function App() {
           <Route path="/test/rooms/:id" element={<TestRoom />} />
           <Route path={`/${ShowConfig.link}/rooms/:id`} element={<Room />} />
           <Route
-            path="/emrys"
+            path="/sinders"
+            element={
+              <GalleryRoom
+                id={0}
+                path={"/sinders"}
+                users={users}
+                isClosed={isClosed}
+                showWelcome={showWelcome}
+              />
+            }
+          />
+          <Route
+            path="/approvesinders"
+            element={<ApproveSindersSubmissions />}
+          />
+          <Route
+            path="/yang"
             element={
               !ShowConfig.isClosed ? (
-                <EmrysGalleryRoom
-                  id={0}
+                <GalleryRoom
+                  id={1}
+                  path={"/yang"}
                   users={users}
                   isClosed={isClosed}
                   showWelcome={showWelcome}
@@ -359,7 +383,7 @@ function App() {
               )
             }
           />
-          <Route
+          {/* <Route
             path="/lounge"
             element={
               !ShowConfig.isClosed ? (
@@ -373,7 +397,7 @@ function App() {
                 <Room />
               )
             }
-          />
+          /> */}
 
           <Route path="/pastexhibitions" element={<PastExhibitions />} />
           <Route
