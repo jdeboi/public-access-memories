@@ -22,7 +22,7 @@ import { getBar } from "../../data/CurrentShow/BotConfig";
 import { p5ToUserCoords } from "../../helpers/coordinates";
 import GalleryYangSketch from "./R_09/GalleryYangSketch";
 import GallerySinders from "./R_06/GallerySinders";
-
+//
 interface IGallery {
   id: number;
   path: string;
