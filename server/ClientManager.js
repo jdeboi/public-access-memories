@@ -16,12 +16,31 @@ const USER_UPDATE_INTERVAL = 100;
 // basically I just need to emit a notice anytime anyone
 // joins, regardless of register? that is used a flag
 
+// server
+const stablePick = (u) => ({
+  id: u.id,
+  userName: u.userName,
+  roomUrl: u.roomUrl,
+  x: u.x,
+  y: u.y, // or whatever fields matter
+  muted: u.muted,
+});
+
+let lastDigest = "";
+
 setInterval(() => {
   try {
     const c = Array.from(clients.values());
-    io.emit("usersUpdate", c);
-  } catch (error) {
-    console.log("error updating users", error);
+    // build a stable, small fingerprint
+    const digest = JSON.stringify(
+      c.map(stablePick).sort((a, b) => a.id.localeCompare(b.id))
+    );
+    if (digest !== lastDigest) {
+      lastDigest = digest;
+      io.emit("usersUpdate", c); // or io.to(room).emit(...) per room
+    }
+  } catch (err) {
+    console.log("error updating users", err);
   }
 }, USER_UPDATE_INTERVAL);
 

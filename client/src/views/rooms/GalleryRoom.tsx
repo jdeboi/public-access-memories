@@ -22,6 +22,7 @@ import { getBar } from "../../data/CurrentShow/BotConfig";
 import { p5ToUserCoords } from "../../helpers/coordinates";
 import GalleryYangSketch from "./R_09/GalleryYangSketch";
 import GallerySinders from "./R_06/GallerySinders";
+import GalleryBriz from "./R_01/GalleryBriz";
 //
 interface IGallery {
   id: number;
@@ -121,6 +122,12 @@ const GalleryRoom = (props: IGallery) => {
             rgba(140,195,255,0.95) 100%
           )`,
         };
+      case 2:
+        return {
+          background: `black`,
+          backgroundImage: "url(/backgroundImgs/debox_tex.webp)",
+          backgroundSize: "400px 400px",
+        };
 
       default:
         return base;
@@ -167,6 +174,24 @@ const GalleryRoom = (props: IGallery) => {
       case 1:
         return (
           <GalleryYangSketch
+            useRoomCoords={true}
+            users={props.users}
+            isClosed={props.isClosed}
+            userNewRoom={() => console.log("going to a new room...")}
+            isMobile={isMobile}
+            user={user}
+            toggleOutside={() => console.log("toggle outside")}
+            userMove={moveGalleryUserRoom}
+            loadingDone={() => dispatch(doneLoadingApp())}
+            // windowUI={windowUI}
+            clickedUserChat={clickedUserChat}
+            setUserActive={clickedUserChat}
+            roomPath={props.path}
+          />
+        );
+      case 2:
+        return (
+          <GalleryBriz
             useRoomCoords={true}
             users={props.users}
             isClosed={props.isClosed}

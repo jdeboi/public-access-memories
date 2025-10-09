@@ -38,6 +38,7 @@ import { filterGalleryUsersPage } from "../../../helpers/helpers";
 // CONFIG
 import { addBots } from "../../../App/useSockets";
 import Dancer from "../components/p5/Dancer";
+import { userToWorldCoords } from "../../../helpers/coordinates";
 
 //////////////
 // MOVEMENT
@@ -128,6 +129,8 @@ export class GallerySketchTemplate1<
   public danceFloor: { x: number; y: number; w: number; h: number } | null =
     null;
   public dancers: Dancer[] = [new Dancer(), new Dancer(), new Dancer()];
+
+  private easeTauSec = 0.12;
 
   constructor(props: P) {
     super(props);
@@ -242,10 +245,10 @@ export class GallerySketchTemplate1<
     if (this.font) {
       p5.textFont(this.font, 14);
     }
-    p5.frameRate(20);
+    p5.frameRate(30);
     loadingDone();
 
-    if (this.barTenders) addBots(this.barTenders);
+    // if (this.barTenders) addBots(this.barTenders);
   };
 
   setupContent = (p5: p5Types) => {
@@ -423,7 +426,6 @@ export class GallerySketchTemplate1<
     p5.translate(p5.windowWidth / 2, p5.windowHeight / 2);
     p5.translate(-this.userEase.x, -this.userEase.y);
     this.worldTranslate(p5);
-
     if (usersEased) {
       drawUsers(
         this.userEase,
@@ -431,7 +433,8 @@ export class GallerySketchTemplate1<
         this.font,
         p5,
         this.barEmojis,
-        this.GlobalConfig
+        this.GlobalConfig,
+        this.props.roomPath
       );
     }
 
@@ -494,11 +497,12 @@ export class GallerySketchTemplate1<
   };
 
   distanceToUser = (x: number, y: number) => {
+    const pos = userToWorldCoords(x, y, this.GlobalConfig);
     return p5Types.prototype.dist(
       this.userEase.x,
       this.userEase.y,
-      x - 50,
-      y - 50
+      pos.x - 50,
+      pos.y - 50
     );
   };
 
@@ -578,22 +582,23 @@ export class GallerySketchTemplate1<
   };
 
   updateUserEase = (p5: p5Types) => {
-    const { userMove } = this.props;
-    if (!reachedDestination(this.userEase, this.stepTo)) {
-      let amt = 0.7;
-      this.userEase.x = this.userEase.x * amt + this.stepTo.x * (1 - amt);
-      this.userEase.y = this.userEase.y * amt + this.stepTo.y * (1 - amt);
-      let d = p5.dist(
-        this.userEase.x,
-        this.userEase.y,
-        this.stepTo.x,
-        this.stepTo.y
-      );
-      if (d < 15) {
-        this.userEase.x = this.stepTo.x;
-        this.userEase.y = this.stepTo.y;
-        userMove(this.userEase.x, this.userEase.y);
-      }
+    // time-based smoothing (EMA)
+    const dt = Math.min(0.05, Math.max(0.001, p5.deltaTime / 1000)); // clamp 1–50ms
+    const k = 1 - Math.exp(-dt / this.easeTauSec); // convert tau -> per-frame gain
+
+    this.userEase.x += (this.stepTo.x - this.userEase.x) * k;
+    this.userEase.y += (this.stepTo.y - this.userEase.y) * k;
+
+    const d = p5.dist(
+      this.userEase.x,
+      this.userEase.y,
+      this.stepTo.x,
+      this.stepTo.y
+    );
+    if (d < 0.5) {
+      this.userEase.x = this.stepTo.x;
+      this.userEase.y = this.stepTo.y;
+      this.props.userMove(this.userEase.x, this.userEase.y);
     }
   };
 
@@ -720,9 +725,11 @@ export class GallerySketchTemplate1<
 
   displayFrameRate = (p5: p5Types) => {
     p5.fill(255);
+
     p5.noStroke();
-    p5.textSize(20);
-    p5.text(p5.round(p5.frameRate()), 60 - p5.width / 2, 60 - p5.height / 2);
+    if (this.font) p5.textFont(this.font, 20);
+    p5.textSize(30);
+    p5.text(p5.round(p5.frameRate()), 100, 100);
   };
 
   mouseStep = () => {

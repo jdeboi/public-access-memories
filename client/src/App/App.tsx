@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import { Route, Routes, useLocation } from "react-router-dom";
+import isEqual from "fast-deep-equal";
 
 // interfaces
 import { ShowConfig } from "../data/CurrentShow/ShowConfig";
@@ -113,12 +114,26 @@ function App() {
     socket.emit("setUser", user);
   }, [user]);
 
-  // TODO - reason for class components?
-  const setUsersData = (data: IUsers) => {
-    setUsers(data);
-  };
+  // stable setter that bails on equal
+  const setUsersData = useCallback((incoming: IUsers) => {
+    setUsers((prev) => {
+      // shallow-ish compare by id and a few fields; or deep-equal if small
+      if (isEqual(prev, incoming)) return prev; // <- prevents re-render
+      return incoming;
+    });
+  }, []);
 
   const socketSetup = useSockets({ users, setUsersData });
+
+  useEffect(() => {
+    // attach all socket listeners
+    const cleanup = socketSetup();
+
+    // detach listeners when component unmounts or when socketSetup changes
+    return () => {
+      cleanup?.();
+    };
+  }, [socketSetup]);
 
   useEffect(() => {
     socketSetup();
@@ -352,6 +367,18 @@ function App() {
           <Route path="/test/rooms/:id" element={<TestRoom />} />
           <Route path={`/${ShowConfig.link}/rooms/:id`} element={<Room />} />
           <Route
+            path="/briz"
+            element={
+              <GalleryRoom
+                id={2}
+                path={"/briz"}
+                users={users}
+                isClosed={isClosed}
+                showWelcome={showWelcome}
+              />
+            }
+          />
+          <Route
             path="/sinders"
             element={
               <GalleryRoom
@@ -383,21 +410,6 @@ function App() {
               )
             }
           />
-          {/* <Route
-            path="/lounge"
-            element={
-              !ShowConfig.isClosed ? (
-                <HostBotRoom
-                  id={0}
-                  users={users}
-                  isClosed={isClosed}
-                  showWelcome={showWelcome}
-                />
-              ) : (
-                <Room />
-              )
-            }
-          /> */}
 
           <Route path="/pastexhibitions" element={<PastExhibitions />} />
           <Route
@@ -432,8 +444,6 @@ function App() {
       {/* check if user hasn't logged in and on a basic page */}
       {getSignedInComponents()}
       {getRoomDecal()}
-      {/* <AudioChat user={user} />
-            <MicrophoneBarBottom /> */}
     </div>
   );
 }

@@ -107,12 +107,20 @@ export function drawUser(user, p5, imgs) {
   p5.pop();
 }
 
-export function drawUsers(userEase, users, font1, p5, imgs, GlobalConfig) {
+export function drawUsers(
+  userEase,
+  users,
+  font1,
+  p5,
+  imgs,
+  GlobalConfig,
+  url = "/"
+) {
   p5.fill(255);
   p5.noStroke();
   p5.textFont("times", iconSize);
   for (const otherUser of users) {
-    if (otherUser.roomUrl === "/" && otherUser.userName) {
+    if (otherUser.roomUrl === url && otherUser.userName) {
       let coord = domCoordsToP5World(otherUser.x, otherUser.y, GlobalConfig);
       let ava = otherUser.avatar;
 

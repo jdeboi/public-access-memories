@@ -128,9 +128,67 @@ export const artists: IArtist[] = [
     thumb: "nick-briz-thumb.jpg",
     nameLink: "briz",
     instaLink: "nbriz",
+    customLink: "/briz",
     webLink: "https://nickbriz.com/",
     medium: "AI, Code, Video",
-    // description: <p></p>,
+    description: (
+      <>
+        <p>
+          The work presented in this exhibition is a series of perspectives,
+          which i'm calling &lt;VECTORS&gt;, from which we might begin to
+          consider how, as glitch artists, we might approach producing glitch
+          art w/artificial neural networks: the algorithms beginning to define
+          this latest era of AI + Machine Learning.<a href="#">[1]</a>
+        </p>
+        <p>
+          Though I will be focusing primarily on images && communicating through
+          text, it’s important to remember that glitch art can be experienced in
+          multiple dimensions. Glitch art is an interdisciplinary + multi-modal
+          artistic practice, genre, tag, scene, community && aesthetic. Diff
+          artists have diff ways of defining the practice as well as its central
+          concept. My fav definition of a g̴̤̀l̵̹̓i̶̤̍t̴̫̕c̵̫̃ḥ̸̕ is: an unexpected moment in a
+          system that, by catching us off-guard, reveals aspects of that system
+          that might otherwise have gone unnoticed. At its best, a glitch is an
+          epiphany. My goal w/these &lt;VECTORS&gt; is to suggest ways we might
+          set ourselves up for revelatory surprise. U might find some of the
+          &lt;vector-views&gt; (the accompanying images) compelling, but it's in
+          the process of creating glitch art that we develop a visceral
+          understanding of the logic + politics mediating our digital lives, &&
+          it's this practice i'm aiming on expanding through these
+          &lt;VECTORS&gt;. These are not prescriptions, there is no "right way"
+          to make glitch art, there are only critical, experimental && playful
+          ways of engaging systems the "wrong way".
+        </p>
+        <div className="text-sm text-slate-300 mt-6">
+          [1] As w/most my glitch thoughts, these are heavily informed by the
+          community, in particularly by conversations i’ve had w/other glitch
+          artists during{" "}
+          <a
+            href="https://not.gli.tc/h"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            https://not.gli.tc/h
+          </a>{" "}
+          in Chicago, as well as on our
+          <a
+            href="https://discord.com/channels/1063518177016954960/1072355936036999259"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            💻🤖🧠🦾👨🏻💻artificial-unintelligence
+          </a>{" "}
+          thread on our discord server, which all are welcome to{" "}
+          <a
+            href="https://discord.gg/q4mS3nvrn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            join
+          </a>
+        </div>
+      </>
+    ),
     statement: (
       <p>
         my artistic practice has always been a pedagogical one. whether acting
@@ -756,6 +814,7 @@ export const artists: IArtist[] = [
 // const roomIds = artists.map((artist) => artist.roomID);
 
 const roomsArray: IRoom[] = [];
+
 function getArtistID(roomID: number) {
   let artist = artists.find((artist) => artist.roomID === roomID);
   if (artist) {

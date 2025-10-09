@@ -139,6 +139,10 @@
   -o-transform: rotate(-90deg);
 }
 
+.loadingclass {
+  display: none;
+}
+
 @font-face {
   font-family: consoleFont;
   src: url(./assets/fonts/sysfont/sysfont.otf);
