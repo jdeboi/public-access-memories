@@ -22,6 +22,7 @@ export default function WindowsHeaderBox({
       {/* 1 col on xs/sm → 2 cols at md+ */}
       <div className="grid gap-5 p-5 items-start bg-slate-900/20 sm:grid-cols-[250px_1fr]">
         {/* Thumbnail (stacks on top on small, fixed column at md+) */}
+        {/* why isn't small working when deployed? */}
         {thumbnail && (
           <div className="w-full sm:w-[250px] sm:min-w-[250px]">
             {link ? (

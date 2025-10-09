@@ -61,10 +61,10 @@
   top: 58px;
 }
 .Header.mobile .right .submenu ul {
-  width: 140px;
+  width: 90vw;
   border-top-left-radius: 8px;
   border-top-right-radius: 0px;
-  transform: translate(-95px, 0px);
+  transform: translate(-80vw, 0px);
 }
 .Header.mobile .apple {
   font-size: 26px;
@@ -185,12 +185,9 @@
   overflow: hidden;
   position: absolute;
   top: 32px;
-  width: auto;
+  width: 200px;
   white-space: nowrap;
   z-index: 200;
-}
-.Header .submenu ul.mobile {
-  max-height: 250px;
 }
 .Header .submenu ul.mobile li {
   border-bottom: 1px solid white;
