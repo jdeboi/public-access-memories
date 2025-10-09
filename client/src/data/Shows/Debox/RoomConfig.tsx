@@ -128,7 +128,7 @@ export const artists: IArtist[] = [
     thumb: "nick-briz-thumb.jpg",
     nameLink: "briz",
     instaLink: "nbriz",
-    customLink: "/briz",
+    // customLink: "/briz",
     webLink: "https://nickbriz.com/",
     medium: "AI, Code, Video",
     description: (
@@ -455,7 +455,7 @@ export const artists: IArtist[] = [
     instaLink: "https://www.instagram.com/carolinesinders/",
     webLink: "https://carolinesinders.com/",
     medium: "AI, Data, Workshop",
-    customLink: "/sinders",
+    // customLink: "/sinders",
     description: (
       <>
         <p>
@@ -688,7 +688,7 @@ export const artists: IArtist[] = [
     nameLink: "emiliayang",
     instaLink: "https://www.instagram.com/rojapordentro",
     webLink: "https://www.emiliayang.org/",
-    customLink: "/yang",
+    // customLink: "/yang",
     medium:
       "Community Based Practice, Digital, Documentary, Installation, Memory, Political, Public art",
     statement: (
