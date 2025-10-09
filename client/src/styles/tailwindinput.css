@@ -1,1 +1,4 @@
 @import "tailwindcss";
+/* Tell Tailwind where to scan for class names (v4) */
+@source "./public/index.html";
+@source "./src/**/*.{js,jsx,ts,tsx,mdx}";

@@ -56,11 +56,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build:css": "tailwindcss -i ./src/styles/tailwindinput.css -o ./src/styles/tailwind.css --minify",
+    "build": "npm run build:css && react-scripts build",
+    "tw:watch": "tailwindcss -i ./src/styles/tailwindinput.css -o ./src/styles/tailwind.css --watch",
+    "dev": "concurrently \"npm:tw:watch\" \"react-scripts start\"",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "tw:watch": "npx @tailwindcss/cli -i ./src/styles/tailwindinput.css -o ./src/styles/tailwind.css --watch",
-    "dev": "concurrently \"npm:tw:watch\" \"react-scripts start\""
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
