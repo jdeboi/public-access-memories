@@ -335,11 +335,11 @@ export const BrizData: BrizQuadType[] = [
       <>
         <p>
           As explained in &lt;VECTOR 1&gt;, the majority of AI generated images
-          today are created using diffusion models, not hacked image
-          classifiers. While it is *technically* possible to setup+train ur own
-          diffusion model from scratch, the vast majority of AI generated images
-          today are being produced w/user facing applications created/controlled
-          by companies like{" "}
+          today are created using diffusion models, not hacked image classifiers
+          like &lt;VECTOR 2&gt;. While it is *technically* possible to
+          setup+train ur own diffusion model from scratch, the vast majority of
+          AI generated images today are being produced w/user facing
+          applications created/controlled by companies like{" "}
           <a
             href="https://www.midjourney.com/"
             target="_blank"
@@ -417,7 +417,7 @@ export const BrizData: BrizQuadType[] = [
           strictly binary, there's a gradient of modes between the push-button
           prompt boxes of DALL-E used in &lt;VECTOR 1&gt; && de-constructing ur
           own neural network in python code like the researchers ref’d in
-          &lt;VECTOR&gt;. By embracing open source alternatives--like{" "}
+          &lt;VECTOR 2&gt;. By embracing open source alternatives--like{" "}
           <a
             href="https://huggingface.co/docs/diffusers/v0.14.0/en/api/pipelines/stable_diffusion/overview"
             target="_blank"
@@ -561,7 +561,7 @@ export const BrizData: BrizQuadType[] = [
           most common patterns of text found in its training data, so it's
           reasonable to expect these to mirror the most commonly used words.
           Which is why researchers (inspired by the Google researchers ref'd in
-          &lt;VECTOR&gt;) where surprised to find groupings of{" "}
+          &lt;VECTOR 2&gt;) where surprised to find groupings of{" "}
           <a
             href="https://www.alignmentforum.org/posts/aPeJE8bSo6rAFoLqg/solidgoldmagikarp-plus-prompt-generation"
             target="_blank"

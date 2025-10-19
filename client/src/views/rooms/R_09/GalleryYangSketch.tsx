@@ -29,6 +29,10 @@ export default class GalleryYangSketch extends GallerySketchTemplate1 {
     this.limits = getLimits(0, worldW, 0, worldH);
   };
 
+  add(x: number, y: number) {
+    
+  }
+
   initDivs = (p5: p5Types) => {
     this.divs.candles = [];
     const candlePos = [{ x: 0, y: 0 }];

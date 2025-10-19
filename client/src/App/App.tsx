@@ -394,7 +394,7 @@ function App() {
             path="/approvesinders"
             element={<ApproveSindersSubmissions />}
           />
-          <Route
+          {/* <Route
             path="/yang"
             element={
               !ShowConfig.isClosed ? (
@@ -409,7 +409,7 @@ function App() {
                 <Room />
               )
             }
-          />
+          /> */}
 
           <Route path="/pastexhibitions" element={<PastExhibitions />} />
           <Route

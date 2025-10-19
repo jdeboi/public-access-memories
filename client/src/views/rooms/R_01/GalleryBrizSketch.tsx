@@ -64,8 +64,8 @@ export default class GalleryBrizSketch extends GallerySketchTemplate1<GalleryBri
 
       const didacticDiv = new Didactic(
         0,
-        (index == 1 || index == 2 ? -d - w : d) + centerWorld.cx,
-        (index == 0 || index == 1 ? d : -d - w) + centerWorld.cy,
+        (index == 0 || index == 3 ? -d - w : d) + centerWorld.cx,
+        (index == 2 || index == 3 ? d : -d - w) + centerWorld.cy,
         w,
         w,
         data,
@@ -115,37 +115,36 @@ export default class GalleryBrizSketch extends GallerySketchTemplate1<GalleryBri
   }
 
   private quadrantIndexFromAngle(p5: p5Types, a: number) {
-    if (a >= 0 && a < p5.HALF_PI) return 0; // NE
-    if (a >= p5.HALF_PI && a < p5.PI) return 1; // NW
-    if (a >= p5.PI && a < 1.5 * p5.PI) return 2; // SW
-    return 3; // SE
+    if (a >= 0 && a < p5.HALF_PI) return 2;
+    if (a >= p5.HALF_PI && a < p5.PI) return 3;
+    if (a >= p5.PI && a < 1.5 * p5.PI) return 0;
+    return 1;
   }
 
   private quadrantMidAngle(p5: p5Types, i: number) {
     return [
-      p5.QUARTER_PI,
-      3 * p5.QUARTER_PI,
       5 * p5.QUARTER_PI,
       7 * p5.QUARTER_PI,
+
+      p5.QUARTER_PI,
+      3 * p5.QUARTER_PI,
     ][i];
   }
 
   // -------------------- drawing --------------------
   private drawWireframe(p5: p5Types, cx: number, cy: number, R: number) {
     const { r, a } = this.posPolar(p5, cx, cy);
-    const rings = p5.sin(p5.frameCount / 400) * 30 + 5; //p5.constrain(Math.floor(p5.map(r, 0, R, 3, 10)), 3, 102);
-    const rays = p5.constrain(Math.floor(p5.map(r, 0, R, 6, 20)), 6, 28);
+    const rings = 20;
+    const rays = 20;
 
     p5.push();
     p5.translate(cx, cy);
     p5.noFill();
 
     for (let i = 1; i <= rings; i++) {
-      const rr = (i / rings) * R * 10;
-
-      const alphaVal = p5.sin(p5.frameCount / 200 + i) * 80 + 100;
+      const alphaVal = p5.sin(p5.frameCount / 20 + i) * 80 + 100;
       p5.stroke(0, 255, 0, alphaVal);
-      p5.circle(0, 0, rr * 2);
+      p5.circle(0, 0, i * 200);
     }
 
     p5.stroke(0, 255, 0, 100);
@@ -169,18 +168,19 @@ export default class GalleryBrizSketch extends GallerySketchTemplate1<GalleryBri
     p5.fill(0, 100);
     p5.circle(cx, cy, R * 2);
 
-    if (this.activeQi !== -1) {
-      p5.push();
-      p5.translate(cx, cy);
-      p5.noStroke();
-      p5.fill(0, 40);
-      const starts = [0, p5.HALF_PI, p5.PI, 1.5 * p5.PI];
-      const s = starts[this.activeQi];
-      p5.arc(0, 0, R * 2, R * 2, s, s + p5.HALF_PI, p5.PIE);
-      p5.pop();
-    }
+    // if (this.activeQi !== -1) {
+    //   p5.push();
+    //   p5.translate(cx, cy);
+    //   p5.noStroke();
+    //   p5.fill(0, 40);
+    //   // const starts = [0, p5.HALF_PI, p5.PI, 1.5 * p5.PI];
+    //   const s = this.quadrantMidAngle(p5, this.activeQi) - p5.QUARTER_PI;
+    //   p5.fill("red");
+    //   p5.arc(0, 0, R * 2, R * 2, s, s + p5.HALF_PI, p5.PIE);
+    //   p5.pop();
+    // }
 
-    p5.stroke(255, 50);
+    p5.stroke(0, 255, 0, 50);
     p5.strokeWeight(1);
     p5.line(cx - R, cy, cx + R, cy);
     p5.line(cx, cy - R, cx, cy + R);
