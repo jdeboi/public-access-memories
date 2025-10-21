@@ -369,33 +369,33 @@ function App() {
           <Route
             path="/briz"
             element={
-              isProduction && ShowConfig.isClosed ? (
-                <Room />
-              ) : (
-                <GalleryRoom
-                  id={2}
-                  path={"/briz"}
-                  users={users}
-                  isClosed={isClosed}
-                  showWelcome={showWelcome}
-                />
-              )
+              // isProduction && ShowConfig.isClosed ? (
+              //   <Room />
+              // ) : (
+              <GalleryRoom
+                id={2}
+                path={"/briz"}
+                users={users}
+                isClosed={isClosed}
+                showWelcome={showWelcome}
+              />
+              // )
             }
           />
           <Route
             path="/sinders"
             element={
-              isProduction && ShowConfig.isClosed ? (
-                <Room />
-              ) : (
-                <GalleryRoom
-                  id={0}
-                  path={"/sinders"}
-                  users={users}
-                  isClosed={isClosed}
-                  showWelcome={showWelcome}
-                />
-              )
+              // isProduction && ShowConfig.isClosed ? (
+              //   <Room />
+              // ) : (
+              <GalleryRoom
+                id={0}
+                path={"/sinders"}
+                users={users}
+                isClosed={isClosed}
+                showWelcome={showWelcome}
+              />
+              // )
             }
           />
           <Route
