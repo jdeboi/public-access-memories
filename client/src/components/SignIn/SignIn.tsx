@@ -242,7 +242,7 @@ const SignIn = forwardRef<SignInSubmitType, SignInProps>((props, ref) => {
     window.location.href = "/";
   };
 
-  const getButtons = (): JSX.Element => {
+  const getModalButtons = (): JSX.Element => {
     let buttons;
     if (props.isFrame) {
       buttons = (
@@ -274,7 +274,7 @@ const SignIn = forwardRef<SignInSubmitType, SignInProps>((props, ref) => {
         isRelative={false}
         classN="SignIn"
         content={getForm()}
-        buttons={getButtons()}
+        buttons={getModalButtons()}
       />
     );
   };

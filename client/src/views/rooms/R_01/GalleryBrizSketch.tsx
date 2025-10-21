@@ -23,7 +23,7 @@ export default class GalleryBrizSketch extends GallerySketchTemplate1<GalleryBri
   // --- content wired to your pamUrl + didactics ---
   private quadrants: BrizQuadType[] = []; // filled in initDidactics()
 
-  private imgs: (p5Types.Image | null)[] = [null, null, null, null];
+  // private imgs: (p5Types.Image | null)[] = [null, null, null, null];
   private activeQi: number = -1;
 
   constructor(props: GalleryBrizSketchProps) {
@@ -36,8 +36,10 @@ export default class GalleryBrizSketch extends GallerySketchTemplate1<GalleryBri
     this.quadrants = BrizData;
   }
 
-  preloadContent = (p5: p5Types) => {
-    this.imgs = this.quadrants.map((q) => p5.loadImage(q.imgUrl));
+  preloadContent = (p5: p5Types) => {};
+
+  setupContent = (p5: p5Types) => {
+    // this.imgs = this.quadrants.map((q) => p5.loadImage(q.imgUrl));
   };
 
   initWorld = () => {

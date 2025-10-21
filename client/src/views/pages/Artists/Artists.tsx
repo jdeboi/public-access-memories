@@ -14,9 +14,11 @@ export const Artists: React.FC = () => {
     ? artists.filter((a) => a.userName !== "hostBot")
     : artists;
 
+  const isProduction = process.env.NODE_ENV === "production";
+
   return (
     <>
-      {ShowConfig.isClosed || ShowConfig.underConstruction ? (
+      {isProduction && (ShowConfig.isClosed || ShowConfig.underConstruction) ? (
         <ClosedPage />
       ) : (
         <PageTemplate title={title}>

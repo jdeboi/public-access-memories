@@ -45,8 +45,8 @@ const Room = () => {
   const { id = "0" } = useParams();
   const artistID = rooms[parseInt(id)]?.artistID || null;
   const artist = artistID !== null ? artists[artistID] : null;
-
-  if (isClosed || underConstruction) return <ClosedPage />;
+  const isProduction = process.env.NODE_ENV === "production";
+  if (isProduction && (isClosed || underConstruction)) return <ClosedPage />;
 
   const RoomComp = ROOMS[id] ?? R_00;
 

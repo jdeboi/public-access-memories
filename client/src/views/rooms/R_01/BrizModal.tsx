@@ -45,6 +45,15 @@ const BrizModal: React.FC<Props> = ({ visible, content, onClose }) => {
         <div className="text-4xl font-bold mb-4">{content.label}</div>
 
         <div className="font-mono">{content.content}</div>
+
+        {content.footnotes && content.footnotes.length > 0 && <div>---</div>}
+        {content.footnotes && content.footnotes.length > 0 && (
+          <div className="mt-4 space-y-4">
+            {content.footnotes.map((fn, idx) => (
+              <div key={idx}>{fn}</div>
+            ))}
+          </div>
+        )}
       </div>
     </div>,
     document.body

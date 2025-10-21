@@ -90,6 +90,8 @@ function App() {
   const [hasLoadedRoom, setHasLoadedRoom] = useState(false);
   const [currentPage, setCurrentPage] = useState(location.pathname);
 
+  const isProduction = process.env.NODE_ENV === "production";
+
   useEffect(() => {
     // initialize roomUrl from the URL on first mount
     if (user.roomUrl !== location.pathname) {
@@ -100,7 +102,7 @@ function App() {
 
   // Google Analytics - when route changes
   useEffect(() => {
-    if (process.env.NODE_ENV == "production")
+    if (isProduction)
       pageview(location.pathname + location.search, location.pathname);
   }, [location]);
 
@@ -276,8 +278,6 @@ function App() {
             />
 
             <MobileFooter avatarClicked={avatarClicked} />
-            {/* <MyLiveKit user={user} /> */}
-            {/* <TwilioChat user={user} users={users} /> */}
           </React.Fragment>
         ) : null}
       </React.Fragment>
@@ -369,48 +369,39 @@ function App() {
           <Route
             path="/briz"
             element={
-              <GalleryRoom
-                id={2}
-                path={"/briz"}
-                users={users}
-                isClosed={isClosed}
-                showWelcome={showWelcome}
-              />
+              isProduction && ShowConfig.isClosed ? (
+                <Room />
+              ) : (
+                <GalleryRoom
+                  id={2}
+                  path={"/briz"}
+                  users={users}
+                  isClosed={isClosed}
+                  showWelcome={showWelcome}
+                />
+              )
             }
           />
           <Route
             path="/sinders"
             element={
-              <GalleryRoom
-                id={0}
-                path={"/sinders"}
-                users={users}
-                isClosed={isClosed}
-                showWelcome={showWelcome}
-              />
+              isProduction && ShowConfig.isClosed ? (
+                <Room />
+              ) : (
+                <GalleryRoom
+                  id={0}
+                  path={"/sinders"}
+                  users={users}
+                  isClosed={isClosed}
+                  showWelcome={showWelcome}
+                />
+              )
             }
           />
           <Route
             path="/approvesinders"
             element={<ApproveSindersSubmissions />}
           />
-          {/* <Route
-            path="/yang"
-            element={
-              !ShowConfig.isClosed ? (
-                <GalleryRoom
-                  id={1}
-                  path={"/yang"}
-                  users={users}
-                  isClosed={isClosed}
-                  showWelcome={showWelcome}
-                />
-              ) : (
-                <Room />
-              )
-            }
-          /> */}
-
           <Route path="/pastexhibitions" element={<PastExhibitions />} />
           <Route
             path="/pastexhibitions/homebody"
