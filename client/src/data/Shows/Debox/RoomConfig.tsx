@@ -650,7 +650,7 @@ export const artists: IArtist[] = [
     nameLink: "warner",
     instaLink: "https://www.instagram.com/rodellwarner/",
     webLink: "https://cargocollective.com/rodellwarner",
-    medium: "AI, GIFs, Custom Code",
+    medium: "1920x1080 single-channel video with sound",
     // description: TBA,
     bio: (
       <>
