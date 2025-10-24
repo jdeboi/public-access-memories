@@ -409,7 +409,7 @@ export const artists: IArtist[] = [
     nameLink: "schmitt",
     instaLink: "https://www.instagram.com/phlpschmt/",
     webLink: "https://philippschmitt.com/",
-    medium: TBA,
+    medium: "Custom software, AI image recognition",
     statement: (
       <>
         <p>

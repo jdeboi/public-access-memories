@@ -248,7 +248,7 @@ export class GallerySketchTemplate1<
     p5.frameRate(30);
     loadingDone();
 
-    // if (this.barTenders) addBots(this.barTenders);
+    if (this.barTenders) addBots(this.barTenders);
   };
 
   setupContent = (p5: p5Types) => {
