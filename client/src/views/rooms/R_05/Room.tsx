@@ -5,7 +5,7 @@ const Room = () => {
       style={{ position: "relative", width: "100%", height: "100%" }}
     >
       <iframe
-        src="https://humans-of.ai/publicaccessmemory"
+        src="https://humans-of.ai/publicaccessmemory/"
         width="100%"
         height="100%"
         title="Philipp Schmitt - Humans of AI"
