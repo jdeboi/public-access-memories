@@ -6,7 +6,8 @@
   "author": "Jenna deBoisblanc <jdeboi@gmail.com>",
   "license": "MIT",
   "engines": {
-    "node": ">=16"
+    "node": "20.x",
+    "npm": "10.x"
   },
   "scripts": {
     "start": "node server/index.js",
