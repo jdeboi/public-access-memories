@@ -128,7 +128,7 @@ export const artists: IArtist[] = [
     thumb: "nick-briz-thumb.jpg",
     nameLink: "briz",
     instaLink: "nbriz",
-    customLink: "/briz",
+    // customLink: "/briz",
     webLink: "https://nickbriz.com/",
     medium: "AI, Code, Video",
     essayLink: "https://outland.art/how-to-glitch-ai/",
