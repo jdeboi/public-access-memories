@@ -42,8 +42,8 @@ const GallerySinders = (props: GallerySindersProps) => {
       "linear-gradient(135deg, rgba(255,182,193,.8), rgba(173,216,230,.8))", // pastel pink→blue
     backdropFilter: "blur(12px)", // blur stuff behind (Chrome/Edge/FF)
     WebkitBackdropFilter: "blur(12px)", // Safari
-    border: "1px solid rgba(255,255,255,0.35)",
-    boxShadow: "0 8px 30px rgba(0,0,0,0.12)",
+    // border: "1px solid rgba(255,255,255,0.35)",
+    // boxShadow: "0 8px 30px rgba(0,0,0,0.12)",
     borderRadius: "14px",
   };
 
@@ -234,7 +234,8 @@ const GallerySinders = (props: GallerySindersProps) => {
         isHidden={isFilterHidden}
         unbounded={false}
         onHide={() => setFilterIsHidden(true)}
-        windowStyle={pastelStyle}
+        // windowStyle={pastelStyle}
+        windowStyle={{ background: "#ffffffaa" }}
         content={
           <div className="w-full px-2 py-2">
             <input

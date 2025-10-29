@@ -1,25 +1,65 @@
+// components/RoomVideo.tsx
+"use client";
+import React, { useRef } from "react";
+import ReactPlayer from "react-player";
+import { useSelector } from "react-redux";
+import { selectMusic, selectWindow } from "../../../store/store";
+
+function RoomVideo({
+  src,
+  poster,
+  isPlaying = true,
+  startMuted = true,
+}: {
+  src: string;
+  poster?: string;
+  isPlaying?: boolean;
+  startMuted?: boolean;
+}) {
+  const wrapRef = useRef<HTMLDivElement | null>(null);
+  const windowUI = useSelector(selectWindow);
+  const music = useSelector(selectMusic);
+
+  return (
+    <div
+      ref={wrapRef}
+      className="relative w-screen h-screen bg-black overflow-hidden"
+    >
+      <ReactPlayer
+        url={src}
+        playing={isPlaying}
+        muted={!windowUI.compositionStarted || music.isMuted} // autoplay on most browsers requires muted=true
+        loop
+        playsinline // iOS inline playback
+        controls={false} // show browser controls (optional)
+        width="100%"
+        height="100%"
+        // Make sure the video fits like object-contain
+        style={{ position: "absolute", inset: 0, background: "black" }}
+        config={{
+          file: {
+            forceVideo: true,
+            attributes: {
+              poster, // optional poster image
+              controlsList: "nodownload",
+              crossOrigin: "anonymous", // helpful if you ever draw frames to a canvas
+            },
+          },
+        }}
+      />
+    </div>
+  );
+}
+
 // This component isn't being used in place of the Gallery Sketch
 const Room = () => {
   return (
-    <div
-      className="Room Sketch"
-      style={{
-        position: "relative",
-        width: "100%",
-        height: "100%",
-        background: "black",
-      }}
-    >
-      <div className="w-full h-full max-w-[1920px] max-h-[1080px] m-auto">
-        <iframe
-          src="https://player.vimeo.com/video/1089821997?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
-          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-          width="100%"
-          height="100%"
-          title="Rodell Warner - Artificial Archive: SCRYING INTIMACIES, Hallucination 1, 2024 - Single-channel video, with sound - 1920x1080"
-        ></iframe>
-      </div>
-    </div>
+    <RoomVideo
+      src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/debox/warner/Artificial_Archive_+SCRYING_INTIMACIES_Rodell_Warner.mp4"
+      // poster="https://.../thumb.jpg"
+      isPlaying={true}
+      startMuted={true}
+    />
   );
 };
 

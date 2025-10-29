@@ -22,7 +22,7 @@ const ArtistsArchiveList = (props: Props) => {
 
     return (
       <div key={index} className="artist-box windows">
-        <a href={url}>
+        <a href={url} target="_blank" rel="noopener noreferrer">
           <img
             alt={artist.name}
             className="thumb"
@@ -33,7 +33,14 @@ const ArtistsArchiveList = (props: Props) => {
         </a>
         <div className="artist-name">
           <div>
-            <a href={url}>{artist.name}</a>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href={url}
+              className="text-[cyan] hover:underline font-['consoleFont']"
+            >
+              {artist.name}
+            </a>
           </div>
         </div>
       </div>

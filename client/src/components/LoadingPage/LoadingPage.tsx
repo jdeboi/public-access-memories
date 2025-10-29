@@ -10,9 +10,14 @@ export default function LoadingPage(props: { progress?: number }) {
     <div className="backgroundCover">
       <div className="LoadingPage">
         <div className="title" style={sty}>
-          <div>{ShowConfig.galleryTitle}</div>
-          <p>a wrong biennale pavilion</p>
-          {/* <p><a href="/opencall">open call</a></p> */}
+          <div className="font-['geoFont'] text-8xl  mb-6">
+            {ShowConfig.showTitle}
+          </div>
+          <div className="font-mono text-xs text-slate-300">
+            a Wrong Biennale pavilion
+          </div>
+          <p>Public Access Memories</p>
+          <div className="text-xs text-green-500">Loading...</div>
 
           {props.progress ? <p>{props.progress}%</p> : null}
         </div>

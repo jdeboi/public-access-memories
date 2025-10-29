@@ -141,6 +141,7 @@ export default function DeboxStatement() {
                   href="https://thewrong.org/"
                   style={{ textDecoration: "underline" }}
                   target="_blank"
+                  className="text-[cyan]"
                   rel="noopener noreferrer"
                 >
                   Wrong Biennale

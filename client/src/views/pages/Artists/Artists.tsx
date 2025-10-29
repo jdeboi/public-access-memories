@@ -34,7 +34,7 @@ export const Artists: React.FC = () => {
                 <Link
                   to={`/artist/${artist.nameLink}`}
                   aria-label={artist.name}
-                  className="group block"
+                  className="group block  text-[cyan] hover:underline"
                 >
                   <img
                     src={getThumbSrc(artist.thumb, ShowConfig.awsLink)}

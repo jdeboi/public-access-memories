@@ -34,7 +34,10 @@ export const PastExhibitions: React.FC = () => {
                   </span>
                 </div>
 
-                <Link to={exhibition.pageLink} className="hover:underline">
+                <Link
+                  to={exhibition.pageLink}
+                  className="hover:underline text-[cyan]"
+                >
                   <div className="text-3xl leading-snug mt-4">
                     <span className="underline-offset-4 group-hover:underline font-[manoloFont]">
                       {exhibition.title}
@@ -57,7 +60,7 @@ export const PastExhibitions: React.FC = () => {
                           }
                           target="_blank"
                           rel="noopener noreferrer"
-                          className=""
+                          className=" text-[cyan] hover:underline"
                         >
                           {artist.name}
                         </a>

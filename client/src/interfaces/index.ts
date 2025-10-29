@@ -166,6 +166,8 @@ export interface IArtist {
   bio: string | ReactNode;
   title: string;
   year: number;
+  essayLink?: string;
+  essay?: ReactNode;
 }
 
 export interface IDivs {

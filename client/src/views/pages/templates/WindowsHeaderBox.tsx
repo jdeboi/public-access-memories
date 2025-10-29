@@ -5,19 +5,21 @@ export default function WindowsHeaderBox({
   className,
   thumbnail,
   link,
+  isBlack = false,
   children,
 }: {
   title: string;
   className?: string;
   thumbnail?: string;
   link?: string;
+  isBlack?: boolean;
   children?: React.ReactNode;
 }) {
   return (
     <div
-      className={`windows transition-shadow hover:shadow-lg mb-6 ${
-        className || ""
-      }`}
+      className={`${
+        isBlack ? "windowsBlack" : "windows"
+      } transition-shadow hover:shadow-lg mb-6 ${className || ""}`}
     >
       {/* 1 col on xs/sm → 2 cols at md+ */}
       <div className="grid gap-5 p-5 items-start bg-slate-900/20 sm:grid-cols-[250px_1fr]">

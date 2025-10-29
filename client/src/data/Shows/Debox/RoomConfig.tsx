@@ -44,7 +44,7 @@ export const artists: IArtist[] = [
     nameLink: "astarhan",
     instaLink: "nimrodastarhan",
     webLink: "https://www.nimrodastarhan.com",
-    medium: "PC, AI algorithm, speculative archeology object database",
+    medium: "AI, custom software",
     description: (
       <>
         <p>
@@ -128,9 +128,10 @@ export const artists: IArtist[] = [
     thumb: "nick-briz-thumb.jpg",
     nameLink: "briz",
     instaLink: "nbriz",
-    // customLink: "/briz",
+    customLink: "/briz",
     webLink: "https://nickbriz.com/",
     medium: "AI, Code, Video",
+    essayLink: "https://outland.art/how-to-glitch-ai/",
     description: (
       <>
         <p>
@@ -138,7 +139,12 @@ export const artists: IArtist[] = [
           which i'm calling &lt;VECTORS&gt;, from which we might begin to
           consider how, as glitch artists, we might approach producing glitch
           art w/artificial neural networks: the algorithms beginning to define
-          this latest era of AI + Machine Learning.<a href="#">[1]</a>
+          this latest era of AI + Machine Learning.
+          <sup id={`supp-1`}>
+            <a style={{ color: "blue" }} href="#fnn-1" role="doc-noteref">
+              [1]
+            </a>
+          </sup>
         </p>
         <p>
           Though I will be focusing primarily on images && communicating through
@@ -159,7 +165,7 @@ export const artists: IArtist[] = [
           to make glitch art, there are only critical, experimental && playful
           ways of engaging systems the "wrong way".
         </p>
-        <div className="text-sm text-slate-300 mt-6">
+        <div className="text-sm text-slate-800 mt-6" id="fnn-1">
           [1] As w/most my glitch thoughts, these are heavily informed by the
           community, in particularly by conversations i’ve had w/other glitch
           artists during{" "}
@@ -410,6 +416,7 @@ export const artists: IArtist[] = [
     instaLink: "https://www.instagram.com/phlpschmt/",
     webLink: "https://philippschmitt.com/",
     medium: "Custom software, AI image recognition",
+    essayLink: "https://humans-of.ai/editorial/",
     statement: (
       <>
         <p>
@@ -456,6 +463,8 @@ export const artists: IArtist[] = [
     webLink: "https://carolinesinders.com/",
     medium: "AI, Data, Workshop",
     // customLink: "/sinders",
+    essayLink:
+      "https://carolinesinders.com/wp-content/uploads/2020/05/Feminist-Data-Set-Final-Draft-2020-0526.pdf",
     description: (
       <>
         <p>
@@ -651,6 +660,8 @@ export const artists: IArtist[] = [
     instaLink: "https://www.instagram.com/rodellwarner/",
     webLink: "https://cargocollective.com/rodellwarner",
     medium: "1920x1080 single-channel video with sound",
+    essayLink:
+      "https://preelit.com/2023/11/09/brief-and-candid-notes-on-artificial-archive/",
     // description: TBA,
     bio: (
       <>
@@ -766,6 +777,16 @@ export const artists: IArtist[] = [
           mourning in Nicaragua, this project allows the victims' stories to
           transcend their homes and families to transform public and private
           spaces into places of collective memory.
+        </p>
+        <p>
+          <a
+            href="https://www.museodelamemorianicaragua.org/en/home/"
+            target="_blank"
+            className="text-[cyan] hover:underline"
+            rel="noopener noreferrer"
+          >
+            Read more about the project here.
+          </a>
         </p>
       </>
     ),

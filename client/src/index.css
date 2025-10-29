@@ -107,10 +107,6 @@ input.standardInputWhite {
 }
 
 /* Handle on hover */
-a {
-  color: cyan;
-}
-
 h1 {
   font-size: 40pt;
   padding: 20px 0 20px 0;
@@ -163,7 +159,6 @@ p.small {
 
 .windowsBlack {
   box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080;
-  padding: 20px;
   box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
 }
 

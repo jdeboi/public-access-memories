@@ -90,7 +90,7 @@ export const BrizInProgressData: BrizQuadType = {
     </>
   ),
   footnotes: [
-    <div className="text-sm text-slate-600 mt-6" id="fn-2">
+    <div className="text-sm text-slate-600 mt-6" id="fn-17">
       [17] This is a term borrowed from the collaborative project of glitch
       artist Nicolas Maigret && Maria Roszkowska
     </div>,
@@ -102,7 +102,7 @@ export const BrizData: BrizQuadType[] = [
     id: 0,
     vector: "<VECTOR 1>",
     label: "glitch(alike) prompts",
-    imgUrl: `${base}/vv1.png`,
+    imgUrl: `${base}/vv1.jpg`,
     didactic: "DALL·E 2 “glitch art” prompt, upscaled via LDSR.",
 
     content: (
@@ -218,13 +218,13 @@ export const BrizData: BrizQuadType[] = [
         </a>{" "}
         for more info (v1-v2) 2010-2011 (v3) 2019
       </div>,
-      <div className="text-sm text-slate-600 mt-6">
+      <div className="text-sm text-slate-600 mt-6" id="fn-4">
         [4] typically unintended, often unexpected (though occasionally
         embraced) formal characteristics unique to each particular communication
         mediums, like the snowy static of a week TV signal, the poppy static of
         a scratched vinyl record or the DCT blocks of an overly compressed JPEG.
       </div>,
-      <div className="text-sm text-slate-600 mt-6">
+      <div className="text-sm text-slate-600 mt-6" id="fn-5">
         [5] Richter is a German painter well known for his photorealistic
         paintings which, being painted from photographs, embraced the artifacts
         caused by photography, like blurry images.
@@ -235,7 +235,7 @@ export const BrizData: BrizQuadType[] = [
     id: 1,
     vector: "<VECTOR 2>",
     label: "misused models",
-    imgUrl: `${base}/vv2.png`,
+    imgUrl: `${base}/vv2.jpg`,
     didactic:
       "feature-visualization (GoogLeNet), upscaled by nearest-neighbor.",
 
@@ -343,7 +343,7 @@ export const BrizData: BrizQuadType[] = [
       </>
     ),
     footnotes: [
-      <div className="text-sm text-slate-600 mt-6">
+      <div className="text-sm text-slate-600 mt-6" id="fn-6">
         [6] See{" "}
         <a
           href="https://beyondresolution.info/A-Vernacular-of-File-Formats"
@@ -364,7 +364,7 @@ export const BrizData: BrizQuadType[] = [
         </a>{" "}
         for examples
       </div>,
-      <div className="text-sm text-slate-600 mt-6">
+      <div className="text-sm text-slate-600 mt-6" id="fn-7">
         [7]{" "}
         <a
           href="https://arxiv.org/pdf/1409.4842.pdf"
@@ -395,7 +395,7 @@ export const BrizData: BrizQuadType[] = [
         </a>{" "}
         that year.
       </div>,
-      <div className="text-sm text-slate-600 mt-6">
+      <div className="text-sm text-slate-600 mt-6" id="fn-8">
         [8] One popular example is the{" "}
         <a
           href="https://cocodataset.org/#home"
@@ -406,7 +406,7 @@ export const BrizData: BrizQuadType[] = [
           COCO dataset
         </a>
       </div>,
-      <div className="text-sm text-slate-600 mt-6">
+      <div className="text-sm text-slate-600 mt-6" id="fn-9">
         [9] The most influential being{" "}
         <a
           href="https://en.wikipedia.org/wiki/Gradient_descent"
@@ -425,7 +425,7 @@ export const BrizData: BrizQuadType[] = [
     id: 2,
     vector: "<VECTOR 3>",
     label: "de-optimization",
-    imgUrl: `${base}/vv3.png`,
+    imgUrl: `${base}/vv3.jpg`,
     didactic: "Stable Diffusion 1.5 with atypical sampling (R-ESRGAN upscale).",
     content: (
       <>
@@ -564,7 +564,7 @@ export const BrizData: BrizQuadType[] = [
       </>
     ),
     footnotes: [
-      <div className="text-sm text-slate-600 mt-6">
+      <div className="text-sm text-slate-600 mt-6" id="fn-10">
         [10] If u’re interested in this glitch &lt;VECTOR&gt; i’d suggest
         checking out Google’s{" "}
         <a
@@ -586,7 +586,7 @@ export const BrizData: BrizQuadType[] = [
         </a>{" "}
         implementation.
       </div>,
-      <div className="text-sm text-slate-600 mt-6">
+      <div className="text-sm text-slate-600 mt-6" id="fn-11">
         [11] This remixed quote comes from his 2009 essay{" "}
         <a
           href="http://lab404.com/articles/commodify_your_consumption.pdf"
@@ -599,7 +599,7 @@ export const BrizData: BrizQuadType[] = [
         where he applies Michel de Certeau's theoretical framework to the
         internet art "surf clubs" of the time.
       </div>,
-      <div className="text-sm text-slate-600 mt-6">
+      <div className="text-sm text-slate-600 mt-6" id="fn-12">
         [12] Likely the most popular collection of these community tweaked
         models can be found at{" "}
         <a
@@ -617,7 +617,7 @@ export const BrizData: BrizQuadType[] = [
     id: 3,
     vector: "<VECTOR 4>",
     label: "unexpected output",
-    imgUrl: `${base}/vv4.png`,
+    imgUrl: `${base}/vv4.jpg`,
     didactic: "DALL·E 2 ‘a human with three eyes,’ LDSR upscale.",
     content: (
       <>
@@ -745,10 +745,10 @@ export const BrizData: BrizQuadType[] = [
       </>
     ),
     footnotes: [
-      <div className="text-sm text-slate-600 mt-6">
+      <div className="text-sm text-slate-600 mt-6" id="fn-13">
         [13] Reference Domenico’s experiments
       </div>,
-      <div className="text-sm text-slate-600 mt-6">
+      <div className="text-sm text-slate-600 mt-6" id="fn-14">
         [14] Which is precisely what Eryk Salvaggio did in{" "}
         <a
           href="https://twitter.com/e_salvaggio/status/1623539155106951168?t=pIpNn2RGKMEmVT8Ct5Gj1A&s=19"
@@ -759,7 +759,7 @@ export const BrizData: BrizQuadType[] = [
           this series of experiments
         </a>
       </div>,
-      <div className="text-sm text-slate-600 mt-6">
+      <div className="text-sm text-slate-600 mt-6" id="fn-15">
         [15] Stable Diffusion was trained on the{" "}
         <a
           href="https://laion.ai/blog/laion-5b/"
@@ -771,7 +771,7 @@ export const BrizData: BrizQuadType[] = [
         </a>{" "}
         dataset for example{" "}
       </div>,
-      <div className="text-sm text-slate-600 mt-6">
+      <div className="text-sm text-slate-600 mt-6" id="fn-16">
         [16] At the time of this writing, the most popular diffusion models
         still distort (on occasion) human hands, but “bugs” like these are
         quickly addressed, what glitch artists embrace as a “feature” often

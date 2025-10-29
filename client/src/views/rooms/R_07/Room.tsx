@@ -5,9 +5,6 @@ const Room = () => {
     <div
       className="Room Sketch"
       style={{
-        position: "relative",
-        width: "100%",
-        height: "100%",
         backgroundColor: "black",
       }}
     >
@@ -15,6 +12,7 @@ const Room = () => {
         src="https://cthompto.github.io/consensus-sensing/"
         width="100%"
         height="100%"
+        style={{ margin: "auto" }}
         title="Consensus Sensing by Chelsea Thompson"
       ></iframe>
     </div>

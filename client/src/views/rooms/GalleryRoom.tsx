@@ -16,13 +16,19 @@ import { selectMusic, selectUser, selectWindow } from "../../store/store";
 import { setUserRoomUrl, moveUserRoom } from "../../store/user";
 import { setUserActiveChat } from "../../store/userActive";
 import { setOneMenu, showChat } from "../../store/menu";
-import { doneLoadingApp, startComposition } from "../../store/window";
+import {
+  doneLoadingApp,
+  loadingApp,
+  startComposition,
+} from "../../store/window";
 
 import { getBar } from "../../data/CurrentShow/BotConfig";
 import { p5ToUserCoords } from "../../helpers/coordinates";
 import GalleryYangSketch from "./R_09/GalleryYangSketch";
 import GallerySinders from "./R_06/GallerySinders";
 import GalleryBriz from "./R_01/GalleryBriz";
+import ArtistMenu from "../../components/ArtistMenu/ArtistMenu";
+import { artists } from "../../data/CurrentShow/RoomConfig";
 //
 interface IGallery {
   id: number;
@@ -44,6 +50,10 @@ const GalleryRoom = (props: IGallery) => {
   const [submissionHidden, setSubmissionHidden] = useState(true);
 
   const isMobile = windowUI.isMobile || windowUI.hasFooter;
+
+  useEffect(() => {
+    dispatch(loadingApp());
+  }, []);
 
   useEffect(() => {
     if (user.roomUrl !== props.path) {
@@ -134,6 +144,18 @@ const GalleryRoom = (props: IGallery) => {
     }
   }, [props.id]);
 
+  const getArtistMenu = () => {
+    switch (props.id) {
+      case 0:
+        return <ArtistMenu artist={artists[6] /* Sinders */} variant="light" />;
+      case 1:
+        return <ArtistMenu artist={artists[9] /* Yang */} />;
+      case 2:
+        return <ArtistMenu artist={artists[1] /* Briz */} />;
+    }
+    return null;
+  };
+
   const getGalleryAudio = () => {
     if (props.showWelcome || showStart) {
       return null;
@@ -220,6 +242,7 @@ const GalleryRoom = (props: IGallery) => {
       {windowUI.loading && <LoadingPage />}
 
       {getGalleryAudio()}
+      {getArtistMenu()}
     </div>
   );
 };

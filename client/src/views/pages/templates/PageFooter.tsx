@@ -45,7 +45,7 @@ const PageFooter = ({ className = "" }) => {
       {newsletterPath && (
         <a
           href={newsletterPath}
-          className="text-blue-200 hover:underline text-sm focus:outline-none focus:ring focus:ring-white/40 rounded-sm"
+          className="text-[cyan] hover:underline text-md focus:outline-none"
           aria-label="Join the newsletter"
           target="_blank"
           rel="noopener noreferrer"

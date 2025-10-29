@@ -6,6 +6,7 @@ import PageTemplate from "./PageTemplate";
 import SectionHeader from "./SectionHeader";
 import CustomPill from "./CustomPill";
 import WindowsHeaderBox from "./WindowsHeaderBox";
+import { Link } from "react-router-dom";
 
 const ExhibitionPageTemplate = ({
   title,
@@ -60,8 +61,12 @@ const ExhibitionPageTemplate = ({
 
   return (
     <PageTemplate title={title}>
-      <WindowsHeaderBox title={title} thumbnail={thumbnail}>
-        {" "}
+      <div>
+        <Link to="/pastexhibitions" className="text-[cyan] hover:underline">
+          &lt;-- Back to All Past Exhibitions
+        </Link>
+      </div>
+      <WindowsHeaderBox title={title} thumbnail={thumbnail} className="my-6">
         <div className="flex items-center gap-3">
           <CustomPill text={exhibitionType} />
 

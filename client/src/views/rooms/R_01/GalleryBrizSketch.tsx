@@ -47,8 +47,8 @@ export default class GalleryBrizSketch extends GallerySketchTemplate1<GalleryBri
     const worldW = 30;
     const worldH = worldW;
     this.GlobalConfig = {
-      x: -worldW / 2,
-      y: -worldH / 2,
+      x: -worldW / 2 + 1,
+      y: -worldH / 2 + 1,
       scaler: 70,
       worldW,
       worldH,

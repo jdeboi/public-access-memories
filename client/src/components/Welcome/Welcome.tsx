@@ -16,7 +16,7 @@ interface IWelcome {
   closeWelcome: () => void;
 }
 
-const stepTitles = ["welcome", "avatar", "instructions"];
+const stepTitles = ["welcome", "welcome", "welcome"];
 
 const Welcome = (props: IWelcome) => {
   // https://codepen.io/JohJakob/pen/YPxgwo

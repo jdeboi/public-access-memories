@@ -1,11 +1,10 @@
 // ModalOverlay.tsx
 import React from "react";
 import { createPortal } from "react-dom";
-import { BrizQuadType } from "./briz";
 
 type Props = {
   visible: boolean;
-  content: BrizQuadType | null;
+  content: React.ReactNode | null;
   onClose: () => void;
 };
 
@@ -38,22 +37,7 @@ const BrizModal: React.FC<Props> = ({ visible, content, onClose }) => {
             <path d="M18 6 6 18M6 6l12 12" />
           </svg>
         </button>
-
-        <div className="text-2xl font-bold font-[manoloFont] uppercase mb-2">
-          {content.vector}
-        </div>
-        <div className="text-4xl font-bold mb-4">{content.label}</div>
-
-        <div className="font-mono">{content.content}</div>
-
-        {content.footnotes && content.footnotes.length > 0 && <div>---</div>}
-        {content.footnotes && content.footnotes.length > 0 && (
-          <div className="mt-4 space-y-4">
-            {content.footnotes.map((fn, idx) => (
-              <div key={idx}>{fn}</div>
-            ))}
-          </div>
-        )}
+        {content}
       </div>
     </div>,
     document.body

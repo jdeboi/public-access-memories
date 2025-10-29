@@ -149,8 +149,15 @@ const Frame = (props: FrameProps) => {
     e.stopPropagation();
   };
 
-  const handleStart = () => props.newFrameToTop?.();
-  const handleStop = () => {};
+  const handleStart = () => {
+    props.newFrameToTop?.();
+    props.onStart?.();
+  };
+  const handleStop = (_: any, data: any) => {
+    setPos({ x: data.x, y: data.y });
+    props.onStop?.();
+  };
+
   const handleClick = (e: MouseEvent) => {
     props.newFrameToTop?.();
     e.stopPropagation();
@@ -165,7 +172,7 @@ const Frame = (props: FrameProps) => {
       grid={[1, 1]}
       scale={1}
       bounds={props.unbounded ? undefined : ".App-Content"}
-      onStop={(_, data) => setPos({ x: data.x, y: data.y })} // persist final
+      onStop={handleStop} // persist final
       cancel=".close, .minimize, .zoom"
       onStart={handleStart}
       onDrag={onControlledDrag}

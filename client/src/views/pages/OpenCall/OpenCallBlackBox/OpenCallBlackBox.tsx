@@ -155,7 +155,7 @@ export default function OpenCallBlackBox() {
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ color: "black" }}
-                  className="windowsBlackNoPadding font-['geoFont'] p-4 text-2xl inline-block min-w-[200px] text-center bg-white font-semibold shadow-md hover:shadow-lg hover:bg-gray-100 transition"
+                  className="windowsBlack font-['geoFont'] p-4 text-2xl inline-block min-w-[200px] text-center bg-white font-semibold shadow-md hover:shadow-lg hover:bg-gray-100 transition"
                 >
                   APPLY
                 </a>

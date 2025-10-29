@@ -3,6 +3,7 @@ import { GallerySketch1Props } from "../../Gallery/Gallery1/GallerySketchTemplat
 import { BrizQuadType } from "./briz";
 import GalleryBrizSketch from "./GalleryBrizSketch";
 import BrizModal from "./BrizModal";
+import BrizContent from "./BrizContent";
 
 interface GalleryBrizProps extends GallerySketch1Props {}
 
@@ -20,7 +21,11 @@ const GalleryBriz = (props: GalleryBrizProps) => {
   return (
     <>
       <GalleryBrizSketch {...props} openContent={openContent} />
-      <BrizModal visible={!contentHidden} content={content} onClose={close} />
+      <BrizModal
+        visible={!contentHidden}
+        content={<BrizContent content={content} />}
+        onClose={close}
+      />
     </>
   );
 };

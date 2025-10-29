@@ -3,6 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { selectWindow } from "../../../store/store";
 import { ShowConfig } from "../../../data/CurrentShow/ShowConfig";
+import { Link } from "react-router-dom";
 
 export default function DetailsClosed() {
   const windowUI = useSelector(selectWindow);
@@ -21,25 +22,33 @@ export default function DetailsClosed() {
     <div className="Welcome-Details">
       <div className="Details closed">
         <div className="Details-txt">
-          <div style={{ fontSize: fonts[2], paddingBottom: "30px" }}>
+          <div className="mb-3">
             While you're free to roam the grounds, we're sorry to inform you
             that the gallery is currently
           </div>
-          <div style={{ fontSize: fonts[0], paddingBottom: "30px" }}>
-            CLOSED
-          </div>
+          <div className="text-4xl mb-3">CLOSED</div>
           {!ShowConfig.isResidency && (
-            <div style={{ fontSize: fonts[2], paddingBottom: "10px" }}>
-              Please join us for the opening on:
-            </div>
+            <div className="mb-6">Please join us for the opening on:</div>
           )}
           {ShowConfig.isResidency && (
-            <div style={{ fontSize: fonts[2], paddingBottom: "10px" }}>
+            <div className="mb-6">
               Please join us for residency open studios on:
             </div>
           )}
-          <div style={{ fontSize: fonts[1], paddingBottom: "5px" }}>
-            {ShowConfig.showOpens.date}
+          <div className="windows p-2 font-mono max-w-100 m-auto">
+            <div className="font-sm mb-2">{ShowConfig.showOpens.date}</div>
+            {ShowConfig.calendarLink && (
+              <div className="text-sm">
+                <Link
+                  to={ShowConfig.calendarLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className=""
+                >
+                  🗓️ Add to your calendar!
+                </Link>
+              </div>
+            )}
           </div>
           {/* <div><a href="/opencall">open call</a></div> */}
           {/* {ShowConfig.showOpens.time !== "" ? <div style={{fontSize: fonts[1], paddingBottom: "10px"}}>{ShowConfig.showOpens.time}</div> : null} */}

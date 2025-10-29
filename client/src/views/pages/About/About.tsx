@@ -7,7 +7,7 @@ const About = () => {
   return (
     <PageTemplate title="About">
       <div className="windows p-8">
-        <div className="mb-4">
+        <div className="mb-4 text-lg">
           Public Access Memories (PAM) is a virtual net art gallery that
           situates digital works within their native environment. The gallery
           hosts exhibitions (solo and group), artist talks, and more. An
@@ -35,7 +35,7 @@ const About = () => {
           &gt;{" "}
           <a
             href="https://instagram.com/jdeboi"
-            className="text-blue-200 hover:underline"
+            className="text-[cyan] hover:underline"
           >
             Jenna deBoisblanc
           </a>{" "}
@@ -46,7 +46,7 @@ const About = () => {
           &gt;{" "}
           <a
             href="https://www.matthisgrunsky.ca/"
-            className="text-blue-200 hover:underline"
+            className="text-[cyan] hover:underline"
           >
             Matthis Grunsky
           </a>{" "}
@@ -62,7 +62,7 @@ const About = () => {
           &gt;{" "}
           <a
             href="https://instagram.com/jon.cham.bers"
-            className="text-blue-200 hover:underline"
+            className="text-[cyan] hover:underline"
           >
             Jon Chambers
           </a>{" "}
@@ -82,14 +82,14 @@ const About = () => {
           and/or submit work, please reach out to{" "}
           <a
             href="mailto:publicaccessmemories@gmail.com"
-            className="text-blue-200 hover:underline"
+            className="text-[cyan] hover:underline"
           >
             publicaccessmemories@gmail.com
           </a>
           . For developers, you can check out the{" "}
           <a
             href="https://github.com/jdeboi/public-access-memories"
-            className="text-blue-200 hover:underline"
+            className="text-[cyan] hover:underline"
           >
             github repo
           </a>

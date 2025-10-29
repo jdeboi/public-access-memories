@@ -21,6 +21,7 @@ import ClosedPage from "../../pages/ClosedPage/ClosedPage";
 
 import { rooms, artists } from "../../../data/CurrentShow/RoomConfig";
 import ArtistMenu from "../../../components/ArtistMenu/ArtistMenu";
+import { useState } from "react";
 
 const { isClosed, underConstruction } = ShowConfig;
 
@@ -41,19 +42,23 @@ const ROOMS: Record<string, React.ComponentType> = {
   "13": R_13,
 };
 
-const Room = () => {
+const Room = ({ isTest = false }: { isTest?: boolean }) => {
   const { id = "0" } = useParams();
   const artistID = rooms[parseInt(id)]?.artistID || null;
   const artist = artistID !== null ? artists[artistID] : null;
   const isProduction = process.env.NODE_ENV === "production";
-  if (isProduction && (isClosed || underConstruction)) return <ClosedPage />;
+
+  if (!isTest && isProduction && (isClosed || underConstruction))
+    return <ClosedPage />;
 
   const RoomComp = ROOMS[id] ?? R_00;
+
+  const variant = ["2", "3"].includes(id) ? "light" : "dark";
 
   return (
     <>
       <RoomComp />
-      <ArtistMenu artist={artist} />
+      <ArtistMenu artist={artist} variant={variant} />
     </>
   );
 };

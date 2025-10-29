@@ -7,16 +7,21 @@ const IconLink = React.memo(({ href, icon, label }: IconLinkProps) => {
   if (!href) return null;
 
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={label}
-      title={label}
-      className="transition-opacity hover:opacity-80 text-[200%]"
-    >
-      <FontAwesomeIcon icon={icon} />
-    </a>
+    <div>
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={label}
+        title={label}
+        className="transition-opacity hover:opacity-80 mr-2 text-[cyan]"
+      >
+        <FontAwesomeIcon icon={icon} />{" "}
+        <span className="font-['consoleFont']" style={{ color: "black" }}>
+          {label}
+        </span>
+      </a>
+    </div>
   );
 });
 

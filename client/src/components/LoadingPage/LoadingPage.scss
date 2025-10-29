@@ -1,27 +1,27 @@
 .LoadingPage {
-    position: absolute;
-    // top: 45%;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: absolute;
+  // top: 45%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    text-align: center;
-    // color: white;
-    color: black;
-    font-weight: normal;
-    z-index: 1;
+  text-align: center;
+  // color: white;
+  color: white;
+  font-weight: normal;
+  z-index: 1;
 
-    a {
-        color: darkcyan;
-    }
-    .title {
-        font-size: 50px;
-        padding-bottom: 20px;
-    }
+  a {
+    color: darkcyan;
+  }
+  .title {
+    font-size: 50px;
+    padding-bottom: 20px;
+  }
 
-    .loadingSymbol {
-        font-size: 20px;
-    }
+  .loadingSymbol {
+    font-size: 20px;
+  }
 }

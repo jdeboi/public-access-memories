@@ -13,7 +13,6 @@ import Gallery from "../views/Gallery/Gallery";
 import About from "../views/pages/About/About";
 import Statement from "../views/pages/Statement/Statement";
 import Room from "../views/rooms/Room/Room";
-import TestRoom from "../views/rooms/TestRoom/TestRoom";
 import NotFound from "../views/pages/NotFound/NotFound";
 import Artists from "../views/pages/Artists/Artists";
 import ArtistProfilePage from "../views/pages/Artists/ArtistProfilePage";
@@ -66,7 +65,7 @@ import {
   HOMEOFFICES_ID,
 } from "../data/CurrentShow/GalleryConfig";
 import Residency from "../views/pages/Residency/Residency";
-import HostBotRoom from "../views/Gallery/Gallery0Residency/rooms/HostBotRoom";
+// import HostBotRoom from "../views/Gallery/Gallery0Residency/rooms/HostBotRoom";
 import OpenCall from "../views/pages/OpenCall/OpenCall";
 import GalleryRoom from "../views/rooms/GalleryRoom";
 import ApproveSindersSubmissions from "../views/rooms/R_06/ApproveSindersSubmissions";
@@ -233,17 +232,17 @@ function App() {
   };
 
   const getRoomDecal = () => {
-    if (ShowConfig.isClosed || ShowConfig.underConstruction) {
-      if (location.pathname.substring(1, 5) === "test") {
-        return (
-          <RoomDecal
-            startMedia={startMedia}
-            artists={artists}
-            rooms={rooms}
-            hasLoadedRoom={hasLoadedRoom}
-          />
-        );
-      }
+    if (location.pathname.substring(1, 5) === "test") {
+      return (
+        <RoomDecal
+          startMedia={startMedia}
+          artists={artists}
+          rooms={rooms}
+          hasLoadedRoom={hasLoadedRoom}
+        />
+      );
+    }
+    if (isProduction && (ShowConfig.isClosed || ShowConfig.underConstruction)) {
       return null;
     } else {
       return (
@@ -364,7 +363,7 @@ function App() {
               />
             }
           />
-          <Route path="/test/rooms/:id" element={<TestRoom />} />
+          <Route path="/test/rooms/:id" element={<Room isTest={true} />} />
           <Route path={`/${ShowConfig.link}/rooms/:id`} element={<Room />} />
           <Route
             path="/briz"
