@@ -128,7 +128,7 @@ export const artists: IArtist[] = [
     thumb: "nick-briz-thumb.jpg",
     nameLink: "briz",
     instaLink: "nbriz",
-    // customLink: "/briz",
+    customLink: "/briz",
     webLink: "https://nickbriz.com/",
     medium: "AI, Code, Video",
     essayLink: "https://outland.art/how-to-glitch-ai/",
@@ -462,7 +462,7 @@ export const artists: IArtist[] = [
     instaLink: "https://www.instagram.com/carolinesinders/",
     webLink: "https://carolinesinders.com/",
     medium: "AI, Data, Workshop",
-    // customLink: "/sinders",
+    customLink: "/sinders",
     essayLink:
       "https://carolinesinders.com/wp-content/uploads/2020/05/Feminist-Data-Set-Final-Draft-2020-0526.pdf",
     description: (

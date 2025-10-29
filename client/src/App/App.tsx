@@ -232,7 +232,14 @@ function App() {
   };
 
   const getRoomDecal = () => {
-    if (location.pathname.substring(1, 5) === "test") {
+    const substringPath = location.pathname.substring(1, 5);
+    const customLinks = artists.map((artist) => artist.customLink);
+    // remove undefined, null; and remove the leading "/"
+    const validCustomLinks = customLinks
+      .filter((link): link is string => typeof link === "string")
+      .map((link) => link.substring(1, 5));
+    const linksWithDecal = ["test", ...validCustomLinks];
+    if (linksWithDecal.includes(substringPath)) {
       return (
         <RoomDecal
           startMedia={startMedia}
@@ -384,9 +391,22 @@ function App() {
           <Route
             path="/sinders"
             element={
-              // isProduction && ShowConfig.isClosed ? (
-              //   <Room />
-              // ) : (
+              isProduction && ShowConfig.isClosed ? (
+                <Room />
+              ) : (
+                <GalleryRoom
+                  id={0}
+                  path={"/sinders"}
+                  users={users}
+                  isClosed={isClosed}
+                  showWelcome={showWelcome}
+                />
+              )
+            }
+          />
+          <Route
+            path="/test/rooms/sinders"
+            element={
               <GalleryRoom
                 id={0}
                 path={"/sinders"}
@@ -394,7 +414,6 @@ function App() {
                 isClosed={isClosed}
                 showWelcome={showWelcome}
               />
-              // )
             }
           />
           <Route

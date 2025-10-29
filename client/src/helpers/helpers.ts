@@ -178,8 +178,15 @@ export const getRoomByPath = (path: string, rooms: IRoom[]): IRoom | null => {
     let p = path.substring(12, path.length);
     let r = rooms.filter((room) => room.artistID + "" === p);
     if (r.length > 0) return r[0];
+
+    // for custom links e.g. /briz
+    let r2 = rooms.filter(
+      (room) => room.link === path.substring(11, path.length)
+    );
+    if (r2.length > 0) return r2[0];
   } else {
     let r = rooms.filter((room) => room.link === path);
+
     if (r.length > 0) return r[0];
   }
   return null;
