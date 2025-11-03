@@ -31,7 +31,8 @@ const About = () => {
       {/* Child content slots into the template here */}
       <section className="font-mono">
         <SectionHeader title="Creators" />
-        <p className="leading-relaxed">
+
+        <div className="mb-6">
           &gt;{" "}
           <a
             href="https://instagram.com/jdeboi"
@@ -40,9 +41,11 @@ const About = () => {
             Jenna deBoisblanc
           </a>{" "}
           is the founder and chief developer of PAM. A net artist from New
-          Orleans, she considers how the internet mediates the human experience.
-          <br />
-          <br />
+          Orleans, she strives to build whacky, wild, and playful virtual spaces
+          that foster connection and community with artists thinking critically
+          about technology.
+        </div>
+        <div className="mb-6">
           &gt;{" "}
           <a
             href="https://www.matthisgrunsky.ca/"
@@ -53,12 +56,12 @@ const About = () => {
           is an artist and educator based out of Winnipeg, Manitoba. He is
           interested in the aesthetic potential of computation both on the
           computer screen and in physical media.
-        </p>
+        </div>
       </section>
 
       <section className="font-mono">
         <SectionHeader title="Guest Curators" />
-        <p className="leading-relaxed">
+        <div>
           &gt;{" "}
           <a
             href="https://instagram.com/jon.cham.bers"
@@ -72,12 +75,12 @@ const About = () => {
           consumerism, surveillance, play, and speculative futures, often using
           imperfect 3D body scans as metaphors for fractured life in a
           technological world.
-        </p>
+        </div>
       </section>
 
       <section className="font-mono">
         <SectionHeader title="Get Involved" />
-        <p className="leading-relaxed">
+        <div>
           To suggest a curatorial project, collaborate on a gallery feature,
           and/or submit work, please reach out to{" "}
           <a
@@ -94,7 +97,7 @@ const About = () => {
             github repo
           </a>
           .
-        </p>
+        </div>
       </section>
     </PageTemplate>
   );
