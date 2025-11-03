@@ -55,7 +55,7 @@ function RoomVideo({
 const Room = () => {
   return (
     <RoomVideo
-      src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/debox/warner/Artificial_Archive_+SCRYING_INTIMACIES_Rodell_Warner.mp4"
+      src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/debox/warner/Artificial_Archive_%2BSCRYING_INTIMACIES_Rodell_Warner.mp4"
       // poster="https://.../thumb.jpg"
       isPlaying={true}
       startMuted={true}

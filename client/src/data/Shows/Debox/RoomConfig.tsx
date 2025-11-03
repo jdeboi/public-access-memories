@@ -236,7 +236,7 @@ export const artists: IArtist[] = [
   {
     id: 2,
     roomID: 2,
-    name: "Melody Mou Peijing",
+    name: "Mou Peijing",
     title: "(Un)Natural Language",
     thumb: "melody-mou-peijing-thumb.jpg",
     nameLink: "peijing",
@@ -257,48 +257,54 @@ export const artists: IArtist[] = [
       </p>
     ),
     statement: (
-      <p>
-        I am a media artist whose work addresses issues of ecology and
-        experimental narrative through computational technologies. My research
-        explores threatened ecologies in the context of social conflicts,
-        indigenous knowledges, and the ways language reproduces ideological
-        assumptions. I work with the local environmental intelligence of rivers
-        and oceans, studying the complex interactions between narrative,
-        culture, and nature, as well as the interconnections between water and
-        other organisms. What roles can art and technology play in addressing
-        ecological crises? How can we extend empathy to nature? My goals revolve
-        around investigating alternative uses of technology, especially machine
-        learning and electronics, for ecological purposes, and demonstrating how
-        digital media can nurture our coexistence with non-human agencies.
-        Through my exploration, I contribute to interpretable AI and
-        experimental storytelling strategies. I also investigate how
-        culture—through social narrative, language, and communication—shapes our
-        relationship with nature. I create transformative art projects that
-        advocate for fairness and inclusion across all species, treating
-        non-human subjects as independent agencies.
-      </p>
+      <>
+        <p>
+          I am a media artist whose work engages ecology and experimental
+          narrative through computational technologies. My research explores
+          threatened ecologies within social conflict, Indigenous knowledges,
+          and the ways language reproduces ideological assumptions. What roles
+          can art and technology play in addressing ecological crises? How can
+          we extend empathy toward nature? My practice investigates alternative
+          uses of technology—particularly machine learning and electronics—for
+          ecological purposes, and demonstrates how digital media can nurture
+          coexistence with non-human agencies.
+        </p>
+        <p>
+          <em>(Un)Natural Language</em> is an artistic computational system that
+          examines how words shape ecological narratives by detecting potential
+          environmental threats in government water-related project documents.
+          Weaving together machine learning, environmental activism, and
+          linguistics, the system offers a new analytical lens for interpreting
+          public documents and uncovering hidden narratives of economic
+          expansion and extractivism. Through a custom-labeled dataset and a
+          fine-tuned BERT model, it visualizes patterns of pro-growth and
+          ecologically detrimental discourse. This project reclaims computation
+          as a space for reflection rather than control—inviting viewers to
+          reconsider the language shaping our ecological futures.
+        </p>
+      </>
     ),
     bio: (
       <>
         <p>
           Melody Mou Peijing is a media artist and researcher working across
-          critical ecology, computation, and experimental narrative. She
-          received her BA in Creative Media from City University of Hong Kong
-          and is currently pursuing an MFA in Design | Media Arts at UCLA,
-          supported by a University Fellowship, where she also serves as a
-          Teaching Assistant. Her works have been exhibited internationally at
-          FILE Festival, VIDEOFORMES, The New River, the New Media Writing
-          Prize, and the FutureTense Awards, among others.
+          critical ecology, computation, and experimental narrative. Her works
+          have been exhibited internationally at SIGGRAPH Asia, NeurIPS Art
+          Gallery, FILE Festival, The New River, the New Media Writing Prize,
+          and the FutureTense Awards, among others. She received her BA in
+          Creative Media from City University of Hong Kong and is currently
+          pursuing an MFA in Design | Media Arts at UCLA, supported by a
+          University Fellowship, where she also serves as a Teaching Assistant.
         </p>
         <p>
-          Previously, Melody worked as a researcher and creative technologist at
-          the Centre for Applied Computing and Interactive Media at School of
-          Creative Media and the Hong Kong Arts Development Council, where she
-          investigated the creative potential of machine learning in
+          Previously, she worked as a researcher and creative technologist at
+          the Centre for Applied Computing and Interactive Media at CityU’s
+          School of Creative Media and the Hong Kong Arts Development Council,
+          where she explored the creative potential of machine learning in
           reconfiguring moving images through algorithmic experimentation. Her
-          practice draws from critical ecologies and computational aesthetics,
+          practice draws from critical ecology and computational aesthetics,
           often entangling natural processes with digital systems to question
-          narratives of anthropocentric assumptions.
+          anthropocentric narratives.
         </p>
       </>
     ),
@@ -332,17 +338,19 @@ export const artists: IArtist[] = [
     ),
     bio: (
       <p>
-        Everest Pipkin is a game developer, writer, and artist from central
-        Texas who lives and works on a sheep farm in southern New Mexico. Their
-        work both in the studio and in the garden follows themes of ecology,
-        tool making, and collective care during collapse. When not at the
-        computer in the heat of the day, you can find them in the hills spending
-        time with their neighbors— both human and non-human.
+        Everest Pipkin is a game developer, artist, and educator who works in
+        games and software tools across the handmade web– as well as on paper
+        through books, zines and drawings. They have shown and spoken at The
+        Design Museum of London, The Texas Biennial, The XXI Triennale of Milan,
+        The Photographers Gallery of London, Center for Land Use Interpretation,
+        and currently teach game design at the Pratt Institute. They believe the
+        internet is a public good, and the post office should operate it.
       </p>
     ),
     instaLink: "https://www.instagram.com/everestpipkin/",
     webLink: "https://everest-pipkin.com/",
-    medium: "AI, Custom Software",
+    medium:
+      "Javascript, Deepfake Vocal Cloning Softwares, Personal Voice Dataset, Found sounds",
     year: 2020,
   },
   {
@@ -420,9 +428,8 @@ export const artists: IArtist[] = [
     statement: (
       <>
         <p>
-          Philipp Schmitt is an artist and designer based in Brooklyn, USA. His
-          creative practice engages with the philosophical, poetic, and
-          political dimensions of computation.
+          Philipp's creative practice engages with the philosophical, poetic,
+          and political dimensions of computation.
         </p>
         <p>
           Schmitt often incorporates emerging computing technologies such as
@@ -437,7 +444,7 @@ export const artists: IArtist[] = [
       <>
         <p>
           Philipp Schmitt (he/him; b. 1993 at 356 PPM CO2) is an artist and
-          designer based in Brooklyn Hamburg, Germany.
+          designer based in Hamburg, Germany.
         </p>
         <p>
           Philipp’s work has been exhibited at The Photographers' Gallery
@@ -561,7 +568,7 @@ export const artists: IArtist[] = [
     // instaLink: "https://www.instagram.com/cthompto",
     blueSkyLink: "https://bsky.app/profile/cthompto.bsky.social",
     webLink: "https://chelsea.technology/?",
-    medium: "custom code",
+    medium: "HTML, CSS, and JavaScript",
     bio: (
       <>
         <p>
@@ -622,29 +629,31 @@ export const artists: IArtist[] = [
     description: (
       <>
         <p>
-          “Consensus Sensing” is a continuation of my series of investigative
+          “Consensus Sensing” is a speculative design and data exploration
+          experience that is a continuation of my series of investigative
           experiments into the transphobia baked into AI image general. This
-          project will expand my image series "Consensus Portraits" into an
-          online interactive archive. "Consensus Portraits" is a series of
-          portraits of trans and non-binary people, generated with popular
-          generative AI tools. It has long been known that biases contained
-          within datasets surface in generative “AI” systems trained on this
-          data. The generated images in this series highlight the transphobic
-          tropes baked into so-called AI systems and contain subtle tells about
-          the source imagery used in their creation.
+          project expands my image series "Consensus Portraits" which is a
+          series of portraits of trans and non-binary people, generated with
+          popular generative AI tools. It has long been known that biases
+          contained within datasets surface in generative “AI” systems trained
+          on this data. The generated images in this series highlight the
+          transphobic tropes baked into so-called AI systems and contain subtle
+          tells about the source imagery used in their creation. For “Consensus
+          Sensing”, I have chosen to focus on images made with the prompt of
+          generating a transwoman.
         </p>
         <p>
-          “Consensus Sensing” will present this archive of AI images within an
+          “Consensus Sensing” presents this archive of AI images within an
           online custom user interface containing footnotes, context, and
-          overlays, inviting viewers to closely read the images. Invested in
-          looking critically at the data and process obscured by the black box,
-          “Consensus Sensing” will offer the audience an opportunity to slow
-          down their viewing and glimpse the inside of the black box.
-        </p>
-        <p>
-          Using HTML, CSS, and JavaScript, this work culminates in an online
-          interactive space containing a gallery of images, critical and
-          descriptive texts, and custom UI elements.
+          overlays, inviting viewers to closely read the images. The user
+          interface is a machine from an imagined open hardware future,
+          positioning the viewer in a future looking back at this archive. This
+          positionality aims to both imagine a more open and humanist tech
+          future and also to give the viewer a sense of distance from the
+          generated images. Invested in looking critically at the data and
+          process obscured by the black box, “Consensus Sensing” offers the
+          audience an opportunity to slow down their viewing and glimpse the
+          inside of the black box.
         </p>
       </>
     ),
@@ -653,12 +662,12 @@ export const artists: IArtist[] = [
   {
     id: 8,
     roomID: 8,
-    title: "Artificial Archive: SCRYING INTIMACIES",
+    title: "Artificial Archive: SCRYING INTIMACIES - Hallucination 04, 2025",
     name: "Rodell Warner",
     thumb: "rodell-warner-thumb.jpg",
     nameLink: "warner",
     instaLink: "https://www.instagram.com/rodellwarner/",
-    webLink: "https://cargocollective.com/rodellwarner",
+    webLink: "https://www.rodellwarner.com/",
     medium: "1920x1080 single-channel video with sound",
     essayLink:
       "https://preelit.com/2023/11/09/brief-and-candid-notes-on-artificial-archive/",
@@ -667,24 +676,42 @@ export const artists: IArtist[] = [
       <>
         <p>
           Rodell Warner is a Trinidadian artist working primarily in new media
-          and photography, and a Moving Image master’s student at Bard College.
+          and photography, and a Moving Image MFA student at Bard College.
           Rooted in the exploration of race, nature, and technologies of
-          representation, Rodell's artworks draw on personal and institutional
+          representation, Rodell’s artworks draw on personal and institutional
           archives to rethink the past, and on digital processes to index
-          emancipatory futures. Rodell's digital animations intervening in early
-          photography from the Caribbean have been exhibited at the Art Gallery
-          of Ontario in the landmark exhibition{" "}
-          <em>Fragments of Epic Memory</em> in 2022, and in 2024 in the Tito's
-          Prize solo exhibition <em>Fictions More Precious</em> at Big Medium in
-          Austin, Texas. Rodell’s <em>TERRARIA ⚘</em> - animated works showing
-          hand-modeled digital 3D renderings of site-identified plant species
-          seen through unique lenses in virtual environments - has been
-          exhibited at the Museum of Contemporary Art, Taipei in{" "}
-          <em>NEXUS－Video and New Media Art from the Caribbean</em> in 2023,
-          and in 2024 at the Pérez Art Museum Miami in the exhibition Sea
-          Change. Over the last 15 years Rodell has worked between Port of Spain
-          in Trinidad, Kingston in Jamaica, and Austin, Texas in the U.S., and
-          is currently living and working in Boston, Massachusetts.
+          emancipatory futures.
+        </p>
+        <p>
+          Rodell's ongoing animated digital interventions into early Caribbean
+          photography have been featured in several exhibitions, including
+          <em>Fragments of Epic Memory</em> at the Art Gallery of Ontario
+          (2022), and the solo exhibition <em>Fictions More Precious</em> as
+          part of the Tito’s Prize at Big Medium in Austin, Texas (2024). These
+          works were recognized with an honorary mention at the Prix Ars
+          Electronica (2025).
+        </p>
+        <p>
+          In 2025, Rodell's first solo museum exhibition,{" "}
+          <em>Rodell Warner + Audubon + His Journals</em>, opened at the Jule
+          Collins Smith Museum of Fine Art. The show featured web-based,
+          text-based, and moving-image works that engaged with the museum’s
+          collection of John James Audubon prints, and raised critical questions
+          about the 19th-century artist and naturalist’s legacy.
+        </p>
+        <p>
+          Also in 2025, Rodell’s web-based moving-image work{" "}
+          <em>World Is Turning</em>—a presentation of a 13-year archive of the
+          artist's moving-image practice—was installed at the Museum of the
+          Moving Image. Rodell also installed a web-based presentation of
+          archival materials in <em>Las' Lap / Afterlife</em>, a performance
+          commissioned by the Trinidad and Tobago Film Festival for the
+          festival's 2025 New Media programme.
+        </p>
+        <p>
+          Rodell has lived and worked between Port of Spain (Trinidad), Kingston
+          (Jamaica), and Austin (Texas), and is currently based in Boston,
+          Massachusetts.
         </p>
       </>
     ),
@@ -693,12 +720,12 @@ export const artists: IArtist[] = [
   {
     id: 9,
     roomID: 9,
-    title: "AMA y NO OLVIDA",
+    title: "AMA y No Olvida, Museum of Memory Against Impunity",
     name: "Emilia Yang",
     thumb: "emilia-yang-thumb.jpg",
     nameLink: "emiliayang",
     instaLink: "https://www.instagram.com/rojapordentro",
-    webLink: "https://www.emiliayang.org/",
+    webLink: "https://www.museodelamemorianicaragua.org/en/home/",
     medium:
       "Community Based Practice, Digital, Documentary, Installation, Memory, Political, Public art",
     statement: (
@@ -740,26 +767,21 @@ export const artists: IArtist[] = [
     ),
     description: (
       <>
+        <div className="text-xl italic mb-4">
+          Emilia Yang in collaboration with the April Mothers Association (AMA)
+          and the AMA y No Olvida, Museum of Memory against Impunity team.
+        </div>
         <p>
-          In Nicaragua, the government has denied the victims of state violence
-          the right to truth, justice, and memory since 2018. “AMA y NO OLVIDA,”
-          Museum of Memory Against Impunity, contributes to dignifying victims
-          of state violence and honoring their memory, as well as countering the
-          regime's impunity. It was created with a participatory approach
-          involving all members of the Mothers of April Association (AMA), an
-          organization of relatives of the victims' deaths.
-        </p>
-        <p>
-          AMA y No Olvida is a transmedia community and participatory archive
-          that holds more than 200 video testimonials, a photographic archive,
-          memory artifacts, and hand-drawn maps that were turned into geographic
-          information systems (GIS) digital maps that geo-localize the
-          narratives of the murder of 100 victims, and an Interactive art book
-          with an augmented reality component. The book I am proposing to
-          exhibit, compiles around 100 stories of victims murdered by the
-          regime, told through the voices of their families. It also shows
-          augmented reality versions of 3D barricade shaped altars with memory
-          objects that belonged to the victims.
+          In Nicaragua, after brutal repression, the government has denied the
+          victims of state violence the right to truth, justice, and memory
+          since 2018. “AMA y NO OLVIDA,” the Museum of Memory Against Impunity,
+          contributes to dignifying state victims and honoring their memory, as
+          well as countering the regime's impunity. It consists of an archive
+          that hosts more than 200 testimonies, photographic archives, memory
+          artifacts, and maps of the victims' murders. It was created with a
+          participatory approach involving all members of the Mothers of April
+          Association (AMA), an organization of relatives of the victims that
+          were killed, mostly mothers, aunts, sisters.
         </p>
         <p>
           In conversation with Black, trans and decolonial scholars, I created a
@@ -776,17 +798,56 @@ export const artists: IArtist[] = [
           statement. With the disappearance of public acts of protest and
           mourning in Nicaragua, this project allows the victims' stories to
           transcend their homes and families to transform public and private
-          spaces into places of collective memory.
-        </p>
-        <p>
+          spaces into places of collective memory.{" "}
           <a
             href="https://www.museodelamemorianicaragua.org/en/home/"
             target="_blank"
-            className="text-[cyan] hover:underline"
+            className="text-blue-600 hover:underline"
             rel="noopener noreferrer"
           >
-            Read more about the project here.
+            Website
           </a>
+        </p>
+
+        <div className="mt-8 font-bold text-xl">3D Altars</div>
+        <p>
+          This is a digital extension of the itinerant transmedia exhibition of
+          AMA y No Olvida. You will find 3D replicas of the barricade shaped
+          altars created by the victims’ relatives to honor the memory of their
+          loved ones. The artifacts add layers to the identity of each victim
+          and what their dreams and life objectives were. They were not just
+          victims, they were protesters defending their right to express
+          themselves freely and their territories. They were students,
+          engineers, dancers, artisans, construction workers, fathers and
+          children. The objects that represent these assets are scattered around
+          the world as many of the victims' families have had to become exiles
+          of Nicaragua due to government repression.
+        </p>
+        <div className="mt-8 font-bold text-xl">
+          Managua Altar Objects-Victims
+        </div>
+        <p>
+          <ul>
+            <li>Straw hat - Gerald Vásquez López</li>
+            <li>Brown boots - Edgard Guevara Portobanco</li>
+            <li>Portrait of Jonathan Morazán Meza</li>
+            <li>Soccer Trophy - Wendell Rivera Narváez</li>
+            <li>Skateboard - Álvaro Conrado Dávila</li>
+            <li>Shoes - Jeisson Chavarría Urbina</li>
+            <li>Drumsticks - Richard Pavón Bermúdez</li>
+            <li>Slingshot - Marlon Manases Ramírez</li>
+            <li>Cap - Moroni López García</li>
+            <li>Spinning Tops - Jesner Rivas</li>
+            <li>Teddy bear and baby sock - Hammer García</li>
+          </ul>
+        </p>
+        <div className="mt-8 font-bold text-xl">AMA Constructing Memory</div>
+        <p>
+          Interactive Art Book (2021): the book is part of the AMA and No Olvida
+          project, a Museum of Memory Against Impunity, and compiles around 100
+          stories of victims murdered by the regime, told through the voices of
+          their families. Using QR codes, you can access the victims profiles
+          and testimonies.
         </p>
       </>
     ),
