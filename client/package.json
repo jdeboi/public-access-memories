@@ -32,6 +32,7 @@
     "http-proxy-middleware": "^2.0.6",
     "js-cookie": "^3.0.1",
     "livekit-client": "^1.13.4",
+    "papaparse": "^5.5.3",
     "react": "^18.2.0",
     "react-audio-player": "^0.17.0",
     "react-dom": "^18.2.0",
@@ -82,6 +83,7 @@
     ]
   },
   "devDependencies": {
+    "@types/papaparse": "^5.3.16",
     "autoprefixer": "^10.4.21",
     "babel-plugin-named-exports-order": "^0.0.2",
     "jest": "^27.5.1",

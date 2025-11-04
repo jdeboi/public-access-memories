@@ -384,9 +384,13 @@ export const displayLightDivs = (userX: number, userY: number, divs: any) => {
   }
 };
 
-export const displayFolderDivs = (divs: any) => {
+export const displayFolderDivs = (
+  divs: any,
+  userX?: number,
+  userY?: number
+) => {
   for (const folder of divs.folders) {
-    folder.display();
+    folder.display(userX, userY);
   }
 };
 
@@ -481,8 +485,12 @@ export function updateDivs(
 
 export const checkDivPress = (userX: number, userY: number, divs: any) => {
   let keys = Object.keys(divs);
+
   for (const key of keys) {
-    for (const div of divs[key]) if (checkDiv(userX, userY, div)) return true;
+    // check in reverse order to prioritize top-most divs
+    const reversedDivs = [...divs[key]].reverse();
+    for (const div of reversedDivs)
+      if (checkDiv(userX, userY, div)) return true;
   }
   return false;
 };
@@ -502,10 +510,14 @@ export const checkFolderDivsDouble = (
   divs: any
 ) => {
   if (divs.folders) {
-    for (const folder of divs.folders) {
-      folder.checkDoubleClicked(userX, userY);
+    // check in reverse order to prioritize top-most divs
+    const reversedDivs = [...divs.folders].reverse();
+    for (const folder of reversedDivs) {
+      const clicked = folder.checkDoubleClicked(userX, userY);
+      if (clicked) return true;
     }
   }
+  return false;
 };
 
 export const checkTrashDivsDouble = (
@@ -514,9 +526,13 @@ export const checkTrashDivsDouble = (
   divs: any
 ) => {
   if (divs.trashCans) {
-    for (const trash of divs.trashCans) {
+    // check in reverse order to prioritize top-most divs
+    const reversedDivs = [...divs.trashCans].reverse();
+    for (const trash of reversedDivs) {
       // trash.checkDoubleClickedAlert(userX, userY);
-      trash.checkDoubleClicked(userX, userY);
+      const clicked = trash.checkDoubleClicked(userX, userY);
+      if (clicked) return true;
     }
   }
+  return false;
 };

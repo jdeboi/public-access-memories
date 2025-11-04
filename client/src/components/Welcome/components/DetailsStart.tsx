@@ -27,7 +27,7 @@ export default function DetailsStart() {
         className="mb-6"
         alt="PAM logo"
       />
-      <div className="text-gray-500 mb-1">a Wrong Biennale pavilion</div>
+      <div className="text-gray-500 mb-1">The Wrong Biennale pavilion</div>
 
       <div className="text-black text-base mb-1">
         <Link
@@ -35,7 +35,7 @@ export default function DetailsStart() {
           style={{ color: "blue" }}
           className="underline transition-colors duration-150"
         >
-          DEBOX
+          Debox
         </Link>
       </div>
 

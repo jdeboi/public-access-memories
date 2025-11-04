@@ -53,19 +53,19 @@ export default function ArtistProfileContent({
         {artist.description && (
           <>
             <SectionHeader title="About the work" />
-            <p>{artist.description}</p>
+            <div>{artist.description}</div>
           </>
         )}
         {artist.statement && (
           <>
             <SectionHeader title="Statement" />
-            <p>{artist.statement}</p>
+            <div>{artist.statement}</div>
           </>
         )}
         {artist.bio && (
           <>
             <SectionHeader title="Bio" />
-            <p>{artist.bio}</p>
+            <div>{artist.bio}</div>
           </>
         )}
       </section>

@@ -47,8 +47,6 @@ const GalleryRoom = (props: IGallery) => {
   const audioPlayer = useRef<ReactAudioPlayer>(null);
   const [showStart, setShowStart] = useState(true);
 
-  const [submissionHidden, setSubmissionHidden] = useState(true);
-
   const isMobile = windowUI.isMobile || windowUI.hasFooter;
 
   useEffect(() => {

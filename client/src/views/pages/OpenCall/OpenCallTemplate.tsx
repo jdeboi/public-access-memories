@@ -7,7 +7,7 @@ export const OpenCallTemplate = () => {
       <div className="windows p-5">
         <h2 className="showTitle">Fields of View</h2>
         <h3>
-          A <a href="https://thewrong.org/">wrong biennale</a> pavilion
+          A <a href="https://thewrong.org/">The Wrong Biennale</a> pavilion
         </h3>
         <h4>Deadline July 1st,œ 2023</h4>
         <h5>
@@ -25,8 +25,8 @@ export const OpenCallTemplate = () => {
         <div>
           <p>
             As part of the 2023-24{" "}
-            <a href="https://thewrong.org/">wrong biennale</a>, public access
-            memories Gallery invites submissions for Fields of View, an
+            <a href="https://thewrong.org/">The Wrong Biennale</a>, public
+            access memories Gallery invites submissions for Fields of View, an
             exhibition that aims to reimagine the dimensionality of virtual
             space. Submissions will be accepted in any digital media format and
             will be exhibited within the HTML Gallery hosted by public access

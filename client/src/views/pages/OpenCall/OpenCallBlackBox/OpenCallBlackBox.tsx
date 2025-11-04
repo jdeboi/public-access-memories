@@ -142,7 +142,7 @@ export default function OpenCallBlackBox() {
                   target="_blank"
                   className="text-blue-600"
                 >
-                  Wrong Biennale
+                  The Wrong Biennale
                 </a>{" "}
                 pavilion and Public Access Memories exhibition
               </div> */}
@@ -187,7 +187,7 @@ export default function OpenCallBlackBox() {
                     style={{ textDecoration: "underline" }}
                     target="_blank"
                   >
-                    Wrong Biennale
+                    The Wrong Biennale
                   </a>{" "}
                   pavilion and Public Access Memories exhibition
                 </div>

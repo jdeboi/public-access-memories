@@ -335,7 +335,9 @@ export default class Floppy extends Draggable {
     // console.log(mx, my, userX, userY, this.x, this.y);
     if (this.checkOver(mouse.x, mouse.y)) {
       // alert("Don't dig through the trash. You're in a gallery. Geez.")
+      return true;
     }
+    return false;
   };
 
   newPage = () => {

@@ -555,7 +555,7 @@ export const artists: IArtist[] = [
         </p>
       </>
     ),
-    year: YEAR,
+    year: "2017 - present",
   },
   {
     id: 7,

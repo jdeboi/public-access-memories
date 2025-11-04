@@ -53,7 +53,9 @@ export default class Trash extends Folder {
       // alert("Don't dig through the trash. You're in a gallery. Geez.")
       this.folder.openWindow();
       if (this.callback) this.callback();
+      return true;
     }
+    return false;
   };
 
   checkDoubleClicked = (userX, userY, GlobalConfig = this.GlobalConfig) => {
@@ -63,6 +65,8 @@ export default class Trash extends Folder {
       // alert("Don't dig through the trash. You're in a gallery. Geez.")
       this.folder.openWindow();
       if (this.callback) this.callback();
+      return true;
     }
+    return false;
   };
 }

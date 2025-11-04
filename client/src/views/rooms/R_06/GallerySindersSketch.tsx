@@ -1,6 +1,6 @@
 import { getLimits } from "../../../helpers/helpers";
 import { initOuterWalls } from "../../Gallery/Gallery1/functions/building";
-import { displayFolderDivs } from "../../Gallery/Gallery1/functions/divs";
+
 import {
   GallerySketch1Props,
   GallerySketchTemplate1,
@@ -9,15 +9,17 @@ import {
 import p5Types from "p5";
 import Folder from "../../Gallery/components/p5/Folder";
 import Postit from "../../Gallery/components/p5/Postit";
-import { initTrashSinders } from "./functions";
+import { displayFolderDivs } from "../../Gallery/Gallery1/functions/divs";
 
 interface GallerySindersSketchProps extends GallerySketch1Props {
   showSubmissionForm: () => void;
+  showReadme: () => void;
   submissions: any[];
+  setPostOpen: (sub: null | any) => void;
 }
 
 export default class GallerySindersSketch extends GallerySketchTemplate1<GallerySindersSketchProps> {
-  public postItImg: p5Types.Image | null = null;
+  public postItImgs: p5Types.Image[] = [];
   private p5Ref: p5Types | null = null;
   private lastSubsSig = "";
 
@@ -27,7 +29,9 @@ export default class GallerySindersSketch extends GallerySketchTemplate1<Gallery
   }
 
   preloadContent = (p5: p5Types) => {
-    this.postItImg = p5.loadImage(this.pamURL + "debox/sinders/postit1.webp");
+    for (let i = 0; i <= 4; i++) {
+      this.postItImgs[i] = p5.loadImage(`${this.pamURL}debox/sinders/${i}.png`);
+    }
   };
 
   initWorld = () => {
@@ -49,7 +53,7 @@ export default class GallerySindersSketch extends GallerySketchTemplate1<Gallery
     if (prevProps.submissions !== this.props.submissions) {
       const nextSig = this.submissionsSig(this.props.submissions);
       if (nextSig !== this.lastSubsSig && this.p5Ref) {
-        this.initPostits(this.p5Ref);
+        this.updatePostits(this.p5Ref);
         this.lastSubsSig = nextSig;
         // If draw loop is paused:
         // this.p5Ref.redraw();
@@ -58,25 +62,36 @@ export default class GallerySindersSketch extends GallerySketchTemplate1<Gallery
   }
 
   private submissionsSig(subs: any[]) {
-    const ids = subs.map((s) => s._id ?? s.id ?? s.title ?? "").join("|");
+    const ids = subs
+      .map((s) => s._id ?? s.id ?? s.title ?? s.isHidden ?? "")
+      .join("|");
     return `${subs.length}#${ids}`;
   }
 
   initPostits = (p5: p5Types) => {
     this.divs.folders = [];
+    const posts = this.props.submissions.map((s, i) => ({
+      id: s._id ?? String(i),
+      tags: s.tags ?? [],
+    }));
+    const MAX_W = 1000;
+    const MAX_H = 1000;
+    // const layout = layoutPosts(posts, MAX_W, MAX_H);
     for (let i = 0; i < this.props.submissions.length; i++) {
       const submission = this.props.submissions[i];
-      const { x, y } = stableGridXY(submission); // replaces your i-based layout
+      const id = submission._id ?? String(i);
+      // const pos = layout[id] ?? { x: MAX_W / 2, y: MAX_H / 2 }; // safe fallback
 
-      if (!this.postItImg || !this.GlobalConfig) continue;
+      if (!this.postItImgs.length || !this.GlobalConfig) continue;
       let postit = new Postit(
-        i,
-        x,
-        y,
+        0,
+        submission.x,
+        submission.y,
         submission,
         p5,
-        this.postItImg,
-        this.GlobalConfig
+        this.postItImgs[3],
+        this.GlobalConfig,
+        this.props.setPostOpen
       );
       this.divs.folders.push(postit);
     }
@@ -87,22 +102,88 @@ export default class GallerySindersSketch extends GallerySketchTemplate1<Gallery
       100,
       100,
       80,
-      80,
+      60,
       "Form",
       "",
-      this.txtFile,
+      this.trashFiles[4],
       this.GlobalConfig,
       this.props.showSubmissionForm
     );
     this.divs.folders.push(submissionTxt);
-    initTrashSinders(
+
+    const readme = new Folder(
       p5,
-      this.lightImgs,
-      this.trashFiles[4],
-      this.divs,
+      0,
+      250,
+      140,
+      80,
+      80,
+      "README.txt",
+      "",
+      this.txtFile,
       this.GlobalConfig,
-      () => {}
+      this.props.showReadme
     );
+    this.divs.folders.push(readme);
+
+    // initTrashSinders(
+    //   p5,
+    //   this.lightImgs,
+    //   this.trashFiles[4],
+    //   this.divs,
+    //   this.GlobalConfig,
+    //   () => {}
+    // );
+  };
+
+  updatePostits = (p5: p5Types) => {
+    console.log("updating postits...");
+
+    // for props.submissions, check if there's a matching postit, if not add it
+    const existingIds = new Set(
+      this.divs.folders.map((f: any) => (f instanceof Postit ? f._id : null))
+    );
+    for (let i = 0; i < this.props.submissions.length; i++) {
+      const submission = this.props.submissions[i];
+      const id = submission._id ?? String(i);
+
+      // Add new postit if not existing
+      if (!existingIds.has(id)) {
+        if (!this.postItImgs.length || !this.GlobalConfig) continue;
+        let postit = new Postit(
+          0,
+          submission.x,
+          submission.y,
+          submission,
+          p5,
+          this.postItImgs[3],
+          this.GlobalConfig,
+          this.props.setPostOpen
+        );
+        postit.closed = false;
+        this.divs.folders.push(postit);
+      }
+      // Update existing postit
+      else {
+        const postit = this.divs.folders.find(
+          (f: any) => f instanceof Postit && f._id === id
+        );
+        if (postit) {
+          postit.closed = false;
+        }
+      }
+    }
+    // Hide postits that are no longer in props.submissions
+    const currentIds = new Set(
+      this.props.submissions.map((s) => s._id ?? String(s.id ?? s.title ?? ""))
+    );
+    for (let folder of this.divs.folders) {
+      if (folder instanceof Postit) {
+        if (!currentIds.has(folder._id)) {
+          folder.closed = true;
+        }
+      }
+    }
   };
 
   initBuilding = (p5: p5Types) => {
@@ -117,27 +198,18 @@ export default class GallerySindersSketch extends GallerySketchTemplate1<Gallery
 
   displayDivs = (p5: p5Types) => {
     if (this.font) p5.textFont(this.font, 14);
-    displayFolderDivs(this.divs);
+    displayFolderDivs(this.divs, this.userEase.x, this.userEase.y);
 
-    if (this.divs.trashFolders && this.divs.trashCans) {
-      for (const folder of this.divs.trashFolders) {
-        folder.display(this.userEase.x, this.userEase.y);
-        folder.displayToolBar(this.userEase.x, this.userEase.y);
-      }
-      for (const trash of this.divs.trashCans) {
-        trash.display(this.userEase.x, this.userEase.y);
-      }
-    }
+    // if (this.divs.trashFolders && this.divs.trashCans) {
+    //   for (const folder of this.divs.trashFolders) {
+    //     folder.display(this.userEase.x, this.userEase.y);
+    //     folder.displayToolBar(this.userEase.x, this.userEase.y);
+    //   }
+    //   for (const trash of this.divs.trashCans) {
+    //     trash.display(this.userEase.x, this.userEase.y);
+    //   }
+    // }
   };
-}
-
-function hashFNV1a(str: string): number {
-  let h = 0x811c9dc5;
-  for (let i = 0; i < str.length; i++) {
-    h ^= str.charCodeAt(i);
-    h = Math.imul(h, 0x01000193);
-  }
-  return h >>> 0; // unsigned
 }
 
 function stableGridXY(
@@ -153,7 +225,7 @@ function stableGridXY(
     sub._id ??
     sub.createdAt ??
     `${sub.title ?? ""}|${sub.content?.slice(0, 32) ?? ""}`;
-  const h = hashFNV1a(String(key));
+  const h = 100; //hashFNV1a(String(key));
 
   const col = h % gridCols;
   const row = (h >>> 8) % gridRows;

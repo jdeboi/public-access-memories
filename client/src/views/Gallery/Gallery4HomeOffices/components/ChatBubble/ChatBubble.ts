@@ -69,6 +69,6 @@ export default class ChatBubble extends Folder {
   }
 
   checkDoubleClickedNormal = (room: number = -1) => {
-    return;
+    return false;
   };
 }

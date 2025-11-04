@@ -14,7 +14,7 @@ export default function LoadingPage(props: { progress?: number }) {
             {ShowConfig.showTitle}
           </div>
           <div className="font-mono text-xs text-slate-300">
-            a Wrong Biennale pavilion
+            The Wrong Biennale pavilion
           </div>
           <p>Public Access Memories</p>
           <div className="text-xs text-green-500">Loading...</div>

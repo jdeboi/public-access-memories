@@ -35,24 +35,28 @@ export default class Folder extends Draggable {
   }
 
   displayInRoom(room: number = -1) {
+    if (this.closed) return;
     if (room !== -1 && room !== this.roomToDisplay) {
       return;
     }
     this.display();
   }
-  display() {
+  display(userX?: number, userY?: number) {
+    if (this.closed) return;
     if (!this.img) {
       return;
     }
     this.p5.push();
     this.p5.translate(this.x, this.y);
     this.p5.image(this.img, 0, 0, this.w, this.h);
-    this.displayOverImage();
+    this.displayOverImage(userX, userY);
     this.drawLabel();
     this.p5.pop();
   }
 
-  displayOverImage() {}
+  displayOverImage(userX?: number, userY?: number) {
+    // Implement the display logic using userX and userY
+  }
 
   drawLabel() {
     if (!this.label || this.label === "") {
@@ -79,6 +83,7 @@ export default class Folder extends Draggable {
   }
 
   checkDraggingNormal(room: number = -1) {
+    if (this.closed) return false;
     if (room !== -1 && room !== this.roomToDisplay) {
       return false;
     }
@@ -94,6 +99,7 @@ export default class Folder extends Draggable {
     return false;
   }
   checkDragging(userX: number, userY: number) {
+    if (this.closed) return false;
     let mouse = mouseToWorld(
       { x: userX, y: userY },
       this.p5,
@@ -114,6 +120,7 @@ export default class Folder extends Draggable {
   }
 
   checkOver = (mx: number, my: number) => {
+    if (this.closed) return false;
     if (
       mx > this.x &&
       mx < this.x + this.w &&
@@ -135,28 +142,36 @@ export default class Folder extends Draggable {
   };
 
   checkDoubleClickedNormal = (room: number = -1) => {
+    if (this.closed) return false;
     if (room !== -1 && room !== this.roomToDisplay) {
-      return;
+      return false;
     }
     let mouse = { x: this.p5.mouseX, y: this.p5.mouseY };
     if (this.link && this.checkOver(mouse.x, mouse.y)) {
       this.openInNewTab(this.link);
+      return true;
     } else if (this.callback && this.checkOver(mouse.x, mouse.y)) {
       this.callback();
+      return true;
     }
+    return false;
   };
 
   checkDoubleClickedAlertNormal = (room: number = -1) => {
+    if (this.closed) return false;
     if (room !== -1 && room !== this.roomToDisplay) {
       return;
     }
     let mouse = { x: this.p5.mouseX, y: this.p5.mouseY };
     if (this.checkOver(mouse.x, mouse.y)) {
       alert("Don't dig through the trash. You're in a gallery. Geez.");
+      return true;
     }
+    return false;
   };
 
   checkDoubleClicked = (userX: number, userY: number) => {
+    if (this.closed) return false;
     let mouse = mouseToWorld(
       { x: userX, y: userY },
       this.p5,
@@ -164,12 +179,16 @@ export default class Folder extends Draggable {
     );
     if (this.link && this.checkOver(mouse.x, mouse.y)) {
       this.openInNewTab(this.link);
+      return true;
     } else if (this.callback && this.checkOver(mouse.x, mouse.y)) {
       this.callback();
+      return true;
     }
+    return false;
   };
 
   checkDoubleClickedAlert = (userX: number, userY: number) => {
+    if (this.closed) return false;
     let mouse = mouseToWorld(
       { x: userX, y: userY },
       this.p5,
@@ -178,7 +197,9 @@ export default class Folder extends Draggable {
     // console.log(mx, my, userX, userY, this.x, this.y);
     if (this.checkOver(mouse.x, mouse.y)) {
       alert("Don't dig through the trash. You're in a gallery. Geez.");
+      return true;
     }
+    return false;
   };
 
   openInNewTab = (url: string) => {

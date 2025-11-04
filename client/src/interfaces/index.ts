@@ -165,7 +165,7 @@ export interface IArtist {
   statement?: string | ReactNode;
   bio: string | ReactNode;
   title: string;
-  year: number;
+  year: number | string;
   essayLink?: string;
   essay?: ReactNode;
 }

@@ -133,10 +133,9 @@ export default function DeboxStatement() {
             {/* Header */}
             <div className="pointer-events-auto p-6 windowsBlack  mb-8 bg-black">
               <div className="font-['geoFont'] text-7xl font-bold text-gray-100 mb-6">
-                DEBOX
+                Debox
               </div>
               <div className="text-gray-500 mb-6">
-                a{" "}
                 <a
                   href="https://thewrong.org/"
                   style={{ textDecoration: "underline" }}
@@ -144,7 +143,7 @@ export default function DeboxStatement() {
                   className="text-[cyan]"
                   rel="noopener noreferrer"
                 >
-                  Wrong Biennale
+                  The Wrong Biennale
                 </a>{" "}
                 pavilion and Public Access Memories exhibition
               </div>
