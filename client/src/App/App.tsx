@@ -375,17 +375,17 @@ function App() {
           <Route
             path="/briz"
             element={
-              // isProduction && ShowConfig.isClosed ? (
-              //   <Room />
-              // ) : (
-              <GalleryRoom
-                id={2}
-                path={"/briz"}
-                users={users}
-                isClosed={isClosed}
-                showWelcome={showWelcome}
-              />
-              // )
+              isProduction && ShowConfig.isClosed ? (
+                <Room />
+              ) : (
+                <GalleryRoom
+                  id={2}
+                  path={"/briz"}
+                  users={users}
+                  isClosed={isClosed}
+                  showWelcome={showWelcome}
+                />
+              )
             }
           />
           <Route
