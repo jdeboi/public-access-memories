@@ -11,6 +11,9 @@ export default class Postit extends Folder {
 
   public _id: string;
 
+  public static fontGeo: p5Types.Font | null = null;
+  public static fontMono: p5Types.Font | null = null;
+
   constructor(
     id: number,
     x: number,
@@ -30,6 +33,11 @@ export default class Postit extends Folder {
     };
   }
 
+  static setFonts = (fontGeo: p5Types.Font, fontMono: p5Types.Font) => {
+    Postit.fontGeo = fontGeo;
+    Postit.fontMono = fontMono;
+  };
+
   displayOverImage(userX?: number, userY?: number) {
     if (this.closed) return;
     if (!this.submission) return;
@@ -44,15 +52,17 @@ export default class Postit extends Folder {
     this.p5.push();
     this.p5.translate(sp + 8, -5);
     if (tags && tags.length > 0) {
+      if (Postit.fontGeo) this.p5.textFont(Postit.fontGeo, 12);
       let tagY = 0;
       let tagX = 0;
       for (let i = 0; i < tags.length; i++) {
         this.displayTagLabel(tagX, tagY, tags[i]);
-        tagX += this.p5.textWidth(tags[i]) + 5;
+        tagX += this.p5.textWidth(tags[i]) + 14;
       }
     }
     this.p5.pop();
 
+    if (Postit.fontMono) this.p5.textFont(Postit.fontMono, 10);
     this.p5.translate(sp, sp + 34);
 
     this.p5.noStroke();
@@ -132,18 +142,21 @@ export default class Postit extends Folder {
     this.p5.push();
     this.p5.translate(x, y);
     this.p5.fill(getTagColor(label));
-    this.p5.stroke(0);
+    this.p5.stroke(80, 100);
     this.p5.strokeWeight(1);
 
-    this.p5.textSize(10);
+    if (Postit.fontGeo) this.p5.textFont(Postit.fontGeo, 12);
+    this.p5.textSize(12);
     const tw = this.p5.textWidth(label);
-    const sp = 3;
-    this.p5.rect(0, 0, tw + sp * 2, 16, 4); // background for readability
+    const sp = 6;
+    const h = 16;
+    const w = tw + sp * 2;
+    this.p5.rect(0, 0, w, h, h / 2); // background for readability
     this.p5.fill(0);
 
     this.p5.noStroke();
     this.p5.textAlign(this.p5.CENTER, this.p5.CENTER);
-    this.p5.text(label, (tw + 7) / 2, 7);
+    this.p5.text(label, w / 2, h / 2 - 1);
     this.p5.pop();
   }
 }

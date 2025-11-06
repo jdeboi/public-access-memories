@@ -38,7 +38,7 @@ export default class GallerySindersSketch extends GallerySketchTemplate1<Gallery
     this.galleryId = 7;
     const worldW = 20;
     const worldH = 20;
-    this.GlobalConfig = { x: -5, y: -5, scaler: 70, worldW, worldH };
+    this.GlobalConfig = { x: -1, y: -3, scaler: 70, worldW, worldH };
     this.limits = getLimits(0, worldW, 0, worldH);
   };
 
@@ -70,17 +70,10 @@ export default class GallerySindersSketch extends GallerySketchTemplate1<Gallery
 
   initPostits = (p5: p5Types) => {
     this.divs.folders = [];
-    const posts = this.props.submissions.map((s, i) => ({
-      id: s._id ?? String(i),
-      tags: s.tags ?? [],
-    }));
-    const MAX_W = 1000;
-    const MAX_H = 1000;
-    // const layout = layoutPosts(posts, MAX_W, MAX_H);
+    if (this.fontGeo && this.font) Postit.setFonts(this.fontGeo, this.font);
+
     for (let i = 0; i < this.props.submissions.length; i++) {
       const submission = this.props.submissions[i];
-      const id = submission._id ?? String(i);
-      // const pos = layout[id] ?? { x: MAX_W / 2, y: MAX_H / 2 }; // safe fallback
 
       if (!this.postItImgs.length || !this.GlobalConfig) continue;
       let postit = new Postit(

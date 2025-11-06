@@ -530,28 +530,16 @@ export const artists: IArtist[] = [
     bio: (
       <>
         <p>
-          Caroline Sinders is a machine-learning-design researcher and artist.
-          For the past few years, she has been examining the intersections of
-          technology’s impact in society, interface design, artificial
-          intelligence, abuse, and politics in digital, conversational spaces.
-          Sinders is the founder of Convocation Design + Research, an agency
-          focusing on the intersections of machine learning, user research,
-          designing for public good, and solving difficult communication
-          problems. As a designer and researcher, she has worked with Amnesty
-          International, Intel, IBM Watson, the Wikimedia Foundation, and
-          others.
-        </p>
-        <p>
-          Sinders has held fellowships with the Harvard Kennedy School, the
-          Mozilla Foundation, Yerba Buena Center for the Arts, Eyebeam, STUDIO
-          for Creative Inquiry, and the International Center of Photography. Her
-          work has been supported by the Ford Foundation, Omidyar Network, the
-          Open Technology Fund and the Knight Foundation. Her work has been
-          featured in the Tate Exchange in Tate Modern, Victoria and Albert
-          Museum, MoMA PS1, LABoral, Ars Electronica, the Houston Center for
-          Contemporary Craft, Slate, Quartz, Wired, as well as others. Sinders
-          holds a Masters from New York University’s Interactive
-          Telecommunications Program.
+          Caroline Sinders is an award winning critical designer, researcher,
+          and artist. They’re the co-founder and executive director human rights
+          research and technology lab, Convocation Research + Design. For over
+          the past decade, they have been examining the intersections of human
+          rights, artificial intelligence, intersectional justice, harmful
+          design, and systems in technology and digital platforms. They’ve
+          worked with the Tate Exchange at the Tate Modern, the United Nations,
+          the UK’s Information Commissioner's Office, the European Commission,
+          Ars Electronica, the Harvard Kennedy School and others. Caroline is
+          currently based between London, UK and New Orleans, USA.
         </p>
       </>
     ),
@@ -684,7 +672,7 @@ export const artists: IArtist[] = [
         </p>
         <p>
           Rodell's ongoing animated digital interventions into early Caribbean
-          photography have been featured in several exhibitions, including
+          photography have been featured in several exhibitions, including{" "}
           <em>Fragments of Epic Memory</em> at the Art Gallery of Ontario
           (2022), and the solo exhibition <em>Fictions More Precious</em> as
           part of the Tito’s Prize at Big Medium in Austin, Texas (2024). These

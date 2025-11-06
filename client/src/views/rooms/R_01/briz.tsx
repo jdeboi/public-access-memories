@@ -103,7 +103,7 @@ export const BrizData: BrizQuadType[] = [
     vector: "<VECTOR 1>",
     label: "glitch(alike) prompts",
     imgUrl: `${base}/vv1.jpg`,
-    didactic: "DALL·E 2 “glitch art” prompt, upscaled via LDSR.",
+    didactic: "DALL-E 2 “glitch art” prompt, upscaled via LDSR.",
 
     content: (
       <>

@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState, useCallback } from "react";
 import GallerySindersSketch from "./GallerySindersSketch";
-import CenterModal from "../../../components/CenterModal/CenterModal";
 import { GallerySketch1Props } from "../../Gallery/Gallery1/GallerySketchTemplate1";
 import Frame from "../../../components/Frame/Frame";
 import { useGoogleSheetSubmissions } from "./useGoogleSheetSubmissions";
@@ -37,6 +36,9 @@ const GallerySinders = (props: GallerySindersProps) => {
   >([]);
   const [query, setQuery] = useState("");
 
+  const [enabledTags, setEnabledTags] = useState<string[]>([]);
+  const [tagInit, setTagInit] = useState(false);
+
   // form state (inside modal)
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -70,7 +72,7 @@ const GallerySinders = (props: GallerySindersProps) => {
     const Artist = (r.Artist ?? "").toString().trim();
     const Url = (r.Url ?? "").toString().trim();
     const Contributor = (r.Contributor ?? "").toString().trim();
-    const CreatedDate = (r.CreatedDate ?? "").toString().trim();
+    const CreatedDate = (r.CreatedDate ?? "").toString().trim() || "11/5/2025";
     const x = typeof r.x === "string" ? parseFloat(r.x) : r.x;
     const y = typeof r.y === "string" ? parseFloat(r.y) : r.y;
     const Tags = Array.isArray(r.Tags)
@@ -80,7 +82,6 @@ const GallerySinders = (props: GallerySindersProps) => {
           .map((t: string) => t.trim())
           .filter(Boolean)
       : [];
-
     // synthesize a stable-ish id for CSV rows
     const syntheticId = Url || `${Title}::${Artist}`;
 
@@ -109,7 +110,7 @@ const GallerySinders = (props: GallerySindersProps) => {
   );
 
   // ---- Mongo fetch ----
-  const fetchMongoSubmissions = useCallback(async (q: string) => {
+  const fetchMongoSubmissions = useCallback(async () => {
     setLoadingMongo(true);
     setErrMongo(null);
     try {
@@ -163,8 +164,8 @@ const GallerySinders = (props: GallerySindersProps) => {
   }, []);
 
   useEffect(() => {
-    fetchMongoSubmissions(query);
-  }, [fetchMongoSubmissions, query]);
+    fetchMongoSubmissions();
+  }, [fetchMongoSubmissions]);
 
   // Submit -> Mongo (unchanged)
   const handleShowSubmissions = useCallback(() => {
@@ -199,7 +200,7 @@ const GallerySinders = (props: GallerySindersProps) => {
       const data = await res.json();
       if (!data.ok) throw new Error(data.error || "Failed to submit");
 
-      await fetchMongoSubmissions(query);
+      await fetchMongoSubmissions();
 
       setTitle("");
       setContent("");
@@ -245,12 +246,40 @@ const GallerySinders = (props: GallerySindersProps) => {
     return Array.from(byKey.values());
   }, [sheetSubmissions, mongoSubmissions]);
 
+  const allTags = useMemo(() => {
+    const tagSet = new Set<string>();
+    for (const s of mergedSubmissions) {
+      if (s.tags && s.tags.length > 0) {
+        s.tags.forEach((t) => tagSet.add(t));
+      }
+    }
+    return Array.from(tagSet).sort();
+  }, [mergedSubmissions]);
+
+  useEffect(() => {
+    if (!tagInit && allTags.length > 0) {
+      setEnabledTags(allTags);
+      setTagInit(true);
+    }
+  }, [allTags, tagInit]);
+
   // Filter + only approved & not hidden
   const filteredSubmissions = useMemo(() => {
     const q = query.trim().toLowerCase();
+    const useTagFilter = allTags.length > 0; // if no tags exist, don't filter by tags
+
+    // for case-insensitive matching
+    const enabledSet = new Set(enabledTags.map((t) => t.toLowerCase()));
 
     const submissions = mergedSubmissions
       .filter((s) => s.approved === true && s.hidden !== true)
+      .filter((s) => {
+        if (!useTagFilter) return true; // no tags present -> show all
+        if (enabledTags.length === 0) return false; // user disabled all -> show none
+        if (!s.tags || s.tags.length === 0) return false; // no tags on item -> no match
+        // match if the item has at least ONE enabled tag
+        return s.tags.some((st) => enabledSet.has(st.toLowerCase()));
+      })
       .filter((s) =>
         !q
           ? true
@@ -268,7 +297,7 @@ const GallerySinders = (props: GallerySindersProps) => {
         return (a.title || "").localeCompare(b.title || "");
       });
     return submissions;
-  }, [mergedSubmissions, query]);
+  }, [mergedSubmissions, query, allTags, enabledTags]);
 
   const loadingAny = loadingMongo || loadingSheet;
   const errAny = errMongo || errSheet || null;
@@ -290,7 +319,45 @@ const GallerySinders = (props: GallerySindersProps) => {
           });
         }}
       />
-
+      {allTags.length > 0 && (
+        <Frame
+          title=""
+          isHidden={isFilterHidden}
+          unbounded={false}
+          onHide={() => setFilterIsHidden(true)}
+          windowStyle={{ background: "#ffffffaa", pointerEvents: "all" }}
+          content={
+            <div className="p-1 flex gap-2 flex-wrap mb-4">
+              {allTags.map((tag) => {
+                const isEnabled = enabledTags.includes(tag);
+                return (
+                  <CustomPill
+                    key={tag}
+                    text={tag}
+                    bgHex={getTagColor(tag)}
+                    textHex={"#000"}
+                    onClick={() => {
+                      setEnabledTags(
+                        (prev) =>
+                          prev.includes(tag)
+                            ? prev.filter((t) => t !== tag) // disable
+                            : [...prev, tag] // enable
+                      );
+                    }}
+                    // If your CustomPill uses `disabled` to style the OFF state:
+                    disabled={!isEnabled}
+                  />
+                );
+              })}
+            </div>
+          }
+          width={250}
+          height={56}
+          x={300}
+          y={20}
+          z={100}
+        />
+      )}
       <BrizModal
         visible={!!postOpen}
         onClose={() => setPostOpen(null)}

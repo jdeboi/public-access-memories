@@ -35,21 +35,25 @@ export default function DetailsClosed() {
               Please join us for residency open studios on:
             </div>
           )}
-          <div className="windows p-2 font-mono max-w-100 m-auto">
-            <div className="font-sm mb-2">{ShowConfig.showOpens.date}</div>
-            {ShowConfig.calendarLink && (
-              <div className="text-sm">
-                <Link
-                  to={ShowConfig.calendarLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className=""
-                >
-                  🗓️ Add to your calendar!
-                </Link>
+
+          {ShowConfig.calendarLink ? (
+            <Link
+              to={ShowConfig.calendarLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className=""
+            >
+              <div className="windows p-2 font-mono max-w-100 m-auto">
+                <div className="font-sm mb-2">{ShowConfig.showOpens.date}</div>
+                <div className="text-sm">🗓️ Add to your calendar!</div>
               </div>
-            )}
-          </div>
+            </Link>
+          ) : (
+            <div className="windows p-2 font-mono max-w-100 m-auto">
+              <div className="font-sm mb-2">{ShowConfig.showOpens.date}</div>
+            </div>
+          )}
+
           {/* <div><a href="/opencall">open call</a></div> */}
           {/* {ShowConfig.showOpens.time !== "" ? <div style={{fontSize: fonts[1], paddingBottom: "10px"}}>{ShowConfig.showOpens.time}</div> : null} */}
         </div>

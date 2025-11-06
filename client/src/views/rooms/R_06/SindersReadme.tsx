@@ -13,7 +13,7 @@ export default function SindersReadme() {
           href={projectUrl}
           target="_blank"
           rel="noreferrer"
-          className="underline underline-offset-4 hover:opacity-90"
+          className="underline underline-offset-4 hover:opacity-90 text-blue-600"
         >
           Caroline Sinders
         </a>{" "}

@@ -9,6 +9,8 @@ export default function CustomPill({
   bgHex,
   textHex,
   borderHex,
+  onClick,
+  disabled,
 }: {
   text: string;
   variant?: PillVariant;
@@ -20,6 +22,8 @@ export default function CustomPill({
   textHex?: string;
   /** Optional custom border color (defaults to a sensible value based on bg/text) */
   borderHex?: string;
+  onClick?: () => void;
+  disabled?: boolean;
 }) {
   const sizes: Record<PillSize, string> = {
     sm: "text-sm px-1.5 py-0.5 h-5",
@@ -54,6 +58,8 @@ export default function CustomPill({
         backgroundColor: variant === "outline" ? "transparent" : bgHex,
         color: computedText,
         borderColor: computedBorder,
+        opacity: disabled ? 0.5 : 1,
+        cursor: onClick && !disabled ? "pointer" : "default",
       } as React.CSSProperties)
     : undefined;
 
@@ -67,6 +73,7 @@ export default function CustomPill({
         className,
       ].join(" ")}
       style={style}
+      onClick={onClick}
     >
       {text}
     </span>
