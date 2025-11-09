@@ -260,7 +260,7 @@ export default function ApproveSindersSubmissions() {
         <div style={card}>
           <h2 style={{ margin: 0 }}>Approve Sinders Submissions</h2>
           <p style={{ opacity: 0.8, marginTop: 8 }}>
-            Enter admin password to continue (lightweight gating only).
+            Enter admin password to continue
           </p>
           {authError && <div style={errorBox}>{authError}</div>}
           <input

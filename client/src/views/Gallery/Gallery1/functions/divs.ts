@@ -384,15 +384,15 @@ export const displayLightDivs = (userX: number, userY: number, divs: any) => {
   }
 };
 
-export const displayFolderDivs = (
-  divs: any,
-  userX?: number,
-  userY?: number
-) => {
-  for (const folder of divs.folders) {
-    folder.display(userX, userY);
-  }
-};
+  export const displayFolderDivs = (
+    divs: any,
+    userX?: number,
+    userY?: number
+  ) => {
+    for (const folder of divs.folders) {
+      folder.display(userX, userY);
+    }
+  };
 
 export const displayTrashDivs = (userX: number, userY: number, divs: any) => {
   for (const trash of divs.trashCans) {

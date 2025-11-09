@@ -12,7 +12,7 @@ export const ShowConfig = {
   googleMeet: {
     isLive: true,
     link: "https://meet.google.com/anj-kqhd-doc",
-    goLiveTime: new Date("2025-11-09T17:00:00Z"), // 11:00 AM CST in UTC,
+    goLiveTime: new Date("2025-11-09T16:00:00Z"), // 11:00 AM CST in UTC,
     durationHours: 3,
   },
   showCloses: "",
