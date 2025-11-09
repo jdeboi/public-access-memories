@@ -837,6 +837,8 @@ export const artists: IArtist[] = [
           their families. Using QR codes, you can access the victims profiles
           and testimonies.
         </p>
+        <div className="mt-8 font-bold text-xl">Additional Credits</div>
+        <p>Experience Web XR Design Jon Chambers</p>
       </>
     ),
     bio: (

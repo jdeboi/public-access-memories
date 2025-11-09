@@ -1,7 +1,7 @@
 export const ShowConfig = {
-  isClosed: true,
+  isClosed: false,
   isOpenCallOpen: false,
-  underConstruction: true,
+  underConstruction: false,
   isResidency: false,
   isMenuOn: false,
   galleryTitle: "Public Access Memories",
@@ -12,7 +12,7 @@ export const ShowConfig = {
   googleMeet: {
     isLive: true,
     link: "https://meet.google.com/anj-kqhd-doc",
-    goLiveTime: new Date("2025-10-09T11:00:00Z"), // 11:00 AM CST in UTC,
+    goLiveTime: new Date("2025-11-09T15:00:00Z"), // 11:00 AM CST in UTC,
     durationHours: 3,
   },
   showCloses: "",
