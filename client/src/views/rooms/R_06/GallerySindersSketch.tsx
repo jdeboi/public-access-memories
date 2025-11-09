@@ -130,7 +130,7 @@ export default class GallerySindersSketch extends GallerySketchTemplate1<Gallery
   };
 
   updatePostits = (p5: p5Types) => {
-    console.log("updating postits...");
+    // console.log("updating postits...");
 
     // for props.submissions, check if there's a matching postit, if not add it
     const existingIds = new Set(

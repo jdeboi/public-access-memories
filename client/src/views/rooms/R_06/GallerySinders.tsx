@@ -561,7 +561,7 @@ const GallerySinders = (props: GallerySindersProps) => {
             <input
               type="text"
               className="w-full bg-white rounded-lg p-2"
-              placeholder={loadingAny ? "Loading…" : "Filter submissions…"}
+              placeholder={"Filter submissions…"}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
