@@ -1,12 +1,12 @@
 // pages/Artists/Artists.tsx
-import React from "react";
+import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 
 import PageTemplate from "../templates/PageTemplate";
 import { ShowConfig } from "../../../data/CurrentShow/ShowConfig";
-import { artists } from "../../../data/CurrentShow/RoomConfig";
+import { artists, rooms } from "../../../data/CurrentShow/RoomConfig";
 import ClosedPage from "../ClosedPage/ClosedPage";
-import { getThumbSrc } from "../../../helpers/helpers";
+import { getRoomFromArtistRoomID, getThumbSrc } from "../../../helpers/helpers";
 
 export const Artists: React.FC = () => {
   const title = ShowConfig.isResidency ? "Artists in Residence" : "Artists";
@@ -32,7 +32,10 @@ export const Artists: React.FC = () => {
                 className="windows max-w-[200px] p-0.5 text-center"
               >
                 <Link
-                  to={`/artist/${artist.nameLink}`}
+                  // to={`/artist/${artist.nameLink}`}
+                  to={
+                    getRoomFromArtistRoomID(artist.roomID, rooms)?.link || "#"
+                  }
                   aria-label={artist.name}
                   className="group block  text-[cyan] hover:underline"
                 >

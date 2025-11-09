@@ -307,6 +307,7 @@ const Gallery = (props: IGallery) => {
     if (showWelcome || showStart) return null;
 
     const volume = music.isMuted ? 0 : getVolume();
+    console.log("Gallery audio volume:", volume);
 
     if (id === HOMEOFFICES_ID) {
       return (
