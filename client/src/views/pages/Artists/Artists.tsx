@@ -30,8 +30,7 @@ export const Artists: React.FC = () => {
               <div
                 key={artist.nameLink}
                 className="windows max-w-[200px] p-0.5 text-center"
-              >
-                <Link
+              > <Link
                   // to={`/artist/${artist.nameLink}`}
                   to={
                     getRoomFromArtistRoomID(artist.roomID, rooms)?.link || "#"

@@ -45,7 +45,7 @@ const parseCsvText = (text: string) => {
     // You can log parsed.errors for diagnosis
     // If needed, only throw for fatal errors:
     const fatal = parsed.errors.find(
-      (e) => e.type === "FieldMismatch" || e.code === "TooFewFields"
+      (e) => e.type === "FieldMismatch" || e.code === "TooFewFields",
     );
     if (fatal)
       throw new Error(`CSV parse error: ${fatal.message || fatal.code}`);
@@ -73,8 +73,7 @@ export function useGoogleSheetSubmissions() {
   // Cache-buster helps avoid edge CDN staleness even with no-store
   const baseUrl =
     "https://docs.google.com/spreadsheets/d/e/2PACX-1vQJ9ialTviBSvKMB9G0lQLQrlCKDLMvfxTgu6wLWpyJW2LQNbvqRrHomW1QK-f2IDyZoDdslaQWyPtk/pub?gid=0&single=true&output=csv";
-  const csvUrl = `${baseUrl}&_=${Date.now()}`;
-
+  const csvUrl = baseUrl;
   const [rows, setRows] = useState<SheetRow[]>([]);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState<string | null>(null);
@@ -103,7 +102,7 @@ export function useGoogleSheetSubmissions() {
         if (!signal?.aborted) setLoading(false);
       }
     },
-    [csvUrl]
+    [csvUrl],
   );
 
   useEffect(() => {

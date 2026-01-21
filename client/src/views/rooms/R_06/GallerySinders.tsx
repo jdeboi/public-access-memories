@@ -52,6 +52,8 @@ const GallerySinders = (props: GallerySindersProps) => {
   const [errMongo, setErrMongo] = useState<string | null>(null);
 
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+
   const [isFilterHidden, setFilterIsHidden] = useState(false);
 
   const [postOpen, setPostOpen] = useState<null | SindersSubmissionType>(null);
@@ -78,10 +80,10 @@ const GallerySinders = (props: GallerySindersProps) => {
     const Tags = Array.isArray(r.Tags)
       ? r.Tags
       : typeof r.Tags === "string"
-      ? r.Tags.split(",")
-          .map((t: string) => t.trim())
-          .filter(Boolean)
-      : [];
+        ? r.Tags.split(",")
+            .map((t: string) => t.trim())
+            .filter(Boolean)
+        : [];
     // synthesize a stable-ish id for CSV rows
     const syntheticId = Url || `${Title}::${Artist}`;
 
@@ -106,7 +108,7 @@ const GallerySinders = (props: GallerySindersProps) => {
 
   const sheetSubmissions: SindersSubmissionType[] = useMemo(
     () => (sheetItems || []).map(mapSheetRowToSubmission),
-    [sheetItems]
+    [sheetItems],
   );
 
   // ---- Mongo fetch ----
@@ -140,11 +142,11 @@ const GallerySinders = (props: GallerySindersProps) => {
                 .map((t: any) => String(t).trim())
                 .filter(Boolean)
             : typeof (s.tags ?? s.Tags) === "string"
-            ? String(s.tags ?? s.Tags)
-                .split(",")
-                .map((t: string) => t.trim())
-                .filter(Boolean)
-            : undefined,
+              ? String(s.tags ?? s.Tags)
+                  .split(",")
+                  .map((t: string) => t.trim())
+                  .filter(Boolean)
+              : undefined,
           approved: typeof s.approved === "boolean" ? s.approved : s.Approved,
           hidden: typeof s.hidden === "boolean" ? s.hidden : s.Hidden,
           x: s.x ?? 50,
@@ -152,7 +154,7 @@ const GallerySinders = (props: GallerySindersProps) => {
           currentlyFiltered: false,
           createdAt: s.createdAt ? String(s.createdAt) : undefined,
           updatedAt: s.updatedAt ? String(s.updatedAt) : undefined,
-        })
+        }),
       );
 
       setMongoSubmissions(normalized);
@@ -179,8 +181,10 @@ const GallerySinders = (props: GallerySindersProps) => {
       setErrMongo("Please provide a title and description.");
       return;
     }
+
+    setSubmitting(true);
     setErrMongo(null);
-    setLoadingMongo(true);
+
     try {
       const res = await fetch("/api/submissions", {
         method: "POST",
@@ -197,6 +201,7 @@ const GallerySinders = (props: GallerySindersProps) => {
           isPersonalData,
         }),
       });
+
       const data = await res.json();
       if (!data.ok) throw new Error(data.error || "Failed to submit");
 
@@ -213,7 +218,7 @@ const GallerySinders = (props: GallerySindersProps) => {
     } catch (e: any) {
       setErrMongo(e.message ?? "Error submitting");
     } finally {
-      setLoadingMongo(false);
+      setSubmitting(false);
     }
   }, [
     title,
@@ -224,7 +229,6 @@ const GallerySinders = (props: GallerySindersProps) => {
     contributor,
     isPersonalData,
     fetchMongoSubmissions,
-    query,
   ]);
 
   // Merge + de-dupe (prefer Mongo version when both exist)
@@ -287,7 +291,7 @@ const GallerySinders = (props: GallerySindersProps) => {
             (s.content ?? "").toLowerCase().includes(q) ||
             (s.artist ?? "").toLowerCase().includes(q) ||
             (s.contributor ?? "").toLowerCase().includes(q) ||
-            (s.tags ?? []).some((t) => t.toLowerCase().includes(q))
+            (s.tags ?? []).some((t) => t.toLowerCase().includes(q)),
       )
       .sort((a, b) => {
         // Prefer createdAt desc when available, else fallback to title
@@ -341,7 +345,7 @@ const GallerySinders = (props: GallerySindersProps) => {
                         (prev) =>
                           prev.includes(tag)
                             ? prev.filter((t) => t !== tag) // disable
-                            : [...prev, tag] // enable
+                            : [...prev, tag], // enable
                       );
                     }}
                     // If your CustomPill uses `disabled` to style the OFF state:
@@ -457,7 +461,7 @@ const GallerySinders = (props: GallerySindersProps) => {
                       type="checkbox"
                       checked={isPersonalData}
                       onChange={(e) => setIsPersonalData(e.target.checked)}
-                      disabled={loadingAny}
+                      disabled={submitting}
                     />
                     <span className="text-sm">
                       Check this box if you want to submit your own data.
@@ -469,14 +473,14 @@ const GallerySinders = (props: GallerySindersProps) => {
                   placeholder="Your Name (optional)"
                   value={contributor}
                   onChange={(e) => setContributor(e.target.value)}
-                  disabled={loadingAny}
+                  disabled={submitting}
                 />
                 <input
                   className="w-full p-2 rounded bg-white/30 border border-white/10"
                   placeholder="Title"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  disabled={loadingAny}
+                  disabled={submitting}
                 />
 
                 <textarea
@@ -485,7 +489,7 @@ const GallerySinders = (props: GallerySindersProps) => {
                   rows={6}
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
-                  disabled={loadingAny}
+                  disabled={submitting}
                 />
 
                 {!isPersonalData && (
@@ -494,7 +498,7 @@ const GallerySinders = (props: GallerySindersProps) => {
                     placeholder="Artist (optional)"
                     value={artist}
                     onChange={(e) => setArtist(e.target.value)}
-                    disabled={loadingAny}
+                    disabled={submitting}
                   />
                 )}
 
@@ -503,7 +507,7 @@ const GallerySinders = (props: GallerySindersProps) => {
                   placeholder="URL (optional)"
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
-                  disabled={loadingAny}
+                  disabled={submitting}
                 />
               </div>
             )}
@@ -525,9 +529,9 @@ const GallerySinders = (props: GallerySindersProps) => {
                 <button
                   className="standardButton primary"
                   onClick={handleSubmit}
-                  disabled={loadingAny}
+                  disabled={submitting || loadingAny}
                 >
-                  {loadingAny ? "Submitting…" : "Submit"}
+                  {submitting ? "Submitting..." : "Submit"}
                 </button>
                 <button
                   className="standardButton secondary"
