@@ -69,6 +69,7 @@ import Residency from "../views/pages/Residency/Residency";
 import OpenCall from "../views/pages/OpenCall/OpenCall";
 import GalleryRoom from "../views/rooms/GalleryRoom";
 import ApproveSindersSubmissions from "../views/rooms/R_06/ApproveSindersSubmissions";
+import { DeboxData } from "../views/pages/PastExhibitions/Data/DeboxData";
 
 function App() {
   const user = useSelector(selectUser);
@@ -159,7 +160,7 @@ function App() {
 
   const updateDeviceDimensions = () => {
     dispatch(
-      resizeApp({ width: window.innerWidth, height: window.innerHeight })
+      resizeApp({ width: window.innerWidth, height: window.innerHeight }),
     );
   };
 
@@ -440,6 +441,10 @@ function App() {
           <Route
             path="/pastexhibitions/residency2025"
             element={<ExhibitionPageTemplate {...residency2025Data} />}
+          />
+          <Route
+            path="/pastexhibitions/debox"
+            element={<ExhibitionPageTemplate {...DeboxData} />}
           />
           <Route
             path="/editusers"

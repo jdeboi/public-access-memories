@@ -14,20 +14,28 @@ const LiveStreamLi = () => {
   const [isShowTime, setIsShowTime] = useState(false);
   const [isBlinking, setBlinking] = useState(false);
 
-  const LiveStreamIsLive = ShowConfig.googleMeet.isLive && !isClosed;
-  const LiveStreamURL = ShowConfig.googleMeet.link;
-  const LiveStreamStartTime = ShowConfig.googleMeet.goLiveTime;
-  const LiveStreamDurationHours = ShowConfig.googleMeet.durationHours;
-  const LiveStreamEndTime = new Date(
-    LiveStreamStartTime.getTime() + LiveStreamDurationHours * 60 * 60 * 1000
-  );
+  const LiveStreamIsLive =
+    ShowConfig.googleMeet && ShowConfig.googleMeet.isLive && !isClosed;
+  const LiveStreamURL = ShowConfig.googleMeet?.link;
+  const LiveStreamStartTime = ShowConfig.googleMeet?.goLiveTime;
+  const LiveStreamDurationHours = ShowConfig.googleMeet?.durationHours;
+  const LiveStreamEndTime =
+    LiveStreamStartTime && LiveStreamDurationHours
+      ? new Date(
+          LiveStreamStartTime.getTime() +
+            LiveStreamDurationHours * 60 * 60 * 1000,
+        )
+      : null;
 
   useEffect(() => {
     const interval = setInterval(() => {
       const currentDate = new Date();
       const isBetween =
-        currentDate >= LiveStreamStartTime && currentDate <= LiveStreamEndTime;
-      setIsShowTime(isBetween);
+        LiveStreamStartTime &&
+        LiveStreamEndTime &&
+        currentDate >= LiveStreamStartTime &&
+        currentDate <= LiveStreamEndTime;
+      setIsShowTime(Boolean(isBetween));
       if (isBetween) {
         setBlinking((prevBlinking) => !prevBlinking);
       } else {

@@ -3,6 +3,7 @@ import { HomeOfficesData } from "./HomeOfficesData";
 import { AsIRecallData } from "./AsIRecallData";
 import { residency2025Data } from "./Residency2025Data";
 import { fieldsOfViewData } from "./FieldsOfViewData";
+import { DeboxData } from "./DeboxData";
 
 const data = [
   AsIRecallData,
@@ -10,6 +11,7 @@ const data = [
   HomeOfficesData,
   fieldsOfViewData,
   residency2025Data,
+  DeboxData,
 ];
 
 // Sort by year in descending order

@@ -11,7 +11,7 @@ export const roomConfig = {
 };
 
 const TBA = "TBA";
-const YEAR = 2025;
+const YEAR = 2026;
 
 function getDefaultArtist(id: number): IArtist {
   return {
@@ -30,11 +30,11 @@ function getDefaultArtist(id: number): IArtist {
   };
 }
 
-// export const artists: IArtist[] = Array.from({ length: 10 }, (_, i) =>
-//   getDefaultArtist(i)
-// );
+export const artists: IArtist[] = Array.from({ length: 10 }, (_, i) =>
+  getDefaultArtist(i),
+);
 
-export const artists: IArtist[] = [
+export const artistsLive: IArtist[] = [
   {
     id: 0,
     roomID: 0,

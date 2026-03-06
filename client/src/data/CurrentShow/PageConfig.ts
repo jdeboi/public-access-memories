@@ -4,10 +4,10 @@ interface IPageConfig {
 }
 
 export const PageConfig: IPageConfig[] = [
-  {
-    link: "/statement",
-    title: "statement",
-  },
+  // {
+  //   link: "/statement",
+  //   title: "statement",
+  // },
   // { link: "/residency", title: "residency" },
   // {
   //   link: "/opencall",

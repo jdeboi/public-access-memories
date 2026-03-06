@@ -27,7 +27,7 @@ export default function DetailsClosed() {
             that the gallery is currently
           </div>
           <div className="text-4xl mb-3">CLOSED</div>
-          {!ShowConfig.isResidency && (
+          {!ShowConfig.isResidency && ShowConfig.showOpens && (
             <div className="mb-6">Please join us for the opening on:</div>
           )}
           {ShowConfig.isResidency && (
@@ -44,14 +44,16 @@ export default function DetailsClosed() {
               className=""
             >
               <div className="windows p-2 font-mono max-w-100 m-auto">
-                <div className="font-sm mb-2">{ShowConfig.showOpens.date}</div>
+                <div className="font-sm mb-2">{ShowConfig.showOpens?.date}</div>
                 <div className="text-sm">🗓️ Add to your calendar!</div>
               </div>
             </Link>
           ) : (
-            <div className="windows p-2 font-mono max-w-100 m-auto">
-              <div className="font-sm mb-2">{ShowConfig.showOpens.date}</div>
-            </div>
+            ShowConfig.showOpens && (
+              <div className="windows p-2 font-mono max-w-100 m-auto">
+                <div className="font-sm mb-2">{ShowConfig.showOpens?.date}</div>
+              </div>
+            )
           )}
 
           {/* <div><a href="/opencall">open call</a></div> */}
