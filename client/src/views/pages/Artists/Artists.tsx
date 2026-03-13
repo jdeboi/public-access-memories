@@ -3,7 +3,7 @@ import React, { useMemo } from "react";
 import { Link } from "react-router-dom";
 
 import PageTemplate from "../templates/PageTemplate";
-import { ShowConfig } from "../../../data/CurrentShow/ShowConfig";
+import { DevMatchProd, ShowConfig } from "../../../data/CurrentShow/ShowConfig";
 import { artists, rooms } from "../../../data/CurrentShow/RoomConfig";
 import ClosedPage from "../ClosedPage/ClosedPage";
 import { getRoomFromArtistRoomID, getThumbSrc } from "../../../helpers/helpers";
@@ -18,7 +18,8 @@ export const Artists: React.FC = () => {
 
   return (
     <>
-      {isProduction && (ShowConfig.isClosed || ShowConfig.underConstruction) ? (
+      {(isProduction || DevMatchProd) &&
+      (ShowConfig.isClosed || ShowConfig.underConstruction) ? (
         <ClosedPage />
       ) : (
         <PageTemplate title={title}>
@@ -30,7 +31,9 @@ export const Artists: React.FC = () => {
               <div
                 key={artist.nameLink}
                 className="windows max-w-[200px] p-0.5 text-center"
-              > <Link
+              >
+                {" "}
+                <Link
                   // to={`/artist/${artist.nameLink}`}
                   to={
                     getRoomFromArtistRoomID(artist.roomID, rooms)?.link || "#"

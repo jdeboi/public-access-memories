@@ -27,15 +27,17 @@ export default function DetailsStart() {
         className="mb-6"
         alt="PAM logo"
       />
-      <div className="text-gray-500 mb-1">The Wrong Biennale pavilion</div>
+      {ShowConfig.isWrongPavilion && (
+        <div className="text-gray-500 mb-1">The Wrong Biennale pavilion</div>
+      )}
 
       <div className="text-black text-base mb-1">
         <Link
-          to="/statement"
+          to={ShowConfig.isOpenCallOpen ? "/open-call" : "/statement"}
           style={{ color: "blue" }}
           className="underline transition-colors duration-150"
         >
-          Debox
+          {ShowConfig.isOpenCallOpen ? "Open Call" : ShowConfig.showTitle}
         </Link>
       </div>
 

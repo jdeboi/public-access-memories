@@ -1,12 +1,13 @@
 import { GlobalConfig } from "../../../../data/Shows/AsIRecall/GlobalConfig";
 import p5Types from "p5";
 import Folder from "../../components/p5/Folder";
+import { ShowConfig } from "../../../../data/CurrentShow/ShowConfig";
 
 export const addFolderDivs = (
   divs: any,
   instaImg: p5Types.Image,
   txtFile: p5Types.Image,
-  p5: p5Types
+  p5: p5Types,
 ) => {
   divs.folders = [];
 
@@ -14,12 +15,19 @@ export const addFolderDivs = (
   let p1 = { x: GlobalConfig.scaler * 27.5, y: GlobalConfig.scaler * 24.5 };
   let p2 = { x: GlobalConfig.scaler * 25, y: GlobalConfig.scaler * 13.5 };
   let labels = [
-    {
-      x: p0.x,
-      y: p0.y,
-      label: "show statement",
-      link: "https://publicaccessmemories.com/statement",
-    },
+    ShowConfig.isOpenCallOpen
+      ? {
+          x: p0.x,
+          y: p0.y,
+          label: "open call",
+          link: "https://publicaccessmemories.com/opencall",
+        }
+      : {
+          x: p0.x,
+          y: p0.y,
+          label: "show statement",
+          link: "https://publicaccessmemories.com/statement",
+        },
     {
       x: p1.x,
       y: p1.y,
@@ -46,7 +54,7 @@ export const addFolderDivs = (
       label,
       link,
       i === 2 ? instaImg : txtFile,
-      GlobalConfig
+      GlobalConfig,
     );
     divs.folders.push(folder);
   }

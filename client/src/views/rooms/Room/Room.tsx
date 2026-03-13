@@ -16,7 +16,7 @@ import R_11 from "../R_11/Room";
 import R_12 from "../R_12/Room";
 import R_13 from "../R_13/Room";
 
-import { ShowConfig } from "../../../data/CurrentShow/ShowConfig";
+import { DevMatchProd, ShowConfig } from "../../../data/CurrentShow/ShowConfig";
 import ClosedPage from "../../pages/ClosedPage/ClosedPage";
 
 import { rooms, artists } from "../../../data/CurrentShow/RoomConfig";
@@ -48,8 +48,13 @@ const Room = ({ isTest = false }: { isTest?: boolean }) => {
   const artist = artistID !== null ? artists[artistID] : null;
   const isProduction = process.env.NODE_ENV === "production";
 
-  if (!isTest && isProduction && (isClosed || underConstruction))
+  if (
+    !isTest &&
+    (isProduction || DevMatchProd) &&
+    (isClosed || underConstruction)
+  ) {
     return <ClosedPage />;
+  }
 
   const RoomComp = ROOMS[id] ?? R_00;
 

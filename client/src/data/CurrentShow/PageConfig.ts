@@ -9,14 +9,14 @@ export const PageConfig: IPageConfig[] = [
   //   title: "statement",
   // },
   // { link: "/residency", title: "residency" },
-  // {
-  //   link: "/opencall",
-  //   title: "open call",
-  // },
   {
-    link: "/artists",
-    title: "artists",
+    link: "/opencall",
+    title: "open call",
   },
+  // {
+  //   link: "/artists",
+  //   title: "artists",
+  // },
   {
     link: "/about",
     title: "about",

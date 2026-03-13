@@ -13,9 +13,11 @@ export default function LoadingPage(props: { progress?: number }) {
           <div className="font-['geoFont'] text-8xl  mb-6">
             {ShowConfig.showTitle}
           </div>
-          <div className="font-mono text-xs text-slate-300">
-            The Wrong Biennale pavilion
-          </div>
+          {ShowConfig.isWrongPavilion && (
+            <div className="font-mono text-xs text-slate-300">
+              The Wrong Biennale pavilion
+            </div>
+          )}
           <p>Public Access Memories</p>
           <div className="text-xs text-green-500">Loading...</div>
 

@@ -18,17 +18,18 @@ interface IShowConfig {
   showCloses: { date: string; time: string } | null;
   link: string;
   awsLink: string;
+  isWrongPavilion: boolean;
 }
 
 export const ShowConfig: IShowConfig = {
   isClosed: true,
-  isOpenCallOpen: false,
+  isOpenCallOpen: true,
   underConstruction: true,
   isResidency: false,
   isMenuOn: false,
   galleryTitle: "Public Access Memories",
-  showTitle: "Debox",
-  showDescription: "a virtual net art exhibition",
+  showTitle: "Curator Open Call",
+  showDescription: "Apply to curate a PAM show!",
   showOpens: null, //{ date: "November 9th, 2025", time: "11AM CST (GMT-6)" },
   // calendarLink: "https://calendar.app.google/8JMy8Tvt7k6jUagk8",
   calendarLink: "",
@@ -42,4 +43,7 @@ export const ShowConfig: IShowConfig = {
   showCloses: null,
   link: "debox",
   awsLink: "debox",
+  isWrongPavilion: false,
 };
+
+export const DevMatchProd = true;

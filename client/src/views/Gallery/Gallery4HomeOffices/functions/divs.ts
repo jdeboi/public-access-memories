@@ -41,7 +41,7 @@ import ChatBubble from "../components/ChatBubble/ChatBubble";
 export const addLightDivs = (
   divs: any,
   lightImgs: p5Types.Image[],
-  p5: p5Types
+  p5: p5Types,
 ) => {
   divs.lights = [];
   const lightsP5 = [
@@ -59,7 +59,7 @@ export const addLightDivs = (
 export const addColumnDivs = (
   divs: any,
   columnGif: p5Types.Image,
-  p5: p5Types
+  p5: p5Types,
 ) => {
   divs.columns = [];
   let factor = p5.width / 1400;
@@ -73,13 +73,13 @@ export const addColumnDivs = (
       280,
       p5,
       columnGif,
-      GlobalConfig
+      GlobalConfig,
     );
 
     column.setNormal(
       100 * factor + i * dx * factor,
       200 * factor + i * dx * factor,
-      ALTAR_PAGE
+      ALTAR_PAGE,
     );
     divs.columns.push(column);
   }
@@ -92,13 +92,13 @@ export const addColumnDivs = (
       280,
       p5,
       columnGif,
-      GlobalConfig
+      GlobalConfig,
     );
 
     column.setNormal(
       1200 * factor - i * dx * factor,
       200 * factor + i * dx * factor,
-      ALTAR_PAGE
+      ALTAR_PAGE,
     );
     divs.columns.push(column);
   }
@@ -163,7 +163,7 @@ const addPopstarDiv = (divs: any, p5: p5Types) => {
     0,
     360 * vFactor * factor,
     640 * vFactor * factor,
-    p5
+    p5,
   );
   popstar.id = 10;
 
@@ -194,7 +194,7 @@ const addSmokeDiv = (divs: any, p5: p5Types) => {
 export const addBlindsDiv = (
   blindsImg: p5Types.Image,
   divs: any,
-  p5: p5Types
+  p5: p5Types,
 ) => {
   let blinds = new BlindsDraggable(0, 0, 0, 200, 200, blindsImg, p5);
   blinds.setNormal(p5.width * 0.1, 100, BLINDS_PAGE);
@@ -222,7 +222,7 @@ export const addTrashDivs = (divs: any, trashFiles: any, p5: p5Types) => {
       "recycle bin",
       "/trash",
       trashFiles[0],
-      GlobalConfig
+      GlobalConfig,
     );
     tf.setNormal(x0, y0, room);
     divs.trashCans.push(tf);
@@ -233,18 +233,26 @@ export const addFolderDivs = (
   divs: any,
   instaImg: p5Types.Image,
   txtFile: p5Types.Image,
-  p5: p5Types
+  p5: p5Types,
 ) => {
   divs.folders = [];
 
   let labels = [
-    {
-      x: 50,
-      y: 150,
-      label: "statement",
-      link: "https://publicaccessmemories.com/statement",
-      room: HOME_PAGE,
-    },
+    ShowConfig.isOpenCallOpen
+      ? {
+          x: 50,
+          y: 150,
+          label: "open call",
+          link: "https://publicaccessmemories.com/opencall",
+          room: HOME_PAGE,
+        }
+      : {
+          x: 50,
+          y: 150,
+          label: "statement",
+          link: "https://publicaccessmemories.com/statement",
+          room: HOME_PAGE,
+        },
     {
       x: 150,
       y: 80,
@@ -287,7 +295,7 @@ export const addFolderDivs = (
       label,
       link,
       i === 2 ? instaImg : txtFile,
-      GlobalConfig
+      GlobalConfig,
     );
     if (i === 3) {
       folder.setNormal(x, y, room);
@@ -384,7 +392,7 @@ const addFruitDivs = (divs: any, p5: p5Types) => {
 export const addGiftShopDivs = (
   divs: any,
   imgs: p5Types.Image[],
-  p5: p5Types
+  p5: p5Types,
 ) => {
   let labels = [
     {
@@ -429,7 +437,7 @@ export const addGiftShopDivs = (
       label,
       link,
       imgs[i],
-      GlobalConfig
+      GlobalConfig,
     );
     folder.setNormal(x, y, GIFT_PAGE);
     divs.folders.push(folder);
@@ -451,7 +459,7 @@ export const addBarDivs = (divs: any, lightImg: p5Types.Image, p5: p5Types) => {
           lightImg,
           numBarItems,
           p5,
-          GlobalConfig
+          GlobalConfig,
         );
         divs.bars.push(wineBar);
         wineBar.setNormal(bar.x, bar.y, bar.roomPage);
@@ -463,7 +471,7 @@ export const addBarDivs = (divs: any, lightImg: p5Types.Image, p5: p5Types) => {
           lightImg,
           numBarItems,
           p5,
-          GlobalConfig
+          GlobalConfig,
         );
         cocktailBar.setNormal(bar.x, bar.y, bar.roomPage);
         divs.bars.push(cocktailBar);
@@ -475,7 +483,7 @@ export const addBarDivs = (divs: any, lightImg: p5Types.Image, p5: p5Types) => {
           lightImg,
           numBarItems,
           p5,
-          GlobalConfig
+          GlobalConfig,
         );
         djBar.setNormal(bar.x, bar.y, bar.roomPage);
         divs.bars.push(djBar);
@@ -487,7 +495,7 @@ export const addBarDivs = (divs: any, lightImg: p5Types.Image, p5: p5Types) => {
           lightImg,
           numBarItems,
           p5,
-          GlobalConfig
+          GlobalConfig,
         );
         cheeseBar.setNormal(bar.x, bar.y, bar.roomPage);
         divs.bars.push(cheeseBar);
@@ -522,7 +530,7 @@ export const displayColumnDivs = (
   userX: number,
   userY: number,
   room: number,
-  divs: any
+  divs: any,
 ) => {
   for (const col of divs.columns) {
     if (col.roomToDisplay == room) {

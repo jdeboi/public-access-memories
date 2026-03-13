@@ -7,8 +7,14 @@ import "../Page.css";
 //   GIFT_PAGE,
 // } from "../../../data/Shows/HomeOffices/PageConstants";
 import DeboxStatement from "./DeboxStatement";
+import OpenCall from "../OpenCall/OpenCall";
+import { ShowConfig } from "../../../data/CurrentShow/ShowConfig";
 
 export const Statement = () => {
+  if (ShowConfig.isOpenCallOpen) {
+    return <OpenCall />;
+  }
+
   return <DeboxStatement />;
 };
 

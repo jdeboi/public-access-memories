@@ -7,18 +7,20 @@ import PageTemplate from "../templates/PageTemplate";
 
 export const OpenCall = () => {
   return (
-    <PageTemplate title="Open Call">
+    <>
       {ShowConfig.isOpenCallOpen ? (
         <OpenCallOpen />
       ) : (
-        <React.Fragment>
-          <h3>...is CLOSED...</h3>
-          <p>
-            Please checkout the <Link to="/statement">statement</Link>.
-          </p>
-        </React.Fragment>
+        <PageTemplate title="Open Call">
+          <React.Fragment>
+            <h3>...is CLOSED...</h3>
+            <p>
+              Please checkout the <Link to="/statement">statement</Link>.
+            </p>
+          </React.Fragment>
+        </PageTemplate>
       )}
-    </PageTemplate>
+    </>
   );
 };
 

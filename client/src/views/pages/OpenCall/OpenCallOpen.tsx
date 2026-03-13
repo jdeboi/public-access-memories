@@ -1,54 +1,42 @@
 import React from "react";
 import "../Page.css";
+import SectionHeader from "../templates/SectionHeader";
+import PageTemplate from "../templates/PageTemplate";
 
 export const OpenCallOpen = () => {
-  return (
-    <React.Fragment>
-      <div className="windows p-5">
-        <h2 className="showTitle">Online Residency</h2>
-        <h4>Deadline to apply - Tuesday, February 18th 2025</h4>
-        <h3>
-          <a href="https://forms.gle/ucoPQfakucGuoBGb9" target="_blank">
-            Apply here
-          </a>
-        </h3>
-      </div>
-      <br />
-      <br />
-      <p>
-        Public Access Memories is excited to offer an online residency program
-        from March - June, 2025. Net artists are invited to apply for dedicated
-        time and virtual space to develop works in progress, participate in
-        studio visits and critiques, and optionally present an artist talk.
-      </p>
-      <p>
-        We especially encourage those eager to experiment with how the gallery
-        itself might be reimagined to augment digital residencies and net art
-        practices more broadly. The design, aesthetic, function, UI, etc. are
-        offered to the artist as a canvas (with ample coding support from PAM).
-      </p>
+  const highlightColor = "text-[cyan]";
 
-      <h4>
-        <a href="https://forms.gle/ucoPQfakucGuoBGb9" target="_blank">
-          Apply here by 2/18/2025
-        </a>
-      </h4>
-      <p>
-        For questions please email{" "}
-        <a href="mailto:publicaccessmemories@gmail.compublicaccessmemories@gmail.com">
-          publicaccessmemories@gmail.com
-        </a>
-      </p>
-      <p>
-        <a href="https://forms.gle/ucoPQfakucGuoBGb9" target="_blank">
-          <img
-            src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/residency/residency.jpg"
-            width="100%"
-            style={{ maxWidth: "500px" }}
-          />
-        </a>
-      </p>
-    </React.Fragment>
+  return (
+    <PageTemplate title="Open Call — Group Exhibition">
+      <div className="windows p-8 mb-6">
+        <div className="text-2xl mb-4">
+          Public Access Memories is inviting proposals for a{" "}
+          <strong className={highlightColor}>new group exhibition</strong>{" "}
+          exploring web-native art.
+        </div>
+
+        <h4 className={`mb-6 ${highlightColor} font-mono`}>
+          DEADLINE: Sunday, May 17, 2026
+        </h4>
+
+        <div className="mb-6 text-md font-mono">
+          Submissions are welcome from curators, artists, and collectives.
+          Artists may propose a group exhibition and include their own work if
+          it aligns with the curatorial concept.
+        </div>
+
+        <div className="text-lg">
+          <a
+            href="https://forms.gle/G9bpqQTiXJFtGQsJ9"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="standardButton primary"
+          >
+            APPLY NOW
+          </a>
+        </div>
+      </div>
+    </PageTemplate>
   );
 };
 

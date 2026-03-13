@@ -35,7 +35,7 @@ export const addRoomLabelDivs = (
   divs: any,
   eyeIcon: p5Types.Image,
   font: p5Types.Font,
-  p5: p5Types
+  p5: p5Types,
 ) => {
   divs.roomLabels = [];
   for (let i = 0; i < rooms.length; i++) {
@@ -47,7 +47,7 @@ export const addRoomLabelDivs = (
 export const displayRoomLabelDivs = (
   font: p5Types.Font,
   roomCount: any,
-  divs: any
+  divs: any,
 ) => {
   for (const rl of divs.roomLabels) {
     // rl.display(font, roomCount);
@@ -60,7 +60,7 @@ export const addDoorDivs = (
   divs: any,
   doors: any,
   doorImgs: p5Types.Image[],
-  p5: p5Types
+  p5: p5Types,
 ) => {
   divs.doors = [];
   let numDoors = 4;
@@ -74,7 +74,7 @@ export const addDoorDivs = (
 export const addLightDivs = (
   divs: any,
   lightImgs: p5Types.Image[],
-  p5: p5Types
+  p5: p5Types,
 ) => {
   divs.lights = [];
   const lightsP5 = [
@@ -100,7 +100,7 @@ export const addColumnDivs = (
   divs: any,
   columnGif: p5Types.Image,
   p5: p5Types,
-  factor = 1
+  factor = 1,
 ) => {
   divs.columns = [];
   let sc = GlobalConfig.scaler;
@@ -118,7 +118,7 @@ export const addColumnDivs = (
       280 * factor,
       p5,
       columnGif,
-      GlobalConfig
+      GlobalConfig,
     );
     divs.columns.push(column);
   }
@@ -134,7 +134,7 @@ export const addColumnDivs = (
       280 * factor,
       p5,
       columnGif,
-      GlobalConfig
+      GlobalConfig,
     );
     divs.columns.push(column);
   }
@@ -150,7 +150,7 @@ export const addColumnDivs = (
       280 * factor,
       p5,
       columnGif,
-      GlobalConfig
+      GlobalConfig,
     );
     divs.columns.push(column);
   }
@@ -182,7 +182,7 @@ export const addTrashDivs = (divs: any, trashFiles: any, p5: p5Types) => {
       "recycle bin",
       "/trash",
       trashFiles[0],
-      GlobalConfig
+      GlobalConfig,
     );
     divs.trashCans.push(tf);
   }
@@ -192,7 +192,7 @@ export const addFolderDivs = (
   divs: any,
   instaImg: p5Types.Image,
   txtFile: p5Types.Image,
-  p5: p5Types
+  p5: p5Types,
 ) => {
   divs.folders = [];
   // yeah, why are these in dom coords...
@@ -201,12 +201,19 @@ export const addFolderDivs = (
   let p1 = { x: 22, y: 19.5 };
   let p2 = { x: 20, y: 21 };
   let labels = [
-    {
-      x: p0.x * sc,
-      y: p0.y * sc,
-      label: "statement",
-      link: "https://publicaccessmemories.com/statement",
-    },
+    ShowConfig.isOpenCallOpen
+      ? {
+          x: p0.x * sc,
+          y: p0.y * sc,
+          label: "open call",
+          link: "https://publicaccessmemories.com/opencall",
+        }
+      : {
+          x: p0.x * sc,
+          y: p0.y * sc,
+          label: "statement",
+          link: "https://publicaccessmemories.com/statement",
+        },
     {
       x: p1.x * sc,
       y: p1.y * sc,
@@ -238,7 +245,7 @@ export const addFolderDivs = (
       label,
       link,
       i === 2 ? instaImg : txtFile,
-      GlobalConfig
+      GlobalConfig,
     );
     divs.folders.push(folder);
   }
@@ -257,7 +264,7 @@ export const addOakDivs = (divs: any, oakImg: p5Types.Image, p5: p5Types) => {
       400,
       p5,
       oakImg,
-      GlobalConfig
+      GlobalConfig,
     );
     divs.oaks.push(oak);
   }
@@ -267,18 +274,18 @@ export const addSwingDivs = (
   divs: any,
   baby: p5Types.Image,
   chain: p5Types.Image | null,
-  p5: p5Types
+  p5: p5Types,
 ) => {
   divs.swings = [];
   divs.swings.push(
-    new Swing(0, -4.1, 36.8, 100, 190, p5, baby, chain, GlobalConfig)
+    new Swing(0, -4.1, 36.8, 100, 190, p5, baby, chain, GlobalConfig),
   );
 };
 
 export const addTableDivs = (
   divs: any,
   tableImgs: p5Types.Image[],
-  p5: p5Types
+  p5: p5Types,
 ) => {
   let sc = GlobalConfig.scaler;
   divs.tables = [];
@@ -298,7 +305,7 @@ export const addTableDivs = (
       p5,
       tableImgs[0],
       tableImgs[1],
-      GlobalConfig
+      GlobalConfig,
     );
     divs.tables.push(table);
   }
@@ -314,7 +321,7 @@ export const addBarDivs = (divs: any, lightImg: p5Types.Image, p5: p5Types) => {
     switch (barType) {
       case "wine":
         divs.bars.push(
-          new WineBar(i, { ...bar }, lightImg, numBarItems, p5, GlobalConfig)
+          new WineBar(i, { ...bar }, lightImg, numBarItems, p5, GlobalConfig),
         );
         break;
       case "cocktail":
@@ -325,18 +332,18 @@ export const addBarDivs = (divs: any, lightImg: p5Types.Image, p5: p5Types) => {
             lightImg,
             numBarItems,
             p5,
-            GlobalConfig
-          )
+            GlobalConfig,
+          ),
         );
         break;
       case "DJ":
         divs.bars.push(
-          new DJBar(i, { ...bar }, lightImg, numBarItems, p5, GlobalConfig)
+          new DJBar(i, { ...bar }, lightImg, numBarItems, p5, GlobalConfig),
         );
         break;
       case "cheese":
         divs.bars.push(
-          new CheeseBar(i, { ...bar }, lightImg, numBarItems, p5, GlobalConfig)
+          new CheeseBar(i, { ...bar }, lightImg, numBarItems, p5, GlobalConfig),
         );
         break;
     }
@@ -382,7 +389,7 @@ export const displayDoorDivs = (
   userY: number,
   divs: any,
   isClosed: boolean,
-  closedSign: p5Types.Image
+  closedSign: p5Types.Image,
 ) => {
   for (const door of divs.doors) {
     door.display(userX, userY, isClosed, closedSign);
@@ -452,7 +459,7 @@ export const displayTreeDivs = (
   userX: number,
   userY: number,
   sz: number,
-  divs: any
+  divs: any,
 ) => {
   for (const tree of divs.trees) {
     tree.display(userX, userY, sz);
@@ -483,7 +490,7 @@ export function updateDivs(
   userEase: { x: number; y: number },
   users: any,
   divs: any,
-  isPanGallery = false
+  isPanGallery = false,
 ) {
   if (divs.doors) {
     for (const door of divs.doors) {
@@ -516,7 +523,7 @@ const checkDiv = (userX: number, userY: number, div: any) => {
 export const checkFolderDivsDouble = (
   userX: number,
   userY: number,
-  divs: any
+  divs: any,
 ) => {
   for (const folder of divs.folders) {
     folder.checkDoubleClicked(userX, userY);
@@ -526,7 +533,7 @@ export const checkFolderDivsDouble = (
 export const checkTrashDivsDouble = (
   userX: number,
   userY: number,
-  divs: any
+  divs: any,
 ) => {
   for (const trash of divs.trashCans) {
     trash.checkDoubleClickedAlert(userX, userY);

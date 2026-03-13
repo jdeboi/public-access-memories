@@ -4,7 +4,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import isEqual from "fast-deep-equal";
 
 // interfaces
-import { ShowConfig } from "../data/CurrentShow/ShowConfig";
+import { ShowConfig, DevMatchProd } from "../data/CurrentShow/ShowConfig";
 import { IUsers } from "../interfaces";
 
 ///////////////////////////////
@@ -250,7 +250,10 @@ function App() {
         />
       );
     }
-    if (isProduction && (ShowConfig.isClosed || ShowConfig.underConstruction)) {
+    if (
+      (isProduction || DevMatchProd) &&
+      (ShowConfig.isClosed || ShowConfig.underConstruction)
+    ) {
       return null;
     } else {
       return (
@@ -376,7 +379,7 @@ function App() {
           <Route
             path="/briz"
             element={
-              isProduction && ShowConfig.isClosed ? (
+              (isProduction || DevMatchProd) && ShowConfig.isClosed ? (
                 <Room />
               ) : (
                 <GalleryRoom
@@ -392,7 +395,7 @@ function App() {
           <Route
             path="/sinders"
             element={
-              isProduction && ShowConfig.isClosed ? (
+              (isProduction || DevMatchProd) && ShowConfig.isClosed ? (
                 <Room />
               ) : (
                 <GalleryRoom

@@ -12,10 +12,14 @@ const ClosedPage: React.FC = () => {
     ? "Please join us for residency open studios!"
     : "Please join us for the opening!";
 
+  const subtitleText = showOpens
+    ? subtitle
+    : "Please check back later for updates about upcoming exhibitions!";
+
   return (
     <PageTemplate title={title} className="bg-black mb-20 ">
       <div className="windows p-6">
-        <div className="text-3xl font-semibold mb-8">{subtitle}</div>
+        <div className="text-3xl font-semibold mb-8">{subtitleText}</div>
         {/* <div className="text-white/90 mb-8">{subtitle}</div> */}
         <div className="font-mono">
           {showOpens?.date && <div className="mt-1">{showOpens.date}</div>}
