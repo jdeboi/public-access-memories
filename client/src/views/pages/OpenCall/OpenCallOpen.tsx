@@ -20,7 +20,7 @@ export const OpenCallOpen = () => {
         </h4>
 
         <div className="mb-6 text-md font-mono">
-          Submissions are welcome from curators, artists, and collectives.
+          Submissions are welcome from curators, solo artists, and collectives.
           Artists may propose a group exhibition and include their own work if
           it aligns with the curatorial concept.
         </div>
@@ -34,6 +34,14 @@ export const OpenCallOpen = () => {
           >
             APPLY NOW
           </a>
+        </div>
+      </div>
+      <div className="windows p-1">
+        <div className="w-full aspect-square">
+          <iframe
+            className="w-full h-full"
+            src="/iframes/opencall/curator.html"
+          ></iframe>
         </div>
       </div>
     </PageTemplate>
