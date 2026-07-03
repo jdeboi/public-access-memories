@@ -6,6 +6,8 @@ const path = require("path");
 const server = http.createServer(app);
 const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
+const rateLimit = require("express-rate-limit");
 
 const clients = new Map();
 module.exports.clients = clients;
@@ -30,7 +32,14 @@ mongoose
   });
 
 const cors = require("cors");
-app.use(cors());
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://www.publicaccessmemories.com",
+  "https://publicaccessmemories.com",
+];
+app.use(cors({ origin: allowedOrigins }));
+
+const authLimiter = rateLimit({ windowMs: 15 * 60_000, max: 20 });
 
 // JSON body parser (you already have bodyParser; either is fine)
 app.use(express.json({ limit: "1mb" }));
@@ -58,27 +67,26 @@ app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!" });
 });
 
-app.post("/api/check-artist-password", async (req, res) => {
-  const password = req.body.password;
+function safeEqual(a, b) {
   try {
-    if (password === process.env.REACT_APP_ARTIST_PASSWORD) {
-      res.send({ success: true });
-    } else {
-      res.send({ success: false });
-    }
-  } catch (error) {
-    res.status(500).send({ success: false, message: error.message });
+    return crypto.timingSafeEqual(Buffer.from(a), Buffer.from(b));
+  } catch {
+    return false;
   }
+}
+
+app.post("/api/check-artist-password", authLimiter, async (req, res) => {
+  const password = req.body.password || "";
+  const match = safeEqual(password, process.env.REACT_APP_ARTIST_PASSWORD || "");
+  res.json({ success: match });
 });
 
-app.post("/api/verify-password", (req, res) => {
-  // const identity = req.body.identity;
-  if (req.body.password === process.env.ADMIN_PASSWORD) {
-    // do I need username?
+app.post("/api/verify-password", authLimiter, (req, res) => {
+  const password = req.body.password || "";
+  if (safeEqual(password, process.env.ADMIN_PASSWORD || "")) {
     const token = jwt.sign({ username: "admin" }, process.env.ADMIN_SECRET, {
       expiresIn: "5d",
     });
-
     res.json({ isValid: true, token });
   } else {
     res.json({ isValid: false });

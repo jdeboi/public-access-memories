@@ -2,10 +2,6 @@ import { ChangeEvent, useState } from "react";
 import { IUser, IUsers } from "../../interfaces";
 import "./EditUsers.css";
 
-// import { useLiveKitRoom } from '@livekit/components-react';
-// import { RemoteParticipant } from 'livekit-client';
-// import { useDispatch } from 'react-redux';
-// import { setIsGlobalMuted } from '../../store/user';
 import socket from "../../helpers/Socket";
 import { filterEditUsers } from "../../helpers/helpers";
 

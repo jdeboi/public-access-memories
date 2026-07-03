@@ -11,9 +11,6 @@ import FaqLi from "../menuItems/FaqLi";
 import VolumeLi from "../menuItems/VolumeLi";
 import AvatarLi from "../menuItems/AvatarLi";
 import LiveStreamLi from "../menuItems/LiveStreamLi";
-// import MicrophoneLi from '../menuItems/MicrophoneLi';
-// import { MicrophoneMuteButton } from '../../../AudioChat/SelectMicrophone/MicrophoneToggleButton';
-// import { MicrophoneSelector } from '../../../AudioChat/SelectMicrophone/MicrophoneSelector';
 import { useLocation } from "react-router-dom";
 
 interface IDH extends IMainMenu {
