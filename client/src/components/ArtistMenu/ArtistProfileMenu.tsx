@@ -19,7 +19,7 @@ export default function ArtistProfileMenu({ artist }: { artist: IArtist }) {
       <div className="text-5xl font-['manoloFont'] mb-10">{artist.name}</div>
       <WindowsHeaderBox
         title={artist.name}
-        thumbnail={getThumbSrc(artist.thumb, ShowConfig.awsLink)}
+        thumbnail={getThumbSrc(artist.thumb, ShowConfig.show.awsSlug)}
         className="mb-16"
         isBlack={true}
       >

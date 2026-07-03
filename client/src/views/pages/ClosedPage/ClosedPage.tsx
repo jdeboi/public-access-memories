@@ -5,7 +5,8 @@ import PageTemplate from "../templates/PageTemplate";
 import { ShowConfig } from "../../../data/CurrentShow/ShowConfig";
 
 const ClosedPage: React.FC = () => {
-  const { isResidency, showOpens, calendarLink } = ShowConfig;
+  const { isResidency } = ShowConfig;
+  const { opens: showOpens, calendarLink } = ShowConfig.dates;
 
   const title = "Gallery Closed";
   const subtitle = isResidency

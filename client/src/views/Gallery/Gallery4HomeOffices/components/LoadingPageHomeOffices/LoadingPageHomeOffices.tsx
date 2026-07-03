@@ -14,7 +14,7 @@ export default function LoadingPageHomeOffices(props: { showTitle: boolean }) {
       <div className="loadingContainer">
         {props.showTitle ? (
           <div className="title" style={sty}>
-            {ShowConfig.galleryTitle}
+            {ShowConfig.site.title}
           </div>
         ) : null}
 

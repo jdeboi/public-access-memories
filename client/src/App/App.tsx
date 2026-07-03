@@ -252,7 +252,7 @@ function App() {
     }
     if (
       (isProduction || DevMatchProd) &&
-      (ShowConfig.isClosed || ShowConfig.underConstruction)
+      ShowConfig.isClosed
     ) {
       return null;
     } else {
@@ -375,7 +375,7 @@ function App() {
             }
           />
           <Route path="/test/rooms/:id" element={<Room isTest={true} />} />
-          <Route path={`/${ShowConfig.link}/rooms/:id`} element={<Room />} />
+          <Route path={`/${ShowConfig.show.slug}/rooms/:id`} element={<Room />} />
           <Route
             path="/briz"
             element={

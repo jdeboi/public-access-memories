@@ -201,7 +201,7 @@ export const addFolderDivs = (
   }
 
   let labels = [
-    ShowConfig.isOpenCallOpen
+    ShowConfig.isOpenCallTime
       ? { x: p0.x, y: p0.y, label: "open call", link: "/opencall" }
       : { x: p0.x, y: p0.y, label: "statement", link: "/statement" },
 

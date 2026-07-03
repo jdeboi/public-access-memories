@@ -8,7 +8,7 @@ import PageTemplate from "../templates/PageTemplate";
 export const OpenCall = () => {
   return (
     <>
-      {ShowConfig.isOpenCallOpen ? (
+      {ShowConfig.isOpenCallTime ? (
         <OpenCallOpen />
       ) : (
         <PageTemplate title="Open Call">

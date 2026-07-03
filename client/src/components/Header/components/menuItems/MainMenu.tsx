@@ -33,10 +33,10 @@ const MainMenu = (props: IMainMenu) => {
     }
     return (
       <li className={classN} onClick={() => navigate("/")}>
-        <span id="pageTitle">{ShowConfig.galleryTitle}</span>
+        <span id="pageTitle">{ShowConfig.site.title}</span>
       </li>
     );
-    // return <li><span id="pageTitle">{ShowConfig.galleryTitle}</span></li>
+    // return <li><span id="pageTitle">{ShowConfig.site.title}</span></li>
   };
 
   const isXXSmall = () => {
@@ -46,7 +46,7 @@ const MainMenu = (props: IMainMenu) => {
   if (props.isMenuOn)
     return (
       <FinderSubmenu
-        title={ShowConfig.galleryTitle}
+        title={ShowConfig.site.title}
         specialClass=""
         listItems={roomsList}
       />

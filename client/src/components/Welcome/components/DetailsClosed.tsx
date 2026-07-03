@@ -27,7 +27,7 @@ export default function DetailsClosed() {
             that the gallery is currently
           </div>
           <div className="text-4xl mb-3">CLOSED</div>
-          {!ShowConfig.isResidency && ShowConfig.showOpens && (
+          {!ShowConfig.isResidency && ShowConfig.dates.opens && (
             <div className="mb-6">Please join us for the opening on:</div>
           )}
           {ShowConfig.isResidency && (
@@ -36,28 +36,28 @@ export default function DetailsClosed() {
             </div>
           )}
 
-          {ShowConfig.calendarLink ? (
+          {ShowConfig.dates.calendarLink ? (
             <Link
-              to={ShowConfig.calendarLink}
+              to={ShowConfig.dates.calendarLink}
               target="_blank"
               rel="noopener noreferrer"
               className=""
             >
               <div className="windows p-2 font-mono max-w-100 m-auto">
-                <div className="font-sm mb-2">{ShowConfig.showOpens?.date}</div>
+                <div className="font-sm mb-2">{ShowConfig.dates.opens?.date}</div>
                 <div className="text-sm">🗓️ Add to your calendar!</div>
               </div>
             </Link>
           ) : (
-            ShowConfig.showOpens && (
+            ShowConfig.dates.opens && (
               <div className="windows p-2 font-mono max-w-100 m-auto">
-                <div className="font-sm mb-2">{ShowConfig.showOpens?.date}</div>
+                <div className="font-sm mb-2">{ShowConfig.dates.opens?.date}</div>
               </div>
             )
           )}
 
           {/* <div><a href="/opencall">open call</a></div> */}
-          {/* {ShowConfig.showOpens.time !== "" ? <div style={{fontSize: fonts[1], paddingBottom: "10px"}}>{ShowConfig.showOpens.time}</div> : null} */}
+          {/* {ShowConfig.dates.opens.time !== "" ? <div style={{fontSize: fonts[1], paddingBottom: "10px"}}>{ShowConfig.dates.opens.time}</div> : null} */}
         </div>
       </div>
     </div>

@@ -15,10 +15,10 @@ const LiveStreamLi = () => {
   const [isBlinking, setBlinking] = useState(false);
 
   const LiveStreamIsLive =
-    ShowConfig.googleMeet && ShowConfig.googleMeet.isLive && !isClosed;
-  const LiveStreamURL = ShowConfig.googleMeet?.link;
-  const LiveStreamStartTime = ShowConfig.googleMeet?.goLiveTime;
-  const LiveStreamDurationHours = ShowConfig.googleMeet?.durationHours;
+    ShowConfig.dates.googleMeet && ShowConfig.dates.googleMeet.isLive && !isClosed;
+  const LiveStreamURL = ShowConfig.dates.googleMeet?.link;
+  const LiveStreamStartTime = ShowConfig.dates.googleMeet?.goLiveTime;
+  const LiveStreamDurationHours = ShowConfig.dates.googleMeet?.durationHours;
   const LiveStreamEndTime =
     LiveStreamStartTime && LiveStreamDurationHours
       ? new Date(

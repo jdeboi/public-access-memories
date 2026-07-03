@@ -23,7 +23,7 @@ import { rooms, artists } from "../../../data/CurrentShow/RoomConfig";
 import ArtistMenu from "../../../components/ArtistMenu/ArtistMenu";
 import { useState } from "react";
 
-const { isClosed, underConstruction } = ShowConfig;
+const { isClosed } = ShowConfig;
 
 const ROOMS: Record<string, React.ComponentType> = {
   "0": R_00,
@@ -51,7 +51,7 @@ const Room = ({ isTest = false }: { isTest?: boolean }) => {
   if (
     !isTest &&
     (isProduction || DevMatchProd) &&
-    (isClosed || underConstruction)
+    isClosed
   ) {
     return <ClosedPage />;
   }

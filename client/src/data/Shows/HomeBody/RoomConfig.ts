@@ -346,7 +346,7 @@ for (let i = 0; i < artists.length; i++) {
   const roomDeets: IRoom = {
     ...roomDetails[i],
     artistID: getArtistID(i),
-    link: `/${ShowConfig.link}/rooms/${getArtistID(i)}`,
+    link: `/${ShowConfig.show.slug}/rooms/${getArtistID(i)}`,
   };
   roomsArray.push(roomDeets);
 }

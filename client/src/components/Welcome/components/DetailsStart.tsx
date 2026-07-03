@@ -20,7 +20,7 @@ export default function DetailsStart() {
 
   return (
     <div className="flex flex-1 flex-col items-center justify-center text-center py-10">
-      <div className="text-black mb-6 text-3xl">{ShowConfig.galleryTitle}</div>
+      <div className="text-black mb-6 text-3xl">{ShowConfig.site.title}</div>
       <img
         src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/assets/PAM_logos/logo_black_lg.png"
         width={70}
@@ -31,15 +31,19 @@ export default function DetailsStart() {
         <div className="text-gray-500 mb-1">The Wrong Biennale pavilion</div>
       )}
 
-      <div className="text-black text-base mb-1">
-        <Link
-          to={ShowConfig.isOpenCallOpen ? "/open-call" : "/statement"}
-          style={{ color: "blue" }}
-          className="underline transition-colors duration-150"
-        >
-          {ShowConfig.isOpenCallOpen ? "Open Call" : ShowConfig.showTitle}
-        </Link>
-      </div>
+      {ShowConfig.showPlanned ? (
+        <div className="text-black text-base mb-1">
+          <Link
+            to={ShowConfig.isOpenCallTime ? "/open-call" : "/statement"}
+            style={{ color: "blue" }}
+            className="underline transition-colors duration-150"
+          >
+            {ShowConfig.isOpenCallTime ? "Open Call" : ShowConfig.show.title}
+          </Link>
+        </div>
+      ) : (
+        <div className="text-black text-base mt-3">a net art gallery</div>
+      )}
 
       {/* Optional: Uncomment if you want to bring these back */}
       {/* 

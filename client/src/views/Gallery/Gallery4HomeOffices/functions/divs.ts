@@ -238,7 +238,7 @@ export const addFolderDivs = (
   divs.folders = [];
 
   let labels = [
-    ShowConfig.isOpenCallOpen
+    ShowConfig.isOpenCallTime
       ? {
           x: 50,
           y: 150,
@@ -276,7 +276,7 @@ export const addFolderDivs = (
     },
   ];
 
-  if (ShowConfig.isOpenCallOpen) {
+  if (ShowConfig.isOpenCallTime) {
     labels[0].label = "open call";
     labels[0].link = "https://publicaccessmemories.com/opencall";
   }

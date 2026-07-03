@@ -11,7 +11,7 @@ import OpenCall from "../OpenCall/OpenCall";
 import { ShowConfig } from "../../../data/CurrentShow/ShowConfig";
 
 export const Statement = () => {
-  if (ShowConfig.isOpenCallOpen) {
+  if (ShowConfig.isOpenCallTime) {
     return <OpenCall />;
   }
 

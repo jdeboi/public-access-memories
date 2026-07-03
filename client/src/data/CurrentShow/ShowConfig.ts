@@ -1,49 +1,66 @@
-interface IShowConfig {
-  isClosed: boolean;
-  isOpenCallOpen: boolean;
-  underConstruction: boolean;
-  isResidency: boolean;
-  isMenuOn: boolean;
-  galleryTitle: string;
-  showTitle: string;
-  showDescription: string;
-  googleMeet: {
-    isLive: boolean;
-    link: string;
-    goLiveTime: Date;
-    durationHours: number;
-  } | null;
-  showOpens: { date: string; time: string } | null;
-  calendarLink: string | null;
-  showCloses: { date: string; time: string } | null;
+export const ShowStatus = {
+  CLOSED_NO_PLANS: "closed-no-plans",
+  CLOSED_OPEN_CALL: "open-call",
+  CLOSED_PRE_SHOW: "pre-show",
+  OPEN: "open",
+} as const;
+type ShowStatus = (typeof ShowStatus)[keyof typeof ShowStatus];
+
+export const ShowType = {
+  GROUP_SHOW: "group-show",
+  SOLO_SHOW: "solo-show",
+  RESIDENCY: "residency",
+  WRONG_PAVILION: "wrong-pavilion",
+} as const;
+type ShowType = (typeof ShowType)[keyof typeof ShowType];
+
+interface IGoogleMeet {
+  isLive: boolean;
   link: string;
-  awsLink: string;
-  isWrongPavilion: boolean;
+  goLiveTime: Date;
+  durationHours: number;
 }
 
-export const ShowConfig: IShowConfig = {
-  isClosed: true,
-  isOpenCallOpen: true,
-  underConstruction: true,
-  isResidency: false,
-  isMenuOn: false,
-  galleryTitle: "Public Access Memories",
-  showTitle: "Curator Open Call",
-  showDescription: "Apply to curate a PAM show!",
-  showOpens: null, //{ date: "November 9th, 2025", time: "11AM CST (GMT-6)" },
-  // calendarLink: "https://calendar.app.google/8JMy8Tvt7k6jUagk8",
-  calendarLink: "",
-  // googleMeet: {
-  //   isLive: true,
-  //   link: "https://meet.google.com/anj-kqhd-doc",
-  //   goLiveTime: new Date("2025-11-09T16:00:00Z"), // 11:00 AM CST in UTC,
-  //   durationHours: 3,
-  // },
-  googleMeet: null,
-  showCloses: null,
-  link: "debox",
-  awsLink: "debox",
-  isWrongPavilion: false,
+// ── Change these to switch gallery state ─────────────────────────────────────
+const STATUS: ShowStatus = ShowStatus.CLOSED_NO_PLANS;
+const SHOW_TYPE: ShowType = ShowType.GROUP_SHOW;
+// ─────────────────────────────────────────────────────────────────────────────
+
+function deriveState(status: ShowStatus, type: ShowType) {
+  return {
+    isClosed: status !== ShowStatus.OPEN,
+    isMenuOn: false,
+    isOpenCallTime: status === ShowStatus.CLOSED_OPEN_CALL,
+    showPlanned: status !== ShowStatus.CLOSED_NO_PLANS,
+    artistsPageOn: status === ShowStatus.OPEN,
+    isResidency: type === ShowType.RESIDENCY,
+    isWrongPavilion: type === ShowType.WRONG_PAVILION,
+  };
+}
+
+export const ShowConfig = {
+  status: STATUS,
+
+  site: {
+    title: "Public Access Memories",
+  },
+
+  show: {
+    type: SHOW_TYPE,
+    title: "Show TBA",
+    description: "Upcoming show details TBA",
+    slug: "debox", // drives URL routing: /<slug>/rooms/:id
+    awsSlug: "debox", // drives asset paths (may differ from slug)
+  },
+
+  dates: {
+    opens: null as { date: string; time: string } | null,
+    closes: null as { date: string; time: string } | null,
+    calendarLink: null as string | null,
+    googleMeet: null as IGoogleMeet | null,
+  },
+
+  ...deriveState(STATUS, SHOW_TYPE),
 };
 
 export const DevMatchProd = true;

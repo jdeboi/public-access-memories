@@ -99,9 +99,9 @@ export const useHostBot = () => {
     } else if (hostBotJustAsked === 1) {
       const lc = txt.toLowerCase();
       if (lc === "y" || lc.indexOf("yes") > -1) {
-        if (ShowConfig.link == "homebody")
+        if (ShowConfig.show.slug == "homebody")
           sendMessage("Enter the glass doors to get into the gallery.");
-        else if (ShowConfig.link == "as-i-recall")
+        else if (ShowConfig.show.slug == "as-i-recall")
           sendMessage("Click / tap on the floppies to see artists' work!");
         else
           sendMessage(
@@ -113,11 +113,11 @@ export const useHostBot = () => {
         setHostBotJustAsked(0);
       }
     } else if (hostBotJustAsked === 2) {
-      if (ShowConfig.link == "homebody")
+      if (ShowConfig.show.slug == "homebody")
         sendMessage(
           "See artwork in rooms by walking in the doorway and down the stairs."
         );
-      else if (ShowConfig.link == "as-i-recall")
+      else if (ShowConfig.show.slug == "as-i-recall")
         sendMessage("Try dragging the floppies!");
       setHostBotJustAsked(3);
     } else if (hostBotJustAsked === 3) {

@@ -14,7 +14,7 @@ const FAQContent = () => {
             />
 
             {/* ENTERING - As I Recall */}
-            {ShowConfig.link == "as-i-recall" &&
+            {ShowConfig.show.slug == "as-i-recall" &&
                 <Instruction
                     title={"Enter Room"}
                     imgURL={"https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/gallery/enter.png"}
@@ -22,7 +22,7 @@ const FAQContent = () => {
                 />
             }
             {/* ENTERING - Homebody */}
-            {ShowConfig.link === "homebody" &&
+            {ShowConfig.show.slug === "homebody" &&
                 <React.Fragment>
                     {/* enter gallery */}
                     <Instruction

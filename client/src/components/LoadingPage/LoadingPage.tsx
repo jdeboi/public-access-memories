@@ -11,7 +11,7 @@ export default function LoadingPage(props: { progress?: number }) {
       <div className="LoadingPage">
         <div className="title" style={sty}>
           <div className="font-['geoFont'] text-8xl  mb-6">
-            {ShowConfig.showTitle}
+            {ShowConfig.show.title}
           </div>
           {ShowConfig.isWrongPavilion && (
             <div className="font-mono text-xs text-slate-300">

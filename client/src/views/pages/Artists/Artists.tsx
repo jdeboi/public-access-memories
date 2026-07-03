@@ -19,7 +19,7 @@ export const Artists: React.FC = () => {
   return (
     <>
       {(isProduction || DevMatchProd) &&
-      (ShowConfig.isClosed || ShowConfig.underConstruction) ? (
+      ShowConfig.isClosed ? (
         <ClosedPage />
       ) : (
         <PageTemplate title={title}>
@@ -42,7 +42,7 @@ export const Artists: React.FC = () => {
                   className="group block  text-[cyan] hover:underline"
                 >
                   <img
-                    src={getThumbSrc(artist.thumb, ShowConfig.awsLink)}
+                    src={getThumbSrc(artist.thumb, ShowConfig.show.awsSlug)}
                     // src={`https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/as_i_recall/thumbs/lizz-thumb.png`}
                     alt={`${artist.name} thumbnail`}
                     loading="lazy"

@@ -902,7 +902,7 @@ for (let i = 0; i < artists.length; i++) {
     dir: "bottom",
     artistID: getArtistID(i),
     link:
-      artists[i].customLink ?? `/${ShowConfig.link}/rooms/${getArtistID(i)}`,
+      artists[i].customLink ?? `/${ShowConfig.show.slug}/rooms/${getArtistID(i)}`,
   };
   roomsArray.push(roomDeets);
 }

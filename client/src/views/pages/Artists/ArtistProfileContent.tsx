@@ -27,7 +27,7 @@ export default function ArtistProfileContent({
     <>
       <WindowsHeaderBox
         title={artist.name}
-        thumbnail={getThumbSrc(artist.thumb, ShowConfig.awsLink)}
+        thumbnail={getThumbSrc(artist.thumb, ShowConfig.show.awsSlug)}
         link={room?.link || undefined}
       >
         {room?.link && (

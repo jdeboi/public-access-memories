@@ -15,7 +15,7 @@ export const addFolderDivs = (
   let p1 = { x: GlobalConfig.scaler * 27.5, y: GlobalConfig.scaler * 24.5 };
   let p2 = { x: GlobalConfig.scaler * 25, y: GlobalConfig.scaler * 13.5 };
   let labels = [
-    ShowConfig.isOpenCallOpen
+    ShowConfig.isOpenCallTime
       ? {
           x: p0.x,
           y: p0.y,

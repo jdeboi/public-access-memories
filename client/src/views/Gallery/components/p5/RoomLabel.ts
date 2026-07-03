@@ -75,7 +75,7 @@ export default class RoomLabel extends Draggable {
     const w = this.roomConfig.w * this.GlobalConfig.scaler * 0.75;
     const maxL = Math.floor(w / (factor * 11 * 0.7));
 
-    if (ShowConfig.isClosed || ShowConfig.underConstruction) {
+    if (ShowConfig.isClosed) {
       this.displayLabel(`Room ${this.id}`, "artist TBA", factor, maxL);
     } else this.displayLabel(this.title, this.artist, factor, maxL);
 
@@ -102,7 +102,7 @@ export default class RoomLabel extends Draggable {
 
     this.p5.translate(15, 25);
 
-    if (ShowConfig.isClosed || ShowConfig.underConstruction) {
+    if (ShowConfig.isClosed) {
       this.displayLabel(`Room ${this.id}`, "artist TBA", 1);
     } else this.displayLabel(this.title, this.artist, 1);
 

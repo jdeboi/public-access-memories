@@ -437,7 +437,7 @@ for (let i = 0; i < artists.length; i++) {
     artistID: getArtistID(i),
     link:
       roomDetails[i].customLink ??
-      `/${ShowConfig.link}/rooms/${getArtistID(i)}`,
+      `/${ShowConfig.show.slug}/rooms/${getArtistID(i)}`,
   };
   roomsArray.push(roomDeets);
 }

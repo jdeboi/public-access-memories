@@ -85,7 +85,7 @@ export default class FOVRoomLabel extends RoomLabel {
 
     this.p5.translate(15, 25);
 
-    if (ShowConfig.isClosed || ShowConfig.underConstruction) {
+    if (ShowConfig.isClosed) {
       this.displayLabel(`Room ${this.id}`, "artist TBA", 1, 33);
     } else this.displayLabel(this.title, this.artist, 1, 33);
 
