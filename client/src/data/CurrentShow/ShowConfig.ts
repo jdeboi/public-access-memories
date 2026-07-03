@@ -4,7 +4,7 @@ export const ShowStatus = {
   CLOSED_PRE_SHOW: "pre-show",
   OPEN: "open",
 } as const;
-type ShowStatus = (typeof ShowStatus)[keyof typeof ShowStatus];
+export type ShowStatus = (typeof ShowStatus)[keyof typeof ShowStatus];
 
 export const ShowType = {
   GROUP_SHOW: "group-show",
@@ -12,7 +12,7 @@ export const ShowType = {
   RESIDENCY: "residency",
   WRONG_PAVILION: "wrong-pavilion",
 } as const;
-type ShowType = (typeof ShowType)[keyof typeof ShowType];
+export type ShowType = (typeof ShowType)[keyof typeof ShowType];
 
 interface IGoogleMeet {
   isLive: boolean;

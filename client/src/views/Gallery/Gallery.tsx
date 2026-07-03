@@ -185,6 +185,9 @@ const Gallery = (props: IGallery) => {
       case RESIDENCY_ID:
         return (
           <GalleryResidency
+            user={user}
+            useRoomCoords={false}
+            roomPath="/"
             users={users}
             isClosed={isClosed}
             userMove={moveGalleryUser}
