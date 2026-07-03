@@ -24,7 +24,8 @@
     "mongoose": "^8.19.0",
     "react-markdown": "^8.0.7",
     "socket.io": "^4.5.1",
-    "zod": "^4.1.11"
+    "zod": "^4.1.11",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
