@@ -18,19 +18,6 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 
-const mongoose = require("mongoose");
-
-mongoose.set("strictQuery", true);
-mongoose
-  .connect(process.env.MONGODB_URI, {
-    dbName: process.env.MONGODB_DB || "PAM",
-  })
-  .then(() => console.log("[mongo] connected"))
-  .catch((err) => {
-    console.error("[mongo] connection error", err);
-    process.exit(1);
-  });
-
 const cors = require("cors");
 const allowedOrigins = [
   "http://localhost:3000",
@@ -43,9 +30,6 @@ const authLimiter = rateLimit({ windowMs: 15 * 60_000, max: 20 });
 
 // JSON body parser (you already have bodyParser; either is fine)
 app.use(express.json({ limit: "1mb" }));
-
-const submissionsRouter = require("./routes/SindersSubmissions");
-app.use("/api/submissions", submissionsRouter);
 
 const origin =
   process.env.NODE_ENV != "production"
