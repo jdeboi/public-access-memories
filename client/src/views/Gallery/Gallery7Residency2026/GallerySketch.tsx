@@ -27,6 +27,7 @@ import {
   // addDoorDivs,
   addBarDivs,
   addTableDiv,
+  addEaselDiv,
   displayAllDivs,
 } from "./functions/divs";
 
@@ -54,6 +55,7 @@ export default class GallerySketch extends GallerySketchTemplate1 {
   floorTex1: p5Types.Image | null = null;
   tableImg: p5Types.Image | null = null;
   stoolImg: p5Types.Image | null = null;
+  easelImg: p5Types.Image | null = null;
 
   constructor(props: GallerySketch1Props) {
     super(props);
@@ -107,6 +109,7 @@ export default class GallerySketch extends GallerySketchTemplate1 {
     this.columnGif = p5.loadImage("/online_assets/residency2026/column.png");
     this.tableImg = p5.loadImage("/online_assets/residency2026/table.png");
     this.stoolImg = p5.loadImage("/online_assets/residency2026/stool.png");
+    this.easelImg = p5.loadImage("/online_assets/residency2026/easel2.png");
   };
 
   setupContent = (p5: p5Types) => {
@@ -127,6 +130,9 @@ export default class GallerySketch extends GallerySketchTemplate1 {
     addBarDivs(this.divs, this.lightImgs[3], p5);
     if (this.tableImg && this.stoolImg) {
       addTableDiv(this.divs, this.tableImg, this.stoolImg, p5);
+    }
+    if (this.easelImg) {
+      addEaselDiv(this.divs, this.easelImg, p5);
     }
   };
 
@@ -157,11 +163,30 @@ export default class GallerySketch extends GallerySketchTemplate1 {
     drawWalls(this.walls, p5);
   };
 
-  // Called before drawUser — table+stools render under the emoji
+  // Called before drawUser — table+stools and easel render under the emoji
   displayScene = (_p5: p5Types) => {
     if (this.divs.table2026) {
       for (const table of this.divs.table2026) {
         table.display(this.userEase.x, this.userEase.y);
+      }
+    }
+    if (this.divs.easel2026) {
+      for (const easel of this.divs.easel2026) {
+        easel.display(this.userEase.x, this.userEase.y);
+      }
+    }
+  };
+
+  displayOverUserStatic = (p5: p5Types) => {
+    if (!this.divs.easel2026) return;
+    for (const easel of this.divs.easel2026) {
+      if (easel.isOverCanvas) {
+        p5.push();
+        p5.textSize(28);
+        p5.textAlign(p5.LEFT, p5.BOTTOM);
+        p5.noStroke();
+        p5.text("🖌️", p5.mouseX, p5.mouseY);
+        p5.pop();
       }
     }
   };
