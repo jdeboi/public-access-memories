@@ -67,6 +67,21 @@ export const drawGalleryGround = (
   ctx.restore();
 };
 
+// Vertical strip of concrete_tiles1 at the horizontal midpoint (x = 11)
+export const drawConcreteTileLine = (
+  tileTex: p5Types.Image,
+  p5: p5Types,
+) => {
+  if (!tileTex) return;
+  const sc = GlobalConfig.scaler;
+  const tileSize = 5;
+  const midX = 11; // (-5 + 27) / 2
+
+  for (let y = -3; y < 23; y += tileSize) {
+    p5.image(tileTex, midX * sc, y * sc, tileSize * sc + 1, tileSize * sc + 1);
+  }
+};
+
 export const drawWalls = (walls: Wall[], p5: p5Types) => {
   for (const wall of walls) wall.display(p5);
 };

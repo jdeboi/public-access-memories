@@ -17,6 +17,7 @@ import {
 // Gallery7-local building / divs
 import {
   drawGalleryGround,
+  drawConcreteTileLine,
   drawColumns,
   drawRooms,
   drawWalls,
@@ -46,9 +47,16 @@ import { RESIDENCY2026_ID } from "../../../data/CurrentShow/GalleryConfig";
 
 // Room component (display logic identical to Residency)
 import ResidencyRoom from "../Gallery0Residency/components/ResidencyRoom";
+import { Pipes2026 } from "./components/Pipes2026";
 
 // URLs
 import { LMD_URL, PAM_URL } from "../functions/loadImages";
+
+// Floor grid: x [-5, 27), y [-3, 22) in world units
+const FLOOR_COLS = 32;
+const FLOOR_ROWS = 25;
+const FLOOR_X0 = -5; // world-unit left edge
+const FLOOR_Y0 = -3; // world-unit top edge
 
 export default class GallerySketch extends GallerySketchTemplate1 {
   roomTextures: p5Types.Image[] = [];
@@ -57,6 +65,9 @@ export default class GallerySketch extends GallerySketchTemplate1 {
   tableImg: p5Types.Image | null = null;
   stoolImg: p5Types.Image | null = null;
   easelImg: p5Types.Image | null = null;
+  pipesImg: p5Types.Image | null = null;
+  concreteTiles1Img: p5Types.Image | null = null;
+  pipes2026: Pipes2026 | null = null;
 
   constructor(props: GallerySketch1Props) {
     super(props);
@@ -111,11 +122,17 @@ export default class GallerySketch extends GallerySketchTemplate1 {
     this.tableImg = p5.loadImage("/online_assets/residency2026/table.png");
     this.stoolImg = p5.loadImage("/online_assets/residency2026/stool.png");
     this.easelImg = p5.loadImage("/online_assets/residency2026/easel2.png");
+    this.pipesImg = p5.loadImage("/online_assets/residency2026/pipes.png");
+    this.concreteTiles1Img = p5.loadImage(
+      "/online_assets/residency2026/concrete_tiles1.jpg",
+    );
   };
 
   setupContent = (p5: p5Types) => {
     p5.pixelDensity(2);
     p5.frameRate(20);
+    this.pipes2026 = new Pipes2026(FLOOR_COLS, FLOOR_ROWS, GlobalConfig.scaler);
+    this.pipes2026.init(p5);
   };
 
   initBuilding = (p5: p5Types) => {
@@ -151,14 +168,54 @@ export default class GallerySketch extends GallerySketchTemplate1 {
     p5.clear(0, 0, 0, 0);
   };
 
+  pipesDraw = (p5: p5Types) => {
+    if (this.pipes2026) {
+      const sc = GlobalConfig.scaler;
+
+      this.pipes2026.update();
+      const pg = this.pipes2026.getGraphics();
+      if (pg) {
+        p5.image(
+          pg,
+          FLOOR_X0 * sc,
+          FLOOR_Y0 * sc,
+          FLOOR_COLS * sc,
+          FLOOR_ROWS * sc,
+        );
+      }
+    }
+  };
   displayBuilding = (p5: p5Types) => {
-    // Floor: random mix of two concrete textures
+    // Pipes screensaver — drawn first, clipped to floor bounds
+    // this.pipesDraw(p5);
+
+    // Floor: concrete tiles drawn at partial alpha so pipes show through
     if (this.floorTex && this.floorTex1) {
+      // p5.tint(255, 245);
       drawGalleryGround(this.floorTex, this.floorTex1, p5);
+      // p5.noTint();
+    }
+
+    if (this.concreteTiles1Img) {
+      drawConcreteTileLine(this.concreteTiles1Img, p5);
     }
 
     if (this.font) p5.textFont(this.font, 12);
 
+    if (this.pipesImg && this.pipesImg.width > 0) {
+      const img = this.pipesImg;
+      const sc = GlobalConfig.scaler;
+      const HALF_LIGHT_W_PX = 150;
+      const pipeW = HALF_LIGHT_W_PX * 2;
+      const pipeH = pipeW * (img.height / img.width);
+      for (let r = 0; r < 2; r++) {
+        for (let c = 0; c < 10; c++) {
+          const x = c * 3 - 5;
+          const y = r * 14 - 2.3;
+          p5.image(img, x * sc, y * sc, pipeW, pipeH);
+        }
+      }
+    }
     // Columns: static (not draggable), drawn directly
     if (this.columnGif) drawColumns(this.columnGif, p5);
 

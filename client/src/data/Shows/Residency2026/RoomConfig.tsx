@@ -56,10 +56,10 @@ export const artists: IArtist[] = [
 function getRoomPosition(index: number): { x: number; y: number } {
   if (index < 6) {
     // 2 rows of 3: row 0 at y=0, row 1 at y=8
-    return { x: (index % 3) * 7, y: Math.floor(index / 3) * 10 };
+    return { x: (index % 3) * 7 - 2, y: Math.floor(index / 3) * 14 };
   }
   // lounge: centered below at y=16
-  return { x: 4, y: 16 };
+  return { x: 22, y: 6 };
 }
 
 const roomDetails = artists.map((artist, index) => ({

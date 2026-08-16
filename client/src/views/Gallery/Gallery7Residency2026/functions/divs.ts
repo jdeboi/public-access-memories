@@ -24,8 +24,8 @@ const HALF_LIGHT_W = 150 / sc;
 const LIGHT_POSITIONS = rooms
   .filter((r) => r.id < 6)
   .map((r) => ({
-    x: r.x + roomConfig.w / 2 - HALF_LIGHT_W,
-    y: r.y - 0.35,
+    x: r.x + roomConfig.w / 2 - HALF_LIGHT_W + 0.3,
+    y: r.y - 2,
     isFlipped: false,
   }));
 
@@ -63,7 +63,7 @@ export const addTableDiv = (
   p5: p5Types,
 ) => {
   divs.table2026 = [
-    new Table2026(9, 4, tableImg, stoolImg, p5, GlobalConfig, 6),
+    new Table2026(5, 6.5, tableImg, stoolImg, p5, GlobalConfig, 6),
   ];
 };
 

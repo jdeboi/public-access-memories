@@ -186,7 +186,10 @@ const Gallery = (props: IGallery) => {
           ...base,
           backgroundImage:
             "url(/backgroundImgs/residency2026Bgs/industrialwall2.jpg)",
+
+          // "url(/backgroundImgs/residency2026Bgs/industrialwall3.jpg)",
           backgroundSize: "600px 200px",
+          // backgroundSize: "300px 300px",
         };
       default:
         return base;
