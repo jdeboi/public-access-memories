@@ -1,15 +1,22 @@
 import { GlobalConfig } from "../../../../data/Shows/Residency/GlobalConfig";
 import {
-  artists,
-  rooms,
-  roomConfig,
+  artists as Residency2025Artists,
+  rooms as Residency2025Rooms,
+  roomConfig as Residency2025RoomConfig,
 } from "../../../../data/Shows/Residency/RoomConfig";
-import { p5ToUserCoords } from "../../../../helpers/coordinates";
 import p5Room from "../../components/p5/p5Room";
 
 export default class ResidencyRoom extends p5Room {
-  constructor(p5, door, i) {
-    super(p5, door, i, GlobalConfig, artists, rooms, roomConfig);
+  constructor(
+    p5,
+    door,
+    i,
+    globalConfig = GlobalConfig,
+    roomConfig = Residency2025RoomConfig,
+    artists = Residency2025Artists,
+    rooms = Residency2025Rooms,
+  ) {
+    super(p5, door, i, globalConfig, artists, rooms, roomConfig);
     this.room = rooms[i];
     this.artist = artists[this.room.artistID];
   }

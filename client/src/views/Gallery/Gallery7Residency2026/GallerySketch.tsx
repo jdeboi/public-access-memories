@@ -34,6 +34,7 @@ import {
 // Config
 import { GlobalConfig } from "../../../data/Shows/Residency2026/GlobalConfig";
 import {
+  artists,
   rooms as globalRooms,
   roomConfig,
 } from "../../../data/Shows/Residency2026/RoomConfig";
@@ -120,7 +121,17 @@ export default class GallerySketch extends GallerySketchTemplate1 {
   initBuilding = (p5: p5Types) => {
     initOuterWalls(p5, this.walls);
     for (let i = 0; i < this.globalRooms.length; i++) {
-      this.rooms.push(new ResidencyRoom(p5, this.doorImgs[0], i, roomConfig));
+      this.rooms.push(
+        new ResidencyRoom(
+          p5,
+          this.doorImgs[0],
+          i,
+          GlobalConfig,
+          roomConfig,
+          artists,
+          globalRooms,
+        ),
+      );
     }
   };
 
@@ -137,7 +148,7 @@ export default class GallerySketch extends GallerySketchTemplate1 {
   };
 
   displayBackground = (p5: p5Types) => {
-    p5.background(0);
+    p5.clear(0, 0, 0, 0);
   };
 
   displayBuilding = (p5: p5Types) => {
@@ -151,12 +162,17 @@ export default class GallerySketch extends GallerySketchTemplate1 {
     // Columns: static (not draggable), drawn directly
     if (this.columnGif) drawColumns(this.columnGif, p5);
 
+    const localUser = {
+      ...this.props.user,
+      x: this.stepTo.x,
+      y: this.stepTo.y,
+    };
     drawRooms(
       this.rooms,
       this.roomTextures,
       this.otherImgs,
       this.props.users,
-      this.props.user,
+      localUser,
       p5,
     );
 

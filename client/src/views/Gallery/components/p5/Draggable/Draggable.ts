@@ -45,7 +45,7 @@ export default class Draggable {
     h: number,
     p5: p5Types,
     content: p5Types.Image | null,
-    GlobalConfig: any
+    GlobalConfig: any,
   ) {
     this.p5 = p5;
     this.x = x;
@@ -182,7 +182,7 @@ export default class Draggable {
     let mouse = mouseToWorld(
       { x: userX, y: userY },
       this.p5,
-      this.GlobalConfig
+      this.GlobalConfig,
     );
     mouse.x -= this.x;
     mouse.y -= this.y;

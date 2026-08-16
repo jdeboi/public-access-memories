@@ -2,6 +2,7 @@ import Light from "../../components/p5/Light";
 import Door from "../../components/p5/Door";
 import CoffeeBar from "../../components/p5/Bars/CoffeeBar";
 import Table2026 from "../components/Table2026";
+import Easel2026 from "../components/Easel2026";
 import p5Types from "p5";
 
 import {
@@ -62,8 +63,16 @@ export const addTableDiv = (
   p5: p5Types,
 ) => {
   divs.table2026 = [
-    new Table2026(9, 4, tableImg, stoolImg, p5, GlobalConfig, 4),
+    new Table2026(9, 4, tableImg, stoolImg, p5, GlobalConfig, 6),
   ];
+};
+
+export const addEaselDiv = (
+  divs: any,
+  easelImg: p5Types.Image,
+  p5: p5Types,
+) => {
+  divs.easel2026 = [new Easel2026(16, 6, easelImg, p5, GlobalConfig)];
 };
 
 export const addBarDivs = (divs: any, lightImg: p5Types.Image, p5: p5Types) => {

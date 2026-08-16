@@ -12,7 +12,7 @@ const STOOL_W = 144;
 const STOOL_H = 144;
 
 // Back stools are positioned so roughly half the stool shows above the table top
-const BACK_STOOL_OFFSET_Y = -Math.round(STOOL_H * 0.55);
+const BACK_STOOL_OFFSET_Y = -Math.round(STOOL_H * 0.3);
 
 // Counter pill dimensions (relative to table local origin)
 const BAR_Y = TABLE_H / 8;
@@ -42,7 +42,7 @@ export default class Table2026 {
     stoolImg: p5Types.Image,
     p5: p5Types,
     GlobalConfig: IGlobalConfig,
-    defaultStoolCount: number = 4,
+    defaultStoolCount: number = 6,
   ) {
     this.p5 = p5;
     this.GlobalConfig = GlobalConfig;
@@ -138,6 +138,7 @@ export default class Table2026 {
     p5.noStroke();
     p5.fill(20, 20, 20, 210);
     p5.rect(midX - BAR_W / 2, BAR_Y, BAR_W, BAR_H, 6);
+    p5.textFont("Arial");
 
     this.minusBtn.display(mx, my);
     this.plusBtn.display(mx, my);
@@ -146,6 +147,7 @@ export default class Table2026 {
     p5.noStroke();
     p5.textAlign(p5.CENTER, p5.CENTER);
     p5.textSize(15);
+
     p5.text(this.stoolCount, midX, BAR_Y + BAR_H / 2 - 1);
 
     p5.fill(160);

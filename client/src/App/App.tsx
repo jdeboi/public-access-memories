@@ -59,13 +59,16 @@ import { artists, rooms } from "../data/CurrentShow/RoomConfig";
 import FAQFrame from "../components/FAQ/FAQFrame";
 import {
   ASIRECALL_ID,
+  BLANK_SPACE_ID,
   DEBOX_ID,
   FIELDSOFVIEW_ID,
   HOMEBODY_ID,
   HOMEOFFICES_ID,
+  RESIDENCY_ID,
+  RESIDENCY2026_ID,
 } from "../data/CurrentShow/GalleryConfig";
 import Residency from "../views/pages/Residency/Residency";
-// import HostBotRoom from "../views/Gallery/Gallery0Residency/rooms/HostBotRoom";
+import HostBotRoom from "../views/Gallery/Gallery0Residency/rooms/HostBotRoom";
 import OpenCall from "../views/pages/OpenCall/OpenCall";
 import GalleryRoom from "../views/rooms/GalleryRoom";
 import ApproveSindersSubmissions from "../views/rooms/R_06/ApproveSindersSubmissions";
@@ -250,10 +253,7 @@ function App() {
         />
       );
     }
-    if (
-      (isProduction || DevMatchProd) &&
-      ShowConfig.isClosed
-    ) {
+    if ((isProduction || DevMatchProd) && ShowConfig.isClosed) {
       return null;
     } else {
       return (
@@ -314,7 +314,7 @@ function App() {
             path="/"
             element={
               <Gallery
-                id={DEBOX_ID}
+                id={RESIDENCY2026_ID}
                 users={users}
                 isClosed={isClosed}
                 showWelcome={showWelcome}
@@ -325,6 +325,7 @@ function App() {
 
           <Route path="/statement" element={<Statement />} />
           <Route path="/opencall" element={<OpenCall />} />
+
           <Route path="/residency" element={<Residency />} />
 
           <Route path="/artists" element={<Artists />} />
@@ -374,8 +375,22 @@ function App() {
               />
             }
           />
+          <Route
+            path="/lounge"
+            element={
+              <HostBotRoom
+                id={RESIDENCY_ID}
+                users={users}
+                isClosed={isClosed}
+                showWelcome={showWelcome}
+              />
+            }
+          />
           <Route path="/test/rooms/:id" element={<Room isTest={true} />} />
-          <Route path={`/${ShowConfig.show.slug}/rooms/:id`} element={<Room />} />
+          <Route
+            path={`/${ShowConfig.show.slug}/rooms/:id`}
+            element={<Room />}
+          />
           <Route
             path="/briz"
             element={

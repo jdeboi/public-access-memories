@@ -4,13 +4,17 @@ import { GlobalConfig as GlobalConfigAIR } from "../Shows/AsIRecall/GlobalConfig
 import { GlobalConfig as GlobalConfigFOV } from "../Shows/FieldsOfView/GlobalConfig";
 import { GlobalConfig as GlobalConfigResidency } from "../Shows/Residency/GlobalConfig";
 import { GlobalConfig as GlobalConfigDebox } from "../Shows/Debox/GlobalConfig";
+import { GlobalConfig as GlobalConfigBlankSpace } from "../Shows/BlankSpace/GlobalConfig";
+import { GlobalConfig as GlobalConfigResidency2026 } from "../Shows/Residency2026/GlobalConfig";
 import {
   ASIRECALL_ID,
+  BLANK_SPACE_ID,
   DEBOX_ID,
   FIELDSOFVIEW_ID,
   HOMEBODY_ID,
   HOMEOFFICES_ID,
   RESIDENCY_ID,
+  RESIDENCY2026_ID,
 } from "./GalleryConfig";
 
 export {
@@ -33,6 +37,10 @@ export const getCurrentPageGlobalConfig = (index: number) => {
       return GlobalConfigDave;
     case DEBOX_ID:
       return GlobalConfigDebox;
+    case BLANK_SPACE_ID:
+      return GlobalConfigBlankSpace;
+    case RESIDENCY2026_ID:
+      return GlobalConfigResidency2026;
     default:
       return GlobalConfigHB;
   }

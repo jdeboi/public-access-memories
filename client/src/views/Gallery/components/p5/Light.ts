@@ -12,6 +12,7 @@ export default class Light extends Draggable {
   isOn: boolean;
   scaler: number;
   button: ButtonSq;
+  isHorizontal: boolean = false;
 
   constructor(
     id: number,
@@ -21,12 +22,16 @@ export default class Light extends Draggable {
     imgs: p5Types.Image[],
     p5: p5Types,
     GlobalConfig: IGlobalConfig,
-    w: number = 80,
-    h: number = 300
+    isHorizontal: boolean = false,
   ) {
-    super(id, 0, 0, w, h, p5, null, GlobalConfig);
+    super(id, 0, 0, 80, 300, p5, null, GlobalConfig);
 
     this.scaler = GlobalConfig.scaler / 100;
+    this.isHorizontal = isHorizontal;
+    if (this.isHorizontal) {
+      this.w = 300;
+      this.h = 80;
+    }
 
     if (this.scaler < 0.84) this.scaler = 0.84;
     this.w *= this.scaler;
@@ -43,12 +48,14 @@ export default class Light extends Draggable {
     this.isOn = true;
 
     let wb = 15;
-    this.button = new ButtonSq(
-      (this.w - wb) / 2,
-      this.h - 15 * this.scaler,
-      wb,
-      p5
-    );
+    let buttonX = (this.w - wb) / 2;
+    let buttonY = this.h - 15 * this.scaler;
+    if (this.isHorizontal) {
+      buttonX = this.w - 15 - wb * this.scaler;
+      buttonY = this.h / 2 + this.barH - wb / 2;
+    }
+
+    this.button = new ButtonSq(buttonX, buttonY, wb, p5);
   }
 
   checkButtonsNormal() {
@@ -78,7 +85,7 @@ export default class Light extends Draggable {
     let mouse = mouseToWorld(
       { x: userX, y: userY },
       this.p5,
-      this.GlobalConfig
+      this.GlobalConfig,
     );
     mouse.x -= this.x;
     mouse.y -= this.y;
@@ -100,7 +107,7 @@ export default class Light extends Draggable {
     let mouse = mouseToWorld(
       { x: userX, y: userY },
       this.p5,
-      this.GlobalConfig
+      this.GlobalConfig,
     );
     mouse.x -= this.x;
     mouse.y -= this.y;
@@ -109,6 +116,13 @@ export default class Light extends Draggable {
 
   toggleLights() {
     this.isOn = !this.isOn;
+  }
+
+  makeHorizontal() {
+    if (this.isHorizontal) {
+      this.p5.rotate(-Math.PI / 2);
+      this.p5.translate(-this.h, 0);
+    }
   }
 
   displayContent(userX: number, userY: number) {
@@ -144,6 +158,7 @@ export default class Light extends Draggable {
     if (this.isFlipped) {
       // shadow / glow
       this.p5.push();
+      this.makeHorizontal();
       this.p5.translate(0, this.barH);
       this.p5.image(imgBack, 0, backY, backW, backH);
       this.p5.pop();
@@ -152,6 +167,7 @@ export default class Light extends Draggable {
       this.p5.translate(0, this.barH);
 
       this.p5.push();
+      this.makeHorizontal();
       this.p5.translate(x, 0);
       this.p5.scale(-1, 1);
       this.p5.image(img, -w, 0, w, h);
@@ -161,16 +177,22 @@ export default class Light extends Draggable {
     } else {
       // shadow / glow
       this.p5.push();
+      this.makeHorizontal();
       this.p5.translate(0, this.barH);
       this.p5.scale(-1, 1);
-      this.p5.image(imgBack, -backW + 20, backY, backW, backH);
+      // For horizontal mode: -backW+20 floats the glow ~47px above the panel.
+      // Center it on the panel top edge instead so the bleed is contiguous.
+      const shadowX = this.isHorizontal ? (-this.h - backW / 2) : (-backW + 20);
+      this.p5.image(imgBack, shadowX, backY, backW, backH);
       this.p5.pop();
 
       this.displaySolidBack(this.p5.color(255));
       this.p5.translate(0, this.barH);
 
       this.p5.push();
+      this.makeHorizontal();
       this.p5.translate(x, 0);
+
       this.p5.image(img, 0, 0, w, h);
       this.p5.translate(0, dy);
       this.p5.image(img, 0, 0, w, h);
@@ -178,7 +200,8 @@ export default class Light extends Draggable {
     }
 
     this.p5.pop();
-    this.displayFrame();
+
     this.displayButton(userX, userY);
+    this.displayFrame();
   }
 }

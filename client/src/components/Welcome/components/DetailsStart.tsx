@@ -34,7 +34,7 @@ export default function DetailsStart() {
       {ShowConfig.showPlanned ? (
         <div className="text-black text-base mb-1">
           <Link
-            to={ShowConfig.isOpenCallTime ? "/open-call" : "/statement"}
+            to={ShowConfig.isOpenCallTime ? "/opencall" : "/statement"}
             style={{ color: "blue" }}
             className="underline transition-colors duration-150"
           >

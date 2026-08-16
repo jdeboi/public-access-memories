@@ -4,6 +4,7 @@ import PageFooter from "./PageFooter";
 
 type PageTemplateProps = {
   title?: string;
+  subtitle?: string;
   intro?: React.ReactNode;
 
   /** Solid color, e.g. '#0b0b0b' or 'rgb(0 0 0 / 0.9)' */
@@ -32,6 +33,7 @@ const DEFAULT_GRADIENT = "linear-gradient(to bottom, #5b43cd, #0da6ff)";
 const PageTemplate: React.FC<PageTemplateProps> = ({
   title = "",
   intro = "",
+  subtitle = "",
   background,
   backgroundImage,
   bgClassName,
@@ -47,8 +49,8 @@ const PageTemplate: React.FC<PageTemplateProps> = ({
   const style: React.CSSProperties | undefined = bgClassName
     ? undefined
     : background
-    ? { background }
-    : { backgroundImage: backgroundImage ?? DEFAULT_GRADIENT };
+      ? { background }
+      : { backgroundImage: backgroundImage ?? DEFAULT_GRADIENT };
 
   return (
     <div
@@ -62,6 +64,11 @@ const PageTemplate: React.FC<PageTemplateProps> = ({
           <h1 className="text-4xl font-bold mb-10 [font-family:'manoloFont']">
             {title}
           </h1>
+        )}
+        {subtitle && (
+          <h3 className="text-2xl text-black font-bold mb-10 uppercase font-['geoFont']">
+            <span className="bg-white px-2">{subtitle}</span>
+          </h3>
         )}
         {intro && (
           <div className="mb-8 leading-relaxed text-white/90">{intro}</div>

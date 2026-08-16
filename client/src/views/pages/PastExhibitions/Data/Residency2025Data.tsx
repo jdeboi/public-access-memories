@@ -1,6 +1,6 @@
 // src/content/exhibitions/residency2025.data.tsx
 import React from "react";
-import { artists as residencyArtists } from "../../../../data/Shows/Residency/RoomConfig";
+import { artists as residencyArtists } from "../../../../data/Shows/Residency2025/RoomConfig";
 import { PastExhibitionDataInterface } from "./_PastExhibitionDataType";
 
 const filteredArtists = residencyArtists.filter((a) => a.name !== "hostBot");

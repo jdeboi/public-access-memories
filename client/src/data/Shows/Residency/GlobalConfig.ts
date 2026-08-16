@@ -4,7 +4,7 @@ import { IGlobalConfig } from "../../../interfaces";
 let xMin = -5;
 let xMax = 27;
 let yMin = -3;
-let yMax = 14;
+let yMax = 22;
 
 export const GlobalConfig: IGlobalConfig = {
   scaler: 70,

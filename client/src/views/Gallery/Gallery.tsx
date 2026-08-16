@@ -15,6 +15,8 @@ import GallerySketch2 from "./Gallery2/GallerySketch";
 import GallerySketch3 from "./Gallery3/GallerySketch";
 import GalleryGreber from "./Gallery4HomeOffices/GalleryGreber";
 import Gallery5DeboxSketch from "./Gallery5Debox/Gallery5DeboxSketch";
+import Gallery6BlankSpaceSketch from "./Gallery6BlankSpace/Gallery6BlankSpaceSketch";
+import Gallery7Residency2026Sketch from "./Gallery7Residency2026/GallerySketch";
 
 import { getCurrentPageGlobalConfig } from "../../data/CurrentShow/GlobalConfig";
 
@@ -52,11 +54,13 @@ import { p5ToUserCoords } from "../../helpers/coordinates";
 import { getLayoutSlug } from "../../data/Shows/HomeOffices/PageConstants";
 import {
   ASIRECALL_ID,
+  BLANK_SPACE_ID,
   DEBOX_ID,
   FIELDSOFVIEW_ID,
   HOMEBODY_ID,
   HOMEOFFICES_ID,
   RESIDENCY_ID,
+  RESIDENCY2026_ID,
 } from "../../data/CurrentShow/GalleryConfig";
 
 interface IGallery {
@@ -106,7 +110,7 @@ const Gallery = (props: IGallery) => {
         else dispatch(showChat());
       }
     },
-    [dispatch, user.id, windowUI.isMobile, windowUI.hasFooter]
+    [dispatch, user.id, windowUI.isMobile, windowUI.hasFooter],
   );
 
   const getVolume = useCallback(() => {
@@ -125,7 +129,7 @@ const Gallery = (props: IGallery) => {
       dispatch(setSketchVolume(getVolume()));
       dispatch(moveUser({ x, y, galleryIndex: id }));
     },
-    [dispatch, getVolume, id]
+    [dispatch, getVolume, id],
   );
 
   const moveGalleryUserNormal = useCallback(
@@ -133,7 +137,7 @@ const Gallery = (props: IGallery) => {
       dispatch(setSketchVolume(getVolume()));
       dispatch(moveUserNormal({ x, y, galleryIndex: id }));
     },
-    [dispatch, getVolume, id]
+    [dispatch, getVolume, id],
   );
 
   const userNewRoom = useCallback(
@@ -141,7 +145,7 @@ const Gallery = (props: IGallery) => {
       navigate(room);
       dispatch(setUserRoomUrl({ roomUrl: room }));
     },
-    [dispatch, navigate]
+    [dispatch, navigate],
   );
 
   // style: compute once per gallery id (no mutation in switch)
@@ -174,6 +178,15 @@ const Gallery = (props: IGallery) => {
           ...base,
           backgroundImage: "url(/backgroundImgs/debox_tex.webp)",
           backgroundSize: "400px 400px",
+        };
+      case BLANK_SPACE_ID:
+        return { ...base, backgroundImage: "none", backgroundColor: "#08080c" };
+      case RESIDENCY2026_ID:
+        return {
+          ...base,
+          backgroundImage:
+            "url(/backgroundImgs/residency2026Bgs/industrialwall2.jpg)",
+          backgroundSize: "600px 200px",
         };
       default:
         return base;
@@ -275,6 +288,40 @@ const Gallery = (props: IGallery) => {
             roomPath={"/"}
           />
         );
+      case BLANK_SPACE_ID:
+        return (
+          <Gallery6BlankSpaceSketch
+            useRoomCoords={false}
+            user={user}
+            users={users}
+            isClosed={isClosed}
+            userMove={moveGalleryUser}
+            userNewRoom={userNewRoom}
+            loadingDone={() => dispatch(doneLoadingApp())}
+            toggleOutside={() => dispatch(toggleOutside())}
+            isMobile={windowUI.isMobile}
+            clickedUserChat={clickedUserChat}
+            setUserActive={clickedUserChat}
+            roomPath={"/"}
+          />
+        );
+      case RESIDENCY2026_ID:
+        return (
+          <Gallery7Residency2026Sketch
+            user={user}
+            useRoomCoords={false}
+            roomPath="/"
+            users={users}
+            isClosed={isClosed}
+            userMove={moveGalleryUser}
+            userNewRoom={userNewRoom}
+            loadingDone={() => dispatch(doneLoadingApp())}
+            toggleOutside={() => dispatch(toggleOutside())}
+            isMobile={windowUI.isMobile}
+            clickedUserChat={clickedUserChat}
+            setUserActive={clickedUserChat}
+          />
+        );
       default:
         return (
           <GallerySketch1
@@ -354,7 +401,7 @@ const Gallery = (props: IGallery) => {
         return (
           <MiniMap
             users={filterUsers(user, users).filter(
-              (u) => u.roomUrl === "/" || u.roomUrl === "/debox"
+              (u) => u.roomUrl === "/" || u.roomUrl === "/debox",
             )}
             x={20}
             y={20}
@@ -364,6 +411,10 @@ const Gallery = (props: IGallery) => {
             galleryId={DEBOX_ID}
           />
         );
+      case BLANK_SPACE_ID:
+        return null;
+      case RESIDENCY2026_ID:
+        return null;
       default:
         return <MiniMap users={filterUsers(user, users)} x={20} y={20} />;
     }

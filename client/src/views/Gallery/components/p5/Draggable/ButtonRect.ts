@@ -16,7 +16,7 @@ export default class ButtonRect {
     w: number,
     h: number,
     p5: p5Types,
-    font: p5Types.Font | null = null
+    font: p5Types.Font | null = null,
   ) {
     this.label = label;
     this.w = w;
@@ -46,7 +46,7 @@ export default class ButtonRect {
     if (this.font) this.p5.textFont(this.font, 16);
     this.p5.textAlign(this.p5.CENTER, this.p5.CENTER);
     // this.p5.textSize(12);
-    this.p5.text(this.label, this.x + this.w / 2, this.y + this.h / 2 - 2);
+    this.p5.text(this.label, this.x + this.w / 2, this.y + this.h / 2);
   }
 
   display(mx: number, my: number) {

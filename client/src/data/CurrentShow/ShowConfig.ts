@@ -22,8 +22,8 @@ interface IGoogleMeet {
 }
 
 // ── Change these to switch gallery state ─────────────────────────────────────
-const STATUS: ShowStatus = ShowStatus.CLOSED_NO_PLANS;
-const SHOW_TYPE: ShowType = ShowType.GROUP_SHOW;
+const STATUS: ShowStatus = ShowStatus.CLOSED_OPEN_CALL;
+const SHOW_TYPE: ShowType = ShowType.RESIDENCY;
 // ─────────────────────────────────────────────────────────────────────────────
 
 function deriveState(status: ShowStatus, type: ShowType) {

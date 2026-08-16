@@ -2,6 +2,10 @@ import {
   GlobalConfig,
   limits,
 } from "../../../../data/Shows/Residency2026/GlobalConfig";
+import {
+  rooms,
+  roomConfig,
+} from "../../../../data/Shows/Residency2026/RoomConfig";
 import Wall from "../../components/p5/Wall";
 import p5Types from "p5";
 import { IUser } from "../../../../interfaces";
@@ -11,23 +15,16 @@ export const initOuterWalls = (p5: p5Types, walls: Wall[]) => {
   walls.push(new Wall(p5, limits, GlobalConfig));
 };
 
-// World-unit positions for structural columns — centered on the image
-const COLUMN_POSITIONS = [
-  { x: 3.8, y: -0.5 },
-  { x: 7.8, y: -0.5 },
-  { x: 3.8, y: 3.8 },
-  { x: 7.8, y: 3.8 },
-  { x: 3.8, y: 7.5 },
-  { x: 7.8, y: 7.5 },
-  { x: 3.8, y: 11.8 },
-  { x: 7.8, y: 11.8 },
-];
+// World-unit positions for structural columns — derived from room right edges
+const COLUMN_POSITIONS = rooms
+  .filter((r) => r.id < 6)
+  .flatMap((r) => [{ x: r.x + roomConfig.w + 1.5, y: r.y + 1.3 }]);
 
 export const drawColumns = (columnImg: p5Types.Image, p5: p5Types) => {
   if (!columnImg) return;
   const sc = GlobalConfig.scaler;
-  const colW = 80;
-  const colH = 280;
+  const colW = 150;
+  const colH = 400;
   p5.push();
   p5.imageMode(p5.CENTER);
   for (const { x, y } of COLUMN_POSITIONS) {
@@ -46,6 +43,17 @@ export const drawGalleryGround = (
   const sc = GlobalConfig.scaler;
   const tileSize = 5; // world units per tile
 
+  const ctx = (p5 as any).drawingContext as CanvasRenderingContext2D;
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(
+    -5 * sc,
+    -3 * sc,
+    GlobalConfig.worldW * sc,
+    GlobalConfig.worldH * sc,
+  );
+  ctx.clip();
+
   for (let x = -5; x < 28; x += tileSize) {
     for (let y = -3; y < 23; y += tileSize) {
       // deterministic pseudo-random per tile — stable across frames
@@ -55,6 +63,8 @@ export const drawGalleryGround = (
       p5.image(tex, x * sc, y * sc, sc * tileSize + 1, sc * tileSize + 1);
     }
   }
+
+  ctx.restore();
 };
 
 export const drawWalls = (walls: Wall[], p5: p5Types) => {
