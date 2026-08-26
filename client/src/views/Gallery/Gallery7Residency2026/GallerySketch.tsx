@@ -49,17 +49,17 @@ import {
 import { RESIDENCY2026_ID } from "../../../data/CurrentShow/GalleryConfig";
 
 // Room component (display logic identical to Residency)
-import ResidencyRoom from "../Gallery0Residency/components/ResidencyRoom";
 import { Pipes2026 } from "./components/Pipes2026";
 
 // URLs
 import { LMD_URL, PAM_URL } from "../functions/loadImages";
+import ResidencyRoom2026 from "./components/ResidencyRoom2026";
+import p5 from "p5";
 
-// Floor grid: x [-5, 27), y [-3, 22) in world units
 const FLOOR_COLS = 32;
 const FLOOR_ROWS = 25;
-const FLOOR_X0 = -5; // world-unit left edge
-const FLOOR_Y0 = -3; // world-unit top edge
+const FLOOR_X0 = -5;
+const FLOOR_Y0 = -3;
 
 export default class GallerySketch extends GallerySketchTemplate1 {
   roomTextures: p5Types.Image[] = [];
@@ -68,7 +68,7 @@ export default class GallerySketch extends GallerySketchTemplate1 {
   tableImg: p5Types.Image | null = null;
   stoolImg: p5Types.Image | null = null;
   easelImg: p5Types.Image | null = null;
-  pipesImg: p5Types.Image | null = null;
+  pipesImg: p5Types.Image | p5Types.Graphics | null = null;
   concreteTiles1Img: p5Types.Image | null = null;
   concreteTiles2Img: p5Types.Image | null = null;
   flatFileClosedImg: p5Types.Image | null = null;
@@ -87,21 +87,12 @@ export default class GallerySketch extends GallerySketchTemplate1 {
   preloadRoomTextures = (p5: p5Types) => {
     this.doorImgs[0] = p5.loadImage(LMD_URL + "door/frame2.png");
     this.doorImgs[1] = p5.loadImage(LMD_URL + "door/leftdoor2.png");
-    this.roomTextures[0] = p5.loadImage(
-      PAM_URL + "residency/assets/lightsOnDoorOpen.jpg",
-    );
-    this.roomTextures[1] = p5.loadImage(
-      PAM_URL + "residency/assets/lightsOnDoorClosed.jpg",
-    );
-    this.roomTextures[2] = p5.loadImage(
-      PAM_URL + "residency/assets/lightsOffDoorOpen.jpg",
-    );
-    this.roomTextures[3] = p5.loadImage(
-      PAM_URL + "residency/assets/lightsOffDoorClosed.jpg",
-    );
-    this.roomTextures[4] = p5.loadImage(
-      PAM_URL + "residency/assets/lightsOnDoorOpen.jpg",
-    );
+
+    for (let i = 0; i < 10; i++) {
+      this.roomTextures[i] = p5.loadImage(
+        PAM_URL + `residency/assets/2026_studios/${(i % 6) + 1}.jpeg`,
+      );
+    }
     this.eyeIcon = p5.loadImage(LMD_URL + "eye.png");
     // two concrete textures — randomly mixed per tile
     this.floorTex = p5.loadImage("/online_assets/residency2026/concrete_0.png");
@@ -148,13 +139,20 @@ export default class GallerySketch extends GallerySketchTemplate1 {
     p5.frameRate(20);
     this.pipes2026 = new Pipes2026(FLOOR_COLS, FLOOR_ROWS, GlobalConfig.scaler);
     this.pipes2026.init(p5);
+
+    if (this.pipesImg) {
+      const pg = p5.createGraphics(this.pipesImg.width, this.pipesImg.height);
+      pg.tint(100, 150, 180, 50);
+      pg.image(this.pipesImg, 0, 0);
+      this.pipesImg = pg as unknown as p5Types.Image;
+    }
   };
 
   initBuilding = (p5: p5Types) => {
     initOuterWalls(p5, this.walls);
     for (let i = 0; i < this.globalRooms.length; i++) {
       this.rooms.push(
-        new ResidencyRoom(
+        new ResidencyRoom2026(
           p5,
           this.doorImgs[0],
           i,
@@ -191,33 +189,14 @@ export default class GallerySketch extends GallerySketchTemplate1 {
     p5.clear(0, 0, 0, 0);
   };
 
-  pipesDraw = (p5: p5Types) => {
-    if (this.pipes2026) {
-      const sc = GlobalConfig.scaler;
-
-      this.pipes2026.update();
-      const pg = this.pipes2026.getGraphics();
-      if (pg) {
-        p5.image(
-          pg,
-          FLOOR_X0 * sc,
-          FLOOR_Y0 * sc,
-          FLOOR_COLS * sc,
-          FLOOR_ROWS * sc,
-        );
-      }
-    }
-  };
   displayBuilding = (p5: p5Types) => {
-    // Pipes screensaver — drawn first, clipped to floor bounds
-    // this.pipesDraw(p5);
-
     // Floor: concrete tiles drawn at partial alpha so pipes show through
     if (this.floorTex && this.floorTex1) {
       // p5.tint(255, 245);
       drawGalleryGround(this.floorTex, this.floorTex1, p5);
       // p5.noTint();
     }
+    this.displayOverheadPipes(p5);
 
     if (this.concreteTiles1Img) {
       drawRoomWalkways(this.concreteTiles1Img, p5);
@@ -227,23 +206,6 @@ export default class GallerySketch extends GallerySketchTemplate1 {
     }
 
     if (this.font) p5.textFont(this.font, 12);
-
-    if (this.pipesImg && this.pipesImg.width > 0) {
-      const img = this.pipesImg;
-      const sc = GlobalConfig.scaler;
-      const HALF_LIGHT_W_PX = 150;
-      const pipeW = HALF_LIGHT_W_PX * 2;
-      const pipeH = pipeW * (img.height / img.width);
-      for (let r = 0; r < 2; r++) {
-        for (let c = 0; c < 10; c++) {
-          const x = c * 3 - 5;
-          const y = r * 14 - 2.3;
-          p5.image(img, x * sc, y * sc, pipeW, pipeH);
-        }
-      }
-    }
-    // Columns: static (not draggable), drawn directly
-    if (this.columnGif) drawColumns(this.columnGif, p5);
 
     const localUser = {
       ...this.props.user,
@@ -281,6 +243,51 @@ export default class GallerySketch extends GallerySketchTemplate1 {
         const saved = easel.consumeSave();
         if (saved && this.divs.flatFiles) {
           for (const ff of this.divs.flatFiles) ff.addDrawing(saved);
+        }
+      }
+    }
+  };
+
+  displayOverUserScene = (p5: p5Types) => {
+    p5.push();
+    p5.translate(p5.windowWidth / 2, p5.windowHeight / 2);
+    p5.translate(-this.userEase.x, -this.userEase.y);
+    this.worldTranslate(p5);
+
+    if (this.columnGif) drawColumns(this.columnGif, p5);
+    this.displayDivs(p5);
+    p5.pop();
+  };
+
+  displayPipesLattice = (p5: p5Types) => {
+    if (this.pipes2026) {
+      this.pipes2026.update();
+      const pg = this.pipes2026.getGraphics();
+      if (pg) {
+        const sc = GlobalConfig.scaler;
+        p5.image(
+          pg,
+          FLOOR_X0 * sc,
+          FLOOR_Y0 * sc,
+          FLOOR_COLS * sc,
+          FLOOR_ROWS * sc,
+        );
+      }
+    }
+  };
+
+  displayOverheadPipes = (p5: p5Types) => {
+    if (this.pipesImg && this.pipesImg.width > 0) {
+      const img = this.pipesImg;
+      const sc = GlobalConfig.scaler;
+      const HALF_LIGHT_W_PX = 150;
+      const pipeW = HALF_LIGHT_W_PX * 2;
+      const pipeH = pipeW * (img.height / img.width);
+      for (let r = 0; r < 2; r++) {
+        for (let c = 0; c < 11; c++) {
+          const x = c * 3 - 5;
+          const y = r * 14 - 2.3;
+          p5.image(img, x * sc, y * sc, pipeW, pipeH);
         }
       }
     }

@@ -18,13 +18,13 @@ export const initOuterWalls = (p5: p5Types, walls: Wall[]) => {
 // World-unit positions for structural columns — derived from room right edges
 const COLUMN_POSITIONS = rooms
   .filter((r) => r.id < 6)
-  .flatMap((r) => [{ x: r.x + roomConfig.w + 2, y: r.y + 1.3 }]);
+  .flatMap((r) => [{ x: r.x + roomConfig.w + 1.44, y: r.y + 1.3 }]);
 
 export const drawColumns = (columnImg: p5Types.Image, p5: p5Types) => {
   if (!columnImg) return;
   const sc = GlobalConfig.scaler;
-  const colW = 150;
-  const colH = 400;
+  const colW = 190;
+  const colH = colW * 3;
   p5.push();
   p5.imageMode(p5.CENTER);
   for (const { x, y } of COLUMN_POSITIONS) {

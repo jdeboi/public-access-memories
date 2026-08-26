@@ -30,7 +30,7 @@ export default class p5Room {
     GlobalConfig: any,
     artists: IArtist[],
     rooms: IRoom[],
-    roomConfig: any
+    roomConfig: any,
   ) {
     this.p5 = p5;
     this.GlobalConfig = GlobalConfig;
@@ -116,7 +116,7 @@ export default class p5Room {
     p5: p5Types,
     sc: number,
     coords: any,
-    strokeColor: [number, number, number] = [255, 0, 0]
+    strokeColor: [number, number, number] = [255, 0, 0],
   ) {
     p5.stroke(...strokeColor);
     p5.strokeWeight(10);
@@ -176,7 +176,7 @@ export default class p5Room {
       p5,
       this.GlobalConfig.scaler,
       this.computeLineCoords("doorCrossing"),
-      [255, 0, 0]
+      [255, 0, 0],
     );
   }
 
@@ -185,7 +185,7 @@ export default class p5Room {
       p5,
       this.GlobalConfig.scaler,
       this.computeLineCoords("doorBoundary"),
-      [255, 0, 255]
+      [255, 0, 255],
     );
   }
 
@@ -194,7 +194,7 @@ export default class p5Room {
       p5,
       this.GlobalConfig.scaler,
       this.computeLineCoords("doorEntry"),
-      [0, 255, 0]
+      [0, 255, 0],
     );
   }
 
@@ -206,7 +206,7 @@ export default class p5Room {
         ...this.computeLineCoords("doorCrossing"),
         to: this.link,
       },
-      this.GlobalConfig
+      this.GlobalConfig,
     );
   }
 
@@ -218,7 +218,7 @@ export default class p5Room {
         ...this.computeLineCoords("doorBoundary"),
         to: this.artist,
       },
-      this.GlobalConfig
+      this.GlobalConfig,
     );
   }
 
@@ -230,7 +230,7 @@ export default class p5Room {
         ...this.computeLineCoords("doorEntry"),
         to: this.artist,
       },
-      this.GlobalConfig
+      this.GlobalConfig,
     );
   }
 
@@ -246,7 +246,7 @@ export default class p5Room {
       prevStep,
       userStep,
       roomWalls,
-      this.GlobalConfig
+      this.GlobalConfig,
     );
   }
 
@@ -261,7 +261,7 @@ export default class p5Room {
     const pt = p5ToUserCoords(
       this.x + this.w / 2,
       this.y + this.h,
-      this.GlobalConfig
+      this.GlobalConfig,
     );
     return (
       user.x >= pt.x - doorW / 2 &&

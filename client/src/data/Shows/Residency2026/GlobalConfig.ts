@@ -2,7 +2,7 @@ import { getLimits } from "../../../helpers/helpers";
 import { IGlobalConfig } from "../../../interfaces";
 
 let xMin = -5;
-let xMax = 27;
+let xMax = 29;
 let yMin = -3;
 let yMax = 22;
 
@@ -20,9 +20,4 @@ export const GlobalConfig: IGlobalConfig = {
 
 export const limits = getLimits(xMin, xMax, yMin, yMax);
 
-export const outsideDoors = [
-  { x0: 22.5, y0: 5.2, x1: 24, y1: 5.2, to: "outside" }, // top
-  { x0: 0, y0: 8.5, x1: 0, y1: 10, to: "outside" }, // left
-  { x0: 14, y0: 27.2, x1: 16, y1: 27.2, to: "outside" }, // bottom
-  { x0: 22.5, y0: 15.2, x1: 24, y1: 15.2, to: "outside" }, // right
-];
+export const outsideDoors = [];
