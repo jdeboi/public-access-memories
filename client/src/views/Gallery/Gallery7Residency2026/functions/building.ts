@@ -18,7 +18,7 @@ export const initOuterWalls = (p5: p5Types, walls: Wall[]) => {
 // World-unit positions for structural columns — derived from room right edges
 const COLUMN_POSITIONS = rooms
   .filter((r) => r.id < 6)
-  .flatMap((r) => [{ x: r.x + roomConfig.w + 1.5, y: r.y + 1.3 }]);
+  .flatMap((r) => [{ x: r.x + roomConfig.w + 2, y: r.y + 1.3 }]);
 
 export const drawColumns = (columnImg: p5Types.Image, p5: p5Types) => {
   if (!columnImg) return;
@@ -67,11 +67,49 @@ export const drawGalleryGround = (
   ctx.restore();
 };
 
+// Concrete tile square centered behind each of the 6 artist rooms
+export const drawRoomBackgrounds = (tileTex: p5Types.Image, p5: p5Types) => {
+  if (!tileTex) return;
+  const sc = GlobalConfig.scaler;
+  const pad = 1; // world-unit border around each room
+  const bgW = (roomConfig.w + pad * 2) * sc;
+  const bgH = (roomConfig.h + pad * 2) * sc;
+  for (const room of rooms.filter((r) => r.id < 7)) {
+    const cx = (room.x + roomConfig.w / 2) * sc;
+    const cy = (room.y + roomConfig.h / 2) * sc;
+    p5.image(tileTex, cx - bgW / 2, cy - bgH / 2, bgW, bgH);
+  }
+};
+
+// Mini-tile walkway running horizontally under each room row
+export const drawRoomWalkways = (tileTex: p5Types.Image, p5: p5Types) => {
+  if (!tileTex) return;
+  const sc = GlobalConfig.scaler;
+  const pad = 2; // must match drawRoomBackgrounds pad
+  const tileSize = 2; // world units — "mini" tile
+  const tilePx = tileSize * sc;
+
+  const xStart = (-3 - pad) * sc; // left edge of room 0 background
+  const xEnd = (19 + roomConfig.w + pad) * sc; // right edge of room 2 background
+
+  for (const rowY of [-2, 12]) {
+    const y = (rowY + roomConfig.h + pad) * sc; // bottom of room background row
+    for (let x = xStart; x < xEnd; x += tilePx) {
+      p5.image(tileTex, x, y, tilePx * 2 + 1, tilePx + 1);
+    }
+  }
+  // vertical
+  const yStart = (-1 + roomConfig.h + pad) * sc;
+  const yEnd = (13 + roomConfig.h + pad) * sc;
+  const xStart2 = (14 + roomConfig.w + pad) * sc; // right edge of room 2 background
+
+  for (let y = yStart; y < yEnd; y += tilePx) {
+    p5.image(tileTex, xStart2, y, tilePx * 2 + 1, tilePx + 1);
+  }
+};
+
 // Vertical strip of concrete_tiles1 at the horizontal midpoint (x = 11)
-export const drawConcreteTileLine = (
-  tileTex: p5Types.Image,
-  p5: p5Types,
-) => {
+export const drawConcreteTileLine = (tileTex: p5Types.Image, p5: p5Types) => {
   if (!tileTex) return;
   const sc = GlobalConfig.scaler;
   const tileSize = 5;

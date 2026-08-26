@@ -3,6 +3,7 @@ import Door from "../../components/p5/Door";
 import CoffeeBar from "../../components/p5/Bars/CoffeeBar";
 import Table2026 from "../components/Table2026";
 import Easel2026 from "../components/Easel2026";
+import FlatFile2026 from "../components/FlatFile2026";
 import p5Types from "p5";
 
 import {
@@ -63,7 +64,7 @@ export const addTableDiv = (
   p5: p5Types,
 ) => {
   divs.table2026 = [
-    new Table2026(5, 6.5, tableImg, stoolImg, p5, GlobalConfig, 6),
+    new Table2026(4, 7.5, tableImg, stoolImg, p5, GlobalConfig, 6),
   ];
 };
 
@@ -72,7 +73,18 @@ export const addEaselDiv = (
   easelImg: p5Types.Image,
   p5: p5Types,
 ) => {
-  divs.easel2026 = [new Easel2026(16, 6, easelImg, p5, GlobalConfig)];
+  divs.easel2026 = [new Easel2026(15, 7, easelImg, p5, GlobalConfig)];
+};
+
+export const addFlatFileDiv = (
+  divs: any,
+  closedImg: p5Types.Image,
+  openImg: p5Types.Image,
+  p5: p5Types,
+) => {
+  divs.flatFiles = [
+    new FlatFile2026(21.5, 0, closedImg, openImg, p5, GlobalConfig),
+  ];
 };
 
 export const addBarDivs = (divs: any, lightImg: p5Types.Image, p5: p5Types) => {

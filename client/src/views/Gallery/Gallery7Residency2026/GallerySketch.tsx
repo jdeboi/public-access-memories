@@ -18,6 +18,8 @@ import {
 import {
   drawGalleryGround,
   drawConcreteTileLine,
+  drawRoomBackgrounds,
+  drawRoomWalkways,
   drawColumns,
   drawRooms,
   drawWalls,
@@ -29,6 +31,7 @@ import {
   addBarDivs,
   addTableDiv,
   addEaselDiv,
+  addFlatFileDiv,
   displayAllDivs,
 } from "./functions/divs";
 
@@ -67,6 +70,9 @@ export default class GallerySketch extends GallerySketchTemplate1 {
   easelImg: p5Types.Image | null = null;
   pipesImg: p5Types.Image | null = null;
   concreteTiles1Img: p5Types.Image | null = null;
+  concreteTiles2Img: p5Types.Image | null = null;
+  flatFileClosedImg: p5Types.Image | null = null;
+  flatFileOpenImg: p5Types.Image | null = null;
   pipes2026: Pipes2026 | null = null;
 
   constructor(props: GallerySketch1Props) {
@@ -82,10 +88,10 @@ export default class GallerySketch extends GallerySketchTemplate1 {
     this.doorImgs[0] = p5.loadImage(LMD_URL + "door/frame2.png");
     this.doorImgs[1] = p5.loadImage(LMD_URL + "door/leftdoor2.png");
     this.roomTextures[0] = p5.loadImage(
-      PAM_URL + "residency/assets/openLightStudioDoor.jpg",
+      PAM_URL + "residency/assets/lightsOnDoorOpen.jpg",
     );
     this.roomTextures[1] = p5.loadImage(
-      PAM_URL + "residency/assets/closedLightStudioDoor.jpg",
+      PAM_URL + "residency/assets/lightsOnDoorClosed.jpg",
     );
     this.roomTextures[2] = p5.loadImage(
       PAM_URL + "residency/assets/lightsOffDoorOpen.jpg",
@@ -94,7 +100,7 @@ export default class GallerySketch extends GallerySketchTemplate1 {
       PAM_URL + "residency/assets/lightsOffDoorClosed.jpg",
     );
     this.roomTextures[4] = p5.loadImage(
-      PAM_URL + "residency/assets/lounge.jpg",
+      PAM_URL + "residency/assets/lightsOnDoorOpen.jpg",
     );
     this.eyeIcon = p5.loadImage(LMD_URL + "eye.png");
     // two concrete textures — randomly mixed per tile
@@ -125,6 +131,15 @@ export default class GallerySketch extends GallerySketchTemplate1 {
     this.pipesImg = p5.loadImage("/online_assets/residency2026/pipes.png");
     this.concreteTiles1Img = p5.loadImage(
       "/online_assets/residency2026/concrete_tiles1.jpg",
+    );
+    this.concreteTiles2Img = p5.loadImage(
+      "/online_assets/residency2026/concrete_tiles2.jpg",
+    );
+    this.flatFileClosedImg = p5.loadImage(
+      "/online_assets/residency2026/flat_file_closed.png",
+    );
+    this.flatFileOpenImg = p5.loadImage(
+      "/online_assets/residency2026/flat_file_open.png",
     );
   };
 
@@ -162,6 +177,14 @@ export default class GallerySketch extends GallerySketchTemplate1 {
     if (this.easelImg) {
       addEaselDiv(this.divs, this.easelImg, p5);
     }
+    if (this.flatFileClosedImg && this.flatFileOpenImg) {
+      addFlatFileDiv(
+        this.divs,
+        this.flatFileClosedImg,
+        this.flatFileOpenImg,
+        p5,
+      );
+    }
   };
 
   displayBackground = (p5: p5Types) => {
@@ -197,7 +220,10 @@ export default class GallerySketch extends GallerySketchTemplate1 {
     }
 
     if (this.concreteTiles1Img) {
-      drawConcreteTileLine(this.concreteTiles1Img, p5);
+      drawRoomWalkways(this.concreteTiles1Img, p5);
+    }
+    if (this.concreteTiles1Img) {
+      drawRoomBackgrounds(this.concreteTiles1Img, p5);
     }
 
     if (this.font) p5.textFont(this.font, 12);
@@ -236,8 +262,13 @@ export default class GallerySketch extends GallerySketchTemplate1 {
     drawWalls(this.walls, p5);
   };
 
-  // Called before drawUser — table+stools and easel render under the emoji
+  // Called before drawUser — table+stools, easel, and flat file render under the emoji
   displayScene = (_p5: p5Types) => {
+    if (this.divs.flatFiles) {
+      for (const ff of this.divs.flatFiles) {
+        ff.display(this.userEase.x, this.userEase.y);
+      }
+    }
     if (this.divs.table2026) {
       for (const table of this.divs.table2026) {
         table.display(this.userEase.x, this.userEase.y);
@@ -246,6 +277,11 @@ export default class GallerySketch extends GallerySketchTemplate1 {
     if (this.divs.easel2026) {
       for (const easel of this.divs.easel2026) {
         easel.display(this.userEase.x, this.userEase.y);
+        // Transfer any saved drawing into the flat file
+        const saved = easel.consumeSave();
+        if (saved && this.divs.flatFiles) {
+          for (const ff of this.divs.flatFiles) ff.addDrawing(saved);
+        }
       }
     }
   };

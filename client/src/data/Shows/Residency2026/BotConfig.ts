@@ -18,8 +18,8 @@ export const danceFloor = {
 };
 
 const coffeeBotCoords = {
-  x: 23,
-  y: 0.5,
+  x: 23.5,
+  y: 16,
 };
 
 const hostBotCoords = {
@@ -46,7 +46,7 @@ const barUsers: IUser[] = [
     "/",
     "1",
     coffeeBotCoords.x + botDX,
-    coffeeBotCoords.y + botDY
+    coffeeBotCoords.y + botDY,
   ),
   getNewUser(
     "beerBot",
@@ -54,7 +54,7 @@ const barUsers: IUser[] = [
     "/hidden",
     "2",
     hiddenBarCoords.x + botDX,
-    hiddenBarCoords.y + botDY
+    hiddenBarCoords.y + botDY,
   ),
   getNewUser(
     "snackBot",
@@ -62,7 +62,7 @@ const barUsers: IUser[] = [
     "/hidden",
     "3",
     hiddenBarCoords.x - 1,
-    hiddenBarCoords.y + botDY
+    hiddenBarCoords.y + botDY,
   ),
   getNewUser(
     "DJBot",
@@ -70,7 +70,7 @@ const barUsers: IUser[] = [
     "/hidden",
     "4",
     hiddenBarCoords.x + botDX,
-    hiddenBarCoords.y - 0.1
+    hiddenBarCoords.y - 0.1,
   ),
   getNewUser("hostBot", "🤖", "/lounge", "5", hostBotCoords.x, hostBotCoords.y),
 ];

@@ -30,7 +30,7 @@ export default class Light extends Draggable {
     this.isHorizontal = isHorizontal;
     if (this.isHorizontal) {
       this.w = 300;
-      this.h = 80;
+      this.h = 65;
     }
 
     if (this.scaler < 0.84) this.scaler = 0.84;
@@ -182,8 +182,9 @@ export default class Light extends Draggable {
       this.p5.scale(-1, 1);
       // For horizontal mode: -backW+20 floats the glow ~47px above the panel.
       // Center it on the panel top edge instead so the bleed is contiguous.
-      const shadowX = this.isHorizontal ? (-this.h - backW / 2) : (-backW + 20);
-      this.p5.image(imgBack, shadowX, backY, backW, backH);
+      const shadowX = this.isHorizontal ? -backW / 2 : -backW + 20;
+      const shadowY = this.isHorizontal ? backY - 5 : backY;
+      this.p5.image(imgBack, shadowX, shadowY, backW, backH);
       this.p5.pop();
 
       this.displaySolidBack(this.p5.color(255));
