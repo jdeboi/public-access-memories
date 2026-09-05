@@ -18,8 +18,8 @@ export const danceFloor = {
 };
 
 const coffeeBotCoords = {
-  x: 23.5,
-  y: 16,
+  x: 24.5,
+  y: 13,
 };
 
 const hostBotCoords = {

@@ -34,6 +34,7 @@ export default class Table2026 {
   stools: Stool2026[];
   minusBtn: ButtonRect;
   plusBtn: ButtonRect;
+  font: p5Types.Font | null = null;
 
   constructor(
     xWorld: number,
@@ -43,6 +44,7 @@ export default class Table2026 {
     p5: p5Types,
     GlobalConfig: IGlobalConfig,
     defaultStoolCount: number = 6,
+    font: p5Types.Font | null = null,
   ) {
     this.p5 = p5;
     this.GlobalConfig = GlobalConfig;
@@ -54,6 +56,7 @@ export default class Table2026 {
     this.tableImg = tableImg;
     this.stoolImg = stoolImg;
     this.stoolCount = defaultStoolCount;
+    this.font = font;
     this.stools = [];
 
     const midX = this.w / 2;
@@ -135,24 +138,22 @@ export default class Table2026 {
     const midX = this.w / 2;
 
     p5.push();
-    p5.noStroke();
-    p5.fill(20, 20, 20, 210);
+    p5.fill(240, 238, 234);
+    p5.translate(0, -10);
+    p5.stroke(0);
+    p5.strokeWeight(1);
     p5.rect(midX - BAR_W / 2, BAR_Y, BAR_W, BAR_H, 6);
-    p5.textFont("Arial");
 
     this.minusBtn.display(mx, my);
     this.plusBtn.display(mx, my);
 
-    p5.fill(255);
+    p5.fill(0);
     p5.noStroke();
     p5.textAlign(p5.CENTER, p5.CENTER);
-    p5.textSize(15);
+    if (this.font) p5.textFont(this.font); else p5.textFont("Arial");
+    p5.textSize(12);
 
-    p5.text(this.stoolCount, midX, BAR_Y + BAR_H / 2 - 1);
-
-    p5.fill(160);
-    p5.textSize(10);
-    p5.text("stools (0–8)", midX, BAR_Y + BAR_H + 11);
+    p5.text(this.stoolCount, midX, BAR_Y + BAR_H / 2 + 1);
 
     p5.pop();
   }

@@ -8,8 +8,8 @@ export const reservedArtists = {
 };
 
 export const roomConfig = {
-  w: 5,
-  h: 5,
+  w: 4,
+  h: 4,
   start: 0,
   end: 1,
 };
@@ -59,7 +59,7 @@ function getRoomPosition(index: number): { x: number; y: number } {
     return { x: (index % 3) * 8 - 4, y: Math.floor(index / 3) * 14 };
   }
   // lounge: centered below at y=16
-  return { x: 23, y: 6 };
+  return { x: 22, y: 6 };
 }
 
 const roomDetails = artists.map((artist, index) => ({

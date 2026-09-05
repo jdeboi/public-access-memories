@@ -2,8 +2,6 @@ import p5Types from "p5";
 import { IGlobalConfig } from "../../../../interfaces";
 import { mouseToWorld } from "../../../../helpers/coordinates";
 import ButtonRect from "../../components/p5/Draggable/ButtonRect";
-// @ts-ignore
-import ButtonTog from "../../components/p5/Draggable/ButtonTog";
 
 const IMG_W = 300;
 const IMG_H = Math.round((130 / 200) * IMG_W); // preserve original image aspect ratio
@@ -57,9 +55,10 @@ export default class FlatFile2026 {
   startDrag: { x: number; y: number };
   startDragCoords: { x: number; y: number };
 
-  toggle: any;
+  openCloseBtn: ButtonRect;
   prevBtn: ButtonRect;
   nextBtn: ButtonRect;
+  font: p5Types.Font | null;
 
   constructor(
     xWorld: number,
@@ -68,6 +67,7 @@ export default class FlatFile2026 {
     openImg: p5Types.Image,
     p5: p5Types,
     GlobalConfig: IGlobalConfig,
+    font: p5Types.Font | null = null,
   ) {
     this.p5 = p5;
     this.GlobalConfig = GlobalConfig;
@@ -83,7 +83,8 @@ export default class FlatFile2026 {
     this.startDrag = { x: 0, y: 0 };
     this.startDragCoords = { x: 0, y: 0 };
 
-    this.toggle = new ButtonTog(TOG_X, TOG_Y, TOG_W, TOG_H, p5);
+    this.font = font;
+    this.openCloseBtn = new ButtonRect("open", TOG_X, TOG_Y, TOG_W, TOG_H, p5, font);
     this.prevBtn = new ButtonRect("◄", PREV_X, BTN_Y, BTN_W, BTN_H, p5);
     this.nextBtn = new ButtonRect("►", NEXT_X, BTN_Y, BTN_W, BTN_H, p5);
   }
@@ -108,9 +109,8 @@ export default class FlatFile2026 {
   checkButtons(userX: number, userY: number): boolean {
     const { x: lx, y: ly } = this.localMouse(userX, userY);
 
-    if (this.toggle.mouseOver(lx, ly)) {
-      this.toggle.toggle();
-      this.isOpen = this.toggle.isOn;
+    if (this.openCloseBtn.mouseOver(lx, ly)) {
+      this.isOpen = !this.isOpen;
       return true;
     }
     if (this.isOpen && this.drawings.length > 1) {
@@ -162,6 +162,8 @@ export default class FlatFile2026 {
 
     // Drawing viewer (open state)
     if (this.isOpen) {
+      p5.push();
+      p5.translate(0, -VIEW_H - 18);
       if (n > 0) {
         p5.noStroke();
         p5.fill(248);
@@ -175,27 +177,24 @@ export default class FlatFile2026 {
         p5.textAlign(p5.CENTER, p5.CENTER);
         p5.textFont("Arial");
         p5.textSize(11);
-        p5.text("no drawings filed yet", VIEW_X + VIEW_W / 2, VIEW_Y + VIEW_H / 2);
+        p5.text(
+          "no drawings filed yet",
+          VIEW_X + VIEW_W / 2,
+          VIEW_Y + VIEW_H / 2,
+        );
       }
+      p5.pop();
     }
 
     // Panel background
-    p5.noStroke();
-    p5.fill(18, 18, 18, 225);
+    p5.fill(240, 238, 234);
+    p5.stroke(0);
+    p5.strokeWeight(1);
     p5.rect(0, IMG_H, IMG_W, PANEL_H, 0, 0, 6, 6);
 
-    // Toggle + label
-    this.toggle.display(lx, ly);
-    p5.noStroke();
-    p5.fill(180);
-    p5.textAlign(p5.LEFT, p5.CENTER);
-    p5.textFont("Arial");
-    p5.textSize(11);
-    p5.text(
-      this.isOpen ? "open" : "closed",
-      TOG_X + TOG_W + 6,
-      IMG_H + PANEL_H / 2,
-    );
+    // Open/close button
+    this.openCloseBtn.label = this.isOpen ? "close" : "open";
+    this.openCloseBtn.display(lx, ly);
 
     if (this.isOpen) {
       // Nav arrows + "X / N" counter
@@ -203,10 +202,11 @@ export default class FlatFile2026 {
         this.prevBtn.display(lx, ly);
         this.nextBtn.display(lx, ly);
       }
-      p5.fill(n === 0 ? 100 : 180);
+      p5.fill(n === 0 ? 120 : 60);
       p5.noStroke();
       p5.textAlign(p5.CENTER, p5.CENTER);
-      p5.textSize(10);
+      if (this.font) p5.textFont(this.font); else p5.textFont("Arial");
+      p5.textSize(8);
       p5.text(
         n === 0 ? "empty" : `${this.viewIdx + 1} / ${n}`,
         NAV_CENTER_X,
@@ -214,18 +214,21 @@ export default class FlatFile2026 {
       );
     } else {
       // Fill bar showing how many drawings are stored
-      p5.noStroke();
-      p5.fill(55, 55, 55);
+      p5.stroke(0);
+      p5.strokeWeight(1);
+      p5.fill(210, 208, 204);
       p5.rect(FILL_X, FILL_Y, FILL_W, FILL_H, 3);
       if (n > 0) {
         const pct = n / MAX_SLOTS;
-        p5.fill(pct > 0.8 ? p5.color(200, 50, 50) : p5.color(30, 100, 200));
+        p5.noStroke();
+        p5.fill(pct > 0.8 ? p5.color(180, 40, 40) : p5.color(20, 80, 180));
         p5.rect(FILL_X, FILL_Y, Math.max(4, FILL_W * pct), FILL_H, 3);
       }
-      p5.fill(220);
+      p5.fill(40);
       p5.noStroke();
       p5.textAlign(p5.CENTER, p5.CENTER);
-      p5.textSize(10);
+      if (this.font) p5.textFont(this.font); else p5.textFont("Arial");
+      p5.textSize(8);
       p5.text(
         `${n} / ${MAX_SLOTS} drawings`,
         FILL_X + FILL_W / 2,

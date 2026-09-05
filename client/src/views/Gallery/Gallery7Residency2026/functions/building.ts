@@ -9,21 +9,21 @@ import {
 import Wall from "../../components/p5/Wall";
 import p5Types from "p5";
 import { IUser } from "../../../../interfaces";
-import ResidencyRoom from "../../Gallery0Residency/components/ResidencyRoom";
+import ResidencyRoom2026 from "../components/ResidencyRoom2026";
 
 export const initOuterWalls = (p5: p5Types, walls: Wall[]) => {
   walls.push(new Wall(p5, limits, GlobalConfig));
 };
 
 // World-unit positions for structural columns — derived from room right edges
-const COLUMN_POSITIONS = rooms
+export const COLUMN_POSITIONS = rooms
   .filter((r) => r.id < 6)
-  .flatMap((r) => [{ x: r.x + roomConfig.w + 1.44, y: r.y + 1.3 }]);
+  .flatMap((r) => [{ x: r.x + roomConfig.w + 2, y: r.y + 1.3 }]);
 
 export const drawColumns = (columnImg: p5Types.Image, p5: p5Types) => {
   if (!columnImg) return;
   const sc = GlobalConfig.scaler;
-  const colW = 190;
+  const colW = 150;
   const colH = colW * 3;
   p5.push();
   p5.imageMode(p5.CENTER);
@@ -125,7 +125,7 @@ export const drawWalls = (walls: Wall[], p5: p5Types) => {
 };
 
 export const drawRooms = (
-  rooms: ResidencyRoom[],
+  rooms: ResidencyRoom2026[],
   roomTextures: p5Types.Image[],
   otherImgs: p5Types.Image[],
   users: IUser[],
@@ -135,7 +135,7 @@ export const drawRooms = (
   if (!rooms) return;
   for (const room of rooms) {
     if (room.userName === "hostBot") {
-      room.displayHostBotRoom(roomTextures, otherImgs[1]);
+      room.displayHostBotRoom(roomTextures, otherImgs[1], user);
       continue;
     }
     const artist = users.find((u) => u.userName === room.userName);

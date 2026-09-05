@@ -4,6 +4,8 @@ import CoffeeBar from "../../components/p5/Bars/CoffeeBar";
 import Table2026 from "../components/Table2026";
 import Easel2026 from "../components/Easel2026";
 import FlatFile2026 from "../components/FlatFile2026";
+import Plant2026 from "../components/Plant2026";
+import { COLUMN_POSITIONS } from "./building";
 import p5Types from "p5";
 
 import {
@@ -62,9 +64,10 @@ export const addTableDiv = (
   tableImg: p5Types.Image,
   stoolImg: p5Types.Image,
   p5: p5Types,
+  font: p5Types.Font | null = null,
 ) => {
   divs.table2026 = [
-    new Table2026(4, 7.5, tableImg, stoolImg, p5, GlobalConfig, 6),
+    new Table2026(4, 7.5, tableImg, stoolImg, p5, GlobalConfig, 6, font),
   ];
 };
 
@@ -72,8 +75,9 @@ export const addEaselDiv = (
   divs: any,
   easelImg: p5Types.Image,
   p5: p5Types,
+  font: p5Types.Font | null = null,
 ) => {
-  divs.easel2026 = [new Easel2026(15, 7, easelImg, p5, GlobalConfig)];
+  divs.easel2026 = [new Easel2026(15, 7, easelImg, p5, GlobalConfig, font)];
 };
 
 export const addFlatFileDiv = (
@@ -81,10 +85,36 @@ export const addFlatFileDiv = (
   closedImg: p5Types.Image,
   openImg: p5Types.Image,
   p5: p5Types,
+  font: p5Types.Font | null = null,
 ) => {
   divs.flatFiles = [
-    new FlatFile2026(21.5, 0, closedImg, openImg, p5, GlobalConfig),
+    new FlatFile2026(21.5, 0, closedImg, openImg, p5, GlobalConfig, font),
   ];
+};
+
+const COL_W = 190;
+const COL_H = COL_W * 3;
+const PLANT_W = 160;
+const PLANT_H = PLANT_W * 1.25;
+
+export const addPlantDivs = (
+  divs: any,
+  plantImg: p5Types.Image,
+  p5: p5Types,
+) => {
+  divs.plants2026 = COLUMN_POSITIONS.map(
+    ({ x, y }, i) =>
+      new Plant2026(
+        i,
+        x * sc - PLANT_W,
+        y * sc + COL_H / 2 - PLANT_H,
+        PLANT_W,
+        PLANT_H,
+        plantImg,
+        p5,
+        GlobalConfig,
+      ),
+  );
 };
 
 export const addBarDivs = (divs: any, lightImg: p5Types.Image, p5: p5Types) => {

@@ -46,6 +46,7 @@ export default class Easel2026 {
     easelImg: p5Types.Image,
     p5: p5Types,
     GlobalConfig: IGlobalConfig,
+    font: p5Types.Font | null = null,
   ) {
     this.p5 = p5;
     this.GlobalConfig = GlobalConfig;
@@ -59,8 +60,8 @@ export default class Easel2026 {
     this.graphics = p5.createGraphics(CANVAS_W, CANVAS_H);
     this.graphics.background(255);
 
-    this.clearBtn = new ButtonRect("clear", CLEAR_BTN_X, CLEAR_BTN_Y, BTN_W, BTN_H, p5);
-    this.saveBtn = new ButtonRect("save", SAVE_BTN_X, SAVE_BTN_Y, BTN_W, BTN_H, p5);
+    this.clearBtn = new ButtonRect("clear", CLEAR_BTN_X, CLEAR_BTN_Y, BTN_W, BTN_H, p5, font);
+    this.saveBtn = new ButtonRect("save", SAVE_BTN_X, SAVE_BTN_Y, BTN_W, BTN_H, p5, font);
     this.pendingSave = null;
 
     this.isDrawing = false;

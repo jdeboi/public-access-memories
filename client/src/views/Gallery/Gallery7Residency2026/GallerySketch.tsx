@@ -32,6 +32,7 @@ import {
   addTableDiv,
   addEaselDiv,
   addFlatFileDiv,
+  addPlantDivs,
   displayAllDivs,
 } from "./functions/divs";
 
@@ -73,6 +74,8 @@ export default class GallerySketch extends GallerySketchTemplate1 {
   concreteTiles2Img: p5Types.Image | null = null;
   flatFileClosedImg: p5Types.Image | null = null;
   flatFileOpenImg: p5Types.Image | null = null;
+  plantImg: p5Types.Image | null = null;
+  fontDogica: p5Types.Font | null = null;
   pipes2026: Pipes2026 | null = null;
 
   constructor(props: GallerySketch1Props) {
@@ -93,6 +96,9 @@ export default class GallerySketch extends GallerySketchTemplate1 {
         PAM_URL + `residency/assets/2026_studios/${(i % 6) + 1}.jpeg`,
       );
     }
+    this.roomTextures[6] = p5.loadImage(
+      PAM_URL + `residency/assets/2026_studios/lounge.jpg`,
+    );
     this.eyeIcon = p5.loadImage(LMD_URL + "eye.png");
     // two concrete textures — randomly mixed per tile
     this.floorTex = p5.loadImage("/online_assets/residency2026/concrete_0.png");
@@ -132,6 +138,8 @@ export default class GallerySketch extends GallerySketchTemplate1 {
     this.flatFileOpenImg = p5.loadImage(
       "/online_assets/residency2026/flat_file_open.png",
     );
+    this.plantImg = p5.loadImage(PAM_URL + "residency/assets/plant.webp");
+    this.fontDogica = p5.loadFont("/fonts/dogica.ttf");
   };
 
   setupContent = (p5: p5Types) => {
@@ -170,10 +178,10 @@ export default class GallerySketch extends GallerySketchTemplate1 {
     addLightDivs(this.divs, this.lightImgs, p5);
     addBarDivs(this.divs, this.lightImgs[3], p5);
     if (this.tableImg && this.stoolImg) {
-      addTableDiv(this.divs, this.tableImg, this.stoolImg, p5);
+      addTableDiv(this.divs, this.tableImg, this.stoolImg, p5, this.fontDogica);
     }
     if (this.easelImg) {
-      addEaselDiv(this.divs, this.easelImg, p5);
+      addEaselDiv(this.divs, this.easelImg, p5, this.fontDogica);
     }
     if (this.flatFileClosedImg && this.flatFileOpenImg) {
       addFlatFileDiv(
@@ -181,7 +189,11 @@ export default class GallerySketch extends GallerySketchTemplate1 {
         this.flatFileClosedImg,
         this.flatFileOpenImg,
         p5,
+        this.fontDogica,
       );
+    }
+    if (this.plantImg) {
+      addPlantDivs(this.divs, this.plantImg, p5);
     }
   };
 
@@ -255,6 +267,11 @@ export default class GallerySketch extends GallerySketchTemplate1 {
     this.worldTranslate(p5);
 
     if (this.columnGif) drawColumns(this.columnGif, p5);
+    if (this.divs.plants2026) {
+      for (const plant of this.divs.plants2026) {
+        if (plant.content) p5.image(plant.content, plant.x, plant.y, plant.w, plant.h);
+      }
+    }
     this.displayDivs(p5);
     p5.pop();
   };
