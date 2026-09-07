@@ -47,10 +47,10 @@ export const ShowConfig = {
 
   show: {
     type: SHOW_TYPE,
-    title: "Show TBA",
+    title: "PAM Residency",
     description: "Upcoming show details TBA",
-    slug: "debox", // drives URL routing: /<slug>/rooms/:id
-    awsSlug: "debox", // drives asset paths (may differ from slug)
+    slug: "residency2026", // drives URL routing: /<slug>/rooms/:id
+    awsSlug: "residency2026", // drives asset paths (may differ from slug)
   },
 
   dates: {

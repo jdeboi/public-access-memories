@@ -8,6 +8,7 @@ export default class Folder extends Draggable {
   img: p5Types.Image | null;
   tw: number;
   callback: (() => void) | undefined;
+  font: p5Types.Font | null;
 
   constructor(
     p5: p5Types,
@@ -20,7 +21,8 @@ export default class Folder extends Draggable {
     link: string,
     img: p5Types.Image | null,
     GlobalConfig: any,
-    callback?: () => void
+    callback?: () => void,
+    font?: p5Types.Font | null,
   ) {
     super(id, x, y, w, h, p5, img, GlobalConfig);
     // TODO - my coordinate system needs formalization
@@ -32,6 +34,7 @@ export default class Folder extends Draggable {
     this.img = img;
     this.tw = 40;
     this.callback = callback;
+    this.font = font ?? null;
   }
 
   displayInRoom(room: number = -1) {
@@ -62,7 +65,8 @@ export default class Folder extends Draggable {
     if (!this.label || this.label === "") {
       return;
     }
-    this.p5.textSize(16);
+    if (this.font) this.p5.textFont(this.font);
+    this.p5.textSize(this.font ? 10 : 16);
     this.p5.push();
 
     this.tw = this.p5.textWidth(this.label);

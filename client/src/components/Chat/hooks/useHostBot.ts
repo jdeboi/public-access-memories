@@ -105,7 +105,7 @@ export const useHostBot = () => {
           sendMessage("Click / tap on the floppies to see artists' work!");
         else
           sendMessage(
-            "There's an FAQ button on the top menu. Look for the question mark."
+            "There's an FAQ button on the top menu. Look for the question mark.",
           );
         setHostBotJustAsked(2);
       } else {
@@ -115,14 +115,14 @@ export const useHostBot = () => {
     } else if (hostBotJustAsked === 2) {
       if (ShowConfig.show.slug == "homebody")
         sendMessage(
-          "See artwork in rooms by walking in the doorway and down the stairs."
+          "See artwork in rooms by walking in the doorway and down the stairs.",
         );
       else if (ShowConfig.show.slug == "as-i-recall")
         sendMessage("Try dragging the floppies!");
       setHostBotJustAsked(3);
     } else if (hostBotJustAsked === 3) {
       sendMessage(
-        "You can also click the menu in the title bar to get additional information about artists. Enjoy the show!"
+        "You can also click the menu in the title bar to get additional information about artists. Enjoy the show!",
       );
       setHostBotJustAsked(4);
     } else if (hostBotJustAsked === 4) {
@@ -134,7 +134,7 @@ export const useHostBot = () => {
         "Artsy says Post-Internet refers to a current trend in art and criticism concerned with the impact of the Internet on art and culture.",
         "10000110100101111101",
         "Public Access Memories was created in 2021",
-        "I hope you enjoy the show!",
+        "I hope you enjoy the work!",
       ];
       let r = Math.floor(Math.random() * phrases.length);
       sendMessage(phrases[r]);
@@ -151,7 +151,7 @@ export const useHostBot = () => {
         time: JSON.stringify(new Date()),
         roomUrl: user.roomUrl,
         avatar: userActive.active.avatar,
-      })
+      }),
     );
   };
 

@@ -17,9 +17,9 @@ const VIEW_W = IMG_W - VIEW_PAD * 2;
 const VIEW_H = IMG_H - VIEW_PAD * 2;
 
 // Panel layout (y values are absolute from local origin 0)
-const TOG_W = 38;
-const TOG_H = 20;
-const TOG_X = 6;
+const TOG_W = 48;
+const TOG_H = 24;
+const TOG_X = 10;
 const TOG_Y = IMG_H + Math.round((PANEL_H - TOG_H) / 2);
 
 const BTN_W = 22;
@@ -84,9 +84,36 @@ export default class FlatFile2026 {
     this.startDragCoords = { x: 0, y: 0 };
 
     this.font = font;
-    this.openCloseBtn = new ButtonRect("open", TOG_X, TOG_Y, TOG_W, TOG_H, p5, font);
-    this.prevBtn = new ButtonRect("◄", PREV_X, BTN_Y, BTN_W, BTN_H, p5);
-    this.nextBtn = new ButtonRect("►", NEXT_X, BTN_Y, BTN_W, BTN_H, p5);
+    this.openCloseBtn = new ButtonRect(
+      "open",
+      TOG_X,
+      TOG_Y,
+      TOG_W,
+      TOG_H,
+      p5,
+      font,
+      12,
+    );
+    this.prevBtn = new ButtonRect(
+      "◄",
+      PREV_X,
+      BTN_Y,
+      BTN_W,
+      BTN_H,
+      p5,
+      font,
+      12,
+    );
+    this.nextBtn = new ButtonRect(
+      "►",
+      NEXT_X,
+      BTN_Y,
+      BTN_W,
+      BTN_H,
+      p5,
+      font,
+      12,
+    );
   }
 
   isFull(): boolean {
@@ -175,8 +202,9 @@ export default class FlatFile2026 {
         p5.rect(VIEW_X, VIEW_Y, VIEW_W, VIEW_H, 2);
         p5.fill(110);
         p5.textAlign(p5.CENTER, p5.CENTER);
-        p5.textFont("Arial");
-        p5.textSize(11);
+        if (this.font) p5.textFont(this.font);
+        else p5.textFont("Arial");
+        p5.textSize(12);
         p5.text(
           "no drawings filed yet",
           VIEW_X + VIEW_W / 2,
@@ -205,8 +233,9 @@ export default class FlatFile2026 {
       p5.fill(n === 0 ? 120 : 60);
       p5.noStroke();
       p5.textAlign(p5.CENTER, p5.CENTER);
-      if (this.font) p5.textFont(this.font); else p5.textFont("Arial");
-      p5.textSize(8);
+      if (this.font) p5.textFont(this.font);
+      else p5.textFont("Arial");
+      p5.textSize(12);
       p5.text(
         n === 0 ? "empty" : `${this.viewIdx + 1} / ${n}`,
         NAV_CENTER_X,
@@ -227,8 +256,9 @@ export default class FlatFile2026 {
       p5.fill(40);
       p5.noStroke();
       p5.textAlign(p5.CENTER, p5.CENTER);
-      if (this.font) p5.textFont(this.font); else p5.textFont("Arial");
-      p5.textSize(8);
+      if (this.font) p5.textFont(this.font);
+      else p5.textFont("Arial");
+      p5.textSize(12);
       p5.text(
         `${n} / ${MAX_SLOTS} drawings`,
         FILL_X + FILL_W / 2,

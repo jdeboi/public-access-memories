@@ -19,12 +19,12 @@ export const danceFloor = {
 
 const coffeeBotCoords = {
   x: 24.5,
-  y: 13,
+  y: 13.5,
 };
 
 const hostBotCoords = {
-  x: 100,
-  y: 300,
+  x: 1.5,
+  y: 9,
 };
 
 const hiddenBarCoords = {
@@ -72,7 +72,7 @@ const barUsers: IUser[] = [
     hiddenBarCoords.x + botDX,
     hiddenBarCoords.y - 0.1,
   ),
-  getNewUser("hostBot", "🤖", "/lounge", "5", hostBotCoords.x, hostBotCoords.y),
+  getNewUser("hostBot", "🤖", "/", "5", hostBotCoords.x, hostBotCoords.y),
 ];
 
 export const barTenders: IUser[] = barUsers.map((user) => {

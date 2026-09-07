@@ -1,7 +1,7 @@
 import SectionHeader from "../templates/SectionHeader";
 import { OpenCallOpen } from "./OpenCallOpen";
 
-const deadline = new Date("2026-08-23T23:59:59Z");
+const deadline = new Date("2026-10-04T23:59:59Z");
 
 export default function OpenCallResidency() {
   const highlightColor = "text-[cyan]";
@@ -35,8 +35,18 @@ export default function OpenCallResidency() {
 
       <ul className="list-none space-y-1">
         <li>
-          <span className={highlightColor}>Residency dates:</span> 4 weeks,
-          mid-September &ndash; mid-October 2026
+          <span className={highlightColor}>DEADLINE TO APPLY: </span>
+          {deadline.toLocaleString("en-US", {
+            timeZone: "UTC",
+            weekday: "long",
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          })}
+        </li>
+        <li>
+          <span className={highlightColor}>Residency length:</span>{" "}
+          Approximately 4 weeks
         </li>
         <li>
           <span className={highlightColor}>Time commitment:</span> Meetings 1–2
@@ -73,7 +83,13 @@ export default function OpenCallResidency() {
       deadline={deadline}
       bodyText={bodyText}
       applyNowLink="https://forms.gle/WU5zoHBii3jgM6fq9"
-      visuals={<div>test</div>}
+      visuals={
+        <img
+          src="https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/residency/assets/2026/studios_banner.jpg"
+          alt="Residency studios"
+          className="w-full object-cover border"
+        />
+      }
     />
   );
 }

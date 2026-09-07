@@ -17,7 +17,7 @@ const LINE_COL: [number, number, number] = [200, 200, 200];
 const BG: [number, number, number] = [215, 225, 232];
 const INK: [number, number, number] = [70, 80, 88];
 const MUTED: [number, number, number] = [140, 155, 165];
-const GLASS_COL: [number, number, number] = [0, 122, 230];
+const GLASS_COL: [number, number, number] = [70, 150, 255];
 
 type DoorPt = (u: number, v: number) => [number, number];
 
@@ -84,7 +84,7 @@ export default class ResidencyRoom2026 extends ResidencyRoom {
     const w = hw * 2;
     const h = hh * 2;
 
-    this.drawFrontWall(p5, x, y, w, h, isDoorOpen);
+    this.drawFrontWall(p5, x, y, w, h, isDoorOpen, roomTextures);
     p5.pop();
   }
 
@@ -95,8 +95,9 @@ export default class ResidencyRoom2026 extends ResidencyRoom {
     w: number,
     h: number,
     isDoorOpen: boolean,
+    roomTextures: p5Types.Image[],
   ) {
-    this.drawWallPanels(p5, x, y, w, h);
+    this.drawWallPanels(p5, x, y, w, h, roomTextures);
     this.drawDoor(p5, x, y, w, h, isDoorOpen);
   }
 
@@ -106,24 +107,48 @@ export default class ResidencyRoom2026 extends ResidencyRoom {
     y: number,
     w: number,
     h: number,
+    roomTextures: p5Types.Image[],
   ) {
     const doorH = (h * 3) / 4;
 
     // left bottom panel
-    this.drawWallPanel(p5, x, y + h / 4, w / 3, doorH, 3);
+    this.drawWallPanel(p5, x, y + h / 4, w / 3, doorH, 3, roomTextures[7]);
 
     // right bottom panel
-    this.drawWallPanel(p5, x + (w * 2) / 3, y + h / 4, w / 3, doorH, 4);
+    this.drawWallPanel(
+      p5,
+      x + (w * 2) / 3,
+      y + h / 4,
+      w / 3,
+      doorH,
+      4,
+      roomTextures[8],
+    );
 
     // top left panel
-    this.drawWallPanel(p5, x, y, w / 3, h / 4, 0);
-    this.drawLeftMenu(p5, x, y, w / 3, h / 4);
+    this.drawWallPanel(p5, x, y, w / 3, h / 4, 0, roomTextures[7]);
+    this.drawLeftMenu(p5, x, y, w / 3 - SCROLL_W / 2, h / 4);
 
     // top center panel
-    this.drawWallPanel(p5, x + w / 3, y, w / 3, h / 4, 1);
+    this.drawWallPanel(p5, x + w / 3, y, w / 3, h / 4, 1, roomTextures[8]);
     this.drawMiddleMenu(p5, x + w / 3, y, w / 3, h / 4, p5.frameCount + 50);
     // top right panel
-    this.drawWallPanel(p5, x + (w * 2) / 3, y, w / 3, h / 4, 2);
+    this.drawWallPanel(
+      p5,
+      x + (w * 2) / 3,
+      y,
+      w / 3,
+      h / 4,
+      2,
+      roomTextures[7],
+    );
+    this.drawLeftMenu(
+      p5,
+      x + (2 / 3) * w + SCROLL_W / 2,
+      y,
+      w / 3 - SCROLL_W / 2,
+      h / 4,
+    );
     this.drawTopRails(p5, x, y, w, h);
   }
 
@@ -140,19 +165,50 @@ export default class ResidencyRoom2026 extends ResidencyRoom {
     p5.noStroke();
     p5.rect(0, 0, w, h);
 
-    // draw hamburger lines
     p5.stroke(...LINE_COL);
     p5.strokeWeight(1);
+
+    const startX = 10;
+
+    // draw hamburger lines
     p5.push();
-    p5.translate(10, 10);
-    const lineW = 12;
-    const lineH = 1;
-    const lineSpacing = 2;
-    for (let i = 0; i < 3; i++) {
-      p5.line(0, i * (lineH + lineSpacing), lineW, i * (lineH + lineSpacing));
+    p5.translate(startX, startX);
+    // const lineW = 12;
+    // const lineH = 1;
+    // const lineSpacing = 2;
+    // for (let i = 0; i < 3; i++) {
+    //   p5.line(0, i * (lineH + lineSpacing), lineW, i * (lineH + lineSpacing));
+    // }
+    // p5.translate(0, 15);
+    // p5.line(0, 0, w - startX * 2 - SCROLL_W / 2, 0);
+
+    // p5.translate(0, 10);
+
+    p5.randomSeed(this.id * 1000 + p5.floor(p5.frameCount / 20) + x);
+    for (let y = 0; y < 4; y++) {
+      this.drawUI(p5, w, startX);
+      p5.translate(0, 7 * 1.8);
     }
     p5.pop();
     p5.pop();
+  }
+
+  private drawUI(p5: p5Types, w: number, startX: number) {
+    const sqDim = 7;
+    p5.stroke(...MUTED, 180);
+    p5.strokeWeight(1);
+
+    p5.fill(...MUTED, 180);
+    if (p5.random() < 0.5) {
+      p5.noFill();
+    }
+
+    p5.rect(0, 0, sqDim);
+    p5.fill(...MUTED, 180);
+    if (p5.random() < 0.5) {
+      p5.noFill();
+    }
+    p5.rect(sqDim * 2, 0, w - sqDim * 2 - startX * 2, sqDim);
   }
 
   private drawMiddleMenu(
@@ -169,6 +225,10 @@ export default class ResidencyRoom2026 extends ResidencyRoom {
     p5.noStroke();
     const barH2 = 20;
     p5.rect(0, 0, w, barH2);
+    p5.push();
+    p5.translate(5, 10);
+    this.drawUI(p5, w, 5);
+    p5.pop();
 
     p5.noFill();
     const sw = 4;
@@ -222,13 +282,17 @@ export default class ResidencyRoom2026 extends ResidencyRoom {
     w: number,
     h: number,
     _randomNum: number,
+    glassImg: p5Types.Image | null = null,
   ) {
     p5.push();
     p5.translate(x, y);
-    p5.noStroke();
-    p5.fill(...GLASS_COL, 20);
-    p5.rect(0, 0, w, h);
 
+    p5.noStroke();
+    p5.fill(...GLASS_COL, 30);
+    p5.rect(0, 0, w, h);
+    if (glassImg) {
+      p5.image(glassImg, 0, 0, w, h);
+    }
     p5.pop();
   }
 
@@ -265,7 +329,7 @@ export default class ResidencyRoom2026 extends ResidencyRoom {
     };
 
     // Main door panel
-    p5.fill(...GLASS_COL, 22);
+    p5.fill(...GLASS_COL, 30);
     p5.strokeWeight(1);
     p5.stroke(...LINE_COL);
     // p5.noStroke();

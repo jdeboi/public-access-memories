@@ -60,8 +60,26 @@ export default class Easel2026 {
     this.graphics = p5.createGraphics(CANVAS_W, CANVAS_H);
     this.graphics.background(255);
 
-    this.clearBtn = new ButtonRect("clear", CLEAR_BTN_X, CLEAR_BTN_Y, BTN_W, BTN_H, p5, font);
-    this.saveBtn = new ButtonRect("save", SAVE_BTN_X, SAVE_BTN_Y, BTN_W, BTN_H, p5, font);
+    this.clearBtn = new ButtonRect(
+      "clear",
+      CLEAR_BTN_X,
+      CLEAR_BTN_Y,
+      BTN_W,
+      BTN_H,
+      p5,
+      font,
+      12,
+    );
+    this.saveBtn = new ButtonRect(
+      "save",
+      SAVE_BTN_X,
+      SAVE_BTN_Y,
+      BTN_W,
+      BTN_H,
+      p5,
+      font,
+      12,
+    );
     this.pendingSave = null;
 
     this.isDrawing = false;

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/jdeboisblanc/Projects/gallery/pam2/client/public/online_assets/residency2026/pipes.png)",
+      "Bash(sips -g pixelWidth -g pixelHeight /Users/jdeboisblanc/Projects/gallery/pam2/client/public/online_assets/residency2026/flat_file_closed.png)",
+      "Bash(npx --yes tsc --noEmit)",
+      "Bash(/Users/jdeboisblanc/Projects/gallery/pam2/client/node_modules/.bin/tsc --noEmit --project /Users/jdeboisblanc/Projects/gallery/pam2/client/tsconfig.json)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/residency/assets/plant.webp\")"
+    ]
+  }
+}

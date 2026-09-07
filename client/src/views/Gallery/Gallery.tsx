@@ -28,6 +28,7 @@ import LoadingPageHomeOffices from "../../views/Gallery/Gallery4HomeOffices/comp
 import MiniMapAIR from "./components/MiniMap/MiniMapAIR";
 import MiniMap from "./components/MiniMap/MiniMap";
 import MiniMapFOV from "./components/MiniMap/MiniMapFOV";
+import MiniMapResidency2026 from "./components/MiniMap/MiniMapResidency2026";
 
 // store
 import { useSelector, useDispatch } from "react-redux";
@@ -417,7 +418,7 @@ const Gallery = (props: IGallery) => {
       case BLANK_SPACE_ID:
         return null;
       case RESIDENCY2026_ID:
-        return null;
+        return <MiniMapResidency2026 users={filterUsers(user, users)} x={20} y={20} />;
       default:
         return <MiniMap users={filterUsers(user, users)} x={20} y={20} />;
     }

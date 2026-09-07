@@ -188,6 +188,7 @@ export const addFolderDivs = (
   p5: p5Types,
   gconfig: any = GlobalConfig,
   points: { x: number; y: number }[] = [],
+  font?: p5Types.Font | null,
 ) => {
   divs.folders = [];
   // yeah, why are these in dom coords...
@@ -227,6 +228,8 @@ export const addFolderDivs = (
       link,
       i === 2 ? instaImg : txtFile,
       gconfig,
+      undefined,
+      font,
     );
     divs.folders.push(folder);
   }

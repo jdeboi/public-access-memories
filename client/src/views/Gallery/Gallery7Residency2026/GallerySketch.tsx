@@ -35,6 +35,7 @@ import {
   addPlantDivs,
   displayAllDivs,
 } from "./functions/divs";
+import { addFolderDivs } from "../Gallery1/functions/divs";
 
 // Config
 import { GlobalConfig } from "../../../data/Shows/Residency2026/GlobalConfig";
@@ -75,8 +76,8 @@ export default class GallerySketch extends GallerySketchTemplate1 {
   flatFileClosedImg: p5Types.Image | null = null;
   flatFileOpenImg: p5Types.Image | null = null;
   plantImg: p5Types.Image | null = null;
-  fontDogica: p5Types.Font | null = null;
   pipes2026: Pipes2026 | null = null;
+  fontDogica: p5Types.Font | null = null;
 
   constructor(props: GallerySketch1Props) {
     super(props);
@@ -101,9 +102,18 @@ export default class GallerySketch extends GallerySketchTemplate1 {
     );
     this.eyeIcon = p5.loadImage(LMD_URL + "eye.png");
     // two concrete textures — randomly mixed per tile
-    this.floorTex = p5.loadImage("/online_assets/residency2026/concrete_0.png");
+    this.floorTex = p5.loadImage(
+      PAM_URL + "residency/assets/2026/concrete_0.jpg",
+    );
     this.floorTex1 = p5.loadImage(
-      "/online_assets/residency2026/concrete_1.png",
+      PAM_URL + "residency/assets/2026/concrete_1.jpg",
+    );
+
+    this.roomTextures[7] = p5.loadImage(
+      PAM_URL + "residency/assets/2026/glass.png",
+    );
+    this.roomTextures[8] = p5.loadImage(
+      PAM_URL + "residency/assets/2026/glass1.png",
     );
   };
 
@@ -121,22 +131,22 @@ export default class GallerySketch extends GallerySketchTemplate1 {
       PAM_URL + "residency/assets/greenCircle.png",
     );
     // override the template's column with the local residency2026 version
-    this.columnGif = p5.loadImage("/online_assets/residency2026/column.png");
-    this.tableImg = p5.loadImage("/online_assets/residency2026/table.png");
-    this.stoolImg = p5.loadImage("/online_assets/residency2026/stool.png");
-    this.easelImg = p5.loadImage("/online_assets/residency2026/easel2.png");
-    this.pipesImg = p5.loadImage("/online_assets/residency2026/pipes.png");
+    this.columnGif = p5.loadImage(PAM_URL + "residency/assets/2026/column.png");
+    this.tableImg = p5.loadImage(PAM_URL + "residency/assets/2026/table.png");
+    this.stoolImg = p5.loadImage(PAM_URL + "residency/assets/2026/stool.png");
+    this.easelImg = p5.loadImage(PAM_URL + "residency/assets/2026/easel2.png");
+    this.pipesImg = p5.loadImage(PAM_URL + "residency/assets/2026/pipes.png");
     this.concreteTiles1Img = p5.loadImage(
-      "/online_assets/residency2026/concrete_tiles1.jpg",
+      PAM_URL + "residency/assets/2026/concrete_tiles1.jpg",
     );
     this.concreteTiles2Img = p5.loadImage(
-      "/online_assets/residency2026/concrete_tiles2.jpg",
+      PAM_URL + "residency/assets/2026/concrete_tiles2.jpg",
     );
     this.flatFileClosedImg = p5.loadImage(
-      "/online_assets/residency2026/flat_file_closed.png",
+      PAM_URL + "residency/assets/2026/flat_file_closed.png",
     );
     this.flatFileOpenImg = p5.loadImage(
-      "/online_assets/residency2026/flat_file_open.png",
+      PAM_URL + "residency/assets/2026/flat_file_open.png",
     );
     this.plantImg = p5.loadImage(PAM_URL + "residency/assets/plant.webp");
     this.fontDogica = p5.loadFont("/fonts/dogica.ttf");
@@ -178,10 +188,10 @@ export default class GallerySketch extends GallerySketchTemplate1 {
     addLightDivs(this.divs, this.lightImgs, p5);
     addBarDivs(this.divs, this.lightImgs[3], p5);
     if (this.tableImg && this.stoolImg) {
-      addTableDiv(this.divs, this.tableImg, this.stoolImg, p5, this.fontDogica);
+      addTableDiv(this.divs, this.tableImg, this.stoolImg, p5, this.font);
     }
     if (this.easelImg) {
-      addEaselDiv(this.divs, this.easelImg, p5, this.fontDogica);
+      addEaselDiv(this.divs, this.easelImg, p5, this.font);
     }
     if (this.flatFileClosedImg && this.flatFileOpenImg) {
       addFlatFileDiv(
@@ -189,11 +199,28 @@ export default class GallerySketch extends GallerySketchTemplate1 {
         this.flatFileClosedImg,
         this.flatFileOpenImg,
         p5,
-        this.fontDogica,
+        this.font,
       );
     }
     if (this.plantImg) {
       addPlantDivs(this.divs, this.plantImg, p5);
+    }
+    if (this.instaImg && this.txtFile) {
+      const sc = this.getGlobalScaler();
+      const folderPoints = [
+        { x: -3 * sc, y: 6.5 * sc },
+        { x: -1 * sc, y: 7 * sc },
+        { x: -2.5 * sc, y: 9 * sc },
+      ];
+      addFolderDivs(
+        this.divs,
+        this.instaImg,
+        this.txtFile,
+        p5,
+        this.GlobalConfig,
+        folderPoints,
+        this.fontDogica,
+      );
     }
   };
 
@@ -269,7 +296,8 @@ export default class GallerySketch extends GallerySketchTemplate1 {
     if (this.columnGif) drawColumns(this.columnGif, p5);
     if (this.divs.plants2026) {
       for (const plant of this.divs.plants2026) {
-        if (plant.content) p5.image(plant.content, plant.x, plant.y, plant.w, plant.h);
+        if (plant.content)
+          p5.image(plant.content, plant.x, plant.y, plant.w, plant.h);
       }
     }
     this.displayDivs(p5);
@@ -300,6 +328,18 @@ export default class GallerySketch extends GallerySketchTemplate1 {
       const HALF_LIGHT_W_PX = 150;
       const pipeW = HALF_LIGHT_W_PX * 2;
       const pipeH = pipeW * (img.height / img.width);
+
+      const ctx = (p5 as any).drawingContext as CanvasRenderingContext2D;
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(
+        -5 * sc,
+        -3 * sc,
+        GlobalConfig.worldW * sc,
+        GlobalConfig.worldH * sc,
+      );
+      ctx.clip();
+
       for (let r = 0; r < 2; r++) {
         for (let c = 0; c < 11; c++) {
           const x = c * 3 - 5;
@@ -307,6 +347,8 @@ export default class GallerySketch extends GallerySketchTemplate1 {
           p5.image(img, x * sc, y * sc, pipeW, pipeH);
         }
       }
+
+      ctx.restore();
     }
   };
 
