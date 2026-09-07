@@ -63,7 +63,7 @@ export default function OpenCallResidency() {
           </a>
         </li>
       </ul>
-      <div className="mt-6 pt-4 border-t border-current space-y-4">
+      <div className="mt-6 pt-4 space-y-4">
         <a
           href="https://forms.gle/WU5zoHBii3jgM6fq9"
           target="_blank"
