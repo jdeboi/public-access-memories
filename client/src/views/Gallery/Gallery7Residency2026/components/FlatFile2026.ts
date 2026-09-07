@@ -101,7 +101,7 @@ export default class FlatFile2026 {
       BTN_W,
       BTN_H,
       p5,
-      font,
+      null,
       12,
     );
     this.nextBtn = new ButtonRect(
@@ -111,7 +111,7 @@ export default class FlatFile2026 {
       BTN_W,
       BTN_H,
       p5,
-      font,
+      null,
       12,
     );
   }
