@@ -153,6 +153,7 @@ export interface IArtist {
   id: number;
   roomID: number;
   name: string;
+  pronouns?: string;
   thumb: string;
   nameLink: string;
   instaLink?: string;

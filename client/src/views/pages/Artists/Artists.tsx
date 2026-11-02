@@ -19,7 +19,7 @@ export const Artists: React.FC = () => {
   return (
     <>
       {(isProduction || DevMatchProd) &&
-      ShowConfig.isClosed ? (
+      !ShowConfig.artistsPageOn ? (
         <ClosedPage />
       ) : (
         <PageTemplate title={title}>
@@ -36,7 +36,10 @@ export const Artists: React.FC = () => {
                 <Link
                   // to={`/artist/${artist.nameLink}`}
                   to={
-                    getRoomFromArtistRoomID(artist.roomID, rooms)?.link || "#"
+                    ShowConfig.isClosed
+                      ? `/artist/${artist.nameLink}`
+                      : getRoomFromArtistRoomID(artist.roomID, rooms)?.link ||
+                        "#"
                   }
                   aria-label={artist.name}
                   className="group block  text-[cyan] hover:underline"

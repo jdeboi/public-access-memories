@@ -32,7 +32,7 @@ export default function DetailsClosed() {
           )}
           {ShowConfig.isResidency && (
             <div className="mb-6">
-              Please join us for residency open studios on:
+              The residency begins:
             </div>
           )}
 

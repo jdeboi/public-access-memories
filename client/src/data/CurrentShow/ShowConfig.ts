@@ -22,7 +22,7 @@ interface IGoogleMeet {
 }
 
 // ── Change these to switch gallery state ─────────────────────────────────────
-const STATUS: ShowStatus = ShowStatus.CLOSED_OPEN_CALL;
+const STATUS: ShowStatus = ShowStatus.CLOSED_PRE_SHOW;
 const SHOW_TYPE: ShowType = ShowType.RESIDENCY;
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -32,7 +32,8 @@ function deriveState(status: ShowStatus, type: ShowType) {
     isMenuOn: false,
     isOpenCallTime: status === ShowStatus.CLOSED_OPEN_CALL,
     showPlanned: status !== ShowStatus.CLOSED_NO_PLANS,
-    artistsPageOn: status === ShowStatus.OPEN,
+    artistsPageOn:
+      status === ShowStatus.OPEN || status === ShowStatus.CLOSED_PRE_SHOW,
     isResidency: type === ShowType.RESIDENCY,
     isWrongPavilion: type === ShowType.WRONG_PAVILION,
   };
@@ -47,14 +48,17 @@ export const ShowConfig = {
 
   show: {
     type: SHOW_TYPE,
-    title: "PAM Residency",
-    description: "Upcoming show details TBA",
+    title: "PAM Residency 2026",
+    description: "A month-long online residency for six net artists",
     slug: "residency2026", // drives URL routing: /<slug>/rooms/:id
     awsSlug: "residency2026", // drives asset paths (may differ from slug)
   },
 
   dates: {
-    opens: null as { date: string; time: string } | null,
+    opens: { date: "Friday, November 13, 2026", time: "" } as {
+      date: string;
+      time: string;
+    } | null,
     closes: null as { date: string; time: string } | null,
     calendarLink: null as string | null,
     googleMeet: null as IGoogleMeet | null,

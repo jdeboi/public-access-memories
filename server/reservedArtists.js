@@ -25,6 +25,12 @@ const reservedArtists = [
   "Z.YuTube",
   "eddie_lohmeyer",
   "chelsea",
+  "mollye",
+  "jls",
+  "dorothy",
+  "ktduffy",
+  "uzoma",
+  "doug",
 ];
 
 module.exports = { reservedArtists, reservedUserNames };

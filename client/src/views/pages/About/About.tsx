@@ -57,11 +57,7 @@ const About = () => {
           interested in the aesthetic potential of computation both on the
           computer screen and in physical media.
         </div>
-      </section>
-
-      <section className="font-mono">
-        <SectionHeader title="Guest Curators" />
-        <div>
+        <div className="mb-6">
           &gt;{" "}
           <a
             href="https://instagram.com/jon.cham.bers"

@@ -1,10 +1,17 @@
 import { IRoom, IArtist } from "../../../interfaces";
+import { residents } from "./Artists";
 import { alwaysReservedArtists } from "../../CurrentShow/ArtistConfig";
 import { ShowConfig } from "../../CurrentShow/ShowConfig";
 
 export const reservedArtists = {
   ...alwaysReservedArtists,
   hostBot: "🤖",
+  mollye: "☀️",
+  jls: "📹",
+  dorothy: "🩻",
+  ktduffy: "⏳",
+  uzoma: "🌀",
+  doug: "💦",
 };
 
 export const roomConfig = {
@@ -16,25 +23,8 @@ export const roomConfig = {
 
 const YEAR = 2026;
 
-function getDefaultArtist(id: number): IArtist {
-  return {
-    id,
-    roomID: id,
-    title: "Studio",
-    name: "Artist TBA",
-    thumb: "",
-    nameLink: "",
-    instaLink: "",
-    webLink: "",
-    medium: "",
-    description: null,
-    bio: "",
-    year: YEAR,
-  };
-}
-
 export const artists: IArtist[] = [
-  ...[0, 1, 2, 3, 4, 5].map(getDefaultArtist),
+  ...residents,
   {
     id: 6,
     roomID: 6,

@@ -3,4 +3,4 @@ export {
   artists,
   rooms,
   reservedArtists,
-} from "../Shows/Debox/RoomConfig";
+} from "../Shows/Residency2026/RoomConfig";

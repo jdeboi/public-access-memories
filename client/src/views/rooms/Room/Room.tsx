@@ -15,6 +15,7 @@ import R_10 from "../R_10/Room";
 import R_11 from "../R_11/Room";
 import R_12 from "../R_12/Room";
 import R_13 from "../R_13/Room";
+import UnderConstructionRoom from "../Templates/UnderConstructionRoom";
 
 import { DevMatchProd, ShowConfig } from "../../../data/CurrentShow/ShowConfig";
 import ClosedPage from "../../pages/ClosedPage/ClosedPage";
@@ -25,7 +26,7 @@ import { useState } from "react";
 
 const { isClosed } = ShowConfig;
 
-const ROOMS: Record<string, React.ComponentType> = {
+const DEBOX_ROOMS: Record<string, React.ComponentType> = {
   "0": R_00,
   "1": R_01,
   "2": R_02,
@@ -42,9 +43,21 @@ const ROOMS: Record<string, React.ComponentType> = {
   "13": R_13,
 };
 
+// Residency 2026 studios: swap in each resident's room as work goes up
+const RESIDENCY2026_ROOMS: Record<string, React.ComponentType> = {
+  "0": UnderConstructionRoom,
+  "1": UnderConstructionRoom,
+  "2": UnderConstructionRoom,
+  "3": UnderConstructionRoom,
+  "4": UnderConstructionRoom,
+  "5": UnderConstructionRoom,
+};
+
+const ROOMS = ShowConfig.isResidency ? RESIDENCY2026_ROOMS : DEBOX_ROOMS;
+
 const Room = ({ isTest = false }: { isTest?: boolean }) => {
   const { id = "0" } = useParams();
-  const artistID = rooms[parseInt(id)]?.artistID || null;
+  const artistID = rooms[parseInt(id)]?.artistID ?? null;
   const artist = artistID !== null ? artists[artistID] : null;
   const isProduction = process.env.NODE_ENV === "production";
 
@@ -56,9 +69,10 @@ const Room = ({ isTest = false }: { isTest?: boolean }) => {
     return <ClosedPage />;
   }
 
-  const RoomComp = ROOMS[id] ?? R_00;
+  const RoomComp = ROOMS[id] ?? UnderConstructionRoom;
 
-  const variant = ["2", "3"].includes(id) ? "light" : "dark";
+  const variant =
+    !ShowConfig.isResidency && ["2", "3"].includes(id) ? "light" : "dark";
 
   return (
     <>

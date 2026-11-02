@@ -42,6 +42,12 @@ export default function ArtistProfileContent({
         <div className="mt-4">
           <CustomPill text={artist.year.toString() || "N/A"} size="md" />
         </div>
+        {artist.pronouns && (
+          <>
+            <div className="mt-4 text-black">pronouns:</div>
+            <div className="font-mono">{artist.pronouns}</div>
+          </>
+        )}
         <div className="mt-4 text-black">medium:</div>
         <div className="font-mono">{artist.medium}</div>
 

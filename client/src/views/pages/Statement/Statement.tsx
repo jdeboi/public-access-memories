@@ -7,6 +7,7 @@ import "../Page.css";
 //   GIFT_PAGE,
 // } from "../../../data/Shows/HomeOffices/PageConstants";
 import DeboxStatement from "./DeboxStatement";
+import Residency2026Statement from "./Residency2026Statement";
 import OpenCall from "../OpenCall/OpenCall";
 import { ShowConfig } from "../../../data/CurrentShow/ShowConfig";
 
@@ -15,7 +16,7 @@ export const Statement = () => {
     return <OpenCall />;
   }
 
-  return <DeboxStatement />;
+  return ShowConfig.isResidency ? <Residency2026Statement /> : <DeboxStatement />;
 };
 
 export default Statement;
