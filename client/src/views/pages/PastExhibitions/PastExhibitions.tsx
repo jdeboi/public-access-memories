@@ -6,6 +6,10 @@ import { normalizeInsta } from "../../../helpers/helpers";
 import { Link } from "react-router-dom";
 import WindowsHeaderBox from "../templates/WindowsHeaderBox";
 import CustomPill from "../templates/CustomPill";
+import { PastExhibitionImage } from "./Data/_PastExhibitionDataType";
+
+const getImageSrc = (img?: PastExhibitionImage) =>
+  typeof img === "string" ? img : img?.src ?? "";
 
 export const PastExhibitions: React.FC = () => {
   return (
@@ -23,7 +27,7 @@ export const PastExhibitions: React.FC = () => {
             >
               <WindowsHeaderBox
                 title={exhibition.title}
-                thumbnail={exhibition.thumbnail ?? exhibition.imgs?.[0] ?? ""}
+                thumbnail={exhibition.thumbnail ?? getImageSrc(exhibition.imgs?.[0])}
                 link={exhibition.pageLink}
               >
                 <div className="flex items-center gap-3">

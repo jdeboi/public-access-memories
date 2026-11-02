@@ -25,11 +25,23 @@ export const DeboxData: PastExhibitionDataInterface = {
   imgs: [
     "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/debox/imgs/debox_gallery.jpg",
     "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/debox/Debox-Flyer.jpg",
-    "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/debox/imgs/sinders.jpg",
-    "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/debox/imgs/emilia.jpg",
-    "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/debox/imgs/thompto.jpeg",
+    {
+      src: "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/debox/imgs/sinders.jpg",
+      caption: "Caroline Sinders",
+    },
+    {
+      src: "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/debox/imgs/emilia.jpg",
+      caption: "Emilia Yang",
+    },
+    {
+      src: "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/debox/imgs/thompto.jpeg",
+      caption: "Chelsea Thompto",
+    },
     "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/debox/imgs/emojis.jpg",
-    "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/debox/imgs/briz.jpg",
+    {
+      src: "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/debox/imgs/briz.jpg",
+      caption: "Nick Briz",
+    },
     "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/debox/imgs/group.jpg",
   ],
   artists: artistsLive,

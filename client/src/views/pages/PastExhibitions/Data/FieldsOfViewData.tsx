@@ -2,17 +2,17 @@
 import { artists } from "../../../../data/Shows/FieldsOfView/RoomConfig";
 import { PastExhibitionDataInterface } from "./_PastExhibitionDataType";
 
+const imgBase =
+  "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/fields_of_view/screenshots/";
+
 const imgNames = [
-  "fieldsofview.jpeg",
-  "alex.jpg",
-  "christina.jpg",
-  "isolini.jpg",
-  "petra.jpg",
-  "ziyi.jpg",
-].map(
-  (name) =>
-    `https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/fields_of_view/screenshots/${name}`
-);
+  { name: "fieldsofview.jpeg" },
+  { name: "alex.jpg", caption: "Alex Gibson + Desi Rekrut (PM)" },
+  { name: "christina.jpg", caption: "Christina Humphreys" },
+  { name: "isolini.jpg", caption: "Jason Isolini" },
+  { name: "petra.jpg", caption: "Petra Szemán" },
+  { name: "ziyi.jpg", caption: "Ziyi Zhang" },
+].map(({ name, caption }) => ({ src: imgBase + name, caption }));
 
 export const fieldsOfViewData: PastExhibitionDataInterface = {
   pageLink: "/pastexhibitions/fieldsofview",

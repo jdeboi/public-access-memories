@@ -1,5 +1,7 @@
 import { IArtist } from "../../../../interfaces";
 
+export type PastExhibitionImage = string | { src: string; caption?: string };
+
 export interface PastExhibitionDataInterface {
   pageLink: string;
   awsLink: string;
@@ -11,7 +13,7 @@ export interface PastExhibitionDataInterface {
     | "Group Show"
     | "Residency"
     | "The Wrong Biennale";
-  imgs?: string[];
+  imgs?: PastExhibitionImage[];
   artists?: IArtist[];
   thumbnail?: string;
   videoLink?: string;
