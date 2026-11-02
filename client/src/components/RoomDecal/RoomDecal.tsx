@@ -38,7 +38,8 @@ const RoomDecal = (props: IRoomDecal) => {
     );
   };
 
-  if (room) {
+  // the lounge isn't an artist room, so it gets no title card
+  if (room && artist?.userName !== "hostBot") {
     const buttons = getButtons();
     const { title, medium, year, name, nameLink } = artist;
     return (

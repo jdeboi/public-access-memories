@@ -32,7 +32,8 @@ export const PageConfig: IPageConfig[] = [
   //   link: "/artists",
   //   title: "artists",
   // },
-  ...(ShowConfig.artistsPageOn ? [ArtistsPage] : []),
+  // page is reachable during pre-show, but only linked once the show opens
+  ...(ShowConfig.artistsPageOn && !ShowConfig.isClosed ? [ArtistsPage] : []),
   {
     link: "/about",
     title: "about",
