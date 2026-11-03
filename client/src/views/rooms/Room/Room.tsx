@@ -16,6 +16,7 @@ import R_11 from "../R_11/Room";
 import R_12 from "../R_12/Room";
 import R_13 from "../R_13/Room";
 import UnderConstructionRoom from "../Templates/UnderConstructionRoom";
+import IframeRoom from "../Templates/IframeRoom";
 
 import { DevMatchProd, ShowConfig } from "../../../data/CurrentShow/ShowConfig";
 import ClosedPage from "../../pages/ClosedPage/ClosedPage";
@@ -47,7 +48,12 @@ const DEBOX_ROOMS: Record<string, React.ComponentType> = {
 const RESIDENCY2026_ROOMS: Record<string, React.ComponentType> = {
   "0": UnderConstructionRoom,
   "1": UnderConstructionRoom,
-  "2": UnderConstructionRoom,
+  "2": () => (
+    <IframeRoom
+      src="https://docs.google.com/document/d/1E5lXNYKBRnMwBFJk2A8RCeAxEJJCOhkuttNUXRTrqR8/preview?tab=t.8mem5nl3ka9w"
+      title="Echo Time: Railing Against the Image"
+    />
+  ),
   "3": UnderConstructionRoom,
   "4": UnderConstructionRoom,
   "5": UnderConstructionRoom,
