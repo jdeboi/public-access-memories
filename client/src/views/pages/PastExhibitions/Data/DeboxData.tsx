@@ -1,5 +1,6 @@
 // src/content/exhibitions/asirecall.data.tsx
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { artists, artistsLive } from "../../../../data/Shows/Debox/RoomConfig";
 import { PastExhibitionDataInterface } from "./_PastExhibitionDataType";
@@ -45,6 +46,11 @@ export const DeboxData: PastExhibitionDataInterface = {
     "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/debox/imgs/group.jpg",
   ],
   artists: artistsLive,
+  link: (
+    <Link className="underline hover:no-underline" to="/galleries/debox">
+      🚪 archived work
+    </Link>
+  ),
   thumbnail:
     "https://jdeboi-public.s3.us-east-2.amazonaws.com/public_access_memories/debox/imgs/debox_gallery.jpg",
   statement: (

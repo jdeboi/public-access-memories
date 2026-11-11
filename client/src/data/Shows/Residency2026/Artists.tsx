@@ -8,7 +8,7 @@ export const residents: IArtist[] = [
     id: 0,
     roomID: 0,
     title: "Studio",
-    userName: "mollye",
+    userName: "mbendell",
     name: "Mollye Bendell",
     pronouns: "she/hers",
     thumb: "blendell-thumb.jpg",
@@ -67,7 +67,7 @@ export const residents: IArtist[] = [
     id: 1,
     roomID: 1,
     title: "Studio",
-    userName: "jls",
+    userName: "jls_gangwisch",
     name: "JLS Gangwisch",
     pronouns: "they/any",
     thumb: "jls-thumb.jpg",
@@ -84,26 +84,6 @@ export const residents: IArtist[] = [
           translations and accompanying soundscapes built from their visual
           data that will highlight issues of domestic surveillance and
           visibility &amp; concealment based on demographics.
-        </p>
-        <p>
-          In 2017 I participated in the re:like residency with the UK-based
-          Overheard Map of Now Collective. In the first week that I had primary
-          control of the website I began exploring unprotected IP cameras
-          (cameras that are connected to the internet and unprotected with a
-          password, either by accident or intention) as an input medium for
-          poetic reinterpretation exploring themes of global connectivity. Nine
-          years later, with unimaginable advancement of surveillance
-          technology, computer vision, and the automation of security
-          apparatuses, I have begun to revisit this work.
-        </p>
-        <p>
-          I recently completed _composur_dip0, a video diptych that uses a
-          custom neural network algorithm to generate an abstract animation
-          using live feeds of two unprotected IP cameras as input media. This
-          work explores the aesthetics of computational translation, employing
-          surveillance technologies to highlight their social encroachment.
-          Through the residency I hope to begin work on a website platform for
-          similar work.
         </p>
       </div>
     ),
@@ -128,7 +108,7 @@ export const residents: IArtist[] = [
     id: 2,
     roomID: 2,
     title: "Studio",
-    userName: "dorothy",
+    userName: "drs9871",
     name: "Dorothy R. Santos",
     pronouns: "she/they",
     thumb: "santos-thumb.jpg",
@@ -150,9 +130,9 @@ export const residents: IArtist[] = [
           form(at).
         </p>
         <p>
-          The work does not currently have a digital instantiation, and I would
+          Echo Time does not currently have a digital instantiation. I would
           like to create a web-based work that also includes my reading of the
-          work and is interactive for the reader/listener. I seek to elicit the
+          piece that is softly interactive for the reader/listener. I seek to elicit the
           reader into understanding the ocular nature of medicine and
           surveillance. My hope is to subvert, transform, illuminate, and push
           the reader/listener towards a somatic response that encourages
@@ -309,13 +289,21 @@ export const residents: IArtist[] = [
     bio: (
       <div>
         <p>
-          Uzoma Orji is the Creative Director of uzoma.studio, an Abuja-based
-          culture tech company designing digital products that bridge art,
-          culture, knowledge production, and technology. He is also the
-          Director of the Ministry of Dreams, a speculative government agency
-          dedicated to safeguarding collective imagination, and one-third of
-          Future Inventions, a research collective prototyping Afro-technological
-          futures.
+          Chidumaga Uzoma Orji is an artist and technologist whose work seeks
+          to understand the post-colonial present while dreaming toward a
+          liberated African future. Through his practice, he explores the
+          digital as a portal for worldbuilding and collective dreaming.
+        </p>
+        <p>
+          He is the Creative Director of uzoma.studio, an Abuja-based culture
+          tech company designing digital products that bridge art, culture,
+          knowledge production, and technology.
+        </p>
+        <p>
+          He is also the Director of the Ministry of Dreams, a speculative
+          government agency dedicated to safeguarding collective imagination,
+          and one-third of Future Inventions, a research collective prototyping
+          Afro-technological futures.
         </p>
         <p>
           Uzoma has been in residence at QUAD Derby (UK), the Yinka Shonibare
@@ -358,15 +346,7 @@ export const residents: IArtist[] = [
           which a visitor to the site moves through an ascii-styled urban
           environment, encountering vignettes of text spewing out into the
           world like wasted water out of a lawn sprinkler, or text rain flowing
-          into a storm drain. (For a sample of one of these vignettes, visit{" "}
-          <a
-            href="https://dougrosman.github.io/sprinkler/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            sprinkler
-          </a>
-          .)
+          into a storm drain.
         </p>
         <p>
           Through this work, I am interested in exploring the feeling of living
@@ -390,6 +370,10 @@ export const residents: IArtist[] = [
           Technology / Sound Practices department. He makes and teaches art
           across intersecting technological contexts including creative code,
           web art, computer vision, blockchain, and "Artificial Intelligence."
+          He works creatively with computation as a means to better understand
+          the coded systems that structure the world, and finds joy in working
+          with code to build and interact with unpredictable generative
+          systems.
         </p>
       </div>
     ),

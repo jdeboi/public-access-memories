@@ -1,5 +1,4 @@
 import { IRoom, IArtist } from "../../../interfaces";
-import { ShowConfig } from "../../CurrentShow/ShowConfig";
 
 export const reservedArtists: IArtist[] = [];
 
@@ -9,30 +8,6 @@ export const roomConfig = {
   start: 0,
   end: 1,
 };
-
-const TBA = "TBA";
-const YEAR = 2026;
-
-function getDefaultArtist(id: number): IArtist {
-  return {
-    id: id,
-    roomID: id,
-    title: TBA,
-    name: "artist " + TBA,
-    thumb: "temp-thumb",
-    nameLink: TBA,
-    instaLink: "",
-    webLink: "",
-    medium: TBA,
-    description: TBA,
-    bio: TBA,
-    year: YEAR,
-  };
-}
-
-export const artists: IArtist[] = Array.from({ length: 10 }, (_, i) =>
-  getDefaultArtist(i),
-);
 
 export const artistsLive: IArtist[] = [
   {
@@ -882,7 +857,8 @@ export const artistsLive: IArtist[] = [
   },
 ];
 
-// const roomIds = artists.map((artist) => artist.roomID);
+// Debox is archived, so its rooms use the real artist list
+export const artists = artistsLive;
 
 const roomsArray: IRoom[] = [];
 
@@ -902,7 +878,7 @@ for (let i = 0; i < artists.length; i++) {
     dir: "bottom",
     artistID: getArtistID(i),
     link:
-      artists[i].customLink ?? `/${ShowConfig.show.slug}/rooms/${getArtistID(i)}`,
+      artists[i].customLink ?? `/debox/rooms/${getArtistID(i)}`,
   };
   roomsArray.push(roomDeets);
 }

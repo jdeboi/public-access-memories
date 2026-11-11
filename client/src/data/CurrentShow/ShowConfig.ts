@@ -22,7 +22,7 @@ interface IGoogleMeet {
 }
 
 // ── Change these to switch gallery state ─────────────────────────────────────
-const STATUS: ShowStatus = ShowStatus.CLOSED_PRE_SHOW;
+const STATUS: ShowStatus = ShowStatus.OPEN;
 const SHOW_TYPE: ShowType = ShowType.RESIDENCY;
 // ─────────────────────────────────────────────────────────────────────────────
 

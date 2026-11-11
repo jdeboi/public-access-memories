@@ -6,12 +6,6 @@ import { ShowConfig } from "../../CurrentShow/ShowConfig";
 export const reservedArtists = {
   ...alwaysReservedArtists,
   hostBot: "🤖",
-  mollye: "☀️",
-  jls: "📹",
-  dorothy: "🩻",
-  ktduffy: "⏳",
-  uzoma: "🌀",
-  doug: "💦",
 };
 
 export const roomConfig = {

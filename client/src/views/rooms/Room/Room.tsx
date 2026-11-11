@@ -22,6 +22,10 @@ import { DevMatchProd, ShowConfig } from "../../../data/CurrentShow/ShowConfig";
 import ClosedPage from "../../pages/ClosedPage/ClosedPage";
 
 import { rooms, artists } from "../../../data/CurrentShow/RoomConfig";
+import {
+  rooms as deboxRooms,
+  artists as deboxArtists,
+} from "../../../data/Shows/Debox/RoomConfig";
 import ArtistMenu from "../../../components/ArtistMenu/ArtistMenu";
 import { useState } from "react";
 
@@ -46,8 +50,18 @@ const DEBOX_ROOMS: Record<string, React.ComponentType> = {
 
 // Residency 2026 studios: swap in each resident's room as work goes up
 const RESIDENCY2026_ROOMS: Record<string, React.ComponentType> = {
-  "0": UnderConstructionRoom,
-  "1": UnderConstructionRoom,
+  "0": () => (
+    <IframeRoom
+      src="https://mollyebendell.com/psychoemesis-blog"
+      title="Mollye Bendell — Psychoemesis"
+    />
+  ),
+  "1": () => (
+    <IframeRoom
+      src="https://jlsgangwisch.github.io/2026_PublicAccessMemory_Studio_JLS/"
+      title="JLS Gangwisch — Studio"
+    />
+  ),
   "2": () => (
     <IframeRoom
       src="https://docs.google.com/document/d/1E5lXNYKBRnMwBFJk2A8RCeAxEJJCOhkuttNUXRTrqR8/preview?tab=t.8mem5nl3ka9w"
@@ -55,30 +69,50 @@ const RESIDENCY2026_ROOMS: Record<string, React.ComponentType> = {
     />
   ),
   "3": UnderConstructionRoom,
-  "4": UnderConstructionRoom,
-  "5": UnderConstructionRoom,
+  "4": () => (
+    <IframeRoom
+      src="https://portal8.vercel.app"
+      title="Uzoma Orji — Portal"
+    />
+  ),
+  "5": () => (
+    <IframeRoom
+      src="https://dougrosman.com/runoff/"
+      title="Doug Rosman — Runoff"
+    />
+  ),
 };
 
 const ROOMS = ShowConfig.isResidency ? RESIDENCY2026_ROOMS : DEBOX_ROOMS;
 
-const Room = ({ isTest = false }: { isTest?: boolean }) => {
+const Room = ({
+  isTest = false,
+  isDeboxArchive = false,
+}: {
+  isTest?: boolean;
+  isDeboxArchive?: boolean;
+}) => {
   const { id = "0" } = useParams();
-  const artistID = rooms[parseInt(id)]?.artistID ?? null;
-  const artist = artistID !== null ? artists[artistID] : null;
+  const showRooms = isDeboxArchive ? deboxRooms : rooms;
+  const showArtists = isDeboxArchive ? deboxArtists : artists;
+  const roomComps = isDeboxArchive ? DEBOX_ROOMS : ROOMS;
+  const artistID = showRooms[parseInt(id)]?.artistID ?? null;
+  const artist = artistID !== null ? showArtists[artistID] : null;
   const isProduction = process.env.NODE_ENV === "production";
 
   if (
     !isTest &&
+    !isDeboxArchive &&
     (isProduction || DevMatchProd) &&
     isClosed
   ) {
     return <ClosedPage />;
   }
 
-  const RoomComp = ROOMS[id] ?? UnderConstructionRoom;
+  const RoomComp = roomComps[id] ?? UnderConstructionRoom;
 
   const variant =
-    !ShowConfig.isResidency && ["2", "3"].includes(id) ? "light" : "dark";
+    roomComps === DEBOX_ROOMS && ["2", "3"].includes(id) ? "light" : "dark";
 
   return (
     <>

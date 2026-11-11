@@ -10,6 +10,7 @@ import { IUsers } from "../interfaces";
 ///////////////////////////////
 // VIEWS
 import Gallery from "../views/Gallery/Gallery";
+import ArchivedGallery from "../views/Gallery/ArchivedGallery";
 import About from "../views/pages/About/About";
 import Statement from "../views/pages/Statement/Statement";
 import Room from "../views/rooms/Room/Room";
@@ -58,12 +59,6 @@ import { artists, rooms } from "../data/CurrentShow/RoomConfig";
 // import OpenCall from "../views/pages/OpenCall/OpenCall";
 import FAQFrame from "../components/FAQ/FAQFrame";
 import {
-  ASIRECALL_ID,
-  BLANK_SPACE_ID,
-  DEBOX_ID,
-  FIELDSOFVIEW_ID,
-  HOMEBODY_ID,
-  HOMEOFFICES_ID,
   RESIDENCY_ID,
   RESIDENCY2026_ID,
 } from "../data/CurrentShow/GalleryConfig";
@@ -332,47 +327,9 @@ function App() {
           <Route path="/artist/:name" element={<ArtistProfilePage />} />
 
           <Route
-            path="/galleries/homebody"
+            path="/galleries/:name"
             element={
-              <Gallery
-                id={HOMEBODY_ID}
-                users={users}
-                isClosed={isClosed}
-                showWelcome={showWelcome}
-              />
-            }
-          />
-          <Route
-            path="/galleries/asirecall"
-            element={
-              <Gallery
-                id={ASIRECALL_ID}
-                users={users}
-                isClosed={isClosed}
-                showWelcome={showWelcome}
-              />
-            }
-          />
-          <Route
-            path="/galleries/fieldsofview"
-            element={
-              <Gallery
-                id={FIELDSOFVIEW_ID}
-                users={users}
-                isClosed={isClosed}
-                showWelcome={showWelcome}
-              />
-            }
-          />
-          <Route
-            path="/galleries/homeoffices"
-            element={
-              <Gallery
-                id={HOMEOFFICES_ID}
-                users={users}
-                isClosed={isClosed}
-                showWelcome={showWelcome}
-              />
+              <ArchivedGallery users={users} showWelcome={showWelcome} />
             }
           />
           <Route
@@ -391,36 +348,29 @@ function App() {
             path={`/${ShowConfig.show.slug}/rooms/:id`}
             element={<Room />}
           />
+          <Route path="/debox/rooms/:id" element={<Room isDeboxArchive />} />
           <Route
             path="/briz"
             element={
-              (isProduction || DevMatchProd) && ShowConfig.isClosed ? (
-                <Room />
-              ) : (
-                <GalleryRoom
-                  id={2}
-                  path={"/briz"}
-                  users={users}
-                  isClosed={isClosed}
-                  showWelcome={showWelcome}
-                />
-              )
+              <GalleryRoom
+                id={2}
+                path={"/briz"}
+                users={users}
+                isClosed={false}
+                showWelcome={showWelcome}
+              />
             }
           />
           <Route
             path="/sinders"
             element={
-              (isProduction || DevMatchProd) && ShowConfig.isClosed ? (
-                <Room />
-              ) : (
-                <GalleryRoom
-                  id={0}
-                  path={"/sinders"}
-                  users={users}
-                  isClosed={isClosed}
-                  showWelcome={showWelcome}
-                />
-              )
+              <GalleryRoom
+                id={0}
+                path={"/sinders"}
+                users={users}
+                isClosed={false}
+                showWelcome={showWelcome}
+              />
             }
           />
           <Route

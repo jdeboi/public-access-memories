@@ -134,41 +134,8 @@ const SignIn = forwardRef<SignInSubmitType, SignInProps>((props, ref) => {
       return;
     }
 
-    if (response.isArtist) {
-      const password = prompt("Enter password to register as artist:");
-      if (!password) {
-        alert("Password is required.");
-        setShouldClose(false);
-        return;
-      }
-
-      try {
-        const res = await fetch("/api/check-artist-password", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ password }),
-        });
-
-        const data = await res.json();
-
-        if (!data.success) {
-          alert("Incorrect password.");
-          setShouldClose(false);
-          return;
-        }
-
-        // Password is correct, continue
-        submitSuccess(response.user);
-      } catch (err) {
-        console.error("Error verifying password:", err);
-        alert("Something went wrong. Please try again.");
-        setShouldClose(false);
-      }
-    } else {
-      submitSuccess(response.user);
-    }
+    // Artists sign in with their reserved username directly (no password)
+    submitSuccess(response.user);
   };
 
   const setArtistAvatar = (user: IUser) => {
