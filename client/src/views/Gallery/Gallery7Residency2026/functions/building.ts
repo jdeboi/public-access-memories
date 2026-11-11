@@ -138,7 +138,12 @@ export const drawRooms = (
       room.displayHostBotRoom(roomTextures, otherImgs[1], user);
       continue;
     }
-    const artist = users.find((u) => u.userName === room.userName);
+    const artist = users.find(
+      (u) =>
+        !!u.userName &&
+        !!room.userName &&
+        u.userName.toLowerCase() === room.userName.toLowerCase(),
+    );
     if (artist) {
       room.displayArtistInRoom(
         user,

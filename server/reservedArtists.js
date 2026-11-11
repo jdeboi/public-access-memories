@@ -28,7 +28,7 @@ const reservedArtists = [
   "mbendell",
   "jls_gangwisch",
   "drs9871",
-  "ktduffy",
+  "KTDuffy",
   "uzoma",
   "doug",
 ];

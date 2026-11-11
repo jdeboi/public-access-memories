@@ -68,7 +68,12 @@ const RESIDENCY2026_ROOMS: Record<string, React.ComponentType> = {
       title="Echo Time: Railing Against the Image"
     />
   ),
-  "3": UnderConstructionRoom,
+  "3": () => (
+    <IframeRoom
+      src="https://ktduffyprojects.com/public-access-memories-residency/"
+      title="KT Duffy — Studio"
+    />
+  ),
   "4": () => (
     <IframeRoom
       src="https://portal8.vercel.app"

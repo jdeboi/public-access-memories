@@ -176,7 +176,7 @@ export const residents: IArtist[] = [
     id: 3,
     roomID: 3,
     title: "Studio",
-    userName: "ktduffy",
+    userName: "KTDuffy",
     name: "KT Duffy",
     pronouns: "they/them",
     thumb: "duffy-thumb.jpg",
